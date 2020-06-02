@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Modules | 正儿八经</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="模块话，模块化说了那么多次，以为了解个大概就行了，然而在一次面试经历中被问到AMD和ES Module，所以特此来一篇，汇总一下吸收的模块方面的内容。 为什么模块很重要？如果没有模块，你能想象在复杂场景下你得js代码是个什么鬼模样吗？模块解决了名称空间和可维护性等变得越来越难以处理的问题。 好的模块是高度独立的，具有独特的功能，可以根据需要对它们进行改组，删除或添加，而不会破坏整个系统。 优势">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Modules">
+<meta property="og:url" content="http://gamehu.run/2020/02/22/JS%20Modules/index.html">
+<meta property="og:site_name" content="正儿八经">
+<meta property="og:description" content="模块话，模块化说了那么多次，以为了解个大概就行了，然而在一次面试经历中被问到AMD和ES Module，所以特此来一篇，汇总一下吸收的模块方面的内容。 为什么模块很重要？如果没有模块，你能想象在复杂场景下你得js代码是个什么鬼模样吗？模块解决了名称空间和可维护性等变得越来越难以处理的问题。 好的模块是高度独立的，具有独特的功能，可以根据需要对它们进行改组，删除或添加，而不会破坏整个系统。 优势">
+<meta property="article:published_time" content="2020-02-22T12:11:00.000Z">
+<meta property="article:modified_time" content="2020-02-24T02:56:31.193Z">
+<meta property="article:author" content="Gamehu">
+<meta property="article:tag" content="module">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="正儿八经" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">正儿八经</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">浪起来？</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://gamehu.run"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JS Modules" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/22/JS%20Modules/" class="article-date">
+  <time datetime="2020-02-22T12:11:00.000Z" itemprop="datePublished">2020-02-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Modules
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+
+<p>模块话，模块化说了那么多次，以为了解个大概就行了，然而在一次面试经历中被问到AMD和ES Module，所以特此来一篇，汇总一下吸收的模块方面的内容。</p>
+<h3 id="为什么模块很重要？"><a href="#为什么模块很重要？" class="headerlink" title="为什么模块很重要？"></a>为什么模块很重要？</h3><p>如果没有模块，你能想象在复杂场景下你得js代码是个什么鬼模样吗？模块解决了名称空间和可维护性等变得越来越难以处理的问题。</p>
+<p>好的模块是高度独立的，具有独特的功能，可以根据需要对它们进行改组，删除或添加，而不会破坏整个系统。</p>
+<h4 id="优势："><a href="#优势：" class="headerlink" title="优势："></a>优势：</h4><p><strong>1）可维护性：</strong>根据定义，模块是独立的。精心设计的模块旨在尽可能减少对代码库各部分的依赖，从而使其能够独立增长和改进。当模块与其他代码解耦时，更新单个模块要容易得多。</p>
+<p><strong>2）命名空间：</strong>在JavaScript中，顶级函数范围之外的变量是全局变量（意味着每个人都可以访问它们）。因此，普遍存在“命名空间污染”，其中完全不相关的代码共享全局变量。</p>
+<p>在不相关的代码之间共享全局变量<a href="http://c2.com/cgi/wiki?GlobalVariablesAreBad" target="_blank" rel="noopener">在开发中</a>是一个很大的<a href="http://c2.com/cgi/wiki?GlobalVariablesAreBad" target="_blank" rel="noopener">禁忌</a>。模块允许我们通过为变量创建私有空间来避免名称空间污染。</p>
+<p><strong>3）可重用性：</strong>抽取通用部分，哪里需要就拿去，不用重复写，当然也对应的第一点，当有修改时只需要该一份。</p>
+<p>早期的时候为了达到“模块模式”，也有很多方式，不过我看了下基本上都是基于匿名闭包的基础上而来的。</p>
+<p>这些方式有一个共同点：<strong>使用单个全局变量将其代码包装在函数中，从而使用闭包作用域为其自身创建私有名称空间，同时自定义公开哪些方法、变量</strong>。</p>
+<p>大家可以看下jQuery的源码，就是这样的实现方式，如下面的代码。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myGradesCalculate = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">  <span class="comment">// Keep this variable private inside this closure scope</span></span><br><span class="line">  <span class="keyword">var</span> myGrades = [<span class="number">93</span>, <span class="number">95</span>, <span class="number">88</span>, <span class="number">0</span>, <span class="number">55</span>, <span class="number">91</span>];</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">var</span> average = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> total = myGrades.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">accumulator, item</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> accumulator + item;</span><br><span class="line">      &#125;, <span class="number">0</span>);</span><br><span class="line">      </span><br><span class="line">    <span class="keyword">return</span><span class="string">'Your average grade is '</span> + total / myGrades.length + <span class="string">'.'</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> failing = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> failingGrades = myGrades.filter(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> item &lt; <span class="number">70</span>;</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'You failed '</span> + failingGrades.length + <span class="string">' times.'</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Explicitly reveal public pointers to the private functions </span></span><br><span class="line">  <span class="comment">// that we want to reveal publicly</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    average: average,</span><br><span class="line">    failing: failing</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">myGradesCalculate.failing(); <span class="comment">// 'You failed 2 times.' </span></span><br><span class="line">myGradesCalculate.average(); <span class="comment">// 'Your average grade is 70.33333333333333.'</span></span><br></pre></td></tr></table></figure>
+
+<p>如您所见，这种方法使我们可以决定将哪些变量/方法设为私有（例如<strong><em>myGrades\</em></strong>），以及通过将它们放在return语句中（例如<strong><em>average\</em></strong>和<strong><em>failing\</em></strong>）来公开哪些变量/方法。</p>
+<ul>
+<li>Addy Osmani的“ <a href="https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript" target="_blank" rel="noopener">学习JavaScript设计模式”</a>：精妙读物中的细节宝库</li>
+<li><a href="http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html" target="_blank" rel="noopener">Ben Cherry的“足够好”</a>：一个有用的概述，其中包含模块模式的高级用法示例</li>
+<li><a href="https://carldanley.com/js-module-pattern/" target="_blank" rel="noopener">Carl Danley的博客</a>：模块模式概述和其他JavaScript模式的资源。</li>
+</ul>
+<p>所以大家可以看出，早期关于模块的写法，尽管每种方法都以其自己的方式有效，但它们也有缺点：</p>
+<ol>
+<li>大家各自发挥的，这样有个最大的问题就是到最后就是乱的，就像为什么需要TC39一样，让大家有一套标准，才能从而写出更友好通用的模块。 </li>
+<li>依赖管理是个问题，需要我们开发人员自己管理依赖，记得刚开始用jQuery这种第三方库的时候，如果没注意到顺序就会报错，所以想象一下如果引用较多时，管理依赖关系并正确解决这些问题会让人头疼。</li>
+<li>全局作用域被污染，上述的方式创建的变量（比如<strong>myGradesCalculate</strong>）都在全局范围内，所以该全局范围内的代码的每个部分都可以更改该变量。恶意代码可以有意更改该变量，以使您的代码执行您不希望这样做的事情，或者非恶意代码可能会无意间破坏了您的变量。</li>
+</ol>
+<p>所以基于上述原因，这个时候我们就需要一套规范了来解决这些个问题：<strong>我们能否设计一种无需遍历全局范围即可请求模块接口的方法</strong></p>
+<h3 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h3><p>现在比较通行得规范有两种：<a href="http://wiki.commonjs.org/wiki/Modules/1.1" target="_blank" rel="noopener">CommonJS</a>和<a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank" rel="noopener">AMD</a>。</p>
+<h4 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a><strong><a href="http://wiki.commonjs.org/wiki/Modules/1.1" target="_blank" rel="noopener">CommonJS</a></strong></h4><p>CommonJS是一个旨在定义一系列规范以帮助开发服务器端JavaScript应用程序的项目。CommonJS团队尝试解决的领域之一就是模块，负责设计和实现用于声明模块的JavaScript API。我听说CommonJS，最早是在15年写Node应用的时候接触的，Node.js最开始就是遵循这套规范弄得模块化，但是据说后来不用该规范了。</p>
+<p>一个CommonJS的模块本质上是一种可重复使用的一段JavaScript代码其中出口特定对象，使它们可用于其他模块需要在他们的计划。</p>
+<p>使用CommonJS，每个JavaScript文件都将模块存储在其自己的唯一模块上下文中（就像将其包装在闭包中一样）。在此范围内，我们使用<em>module.exports</em>对象公开模块，并要求将其导入。</p>
+<p>当您定义CommonJS模块时，它可能看起来像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myModule</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.hello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'hello!'</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.goodbye = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'goodbye!'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = myModule;</span><br></pre></td></tr></table></figure>
+
+<p>我们使用特殊对象模块，并将我们函数的引用放入<em>module.exports中</em>。这使CommonJS模块系统知道我们要公开的内容，以便其他文件可以使用它。</p>
+<p>然后，当某人想要使用<em>myModule时</em>，他们可以在其文件中要求它，如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myModule = <span class="built_in">require</span>(<span class="string">'myModule'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myModuleInstance = <span class="keyword">new</span> myModule();</span><br><span class="line">myModuleInstance.hello(); <span class="comment">// 'hello!'</span></span><br><span class="line">myModuleInstance.goodbye(); <span class="comment">// 'goodbye!'</span></span><br></pre></td></tr></table></figure>
+
+<p>与我们之前讨论的模块模式相比，这种方法有两个明显的好处：</p>
+<ol>
+<li>避免全局命名空间污染</li>
+<li>明确我们的依赖关系</li>
+</ol>
+<p>要注意的另一件事是，CommonJS采用服务器优先的方法并<strong>同步加载</strong>模块。这很重要，因为如果我们有我们需要的其他三个模块<em>需要</em>，它就会加载它们一个接一个。</p>
+<p>现在，它可以在服务器上很好地工作，但是不幸的是，这使得为浏览器编写JavaScript时更难使用，因为服务器端通常是从磁盘读取，而浏览器需要网络请求，所以只要加载模块的脚本一直在运行（JavaScript线程将停止直到代码被加载），它就会阻止浏览器运行其他任何东西，直到加载完成。</p>
+<h4 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a><a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank" rel="noopener">AMD</a></h4><p>从上面我们知道CommonJS是同步的，所以很显然不适用浏览器端，那我们就需要<strong>异步模块定义</strong>的规范，即<strong>AMD</strong>。</p>
+<p>使用AMD加载模块如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">define([<span class="string">'myModule'</span>, <span class="string">'myOtherModule'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">myModule, myOtherModule</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(myModule.hello());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这里发生的是，<strong><em>define</em></strong>函数将每个模块依赖项的数组作为第一个参数。这些依赖项在后台加载（以非阻塞方式），并且一旦加载了<strong><em>define</em></strong>，便调用回调函数。</p>
+<p>接下来，回调函数将加载的依赖项作为参数（在本例中为<strong><em>myModule\</em></strong>和<strong><em>myOtherModule</em></strong>），以允许函数使用这些依赖项。最后，还必须使用<strong><em>define\</em></strong>关键字定义依赖项本身。</p>
+<p>例如，<strong><em>myModule\</em></strong>可能看起来像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">define([], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    hello: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    goodbye: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'goodbye'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>与CommonJS不同，AMD采用了浏览器优先的方法以及<strong>异步</strong>行为来完成工作。</p>
+<p>除了异步之外，AMD的另一个好处是您的模块可以是<strong>对象，函数，构造函数，字符串，JSON和许多其他类型</strong>，而CommonJS仅支持将<strong>对象</strong>作为模块。</p>
+<p>AMD与CommonJS相比，其提供的io，文件系统和其他面向服务器的功能不兼容。</p>
+<h4 id="UMD"><a href="#UMD" class="headerlink" title="UMD"></a><a href="https://github.com/umdjs/umd" target="_blank" rel="noopener">UMD</a></h4><p>对于需要同时支持AMD和CommonJS功能的项目，还有另一种格式：通用模块定义（UMD）。</p>
+<p>UMD本质上创建了一种使用这两种方法之一的方式，同时还支持全局变量定义。结果，UMD模块能够在客户端和服务器上工作。</p>
+<p>以下是UMD如何开展业务的快速体验：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">root, factory</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">'function'</span> &amp;&amp; define.amd) &#123;</span><br><span class="line">      <span class="comment">// AMD</span></span><br><span class="line">    define([<span class="string">'myModule'</span>, <span class="string">'myOtherModule'</span>], factory);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> exports === <span class="string">'object'</span>) &#123;</span><br><span class="line">      <span class="comment">// CommonJS</span></span><br><span class="line">    <span class="built_in">module</span>.exports = factory(<span class="built_in">require</span>(<span class="string">'myModule'</span>), <span class="built_in">require</span>(<span class="string">'myOtherModule'</span>));</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// Browser globals (Note: root is window)</span></span><br><span class="line">    root.returnExports = factory(root.myModule, root.myOtherModule);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;(<span class="keyword">this</span>, <span class="function"><span class="keyword">function</span> (<span class="params">myModule, myOtherModule</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Methods</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">notHelloOrGoodbye</span>(<span class="params"></span>)</span>&#123;&#125;; <span class="comment">// A private method</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params"></span>)</span>&#123;&#125;; <span class="comment">// A public method because it's returned (see below)</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">goodbye</span>(<span class="params"></span>)</span>&#123;&#125;; <span class="comment">// A public method because it's returned (see below)</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Exposed public methods</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">      hello: hello,</span><br><span class="line">      goodbye: goodbye</span><br><span class="line">  &#125;</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/" target="_blank" rel="noopener">ES Module</a></p>
+<p>是我做前端开始听的最多的了，当然也因为无时无刻都在用它。</p>
+<p>上面咱们所说的，都不是JavaScript固有的。不过幸运的是，<a href="https://github.com/tc39" target="_blank" rel="noopener">TC39</a>（定义ECMAScript语法和语义的标准机构）引入了ECMAScript 6（ES6）内置模块。</p>
+<p>ES6提供了多种导入和导出模块的可能性，其他人则做了很好的解释-以下是其中的一些资源：</p>
+<ul>
+<li><a href="http://jsmodules.io/cjs.html" target="_blank" rel="noopener">jsmodules.io</a></li>
+<li><a href="http://exploringjs.com/es6/ch_modules.html" target="_blank" rel="noopener">Explorationjs.com</a></li>
+</ul>
+<p>与CommonJS或AMD相比，ES6模块最大的优点是它能够提供两全其美的优势：紧凑和声明性语法以及异步加载，以及诸如更好地支持依赖项等附加优点。</p>
+<p>ES6模块最让人兴奋的应该是导入是导出的<em>实时</em>只读视图，即是只读引用，不过却可以改写属性。所以你猜到了当你模块里的值属性发生变化时，导入的地方获取的值是一样的。ES Module具体的后面还有一篇文档单讲，不然这文章就太长了。</p>
+<h3 id="最后我们对比一下两种方式吧"><a href="#最后我们对比一下两种方式吧" class="headerlink" title="最后我们对比一下两种方式吧"></a>最后我们对比一下两种方式吧</h3><h4 id="ES-Module与CommonJS"><a href="#ES-Module与CommonJS" class="headerlink" title="ES Module与CommonJS:"></a>ES Module与CommonJS:</h4><ul>
+<li>CommonJS规范通常适用于Node这类服务器端的</li>
+<li>CommonJS模块是对象，是运行时加载，运行时才把模块挂载在exports之上（加载整个模块的所有），加载模块其实就是查找对象属性。</li>
+<li>ES Module不是对象，是使用export显示指定输出（函数、对象、变量等），再通过import导入。为编译时加载，编译时遇到import就会生成一个只读引用。等到运行时就会根据此引用去被加载的模块取值。所以不会加载模块所有方法，仅取所需。</li>
+<li>CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。</li>
+<li>CommonJS 模块是运行时加载，ES6 模块是编译时输出接口</li>
+</ul>
+<h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4><p><a href="https://scotch.io/tutorials/understanding-scope-in-javascript" target="_blank" rel="noopener">全局范围（作用域）</a>          </p>
+<blockquote>
+<ol>
+<li>写在script标签中的JS代码，都在全局作用域 。</li>
+<li>全局作用域在页面打开时创建，在页面关闭时销毁。 </li>
+<li>在全局作用域中有一个全局对象window，它代表的是一个浏览器的窗口，它由浏览器创建我们可以直接使用 。</li>
+<li>全局作用域中，创建变量都会作为window对象的属性保存</li>
+<li>创建的函数都会作为window对象的方法保存</li>
+<li>全局作用域中的变量都是全局变量，在页面的任何部分都可以访问的到并可以修改它</li>
+</ol>
+</blockquote>
+<h4 id="来源："><a href="#来源：" class="headerlink" title="来源："></a>来源：</h4><blockquote><footer><strong>darlyn</strong><cite><a href="https://juejin.im/post/5b7d2f45e51d4538826f4c28" target="_blank" rel="noopener">AMD , CMD, CommonJS，ES Module，UMD</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>Sebastian Peyrott</strong><cite><a href="https://auth0.com/blog/javascript-module-systems-showdown/" target="_blank" rel="noopener">JavaScript Module Systems Showdown: CommonJS vs AMD vs ES2015</a></cite></footer></blockquote>
+
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://gamehu.run/2020/02/22/JS%20Modules/" data-id="ckaxs1w9d000otwaqe013az8n" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/module/" rel="tag">module</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/23/ES%20Module/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ES Module
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/13/Root-User-in-Ubuntu/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Root User in Ubuntu</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9C%86%E6%A1%8C%E6%B4%BE/">圆桌派</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E4%BD%9C/">工作</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E7%A8%8B/">工程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%90%E9%95%BF/">成长</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%8F%E6%8D%B7/">敏捷</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%BB%9A%E7%B2%97/">滚粗</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9E%8E%E6%89%AF/">瞎扯</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E5%9C%BA/">职场</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/%E8%AE%A4%E7%9F%A5/">认知</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%83%A8%E7%BD%B2/">部署</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%97%B2%E6%89%AF/">闲扯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/12-Factors/" rel="tag">12-Factors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Brower/" rel="tag">Brower</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES-Module/" rel="tag">ES Module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS%E4%BD%9C%E7%94%A8%E5%9F%9F/" rel="tag">JS作用域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Module/" rel="tag">Module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OKR/" rel="tag">OKR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/" rel="tag">PostgreSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Presentation/" rel="tag">Presentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Hooks/" rel="tag">React Hooks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Serverless/" rel="tag">Serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/" rel="tag">command</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/" rel="tag">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/graphql/" rel="tag">graphql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/" rel="tag">gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ls/" rel="tag">ls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/" rel="tag">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/service-mesh/" rel="tag">service mesh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sso/" rel="tag">sso</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tick%E6%A0%88/" rel="tag">tick栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%87%E4%B8%87%E6%B2%A1%E6%83%B3%E5%88%B0/" rel="tag">万万没想到</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%A7%E5%93%81/" rel="tag">产品</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E6%89%8D%E7%AE%A1%E7%90%86/" rel="tag">人才管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E5%8A%9B/" rel="tag">动力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8D%E4%BA%BA/" rel="tag">名人</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%8A%E8%AF%AB/" rel="tag">告诫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%8B%E7%82%B9/" rel="tag">埋点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%89%AB%E6%8F%8F/" rel="tag">安全扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B/" rel="tag">工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E8%8D%92/" rel="tag">开荒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%83%E7%90%86/" rel="tag">心理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" rel="tag">心理学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">性能优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87/" rel="tag">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1/" rel="tag">梦想金山</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AC%B2%E6%9C%9B/" rel="tag">欲望</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E8%82%B2%E5%9F%BA%E9%87%91/" rel="tag">生育基金</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%91%E6%8E%A7/" rel="tag">监控</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E8%80%83/" rel="tag">系统思考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A0%81/" rel="tag">编码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E5%9C%BA/" rel="tag">职场</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%BE%8B/" rel="tag">自律</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%84%E5%88%92/" rel="tag">规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A4%E7%9F%A5/" rel="tag">认知</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%85%E5%92%92/" rel="tag">诅咒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%A6%E8%AE%BE/" rel="tag">详设</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E6%8A%80%E8%83%BD/" rel="tag">软技能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E8%90%A5/" rel="tag">运营</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%9A%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB/" rel="tag">通用工具类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E9%9A%BE%E5%BA%A6%E6%B2%9F%E9%80%9A/" rel="tag">高难度沟通</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/12-Factors/" style="font-size: 10px;">12-Factors</a> <a href="/tags/Brower/" style="font-size: 10px;">Brower</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/ES-Module/" style="font-size: 10px;">ES Module</a> <a href="/tags/JS%E4%BD%9C%E7%94%A8%E5%9F%9F/" style="font-size: 10px;">JS作用域</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Module/" style="font-size: 10px;">Module</a> <a href="/tags/OKR/" style="font-size: 10px;">OKR</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Presentation/" style="font-size: 10px;">Presentation</a> <a href="/tags/React-Hooks/" style="font-size: 10px;">React Hooks</a> <a href="/tags/Serverless/" style="font-size: 10px;">Serverless</a> <a href="/tags/command/" style="font-size: 10px;">command</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/graphql/" style="font-size: 10px;">graphql</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/ls/" style="font-size: 10px;">ls</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/service-mesh/" style="font-size: 10px;">service mesh</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tick%E6%A0%88/" style="font-size: 10px;">tick栈</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/%E4%B8%87%E4%B8%87%E6%B2%A1%E6%83%B3%E5%88%B0/" style="font-size: 10px;">万万没想到</a> <a href="/tags/%E4%BA%A7%E5%93%81/" style="font-size: 10px;">产品</a> <a href="/tags/%E4%BA%BA%E6%89%8D%E7%AE%A1%E7%90%86/" style="font-size: 10px;">人才管理</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 16.67px;">前端</a> <a href="/tags/%E5%8A%A8%E5%8A%9B/" style="font-size: 10px;">动力</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 10px;">区块链</a> <a href="/tags/%E5%90%8D%E4%BA%BA/" style="font-size: 10px;">名人</a> <a href="/tags/%E5%91%8A%E8%AF%AB/" style="font-size: 10px;">告诫</a> <a href="/tags/%E5%9F%8B%E7%82%B9/" style="font-size: 10px;">埋点</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">学习</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">安全扫描</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 20px;">实践</a> <a href="/tags/%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">工程</a> <a href="/tags/%E5%BC%80%E8%8D%92/" style="font-size: 10px;">开荒</a> <a href="/tags/%E5%BF%83%E7%90%86/" style="font-size: 10px;">心理</a> <a href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 10px;">心理学</a> <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 10px;">性能优化</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 10px;">总结</a> <a href="/tags/%E6%95%88%E7%8E%87/" style="font-size: 10px;">效率</a> <a href="/tags/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1/" style="font-size: 13.33px;">梦想金山</a> <a href="/tags/%E6%AC%B2%E6%9C%9B/" style="font-size: 10px;">欲望</a> <a href="/tags/%E7%94%9F%E8%82%B2%E5%9F%BA%E9%87%91/" style="font-size: 10px;">生育基金</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 10px;">监控</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E8%80%83/" style="font-size: 10px;">系统思考</a> <a href="/tags/%E7%BC%96%E7%A0%81/" style="font-size: 10px;">编码</a> <a href="/tags/%E8%81%8C%E5%9C%BA/" style="font-size: 13.33px;">职场</a> <a href="/tags/%E8%87%AA%E5%BE%8B/" style="font-size: 10px;">自律</a> <a href="/tags/%E8%A7%84%E5%88%92/" style="font-size: 10px;">规划</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E8%AE%A4%E7%9F%A5/" style="font-size: 13.33px;">认知</a> <a href="/tags/%E8%AF%85%E5%92%92/" style="font-size: 10px;">诅咒</a> <a href="/tags/%E8%AF%A6%E8%AE%BE/" style="font-size: 10px;">详设</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 10px;">跨域</a> <a href="/tags/%E8%BD%AF%E6%8A%80%E8%83%BD/" style="font-size: 10px;">软技能</a> <a href="/tags/%E8%BF%90%E8%90%A5/" style="font-size: 10px;">运营</a> <a href="/tags/%E9%80%9A%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB/" style="font-size: 10px;">通用工具类</a> <a href="/tags/%E9%AB%98%E9%9A%BE%E5%BA%A6%E6%B2%9F%E9%80%9A/" style="font-size: 10px;">高难度沟通</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/02/Linux-ls%E5%91%BD%E4%BB%A4/">Linux ls命令</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/28/%E5%89%8D%E7%AB%AF%E5%9F%8B%E7%82%B9(%E4%B8%80)/">前端埋点(一)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/21/ps-grep-top-free/">ps、top、free</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/22/Java%208%20Stream/">Java 8 Streams</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Gamehu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

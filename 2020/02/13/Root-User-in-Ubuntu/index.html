@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Root User in Ubuntu | 正儿八经</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="话说从接触Linux那一天起，就有一种独领风骚的傲气，命令走天下的这种霸气，那时候感觉精通Linux的连女朋友都带光环。 我最开始接触Linux是从Ubuntu开始，当时笔记本装了双系统，我就鼓捣了一个Ubuntu，现在用的较多的CentOS，首先入门都是先从了解root开始，我其实一直对root很好奇，刚好今天看到twitter上ruanyf大佬推了一篇文章Root User in Ubuntu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Root User in Ubuntu">
+<meta property="og:url" content="http://gamehu.run/2020/02/13/Root-User-in-Ubuntu/index.html">
+<meta property="og:site_name" content="正儿八经">
+<meta property="og:description" content="话说从接触Linux那一天起，就有一种独领风骚的傲气，命令走天下的这种霸气，那时候感觉精通Linux的连女朋友都带光环。 我最开始接触Linux是从Ubuntu开始，当时笔记本装了双系统，我就鼓捣了一个Ubuntu，现在用的较多的CentOS，首先入门都是先从了解root开始，我其实一直对root很好奇，刚好今天看到twitter上ruanyf大佬推了一篇文章Root User in Ubuntu">
+<meta property="og:image" content="https://i0.wp.com/itsfoss.com/wp-content/uploads/2020/01/root_user_ubuntu.png?ssl=1">
+<meta property="og:image" content="https://i2.wp.com/itsfoss.com/wp-content/uploads/2020/01/sudo_sandwich.png?ssl=1">
+<meta property="article:published_time" content="2020-02-13T13:20:00.000Z">
+<meta property="article:modified_time" content="2020-02-13T13:56:43.499Z">
+<meta property="article:author" content="Gamehu">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/itsfoss.com/wp-content/uploads/2020/01/root_user_ubuntu.png?ssl=1">
+  
+    <link rel="alternate" href="/atom.xml" title="正儿八经" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">正儿八经</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">浪起来？</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://gamehu.run"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Root-User-in-Ubuntu" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/13/Root-User-in-Ubuntu/" class="article-date">
+  <time datetime="2020-02-13T13:20:00.000Z" itemprop="datePublished">2020-02-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Root User in Ubuntu
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>话说从接触Linux那一天起，就有一种独领风骚的傲气，命令走天下的这种霸气，那时候感觉精通Linux的连女朋友都带光环。</p>
+<p>我最开始接触Linux是从Ubuntu开始，当时笔记本装了双系统，我就鼓捣了一个Ubuntu，现在用的较多的CentOS，首先入门都是先从了解root开始，我其实一直对root很好奇，刚好今天看到twitter上ruanyf大佬推了一篇文章<a href="https://itsfoss.com/root-user-ubuntu/" target="_blank" rel="noopener">Root User in Ubuntu: Important Things You Should Know</a>讲基于Ubuntu的root的文章，基础好用，我们现在做的产品的安装包刚好也是基于Ubuntu做的，所以更有必要在此做个中文版记录。</p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>文章主要讲了以下四块：</p>
+<ol>
+<li>为什么在Ubuntu中禁用root用户</li>
+<li>以root身份使用命令</li>
+<li>切换到root用户</li>
+<li>解锁root用户</li>
+</ol>
+<h3 id="什么是root用户？为什么将其锁定在Ubuntu中？"><a href="#什么是root用户？为什么将其锁定在Ubuntu中？" class="headerlink" title="什么是root用户？为什么将其锁定在Ubuntu中？"></a>什么是root用户？为什么将其锁定在Ubuntu中？</h3><p><img src="https://i0.wp.com/itsfoss.com/wp-content/uploads/2020/01/root_user_ubuntu.png?ssl=1" alt="根用户Ubuntu"></p>
+<p>稍微了解Linux的都知道，在Linux中，有一个称为<a href="http://www.linfo.org/root.html" target="_blank" rel="noopener">root</a>的超级用户。这是超级管理员帐户，可以使用系统执行任何操作。它可以访问任何文件并在Linux系统上运行任何命令。</p>
+<p>拥有权利的同时也被赋予了重大的责任。超级用户可以为您提供对系统的完全控制权，因此也格外谨慎。超级用户可以访问系统文件并运行命令来更改系统配置。因此，错误的命令可能会造成无法挽回的损失，比如网上老说的一个梗：当rm -rf 之后我跑路了。所以一般情况下都不会给root权限，管理员会分配部分权限建对应的用户供对应的人使用。</p>
+<p>这也说明了为什么<a href="https://ubuntu.com/" target="_blank" rel="noopener">Ubuntu</a>默认情况下锁定了root用户，就是为了避免意外灾难。</p>
+<p>您无需具有root特权即可执行日常任务，例如将文件移动到主目录中，从Internet下载文件，创建文档等。</p>
+<p><strong><em>以此类比更好地理解它。如果必须切水果，可以使用菜刀。如果必须砍伐树木，则必须使用锯。现在，您可以使用锯切水果，但这不明智，是吗？\</em></strong></p>
+<p>这是否意味着您不能成为Ubuntu的root用户或无法使用具有root用户特权的系统？不，您仍然可以在“ sudo”的帮助下获得root用户访问权限（在下一节中说明）。</p>
+<blockquote>
+<p>重点：</p>
+<p>用户功能强大，无法用于常规任务。这就是为什么不建议始终使用root的原因。您仍然可以使用root运行特定命令。</p>
+</blockquote>
+<h3 id="如何在Ubuntu中以root用户身份运行命令？"><a href="#如何在Ubuntu中以root用户身份运行命令？" class="headerlink" title="如何在Ubuntu中以root用户身份运行命令？"></a>如何在Ubuntu中以root用户身份运行命令？</h3><p><img src="https://i2.wp.com/itsfoss.com/wp-content/uploads/2020/01/sudo_sandwich.png?ssl=1" alt="须藤三明治xkcd">)图片来源：<a href="https://xkcd.com/149/" target="_blank" rel="noopener">xkcd</a></p>
+<p>当你需要某些系统特定任务的root特权。例如，如果要<a href="https://itsfoss.com/update-ubuntu/" target="_blank" rel="noopener">通过命令行更新Ubuntu</a>，则不能以常规用户身份运行该命令。会有以下类似的错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">Reading package lists... Done</span><br><span class="line">E: Could not open lock file &#x2F;var&#x2F;lib&#x2F;apt&#x2F;lists&#x2F;lock - open (13: Permission denied)</span><br><span class="line">E: Unable to lock directory &#x2F;var&#x2F;lib&#x2F;apt&#x2F;lists&#x2F;</span><br><span class="line">W: Problem unlinking the file &#x2F;var&#x2F;cache&#x2F;apt&#x2F;pkgcache.bin - RemoveCaches (13: Permission denied)</span><br><span class="line">W: Problem unlinking the file &#x2F;var&#x2F;cache&#x2F;apt&#x2F;srcpkgcache.bin - RemoveCaches (13: Permission denied)</span><br></pre></td></tr></table></figure>
+
+<p>那么，这个时候怎么做呢？简单的答案是在需要以root身份运行的命令之前添加sudo。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
+
+<p>Ubuntu和许多其他Linux发行版使用一种称为sudo的特殊机制。Sudo是一个程序，用于以root（或其他用户）身份控制对运行命令的访问。</p>
+<p>Sudo实际上是一个多功能的工具。可以将其配置为允许用户以root用户身份运行所有命令。您可以配置它仅以root身份运行选定的几个命令。您也可以配置为<a href="https://linuxhandbook.com/sudo-without-password/" target="_blank" rel="noopener">不带密码运行sudo</a>。</p>
+<p><a href="https://itsfoss.com/install-ubuntu/" target="_blank" rel="noopener">在安装Ubuntu时</a>，必须创建一个用户帐户。该用户帐户在您的系统上以管理员身份运行，并且按照Ubuntu中的默认sudo策略，它可以使用root特权在系统上运行任何命令。</p>
+<p>运行<strong>sudo不需要root密码，但需要用户自己的password</strong>。</p>
+<p>这就是为什么当使用sudo运行命令时，总会一开始就询问密码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gamehu@nuc:~$ sudo apt update</span><br><span class="line">[sudo] password for gamehu:</span><br></pre></td></tr></table></figure>
+
+<p>如您在上面的示例中看到的，用户gamehu试图使用<em>sudo</em>运行’apt update’命令，系统要求输入gamehu的密码。</p>
+<p><strong>要注意当您开始在终端中输入密码时，屏幕上什么都没有发生不会有任何显示，也没有所谓的删除键、退格键…这里会记录你按下的所有键。因为作为默认安全功能，屏幕上不显示任何内容。甚至没有星号（*）。您输入密码，然后按Enter。*</strong></p>
+<blockquote>
+<p>划重点：</p>
+<p>要在Ubuntu中以root身份运行命令，请在命令前添加sudo。<br>当要求输入密码时，输入您的帐户密码。<br>在屏幕上键入密码时，看不到任何内容。只需继续正确的输入密码，然后按Enter。</p>
+</blockquote>
+<h3 id="如何在Ubuntu中成为root用户？"><a href="#如何在Ubuntu中成为root用户？" class="headerlink" title="如何在Ubuntu中成为root用户？"></a>如何在Ubuntu中成为root用户？</h3><p>你可以使用sudo以root身份运行命令。但是，在某些情况下，您必须以root用户身份运行多个命令，则可以临时切换为root用户。</p>
+<p>sudo命令允许您使用以下命令模拟root登录shell：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo -i</span><br><span class="line">gamehu@nuc:~$ sudo -i</span><br><span class="line">[sudo] password for gamehu: </span><br><span class="line">root@nuc:~# whoami</span><br><span class="line">root</span><br><span class="line">root@nuc:~#</span><br></pre></td></tr></table></figure>
+
+<p>您会注意到，切换到root用户时，shell命令提示符将从$（美元键符号）更改为＃（磅键符号）。</p>
+<p><strong><em>尽管已向您展示了如何成为root用户，但我必须警告你，应避免将系统用作root用户。毕竟出于某种原因，我们不建议这样做。\</em></strong></p>
+<p>临时切换到root用户的另一种方法是使用su命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br></pre></td></tr></table></figure>
+
+<p>如果您尝试在不使用sudo的情况下使用su命令，则会遇到“ su身份验证失败”错误。</p>
+<p>您可以使用exit命令恢复为普通用户。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="如何在Ubuntu中启用root用户？"><a href="#如何在Ubuntu中启用root用户？" class="headerlink" title="如何在Ubuntu中启用root用户？"></a>如何在Ubuntu中启用root用户？</h3><p>到目前为止，您已经知道默认情况下，root用户在基于Ubuntu的发行版中被锁定。</p>
+<p>Linux使您可以自由地对系统进行任何操作。解锁root用户是这些自由之一。</p>
+<p>如果出于某种原因决定启用root用户，则可以通过为它设置密码来启用它：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure>
+
+<p>同样，不建议这样做，我也不鼓励您在桌面上执行此操作。如果忘记了密码，将无法再次<a href="https://itsfoss.com/how-to-hack-ubuntu-password/" target="_blank" rel="noopener">在Ubuntu中更改root密码</a>。</p>
+<p>您可以通过删除密码来再次锁定root用户：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd -dl root</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://gamehu.run/2020/02/13/Root-User-in-Ubuntu/" data-id="ckaxs1w9r001ptwaqdzbc1lns" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/22/JS%20Modules/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Modules
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/03/%E9%A2%86%E5%AF%BC%E5%AF%84%E8%AF%AD/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">领导寄语</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9C%86%E6%A1%8C%E6%B4%BE/">圆桌派</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E4%BD%9C/">工作</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E7%A8%8B/">工程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%90%E9%95%BF/">成长</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%8F%E6%8D%B7/">敏捷</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%BB%9A%E7%B2%97/">滚粗</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9E%8E%E6%89%AF/">瞎扯</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E5%9C%BA/">职场</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/%E8%AE%A4%E7%9F%A5/">认知</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%83%A8%E7%BD%B2/">部署</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%97%B2%E6%89%AF/">闲扯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/12-Factors/" rel="tag">12-Factors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Brower/" rel="tag">Brower</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES-Module/" rel="tag">ES Module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS%E4%BD%9C%E7%94%A8%E5%9F%9F/" rel="tag">JS作用域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Module/" rel="tag">Module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OKR/" rel="tag">OKR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/" rel="tag">PostgreSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Presentation/" rel="tag">Presentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Hooks/" rel="tag">React Hooks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Serverless/" rel="tag">Serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/" rel="tag">command</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/" rel="tag">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/graphql/" rel="tag">graphql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/" rel="tag">gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ls/" rel="tag">ls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/" rel="tag">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/service-mesh/" rel="tag">service mesh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sso/" rel="tag">sso</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tick%E6%A0%88/" rel="tag">tick栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%87%E4%B8%87%E6%B2%A1%E6%83%B3%E5%88%B0/" rel="tag">万万没想到</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%A7%E5%93%81/" rel="tag">产品</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E6%89%8D%E7%AE%A1%E7%90%86/" rel="tag">人才管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E5%8A%9B/" rel="tag">动力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8D%E4%BA%BA/" rel="tag">名人</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%8A%E8%AF%AB/" rel="tag">告诫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%8B%E7%82%B9/" rel="tag">埋点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%89%AB%E6%8F%8F/" rel="tag">安全扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B/" rel="tag">工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E8%8D%92/" rel="tag">开荒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%83%E7%90%86/" rel="tag">心理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" rel="tag">心理学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">性能优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87/" rel="tag">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1/" rel="tag">梦想金山</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AC%B2%E6%9C%9B/" rel="tag">欲望</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E8%82%B2%E5%9F%BA%E9%87%91/" rel="tag">生育基金</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%91%E6%8E%A7/" rel="tag">监控</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E8%80%83/" rel="tag">系统思考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A0%81/" rel="tag">编码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E5%9C%BA/" rel="tag">职场</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%BE%8B/" rel="tag">自律</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%84%E5%88%92/" rel="tag">规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A4%E7%9F%A5/" rel="tag">认知</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%85%E5%92%92/" rel="tag">诅咒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%A6%E8%AE%BE/" rel="tag">详设</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E6%8A%80%E8%83%BD/" rel="tag">软技能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E8%90%A5/" rel="tag">运营</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%9A%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB/" rel="tag">通用工具类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E9%9A%BE%E5%BA%A6%E6%B2%9F%E9%80%9A/" rel="tag">高难度沟通</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/12-Factors/" style="font-size: 10px;">12-Factors</a> <a href="/tags/Brower/" style="font-size: 10px;">Brower</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/ES-Module/" style="font-size: 10px;">ES Module</a> <a href="/tags/JS%E4%BD%9C%E7%94%A8%E5%9F%9F/" style="font-size: 10px;">JS作用域</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Module/" style="font-size: 10px;">Module</a> <a href="/tags/OKR/" style="font-size: 10px;">OKR</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Presentation/" style="font-size: 10px;">Presentation</a> <a href="/tags/React-Hooks/" style="font-size: 10px;">React Hooks</a> <a href="/tags/Serverless/" style="font-size: 10px;">Serverless</a> <a href="/tags/command/" style="font-size: 10px;">command</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/graphql/" style="font-size: 10px;">graphql</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/ls/" style="font-size: 10px;">ls</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/service-mesh/" style="font-size: 10px;">service mesh</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tick%E6%A0%88/" style="font-size: 10px;">tick栈</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/%E4%B8%87%E4%B8%87%E6%B2%A1%E6%83%B3%E5%88%B0/" style="font-size: 10px;">万万没想到</a> <a href="/tags/%E4%BA%A7%E5%93%81/" style="font-size: 10px;">产品</a> <a href="/tags/%E4%BA%BA%E6%89%8D%E7%AE%A1%E7%90%86/" style="font-size: 10px;">人才管理</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 16.67px;">前端</a> <a href="/tags/%E5%8A%A8%E5%8A%9B/" style="font-size: 10px;">动力</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 10px;">区块链</a> <a href="/tags/%E5%90%8D%E4%BA%BA/" style="font-size: 10px;">名人</a> <a href="/tags/%E5%91%8A%E8%AF%AB/" style="font-size: 10px;">告诫</a> <a href="/tags/%E5%9F%8B%E7%82%B9/" style="font-size: 10px;">埋点</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">学习</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">安全扫描</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 20px;">实践</a> <a href="/tags/%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">工程</a> <a href="/tags/%E5%BC%80%E8%8D%92/" style="font-size: 10px;">开荒</a> <a href="/tags/%E5%BF%83%E7%90%86/" style="font-size: 10px;">心理</a> <a href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 10px;">心理学</a> <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 10px;">性能优化</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 10px;">总结</a> <a href="/tags/%E6%95%88%E7%8E%87/" style="font-size: 10px;">效率</a> <a href="/tags/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1/" style="font-size: 13.33px;">梦想金山</a> <a href="/tags/%E6%AC%B2%E6%9C%9B/" style="font-size: 10px;">欲望</a> <a href="/tags/%E7%94%9F%E8%82%B2%E5%9F%BA%E9%87%91/" style="font-size: 10px;">生育基金</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 10px;">监控</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E8%80%83/" style="font-size: 10px;">系统思考</a> <a href="/tags/%E7%BC%96%E7%A0%81/" style="font-size: 10px;">编码</a> <a href="/tags/%E8%81%8C%E5%9C%BA/" style="font-size: 13.33px;">职场</a> <a href="/tags/%E8%87%AA%E5%BE%8B/" style="font-size: 10px;">自律</a> <a href="/tags/%E8%A7%84%E5%88%92/" style="font-size: 10px;">规划</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E8%AE%A4%E7%9F%A5/" style="font-size: 13.33px;">认知</a> <a href="/tags/%E8%AF%85%E5%92%92/" style="font-size: 10px;">诅咒</a> <a href="/tags/%E8%AF%A6%E8%AE%BE/" style="font-size: 10px;">详设</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 10px;">跨域</a> <a href="/tags/%E8%BD%AF%E6%8A%80%E8%83%BD/" style="font-size: 10px;">软技能</a> <a href="/tags/%E8%BF%90%E8%90%A5/" style="font-size: 10px;">运营</a> <a href="/tags/%E9%80%9A%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB/" style="font-size: 10px;">通用工具类</a> <a href="/tags/%E9%AB%98%E9%9A%BE%E5%BA%A6%E6%B2%9F%E9%80%9A/" style="font-size: 10px;">高难度沟通</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/02/Linux-ls%E5%91%BD%E4%BB%A4/">Linux ls命令</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/28/%E5%89%8D%E7%AB%AF%E5%9F%8B%E7%82%B9(%E4%B8%80)/">前端埋点(一)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/21/ps-grep-top-free/">ps、top、free</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/22/Java%208%20Stream/">Java 8 Streams</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Gamehu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

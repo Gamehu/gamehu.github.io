@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Dubbo讲究(一) | 正儿八经</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="第一次接触dubbo好像是在14年吧，13年参加工作时，在一家半国企，当时他们用的是axis2，当时那一堆代码+XML，让我怀疑是否应该继续干IT，觉得太难用了。后来接触了dubbo，觉得这玩意好，省了很多事，感概开源的力量和大公司的体量。用起来真实很通畅。 当然我们公司也没有作妖，非要选个与众不同所以还是选了dubbo作为服务之间的通信框架。 我这儿也不做什么源码解析了，比我专业的细致的网上很多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dubbo讲究(一)">
+<meta property="og:url" content="http://gamehu.run/2018/06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/index.html">
+<meta property="og:site_name" content="正儿八经">
+<meta property="og:description" content="第一次接触dubbo好像是在14年吧，13年参加工作时，在一家半国企，当时他们用的是axis2，当时那一堆代码+XML，让我怀疑是否应该继续干IT，觉得太难用了。后来接触了dubbo，觉得这玩意好，省了很多事，感概开源的力量和大公司的体量。用起来真实很通畅。 当然我们公司也没有作妖，非要选个与众不同所以还是选了dubbo作为服务之间的通信框架。 我这儿也不做什么源码解析了，比我专业的细致的网上很多">
+<meta property="article:published_time" content="2018-06-26T03:37:10.000Z">
+<meta property="article:modified_time" content="2020-01-12T10:54:27.379Z">
+<meta property="article:author" content="Gamehu">
+<meta property="article:tag" content="dubbo">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="正儿八经" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">正儿八经</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">浪起来？</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://gamehu.run"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-dubbo讲究(一)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/" class="article-date">
+  <time datetime="2018-06-26T03:37:10.000Z" itemprop="datePublished">2018-06-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Dubbo讲究(一)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>第一次接触dubbo好像是在14年吧，13年参加工作时，在一家半国企，当时他们用的是axis2，当时那一堆代码+XML，让我怀疑是否应该继续干IT，觉得太难用了。后来接触了dubbo，觉得这玩意好，省了很多事，感概开源的力量和大公司的体量。用起来真实很通畅。</p>
+<p>当然我们公司也没有作妖，非要选个与众不同所以还是选了dubbo作为服务之间的通信框架。</p>
+<p>我这儿也不做什么源码解析了，比我专业的细致的网上很多，我主要解析一下我在用dubbo过程中遇到的问题相关的源码。比如今天讲的就是dubbo的异常机制、序列化协议hession相关的源码。</p>
+<p>问题起因在于我们系统中定义了自己的一套异常处理机制，有个自定义异常</p>
+
+
+<p>图中的ApiException是我们定义的针对接口异常的异常类，长成下图这样。</p>
+
+
+<p>红框的部分是这次发生问题之后加的一个构造参数，加完之后就搞定了。那为什么呢？我们跟着异常信息我们知道是dubbo用的hession那块反序列化报了异常，跟下源码看下。</p>
+<ul>
+<li>我们找到JavaDeserializer的instantiate方法，找到_constructor，发现是个Constructor，找到赋值地方，在JavaDeserializer实例化时赋值，进入JavaDeserializer构造方法，根据赋值代码，并且因为我们的ApiException是不知一个构造函数的所以_constructor肯定不会为null,所以</li>
+</ul>
+
+
+<pre><code>public JavaDeserializer(Class cl) {
+    this._type = cl;
+    this._fieldMap = this.getFieldMap(cl);
+    this._readResolve = this.getReadResolve(cl);
+    if (this._readResolve != null) {
+        this._readResolve.setAccessible(true);
+    }
+
+    Constructor[] constructors = cl.getDeclaredConstructors();
+    long bestCost = 9223372036854775807L;
+
+    for(int i = 0; i &lt; constructors.length; ++i) {
+        Class[] param = constructors[i].getParameterTypes();
+        long cost = 0L;
+
+        for(int j = 0; j &lt; param.length; ++j) {
+            cost = 4L * cost;
+            if (Object.class.equals(param[j])) {
+                ++cost;
+            } else if (String.class.equals(param[j])) {
+                cost += 2L;
+            } else if (Integer.TYPE.equals(param[j])) {
+                cost += 3L;
+            } else if (Long.TYPE.equals(param[j])) {
+                cost += 4L;
+            } else if (param[j].isPrimitive()) {
+                cost += 5L;
+            } else {
+                cost += 6L;
+            }
+        }
+
+        if (cost &lt; 0L || cost &gt; 65536L) {
+            cost = 65536L;
+        }
+
+        cost += (long)param.length &lt;&lt; 48;
+        if (cost &lt; bestCost) {
+            this._constructor = constructors[i];
+            bestCost = cost;
+        }
+    }
+
+    if (this._constructor != null) {
+        this._constructor.setAccessible(true);
+        Class[] params = this._constructor.getParameterTypes();
+        this._constructorArgs = new Object[params.length];
+
+        for(int i = 0; i &lt; params.length; ++i) {
+            this._constructorArgs[i] = getParamArg(params[i]);
+        }
+    }
+
+}</code></pre><p>根据下面这段代码，从JavaDeserializer的构造方法中可以看出，这里_constructor会被赋予参数最少的那个构造器，即找到ApiException一个参数的构造方法 public ApiException(Throwable cause)，</p>
+
+
+<p>有根据下面这段代码，我们知道Throwable不是primitive（原始数据类型），所以_constructorArgs值为null。</p>
+
+
+<p><strong>this._constructor.newInstance(this._constructorArgs)</strong>使用反射调用构造方法时，要求给的参数必须是原始类型或者其包装器</p>
+
+
+<p>但是我们给的参数值都为null，，传入的参数不合法，造成了上面的异常。</p>
+<p><strong>解决办法</strong></p>
+<p>所以绕了这么大一圈知道了原因，那怎么办呢，最简单的方式ApiException提供一个无参的构造方法。就会这样调用：ca.newInstance(new Object[])，即无参构造则不会再抛异常了。</p>
+
+
+<p><strong>小结</strong></p>
+<p>其实这块还会牵扯处很多东西，比如为什么ApiException要那么设计？为什么Java本身的反序列化机制能过而Hession不能过？再比如Constructor.newInstance()和我们经常看到的Class.newInstance()有什么区别？…哎 学海无涯苦作舟</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://gamehu.run/2018/06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/" data-id="ckaxs1w9z0024twaq9jx582gi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dubbo/" rel="tag">dubbo</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/06/27/OKR/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          OKR
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9C%86%E6%A1%8C%E6%B4%BE/">圆桌派</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E4%BD%9C/">工作</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E7%A8%8B/">工程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%90%E9%95%BF/">成长</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%8F%E6%8D%B7/">敏捷</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%BB%9A%E7%B2%97/">滚粗</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9E%8E%E6%89%AF/">瞎扯</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E5%9C%BA/">职场</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/%E8%AE%A4%E7%9F%A5/">认知</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%83%A8%E7%BD%B2/">部署</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%97%B2%E6%89%AF/">闲扯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/12-Factors/" rel="tag">12-Factors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Brower/" rel="tag">Brower</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES-Module/" rel="tag">ES Module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS%E4%BD%9C%E7%94%A8%E5%9F%9F/" rel="tag">JS作用域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Module/" rel="tag">Module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OKR/" rel="tag">OKR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/" rel="tag">PostgreSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Presentation/" rel="tag">Presentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Hooks/" rel="tag">React Hooks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Serverless/" rel="tag">Serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/" rel="tag">command</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/" rel="tag">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/graphql/" rel="tag">graphql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/" rel="tag">gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ls/" rel="tag">ls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/" rel="tag">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/service-mesh/" rel="tag">service mesh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sso/" rel="tag">sso</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tick%E6%A0%88/" rel="tag">tick栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%87%E4%B8%87%E6%B2%A1%E6%83%B3%E5%88%B0/" rel="tag">万万没想到</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%A7%E5%93%81/" rel="tag">产品</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E6%89%8D%E7%AE%A1%E7%90%86/" rel="tag">人才管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E5%8A%9B/" rel="tag">动力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8D%E4%BA%BA/" rel="tag">名人</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%8A%E8%AF%AB/" rel="tag">告诫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%8B%E7%82%B9/" rel="tag">埋点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%89%AB%E6%8F%8F/" rel="tag">安全扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B/" rel="tag">工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E8%8D%92/" rel="tag">开荒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%83%E7%90%86/" rel="tag">心理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" rel="tag">心理学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">性能优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87/" rel="tag">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1/" rel="tag">梦想金山</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AC%B2%E6%9C%9B/" rel="tag">欲望</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E8%82%B2%E5%9F%BA%E9%87%91/" rel="tag">生育基金</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%91%E6%8E%A7/" rel="tag">监控</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E8%80%83/" rel="tag">系统思考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A0%81/" rel="tag">编码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E5%9C%BA/" rel="tag">职场</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%BE%8B/" rel="tag">自律</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%84%E5%88%92/" rel="tag">规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A4%E7%9F%A5/" rel="tag">认知</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%85%E5%92%92/" rel="tag">诅咒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%A6%E8%AE%BE/" rel="tag">详设</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E6%8A%80%E8%83%BD/" rel="tag">软技能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E8%90%A5/" rel="tag">运营</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%9A%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB/" rel="tag">通用工具类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E9%9A%BE%E5%BA%A6%E6%B2%9F%E9%80%9A/" rel="tag">高难度沟通</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/12-Factors/" style="font-size: 10px;">12-Factors</a> <a href="/tags/Brower/" style="font-size: 10px;">Brower</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/ES-Module/" style="font-size: 10px;">ES Module</a> <a href="/tags/JS%E4%BD%9C%E7%94%A8%E5%9F%9F/" style="font-size: 10px;">JS作用域</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Module/" style="font-size: 10px;">Module</a> <a href="/tags/OKR/" style="font-size: 10px;">OKR</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Presentation/" style="font-size: 10px;">Presentation</a> <a href="/tags/React-Hooks/" style="font-size: 10px;">React Hooks</a> <a href="/tags/Serverless/" style="font-size: 10px;">Serverless</a> <a href="/tags/command/" style="font-size: 10px;">command</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/graphql/" style="font-size: 10px;">graphql</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/ls/" style="font-size: 10px;">ls</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/service-mesh/" style="font-size: 10px;">service mesh</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tick%E6%A0%88/" style="font-size: 10px;">tick栈</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/%E4%B8%87%E4%B8%87%E6%B2%A1%E6%83%B3%E5%88%B0/" style="font-size: 10px;">万万没想到</a> <a href="/tags/%E4%BA%A7%E5%93%81/" style="font-size: 10px;">产品</a> <a href="/tags/%E4%BA%BA%E6%89%8D%E7%AE%A1%E7%90%86/" style="font-size: 10px;">人才管理</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 16.67px;">前端</a> <a href="/tags/%E5%8A%A8%E5%8A%9B/" style="font-size: 10px;">动力</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 10px;">区块链</a> <a href="/tags/%E5%90%8D%E4%BA%BA/" style="font-size: 10px;">名人</a> <a href="/tags/%E5%91%8A%E8%AF%AB/" style="font-size: 10px;">告诫</a> <a href="/tags/%E5%9F%8B%E7%82%B9/" style="font-size: 10px;">埋点</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">学习</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">安全扫描</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 20px;">实践</a> <a href="/tags/%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">工程</a> <a href="/tags/%E5%BC%80%E8%8D%92/" style="font-size: 10px;">开荒</a> <a href="/tags/%E5%BF%83%E7%90%86/" style="font-size: 10px;">心理</a> <a href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 10px;">心理学</a> <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 10px;">性能优化</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 10px;">总结</a> <a href="/tags/%E6%95%88%E7%8E%87/" style="font-size: 10px;">效率</a> <a href="/tags/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1/" style="font-size: 13.33px;">梦想金山</a> <a href="/tags/%E6%AC%B2%E6%9C%9B/" style="font-size: 10px;">欲望</a> <a href="/tags/%E7%94%9F%E8%82%B2%E5%9F%BA%E9%87%91/" style="font-size: 10px;">生育基金</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 10px;">监控</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E8%80%83/" style="font-size: 10px;">系统思考</a> <a href="/tags/%E7%BC%96%E7%A0%81/" style="font-size: 10px;">编码</a> <a href="/tags/%E8%81%8C%E5%9C%BA/" style="font-size: 13.33px;">职场</a> <a href="/tags/%E8%87%AA%E5%BE%8B/" style="font-size: 10px;">自律</a> <a href="/tags/%E8%A7%84%E5%88%92/" style="font-size: 10px;">规划</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E8%AE%A4%E7%9F%A5/" style="font-size: 13.33px;">认知</a> <a href="/tags/%E8%AF%85%E5%92%92/" style="font-size: 10px;">诅咒</a> <a href="/tags/%E8%AF%A6%E8%AE%BE/" style="font-size: 10px;">详设</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 10px;">跨域</a> <a href="/tags/%E8%BD%AF%E6%8A%80%E8%83%BD/" style="font-size: 10px;">软技能</a> <a href="/tags/%E8%BF%90%E8%90%A5/" style="font-size: 10px;">运营</a> <a href="/tags/%E9%80%9A%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB/" style="font-size: 10px;">通用工具类</a> <a href="/tags/%E9%AB%98%E9%9A%BE%E5%BA%A6%E6%B2%9F%E9%80%9A/" style="font-size: 10px;">高难度沟通</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/02/Linux-ls%E5%91%BD%E4%BB%A4/">Linux ls命令</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/28/%E5%89%8D%E7%AB%AF%E5%9F%8B%E7%82%B9(%E4%B8%80)/">前端埋点(一)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/21/ps-grep-top-free/">ps、top、free</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/22/Java%208%20Stream/">Java 8 Streams</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Gamehu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

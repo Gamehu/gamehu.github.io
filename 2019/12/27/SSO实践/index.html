@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>SSO实践 | 正儿八经</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="OK，正式说明了SSO的说明网上有很多我就不在这儿丢人了。找了张小图SSO的作用一目了然。   以下主要记录一下我在产品中SSO的实践案例。 案例1案例1 是比较标准的基于OpenID方式的SSO，用Node.js写的。 案例1没什么说的，网上样例很多，如果有兴趣可以看下我之前写的，不过比较老了，也是第一次写nodejs。 OpenID+MongoDB实现的数据交换中心github.com">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSO实践">
+<meta property="og:url" content="http://gamehu.run/2019/12/27/SSO%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="正儿八经">
+<meta property="og:description" content="OK，正式说明了SSO的说明网上有很多我就不在这儿丢人了。找了张小图SSO的作用一目了然。   以下主要记录一下我在产品中SSO的实践案例。 案例1案例1 是比较标准的基于OpenID方式的SSO，用Node.js写的。 案例1没什么说的，网上样例很多，如果有兴趣可以看下我之前写的，不过比较老了，也是第一次写nodejs。 OpenID+MongoDB实现的数据交换中心github.com">
+<meta property="article:published_time" content="2019-12-27T09:49:00.000Z">
+<meta property="article:modified_time" content="2020-01-02T03:32:20.318Z">
+<meta property="article:author" content="Gamehu">
+<meta property="article:tag" content="sso">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="正儿八经" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">正儿八经</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">浪起来？</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://gamehu.run"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-SSO实践" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/27/SSO%E5%AE%9E%E8%B7%B5/" class="article-date">
+  <time datetime="2019-12-27T09:49:00.000Z" itemprop="datePublished">2019-12-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E4%BD%9C/">工作</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SSO实践
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+
+
+
+<h1 id="OK，正式说明了"><a href="#OK，正式说明了" class="headerlink" title="OK，正式说明了"></a>OK，正式说明了</h1><p>SSO的说明网上有很多我就不在这儿丢人了。找了张小图SSO的作用一目了然。</p>
+
+
+<p>以下主要记录一下我在产品中SSO的实践案例。</p>
+<h2 id="案例1"><a href="#案例1" class="headerlink" title="案例1"></a>案例1</h2><p><strong>案例1</strong> 是比较标准的基于OpenID方式的SSO，用Node.js写的。</p>
+<p>案例1没什么说的，网上样例很多，如果有兴趣可以看下我之前写的，不过比较老了，也是第一次写nodejs。</p>
+<blockquote><footer><strong>OpenID+MongoDB实现的数据交换中心</strong><cite><a href="https://github.com/WebHu/async_data_exchange_center.git" target="_blank" rel="noopener">github.com/WebHu/async_data_exchange_center.git</a></cite></footer></blockquote>
+
+
+
+<h3 id="案例2"><a href="#案例2" class="headerlink" title="案例2"></a><strong>案例2</strong></h3><p>则是非标的SSO，用Java+javascript写的。</p>
+<p>案例2虽然不是非标的，不过整体流程是具备的，比较适用特定编码场景（Spring Security+OpenID），可能有需要的同学，反正我是没在网上找到这类案例。</p>
+
+
+<p>客户现场的系统A需要登入到我们提供的系统B，没有单独用户中心即也不存在用户同步，客户要求的是能无缝登入，所以解决办法有用户则直接登入无用户则创建后再登入，登录效果与从登录页面发起的登录一样，所以token解析后用Security的方式执行登录。</p>
+<h4 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * sso出现在路径末尾 react router方式 目前采用这种方式 http:&#x2F;&#x2F;...&#x2F;frame&#x2F;#&#x2F;module&#x2F;xxx?sso&#x3D;xxx 避免sso一直保留</span><br><span class="line"> * @param key 需要获取url参数key</span><br><span class="line"> * @returns &#123;string|null&#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">export function getSsoString(key) &#123;</span><br><span class="line">  const str &#x3D; location.hash;</span><br><span class="line">  if (str &#x3D;&#x3D; null || str.length &lt; 2) &#123;</span><br><span class="line">    return null;</span><br><span class="line">  &#125;</span><br><span class="line">  const arr &#x3D; str.split(&#39;?&#39;);</span><br><span class="line">  if (arr !&#x3D; null &amp;&amp; arr.length &#x3D;&#x3D;&#x3D; 2) &#123;</span><br><span class="line">    const query &#x3D; arr[1];</span><br><span class="line">    if (query !&#x3D; null &amp;&amp; query.length &gt; 0) &#123;</span><br><span class="line">      const words &#x3D; query.split(&#39;&amp;&#39;);</span><br><span class="line">      &#x2F;&#x2F; 将每一个数组元素以&#x3D;分隔并赋给obj对象</span><br><span class="line">      for (let i &#x3D; 0; i &lt; words.length; i++) &#123;</span><br><span class="line">        const tmp_arr &#x3D; words[i].split(&#39;&#x3D;&#39;);</span><br><span class="line">        const k &#x3D; decodeURIComponent(tmp_arr[0]);</span><br><span class="line">        const v &#x3D; decodeURIComponent(tmp_arr[1]);</span><br><span class="line">        if (k &#x3D;&#x3D;&#x3D; key) &#123;</span><br><span class="line">          return v;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 单点登录逻辑 在页面token发送到后端进行验证</span><br><span class="line"> * @param callback</span><br><span class="line"> *&#x2F;</span><br><span class="line">export function sso(callback) &#123;</span><br><span class="line">  const token &#x3D; getSsoString(&#39;sso&#39;);</span><br><span class="line">  if (token !&#x3D; null) &#123;</span><br><span class="line">    req(BASE_WEB_API.SSO, &#123; token &#125;, null, &#123; validateError: true &#125;)</span><br><span class="line">      .then(response &#x3D;&gt; &#123;</span><br><span class="line">        &#x2F;&#x2F; do something....</span><br><span class="line">        if (callback !&#x3D; null) &#123;</span><br><span class="line">          callback();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">      .catch(e &#x3D;&gt; &#123;</span><br><span class="line">        console.error(&#39;failed sso --&gt; &#39;, e);</span><br><span class="line">        if (callback !&#x3D; null) &#123;</span><br><span class="line">          callback();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125; else if (callback !&#x3D; null) &#123;</span><br><span class="line">    callback();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 跳转到猎豹系统</span><br><span class="line"> *</span><br><span class="line"> * @param response</span><br><span class="line"> * @throws Exception</span><br><span class="line"> *&#x2F;</span><br><span class="line">@PostMapping(value &#x3D; &quot;&#x2F;cheetah&quot;, produces &#x3D; MediaType.APPLICATION_JSON_UTF8_VALUE)</span><br><span class="line">public String cheetah(@RequestBody SSOVO ssovo,</span><br><span class="line">                      HttpServletRequest request,</span><br><span class="line">                      HttpServletResponse response) throws Exception &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        &#x2F;&#x2F; 验证license</span><br><span class="line">        if (!licenseService.isValid()) &#123;</span><br><span class="line">            LOGGER.error(&quot;license is invalid&quot;);</span><br><span class="line">            return validateTokenError(request, LICENSE_ERROR_MSG);</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;解析token</span><br><span class="line">        Context.Token userToken &#x3D; Context.getUserInfoFromToken(ssovo.getToken());</span><br><span class="line">        if (isNullOrEmpty(userToken.getUserName()) || isNullOrEmpty(userToken.getPassword())) &#123;</span><br><span class="line">            LOGGER.warn(&quot;token is invalid:&#123;&#125;&quot;, ssovo.getToken());</span><br><span class="line">            return validateTokenError(request);</span><br><span class="line">        &#125;</span><br><span class="line">        LOGGER.info(&quot;当前单点登录的用户信息为:&#123;&#125;&quot;, JSON.toJSONString(userToken));</span><br><span class="line">        &#x2F;&#x2F;验证内置用户是否存在，不存在则创建</span><br><span class="line">        SSOUserVO user &#x3D; ssoService.checkUser(userToken.getUserName(), Context.getCmsContext());</span><br><span class="line">        if (user !&#x3D; null) &#123;</span><br><span class="line">            &#x2F;&#x2F; 执行登录</span><br><span class="line">            user.setPassword(userToken.getPassword());</span><br><span class="line">            return ssoLogin(request, response, user);</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;异常时跳转到登录页</span><br><span class="line">        return validateTokenError(request);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        LOGGER.error(&quot;sso登录失败:&#123;&#125;&quot;, e.getMessage());</span><br><span class="line">        return validateTokenError(request);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private String validateTokenError(HttpServletRequest request) &#123;</span><br><span class="line">    return validateError(request, SSO_VERIFICATION_ERROR_MSG);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private String validateTokenError(HttpServletRequest request, String msg) &#123;</span><br><span class="line">    return validateError(request, msg);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private String validateError(HttpServletRequest request, String msg) &#123;</span><br><span class="line">    HttpSession session &#x3D; request.getSession();</span><br><span class="line">    if (session !&#x3D; null) &#123;</span><br><span class="line">        &#x2F;&#x2F;使session失效</span><br><span class="line">        session.invalidate();</span><br><span class="line">    &#125;</span><br><span class="line">    SSOErrorVO errorVo &#x3D; new SSOErrorVO(SSO_VERIFICATION_ERROR, msg);</span><br><span class="line">    return JSON.toJSONString(errorVo);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;**</span><br><span class="line"> * 执行登录</span><br><span class="line"> *</span><br><span class="line"> * @param request</span><br><span class="line"> * @param response</span><br><span class="line"> * @param userToken</span><br><span class="line"> * @return</span><br><span class="line"> * @throws IOException</span><br><span class="line"> * @throws ServletException</span><br><span class="line"> *&#x2F;</span><br><span class="line">private String ssoLogin(HttpServletRequest request, HttpServletResponse response, SSOUserVO userToken) throws IOException, ServletException &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        &#x2F;&#x2F;登录</span><br><span class="line">        UsernamePasswordAuthenticationToken authReq</span><br><span class="line">                &#x3D; new UsernamePasswordAuthenticationToken(userToken.getUserName(), userToken.getPassword());</span><br><span class="line">        authReq.setDetails(new WebAuthenticationDetails(request));</span><br><span class="line">        Authentication auth &#x3D; authenticationManagerBean.authenticate(authReq);</span><br><span class="line">        SecurityContextHolder.getContext().setAuthentication(auth);</span><br><span class="line">        HttpSession session &#x3D; request.getSession(true);</span><br><span class="line">        &#x2F;&#x2F; 永不超时</span><br><span class="line">        session.setMaxInactiveInterval(-1);</span><br><span class="line">        &#x2F;&#x2F;TODO 静态导入</span><br><span class="line">        session.setAttribute(SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());</span><br><span class="line">        baymaxLoginSuccessHandler.onAuthenticationSuccess(request, response, auth);</span><br><span class="line">    &#125; catch (AuthenticationException failed) &#123;</span><br><span class="line">        LOGGER.warn(</span><br><span class="line">                &quot;sso: InternalAuthenticationServiceException occurred while trying to authenticate the user.&quot;,</span><br><span class="line">                failed);</span><br><span class="line">        SecurityContextHolder.clearContext();</span><br><span class="line">        baymaxAuthenticationFailureHandler.onAuthenticationFailure(request, response, failed);</span><br><span class="line">        validateTokenError(request);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 根据用户名，获取用户的token</span><br><span class="line"> *</span><br><span class="line"> * @param userName</span><br><span class="line"> * @param response</span><br><span class="line"> * @return</span><br><span class="line"> *&#x2F;</span><br><span class="line">@RequestMapping(value &#x3D; &quot;&#x2F;getToken&#x2F;&#123;userName&#125;&quot;, produces &#x3D; MediaType.APPLICATION_JSON_UTF8_VALUE)</span><br><span class="line">public String getToken(@PathVariable(value &#x3D; &quot;userName&quot;, required &#x3D; false) String userName, HttpServletResponse response) &#123;</span><br><span class="line"></span><br><span class="line">    try &#123;</span><br><span class="line">        return Context.createToken(userName, PasswordUtil.getPlaintextPwd());</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        LOGGER.error(&quot;获取token失败:&#123;&#125;&quot;, e.getMessage());</span><br><span class="line">        formatErrorResponse(response, HttpServletResponse.SC_BAD_REQUEST, e.getMessage());</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void formatErrorResponse(HttpServletResponse response, int httpCode, String errorMsg) &#123;</span><br><span class="line">    response.setStatus(httpCode);</span><br><span class="line">    response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);</span><br><span class="line">    try (PrintWriter out &#x3D; response.getWriter();) &#123;</span><br><span class="line">        String errorMsgVo &#x3D; JSON.toJSONString(ImmutableMap.of(&quot;code&quot;, SSO_GET_TOKEN_ERROR, &quot;message&quot;, errorMsg));</span><br><span class="line">        out.write(errorMsgVo);</span><br><span class="line">        out.flush();</span><br><span class="line">    &#125; catch (IOException ex) &#123;</span><br><span class="line">        LOGGER.warn(&quot;get token :&#123;&#125;&quot;, ex.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>处理400异常避免出现白页</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * @author Gamehu</span><br><span class="line"> * @description 接管400异常，个性化错误提示</span><br><span class="line"> * @date 2019&#x2F;12&#x2F;19</span><br><span class="line"> *&#x2F;</span><br><span class="line">@RestControllerAdvice(assignableTypes &#x3D; SSOController.class)</span><br><span class="line">@Order(Ordered.HIGHEST_PRECEDENCE)</span><br><span class="line">@Slf4j</span><br><span class="line">@Component</span><br><span class="line">public class SSO400ExceptionHandler &#123;</span><br><span class="line">    @ExceptionHandler(value &#x3D; Exception.class)</span><br><span class="line">    @ResponseStatus(HttpStatus.BAD_REQUEST)</span><br><span class="line">    public Object defaultErrorHandler(Exception e) &#123;</span><br><span class="line">        log.warn(&quot;---SSO验证异常---  ERROR: &#123;&#125;&quot;, e.getMessage());</span><br><span class="line">        return ImmutableMap.of(&quot;code&quot;, SSO_VERIFICATION_ERROR, &quot;message&quot;, e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="引伸阅读："><a href="#引伸阅读：" class="headerlink" title="引伸阅读："></a>引伸阅读：</h3><blockquote><footer><strong>OpenID versus OAuth from the user’s perspective</strong><cite><a href="http://cakebaker.42dh.com/2008/04/01/openid-versus-oauth-from-the-users-perspective/" target="_blank" rel="noopener">cakebaker.42dh.com/2008/04/01/openid-versus-oauth-from-the-users-perspective</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>OAUTH-OPENID: YOU’RE BARKING UP THE WRONG TREE IF YOU THINK THEY’RE THE SAME THING</strong><cite><a href="http://softwareas.com/oauth-openid-youre-barking-up-the-wrong-tree-if-you-think-theyre-the-same-thing/" target="_blank" rel="noopener">softwareas.com/oauth-openid-youre-barking-up-the-wrong-tree-if-you-think-theyre-the-same-thing</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>What's the difference between OpenID and OAuth?</strong><cite><a href="https://stackoverflow.com/questions/1087031/whats-the-difference-between-openid-and-oauth" target="_blank" rel="noopener">stackoverflow.com/questions/1087031/whats-the-difference-between-openid-and-oauth</a></cite></footer></blockquote>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://gamehu.run/2019/12/27/SSO%E5%AE%9E%E8%B7%B5/" data-id="ckaxs1w9x001ztwaqffeg7sx2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sso/" rel="tag">sso</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/02/03/%E9%A2%86%E5%AF%BC%E5%AF%84%E8%AF%AD/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          领导寄语
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/29/postgresql(1)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">PostgreSQL(1)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9C%86%E6%A1%8C%E6%B4%BE/">圆桌派</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E4%BD%9C/">工作</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E7%A8%8B/">工程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%90%E9%95%BF/">成长</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%8F%E6%8D%B7/">敏捷</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%BB%9A%E7%B2%97/">滚粗</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9E%8E%E6%89%AF/">瞎扯</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E5%9C%BA/">职场</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/%E8%AE%A4%E7%9F%A5/">认知</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%83%A8%E7%BD%B2/">部署</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%97%B2%E6%89%AF/">闲扯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/12-Factors/" rel="tag">12-Factors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Brower/" rel="tag">Brower</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES-Module/" rel="tag">ES Module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS%E4%BD%9C%E7%94%A8%E5%9F%9F/" rel="tag">JS作用域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Module/" rel="tag">Module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OKR/" rel="tag">OKR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/" rel="tag">PostgreSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Presentation/" rel="tag">Presentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Hooks/" rel="tag">React Hooks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Serverless/" rel="tag">Serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/" rel="tag">command</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/" rel="tag">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/graphql/" rel="tag">graphql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/" rel="tag">gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ls/" rel="tag">ls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/" rel="tag">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/service-mesh/" rel="tag">service mesh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sso/" rel="tag">sso</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tick%E6%A0%88/" rel="tag">tick栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%87%E4%B8%87%E6%B2%A1%E6%83%B3%E5%88%B0/" rel="tag">万万没想到</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%A7%E5%93%81/" rel="tag">产品</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E6%89%8D%E7%AE%A1%E7%90%86/" rel="tag">人才管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E5%8A%9B/" rel="tag">动力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8D%E4%BA%BA/" rel="tag">名人</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%8A%E8%AF%AB/" rel="tag">告诫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%8B%E7%82%B9/" rel="tag">埋点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%89%AB%E6%8F%8F/" rel="tag">安全扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B/" rel="tag">工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E8%8D%92/" rel="tag">开荒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%83%E7%90%86/" rel="tag">心理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" rel="tag">心理学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">性能优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87/" rel="tag">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1/" rel="tag">梦想金山</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AC%B2%E6%9C%9B/" rel="tag">欲望</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E8%82%B2%E5%9F%BA%E9%87%91/" rel="tag">生育基金</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%91%E6%8E%A7/" rel="tag">监控</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E8%80%83/" rel="tag">系统思考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A0%81/" rel="tag">编码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E5%9C%BA/" rel="tag">职场</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%BE%8B/" rel="tag">自律</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%84%E5%88%92/" rel="tag">规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A4%E7%9F%A5/" rel="tag">认知</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%85%E5%92%92/" rel="tag">诅咒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%A6%E8%AE%BE/" rel="tag">详设</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E6%8A%80%E8%83%BD/" rel="tag">软技能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E8%90%A5/" rel="tag">运营</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%9A%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB/" rel="tag">通用工具类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E9%9A%BE%E5%BA%A6%E6%B2%9F%E9%80%9A/" rel="tag">高难度沟通</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/12-Factors/" style="font-size: 10px;">12-Factors</a> <a href="/tags/Brower/" style="font-size: 10px;">Brower</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/ES-Module/" style="font-size: 10px;">ES Module</a> <a href="/tags/JS%E4%BD%9C%E7%94%A8%E5%9F%9F/" style="font-size: 10px;">JS作用域</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Module/" style="font-size: 10px;">Module</a> <a href="/tags/OKR/" style="font-size: 10px;">OKR</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Presentation/" style="font-size: 10px;">Presentation</a> <a href="/tags/React-Hooks/" style="font-size: 10px;">React Hooks</a> <a href="/tags/Serverless/" style="font-size: 10px;">Serverless</a> <a href="/tags/command/" style="font-size: 10px;">command</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/graphql/" style="font-size: 10px;">graphql</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/ls/" style="font-size: 10px;">ls</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/service-mesh/" style="font-size: 10px;">service mesh</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tick%E6%A0%88/" style="font-size: 10px;">tick栈</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/%E4%B8%87%E4%B8%87%E6%B2%A1%E6%83%B3%E5%88%B0/" style="font-size: 10px;">万万没想到</a> <a href="/tags/%E4%BA%A7%E5%93%81/" style="font-size: 10px;">产品</a> <a href="/tags/%E4%BA%BA%E6%89%8D%E7%AE%A1%E7%90%86/" style="font-size: 10px;">人才管理</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 16.67px;">前端</a> <a href="/tags/%E5%8A%A8%E5%8A%9B/" style="font-size: 10px;">动力</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 10px;">区块链</a> <a href="/tags/%E5%90%8D%E4%BA%BA/" style="font-size: 10px;">名人</a> <a href="/tags/%E5%91%8A%E8%AF%AB/" style="font-size: 10px;">告诫</a> <a href="/tags/%E5%9F%8B%E7%82%B9/" style="font-size: 10px;">埋点</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">学习</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">安全扫描</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 20px;">实践</a> <a href="/tags/%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">工程</a> <a href="/tags/%E5%BC%80%E8%8D%92/" style="font-size: 10px;">开荒</a> <a href="/tags/%E5%BF%83%E7%90%86/" style="font-size: 10px;">心理</a> <a href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 10px;">心理学</a> <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 10px;">性能优化</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 10px;">总结</a> <a href="/tags/%E6%95%88%E7%8E%87/" style="font-size: 10px;">效率</a> <a href="/tags/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1/" style="font-size: 13.33px;">梦想金山</a> <a href="/tags/%E6%AC%B2%E6%9C%9B/" style="font-size: 10px;">欲望</a> <a href="/tags/%E7%94%9F%E8%82%B2%E5%9F%BA%E9%87%91/" style="font-size: 10px;">生育基金</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 10px;">监控</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E8%80%83/" style="font-size: 10px;">系统思考</a> <a href="/tags/%E7%BC%96%E7%A0%81/" style="font-size: 10px;">编码</a> <a href="/tags/%E8%81%8C%E5%9C%BA/" style="font-size: 13.33px;">职场</a> <a href="/tags/%E8%87%AA%E5%BE%8B/" style="font-size: 10px;">自律</a> <a href="/tags/%E8%A7%84%E5%88%92/" style="font-size: 10px;">规划</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E8%AE%A4%E7%9F%A5/" style="font-size: 13.33px;">认知</a> <a href="/tags/%E8%AF%85%E5%92%92/" style="font-size: 10px;">诅咒</a> <a href="/tags/%E8%AF%A6%E8%AE%BE/" style="font-size: 10px;">详设</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 10px;">跨域</a> <a href="/tags/%E8%BD%AF%E6%8A%80%E8%83%BD/" style="font-size: 10px;">软技能</a> <a href="/tags/%E8%BF%90%E8%90%A5/" style="font-size: 10px;">运营</a> <a href="/tags/%E9%80%9A%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB/" style="font-size: 10px;">通用工具类</a> <a href="/tags/%E9%AB%98%E9%9A%BE%E5%BA%A6%E6%B2%9F%E9%80%9A/" style="font-size: 10px;">高难度沟通</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/02/Linux-ls%E5%91%BD%E4%BB%A4/">Linux ls命令</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/28/%E5%89%8D%E7%AB%AF%E5%9F%8B%E7%82%B9(%E4%B8%80)/">前端埋点(一)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/21/ps-grep-top-free/">ps、top、free</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/22/Java%208%20Stream/">Java 8 Streams</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Gamehu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

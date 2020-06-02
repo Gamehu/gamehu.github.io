@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Java 8 Streams | 正儿八经</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近两周被平台组指名道姓拉去当了两周的苦力，写业务层代码，因为逻辑比较复杂数据输入比较多样，所以导致使用集合的概率很高，且常常伴随着过滤、排序等操作，继而用到了很多Streams提供的方法，遂做个简单记录。 StreamsStream是Java 8中引入的新的抽象层，它提供了一些类似SQL语句的声明性方式处理数据。 流操作分为中间操作和最终操作，元素流在管道中经过中间操作（intermedia">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 8 Streams">
+<meta property="og:url" content="http://gamehu.run/2020/03/22/Java%208%20Stream/index.html">
+<meta property="og:site_name" content="正儿八经">
+<meta property="og:description" content="最近两周被平台组指名道姓拉去当了两周的苦力，写业务层代码，因为逻辑比较复杂数据输入比较多样，所以导致使用集合的概率很高，且常常伴随着过滤、排序等操作，继而用到了很多Streams提供的方法，遂做个简单记录。 StreamsStream是Java 8中引入的新的抽象层，它提供了一些类似SQL语句的声明性方式处理数据。 流操作分为中间操作和最终操作，元素流在管道中经过中间操作（intermedia">
+<meta property="article:published_time" content="2020-03-22T04:20:00.000Z">
+<meta property="article:modified_time" content="2020-03-22T07:02:43.461Z">
+<meta property="article:author" content="Gamehu">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="正儿八经" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">正儿八经</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">浪起来？</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://gamehu.run"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Java 8 Stream" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/22/Java%208%20Stream/" class="article-date">
+  <time datetime="2020-03-22T04:20:00.000Z" itemprop="datePublished">2020-03-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E4%BD%9C/">工作</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java 8 Streams
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+
+<p>最近两周被平台组指名道姓拉去当了两周的苦力，写业务层代码，因为逻辑比较复杂数据输入比较多样，所以导致使用集合的概率很高，且常常伴随着过滤、排序等操作，继而用到了很多Streams提供的方法，遂做个简单记录。</p>
+<h3 id="Streams"><a href="#Streams" class="headerlink" title="Streams"></a>Streams</h3><p>Stream是Java 8中引入的新的抽象层，它提供了一些类似SQL语句的声明性方式处理数据。</p>
+<p>流操作分为中间操作和最终操作，元素流在管道中经过中间操作（intermediate operation）的处理，最后由最终操作(terminal operation)得到前面处理的结果。 流管道由一个源（例如Collection，数组，生成器函数或I / O通道）组成； 随后是零个或多个中间操作，例如Stream.filter或Stream.map； 以及诸如Stream.forEach或Stream.reduce之类的终端操作。</p>
+
+
+<p>即将要处理的元素集合看作一种流， 流在管道中传输， 并且可以在管道中插入节点上进行处理， 比如筛选， 排序，聚合等。</p>
+<p>当然为什么喜欢用它还是因为Stream API 借助于同样新出现的 Lambda 表达式，极大的提高编程效率和程序可读性。会让代码看起来更加简洁当然通常也会更加高效。</p>
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3>
+
+<p>如上图api很多，其中又可以按照最开始说的分为中间操作、最终操作两类，中间（<strong>Intermediate</strong>）操作是可以零个或者多个但是最终（<strong>Terminal</strong>）操作只能有一个，能力有限我就列举一下我常用的。</p>
+<p><strong>可能我们需要注意的一个概念</strong>：因为一个 Stream 可以进行多次中间操作，那是不是就会对 Stream 的每个元素进行转换多次，即时间复杂度就是 N（转换次数）个 ？其实不是这样的，转换操作都是 lazy 的，多个转换操作只会在 Terminal 操作的时候融合起来，一次循环完成。</p>
+<h4 id="中间操作（intermediate-operation）"><a href="#中间操作（intermediate-operation）" class="headerlink" title="中间操作（intermediate operation）"></a>中间操作（intermediate operation）</h4><table>
+<thead>
+<tr>
+<th>API</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>filter</td>
+<td>用于按指定条件过滤元素</td>
+</tr>
+<tr>
+<td>map</td>
+<td>map方法将每个元素映射到其相应的结果，通常用于list转换为map</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>limit返回流中的前N个元素，同SQL的limit</td>
+</tr>
+<tr>
+<td>sorted</td>
+<td>对Stream中的元素进行排序</td>
+</tr>
+<tr>
+<td>distinct</td>
+<td>删除重复项</td>
+</tr>
+</tbody></table>
+<h4 id="最终操作（terminal-operation）"><a href="#最终操作（terminal-operation）" class="headerlink" title="最终操作（terminal operation）"></a>最终操作（terminal operation）</h4><table>
+<thead>
+<tr>
+<th>API</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>forEach</td>
+<td>迭代Stream中的元素</td>
+</tr>
+<tr>
+<td>sum</td>
+<td>对Stream中的元素求和</td>
+</tr>
+<tr>
+<td>collect</td>
+<td>可以接受各种参数并将流元素累加成集合</td>
+</tr>
+<tr>
+<td>reduce</td>
+<td>这个方法的主要作用是把 Stream 元素组合起来。它提供一个起始值（种子），然后依照运算规则（BinaryOperator），和前面 Stream 的第一个、第二个、第 n 个元素组合。其实sum等这类也可以说是reduce。</td>
+</tr>
+<tr>
+<td>max</td>
+<td>获取Stream中符合条件的最大值</td>
+</tr>
+<tr>
+<td>findAny</td>
+<td>这是一个 termimal 操作，它总是返回 Stream 的符合条件的元素，或者空。注意它的返回值类型是Optional（为了避免空指针）。</td>
+</tr>
+<tr>
+<td>anyMatch</td>
+<td>Stream 中只要有一个元素符合传入的 条件。</td>
+</tr>
+</tbody></table>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>列出几个工作中实践的例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 用于按指定条件过滤元素并且把符合条件的添加到指定的集合</span><br><span class="line">List&lt;CiStrategy&gt; sorted &#x3D; new ArrayList&lt;&gt;(cis.size());</span><br><span class="line">cis.stream().filter(it -&gt; it.getType() &#x3D;&#x3D; StrategyType.GLOBAL).forEach(sorted::add);</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 拿输入的id到stream中比较是否存在，如果不存在则返回null</span><br><span class="line">final List&lt;String&gt; agentEnableIds &#x3D; getEnableAgenIdsByApp(query.getAppId());</span><br><span class="line"></span><br><span class="line">String enableId &#x3D; agentEnableIds.stream()</span><br><span class="line">        .filter(id -&gt; agentId.equals(id))</span><br><span class="line">        .findAny()</span><br><span class="line">        .orElse(null);</span><br><span class="line">&#x2F;&#x2F;未开启xx</span><br><span class="line">if (isNullOrEmpty(enableId)) &#123;</span><br><span class="line">    return Collections.emptyList();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 两个集合中，集合B中找到符合集合A中的数据，最终得到符合条件的元素集合</span><br><span class="line">agentCmsList.stream().filter(ag -&gt; agentEnableIds.contains(ag.getId())).collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; checkList的元素作为IpV4Ranges中toRange方法的参数，最终把toRange返回值转换为集合</span><br><span class="line">List&lt;String&gt; checkList &#x3D; splitter.splitToList(scopesToCheck);</span><br><span class="line">List&lt;IpRange&gt; rangesToCheck &#x3D; checkList.stream().map(IpV4Ranges::toRange).collect(toList());</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; failed集合中，去重后的类型失败的有哪些</span><br><span class="line">List&lt;String&gt; types &#x3D; failed.stream().map(Quality.Metric::getType).distinct().collect(toList());</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Alarm的list集合，转换为map，key为Alarm的appId，value为Alarm</span><br><span class="line">List&lt;Alarm&gt; dealingAlarms &#x3D; dealingAlarmPage.getList();</span><br><span class="line">Map&lt;String, Alarm&gt; dealingAlarmMap &#x3D; dealingAlarms.stream().collect(Collectors.</span><br><span class="line">toMap(Alarm::getAppId, Function.identity()));</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 根据状态排序，如果状态一样按照名称排序</span><br><span class="line">    public IBoardAppDataList sortByAppStatus(String[] statusOrder) &#123;</span><br><span class="line">        return new BoardAppDataList(this.stream().sorted(new Comparator&lt;BoardAppData&gt;() &#123;</span><br><span class="line"></span><br><span class="line">            private int findStatus(String[] a, BoardAppData target) &#123;</span><br><span class="line">                return IntStream.range(0, a.length)</span><br><span class="line">                        .filter(i -&gt; String.valueOf(target.getStatus()).equals(a[i]))</span><br><span class="line">                        .findFirst()</span><br><span class="line">                        .orElse(-1);    &#x2F;&#x2F; return -1 if target is not found</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public int compare(BoardAppData o1, BoardAppData o2) &#123;</span><br><span class="line">                int c &#x3D; findStatus(statusOrder, o1) - findStatus(statusOrder, o2);</span><br><span class="line">                if (c &#x3D;&#x3D; 0) &#123;</span><br><span class="line">                    return o1.getAppName().compareTo(o2.getAppName());</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    return c;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).collect(Collectors.toList()));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 判断输入参数里是否存在任意一个满足haveXssCondition</span><br><span class="line">Set&lt;String&gt; keys &#x3D; paramsObj.keySet();</span><br><span class="line">return keys.stream().anyMatch(key -&gt; haveXssCondition(uri, paramsObj, key));</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>很显然我这篇仅仅是一个简单的记录文档，如果需要深入了解，还是系统的看相关的文档和源码。而且我主要用的是stream其实还有parallelStream，有兴趣的大家可以看看。</p>
+<h4 id="感谢："><a href="#感谢：" class="headerlink" title="感谢："></a>感谢：</h4><blockquote><footer><strong>陈 争云, 占 宇剑, 和 司 磊</strong><cite><a href="https://www.ibm.com/developerworks/cn/java/j-lo-java8streamapi/index.html" target="_blank" rel="noopener">Java 8 中的 Streams API 详解</a></cite></footer></blockquote>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://gamehu.run/2020/03/22/Java%208%20Stream/" data-id="ckaxs1w9e000ttwaq30hsd1ll" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/21/ps-grep-top-free/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ps、top、free
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/06/tick%E6%A0%88/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">tick栈</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9C%86%E6%A1%8C%E6%B4%BE/">圆桌派</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E4%BD%9C/">工作</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E7%A8%8B/">工程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%90%E9%95%BF/">成长</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%8F%E6%8D%B7/">敏捷</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/">浏览器</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%BB%9A%E7%B2%97/">滚粗</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%9E%8E%E6%89%AF/">瞎扯</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%81%8C%E5%9C%BA/">职场</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/%E8%AE%A4%E7%9F%A5/">认知</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%83%A8%E7%BD%B2/">部署</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%97%B2%E6%89%AF/">闲扯</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/12-Factors/" rel="tag">12-Factors</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Brower/" rel="tag">Brower</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES-Module/" rel="tag">ES Module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS%E4%BD%9C%E7%94%A8%E5%9F%9F/" rel="tag">JS作用域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Module/" rel="tag">Module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OKR/" rel="tag">OKR</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PostgreSQL/" rel="tag">PostgreSQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Presentation/" rel="tag">Presentation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React-Hooks/" rel="tag">React Hooks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Serverless/" rel="tag">Serverless</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/command/" rel="tag">command</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/" rel="tag">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dubbo/" rel="tag">dubbo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/graphql/" rel="tag">graphql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/" rel="tag">gulp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ls/" rel="tag">ls</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/module/" rel="tag">module</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/service-mesh/" rel="tag">service mesh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sso/" rel="tag">sso</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tick%E6%A0%88/" rel="tag">tick栈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%87%E4%B8%87%E6%B2%A1%E6%83%B3%E5%88%B0/" rel="tag">万万没想到</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%A7%E5%93%81/" rel="tag">产品</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BA%BA%E6%89%8D%E7%AE%A1%E7%90%86/" rel="tag">人才管理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E5%8A%9B/" rel="tag">动力</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" rel="tag">区块链</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8D%E4%BA%BA/" rel="tag">名人</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%8A%E8%AF%AB/" rel="tag">告诫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%8B%E7%82%B9/" rel="tag">埋点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8%E6%89%AB%E6%8F%8F/" rel="tag">安全扫描</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag">实践</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E7%A8%8B/" rel="tag">工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E8%8D%92/" rel="tag">开荒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%83%E7%90%86/" rel="tag">心理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" rel="tag">心理学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">性能优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87/" rel="tag">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1/" rel="tag">梦想金山</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%AC%B2%E6%9C%9B/" rel="tag">欲望</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E8%82%B2%E5%9F%BA%E9%87%91/" rel="tag">生育基金</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%91%E6%8E%A7/" rel="tag">监控</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E8%80%83/" rel="tag">系统思考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A0%81/" rel="tag">编码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8C%E5%9C%BA/" rel="tag">职场</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%BE%8B/" rel="tag">自律</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%A7%84%E5%88%92/" rel="tag">规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A4%E7%9F%A5/" rel="tag">认知</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%85%E5%92%92/" rel="tag">诅咒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%A6%E8%AE%BE/" rel="tag">详设</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%BB%E4%B9%A6/" rel="tag">读书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B7%A8%E5%9F%9F/" rel="tag">跨域</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BD%AF%E6%8A%80%E8%83%BD/" rel="tag">软技能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E8%90%A5/" rel="tag">运营</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%80%9A%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB/" rel="tag">通用工具类</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%AB%98%E9%9A%BE%E5%BA%A6%E6%B2%9F%E9%80%9A/" rel="tag">高难度沟通</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/12-Factors/" style="font-size: 10px;">12-Factors</a> <a href="/tags/Brower/" style="font-size: 10px;">Brower</a> <a href="/tags/Docker/" style="font-size: 10px;">Docker</a> <a href="/tags/ES-Module/" style="font-size: 10px;">ES Module</a> <a href="/tags/JS%E4%BD%9C%E7%94%A8%E5%9F%9F/" style="font-size: 10px;">JS作用域</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Module/" style="font-size: 10px;">Module</a> <a href="/tags/OKR/" style="font-size: 10px;">OKR</a> <a href="/tags/PostgreSQL/" style="font-size: 10px;">PostgreSQL</a> <a href="/tags/Presentation/" style="font-size: 10px;">Presentation</a> <a href="/tags/React-Hooks/" style="font-size: 10px;">React Hooks</a> <a href="/tags/Serverless/" style="font-size: 10px;">Serverless</a> <a href="/tags/command/" style="font-size: 10px;">command</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/dubbo/" style="font-size: 10px;">dubbo</a> <a href="/tags/git/" style="font-size: 13.33px;">git</a> <a href="/tags/graphql/" style="font-size: 10px;">graphql</a> <a href="/tags/gulp/" style="font-size: 10px;">gulp</a> <a href="/tags/ls/" style="font-size: 10px;">ls</a> <a href="/tags/module/" style="font-size: 10px;">module</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/service-mesh/" style="font-size: 10px;">service mesh</a> <a href="/tags/sso/" style="font-size: 10px;">sso</a> <a href="/tags/tick%E6%A0%88/" style="font-size: 10px;">tick栈</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/%E4%B8%87%E4%B8%87%E6%B2%A1%E6%83%B3%E5%88%B0/" style="font-size: 10px;">万万没想到</a> <a href="/tags/%E4%BA%A7%E5%93%81/" style="font-size: 10px;">产品</a> <a href="/tags/%E4%BA%BA%E6%89%8D%E7%AE%A1%E7%90%86/" style="font-size: 10px;">人才管理</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 16.67px;">前端</a> <a href="/tags/%E5%8A%A8%E5%8A%9B/" style="font-size: 10px;">动力</a> <a href="/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/" style="font-size: 10px;">区块链</a> <a href="/tags/%E5%90%8D%E4%BA%BA/" style="font-size: 10px;">名人</a> <a href="/tags/%E5%91%8A%E8%AF%AB/" style="font-size: 10px;">告诫</a> <a href="/tags/%E5%9F%8B%E7%82%B9/" style="font-size: 10px;">埋点</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">学习</a> <a href="/tags/%E5%AE%89%E5%85%A8%E6%89%AB%E6%8F%8F/" style="font-size: 10px;">安全扫描</a> <a href="/tags/%E5%AE%9E%E8%B7%B5/" style="font-size: 20px;">实践</a> <a href="/tags/%E5%B7%A5%E7%A8%8B/" style="font-size: 10px;">工程</a> <a href="/tags/%E5%BC%80%E8%8D%92/" style="font-size: 10px;">开荒</a> <a href="/tags/%E5%BF%83%E7%90%86/" style="font-size: 10px;">心理</a> <a href="/tags/%E5%BF%83%E7%90%86%E5%AD%A6/" style="font-size: 10px;">心理学</a> <a href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" style="font-size: 10px;">性能优化</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 10px;">总结</a> <a href="/tags/%E6%95%88%E7%8E%87/" style="font-size: 10px;">效率</a> <a href="/tags/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1/" style="font-size: 13.33px;">梦想金山</a> <a href="/tags/%E6%AC%B2%E6%9C%9B/" style="font-size: 10px;">欲望</a> <a href="/tags/%E7%94%9F%E8%82%B2%E5%9F%BA%E9%87%91/" style="font-size: 10px;">生育基金</a> <a href="/tags/%E7%9B%91%E6%8E%A7/" style="font-size: 10px;">监控</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%80%9D%E8%80%83/" style="font-size: 10px;">系统思考</a> <a href="/tags/%E7%BC%96%E7%A0%81/" style="font-size: 10px;">编码</a> <a href="/tags/%E8%81%8C%E5%9C%BA/" style="font-size: 13.33px;">职场</a> <a href="/tags/%E8%87%AA%E5%BE%8B/" style="font-size: 10px;">自律</a> <a href="/tags/%E8%A7%84%E5%88%92/" style="font-size: 10px;">规划</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E8%AE%A4%E7%9F%A5/" style="font-size: 13.33px;">认知</a> <a href="/tags/%E8%AF%85%E5%92%92/" style="font-size: 10px;">诅咒</a> <a href="/tags/%E8%AF%A6%E8%AE%BE/" style="font-size: 10px;">详设</a> <a href="/tags/%E8%AF%BB%E4%B9%A6/" style="font-size: 10px;">读书</a> <a href="/tags/%E8%B7%A8%E5%9F%9F/" style="font-size: 10px;">跨域</a> <a href="/tags/%E8%BD%AF%E6%8A%80%E8%83%BD/" style="font-size: 10px;">软技能</a> <a href="/tags/%E8%BF%90%E8%90%A5/" style="font-size: 10px;">运营</a> <a href="/tags/%E9%80%9A%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB/" style="font-size: 10px;">通用工具类</a> <a href="/tags/%E9%AB%98%E9%9A%BE%E5%BA%A6%E6%B2%9F%E9%80%9A/" style="font-size: 10px;">高难度沟通</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">December 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/02/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/02/Linux-ls%E5%91%BD%E4%BB%A4/">Linux ls命令</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/28/%E5%89%8D%E7%AB%AF%E5%9F%8B%E7%82%B9(%E4%B8%80)/">前端埋点(一)</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/21/ps-grep-top-free/">ps、top、free</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/22/Java%208%20Stream/">Java 8 Streams</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Gamehu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
