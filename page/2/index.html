@@ -193,12 +193,52 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/%20" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-留言板">
+          <a href="/guestbook%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-newspaper-o"></i> <br />
+            
+            留言板
           </a>
         </li>
       
@@ -274,7 +314,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/iron_man.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -355,6 +395,25 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.9k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
 
           
 
@@ -373,108 +432,19 @@
       
         
           
-            
-
-<p>模块话，模块化说了那么多次，以为了解个大概就行了，然而在一次面试经历中被问到AMD和ES Module，所以特此来一篇，汇总一下吸收的模块方面的内容。</p>
-<h3 id="为什么模块很重要？"><a href="#为什么模块很重要？" class="headerlink" title="为什么模块很重要？"></a>为什么模块很重要？</h3><p>如果没有模块，你能想象在复杂场景下你得js代码是个什么鬼模样吗？模块解决了名称空间和可维护性等变得越来越难以处理的问题。</p>
-<p>好的模块是高度独立的，具有独特的功能，可以根据需要对它们进行改组，删除或添加，而不会破坏整个系统。</p>
-<h4 id="优势："><a href="#优势：" class="headerlink" title="优势："></a>优势：</h4><p><strong>1）可维护性：</strong>根据定义，模块是独立的。精心设计的模块旨在尽可能减少对代码库各部分的依赖，从而使其能够独立增长和改进。当模块与其他代码解耦时，更新单个模块要容易得多。</p>
-<p><strong>2）命名空间：</strong>在JavaScript中，顶级函数范围之外的变量是全局变量（意味着每个人都可以访问它们）。因此，普遍存在“命名空间污染”，其中完全不相关的代码共享全局变量。</p>
-<p>在不相关的代码之间共享全局变量<a href="http://c2.com/cgi/wiki?GlobalVariablesAreBad" target="_blank" rel="noopener">在开发中</a>是一个很大的<a href="http://c2.com/cgi/wiki?GlobalVariablesAreBad" target="_blank" rel="noopener">禁忌</a>。模块允许我们通过为变量创建私有空间来避免名称空间污染。</p>
-<p><strong>3）可重用性：</strong>抽取通用部分，哪里需要就拿去，不用重复写，当然也对应的第一点，当有修改时只需要该一份。</p>
-<p>早期的时候为了达到“模块模式”，也有很多方式，不过我看了下基本上都是基于匿名闭包的基础上而来的。</p>
-<p>这些方式有一个共同点：<strong>使用单个全局变量将其代码包装在函数中，从而使用闭包作用域为其自身创建私有名称空间，同时自定义公开哪些方法、变量</strong>。</p>
-<p>大家可以看下jQuery的源码，就是这样的实现方式，如下面的代码。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myGradesCalculate = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">  <span class="comment">// Keep this variable private inside this closure scope</span></span><br><span class="line">  <span class="keyword">var</span> myGrades = [<span class="number">93</span>, <span class="number">95</span>, <span class="number">88</span>, <span class="number">0</span>, <span class="number">55</span>, <span class="number">91</span>];</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">var</span> average = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> total = myGrades.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">accumulator, item</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> accumulator + item;</span><br><span class="line">      &#125;, <span class="number">0</span>);</span><br><span class="line">      </span><br><span class="line">    <span class="keyword">return</span><span class="string">'Your average grade is '</span> + total / myGrades.length + <span class="string">'.'</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> failing = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> failingGrades = myGrades.filter(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> item &lt; <span class="number">70</span>;</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'You failed '</span> + failingGrades.length + <span class="string">' times.'</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Explicitly reveal public pointers to the private functions </span></span><br><span class="line">  <span class="comment">// that we want to reveal publicly</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    average: average,</span><br><span class="line">    failing: failing</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">myGradesCalculate.failing(); <span class="comment">// 'You failed 2 times.' </span></span><br><span class="line">myGradesCalculate.average(); <span class="comment">// 'Your average grade is 70.33333333333333.'</span></span><br></pre></td></tr></table></figure>
-
-<p>如您所见，这种方法使我们可以决定将哪些变量/方法设为私有（例如<strong><em>myGrades\</em></strong>），以及通过将它们放在return语句中（例如<strong><em>average\</em></strong>和<strong><em>failing\</em></strong>）来公开哪些变量/方法。</p>
-<ul>
-<li>Addy Osmani的“ <a href="https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript" target="_blank" rel="noopener">学习JavaScript设计模式”</a>：精妙读物中的细节宝库</li>
-<li><a href="http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html" target="_blank" rel="noopener">Ben Cherry的“足够好”</a>：一个有用的概述，其中包含模块模式的高级用法示例</li>
-<li><a href="https://carldanley.com/js-module-pattern/" target="_blank" rel="noopener">Carl Danley的博客</a>：模块模式概述和其他JavaScript模式的资源。</li>
-</ul>
-<p>所以大家可以看出，早期关于模块的写法，尽管每种方法都以其自己的方式有效，但它们也有缺点：</p>
-<ol>
-<li>大家各自发挥的，这样有个最大的问题就是到最后就是乱的，就像为什么需要TC39一样，让大家有一套标准，才能从而写出更友好通用的模块。 </li>
-<li>依赖管理是个问题，需要我们开发人员自己管理依赖，记得刚开始用jQuery这种第三方库的时候，如果没注意到顺序就会报错，所以想象一下如果引用较多时，管理依赖关系并正确解决这些问题会让人头疼。</li>
-<li>全局作用域被污染，上述的方式创建的变量（比如<strong>myGradesCalculate</strong>）都在全局范围内，所以该全局范围内的代码的每个部分都可以更改该变量。恶意代码可以有意更改该变量，以使您的代码执行您不希望这样做的事情，或者非恶意代码可能会无意间破坏了您的变量。</li>
-</ol>
-<p>所以基于上述原因，这个时候我们就需要一套规范了来解决这些个问题：<strong>我们能否设计一种无需遍历全局范围即可请求模块接口的方法</strong></p>
-<h3 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h3><p>现在比较通行得规范有两种：<a href="http://wiki.commonjs.org/wiki/Modules/1.1" target="_blank" rel="noopener">CommonJS</a>和<a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank" rel="noopener">AMD</a>。</p>
-<h4 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a><strong><a href="http://wiki.commonjs.org/wiki/Modules/1.1" target="_blank" rel="noopener">CommonJS</a></strong></h4><p>CommonJS是一个旨在定义一系列规范以帮助开发服务器端JavaScript应用程序的项目。CommonJS团队尝试解决的领域之一就是模块，负责设计和实现用于声明模块的JavaScript API。我听说CommonJS，最早是在15年写Node应用的时候接触的，Node.js最开始就是遵循这套规范弄得模块化，但是据说后来不用该规范了。</p>
-<p>一个CommonJS的模块本质上是一种可重复使用的一段JavaScript代码其中出口特定对象，使它们可用于其他模块需要在他们的计划。</p>
-<p>使用CommonJS，每个JavaScript文件都将模块存储在其自己的唯一模块上下文中（就像将其包装在闭包中一样）。在此范围内，我们使用<em>module.exports</em>对象公开模块，并要求将其导入。</p>
-<p>当您定义CommonJS模块时，它可能看起来像这样：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myModule</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.hello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'hello!'</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.goodbye = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'goodbye!'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = myModule;</span><br></pre></td></tr></table></figure>
-
-<p>我们使用特殊对象模块，并将我们函数的引用放入<em>module.exports中</em>。这使CommonJS模块系统知道我们要公开的内容，以便其他文件可以使用它。</p>
-<p>然后，当某人想要使用<em>myModule时</em>，他们可以在其文件中要求它，如下所示：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myModule = <span class="built_in">require</span>(<span class="string">'myModule'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myModuleInstance = <span class="keyword">new</span> myModule();</span><br><span class="line">myModuleInstance.hello(); <span class="comment">// 'hello!'</span></span><br><span class="line">myModuleInstance.goodbye(); <span class="comment">// 'goodbye!'</span></span><br></pre></td></tr></table></figure>
-
-<p>与我们之前讨论的模块模式相比，这种方法有两个明显的好处：</p>
-<ol>
-<li>避免全局命名空间污染</li>
-<li>明确我们的依赖关系</li>
-</ol>
-<p>要注意的另一件事是，CommonJS采用服务器优先的方法并<strong>同步加载</strong>模块。这很重要，因为如果我们有我们需要的其他三个模块<em>需要</em>，它就会加载它们一个接一个。</p>
-<p>现在，它可以在服务器上很好地工作，但是不幸的是，这使得为浏览器编写JavaScript时更难使用，因为服务器端通常是从磁盘读取，而浏览器需要网络请求，所以只要加载模块的脚本一直在运行（JavaScript线程将停止直到代码被加载），它就会阻止浏览器运行其他任何东西，直到加载完成。</p>
-<h4 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a><a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank" rel="noopener">AMD</a></h4><p>从上面我们知道CommonJS是同步的，所以很显然不适用浏览器端，那我们就需要<strong>异步模块定义</strong>的规范，即<strong>AMD</strong>。</p>
-<p>使用AMD加载模块如下所示：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">define([<span class="string">'myModule'</span>, <span class="string">'myOtherModule'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">myModule, myOtherModule</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(myModule.hello());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>这里发生的是，<strong><em>define</em></strong>函数将每个模块依赖项的数组作为第一个参数。这些依赖项在后台加载（以非阻塞方式），并且一旦加载了<strong><em>define</em></strong>，便调用回调函数。</p>
-<p>接下来，回调函数将加载的依赖项作为参数（在本例中为<strong><em>myModule\</em></strong>和<strong><em>myOtherModule</em></strong>），以允许函数使用这些依赖项。最后，还必须使用<strong><em>define\</em></strong>关键字定义依赖项本身。</p>
-<p>例如，<strong><em>myModule\</em></strong>可能看起来像这样：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">define([], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    hello: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    goodbye: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'goodbye'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>与CommonJS不同，AMD采用了浏览器优先的方法以及<strong>异步</strong>行为来完成工作。</p>
-<p>除了异步之外，AMD的另一个好处是您的模块可以是<strong>对象，函数，构造函数，字符串，JSON和许多其他类型</strong>，而CommonJS仅支持将<strong>对象</strong>作为模块。</p>
-<p>AMD与CommonJS相比，其提供的io，文件系统和其他面向服务器的功能不兼容。</p>
-<h4 id="UMD"><a href="#UMD" class="headerlink" title="UMD"></a><a href="https://github.com/umdjs/umd" target="_blank" rel="noopener">UMD</a></h4><p>对于需要同时支持AMD和CommonJS功能的项目，还有另一种格式：通用模块定义（UMD）。</p>
-<p>UMD本质上创建了一种使用这两种方法之一的方式，同时还支持全局变量定义。结果，UMD模块能够在客户端和服务器上工作。</p>
-<p>以下是UMD如何开展业务的快速体验：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">root, factory</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">'function'</span> &amp;&amp; define.amd) &#123;</span><br><span class="line">      <span class="comment">// AMD</span></span><br><span class="line">    define([<span class="string">'myModule'</span>, <span class="string">'myOtherModule'</span>], factory);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> exports === <span class="string">'object'</span>) &#123;</span><br><span class="line">      <span class="comment">// CommonJS</span></span><br><span class="line">    <span class="built_in">module</span>.exports = factory(<span class="built_in">require</span>(<span class="string">'myModule'</span>), <span class="built_in">require</span>(<span class="string">'myOtherModule'</span>));</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// Browser globals (Note: root is window)</span></span><br><span class="line">    root.returnExports = factory(root.myModule, root.myOtherModule);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;(<span class="keyword">this</span>, <span class="function"><span class="keyword">function</span> (<span class="params">myModule, myOtherModule</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Methods</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">notHelloOrGoodbye</span>(<span class="params"></span>)</span>&#123;&#125;; <span class="comment">// A private method</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params"></span>)</span>&#123;&#125;; <span class="comment">// A public method because it's returned (see below)</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">goodbye</span>(<span class="params"></span>)</span>&#123;&#125;; <span class="comment">// A public method because it's returned (see below)</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Exposed public methods</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">      hello: hello,</span><br><span class="line">      goodbye: goodbye</span><br><span class="line">  &#125;</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
-
-
-
-<p><a href="https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/" target="_blank" rel="noopener">ES Module</a></p>
-<p>是我做前端开始听的最多的了，当然也因为无时无刻都在用它。</p>
-<p>上面咱们所说的，都不是JavaScript固有的。不过幸运的是，<a href="https://github.com/tc39" target="_blank" rel="noopener">TC39</a>（定义ECMAScript语法和语义的标准机构）引入了ECMAScript 6（ES6）内置模块。</p>
-<p>ES6提供了多种导入和导出模块的可能性，其他人则做了很好的解释-以下是其中的一些资源：</p>
-<ul>
-<li><a href="http://jsmodules.io/cjs.html" target="_blank" rel="noopener">jsmodules.io</a></li>
-<li><a href="http://exploringjs.com/es6/ch_modules.html" target="_blank" rel="noopener">Explorationjs.com</a></li>
-</ul>
-<p>与CommonJS或AMD相比，ES6模块最大的优点是它能够提供两全其美的优势：紧凑和声明性语法以及异步加载，以及诸如更好地支持依赖项等附加优点。</p>
-<p>ES6模块最让人兴奋的应该是导入是导出的<em>实时</em>只读视图，即是只读引用，不过却可以改写属性。所以你猜到了当你模块里的值属性发生变化时，导入的地方获取的值是一样的。ES Module具体的后面还有一篇文档单讲，不然这文章就太长了。</p>
-<h3 id="最后我们对比一下两种方式吧"><a href="#最后我们对比一下两种方式吧" class="headerlink" title="最后我们对比一下两种方式吧"></a>最后我们对比一下两种方式吧</h3><h4 id="ES-Module与CommonJS"><a href="#ES-Module与CommonJS" class="headerlink" title="ES Module与CommonJS:"></a>ES Module与CommonJS:</h4><ul>
-<li>CommonJS规范通常适用于Node这类服务器端的</li>
-<li>CommonJS模块是对象，是运行时加载，运行时才把模块挂载在exports之上（加载整个模块的所有），加载模块其实就是查找对象属性。</li>
-<li>ES Module不是对象，是使用export显示指定输出（函数、对象、变量等），再通过import导入。为编译时加载，编译时遇到import就会生成一个只读引用。等到运行时就会根据此引用去被加载的模块取值。所以不会加载模块所有方法，仅取所需。</li>
-<li>CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。</li>
-<li>CommonJS 模块是运行时加载，ES6 模块是编译时输出接口</li>
-</ul>
-<h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4><p><a href="https://scotch.io/tutorials/understanding-scope-in-javascript" target="_blank" rel="noopener">全局范围（作用域）</a>          </p>
-<blockquote>
-<ol>
-<li>写在script标签中的JS代码，都在全局作用域 。</li>
-<li>全局作用域在页面打开时创建，在页面关闭时销毁。 </li>
-<li>在全局作用域中有一个全局对象window，它代表的是一个浏览器的窗口，它由浏览器创建我们可以直接使用 。</li>
-<li>全局作用域中，创建变量都会作为window对象的属性保存</li>
-<li>创建的函数都会作为window对象的方法保存</li>
-<li>全局作用域中的变量都是全局变量，在页面的任何部分都可以访问的到并可以修改它</li>
-</ol>
-</blockquote>
-<h4 id="来源："><a href="#来源：" class="headerlink" title="来源："></a>来源：</h4><blockquote><footer><strong>darlyn</strong><cite><a href="https://juejin.im/post/5b7d2f45e51d4538826f4c28" target="_blank" rel="noopener">AMD , CMD, CommonJS，ES Module，UMD</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>Sebastian Peyrott</strong><cite><a href="https://auth0.com/blog/javascript-module-systems-showdown/" target="_blank" rel="noopener">JavaScript Module Systems Showdown: CommonJS vs AMD vs ES2015</a></cite></footer></blockquote>
-
-
-
-
-
-
           
+
+模块话，模块化说了那么多次，以为了解个大概就行了，然而在一次面试经历中被问到AMD和ES Module，所以特此来一篇，汇总一下吸收的模块方面的内容。
+为什么模块很重要？如果没有模块，你能想象在复杂场景下你得js代码是个什么鬼模样吗？模块解决了名称空间和可维护性等变得越来越难以处理的问题。
+好的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/02/22/JS%20Modules/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -526,7 +496,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/iron_man.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -607,6 +577,25 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.7k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
 
           
 
@@ -625,72 +614,16 @@
       
         
           
-            <p>话说从接触Linux那一天起，就有一种独领风骚的傲气，命令走天下的这种霸气，那时候感觉精通Linux的连女朋友都带光环。</p>
-<p>我最开始接触Linux是从Ubuntu开始，当时笔记本装了双系统，我就鼓捣了一个Ubuntu，现在用的较多的CentOS，首先入门都是先从了解root开始，我其实一直对root很好奇，刚好今天看到twitter上ruanyf大佬推了一篇文章<a href="https://itsfoss.com/root-user-ubuntu/" target="_blank" rel="noopener">Root User in Ubuntu: Important Things You Should Know</a>讲基于Ubuntu的root的文章，基础好用，我们现在做的产品的安装包刚好也是基于Ubuntu做的，所以更有必要在此做个中文版记录。</p>
-<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>文章主要讲了以下四块：</p>
-<ol>
-<li>为什么在Ubuntu中禁用root用户</li>
-<li>以root身份使用命令</li>
-<li>切换到root用户</li>
-<li>解锁root用户</li>
-</ol>
-<h3 id="什么是root用户？为什么将其锁定在Ubuntu中？"><a href="#什么是root用户？为什么将其锁定在Ubuntu中？" class="headerlink" title="什么是root用户？为什么将其锁定在Ubuntu中？"></a>什么是root用户？为什么将其锁定在Ubuntu中？</h3><p><img src="https://i0.wp.com/itsfoss.com/wp-content/uploads/2020/01/root_user_ubuntu.png?ssl=1" alt="根用户Ubuntu"></p>
-<p>稍微了解Linux的都知道，在Linux中，有一个称为<a href="http://www.linfo.org/root.html" target="_blank" rel="noopener">root</a>的超级用户。这是超级管理员帐户，可以使用系统执行任何操作。它可以访问任何文件并在Linux系统上运行任何命令。</p>
-<p>拥有权利的同时也被赋予了重大的责任。超级用户可以为您提供对系统的完全控制权，因此也格外谨慎。超级用户可以访问系统文件并运行命令来更改系统配置。因此，错误的命令可能会造成无法挽回的损失，比如网上老说的一个梗：当rm -rf 之后我跑路了。所以一般情况下都不会给root权限，管理员会分配部分权限建对应的用户供对应的人使用。</p>
-<p>这也说明了为什么<a href="https://ubuntu.com/" target="_blank" rel="noopener">Ubuntu</a>默认情况下锁定了root用户，就是为了避免意外灾难。</p>
-<p>您无需具有root特权即可执行日常任务，例如将文件移动到主目录中，从Internet下载文件，创建文档等。</p>
-<p><strong><em>以此类比更好地理解它。如果必须切水果，可以使用菜刀。如果必须砍伐树木，则必须使用锯。现在，您可以使用锯切水果，但这不明智，是吗？\</em></strong></p>
-<p>这是否意味着您不能成为Ubuntu的root用户或无法使用具有root用户特权的系统？不，您仍然可以在“ sudo”的帮助下获得root用户访问权限（在下一节中说明）。</p>
-<blockquote>
-<p>重点：</p>
-<p>用户功能强大，无法用于常规任务。这就是为什么不建议始终使用root的原因。您仍然可以使用root运行特定命令。</p>
-</blockquote>
-<h3 id="如何在Ubuntu中以root用户身份运行命令？"><a href="#如何在Ubuntu中以root用户身份运行命令？" class="headerlink" title="如何在Ubuntu中以root用户身份运行命令？"></a>如何在Ubuntu中以root用户身份运行命令？</h3><p><img src="https://i2.wp.com/itsfoss.com/wp-content/uploads/2020/01/sudo_sandwich.png?ssl=1" alt="须藤三明治xkcd">)图片来源：<a href="https://xkcd.com/149/" target="_blank" rel="noopener">xkcd</a></p>
-<p>当你需要某些系统特定任务的root特权。例如，如果要<a href="https://itsfoss.com/update-ubuntu/" target="_blank" rel="noopener">通过命令行更新Ubuntu</a>，则不能以常规用户身份运行该命令。会有以下类似的错误。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">Reading package lists... Done</span><br><span class="line">E: Could not open lock file &#x2F;var&#x2F;lib&#x2F;apt&#x2F;lists&#x2F;lock - open (13: Permission denied)</span><br><span class="line">E: Unable to lock directory &#x2F;var&#x2F;lib&#x2F;apt&#x2F;lists&#x2F;</span><br><span class="line">W: Problem unlinking the file &#x2F;var&#x2F;cache&#x2F;apt&#x2F;pkgcache.bin - RemoveCaches (13: Permission denied)</span><br><span class="line">W: Problem unlinking the file &#x2F;var&#x2F;cache&#x2F;apt&#x2F;srcpkgcache.bin - RemoveCaches (13: Permission denied)</span><br></pre></td></tr></table></figure>
-
-<p>那么，这个时候怎么做呢？简单的答案是在需要以root身份运行的命令之前添加sudo。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
-
-<p>Ubuntu和许多其他Linux发行版使用一种称为sudo的特殊机制。Sudo是一个程序，用于以root（或其他用户）身份控制对运行命令的访问。</p>
-<p>Sudo实际上是一个多功能的工具。可以将其配置为允许用户以root用户身份运行所有命令。您可以配置它仅以root身份运行选定的几个命令。您也可以配置为<a href="https://linuxhandbook.com/sudo-without-password/" target="_blank" rel="noopener">不带密码运行sudo</a>。</p>
-<p><a href="https://itsfoss.com/install-ubuntu/" target="_blank" rel="noopener">在安装Ubuntu时</a>，必须创建一个用户帐户。该用户帐户在您的系统上以管理员身份运行，并且按照Ubuntu中的默认sudo策略，它可以使用root特权在系统上运行任何命令。</p>
-<p>运行<strong>sudo不需要root密码，但需要用户自己的password</strong>。</p>
-<p>这就是为什么当使用sudo运行命令时，总会一开始就询问密码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gamehu@nuc:~$ sudo apt update</span><br><span class="line">[sudo] password for gamehu:</span><br></pre></td></tr></table></figure>
-
-<p>如您在上面的示例中看到的，用户gamehu试图使用<em>sudo</em>运行’apt update’命令，系统要求输入gamehu的密码。</p>
-<p><strong>要注意当您开始在终端中输入密码时，屏幕上什么都没有发生不会有任何显示，也没有所谓的删除键、退格键…这里会记录你按下的所有键。因为作为默认安全功能，屏幕上不显示任何内容。甚至没有星号（*）。您输入密码，然后按Enter。*</strong></p>
-<blockquote>
-<p>划重点：</p>
-<p>要在Ubuntu中以root身份运行命令，请在命令前添加sudo。<br>当要求输入密码时，输入您的帐户密码。<br>在屏幕上键入密码时，看不到任何内容。只需继续正确的输入密码，然后按Enter。</p>
-</blockquote>
-<h3 id="如何在Ubuntu中成为root用户？"><a href="#如何在Ubuntu中成为root用户？" class="headerlink" title="如何在Ubuntu中成为root用户？"></a>如何在Ubuntu中成为root用户？</h3><p>你可以使用sudo以root身份运行命令。但是，在某些情况下，您必须以root用户身份运行多个命令，则可以临时切换为root用户。</p>
-<p>sudo命令允许您使用以下命令模拟root登录shell：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo -i</span><br><span class="line">gamehu@nuc:~$ sudo -i</span><br><span class="line">[sudo] password for gamehu: </span><br><span class="line">root@nuc:~# whoami</span><br><span class="line">root</span><br><span class="line">root@nuc:~#</span><br></pre></td></tr></table></figure>
-
-<p>您会注意到，切换到root用户时，shell命令提示符将从$（美元键符号）更改为＃（磅键符号）。</p>
-<p><strong><em>尽管已向您展示了如何成为root用户，但我必须警告你，应避免将系统用作root用户。毕竟出于某种原因，我们不建议这样做。\</em></strong></p>
-<p>临时切换到root用户的另一种方法是使用su命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br></pre></td></tr></table></figure>
-
-<p>如果您尝试在不使用sudo的情况下使用su命令，则会遇到“ su身份验证失败”错误。</p>
-<p>您可以使用exit命令恢复为普通用户。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="如何在Ubuntu中启用root用户？"><a href="#如何在Ubuntu中启用root用户？" class="headerlink" title="如何在Ubuntu中启用root用户？"></a>如何在Ubuntu中启用root用户？</h3><p>到目前为止，您已经知道默认情况下，root用户在基于Ubuntu的发行版中被锁定。</p>
-<p>Linux使您可以自由地对系统进行任何操作。解锁root用户是这些自由之一。</p>
-<p>如果出于某种原因决定启用root用户，则可以通过为它设置密码来启用它：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure>
-
-<p>同样，不建议这样做，我也不鼓励您在桌面上执行此操作。如果忘记了密码，将无法再次<a href="https://itsfoss.com/how-to-hack-ubuntu-password/" target="_blank" rel="noopener">在Ubuntu中更改root密码</a>。</p>
-<p>您可以通过删除密码来再次锁定root用户：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd -dl root</span><br></pre></td></tr></table></figure>
-          
+          话说从接触Linux那一天起，就有一种独领风骚的傲气，命令走天下的这种霸气，那时候感觉精通Linux的连女朋友都带光环。
+我最开始接触Linux是从Ubuntu开始，当时笔记本装了双系统，我就鼓捣了一个Ubuntu，现在用的较多的CentOS，首先入门都是先从了解root开始，我其实一直对root很
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/02/13/Root-User-in-Ubuntu/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -742,7 +675,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/iron_man.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -823,6 +756,25 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  566
+                </span>
+              
+
+              
+
+              
+            </div>
+          
 
           
 
@@ -841,34 +793,23 @@
       
         
           
-            
-
-<p>记录近两年各种机会下与事业部头部三剑客交流收获的一些真知灼见。</p>
-<p><strong>关于合作</strong></p>
-<blockquote>
-<p>目标一致</p>
-</blockquote>
-<p>看上去的完美搭档其实是一个很磨人的过程，一开始恨不得一见面就呼巴掌作为打招呼的方式，最终能达成默契或者说合作，目标一致最重要的前提。</p>
-<p>不管你怎么看不惯一个人，三观有多么不合，但是当你发现大家目标都是一致的时候，静下来的时候大家总会想一想，是不是我有问题，慢慢的就变得能够互相包容，所以要做成事首要条件不是考虑要找多要好的人多默契的人，关键在于你们的目标是否一致，只要目标一致你会发现你们很难分割彼此。</p>
-<p>所以有目标是一件重要紧急的事。</p>
-<p><strong>关于做事</strong></p>
-<blockquote>
-<p>干一行，爱一行，不然干不了大事。</p>
-</blockquote>
-<p>最深刻的一句话，我记得当时是我谈起对我现在做的事好像也没到喜欢的程度的时候，领导对我说了这句话，听后我记得当时醍醐灌顶，然后手脚冰凉，内心很奔溃，至此以后我逐渐爱上了我现在做的事，虽然还是有很厌烦的时候，不过总能爱回去。</p>
-<blockquote>
-<p>勇于释放自己，学会利用资源，学会影响上级。</p>
-</blockquote>
-<p>这句话是我最亲近的老大对我说的，当我在抱怨做事的一些困惑时。这是最有挑战的不过收获也是最大的，这句话不是教我怎么在领导面前表现，而是告诉我领导在意的是你的结果，当你结果好的时候，才会在意过程，从而改变对你的一些印象。当你做出结果时，他们会关注到的。</p>
-<p><strong>关于自信</strong></p>
-<blockquote>
-<p>当你进入了公司就不要再因为自己的出身、学历等感到自卑，因为能进来表示公司已经认可了你，接下来你要想的是，怎么做到比别人牛逼。</p>
-</blockquote>
-<blockquote>
-<p>否定自己是很耗能量的一件事，积极一点。</p>
-</blockquote>
-
           
+
+记录近两年各种机会下与事业部头部三剑客交流收获的一些真知灼见。
+关于合作
+
+目标一致
+
+看上去的完美搭档其实是一个很磨人的过程，一开始恨不得一见面就呼巴掌作为打招呼的方式，最终能达成默契或者说合作，目标一致最重要的前提。
+不管你怎么看不惯一个人，三观有多么不合，但是当你发现大家目标都是一致的时候
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/02/03/%E9%A2%86%E5%AF%BC%E5%AF%84%E8%AF%AD/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -920,7 +861,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/iron_man.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1001,6 +942,25 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.3k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
 
           
 
@@ -1019,44 +979,24 @@
       
         
           
-            
-
-
-
-<h1 id="OK，正式说明了"><a href="#OK，正式说明了" class="headerlink" title="OK，正式说明了"></a>OK，正式说明了</h1><p>SSO的说明网上有很多我就不在这儿丢人了。找了张小图SSO的作用一目了然。</p>
-
-
-<p>以下主要记录一下我在产品中SSO的实践案例。</p>
-<h2 id="案例1"><a href="#案例1" class="headerlink" title="案例1"></a>案例1</h2><p><strong>案例1</strong> 是比较标准的基于OpenID方式的SSO，用Node.js写的。</p>
-<p>案例1没什么说的，网上样例很多，如果有兴趣可以看下我之前写的，不过比较老了，也是第一次写nodejs。</p>
-<blockquote><footer><strong>OpenID+MongoDB实现的数据交换中心</strong><cite><a href="https://github.com/WebHu/async_data_exchange_center.git" target="_blank" rel="noopener">github.com/WebHu/async_data_exchange_center.git</a></cite></footer></blockquote>
-
-
-
-<h3 id="案例2"><a href="#案例2" class="headerlink" title="案例2"></a><strong>案例2</strong></h3><p>则是非标的SSO，用Java+javascript写的。</p>
-<p>案例2虽然不是非标的，不过整体流程是具备的，比较适用特定编码场景（Spring Security+OpenID），可能有需要的同学，反正我是没在网上找到这类案例。</p>
-
-
-<p>客户现场的系统A需要登入到我们提供的系统B，没有单独用户中心即也不存在用户同步，客户要求的是能无缝登入，所以解决办法有用户则直接登入无用户则创建后再登入，登录效果与从登录页面发起的登录一样，所以token解析后用Security的方式执行登录。</p>
-<h4 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * sso出现在路径末尾 react router方式 目前采用这种方式 http:&#x2F;&#x2F;...&#x2F;frame&#x2F;#&#x2F;module&#x2F;xxx?sso&#x3D;xxx 避免sso一直保留</span><br><span class="line"> * @param key 需要获取url参数key</span><br><span class="line"> * @returns &#123;string|null&#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">export function getSsoString(key) &#123;</span><br><span class="line">  const str &#x3D; location.hash;</span><br><span class="line">  if (str &#x3D;&#x3D; null || str.length &lt; 2) &#123;</span><br><span class="line">    return null;</span><br><span class="line">  &#125;</span><br><span class="line">  const arr &#x3D; str.split(&#39;?&#39;);</span><br><span class="line">  if (arr !&#x3D; null &amp;&amp; arr.length &#x3D;&#x3D;&#x3D; 2) &#123;</span><br><span class="line">    const query &#x3D; arr[1];</span><br><span class="line">    if (query !&#x3D; null &amp;&amp; query.length &gt; 0) &#123;</span><br><span class="line">      const words &#x3D; query.split(&#39;&amp;&#39;);</span><br><span class="line">      &#x2F;&#x2F; 将每一个数组元素以&#x3D;分隔并赋给obj对象</span><br><span class="line">      for (let i &#x3D; 0; i &lt; words.length; i++) &#123;</span><br><span class="line">        const tmp_arr &#x3D; words[i].split(&#39;&#x3D;&#39;);</span><br><span class="line">        const k &#x3D; decodeURIComponent(tmp_arr[0]);</span><br><span class="line">        const v &#x3D; decodeURIComponent(tmp_arr[1]);</span><br><span class="line">        if (k &#x3D;&#x3D;&#x3D; key) &#123;</span><br><span class="line">          return v;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 单点登录逻辑 在页面token发送到后端进行验证</span><br><span class="line"> * @param callback</span><br><span class="line"> *&#x2F;</span><br><span class="line">export function sso(callback) &#123;</span><br><span class="line">  const token &#x3D; getSsoString(&#39;sso&#39;);</span><br><span class="line">  if (token !&#x3D; null) &#123;</span><br><span class="line">    req(BASE_WEB_API.SSO, &#123; token &#125;, null, &#123; validateError: true &#125;)</span><br><span class="line">      .then(response &#x3D;&gt; &#123;</span><br><span class="line">        &#x2F;&#x2F; do something....</span><br><span class="line">        if (callback !&#x3D; null) &#123;</span><br><span class="line">          callback();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">      .catch(e &#x3D;&gt; &#123;</span><br><span class="line">        console.error(&#39;failed sso --&gt; &#39;, e);</span><br><span class="line">        if (callback !&#x3D; null) &#123;</span><br><span class="line">          callback();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125; else if (callback !&#x3D; null) &#123;</span><br><span class="line">    callback();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 跳转到猎豹系统</span><br><span class="line"> *</span><br><span class="line"> * @param response</span><br><span class="line"> * @throws Exception</span><br><span class="line"> *&#x2F;</span><br><span class="line">@PostMapping(value &#x3D; &quot;&#x2F;cheetah&quot;, produces &#x3D; MediaType.APPLICATION_JSON_UTF8_VALUE)</span><br><span class="line">public String cheetah(@RequestBody SSOVO ssovo,</span><br><span class="line">                      HttpServletRequest request,</span><br><span class="line">                      HttpServletResponse response) throws Exception &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        &#x2F;&#x2F; 验证license</span><br><span class="line">        if (!licenseService.isValid()) &#123;</span><br><span class="line">            LOGGER.error(&quot;license is invalid&quot;);</span><br><span class="line">            return validateTokenError(request, LICENSE_ERROR_MSG);</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;解析token</span><br><span class="line">        Context.Token userToken &#x3D; Context.getUserInfoFromToken(ssovo.getToken());</span><br><span class="line">        if (isNullOrEmpty(userToken.getUserName()) || isNullOrEmpty(userToken.getPassword())) &#123;</span><br><span class="line">            LOGGER.warn(&quot;token is invalid:&#123;&#125;&quot;, ssovo.getToken());</span><br><span class="line">            return validateTokenError(request);</span><br><span class="line">        &#125;</span><br><span class="line">        LOGGER.info(&quot;当前单点登录的用户信息为:&#123;&#125;&quot;, JSON.toJSONString(userToken));</span><br><span class="line">        &#x2F;&#x2F;验证内置用户是否存在，不存在则创建</span><br><span class="line">        SSOUserVO user &#x3D; ssoService.checkUser(userToken.getUserName(), Context.getCmsContext());</span><br><span class="line">        if (user !&#x3D; null) &#123;</span><br><span class="line">            &#x2F;&#x2F; 执行登录</span><br><span class="line">            user.setPassword(userToken.getPassword());</span><br><span class="line">            return ssoLogin(request, response, user);</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;异常时跳转到登录页</span><br><span class="line">        return validateTokenError(request);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        LOGGER.error(&quot;sso登录失败:&#123;&#125;&quot;, e.getMessage());</span><br><span class="line">        return validateTokenError(request);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private String validateTokenError(HttpServletRequest request) &#123;</span><br><span class="line">    return validateError(request, SSO_VERIFICATION_ERROR_MSG);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private String validateTokenError(HttpServletRequest request, String msg) &#123;</span><br><span class="line">    return validateError(request, msg);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private String validateError(HttpServletRequest request, String msg) &#123;</span><br><span class="line">    HttpSession session &#x3D; request.getSession();</span><br><span class="line">    if (session !&#x3D; null) &#123;</span><br><span class="line">        &#x2F;&#x2F;使session失效</span><br><span class="line">        session.invalidate();</span><br><span class="line">    &#125;</span><br><span class="line">    SSOErrorVO errorVo &#x3D; new SSOErrorVO(SSO_VERIFICATION_ERROR, msg);</span><br><span class="line">    return JSON.toJSONString(errorVo);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;**</span><br><span class="line"> * 执行登录</span><br><span class="line"> *</span><br><span class="line"> * @param request</span><br><span class="line"> * @param response</span><br><span class="line"> * @param userToken</span><br><span class="line"> * @return</span><br><span class="line"> * @throws IOException</span><br><span class="line"> * @throws ServletException</span><br><span class="line"> *&#x2F;</span><br><span class="line">private String ssoLogin(HttpServletRequest request, HttpServletResponse response, SSOUserVO userToken) throws IOException, ServletException &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        &#x2F;&#x2F;登录</span><br><span class="line">        UsernamePasswordAuthenticationToken authReq</span><br><span class="line">                &#x3D; new UsernamePasswordAuthenticationToken(userToken.getUserName(), userToken.getPassword());</span><br><span class="line">        authReq.setDetails(new WebAuthenticationDetails(request));</span><br><span class="line">        Authentication auth &#x3D; authenticationManagerBean.authenticate(authReq);</span><br><span class="line">        SecurityContextHolder.getContext().setAuthentication(auth);</span><br><span class="line">        HttpSession session &#x3D; request.getSession(true);</span><br><span class="line">        &#x2F;&#x2F; 永不超时</span><br><span class="line">        session.setMaxInactiveInterval(-1);</span><br><span class="line">        &#x2F;&#x2F;TODO 静态导入</span><br><span class="line">        session.setAttribute(SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());</span><br><span class="line">        baymaxLoginSuccessHandler.onAuthenticationSuccess(request, response, auth);</span><br><span class="line">    &#125; catch (AuthenticationException failed) &#123;</span><br><span class="line">        LOGGER.warn(</span><br><span class="line">                &quot;sso: InternalAuthenticationServiceException occurred while trying to authenticate the user.&quot;,</span><br><span class="line">                failed);</span><br><span class="line">        SecurityContextHolder.clearContext();</span><br><span class="line">        baymaxAuthenticationFailureHandler.onAuthenticationFailure(request, response, failed);</span><br><span class="line">        validateTokenError(request);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 根据用户名，获取用户的token</span><br><span class="line"> *</span><br><span class="line"> * @param userName</span><br><span class="line"> * @param response</span><br><span class="line"> * @return</span><br><span class="line"> *&#x2F;</span><br><span class="line">@RequestMapping(value &#x3D; &quot;&#x2F;getToken&#x2F;&#123;userName&#125;&quot;, produces &#x3D; MediaType.APPLICATION_JSON_UTF8_VALUE)</span><br><span class="line">public String getToken(@PathVariable(value &#x3D; &quot;userName&quot;, required &#x3D; false) String userName, HttpServletResponse response) &#123;</span><br><span class="line"></span><br><span class="line">    try &#123;</span><br><span class="line">        return Context.createToken(userName, PasswordUtil.getPlaintextPwd());</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        LOGGER.error(&quot;获取token失败:&#123;&#125;&quot;, e.getMessage());</span><br><span class="line">        formatErrorResponse(response, HttpServletResponse.SC_BAD_REQUEST, e.getMessage());</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void formatErrorResponse(HttpServletResponse response, int httpCode, String errorMsg) &#123;</span><br><span class="line">    response.setStatus(httpCode);</span><br><span class="line">    response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);</span><br><span class="line">    try (PrintWriter out &#x3D; response.getWriter();) &#123;</span><br><span class="line">        String errorMsgVo &#x3D; JSON.toJSONString(ImmutableMap.of(&quot;code&quot;, SSO_GET_TOKEN_ERROR, &quot;message&quot;, errorMsg));</span><br><span class="line">        out.write(errorMsgVo);</span><br><span class="line">        out.flush();</span><br><span class="line">    &#125; catch (IOException ex) &#123;</span><br><span class="line">        LOGGER.warn(&quot;get token :&#123;&#125;&quot;, ex.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>处理400异常避免出现白页</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * @author Gamehu</span><br><span class="line"> * @description 接管400异常，个性化错误提示</span><br><span class="line"> * @date 2019&#x2F;12&#x2F;19</span><br><span class="line"> *&#x2F;</span><br><span class="line">@RestControllerAdvice(assignableTypes &#x3D; SSOController.class)</span><br><span class="line">@Order(Ordered.HIGHEST_PRECEDENCE)</span><br><span class="line">@Slf4j</span><br><span class="line">@Component</span><br><span class="line">public class SSO400ExceptionHandler &#123;</span><br><span class="line">    @ExceptionHandler(value &#x3D; Exception.class)</span><br><span class="line">    @ResponseStatus(HttpStatus.BAD_REQUEST)</span><br><span class="line">    public Object defaultErrorHandler(Exception e) &#123;</span><br><span class="line">        log.warn(&quot;---SSO验证异常---  ERROR: &#123;&#125;&quot;, e.getMessage());</span><br><span class="line">        return ImmutableMap.of(&quot;code&quot;, SSO_VERIFICATION_ERROR, &quot;message&quot;, e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="引伸阅读："><a href="#引伸阅读：" class="headerlink" title="引伸阅读："></a>引伸阅读：</h3><blockquote><footer><strong>OpenID versus OAuth from the user’s perspective</strong><cite><a href="http://cakebaker.42dh.com/2008/04/01/openid-versus-oauth-from-the-users-perspective/" target="_blank" rel="noopener">cakebaker.42dh.com/2008/04/01/openid-versus-oauth-from-the-users-perspective</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>OAUTH-OPENID: YOU’RE BARKING UP THE WRONG TREE IF YOU THINK THEY’RE THE SAME THING</strong><cite><a href="http://softwareas.com/oauth-openid-youre-barking-up-the-wrong-tree-if-you-think-theyre-the-same-thing/" target="_blank" rel="noopener">softwareas.com/oauth-openid-youre-barking-up-the-wrong-tree-if-you-think-theyre-the-same-thing</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>What's the difference between OpenID and OAuth?</strong><cite><a href="https://stackoverflow.com/questions/1087031/whats-the-difference-between-openid-and-oauth" target="_blank" rel="noopener">stackoverflow.com/questions/1087031/whats-the-difference-between-openid-and-oauth</a></cite></footer></blockquote>
-
-
           
+
+
+
+OK，正式说明了SSO的说明网上有很多我就不在这儿丢人了。找了张小图SSO的作用一目了然。
+
+
+以下主要记录一下我在产品中SSO的实践案例。
+案例1案例1 是比较标准的基于OpenID方式的SSO，用Node.js写的。
+案例1没什么说的，网上样例很多，如果有兴趣可以看下我之前写的，不过比较
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/12/27/SSO%E5%AE%9E%E8%B7%B5/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1108,7 +1048,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/iron_man.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1189,6 +1129,25 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.1k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
 
           
 
@@ -1207,43 +1166,25 @@
       
         
           
-            
-
-<p>最近产品提了一个需求，要做菜单优化。</p>
-<p>菜单优化：</p>
-<ol>
-<li>重写菜单数据初始化sql脚本，数据结构两层变为三层</li>
-<li>权限数据调整</li>
-<li>兼容原有菜单权限数据</li>
-</ol>
-<p>这里面第三点是最麻烦的，兼容原有的菜单数据，我给需求说了两个方案。</p>
-<p>PlanA：从时间方面（因为是个小迭代，整个迭代的功能只有一周时间开发）考虑管理员菜单权限保留，其它普通角色菜单权限一律置空，需求也接受（因为客户现场大多数情况都是用管理员账号）。</p>
-<p>PlanB：保留原有数据，但是需要1-2天预研一下升级方案是否可行，我提出的方案是直接用sql脚本做，需求也认可，PlanA为兜底方案。</p>
-<p>我就提个解决方案，结果这事最后让我支援一下给做了…，所以在这简单记录一下过程产物。</p>
-<h3 id="PLV8"><a href="#PLV8" class="headerlink" title="PLV8"></a>PLV8</h3><p>简单地说就算PostgreSQL里加个扩展，这个扩展就是V8引擎，是的，你理解的没错，就是Google开源的JavaScript引擎，有了这个扩展那就能在sql里写js代码了，这对于在脚本里写逻辑那可是爽歪歪了。</p>
-<p>安装过程我就不多说了，网上有很多，大体流程就是</p>
-<ol>
-<li>从GitHub wget 下来</li>
-<li>make install</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#添加扩展</span><br><span class="line">CREATE EXTENSION plv8;</span><br><span class="line"></span><br><span class="line">#验证plv8的版本，出来版本号就证明装上了</span><br><span class="line">SELECT plv8_version();</span><br></pre></td></tr></table></figure>
-
-
-
-<p>然后你就可以写JS代码了，ES6、coffeeScript等都可以，只要最终是v8能解析的就成。</p>
-<h3 id="写"><a href="#写" class="headerlink" title="写"></a>写</h3><p>好现在开始写了，一开始不太了解，打算用存储过程做，但是后来老前辈提醒我，我这个是升级脚本，只需要执行一遍就成，所以没必要做存储过程，最后还得删掉，因为留着没意义。</p>
-<p>然后建议我用DO $$的写法,此方式执行完不会留下其它痕迹就跟执行一条长sql一样，贴个代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">DO</span><br><span class="line">$$</span><br><span class="line">plv8.elog(INFO, &#39;------------------------------------update user menus start------------------------------------&#39;);</span><br><span class="line">buildTree &#x3D; function(list) &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    let temp &#x3D; &#123;&#125;;</span><br><span class="line">    let tree &#x3D; &#123;&#125;;</span><br><span class="line">    for (let menu of list) &#123;</span><br><span class="line">      temp[menu.id] &#x3D; menu;</span><br><span class="line">    &#125;</span><br><span class="line">    for (let i in temp) &#123;</span><br><span class="line">      if (temp[i].parent) &#123;</span><br><span class="line">        if (!temp[temp[i].parent].children) &#123;</span><br><span class="line">          temp[temp[i].parent].children &#x3D; &#123;&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        temp[temp[i].parent].children[temp[i].id] &#x3D; temp[i];</span><br><span class="line">      &#125; else &#123;</span><br><span class="line"></span><br><span class="line">        tree[temp[i].id] &#x3D; temp[i];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return tree;</span><br><span class="line"></span><br><span class="line">  &#125; catch (error) &#123;</span><br><span class="line">    plv8.elog(ERROR, &#39;buildTree &#39; + error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">getTreeOfMenus &#x3D; function() &#123;</span><br><span class="line">  let cmdb &#x3D; require(&#39;xxx&#39;);</span><br><span class="line">  let result &#x3D; cmdb.service.query(&#39;default&#39;, &#39;&#123;xxx&#123;id name&#125;&#125;&#39;, &#123;&#125;);</span><br><span class="line">  return buildTree(result);</span><br><span class="line">&#125;;</span><br><span class="line">let allMenus &#x3D; getTreeOfMenus();</span><br><span class="line"></span><br><span class="line">delete allMenus[&#39;xxx&#39;];</span><br><span class="line"></span><br><span class="line">let ids &#x3D; [];</span><br><span class="line">idsOfflatten &#x3D; function(data) &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    for (let id in data) &#123;</span><br><span class="line">      ids.push(id);</span><br><span class="line">      if (data[id].children) &#123;</span><br><span class="line">        idsOfflatten(data[id].children);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return ids;</span><br><span class="line">  &#125; catch (error) &#123;</span><br><span class="line">    plv8.elog(ERROR, &#39;idsOfflatten &#39; + error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">let flatIds &#x3D; idsOfflatten(allMenus);</span><br><span class="line">plv8.elog(INFO, &#39;new menu ids:&#39; + flatIds);</span><br><span class="line">getNormalMenus &#x3D; function(menus) &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    plv8.elog(INFO, &#39;old menus : &#39; + JSON.stringify(menus));</span><br><span class="line">    let old_keys &#x3D; Object.keys(menus);</span><br><span class="line">    old_keys.forEach(id &#x3D;&gt; &#123;</span><br><span class="line">      if (!flatIds.includes(id)) &#123;</span><br><span class="line">        plv8.elog(INFO, &#39;delete menu id: &#39; + id);</span><br><span class="line">        delete menus[id];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    return menus;</span><br><span class="line">  &#125; catch (error) &#123;</span><br><span class="line">    plv8.elog(ERROR, &#39;getNormalMenus &#39; + error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">updateMenus &#x3D; function() &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    let ROLE_ADMIN &#x3D; &#39;admin&#39;,</span><br><span class="line">      ROLE_DOMAIN &#x3D; &#39;domain&#39;;</span><br><span class="line">    let query &#x3D; &#39;SELECT name,  menus, role_type FROM xxx&#39;;</span><br><span class="line">    let updateAdmin &#x3D;</span><br><span class="line">      &#39;UPDATE xxx SET  menus&#x3D;NULL,  last_modified&#x3D;CURRENT_TIMESTAMP where  name &#x3D; $1&#39;;</span><br><span class="line">    let updateNormal &#x3D; &#39;UPDATE xxx SET  menus&#x3D;$1, last_modified&#x3D;CURRENT_TIMESTAMP where name &#x3D; $2&#39;;</span><br><span class="line">    let execCount&#x3D;0;</span><br><span class="line">    plv8.execute(query).forEach(row &#x3D;&gt; &#123;</span><br><span class="line">      let roleType &#x3D; row.role_type;</span><br><span class="line">      if (roleType &#x3D;&#x3D;&#x3D; ROLE_DOMAIN || roleType &#x3D;&#x3D;&#x3D; ROLE_ADMIN) &#123;  </span><br><span class="line">        let adminCount &#x3D; plv8.execute(updateAdmin, [row.name]);</span><br><span class="line">        plv8.elog(INFO, &#39;update admin user menus is null ,count: &#39;+adminCount );</span><br><span class="line">        adminCount&gt;0 ? execCount+&#x3D;1:null;</span><br><span class="line">        return;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      let newMenus &#x3D; getNormalMenus(row.menus);</span><br><span class="line">      let normalCount &#x3D; plv8.execute(updateNormal, [newMenus, row.name]);</span><br><span class="line">      plv8.elog(INFO, &#39;update normal user menus , &#39; + JSON.stringify(newMenus)+&#39;,count:&#39;+normalCount);</span><br><span class="line">      normalCount&gt;0 ? execCount+&#x3D;1:null;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">   return execCount;</span><br><span class="line">  &#125; catch (error) &#123;</span><br><span class="line">    plv8.elog(ERROR, &#39;updateMenus &#39; + error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">let updateCount&#x3D;updateMenus();</span><br><span class="line">plv8.elog(INFO,&#39;total of successes :&#39;+updateCount);</span><br><span class="line">plv8.elog(INFO,&#39;------------------------------------update user menus end------------------------------------&#39;);</span><br><span class="line">$$ LANGUAGE plv8;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h3><p>PostgreSQL很强大，这是我初试水，后续有机会会再写写工作中的一些PostgreSQL的实践例子。</p>
-<p>其实PostgreSQL几乎可扩展主流的所有编程语言比如C++、Java、nodejs等。</p>
-<p>参考文档：</p>
-<blockquote><footer><strong>plv8 documention</strong><cite><a href="https://plv8.github.io/" target="_blank" rel="noopener">plv8.github.io</a></cite></footer></blockquote>
-
-
           
+
+最近产品提了一个需求，要做菜单优化。
+菜单优化：
+
+重写菜单数据初始化sql脚本，数据结构两层变为三层
+权限数据调整
+兼容原有菜单权限数据
+
+这里面第三点是最麻烦的，兼容原有的菜单数据，我给需求说了两个方案。
+PlanA：从时间方面（因为是个小迭代，整个迭代的功能只有一周时间开发）考虑管理员菜单
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/11/29/postgresql(1)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1295,7 +1236,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/iron_man.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1376,6 +1317,25 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  0
+                </span>
+              
+
+              
+
+              
+            </div>
+          
 
           
 
@@ -1394,8 +1354,15 @@
       
         
           
-            
           
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/11/26/Docker%20%E4%B8%80%E7%82%B9%E7%82%B9/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1447,7 +1414,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/iron_man.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1506,6 +1473,25 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  953
+                </span>
+              
+
+              
+
+              
+            </div>
+          
 
           
 
@@ -1524,34 +1510,20 @@
       
         
           
-            <hr>
-<p>最近看了李笑来先生写的《区块链小白书》对其中的理解一个新事物正确的姿势在此做一个备忘。</p>
-<h3 id="1-不要滥用类比"><a href="#1-不要滥用类比" class="headerlink" title="1. 不要滥用类比"></a>1. 不要滥用类比</h3><p>你将要尝试着学习并理解的，是一个前所未有的重大创新，其中有很多你一下子难以理解透彻的概念，很少有人能一下子全都弄明白…… </p>
-<p>在这样的时候，人们会不由自主地抄近路走捷径 —— 滥用类比：</p>
-<blockquote>
-<p>“哦！ 我明白了，这就好像是……” </p>
-</blockquote>
-<p>比如，你经常会看到人们挣扎着理解了半天，突然冒出一句：“哦，我懂了，比特币就是电子黄金！” <strong>类比</strong>是约等号（≈），而“<strong>这就是</strong>”是等号（=），约等号和等号之间的差别有时甚至超过十万八千里。 比特币与电子黄金之间的关系甚至干脆就谈不上是约等于…… 全然不是一个东西。</p>
-<p>在理解全新事物的时候，滥用类比的危害非常大，因为你压根就找不到什么过往已经存在的东西真的和这个创新竟然一模一样 —— 否则，它也不可能被称为创新了，是不是？</p>
-<p>这种不恰当的类比被滥用多次之后，就再也没办法形成正确的理解了 —— 因为理解一个创新需要理解多个前所未有的概念，每个都做了不恰当的类比之后，多次非常不恰当的<strong>约等于</strong>拼接起来之后，无论如何都没办法达到一个与正确理解相近的效果。</p>
-<p>请务必注意，每次你的脑子里不由自主地冒出 “这就好像……” 这个念头的时候，你都要把它强压回去。</p>
-<h3 id="2-重复重复再重复"><a href="#2-重复重复再重复" class="headerlink" title="2. 重复重复再重复"></a>2. 重复重复再重复</h3><p>遇到暂时无法理解的概念，不要担心、不要纠结、不要停顿，你要做的事情很简单：</p>
-<blockquote>
-<ul>
-<li>继续读下去；</li>
-<li>读完之后再<strong>重复读很多次</strong>……</li>
-</ul>
-</blockquote>
-<p>这是学习任何新知识或者在任何新领域探索的 “必杀技”。这背后有一个重要的原理：</p>
-<blockquote>
-<p>绝大多数难以理解的知识，是因为它内部有很多 “前置引用”。</p>
-</blockquote>
-<p>所谓的前置引用，就是一个在后面才能深入理解的概念竟然在此之前已经被引用了，导致的结果是学习者总是处于懵懂的状态。学校里的知识却不是这样的，学校里的知识总是线性层层递进的，理解了前面，就能理解后面…… 关于 “前置引用”。</p>
-<p>“硬着头皮读完，而后重复读很多次” 这个策略，就是可以轻松突破 “前置引用” 所设置的障碍。这个技巧，事实上可以用在任何领域。</p>
-<h3 id="3-借助群智的力量"><a href="#3-借助群智的力量" class="headerlink" title="3.借助群智的力量"></a>3.借助群智的力量</h3><p>快速掌握新知识，快速适应新领域，还有个重要的技巧，就是借助群智的力量。事实上，在学校里，你早就应该发现这个技巧了 —— 如果你能跟那些学霸经常聊天，经常玩耍，你就会发现总是在不经意之间，很多重点难点就那样轻而易举地被解决掉了……</p>
-<p>这首先因为人是社交动物，然而更为重要的是，交流这个东西，随意的交流总是比刻意的交流更为有效 —— 因为随意的交流总是刻意解决那些连你自己都没意识到的问题…… 可偏偏，这些你自己意识不到的问题恰恰是最重要甚至最关键的问题。如果不借助这种群智的力量，很难想象还有什么办法可以解决这种隐秘的关键问题。</p>
-
           
+最近看了李笑来先生写的《区块链小白书》对其中的理解一个新事物正确的姿势在此做一个备忘。
+1. 不要滥用类比你将要尝试着学习并理解的，是一个前所未有的重大创新，其中有很多你一下子难以理解透彻的概念，很少有人能一下子全都弄明白…… 
+在这样的时候，人们会不由自主地抄近路走捷径 —— 滥用类比：
+
+“哦
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/11/20/%E7%90%86%E8%A7%A3%E4%B8%80%E4%B8%AA%E6%96%B0%E4%BA%8B%E7%89%A9%E7%9A%84%E6%96%B9%E6%B3%95/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1603,7 +1575,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/iron_man.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1684,6 +1656,25 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  160
+                </span>
+              
+
+              
+
+              
+            </div>
+          
 
           
 
@@ -1702,17 +1693,22 @@
       
         
           
-            <p>一如前端深似海，一波一波浪起来，搞了一年多前端，目前整个团队基本上步入了正轨，所以目前团队在保功能月迭代的前提下，把之前一些耽搁的东西一样一样都开始排上了日程。</p>
-<ol>
-<li>Code Review 规范</li>
-<li>前端编码规范</li>
-<li>抽取通用工具类</li>
-<li>性能优化</li>
-</ol>
-<p>以上除了性能优化意外，其它的都搞了一轮，后续再进行第二轮…持续的改进。看情况陆陆续续都会分享一下我们的落地方案。</p>
-<p>本次主要做<strong>性能优化实践</strong>的分享</p>
+          一如前端深似海，一波一波浪起来，搞了一年多前端，目前整个团队基本上步入了正轨，所以目前团队在保功能月迭代的前提下，把之前一些耽搁的东西一样一样都开始排上了日程。
 
-          
+Code Review 规范
+前端编码规范
+抽取通用工具类
+性能优化
+
+以上除了性能优化意外，其它的都搞了一轮，后续再进行第二轮…持续的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/11/04/%E5%89%8D%E7%AB%AF-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%A7%BF%E5%8A%BF/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1764,7 +1760,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/iron_man.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1845,6 +1841,25 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  613
+                </span>
+              
+
+              
+
+              
+            </div>
+          
 
           
 
@@ -1863,22 +1878,17 @@
       
         
           
-            <p>最近看《圆桌派》聊的一个话题<strong>斜杠：理想还是欲望？一专还是多能？</strong>。想在这儿随便说说。</p>
-<p>这个词其实前两年说的比较多，当时另一个说法是一个人的<strong>标签</strong>很多。为什么出现的频率高，也流行，更多的原因是在于那其实是大大多数的梦想。</p>
-<p>里面窦先生说了一下，欲望和理想的区别：一定要结果的就是欲望，热爱过程的是理想。所以对于追求<strong>斜杠</strong>，你是出于欲望还是理想？从我个人来说，我对斜杠的追求我归为欲望，因为很显然我是需要结果的，不管是物质上的还是精神上的我都是有所求的。</p>
-<p>我一直认为，斜杠青年：其实是一个很奢侈的一个愿望。</p>
-
-
-
-
-<p>我比较俗啊，我对斜杠的定义是，每个斜杠都应该是一份事业且他们是相互独立（跨界）的，就像《圆桌派》里说的一样你虽然干了很多份事业但是其实他们都是有关联性或者有递进性的这其实不算是斜杠，因为你始终还是在那个圈里。</p>
-<p>既然是事业那就肯定会有付出和回报当然咱们谈的不仅限于钱，最起码你要花时间和精力去做，且会收到反馈。人的时间和精力都是有限的，你把有限的时间和精力花在了多个不同的行业，且都得到反馈，这才算是斜杠。</p>
-<p>比如你上午卖炒河粉，下午coding，晚上酒吧驻唱。这我觉得可以说是：餐饮/互联网/演艺，三个斜杠。</p>
-<p>所以为什么说斜杠是很奢侈的，首先你的精力要跟上，其次你的时间能自己做主，然后你还得技术过硬。当然跟现实生活中一样奢侈品再贵，也总有些人是能消费的。所以不是说斜杠就没有，只是那是很小的一部分。</p>
-<p>大家别把斜杠玩坏了，也别一味的飘飘然的追求斜杠，很多时候你自己要先静一静想一想，别听风就是雨的，不仅飞不高还摔得疼。</p>
-<p>就算你有这个欲望，不得现有实力和条件吗，先让自己有这些条件然后再想吧。</p>
-
-          
+          最近看《圆桌派》聊的一个话题斜杠：理想还是欲望？一专还是多能？。想在这儿随便说说。
+这个词其实前两年说的比较多，当时另一个说法是一个人的标签很多。为什么出现的频率高，也流行，更多的原因是在于那其实是大大多数的梦想。
+里面窦先生说了一下，欲望和理想的区别：一定要结果的就是欲望，热爱过程的是理想。所以对
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/11/03/%E6%96%9C%E6%9D%A0/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1930,7 +1940,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/uploads/iron_man.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -2011,6 +2021,25 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.5k
+                </span>
+              
+
+              
+
+              
+            </div>
+          
 
           
 
@@ -2029,125 +2058,16 @@
       
         
           
-            <p><strong>延宕</strong>其实直白的说就是拖延的意思，有人就感觉了，装逼非要搞个不常见的，就是因为不常见所以你才会好奇啊，才会去查一下这个词时代表什么意思。良苦用心在于为了加深印象撒。</p>
-<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>此篇内容源起最近要准备进行一次分享，筛选分享主题时，想到了<strong>拖延</strong>，首先我自身就有这个问题，然后我敞开怀抱感受了一下，身边很多人都或多或少存在<strong>拖延</strong>的问题。</p>
-<p><strong>目录</strong></p>
-<ul>
-<li>拖延原因分析</li>
-<li>拖延的特征</li>
-<li>造成的危害</li>
-<li>怎么破</li>
-</ul>
-<p>首先这篇不是一个从心理学角度写的东西，当然咱也没这个段位。这是一个不严谨但具有严重个人色彩的分享，只在于刨析自己从而能给朋友们提供一些思考和建议。</p>
-<h4 id="拖延原因分析"><a href="#拖延原因分析" class="headerlink" title="拖延原因分析"></a>拖延原因分析</h4><p>白话点说可能有下面四个原因：</p>
-<ol>
-<li>对成功所需的能力缺乏自信</li>
-<li>对要去完成某个任务有反感心理：认定做事的过程中会遭遇很多困难，结局也会很惨</li>
-<li><strong>目标和回报太遥远，感受不到对我有什么意义</strong></li>
-<li><strong>无法自我约束，例如容易冲动和分心</strong></li>
-</ol>
-<p>加粗部分是我认为对我影响最突出的部分。</p>
-<p>首先咱们得说导致拖延的因素有很多，具体你是哪一类，你可以买本《拖延心理学》对号入座。我暂时认为自己时拖延早期患者，所以列出的主要是自己审视有的。</p>
-<h5 id="目标和回报太遥远，感受不到对我有什么意义"><a href="#目标和回报太遥远，感受不到对我有什么意义" class="headerlink" title="目标和回报太遥远，感受不到对我有什么意义"></a>目标和回报太遥远，感受不到对我有什么意义</h5><p>先分析一下，<strong>目标和回报太遥远，感受不到对我有什么意义</strong>，这个点其实很有意思，你回过头看一下自己列的目标也好还是flag之类的…，大多数都会有一个比较共通的点，那就是列的太大太虚，然后也没有反馈的环节。</p>
-
-
-<p>上图所示就是以前我列的目标，注意看打勾的标识完成的，红圈的表示未达成的。我来自我检讨一下啊，首先打圈的一看就不符合smart原则，当然也没法用PDCA那套。第二个原因是这几个都没有进行反馈设定，这就让你总感觉这个目标好像老离我挺远，慢慢的就觉得没意思了，也没用积极性了。</p>
-<p>但是相反打勾的我都完成了，主要有两方面的原因。</p>
-<ol>
-<li>这几个都是有明显的反馈环节的，比如团队分享，首先意义对我和对同事而言都是正向的。分享完之后也能收到同事给与的一些讨论和评价，这也是一个反馈的环节。这就让这件事变得有结束有结果有意义了，当然就有积极性。</li>
-<li>这件事很具体，也比较小，跨越的周期不长，比较符合smart原则，事情就变得可达。</li>
-</ol>
-<h5 id="无法自我约束，例如容易冲动和分心"><a href="#无法自我约束，例如容易冲动和分心" class="headerlink" title="无法自我约束，例如容易冲动和分心"></a>无法自我约束，例如容易冲动和分心</h5><p>先根据 Tim Urban在TED的演讲，刨析一下拖延时的大脑活动情况，我觉得真是讲到我心里去了，具体大家可以搜一下演讲的名字叫&lt;<a href="http://open.163.com/newview/movie/free?pid=MBHQSM52F&mid=MBI15O7QE" target="_blank" rel="noopener">你有拖延症吗</a>&gt;。</p>
-
-
-<p>如上图在有拖延症的大脑里会有一只Monkey（分心/诱惑），它经常会跳出来，告诉你其实你的时间还有很多，要不我们逛逛YouTobe、BiliBIli…，它会不断的骚扰你，最终你会沦陷让其掌握大脑。其实就是抵御不了诱惑，容易分心。那什么时候我们会突然警醒呢，就是有一个东西出现的时候，如下图，这个东西叫<strong>恐慌</strong>。它一来Monkey就被吓跑了，但是往往这个时候，已经来不及了，被动了。</p>
-
-
-<h4 id="拖延特征"><a href="#拖延特征" class="headerlink" title="拖延特征"></a>拖延特征</h4><p>我们说说怎么辨别，你是否存在拖延这个问题。</p>
-<ol>
-<li><p><strong>看它是不是让你烦恼不已</strong></p>
-<p>内在结果：必须承受某些内在情绪的折磨，从恼怒、后悔到强烈的自我谴责和绝望  </p>
-<p>外在结果：影响家庭、工作、社交….</p>
-</li>
-<li><p><strong>在一开始，你往往信心满满</strong> </p>
-<p>在完成目标的一开始，往往信心满满  ，但是最后其实都不能很好的的完成或者说完成不了，往往整个过程如下图。</p>
-
-</li>
-<li><p><strong>自我</strong></p>
-<p>自我价值感 =能力（具有独立性，反对受控制） =表现（通过拖延，“我”说了算）,不愿意遵守那些不是我们自己所制定的规则并顺应别人的需要 。</p>
-</li>
-<li><p><strong>追求完美</strong></p>
-<p>咋一看还挺牛x，原来拖延还有这么美丽的特征，但是注意我们这儿说的是<strong>适应不良型的完美主义</strong>，“完美主义”者往往对自己期待过高，不够现实，当无法实现这样的要求是，就不知所措。失望之余，通过拖延让自己从中退却。适应不良型的完美主义，对自己的要求跟对自己的表现的期待之间存在一种矛盾。</p>
-</li>
-</ol>
-<h4 id="拖延的伤害"><a href="#拖延的伤害" class="headerlink" title="拖延的伤害"></a>拖延的伤害</h4>
-
-
-
-
-
-
-
-
-
-
-
-<h4 id="怎么破"><a href="#怎么破" class="headerlink" title="怎么破"></a>怎么破</h4><p>说了那么多，最终咱们得找到解法，当然前提是你有拖延困扰并且你愿意付诸行动改变这个毛病。</p>
-<p>以下是我亲身实践且认为效果良好的方子，现在我也还在这么做，这是个持久战别想着10天半个月就有多大的改变，也别相信什么21天就能养成xx习惯，普通人就踏踏实实干就行了。</p>
-<h5 id="破法1：你得接受"><a href="#破法1：你得接受" class="headerlink" title="破法1：你得接受"></a><strong>破法1：你得接受</strong></h5><ul>
-<li>​    接受自己能力有限这个事实得人不太会为此过于烦恼 。</li>
-<li>​    接受遵守那些不是我们自己所制定的规则并顺应别人的需要。</li>
-</ul>
-<h5 id="破法2：和原因对上号"><a href="#破法2：和原因对上号" class="headerlink" title="破法2：和原因对上号"></a><strong>破法2：和原因对上号</strong></h5><ul>
-<li>看看这方面的书以及专业的一些心理视频或者找心理方面的人士咨询，找到自身造成的拖延的原因，才能对症下药，人是个体，个体就有差异千万别总去套别人那套方法论，要找到适合自己的。</li>
-</ul>
-<h5 id="破法3：明确的目标与可行性的计划"><a href="#破法3：明确的目标与可行性的计划" class="headerlink" title="破法3：明确的目标与可行性的计划"></a><strong>破法3：明确的目标与可行性的计划</strong></h5><p>找到一个目标，然后将它分解成几个小的步骤，跨出小小的第一步，学习怎样记录时间，以及如何优化周围环境使之向有利于成功的方向推进。</p>
-
-
-<ul>
-<li><p>目标smart且够小，可达。既非常小，又可以给你带来进步感和成就感。</p>
-</li>
-<li><p>执行过程中引入监督、奖惩机制  </p>
-</li>
-<li><p>整个执行目标的过程按照PDCA不断循环</p>
-</li>
-<li><p><strong>训练强大的执行力</strong>  </p>
-<blockquote>
-<p>执行能力的基本要素：注意力控制、 认知弹性、 目标设定、 信息处理  </p>
-<p>1.启动任务（起始，产生行动的想法）。</p>
-<p>2.维持注意力（持续跟进，专注于一个事项）。 </p>
-<p>3.抑制冲动（在行动前有所思考，而不是马上反应）。 </p>
-<p>4.转换注意力（从一个事项到另一个事项，转变关注的焦点，有弹性地加以回应）。 </p>
-<p>5.流程记忆（记得计划、指令和以前学到的知识，在学习新知识和应对新环境的时候可以记起和运用到旧的知识）。</p>
-<p>6.情绪控制（调整和管理情绪）。 </p>
-<p>7.组织材料（获取所需的材料，并依序编排）。</p>
-<p>8.自我监测（具备自我评价的相应语言能力，在必要的时候能够通过自我交谈闯过难关）。 </p>
-<p>9.时间管理（时间意识，以及对待时间的务实态度）。 </p>
-<p>10.计划（按优先次序考虑问题，找出达成目标的各个步骤，提前为以后的需要和相关进程做好准备）</p>
-</blockquote>
-</li>
-</ul>
-<h5 id="破法4：学会怎样判断时间"><a href="#破法4：学会怎样判断时间" class="headerlink" title="破法4：学会怎样判断时间**"></a><strong>破法</strong>4：学会怎样判断时间**</h5><blockquote>
-<p>时间四象限</p>
-<p>学会利用零碎时间</p>
-<p><strong>预防意外干扰，抵制诱惑</strong></p>
-<p>不要太分散精力</p>
-<p>找出你的最佳时间</p>
-<p>享受你的“自由”时间</p>
-</blockquote>
-<ul>
-<li>主观时间和客观时间，做到平滑过渡。很多人就是忽略客观时间所以才老是导致拖延，时间不是跟着你的意志走的。</li>
-<li>列出“非计划”时间，除开必须做的事情，剩下多少时间可以用于实现你的目标，给他排出来。</li>
-<li>积极的时间约束（番茄工作法…），主要是提高专注力，人不可能24小时都是专注的，就算你说你可以那请你看看猝死的例子…</li>
-</ul>
-<h5 id="破法5：积极一点"><a href="#破法5：积极一点" class="headerlink" title="破法5：积极一点"></a><strong>破法5：积极一点</strong></h5><p>记住一点：不断地否定自己或者消极对待是要消耗很多能量地。</p>
-<p>领导告诉了我一句话：<strong>如果你今年没觉得去年的自己是个SB那你就没有在成长</strong>，所以别动不动就沮丧、消极。</p>
-<p>所以又对应上前面说的，要从一个个小成就不断地激励自己。</p>
-<p> <strong>破法6：利用你的身体减轻拖延</strong> </p>
-<p>锻炼，很多人一提到锻炼就会马上接一个词“身体”，其实锻炼不仅仅是锻炼身体其实还是一种脑力的、心理的活动，锻炼是一种释放，通常锻炼你是不会受其他东西影响的，比如你不能玩手机不能看电视等等…这就迫使你专注起来，并且大脑会开始想事情，有点类似冥想的意思。</p>
-<p>你的大脑是比较放空的，你可以进行整理、归纳、思考等一系列活动，同时锻炼完事之后又特别爽，释放了身体和心理上的一些无用的东西。</p>
-
-          
+          延宕其实直白的说就是拖延的意思，有人就感觉了，装逼非要搞个不常见的，就是因为不常见所以你才会好奇啊，才会去查一下这个词时代表什么意思。良苦用心在于为了加深印象撒。
+正文此篇内容源起最近要准备进行一次分享，筛选分享主题时，想到了拖延，首先我自身就有这个问题，然后我敞开怀抱感受了一下，身边很多人都或多或
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/10/31/%E5%BB%B6%E5%AE%95/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2220,6 +2140,10 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/iron_man.png"
+                alt="Gamehu" />
+            
               <p class="site-author-name" itemprop="name">Gamehu</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
@@ -2241,10 +2165,10 @@
               
               
               <div class="site-state-item site-state-categories">
-                
+                <a href="/categories/index.html">
                   <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">分类</span>
-                
+                </a>
               </div>
             
 
@@ -2252,10 +2176,10 @@
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">标签</span>
-                
+                </a>
               </div>
             
 
