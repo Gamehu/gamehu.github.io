@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/vendors/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/vendors/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -89,11 +96,16 @@
 <meta property="og:url" content="http://gamehu.run/2020/04/21/ps-grep-top-free/index.html">
 <meta property="og:site_name" content="正儿八经">
 <meta property="og:description" content="背景虽然我们系统有建设一些监控工具比如Grafana、Prometheus等，但是很多时候还是愿意直接先到服务器上去瞧一眼，特别是客户现场的问题，因为客户现场暂时不会装这些工具。因为我们是做NPMD的，流量大的时候资源消耗就比较大，加上前期先铺功能非功能需求的细节待完善，所以有时候会出现客户现场机器在一段时间后会变得比较慢的情况，这个时候那当然就说劈里啪啦一堆装逼的命令敲上去瞅瞅服务器咋了。 用的">
+<meta property="og:image" content="http://gamehu.run/.run//04/21/ps-grep-top-free/ps.png">
+<meta property="og:image" content="http://gamehu.run/.run//04/21/ps-grep-top-free/image-20200422105439799.png">
+<meta property="og:image" content="http://gamehu.run/.run//04/21/ps-grep-top-free/top.png">
+<meta property="og:image" content="http://gamehu.run/.run//04/21/ps-grep-top-free/top1.png">
 <meta property="article:published_time" content="2020-04-21T02:54:00.000Z">
 <meta property="article:modified_time" content="2020-04-22T13:08:24.770Z">
 <meta property="article:author" content="Gamehu">
 <meta property="article:tag" content="command">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://gamehu.run/.run//04/21/ps-grep-top-free/ps.png">
 
 
 
@@ -408,7 +420,7 @@
 <p>用的比较高频的命令就是<strong>ps、grep、top</strong>。用的倒是还算一般，不过一直没有深深的了解，所以刚好借着这个机会，深入的学习一下。演示用的是安装centos系统的vps。</p>
 <h3 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h3><p>这命令应该是我使用的命令中的top one了，该命令用于获取正在运行的进程信息。 我们在看一些服务是否运行的时候通常都是用这个命令。我们可以获取任何用户在当前系统上运行的进程之类的信息，例如进程ID（PID）。</p>
 <p>ps命令本身是一个扩展工具，ps –help a一下，会发现有很多的命令选项，说是有80多个。</p>
-
+<img src="/.run//04/21/ps-grep-top-free/ps.png" class title="from 我">
 
 <p>当然我们只说说常用的。</p>
 <h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><p>如果在Linux中使用不带任何选项的ps命令，它将显示当前shell中正在运行的进程：</p>
@@ -495,7 +507,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ grep -w &quot;unix&quot; geekfile.txt</span><br></pre></td></tr></table></figure>
 
 <p><strong>Output:</strong></p>
-
+<img src="/.run//04/21/ps-grep-top-free/image-20200422105439799.png" class>
 
 
 <p><strong>4.使用grep -n在显示输出时显示行号：</strong>要显示匹配行的文件的行号。</p>
@@ -579,7 +591,7 @@
 <li>当前由Linux内核管理的进程或线程的列表。</li>
 </ol>
 <p>一旦运行此命令，它将打开一个交互式命令模式，其中上半部分将包含进程和资源使用情况的统计信息。 下半部分包含当前正在运行的进程的列表。 按q会退出命令模式。</p>
-
+<img src="/.run//04/21/ps-grep-top-free/top.png" class>
 
 <h5 id="上半部分"><a href="#上半部分" class="headerlink" title="上半部分"></a>上半部分</h5><p>如图，在终端的顶部，我们获得了概览数据，包括当前任务数、内存使用率和cpu负载。 </p>
 <p><strong>第一行：任务队列信息</strong>，同uptime命令的结果一样。</p>
@@ -728,7 +740,7 @@
 </tr>
 </tbody></table>
 <h3 id="基本用法-2"><a href="#基本用法-2" class="headerlink" title="基本用法"></a>基本用法</h3><h4 id="杀进程"><a href="#杀进程" class="headerlink" title="杀进程"></a><strong>杀进程</strong></h4><p>如果您想终止进程，只需在top运行时按“ k”。 这将弹出提示，提示您输入进程的进程ID，然后按Enter。</p>
-<p>如下图中的：<span style=color:red>PID to signal/kill [default pid = 1]</span></p>
+<p>如下图中的：<span style="color:red">PID to signal/kill [default pid = 1]</span></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Tasks:  81 total,   2 running,  46 sleeping,   0 stopped,   0 zombie</span><br><span class="line">%Cpu(s):  0.0 us,  0.3 sy,  0.0 ni, 99.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st</span><br><span class="line">KiB Mem :  1006744 total,   202708 free,   144288 used,   659748 buff&#x2F;cache</span><br><span class="line">KiB Swap:        0 total,        0 free,        0 used.   662828 avail Mem</span><br><span class="line">&lt;span style&#x3D;color:red&gt;PID to signal&#x2F;kill [default pid &#x3D; 1]&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure>
 
 <h4 id="进程列表排序"><a href="#进程列表排序" class="headerlink" title="进程列表排序"></a><strong>进程列表排序</strong></h4><p>使用诸如top之类的工具的最常见原因之一就是找出哪个进程消耗最多的资源。 您可以按以下键对列表进行排序（记住是<strong>大写</strong>哦）：</p>
@@ -759,7 +771,7 @@
 <p>或者用以下命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top -u root</span><br></pre></td></tr></table></figure>
 
-<h4 id="过滤进程"><a href="#过滤进程" class="headerlink" title="过滤进程"></a>过滤进程</h4><p>如果只想查看某些进程，可以使用top的过滤。 要激活此模式，请按“ o” /“ O”。 顶部会出现一个提示，您可以在此处键入过滤器表达式。如下图中的<span style=color:red>add filter #1 (ignoring case) as: [!]FLD?VAL</span></p>
+<h4 id="过滤进程"><a href="#过滤进程" class="headerlink" title="过滤进程"></a>过滤进程</h4><p>如果只想查看某些进程，可以使用top的过滤。 要激活此模式，请按“ o” /“ O”。 顶部会出现一个提示，您可以在此处键入过滤器表达式。如下图中的<span style="color:red">add filter #1 (ignoring case) as: [!]FLD?VAL</span></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">KiB Mem :  1006744 total,   198520 free,   147308 used,   660916 buff&#x2F;cache</span><br><span class="line">KiB Swap:        0 total,        0 free,        0 used.   659616 avail Mem</span><br><span class="line">add filter #1 (ignoring case) as: [!]FLD?VAL</span><br><span class="line">  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND</span><br><span class="line">    1 root      20   0   46124   8060   5616 S  0.0  0.8   0:15.74 systemd</span><br><span class="line">    2 root      20   0       0      0      0 S  0.0  0.0   0:00.13 kthreadd</span><br><span class="line">    3 root       0 -20       0      0      0 I  0.0  0.0   0:00.00 rcu_gp</span><br></pre></td></tr></table></figure>
 
 <p>过滤器表达式是指定属性和值之间关系的语句。 过滤器的一些示例是：</p>
@@ -770,7 +782,7 @@
 </ul>
 <p>添加过滤器后，您可以通过添加更多过滤器来进一步简化操作。 要清除添加的所有过滤器，请按“ =”。</p>
 <h4 id="更改CPU和内存统计信息的默认外观"><a href="#更改CPU和内存统计信息的默认外观" class="headerlink" title="更改CPU和内存统计信息的默认外观"></a>更改CPU和内存统计信息的默认外观</h4><p>如果觉得top显示CPU和内存统计信息的默认方式不喜欢。 可以按“ t”和“ m”来更改CPU和内存统计信息的样式。 </p>
-
+<img src="/.run//04/21/ps-grep-top-free/top1.png" class>
 
 <h4 id="保存设置"><a href="#保存设置" class="headerlink" title="保存设置"></a>保存设置</h4><p>如果您对top的输出进行了任何更改，则可以按“ W”将其保存以备后用。 top将其配置写入主目录中的.toprc文件。</p>
 <h4 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h4><blockquote><footer><strong>top1</strong><cite><a href="http://man7.org/linux/man-pages/man1/top.1.html" target="_blank" rel="noopener">man7.org</a></cite></footer></blockquote>

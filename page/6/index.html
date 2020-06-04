@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/vendors/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/vendors/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -418,7 +425,7 @@
 </ol>
 <h2 id="实操"><a href="#实操" class="headerlink" title="实操"></a><strong>实操</strong></h2><p>搬运一下我们团队的分支管理办法，大体的思路还是遵循git flow的规范</p>
 <h3 id="develop和release"><a href="#develop和release" class="headerlink" title="develop和release"></a>develop和release</h3><p>当数个feature开发并提测后，进入多feature集成测试阶段。在develop分支进行多feature集成测试，完成后转入实验局测试。完成实验局阶段后，产品团队决定发版，这时从develop拉出release分支并根据版本号命名。此时会做最终的功能集成测试和回归测试，验证功能间是否有冲突导致的BUG和遗漏BUG，测试完成后合并至master和develop分支。</p>
-
+<img src="/.run//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/1.png" class>
 
 <ul>
 <li><p>步骤1</p>
@@ -482,7 +489,7 @@
 </tr>
 </tbody></table>
 <h3 id="hotfix分支场景"><a href="#hotfix分支场景" class="headerlink" title="hotfix分支场景"></a>hotfix分支场景</h3><p>hotfix分支用于产品稳定版及现场问题的修正。当一线端反馈了BUG并且判定需要作为hotfix修复时，从master拉出hotfix分支。分支修复完成后，重新合并入master和develop分支。若hotfix可能影响定制化feature的场景，由ScrumMaster判断是否需要进行合入。</p>
-
+<img src="/.run//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/2.png" class>
 
 <ul>
 <li><p>步骤1</p>
@@ -545,7 +552,7 @@
 <h3 id="feature分支场景"><a href="#feature分支场景" class="headerlink" title="feature分支场景"></a>feature分支场景</h3><p>feature分支用于进行新功能开发和上个阶段实验局的缺陷修复。产线管理团队需要规划好功能的相关性和相互依赖，避免把相互依赖的功能放到不同的feature中去。在feature规划完成后，需要建立分支，并在feature分支上完成工程开发、提测阶段。提测成功后，feature分支将被合并至develop分支。</p>
 <p>多个feature分支将在develop进行合并测试，若测试前有feature不满足提测条件，为了不影响其它feature的发布，可以将这个分支延迟合并。</p>
 <p><strong>注意事项</strong>：common包等不参与部署过程的公共模块，在产线管理团队规划时可采用其它的分支管理策略，例如多个虚拟团队公用一个feature分支。</p>
-
+<img src="/.run//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/3.png" class>
 
 <ul>
 <li><p>步骤1</p>
@@ -601,7 +608,7 @@
 </tr>
 </tbody></table>
 <h3 id="定制化feature分支场景"><a href="#定制化feature分支场景" class="headerlink" title="定制化feature分支场景"></a>定制化feature分支场景</h3><p>当存在定制化需求时，需要建立定制化feature分支。该分支用于定制化客户的功能开发、测试、打包等。在定制化开发过程中，若有影响该分支的release和hotfix出现，则需要合入定制化feature分支。</p>
-
+<img src="/.run//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/4.png" class>
 
 <ul>
 <li><p>步骤1</p>
@@ -1266,9 +1273,9 @@
         
           
             <p>上周五产线领导派了一个活，合并前端和后端rest服务的代码，release合到develop。其实是一个很简单很日常的工作，但是因为种种原因，现在的版本周期过长，导致新增和修改的代码很多（特别是前端一堆的css、less、jsx、js….）。所以你知道我心中有多少只草泥马了。</p>
+<img src="/.run//02/25/%E5%90%88%E4%BB%A3%E7%A0%81de%E5%86%85%E5%BF%83%E7%8B%AC%E7%99%BD/frontend.png" class title="前端">
 
-
-
+<img src="/.run//02/25/%E5%90%88%E4%BB%A3%E7%A0%81de%E5%86%85%E5%BF%83%E7%8B%AC%E7%99%BD/backend.png" class title="rest后端">
 
 <p>这个时候需要的是冷静，蛋定。找个本子合一支笔，列清楚怎么做这件事情，一定要花时间考虑清楚再下手。</p>
 <h2 id="行动清单"><a href="#行动清单" class="headerlink" title="行动清单"></a>行动清单</h2><ol>
@@ -1432,7 +1439,7 @@
           
             <p>最近前后端都在写，而且相对来说前端写的多一些，因为领导说了，咱们这条产线实行前后端分离策略，但是团队里不再招专业前端，那xxx你先上，你不是常说你是一块砖吗，哪里需要哪里搬。是的，xxx就是我，所以朋友们在公司切记谨言慎行。当然主要还是我觉得了解下前端还是可以的（但是打死不写css）。</p>
 <p>所以我就从一个后端干到了前端，当然团队里肯定是有专业得前端的，不过因为咱们事业部有几条产线，所以资源稍有紧张，给到咱们产线就两个前端，有一个只会css，css肯定得有得，不然你想想啊，就算领导放心让你写css，你也肝颤啊。so，我就从产品mvp开始到正式产品立项，就主要精力在前端。</p>
-<h2 id="一入前端深似海啊"><a href="#一入前端深似海啊" class="headerlink" title="一入前端深似海啊"></a>一入前端深似海啊</h2>
+<h2 id="一入前端深似海啊"><a href="#一入前端深似海啊" class="headerlink" title="一入前端深似海啊"></a>一入前端深似海啊</h2><img src="/.run//02/24/%E5%89%8D%E7%AB%AF%E5%B0%8F%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B/gratisography-sad-bunny-thumbnail.jpg" class title="from gratisography">
 
 <p>前段的东西太多，而且层出不穷。抵御诱惑的最好办法是什么？我觉得是先仔细想想需不需它，当不确定时，先放着不着急做决定，只要坚定自己所要的东西，什么诱惑对你都是过眼云烟。</p>
 <p>脚手架的选择就出现了两派，一派以我为首，崇尚拿来即用避免重复造轮子，一派以专业前端同学为首，崇尚自己搭一套脚手架。具体就不细说，反正双方谁也说服不了谁。最终领导说了，谁是主要负责人谁说了算，当然专业前端是主要负责人，所以最终就决定自己搭建脚手架。当然这个过程是很痛苦的，时间也很长…曾今一度放弃这个方案，但是想着已经花了那么多精力了，就咬咬牙继续整了。最终大概前前后后花了3-4个月时间才算稳定了，当然这个过程编码还是断断继续在进行的。</p>
@@ -1604,7 +1611,7 @@
         
           
             <p>嗯…..19年过了两个月了是时候开始做个19的规划了，为什么一开始没做，因为我相当不专业的忘了…看斗自己都老火，这就体现了我和专业人士的区别，还是比较业余，谁叫我放荡不羁爱浪，需要自我克制一下，所以19规划还是得做。</p>
-
+<img src="/.run//02/19/2019%E5%B9%B4%E5%BC%80%E5%A7%8B/gratisography-421H.jpg" class title="from gratisography">
 
 
 <h2 id="ok-2019年我需要这么规划一下"><a href="#ok-2019年我需要这么规划一下" class="headerlink" title="ok 2019年我需要这么规划一下"></a>ok 2019年我需要这么规划一下</h2><p><strong>知识丰富</strong></p>
@@ -1968,7 +1975,7 @@
 </ul>
 </li>
 </ul>
-
+<img src="/.run//12/26/%E6%80%8E%E4%B9%88%E8%AE%A9%E5%B7%A5%E4%BD%9C%E6%9B%B4%E5%8A%A0%E9%AB%98%E6%95%88/%E4%BF%A1%E6%81%AF%E6%BA%90.png" class>
 
 <ul>
 <li>掌握信息获取的主动权<ul>
@@ -1986,24 +1993,24 @@
 <h2 id="学习提升方法论"><a href="#学习提升方法论" class="headerlink" title="学习提升方法论"></a>学习提升方法论</h2><p>在学习记忆中始终保持必要难度是必要的，这样才能训练自己的记忆能力。</p>
 <p><strong>提升知识记忆的内化效果方法</strong></p>
 <p>1.复述意识=&gt;复述学习的内容，比如用康奈尔笔记法做知识回顾</p>
-
+<img src="/.run//12/26/%E6%80%8E%E4%B9%88%E8%AE%A9%E5%B7%A5%E4%BD%9C%E6%9B%B4%E5%8A%A0%E9%AB%98%E6%95%88/%E5%BA%B7%E5%A5%88%E5%B0%94%E7%AC%94%E8%AE%B0%E6%B3%95.png" class>
 
 <p>2.间隔学习，知识交叉，不能长时间一直学习某个知识，因为这样就没有保证记忆的难度。</p>
 <p>3.费曼学习法=&gt;把学到的知识讲给非专业人士听，用于检测自身是否对知识理解不到位，然后再反过头来深化</p>
 <p><strong>记忆方法-记忆宫殿</strong></p>
 <p>即把需要记忆的内容，抽象成图画，最终转化为情景式的关联记忆，因为人的空间记忆能力是超强的，所以用大脑的这块区域来记忆，坚持训练，肯定对记忆力有提升。我小试了几天，发现通过想象画面来记忆真的比死记硬背更有效且更有劲。</p>
 <p>课程还提到了一个工具：anki，加强记忆力的工具。</p>
-
+<img src="/.run//12/26/%E6%80%8E%E4%B9%88%E8%AE%A9%E5%B7%A5%E4%BD%9C%E6%9B%B4%E5%8A%A0%E9%AB%98%E6%95%88/%E8%AE%B0%E5%BF%86.png" class>
 
 
 <h2 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h2><ol>
 <li><p>邮件FAST法则</p>
-
+<img src="/.run//12/26/%E6%80%8E%E4%B9%88%E8%AE%A9%E5%B7%A5%E4%BD%9C%E6%9B%B4%E5%8A%A0%E9%AB%98%E6%95%88/fast.png" class title="邮件FAST法则">
 </li>
 <li><p>邮件ABC法则</p>
 </li>
 </ol>
-
+<img src="/.run//12/26/%E6%80%8E%E4%B9%88%E8%AE%A9%E5%B7%A5%E4%BD%9C%E6%9B%B4%E5%8A%A0%E9%AB%98%E6%95%88/abc.png" class title="邮件ABC法则">
 
 <ol start="2">
 <li>思维导图做会议记录</li>

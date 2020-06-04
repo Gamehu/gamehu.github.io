@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/vendors/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/vendors/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -89,11 +96,20 @@
 <meta property="og:url" content="http://gamehu.run/2020/02/28/Gulp/index.html">
 <meta property="og:site_name" content="正儿八经">
 <meta property="og:description" content="是这样的，最近呢在捣鼓一系列升级的问题，刚好就遇到了Gulp从3升到4的过程，所以借机呢稍微深入的了解了一下Gulp，在此做个简单的记录。 Gulp我一开始理解的他就是个样式处理工具，但实际了解下来，才发现它原来跟Grunt一样是个构建工具。 那就开整吧，我按我的节奏来哈：  了解一些底层，知道是怎么来的。 了解基本概念，不但要知道是怎么来的，还要知道是干啥的。 了解语法 ，3-&gt;4升级实操">
+<meta property="og:image" content="http://gamehu.run/.run//02/28/Gulp/stream_cc.png">
+<meta property="og:image" content="http://gamehu.run/.run//02/28/Gulp/duplex.png">
+<meta property="og:image" content="http://gamehu.run/.run//02/28/Gulp/stream01.png">
+<meta property="og:image" content="http://gamehu.run/.run//02/28/Gulp/Gulp.png">
+<meta property="og:image" content="http://gamehu.run/.run//02/28/Gulp/gulp01.png">
+<meta property="og:image" content="http://gamehu.run/.run//02/28/Gulp/gulp02.png">
+<meta property="og:image" content="http://gamehu.run/.run//02/28/Gulp/a.gif">
+<meta property="og:image" content="http://gamehu.run/.run//02/28/Gulp/b.jpeg">
 <meta property="article:published_time" content="2020-02-28T13:11:00.000Z">
 <meta property="article:modified_time" content="2020-04-16T12:12:59.606Z">
 <meta property="article:author" content="Gamehu">
 <meta property="article:tag" content="gulp">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://gamehu.run/.run//02/28/Gulp/stream_cc.png">
 
 
 
@@ -419,17 +435,17 @@
 <li>时间效率：拥有数据后立即开始处理数据所需的时间大大减少，而不必等到整个有效负载都传输完成才开始处理。还是倒水的例子，你倒入河里（Pipe）马上就流走了不会等着一桶水倒完之后才流走。</li>
 </ol>
 <p>Streams的<em>cheatsheet</em>：</p>
-
+<img src="/.run//02/28/Gulp/stream_cc.png" class title="from https:&#x2F;&#x2F;devhints.io&#x2F;nodejs-stream">
 
 
 
 <p>Duplex：</p>
-
+<img src="/.run//02/28/Gulp/duplex.png" class title="from [Duplex](http:&#x2F;&#x2F;codewinds.com&#x2F;blog&#x2F;2013-08-31-nodejs-duplex-streams.html)">
 
 
 
 <p>Streams内部实现流程图：</p>
-
+<img src="/.run//02/28/Gulp/stream01.png" class title="from [DauleDK](https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3694288&#x2F;dauledk)">
 
 
 
@@ -459,16 +475,16 @@
 <p><strong>插件</strong></p>
 <p>Gulp 插件实质上是 <a href="https://github.com/rvagg/through2" target="_blank" rel="noopener">Node 转换流（Transform Streams）</a>，它封装了通过管道（pipeline）转换文件的常见功能，通常是使用 <code>.pipe()</code> 方法并放在 <code>src()</code> 和 <code>dest()</code> 之间。他们可以更改经过流（stream）的每个文件的文件名、元数据或文件内容。</p>
 <p><strong>Gulp</strong></p>
-
+<img src="/.run//02/28/Gulp/Gulp.png" class title="from 我">
 
 
 
 <p>Gulp的<em>cheatsheet</em>：</p>
+<img src="/.run//02/28/Gulp/gulp01.png" class title="from https:&#x2F;&#x2F;github.com&#x2F;osscafe&#x2F;gulp-cheatsheet">
 
 
 
-
-
+<img src="/.run//02/28/Gulp/gulp02.png" class title="from https:&#x2F;&#x2F;github.com&#x2F;osscafe&#x2F;gulp-cheatsheet">
 
 
 
@@ -479,12 +495,12 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall gulp --save-dev</span><br><span class="line">npm uninstall gulp -g</span><br></pre></td></tr></table></figure>
 
 <p>你以为升级完之后是这样色儿的</p>
-
+<img src="/.run//02/28/Gulp/a.gif" class>
 
 <p>但是一执行是这样的：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AssertionError [ERR_ASSERTION]: Task function must be specified</span><br></pre></td></tr></table></figure>
 
-
+<img src="/.run//02/28/Gulp/b.jpeg" class>
 
 <p>这是因为Gulp4只支持 2 个参数的 <code>gulp.task</code>了，所以就意味着咱们以前的代码得改了，那咱们就有疑问了怎么改呢？先了解下改了什么。</p>
 <h4 id="series、parallel"><a href="#series、parallel" class="headerlink" title="series、parallel"></a><strong>series、parallel</strong></h4><p>官网说了：Gulp.js 4.0引入了series（）和parallel（）方法来组合任务： </p>

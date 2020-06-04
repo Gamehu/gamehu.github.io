@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/vendors/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/vendors/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -607,7 +614,7 @@
       
         
           
-            
+            <img src="/.run//02/03/%E9%A2%86%E5%AF%BC%E5%AF%84%E8%AF%AD/a.png" class title="Photo by DJ Johnson on Unsplash">
 
 <p>记录近两年各种机会下与事业部头部三剑客交流收获的一些真知灼见。</p>
 <p><strong>关于合作</strong></p>
@@ -774,12 +781,12 @@
       
         
           
-            
+            <img src="/.run//12/27/SSO%E5%AE%9E%E8%B7%B5/florian-olivo-4hbJ-eymZ1o-unsplash.jpg" class title="Photo by Florian Olivo on Unsplash">
 
 
 
 <h1 id="OK，正式说明了"><a href="#OK，正式说明了" class="headerlink" title="OK，正式说明了"></a>OK，正式说明了</h1><p>SSO的说明网上有很多我就不在这儿丢人了。找了张小图SSO的作用一目了然。</p>
-
+<img src="/.run//12/27/SSO%E5%AE%9E%E8%B7%B5/whatis-single_sign_on-h.png" class title="https:&#x2F;&#x2F;searchsecurity.techtarget.com&#x2F;definition&#x2F;single-sign-on">
 
 <p>以下主要记录一下我在产品中SSO的实践案例。</p>
 <h2 id="案例1"><a href="#案例1" class="headerlink" title="案例1"></a>案例1</h2><p><strong>案例1</strong> 是比较标准的基于OpenID方式的SSO，用Node.js写的。</p>
@@ -790,7 +797,7 @@
 
 <h3 id="案例2"><a href="#案例2" class="headerlink" title="案例2"></a><strong>案例2</strong></h3><p>则是非标的SSO，用Java+javascript写的。</p>
 <p>案例2虽然不是非标的，不过整体流程是具备的，比较适用特定编码场景（Spring Security+OpenID），可能有需要的同学，反正我是没在网上找到这类案例。</p>
-
+<img src="/.run//12/27/SSO%E5%AE%9E%E8%B7%B5/sso.png" class title="场景说明">
 
 <p>客户现场的系统A需要登入到我们提供的系统B，没有单独用户中心即也不存在用户同步，客户要求的是能无缝登入，所以解决办法有用户则直接登入无用户则创建后再登入，登录效果与从登录页面发起的登录一样，所以token解析后用Security的方式执行登录。</p>
 <h4 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * sso出现在路径末尾 react router方式 目前采用这种方式 http:&#x2F;&#x2F;...&#x2F;frame&#x2F;#&#x2F;module&#x2F;xxx?sso&#x3D;xxx 避免sso一直保留</span><br><span class="line"> * @param key 需要获取url参数key</span><br><span class="line"> * @returns &#123;string|null&#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">export function getSsoString(key) &#123;</span><br><span class="line">  const str &#x3D; location.hash;</span><br><span class="line">  if (str &#x3D;&#x3D; null || str.length &lt; 2) &#123;</span><br><span class="line">    return null;</span><br><span class="line">  &#125;</span><br><span class="line">  const arr &#x3D; str.split(&#39;?&#39;);</span><br><span class="line">  if (arr !&#x3D; null &amp;&amp; arr.length &#x3D;&#x3D;&#x3D; 2) &#123;</span><br><span class="line">    const query &#x3D; arr[1];</span><br><span class="line">    if (query !&#x3D; null &amp;&amp; query.length &gt; 0) &#123;</span><br><span class="line">      const words &#x3D; query.split(&#39;&amp;&#39;);</span><br><span class="line">      &#x2F;&#x2F; 将每一个数组元素以&#x3D;分隔并赋给obj对象</span><br><span class="line">      for (let i &#x3D; 0; i &lt; words.length; i++) &#123;</span><br><span class="line">        const tmp_arr &#x3D; words[i].split(&#39;&#x3D;&#39;);</span><br><span class="line">        const k &#x3D; decodeURIComponent(tmp_arr[0]);</span><br><span class="line">        const v &#x3D; decodeURIComponent(tmp_arr[1]);</span><br><span class="line">        if (k &#x3D;&#x3D;&#x3D; key) &#123;</span><br><span class="line">          return v;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 单点登录逻辑 在页面token发送到后端进行验证</span><br><span class="line"> * @param callback</span><br><span class="line"> *&#x2F;</span><br><span class="line">export function sso(callback) &#123;</span><br><span class="line">  const token &#x3D; getSsoString(&#39;sso&#39;);</span><br><span class="line">  if (token !&#x3D; null) &#123;</span><br><span class="line">    req(BASE_WEB_API.SSO, &#123; token &#125;, null, &#123; validateError: true &#125;)</span><br><span class="line">      .then(response &#x3D;&gt; &#123;</span><br><span class="line">        &#x2F;&#x2F; do something....</span><br><span class="line">        if (callback !&#x3D; null) &#123;</span><br><span class="line">          callback();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">      .catch(e &#x3D;&gt; &#123;</span><br><span class="line">        console.error(&#39;failed sso --&gt; &#39;, e);</span><br><span class="line">        if (callback !&#x3D; null) &#123;</span><br><span class="line">          callback();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125; else if (callback !&#x3D; null) &#123;</span><br><span class="line">    callback();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -951,7 +958,7 @@
       
         
           
-            
+            <img src="/.run//11/29/postgresql(1)/1.jpg" class title="Photo by fabio on Unsplash">
 
 <p>最近产品提了一个需求，要做菜单优化。</p>
 <p>菜单优化：</p>
@@ -1567,7 +1574,7 @@
 <p>这个词其实前两年说的比较多，当时另一个说法是一个人的<strong>标签</strong>很多。为什么出现的频率高，也流行，更多的原因是在于那其实是大大多数的梦想。</p>
 <p>里面窦先生说了一下，欲望和理想的区别：一定要结果的就是欲望，热爱过程的是理想。所以对于追求<strong>斜杠</strong>，你是出于欲望还是理想？从我个人来说，我对斜杠的追求我归为欲望，因为很显然我是需要结果的，不管是物质上的还是精神上的我都是有所求的。</p>
 <p>我一直认为，斜杠青年：其实是一个很奢侈的一个愿望。</p>
-
+<img src="/.run//11/03/%E6%96%9C%E6%9D%A0/dream_big.jpg" class title="Photo by Randy Tarampi on Unsplash">
 
 
 
@@ -1738,7 +1745,7 @@
 <p>加粗部分是我认为对我影响最突出的部分。</p>
 <p>首先咱们得说导致拖延的因素有很多，具体你是哪一类，你可以买本《拖延心理学》对号入座。我暂时认为自己时拖延早期患者，所以列出的主要是自己审视有的。</p>
 <h5 id="目标和回报太遥远，感受不到对我有什么意义"><a href="#目标和回报太遥远，感受不到对我有什么意义" class="headerlink" title="目标和回报太遥远，感受不到对我有什么意义"></a>目标和回报太遥远，感受不到对我有什么意义</h5><p>先分析一下，<strong>目标和回报太遥远，感受不到对我有什么意义</strong>，这个点其实很有意思，你回过头看一下自己列的目标也好还是flag之类的…，大多数都会有一个比较共通的点，那就是列的太大太虚，然后也没有反馈的环节。</p>
-
+<img src="/.run//10/31/%E5%BB%B6%E5%AE%95/a.png" class title="我的目标">
 
 <p>上图所示就是以前我列的目标，注意看打勾的标识完成的，红圈的表示未达成的。我来自我检讨一下啊，首先打圈的一看就不符合smart原则，当然也没法用PDCA那套。第二个原因是这几个都没有进行反馈设定，这就让你总感觉这个目标好像老离我挺远，慢慢的就觉得没意思了，也没用积极性了。</p>
 <p>但是相反打勾的我都完成了，主要有两方面的原因。</p>
@@ -1747,7 +1754,7 @@
 <li>这件事很具体，也比较小，跨越的周期不长，比较符合smart原则，事情就变得可达。</li>
 </ol>
 <h5 id="无法自我约束，例如容易冲动和分心"><a href="#无法自我约束，例如容易冲动和分心" class="headerlink" title="无法自我约束，例如容易冲动和分心"></a>无法自我约束，例如容易冲动和分心</h5><p>先根据 Tim Urban在TED的演讲，刨析一下拖延时的大脑活动情况，我觉得真是讲到我心里去了，具体大家可以搜一下演讲的名字叫&lt;<a href="http://open.163.com/newview/movie/free?pid=MBHQSM52F&mid=MBI15O7QE" target="_blank" rel="noopener">你有拖延症吗</a>&gt;。</p>
-
+<img src="/.run//10/31/%E5%BB%B6%E5%AE%95/procrastination_brain.png" class title="wait but way">
 
 <p>如上图在有拖延症的大脑里会有一只Monkey（分心/诱惑），它经常会跳出来，告诉你其实你的时间还有很多，要不我们逛逛YouTobe、BiliBIli…，它会不断的骚扰你，最终你会沦陷让其掌握大脑。其实就是抵御不了诱惑，容易分心。那什么时候我们会突然警醒呢，就是有一个东西出现的时候，如下图，这个东西叫<strong>恐慌</strong>。它一来Monkey就被吓跑了，但是往往这个时候，已经来不及了，被动了。</p>
 
@@ -1760,7 +1767,7 @@
 </li>
 <li><p><strong>在一开始，你往往信心满满</strong> </p>
 <p>在完成目标的一开始，往往信心满满  ，但是最后其实都不能很好的的完成或者说完成不了，往往整个过程如下图。</p>
-
+<img src="/.run//10/31/%E5%BB%B6%E5%AE%95/b.png" class title="拖延心理学">
 </li>
 <li><p><strong>自我</strong></p>
 <p>自我价值感 =能力（具有独立性，反对受控制） =表现（通过拖延，“我”说了算）,不愿意遵守那些不是我们自己所制定的规则并顺应别人的需要 。</p>
@@ -1769,15 +1776,15 @@
 <p>咋一看还挺牛x，原来拖延还有这么美丽的特征，但是注意我们这儿说的是<strong>适应不良型的完美主义</strong>，“完美主义”者往往对自己期待过高，不够现实，当无法实现这样的要求是，就不知所措。失望之余，通过拖延让自己从中退却。适应不良型的完美主义，对自己的要求跟对自己的表现的期待之间存在一种矛盾。</p>
 </li>
 </ol>
-<h4 id="拖延的伤害"><a href="#拖延的伤害" class="headerlink" title="拖延的伤害"></a>拖延的伤害</h4>
+<h4 id="拖延的伤害"><a href="#拖延的伤害" class="headerlink" title="拖延的伤害"></a>拖延的伤害</h4><img src="/.run//10/31/%E5%BB%B6%E5%AE%95/huaiyi.jpg" class title="怀疑自己">
 
+<img src="/.run//10/31/%E5%BB%B6%E5%AE%95/wushen.jpg" class title="精神萎靡">
 
+<img src="/.run//10/31/%E5%BB%B6%E5%AE%95/ziwo.png" class title="变得自我">
 
+<img src="/.run//10/31/%E5%BB%B6%E5%AE%95/sikao.jpg" class title="无法实现自己的想法">
 
-
-
-
-
+<img src="/.run//10/31/%E5%BB%B6%E5%AE%95/xinli.jpg" class title="心理疾病">
 
 
 
@@ -1791,7 +1798,7 @@
 <li>看看这方面的书以及专业的一些心理视频或者找心理方面的人士咨询，找到自身造成的拖延的原因，才能对症下药，人是个体，个体就有差异千万别总去套别人那套方法论，要找到适合自己的。</li>
 </ul>
 <h5 id="破法3：明确的目标与可行性的计划"><a href="#破法3：明确的目标与可行性的计划" class="headerlink" title="破法3：明确的目标与可行性的计划"></a><strong>破法3：明确的目标与可行性的计划</strong></h5><p>找到一个目标，然后将它分解成几个小的步骤，跨出小小的第一步，学习怎样记录时间，以及如何优化周围环境使之向有利于成功的方向推进。</p>
-
+<img src="/.run//10/31/%E5%BB%B6%E5%AE%95/target.png" class>
 
 <ul>
 <li><p>目标smart且够小，可达。既非常小，又可以给你带来进步感和成就感。</p>
@@ -1977,7 +1984,7 @@
         
           
             <p>今天内心膨胀的以为自己是个人才，所以随心所欲的看了门课。以下记录了我觉得对我有意义的点。</p>
-
+<img src="/.run//10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/mohamed.jpg" class title="Photo by Mohamed Nohassi on Unsplash">
 
 
 
@@ -1997,7 +2004,7 @@
 <li>通过业务布局减少人才体积（冗余）</li>
 <li>通过组织机构的调整来优化人才在不同组织单元中的密度，激活组织的有效性。</li>
 </ol>
-<h3 id="四大模型"><a href="#四大模型" class="headerlink" title="四大模型"></a>四大模型</h3>
+<h3 id="四大模型"><a href="#四大模型" class="headerlink" title="四大模型"></a>四大模型</h3><img src="/.run//10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/1.jpg" class>
 
 
 
@@ -2008,26 +2015,26 @@
 <h3 id="业务变局"><a href="#业务变局" class="headerlink" title="业务变局"></a>业务变局</h3><p><strong>业务结构与人才结构</strong></p>
 <p>解释，在什么情况下先发展业务还是先发展人才。</p>
 <p>依赖的手段则是进行<strong>业务摸底</strong>和<strong>人才摸底（核心团队）</strong></p>
-
+<img src="/.run//10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/2.jpg" class>
 
 
 
 <h3 id="组织变阵"><a href="#组织变阵" class="headerlink" title="组织变阵"></a>组织变阵</h3><p>说明什么地方配置更加优秀的人才，合理的调整人才结构和组织结构</p>
-
+<img src="/.run//10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/3.jpg" class>
 
 
 
 <h3 id="人才赋能"><a href="#人才赋能" class="headerlink" title="人才赋能"></a>人才赋能</h3><p>迎接未来面对变局的能力</p>
+<img src="/.run//10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/4.jpg" class>
 
-
-
+<img src="/.run//10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/5.jpg" class>
 
 
 
 
 
 <h3 id="人才管理机制"><a href="#人才管理机制" class="headerlink" title="人才管理机制"></a>人才管理机制</h3><p>通过上述内容，沉淀出一套符合自己公司的人才管理机制</p>
-
+<img src="/.run//10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/6.jpg" class>
 
 
 

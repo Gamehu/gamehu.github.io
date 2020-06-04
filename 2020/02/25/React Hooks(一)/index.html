@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/vendors/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/vendors/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -89,11 +96,17 @@
 <meta property="og:url" content="http://gamehu.run/2020/02/25/React%20Hooks(%E4%B8%80)/index.html">
 <meta property="og:site_name" content="正儿八经">
 <meta property="og:description" content="整理自团队内部的分享，因为从17年底启动的产品线，所以用的当时的最新版本16.3.1，由于种种原因一直没有升级，特别是自从出了Hooks之后，我是一直觉得应该进行版本升级了，因为升级这个事是避免不了的，除非你不再接收新的变化。 去年其实呼吁过一次不过被按下来了，犹不死心，所以就借着分享的机会，再团队内部普及一遍。 当然我说了只是普及不是教程，所以要点就两个：  Hooks的特性 在项目中的实践">
+<meta property="og:image" content="http://gamehu.run/.run//02/25/React%20Hooks(%E4%B8%80)/title.png">
+<meta property="og:image" content="http://gamehu.run/.run//02/25/React%20Hooks(%E4%B8%80)/a.png">
+<meta property="og:image" content="http://gamehu.run/.run//02/25/React%20Hooks(%E4%B8%80)/5LbsY.jpg">
+<meta property="og:image" content="http://gamehu.run/.run//02/25/React%20Hooks(%E4%B8%80)/nTmNe.jpg">
+<meta property="og:image" content="http://gamehu.run/.run//02/25/React%20Hooks(%E4%B8%80)/lQQX7.png">
 <meta property="article:published_time" content="2020-02-25T08:57:00.000Z">
 <meta property="article:modified_time" content="2020-03-06T06:24:14.659Z">
 <meta property="article:author" content="Gamehu">
 <meta property="article:tag" content="React Hooks">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://gamehu.run/.run//02/25/React%20Hooks(%E4%B8%80)/title.png">
 
 
 
@@ -404,7 +417,7 @@
       
 
       
-        
+        <img src="/.run//02/25/React%20Hooks(%E4%B8%80)/title.png" class>
 
 <p>整理自团队内部的分享，因为从17年底启动的产品线，所以用的当时的最新版本16.3.1，由于种种原因一直没有升级，特别是自从出了Hooks之后，我是一直觉得应该进行版本升级了，因为升级这个事是避免不了的，除非你不再接收新的变化。</p>
 <p>去年其实呼吁过一次不过被按下来了，犹不死心，所以就借着分享的机会，再团队内部普及一遍。</p>
@@ -422,13 +435,13 @@
 </ol>
 <h2 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h2><h4 id="什么是-Hooks"><a href="#什么是-Hooks" class="headerlink" title="什么是 Hooks?"></a>什么是 Hooks?</h4><p>我的理解啊，是这样，就是当你要完成一个动作（事情…），必然就需要一个过程的，有过程就可以分阶段，而在某个阶段，你可以在其前后插入事项从而实现对整个过程的扩展以及把控，这就是hook做的事情，挤进去搞事情。类似的比如Spring里的AOP。</p>
 <p>而没有React Hooks之前想要实现上述效果，只能用class+生命周期函数，比如下图。</p>
-
+<img src="/.run//02/25/React%20Hooks(%E4%B8%80)/a.png" class title="from https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;5a062fb551882535cd4a4ce3">
 
 <p>而React Hooks就是允许你在不编写 class 的情况下使用状态(state)和其他 React 特性。 你还可以<strong>构建自己的 Hooks</strong>, 跨组件共享可重用的有状态逻辑。<strong>React Hooks 的意思是，组件尽量写成纯函数，如果需要外部功能和在整个渲染过程中进行功能扩展，就用钩子把外部代码”钩”进来。</strong> </p>
 <p>从图1到图2的进化，忘掉class抱紧hooks。</p>
+<img src="/.run//02/25/React%20Hooks(%E4%B8%80)/5LbsY.jpg" class title="图1">
 
-
-
+<img src="/.run//02/25/React%20Hooks(%E4%B8%80)/nTmNe.jpg" class title="图2">
 
 <h4 id="主要应用的Hook"><a href="#主要应用的Hook" class="headerlink" title="主要应用的Hook"></a>主要应用的Hook</h4><p>列举使用频度较高的几个hook。</p>
 <p><strong>useRef</strong> 代替之前的 ref并且更加强大，不仅用于DOM引用。 “ ref”对象是一个通用容器，其当前属性是可变的，并且可以保存任何值，类似于类的实例属性。</p>
@@ -437,10 +450,10 @@
 <p><strong>useEffect</strong> 则可以代替某些生命周期钩子函数，如果你熟悉 React class 的生命周期函数，你可以把 useEffect Hook 看做 componentDidMount，componentDidUpdate 和 componentWillUnmount 这三个函数的组合。</p>
 <h4 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h4><p>结合项目中的代码实操一下，感受一下hooks的魅力。</p>
 <h5 id="示例一"><a href="#示例一" class="headerlink" title="示例一"></a><strong>示例一</strong></h5><p>一个最简单的例子，只是为了加一个变量。</p>
-<p>场景：实现弹出窗体的效果，需要一个变量<span style=color:red>visible</span>控制窗口的显示和隐藏，代码如下：</p>
+<p>场景：实现弹出窗体的效果，需要一个变量<span style="color:red">visible</span>控制窗口的显示和隐藏，代码如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class AlarmCards extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.state &#x3D; &#123; visible: false &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  updateVisible &#x3D; (visible) &#x3D;&gt; &#123;</span><br><span class="line">    this.setState(&#123;</span><br><span class="line">      visible</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    return &#123;...&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><span style=color:red>切换到Hooks代码如下：</p>
+<p><span style="color:red">切换到Hooks代码如下：</span></p>
 <ol>
 <li>class变为函数组件</li>
 <li>用useState</li>
@@ -463,14 +476,14 @@
 
 
 
-<p><span style=color:red><strong>Hooks切换，代码如下：</strong></span></p>
+<p><span style="color:red"><strong>Hooks切换，代码如下：</strong></span></p>
 <ol>
 <li>class变为函数组件</li>
 <li>用useState+useEffect</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useEffect, useState &#125; from &#39;react&#39;;</span><br><span class="line">const AlarmTable &#x3D; (&#123; ...props &#125;) &#x3D;&gt; &#123;</span><br><span class="line"></span><br><span class="line">  const &#123; alarmId, alarmRule, updateTime, appId, closeLoading, span, onDotClick &#125; &#x3D; props;</span><br><span class="line">    &#x2F;&#x2F; 变量声明</span><br><span class="line">  const [tableData, setTableData] &#x3D; useState(&#123; data: [], header: [] &#125;);</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 开始请求， useEffect可当作componentDidMount，componentDidUpdate 和 </span><br><span class="line">  &#x2F;&#x2F; componentWillUnmount三个生命周期的组合</span><br><span class="line"></span><br><span class="line">useEffect(() &#x3D;&gt; &#123;</span><br><span class="line">  const &#123; alarmId, alarmRule, updateTime, appId, onDotClick, closeLoading &#125; &#x3D; props;</span><br><span class="line">  const errorCallback &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    closeLoading(false);</span><br><span class="line">  &#125;;</span><br><span class="line">  req(BASE_WEB_API.GET_ALARM_DETAIL_COMPARISON, &#123; alarmId, alarmRule, updateTime &#125;, null, &#123;</span><br><span class="line">    errorCallback</span><br><span class="line">  &#125;).then(result &#x3D;&gt; &#123;</span><br><span class="line">    if (!isAvailableArray(result)) &#123;</span><br><span class="line">      errorCallback();</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; 生成表格需要的表头和数据</span><br><span class="line">    const data &#x3D; generateTableObjs(result, onDotClick, appId);</span><br><span class="line">    setTableData(&#123; ...data &#125;);</span><br><span class="line">    closeLoading(false);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 卸载函数</span><br><span class="line">  return function cleanup() &#123;</span><br><span class="line">    &#x2F;&#x2F; 重置state避免脏数据影响页面呈现</span><br><span class="line">    setTableData((&#123; data: [], header: [] &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">....</span><br><span class="line">  return &#123;...页面内容...&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong><span style=color:red>继续优化：</span></strong></p>
+<p><strong><span style="color:red">继续优化：</span></strong></p>
 <p><strong>自定义钩子封装</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">function useCpmparisonTable(closeLoading, alarmId, alarmRule, updateTime, onDotClick, appId) &#123;</span><br><span class="line">  const [drawer, setDrawer] &#x3D; useState(&#123;</span><br><span class="line">    visible: false,</span><br><span class="line">    drawerParams: &#123; appId: null, appName: null, record: null &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  const [tableData, setTableData] &#x3D; useState(&#123; data: [], header: [] &#125;);</span><br><span class="line">  </span><br><span class="line">  useEffect(() &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F; 开始请求</span><br><span class="line">    const errorCallback &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">      closeLoading(false);</span><br><span class="line">    &#125;;</span><br><span class="line">    req(BASE_WEB_API.GET_ALARM_DETAIL_COMPARISON, &#123; alarmId, alarmRule, updateTime &#125;, null, &#123;</span><br><span class="line">      errorCallback</span><br><span class="line">    &#125;).then(result &#x3D;&gt; &#123;</span><br><span class="line">      if (!isAvailableArray(result)) &#123;</span><br><span class="line">        errorCallback();</span><br><span class="line">        return;</span><br><span class="line">      &#125;</span><br><span class="line">      &#x2F;&#x2F; 生成表格需要的表头和数据</span><br><span class="line">      const data &#x3D; generateTableObjs(result, onDotClick, appId);</span><br><span class="line">      setTableData(&#123; ...data &#125;);</span><br><span class="line">      closeLoading(false);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 功能等同componentWillUnmount</span><br><span class="line">    return  ()&#x3D;&gt; &#123;</span><br><span class="line">       &#x2F;&#x2F; 重置state避免脏数据影响页面呈现</span><br><span class="line">       setTableData((&#123; data: [], header: [] &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;);</span><br><span class="line">  return [drawer, setDrawer, tableData];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -514,7 +527,7 @@
 </li>
 <li><p>使用的Hooks必须保证顺序，即内部是通过两个数组来管理的，所以<strong>不要在循环，条件判断，嵌套函数里面调用 Hooks</strong>。使其下标对不上从而导致state发生混乱，这在前期可能很容易发生bug。</p>
 <p>下图可简单理解一下内部的原理：</p>
-
+<img src="/.run//02/25/React%20Hooks(%E4%B8%80)/lQQX7.png" class>
 </li>
 <li><p>使用hook后，代码归类不会像之前class组件时代的一样有语法的强制规划了，什么意思呢？在class组件时代，redux的有关的代码是放到connect里的，state生命是放constructor里的，其他逻辑是放每个有关的生命周期里的。而在hook的时代，没有这些东西了，一切都直接放在函数组件内部，如果写得混乱，看起来就是<strong>一锅粥</strong>，所以，制定组件的书写规范和通过注释来归类不同功能的逻辑显得尤为重要。这有助于后期的维护，也有助于保持一个团队在代码书写风格上的一致性。</p>
 </li>
