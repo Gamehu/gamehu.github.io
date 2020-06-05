@@ -89,15 +89,15 @@
 <meta property="og:url" content="https://gamehu.github.io/2020/03/22/Java%208%20Stream/index.html">
 <meta property="og:site_name" content="正儿八经">
 <meta property="og:description" content="最近两周被平台组指名道姓拉去当了两周的苦力，写业务层代码，因为逻辑比较复杂数据输入比较多样，所以导致使用集合的概率很高，且常常伴随着过滤、排序等操作，继而用到了很多Streams提供的方法，遂做个简单记录。 StreamsStream是Java 8中引入的新的抽象层，它提供了一些类似SQL语句的声明性方式处理数据。 流操作分为中间操作和最终操作，元素流在管道中经过中间操作（intermedia">
-<meta property="og:image" content="https://gamehu.github.io/.io//03/22/Java%208%20Stream/computer-keyboard-34153.jpg">
-<meta property="og:image" content="https://gamehu.github.io/.io//03/22/Java%208%20Stream/java-streams.png">
-<meta property="og:image" content="https://gamehu.github.io/.io//03/22/Java%208%20Stream/apis.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/03/22/Java%208%20Stream/computer-keyboard-34153.jpg">
+<meta property="og:image" content="https://gamehu.github.io/2020/03/22/Java%208%20Stream/java-streams.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/03/22/Java%208%20Stream/apis.png">
 <meta property="article:published_time" content="2020-03-22T04:20:00.000Z">
 <meta property="article:modified_time" content="2020-03-22T07:02:43.461Z">
 <meta property="article:author" content="Gamehu">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gamehu.github.io/.io//03/22/Java%208%20Stream/computer-keyboard-34153.jpg">
+<meta name="twitter:image" content="https://gamehu.github.io/2020/03/22/Java%208%20Stream/computer-keyboard-34153.jpg">
 
 
 
@@ -408,16 +408,16 @@
       
 
       
-        <img src="/.io//03/22/Java%208%20Stream/computer-keyboard-34153.jpg" class title="Photo by Negative Space from Pexels">
+        <img src="/2020/03/22/Java%208%20Stream/computer-keyboard-34153.jpg" class title="Photo by Negative Space from Pexels">
 
 <p>最近两周被平台组指名道姓拉去当了两周的苦力，写业务层代码，因为逻辑比较复杂数据输入比较多样，所以导致使用集合的概率很高，且常常伴随着过滤、排序等操作，继而用到了很多Streams提供的方法，遂做个简单记录。</p>
 <h3 id="Streams"><a href="#Streams" class="headerlink" title="Streams"></a>Streams</h3><p>Stream是Java 8中引入的新的抽象层，它提供了一些类似SQL语句的声明性方式处理数据。</p>
 <p>流操作分为中间操作和最终操作，元素流在管道中经过中间操作（intermediate operation）的处理，最后由最终操作(terminal operation)得到前面处理的结果。 流管道由一个源（例如Collection，数组，生成器函数或I / O通道）组成； 随后是零个或多个中间操作，例如Stream.filter或Stream.map； 以及诸如Stream.forEach或Stream.reduce之类的终端操作。</p>
-<img src="/.io//03/22/Java%208%20Stream/java-streams.png" class>
+<img src="/2020/03/22/Java%208%20Stream/java-streams.png" class>
 
 <p>即将要处理的元素集合看作一种流， 流在管道中传输， 并且可以在管道中插入节点上进行处理， 比如筛选， 排序，聚合等。</p>
 <p>当然为什么喜欢用它还是因为Stream API 借助于同样新出现的 Lambda 表达式，极大的提高编程效率和程序可读性。会让代码看起来更加简洁当然通常也会更加高效。</p>
-<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><img src="/.io//03/22/Java%208%20Stream/apis.png" class title="api">
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><img src="/2020/03/22/Java%208%20Stream/apis.png" class title="api">
 
 <p>如上图api很多，其中又可以按照最开始说的分为中间操作、最终操作两类，中间（<strong>Intermediate</strong>）操作是可以零个或者多个但是最终（<strong>Terminal</strong>）操作只能有一个，能力有限我就列举一下我常用的。</p>
 <p><strong>可能我们需要注意的一个概念</strong>：因为一个 Stream 可以进行多次中间操作，那是不是就会对 Stream 的每个元素进行转换多次，即时间复杂度就是 N（转换次数）个 ？其实不是这样的，转换操作都是 lazy 的，多个转换操作只会在 Terminal 操作的时候融合起来，一次循环完成。</p>
@@ -1413,5 +1413,4 @@
 
   
 
-</body>
-</html>
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

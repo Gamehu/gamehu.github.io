@@ -89,17 +89,17 @@
 <meta property="og:url" content="https://gamehu.github.io/2020/02/25/React%20Hooks(%E4%B8%80)/index.html">
 <meta property="og:site_name" content="正儿八经">
 <meta property="og:description" content="整理自团队内部的分享，因为从17年底启动的产品线，所以用的当时的最新版本16.3.1，由于种种原因一直没有升级，特别是自从出了Hooks之后，我是一直觉得应该进行版本升级了，因为升级这个事是避免不了的，除非你不再接收新的变化。 去年其实呼吁过一次不过被按下来了，犹不死心，所以就借着分享的机会，再团队内部普及一遍。 当然我说了只是普及不是教程，所以要点就两个：  Hooks的特性 在项目中的实践">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/25/React%20Hooks(%E4%B8%80)/title.png">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/25/React%20Hooks(%E4%B8%80)/a.png">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/25/React%20Hooks(%E4%B8%80)/5LbsY.jpg">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/25/React%20Hooks(%E4%B8%80)/nTmNe.jpg">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/25/React%20Hooks(%E4%B8%80)/lQQX7.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/25/React%20Hooks(%E4%B8%80)/title.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/25/React%20Hooks(%E4%B8%80)/a.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/25/React%20Hooks(%E4%B8%80)/5LbsY.jpg">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/25/React%20Hooks(%E4%B8%80)/nTmNe.jpg">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/25/React%20Hooks(%E4%B8%80)/lQQX7.png">
 <meta property="article:published_time" content="2020-02-25T08:57:00.000Z">
 <meta property="article:modified_time" content="2020-03-06T06:24:14.659Z">
 <meta property="article:author" content="Gamehu">
 <meta property="article:tag" content="React Hooks">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gamehu.github.io/.io//02/25/React%20Hooks(%E4%B8%80)/title.png">
+<meta name="twitter:image" content="https://gamehu.github.io/2020/02/25/React%20Hooks(%E4%B8%80)/title.png">
 
 
 
@@ -410,7 +410,7 @@
       
 
       
-        <img src="/.io//02/25/React%20Hooks(%E4%B8%80)/title.png" class>
+        <img src="/2020/02/25/React%20Hooks(%E4%B8%80)/title.png" class>
 
 <p>整理自团队内部的分享，因为从17年底启动的产品线，所以用的当时的最新版本16.3.1，由于种种原因一直没有升级，特别是自从出了Hooks之后，我是一直觉得应该进行版本升级了，因为升级这个事是避免不了的，除非你不再接收新的变化。</p>
 <p>去年其实呼吁过一次不过被按下来了，犹不死心，所以就借着分享的机会，再团队内部普及一遍。</p>
@@ -428,13 +428,13 @@
 </ol>
 <h2 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h2><h4 id="什么是-Hooks"><a href="#什么是-Hooks" class="headerlink" title="什么是 Hooks?"></a>什么是 Hooks?</h4><p>我的理解啊，是这样，就是当你要完成一个动作（事情…），必然就需要一个过程的，有过程就可以分阶段，而在某个阶段，你可以在其前后插入事项从而实现对整个过程的扩展以及把控，这就是hook做的事情，挤进去搞事情。类似的比如Spring里的AOP。</p>
 <p>而没有React Hooks之前想要实现上述效果，只能用class+生命周期函数，比如下图。</p>
-<img src="/.io//02/25/React%20Hooks(%E4%B8%80)/a.png" class title="from https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;5a062fb551882535cd4a4ce3">
+<img src="/2020/02/25/React%20Hooks(%E4%B8%80)/a.png" class title="from https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;5a062fb551882535cd4a4ce3">
 
 <p>而React Hooks就是允许你在不编写 class 的情况下使用状态(state)和其他 React 特性。 你还可以<strong>构建自己的 Hooks</strong>, 跨组件共享可重用的有状态逻辑。<strong>React Hooks 的意思是，组件尽量写成纯函数，如果需要外部功能和在整个渲染过程中进行功能扩展，就用钩子把外部代码”钩”进来。</strong> </p>
 <p>从图1到图2的进化，忘掉class抱紧hooks。</p>
-<img src="/.io//02/25/React%20Hooks(%E4%B8%80)/5LbsY.jpg" class title="图1">
+<img src="/2020/02/25/React%20Hooks(%E4%B8%80)/5LbsY.jpg" class title="图1">
 
-<img src="/.io//02/25/React%20Hooks(%E4%B8%80)/nTmNe.jpg" class title="图2">
+<img src="/2020/02/25/React%20Hooks(%E4%B8%80)/nTmNe.jpg" class title="图2">
 
 <h4 id="主要应用的Hook"><a href="#主要应用的Hook" class="headerlink" title="主要应用的Hook"></a>主要应用的Hook</h4><p>列举使用频度较高的几个hook。</p>
 <p><strong>useRef</strong> 代替之前的 ref并且更加强大，不仅用于DOM引用。 “ ref”对象是一个通用容器，其当前属性是可变的，并且可以保存任何值，类似于类的实例属性。</p>
@@ -520,7 +520,7 @@
 </li>
 <li><p>使用的Hooks必须保证顺序，即内部是通过两个数组来管理的，所以<strong>不要在循环，条件判断，嵌套函数里面调用 Hooks</strong>。使其下标对不上从而导致state发生混乱，这在前期可能很容易发生bug。</p>
 <p>下图可简单理解一下内部的原理：</p>
-<img src="/.io//02/25/React%20Hooks(%E4%B8%80)/lQQX7.png" class>
+<img src="/2020/02/25/React%20Hooks(%E4%B8%80)/lQQX7.png" class>
 </li>
 <li><p>使用hook后，代码归类不会像之前class组件时代的一样有语法的强制规划了，什么意思呢？在class组件时代，redux的有关的代码是放到connect里的，state生命是放constructor里的，其他逻辑是放每个有关的生命周期里的。而在hook的时代，没有这些东西了，一切都直接放在函数组件内部，如果写得混乱，看起来就是<strong>一锅粥</strong>，所以，制定组件的书写规范和通过注释来归类不同功能的逻辑显得尤为重要。这有助于后期的维护，也有助于保持一个团队在代码书写风格上的一致性。</p>
 </li>
@@ -1426,5 +1426,4 @@
 
   
 
-</body>
-</html>
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

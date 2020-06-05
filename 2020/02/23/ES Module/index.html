@@ -89,7 +89,7 @@
 <meta property="og:url" content="https://gamehu.github.io/2020/02/23/ES%20Module/index.html">
 <meta property="og:site_name" content="正儿八经">
 <meta property="og:description" content="单独记录一下ES Module，听得太多用的也多，但是一直没深刻的认识一下它。 同样的节奏先Google找是否有大佬写这方面的文章。 幸运的是被我找到了Lin Clark（之前我学习浏览器方面的知识就是读的她的文章）写的，很喜欢她的文章，讲的很生动和具体。 开始来来来，搬运一下这一篇ES modules: A cartoon deep-dive。 模块如何提供帮助？模块为您提供了更好的方式来组织这">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/23/ES%20Module/1.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/23/ES%20Module/1.png">
 <meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/04_import_graph-500x291.png">
 <meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/05_module_record-500x287.png">
 <meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/06_module_instance-500x372.png">
@@ -97,33 +97,33 @@
 <meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/07_loader_vs_es-500x286.png">
 <meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_loader_as_puppeteer-500x330.png">
 <meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_script_entry-500x188.png">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/23/ES%20Module/2.png">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/23/ES%20Module/3.png">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/23/ES%20Module/4.png">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/23/ES%20Module/5.png">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/23/ES%20Module/6.png">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/23/ES%20Module/7.png">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/23/ES%20Module/8.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/23/ES%20Module/2.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/23/ES%20Module/3.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/23/ES%20Module/4.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/23/ES%20Module/5.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/23/ES%20Module/6.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/23/ES%20Module/7.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/23/ES%20Module/8.png">
 <meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/25_file_to_module_record-500x199.png">
 <meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/25_module_map-500x239.png">
 <meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/26_parse_goal-500x311.png">
 <meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/27_construction-500x406.png">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/23/ES%20Module/9.png">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/23/ES%20Module/10.png">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/23/ES%20Module/11.png">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/23/ES%20Module/12.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/23/ES%20Module/9.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/23/ES%20Module/10.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/23/ES%20Module/11.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/23/ES%20Module/12.png">
 <meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/40_top_level_code-500x146.png">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/23/ES%20Module/13.png">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/23/ES%20Module/14.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/23/ES%20Module/13.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/23/ES%20Module/14.png">
 <meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/42_cjs_variable_2-500x113.png">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/23/ES%20Module/15.png">
-<meta property="og:image" content="https://gamehu.github.io/.io//02/23/ES%20Module/16.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/23/ES%20Module/15.png">
+<meta property="og:image" content="https://gamehu.github.io/2020/02/23/ES%20Module/16.png">
 <meta property="article:published_time" content="2020-02-23T14:33:00.000Z">
 <meta property="article:modified_time" content="2020-02-24T14:01:01.210Z">
 <meta property="article:author" content="Gamehu">
 <meta property="article:tag" content="ES Module">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gamehu.github.io/.io//02/23/ES%20Module/1.png">
+<meta name="twitter:image" content="https://gamehu.github.io/2020/02/23/ES%20Module/1.png">
 
 
 
@@ -442,7 +442,7 @@
 <p>这会将这些函数和变量放入模块范围。模块作用域可用于在模块中的功能之间共享变量。</p>
 <p>但是与函数作用域不同，模块作用域具有一种使其变量也可用于其他模块的方式。他们可以明确地说出模块中的哪些变量，类或函数应该可用。</p>
 <p>当其他模块可以使用某些东西时，这称为导出。导出后，其他模块可以明确地说它们依赖于该变量，类或函数。</p>
-<img src="/.io//02/23/ES%20Module/1.png" class>
+<img src="/2020/02/23/ES%20Module/1.png" class>
 
 <p>因为这是一种明确的关系，所以您可以知道如果删除另一个模块，哪个模块将中断。</p>
 <p>一旦能够在模块之间导出和导入变量，就可以更轻松地将代码分解为可以相互独立工作的小块。然后，您可以组合并重组这些块（类似于积木），以从同一组模块创建所有不同种类的应用程序。</p>
@@ -483,35 +483,35 @@
 <p><a href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_script_entry.png" target="_blank" rel="noopener"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_script_entry-500x188.png" alt="具有type = module属性和src URL的脚本标记。 src URL有一个文件，它是条目"></a></p>
 <p>但是，如何找到下一组模块- <code>main.js</code>直接依赖的模块呢？</p>
 <p>这就是导入语句的来源。导入语句的一部分称为模块说明符。它告诉加载程序可以在哪里找到每个下一个模块。</p>
-<img src="/.io//02/23/ES%20Module/2.png" class>
+<img src="/2020/02/23/ES%20Module/2.png" class>
 
 <p>有关模块说明符的一件事：在浏览器和Node之间有时需要对它们进行不同的处理。每个主机都有自己的解释模块说明符字符串的方式。为此，它使用一种称为模块解析算法的模块，该算法在平台之间有所不同。当前，某些可在Node中工作的模块说明符在浏览器中将无法工作，但<a href="https://github.com/domenic/package-name-maps" target="_blank" rel="noopener">仍在进行修复</a>。</p>
 <p>在此问题修复之前，浏览器仅接受URL作为模块说明符。他们将从该URL加载模块文件。但这不会同时出现在整个图表上。在解析文件之前，您不知道模块需要获取哪些依赖项，并且在获取文件之前无法解析文件。</p>
 <p>这意味着我们必须逐层遍历该树，解析一个文件，然后找出其依赖项，然后查找并加载这些依赖项。</p>
-<img src="/.io//02/23/ES%20Module/3.png" class>
+<img src="/2020/02/23/ES%20Module/3.png" class>
 
 <p>如果主线程要等待这些文件中的每一个下载，则许多其他任务将堆积在其队列中。</p>
-<img src="/.io//02/23/ES%20Module/4.png" class>
+<img src="/2020/02/23/ES%20Module/4.png" class>
 
 <p>这样阻塞主线程会使使用模块的应用程序使用起来太慢。这是ES模块规范将算法分为多个阶段的原因之一。将构造分为自己的阶段，使浏览器可以在开始实例化的同步工作之前获取文件并增强对模块图的理解。</p>
 <p>这种方法（算法分为多个阶段）是ES模块和CommonJS模块之间的主要区别之一。</p>
 <p>CommonJS可以做不同的事情，因为从文件系统加载文件比通过Internet下载花费的时间少得多。这意味着Node可以在加载文件时阻止主线程。并且由于文件已经加载，因此仅实例化和求值（在CommonJS中不是单独的阶段）是有意义的。这也意味着在返回模块实例之前，您要遍历整棵树，加载，实例化和评估任何依赖项。</p>
-<img src="/.io//02/23/ES%20Module/5.png" class>
+<img src="/2020/02/23/ES%20Module/5.png" class>
 
 <p>CommonJS方法有一些含义，我将在后面详细解释。但是，这意味着一件事，就是在带有CommonJS模块的Node中，可以在模块说明符中使用变量。<code>require</code>在寻找下一个模块之前，您正在执行该模块中的所有代码（直到语句）。这意味着当您进行模块解析时，变量将具有一个值。</p>
 <p>但是，使用ES模块，您可以在进行任何计算（求值）之前预先建立整个模块图。这意味着您不能在模块说明符中包含变量，因为这些变量尚无值。</p>
-<img src="/.io//02/23/ES%20Module/6.png" class>
+<img src="/2020/02/23/ES%20Module/6.png" class>
 
 <p>但是有时将变量用于模块路径确实很有用。例如，您可能想根据代码在做什么或在什么环境中运行来切换加载的模块。</p>
 <p>为了使ES模块成为可能，有一个建议叫做<a href="https://github.com/tc39/proposal-dynamic-import" target="_blank" rel="noopener">动态导入</a>。有了它，您可以使用类似的导入语句<code>import(</code>${path}/foo.js<code>)</code>。</p>
 <p>动态导入的工作原理是，任何使用<code>import()</code>来导入的文件，都会作为一个入口文件从而创建一棵单独的依赖树，被单独处理。</p>
-<img src="/.io//02/23/ES%20Module/7.png" class>
+<img src="/2020/02/23/ES%20Module/7.png" class>
 
 <p>但是要注意一件事–这两棵树中的任何模块都将共享一个模块实例。这是因为加载程序会缓存模块实例。对于特定全局范围内的每个模块，将只有一个模块实例。</p>
 <p>这意味着浏览器的工作量更少。例如，这意味着即使多个模块依赖该模块文件，该模块文件也只会被提取一次。（这是缓存模块的一个原因。我们将在评估部分中看到另一个原因。）</p>
 <p>加载程序使用称为<a href="https://html.spec.whatwg.org/multipage/webappapis.html#module-map" target="_blank" rel="noopener">模块映射的内容</a>来管理此缓存。每个全局变量在单独的模块图中跟踪其模块。</p>
 <p>当加载程序获取一个URL时，它将把该URL放入模块映射中，并记下它当前正在获取文件。然后它将发出请求并继续以开始获取下一个文件。</p>
-<img src="/.io//02/23/ES%20Module/8.png" class>
+<img src="/2020/02/23/ES%20Module/8.png" class>
 
 <p>如果另一个模块依赖于同一文件会怎样？加载程序将在模块映射中查找每个URL。如果在其中看到<code>fetching</code>，它将继续前进到下一个URL。</p>
 <p>但是模块图不仅跟踪正在获取的文件。模块映射还充当模块的缓存，如下所示。</p>
@@ -532,19 +532,19 @@
 <p>首先，JS引擎创建一个<strong>模块环境记录</strong>（Module Environment Record）。它是管理所有模块记录的变量。然后，它会在内存中找到所有export对应的的地址。模块环境记录将跟踪内存中与每个export相关联的地址。</p>
 <p>内存中的这些地址对应的空间尚无法获取其值。只有在运行之后，它们的实际值才会被填写。需要注意的一点是：在此阶段中将初始化所有导出的函数声明。这将使后面的执行阶段变得更加容易。</p>
 <p>为了实例化<strong>模块关系图</strong>，引擎会采用<strong>深度优先的后序遍历方式</strong>。这意味着它将到达关系图的最底部（底部不依赖于其他任何东西），并设置其导出。</p>
-<img src="/.io//02/23/ES%20Module/9.png" class>
+<img src="/2020/02/23/ES%20Module/9.png" class>
 
 <p>最终，引擎会把模块下的所有依赖导出连接到当前模块。接着回到上一层把模块的导入连接起来。</p>
 <p>请注意，导出和导入均指向内存中的同一位置。</p>
-<img src="/.io//02/23/ES%20Module/10.png" class>
+<img src="/2020/02/23/ES%20Module/10.png" class>
 
 <p>这不同于CommonJS模块。在CommonJS中，整个导出对象在导出时被复制。这意味着导出的任何值（如数字）都是副本，所以在CommonJS如果导出模块以后更改了该值，则导入模块将看不到该更改。</p>
 <p>这意味着，如果导出模块以后更改了该值，则导入模块将看不到该更改。</p>
-<img src="/.io//02/23/ES%20Module/11.png" class>
+<img src="/2020/02/23/ES%20Module/11.png" class>
 
 <p>相反，ES模块使用<strong>实时绑定</strong>（Live Binding）。两个模块都指向内存中的相同位置（引用）。这意味着，当导出模块更改值时，该更改将显示在导入模块中。</p>
 <p>导出值的模块可以随时更改这些值，但是导入模块不能更改其导入的值，因为是导入的是<strong>只读引用</strong>。不过如果模块导入了一个对象，则它可以更改该对象上的属性值。</p>
-<img src="/.io//02/23/ES%20Module/12.png" class>
+<img src="/2020/02/23/ES%20Module/12.png" class>
 
 <p>之所以ESM采用实时绑定，是因为可以在不运行任何代码的情况下链接到所有模块。这有助于解决循环依赖的问题，在后面的运行(evaluation)阶段会细说。</p>
 <p>OK，当实例化结束时，我们得到了所有模块实例，并知道了已完成链接的导出/导入变量的内存地址。</p>
@@ -557,18 +557,18 @@
 <p>那我们之前谈到的循环依赖怎么处理呢？</p>
 <p>在循环依赖关系中，您最终会在模块关系图中出现循环。你依赖我我依赖你，通常，这会变成很大的循环。</p>
 <p>为了解释这个问题，我举个例子。</p>
- <img src="/.io//02/23/ES%20Module/13.png" class>
+ <img src="/2020/02/23/ES%20Module/13.png" class>
 
 <p>首先让我们看一下如果时CommonJS模块会时什么样的。首先，main模块将执行到require语句。然后它将去加载counter模块。</p>
- <img src="/.io//02/23/ES%20Module/14.png" class>
+ <img src="/2020/02/23/ES%20Module/14.png" class>
 
 <p>然后，counter模块将尝试从访问导出的对象<code>message</code>。但是由于尚未在main模块中执行，因此它将返回undefined。JS引擎将在内存中为局部变量分配空间，并将该值设置为undefined。</p>
 <p><a href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/42_cjs_variable_2.png" target="_blank" rel="noopener"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/42_cjs_variable_2-500x113.png" alt="中间的内存，main.js和内存之间没有连接，但是从counter.js到未定义的内存位置的导入链接"></a></p>
 <p>此时会一直运行持续到counter模块顶级代码的末尾。我们想看看是否最终将获得正确的message（在执行main.js之后），因此我们设置了超时时间。然后继续运行到<code>main.js</code>。</p>
- <img src="/.io//02/23/ES%20Module/15.png" class>
+ <img src="/2020/02/23/ES%20Module/15.png" class>
 
 <p>message变量将被初始化并添加到内存中。但是由于两者之间没有连接，因此message在counter模块中仍然是时undefined。</p>
- <img src="/.io//02/23/ES%20Module/16.png" class>
+ <img src="/2020/02/23/ES%20Module/16.png" class>
 
 <p>如果使用实时绑定处理导出，则counter模块最终将看到正确的值。到超时运行时，<code>main.js</code>的执行就已经完成并填充了值。</p>
 <p>支持循环依赖是 ESM 设计之初就考虑到的一大因素。也正是这种分（三）阶段设计使其成为可能。</p>
@@ -1472,5 +1472,4 @@
 
   
 
-</body>
-</html>
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

@@ -408,7 +408,7 @@
 <p><strong>I. 基准代码</strong></p>
 <p>一份基准代码（Codebase），多份部署（deploy）</p>
 <p>我们项目是采用类似git flow的方式来管理代码，首先每个应用肯定只有一份基准代码（master），不管是新功能的开发、bugfix、hostfix、release、tag等最终都是基于master的。这样就保证了所有部署的基准代码相同，但每份部署可以使用其不同的版本</p>
-<img src="/.io//07/04/12-Factors/codebase-deploys.png" class title="来源于12factor.net">
+<img src="/2018/07/04/12-Factors/codebase-deploys.png" class title="来源于12factor.net">
 
 <p><strong>II. 依赖</strong></p>
 <p>显式声明依赖关系（ dependency ）</p>
@@ -419,12 +419,12 @@
 <p><strong>IV. 后端服务</strong></p>
 <p>把后端服务(backing services)当作附加资源</p>
 <p>数据库、消息队列、数据中心等都是作为基础设施存在的，每个应用是与这些组件都是松耦合。不足是现有的客户场景对可能只能做到逻辑上的隔离，比如数据库虽然逻辑上和应用是隔离的但是物理上可能在一个主机上，因为客户现场可能就跟我们提供几台机器。</p>
-<img src="/.io//07/04/12-Factors/attached-resources.png" class title="来源于12factor.net">
+<img src="/2018/07/04/12-Factors/attached-resources.png" class title="来源于12factor.net">
 
 <p>**<br>V. 构建，发布，运行**</p>
 <p>严格分离构建和运行。</p>
 <p>项目采用的是阿里云的ci/cd方案，构建、发布、运行都是分离的。每个版本对应唯一ID。</p>
-<img src="/.io//07/04/12-Factors/release.png" class title="来源于12factor.net">
+<img src="/2018/07/04/12-Factors/release.png" class title="来源于12factor.net">
 
 <p><strong>VI. 进程</strong></p>
 <p>以一个或多个无状态进程运行应用</p>
@@ -436,7 +436,7 @@
 <p><strong>VIII. 并发</strong></p>
 <p>通过进程模型进行扩展。</p>
 <p>这一点没做好，后端采用的java语言，都知道java是典型的线程模式。所以只能给应用分配相应的资源，让其能纵向扩展，但其实效果不是很好。当然我们有比较简单的方式可以使其进行横向扩展，即每个应用部署多实例的方式进行横向扩展，不过目前没有实践。后续会完善。</p>
-<img src="/.io//07/04/12-Factors/process-types.png" class title="来源于12factor.net">
+<img src="/2018/07/04/12-Factors/process-types.png" class title="来源于12factor.net">
 
 <p><strong>IX. 易处理</strong></p>
 <p>快速启动和优雅终止可最大化健壮性。</p>
@@ -937,7 +937,7 @@
           
             <p>这段时间区块链很火，虽然我没用什么兴趣去做区块链，因为愚笨的我现在还没太看懂区块链到底能进入哪些行业？就像之前看红杉资本的一位VC的访谈，她的成功秘诀之一就是，自己没看懂的行业是肯定不会投的不管它多么火。</p>
 <p>但是虽然这么说，我还是得了解一下到底是个什么玩意？虽然网上到处是文章但是都是东拼西凑得，不太体系。所以当我听说caoz大佬要开个区块链的扫盲视频，所以马上付费了解了下同时也看了下MacTalk大佬写的文章….。以下是这段时间对于区块链的一些笔记。</p>
-<img src="/.io//06/29/%E5%8C%BA%E5%9D%97%E9%93%BE/licheng.png" class title="图摘自趣链">
+<img src="/2018/06/29/%E5%8C%BA%E5%9D%97%E9%93%BE/licheng.png" class title="图摘自趣链">
 
 <p>从图中可以看出，现目前区块链的应用主要有两种场景，<strong>公有链</strong>和<strong>联盟链</strong>，其实还有<strong>私有链</strong></p>
 <p>所以首先要了解比特币不是区块链，区块链是一种技术集合的统称，比特币等是区块链的一种应用。</p>
@@ -995,7 +995,7 @@
 <p>在POS之上又有人提出了DPOS，在基于拥有数量的基础上，投票选举工作节点的模式，由投票委任的节点负责运算打包，一旦出现坏区块或者故障，会有一套机制保障自动切换到其他节点，实现平滑过渡</p>
 </blockquote>
 <p><strong>智能合约</strong></p>
-<img src="/.io//06/29/%E5%8C%BA%E5%9D%97%E9%93%BE/zhinengheyue.png" class title="图摘自曹政易灵微课">
+<img src="/2018/06/29/%E5%8C%BA%E5%9D%97%E9%93%BE/zhinengheyue.png" class title="图摘自曹政易灵微课">
 
 <blockquote>
 <p>来源于以太坊。智能合约，也就是说，在区块中传递的合约，或者说传递的字符串，不是单纯的字符串和信息，而是一段可执行的脚本，比如说，有触发条件，有交互能力。</p>
@@ -1470,14 +1470,14 @@
           
             <p>事业部老大从17年开始就在推OKR，以前都是说KPI，所以我想知道OKR又是个啥，以此文章做个记录。</p>
 <h1 id="什么是OKR体系？"><a href="#什么是OKR体系？" class="headerlink" title="什么是OKR体系？"></a>什么是OKR体系？</h1><p>OKR体系的全称是Objectives &amp; Key Results，即目标与关键成果。所谓OKR，O = Objective 可以理解为企业目标，KR ＝Key Results 可以理解为关键成果。浓缩在一起就是“为确保达成企业目标的关键成果分解与实施”。</p>
-<img src="/.io//06/27/OKR/kpi1.png" class>
+<img src="/2018/06/27/OKR/kpi1.png" class>
 
 
 <h2 id="二、OKR与KPI的区别"><a href="#二、OKR与KPI的区别" class="headerlink" title="二、OKR与KPI的区别"></a>二、OKR与KPI的区别</h2><p>如果要说 OKR 和 KPI 的区别，区别就在于 KPI 只能让驴使劲走，而 OKR 用于保证驴头朝正确的方向，有些驴拼命想往前走，不希望落后于别人，这时候 OKR 用于帮助驴少走曲线。</p>
 <p>OKR考核：“我要做的事”，KPI考核：“要我做的事”，理解不同，但二者都强调有目标,同时也需要有执行力。OKR的思路是先制定目标，然后明确目标的结果，再对结果进行量化，最后考核完成情况。KPI 的思路也是先确定组织目标，然后对组织目标进行分解直到个人目标，然后对个人目标进行量化</p>
-<img src="/.io//06/27/OKR/ORK-KPI2.jpg" class>
+<img src="/2018/06/27/OKR/ORK-KPI2.jpg" class>
 
-<img src="/.io//06/27/OKR/kpi3.jpg" class>
+<img src="/2018/06/27/OKR/kpi3.jpg" class>
 
 <p>解释来源于：<blockquote><footer><strong>真人才</strong><cite><a href="http://www.zhenrencai.cn/OKRCase3" target="_blank" rel="noopener">OKR管理体系的基本框架</a></cite></footer></blockquote></p>
 
@@ -1625,16 +1625,16 @@
 <p>当然我们公司也没有作妖，非要选个与众不同所以还是选了dubbo作为服务之间的通信框架。</p>
 <p>我这儿也不做什么源码解析了，比我专业的细致的网上很多，我主要解析一下我在用dubbo过程中遇到的问题相关的源码。比如今天讲的就是dubbo的异常机制、序列化协议hession相关的源码。</p>
 <p>问题起因在于我们系统中定义了自己的一套异常处理机制，有个自定义异常</p>
-<img src="/.io//06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error.png" class title="异常堆栈信息">
+<img src="/2018/06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error.png" class title="异常堆栈信息">
 
 <p>图中的ApiException是我们定义的针对接口异常的异常类，长成下图这样。</p>
-<img src="/.io//06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error01.png" class title="ApiException">
+<img src="/2018/06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error01.png" class title="ApiException">
 
 <p>红框的部分是这次发生问题之后加的一个构造参数，加完之后就搞定了。那为什么呢？我们跟着异常信息我们知道是dubbo用的hession那块反序列化报了异常，跟下源码看下。</p>
 <ul>
 <li>我们找到JavaDeserializer的instantiate方法，找到_constructor，发现是个Constructor，找到赋值地方，在JavaDeserializer实例化时赋值，进入JavaDeserializer构造方法，根据赋值代码，并且因为我们的ApiException是不知一个构造函数的所以_constructor肯定不会为null,所以</li>
 </ul>
-<img src="/.io//06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error02.png" class title="xxx could not be instantiated">
+<img src="/2018/06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error02.png" class title="xxx could not be instantiated">
 
 <pre><code>public JavaDeserializer(Class cl) {
     this._type = cl;
@@ -1690,18 +1690,18 @@
     }
 
 }</code></pre><p>根据下面这段代码，从JavaDeserializer的构造方法中可以看出，这里_constructor会被赋予参数最少的那个构造器，即找到ApiException一个参数的构造方法 public ApiException(Throwable cause)，</p>
-<img src="/.io//06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error04.png" class title="xxx">
+<img src="/2018/06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error04.png" class title="xxx">
 
 <p>有根据下面这段代码，我们知道Throwable不是primitive（原始数据类型），所以_constructorArgs值为null。</p>
-<img src="/.io//06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error03.png" class title="_constructorArgs">
+<img src="/2018/06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error03.png" class title="_constructorArgs">
 
 <p><strong>this._constructor.newInstance(this._constructorArgs)</strong>使用反射调用构造方法时，要求给的参数必须是原始类型或者其包装器</p>
-<img src="/.io//06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error05.png" class title="反射调用构造函数">
+<img src="/2018/06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error05.png" class title="反射调用构造函数">
 
 <p>但是我们给的参数值都为null，，传入的参数不合法，造成了上面的异常。</p>
 <p><strong>解决办法</strong></p>
 <p>所以绕了这么大一圈知道了原因，那怎么办呢，最简单的方式ApiException提供一个无参的构造方法。就会这样调用：ca.newInstance(new Object[])，即无参构造则不会再抛异常了。</p>
-<img src="/.io//06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error06.png" class title="反射调用构造函数">
+<img src="/2018/06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error06.png" class title="反射调用构造函数">
 
 <p><strong>小结</strong></p>
 <p>其实这块还会牵扯处很多东西，比如为什么ApiException要那么设计？为什么Java本身的反序列化机制能过而Hession不能过？再比如Constructor.newInstance()和我们经常看到的Class.newInstance()有什么区别？…哎 学海无涯苦作舟</p>
@@ -2512,5 +2512,4 @@
 
   
 
-</body>
-</html>
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
