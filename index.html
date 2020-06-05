@@ -14,13 +14,6 @@
 
 
 
-  
-  
-    
-    
-  <script src="/vendors/pace/pace.min.js?v=1.0.2"></script>
-  <link href="/vendors/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
-
 
 
 
@@ -93,7 +86,7 @@
 <meta name="description" content="我还是我，看到自己都老火...">
 <meta property="og:type" content="website">
 <meta property="og:title" content="正儿八经">
-<meta property="og:url" content="http://gamehu.run/index.html">
+<meta property="og:url" content="https://gamehu.github.io/index.html">
 <meta property="og:site_name" content="正儿八经">
 <meta property="og:description" content="我还是我，看到自己都老火...">
 <meta property="article:author" content="Gamehu">
@@ -128,7 +121,7 @@
 
 
 
-  <link rel="canonical" href="http://gamehu.run/"/>
+  <link rel="canonical" href="https://gamehu.github.io/"/>
 
 
 
@@ -316,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gamehu.run/2020/06/02/Linux%20ls%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/06/02/Linux%20ls%E5%91%BD%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
@@ -418,10 +411,10 @@
 <li>如果显示多个条目，则将按文件名的字母顺序对其进行排序。</li>
 </ul>
 <p>最后，当在命令行上未给出路径时，这些<code>ls</code>命令将采用<code>./</code>–即当前目录。</p>
-<img src="/.run//06/02/Linux%20ls%E5%91%BD%E4%BB%A4/1.png" class title="ls">
+<img src="/.io//06/02/Linux%20ls%E5%91%BD%E4%BB%A4/1.png" class title="ls">
 
 <h5 id="ls-l-长格式显示"><a href="#ls-l-长格式显示" class="headerlink" title="ls -l: 长格式显示"></a><code>ls -l: 长格式显示</code></h5><p>除文件名称外，亦将日期和时间、权限、拥有者、文件大小等资讯详细列出，我们经常使用的<code>ll</code>其实就是它的别名。</p>
-<img src="/.run//06/02/Linux%20ls%E5%91%BD%E4%BB%A4/2.png" class title="ls -l">
+<img src="/.io//06/02/Linux%20ls%E5%91%BD%E4%BB%A4/2.png" class title="ls -l">
 
 <h5 id="ls-a-显示所有文件"><a href="#ls-a-显示所有文件" class="headerlink" title="ls -a: 显示所有文件"></a><code>ls -a: 显示所有文件</code></h5><p>使用该<code>-a</code>选项时，在显示目录内容时<code>ls</code>包括<a href="https://en.wikipedia.org/wiki/Hidden_file_and_hidden_directory" target="_blank" rel="noopener">隐藏文件</a>。但是什么是隐藏文件？</p>
 <p>隐藏文件：名称以点开头的文件被视为隐藏文件。此外，每个目录还包含两个特殊的，通常为隐藏的条目：<code>.</code>和<code>..</code></p>
@@ -430,19 +423,19 @@
 <li>该<code>.</code>条目指向目录本身。这种自我指称似乎很奇怪。但这有时很有用，有点像将自己的电话号码存储到智能手机库中。</li>
 <li>该<code>..</code>条目指向父目录。由于类Unix系统上的文件层次结构严格地组织为一<a href="https://en.wikipedia.org/wiki/Tree_(data_structure)" target="_blank" rel="noopener">棵树</a>，因此每个目录只有一个父目录。</li>
 </ul>
-<img src="/.run//06/02/Linux%20ls%E5%91%BD%E4%BB%A4/3.png" class>
+<img src="/.io//06/02/Linux%20ls%E5%91%BD%E4%BB%A4/3.png" class>
 
 <h5 id="ls-s-显示文件分配的大小"><a href="#ls-s-显示文件分配的大小" class="headerlink" title="ls -s: 显示文件分配的大小"></a><code>ls -s: 显示文件分配的大小</code></h5><p>这里大小的单位是<strong>块</strong>，在linux中一块可以看作是1024字节，该大小指的不是逻辑大小而是实际大小。如下所示，a、b都是2097152，但是通过块的方式查看b只有1028，因为b目录下由 <a href="https://en.wikipedia.org/wiki/Sparse_file" target="_blank" rel="noopener">sparse files</a>。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sh:~&#x2F;ls$ ls -ls a b</span><br><span class="line">2052 -rw-r--r-- 1 sylvain sylvain 2097152 Sep 19 22:18 a</span><br><span class="line">1028 -rw-r--r-- 1 sylvain sylvain 2097152 Sep 19 22:18 b</span><br></pre></td></tr></table></figure>
 
 <h5 id="ls-h-可读性强的方式显示文件大小"><a href="#ls-h-可读性强的方式显示文件大小" class="headerlink" title="ls -h: 可读性强的方式显示文件大小"></a><code>ls -h: 可读性强的方式显示文件大小</code></h5><p>使用-h选项，ls将使用单位后缀显示文件大小，以使其更加用户友好。如图直接使用-h是没用的，结合l和s使用。</p>
-<img src="/.run//06/02/Linux%20ls%E5%91%BD%E4%BB%A4/4.png" class>
+<img src="/.io//06/02/Linux%20ls%E5%91%BD%E4%BB%A4/4.png" class>
 
-<h5 id="ls-d-只显示目录（文件夹）"><a href="#ls-d-只显示目录（文件夹）" class="headerlink" title="ls -d */: 只显示目录（文件夹）"></a><code>ls -d */: 只显示目录（文件夹）</code></h5><img src="/.run//06/02/Linux%20ls%E5%91%BD%E4%BB%A4/5.png" class>
+<h5 id="ls-d-只显示目录（文件夹）"><a href="#ls-d-只显示目录（文件夹）" class="headerlink" title="ls -d */: 只显示目录（文件夹）"></a><code>ls -d */: 只显示目录（文件夹）</code></h5><img src="/.io//06/02/Linux%20ls%E5%91%BD%E4%BB%A4/5.png" class>
 
 <h5 id="ls-i-显示文件的索引号"><a href="#ls-i-显示文件的索引号" class="headerlink" title="ls -i: 显示文件的索引号"></a><code>ls -i: 显示文件的索引号</code></h5><p>有点我们说的引用地址的意思，该选项在查看文件的硬、软链接时比较有用。比如查看某几个文件是否引用同一基础文件系统对象。</p>
 <p>比如下图，切换到根目录，然后<code>ls -ia</code>你会发现<code>.</code>和<code>..</code> 的索引号都是2，证明指向的是同一个目录，这刚好可以解释根目录的父目录就是根目录自身。</p>
-<img src="/.run//06/02/Linux%20ls%E5%91%BD%E4%BB%A4/6.png" class>
+<img src="/.io//06/02/Linux%20ls%E5%91%BD%E4%BB%A4/6.png" class>
 
 <h5 id="ls-1"><a href="#ls-1" class="headerlink" title="ls ../"></a><code>ls ../</code></h5><p>查看父目录文件。</p>
 <h5 id="ls-2"><a href="#ls-2" class="headerlink" title="ls ~"></a><code>ls ~</code></h5><p>查看主目录的文件。</p>
@@ -500,7 +493,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gamehu.run/2020/04/28/%E5%89%8D%E7%AB%AF%E5%9F%8B%E7%82%B9(%E4%B8%80)/">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/04/28/%E5%89%8D%E7%AB%AF%E5%9F%8B%E7%82%B9(%E4%B8%80)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
@@ -858,7 +851,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gamehu.run/2020/04/21/ps-grep-top-free/">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/04/21/ps-grep-top-free/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
@@ -955,7 +948,7 @@
 <p>用的比较高频的命令就是<strong>ps、grep、top</strong>。用的倒是还算一般，不过一直没有深深的了解，所以刚好借着这个机会，深入的学习一下。演示用的是安装centos系统的vps。</p>
 <h3 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h3><p>这命令应该是我使用的命令中的top one了，该命令用于获取正在运行的进程信息。 我们在看一些服务是否运行的时候通常都是用这个命令。我们可以获取任何用户在当前系统上运行的进程之类的信息，例如进程ID（PID）。</p>
 <p>ps命令本身是一个扩展工具，ps –help a一下，会发现有很多的命令选项，说是有80多个。</p>
-<img src="/.run//04/21/ps-grep-top-free/ps.png" class title="from 我">
+<img src="/.io//04/21/ps-grep-top-free/ps.png" class title="from 我">
 
 <p>当然我们只说说常用的。</p>
 <h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><p>如果在Linux中使用不带任何选项的ps命令，它将显示当前shell中正在运行的进程：</p>
@@ -1042,7 +1035,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ grep -w &quot;unix&quot; geekfile.txt</span><br></pre></td></tr></table></figure>
 
 <p><strong>Output:</strong></p>
-<img src="/.run//04/21/ps-grep-top-free/image-20200422105439799.png" class>
+<img src="/.io//04/21/ps-grep-top-free/image-20200422105439799.png" class>
 
 
 <p><strong>4.使用grep -n在显示输出时显示行号：</strong>要显示匹配行的文件的行号。</p>
@@ -1126,7 +1119,7 @@
 <li>当前由Linux内核管理的进程或线程的列表。</li>
 </ol>
 <p>一旦运行此命令，它将打开一个交互式命令模式，其中上半部分将包含进程和资源使用情况的统计信息。 下半部分包含当前正在运行的进程的列表。 按q会退出命令模式。</p>
-<img src="/.run//04/21/ps-grep-top-free/top.png" class>
+<img src="/.io//04/21/ps-grep-top-free/top.png" class>
 
 <h5 id="上半部分"><a href="#上半部分" class="headerlink" title="上半部分"></a>上半部分</h5><p>如图，在终端的顶部，我们获得了概览数据，包括当前任务数、内存使用率和cpu负载。 </p>
 <p><strong>第一行：任务队列信息</strong>，同uptime命令的结果一样。</p>
@@ -1317,7 +1310,7 @@
 </ul>
 <p>添加过滤器后，您可以通过添加更多过滤器来进一步简化操作。 要清除添加的所有过滤器，请按“ =”。</p>
 <h4 id="更改CPU和内存统计信息的默认外观"><a href="#更改CPU和内存统计信息的默认外观" class="headerlink" title="更改CPU和内存统计信息的默认外观"></a>更改CPU和内存统计信息的默认外观</h4><p>如果觉得top显示CPU和内存统计信息的默认方式不喜欢。 可以按“ t”和“ m”来更改CPU和内存统计信息的样式。 </p>
-<img src="/.run//04/21/ps-grep-top-free/top1.png" class>
+<img src="/.io//04/21/ps-grep-top-free/top1.png" class>
 
 <h4 id="保存设置"><a href="#保存设置" class="headerlink" title="保存设置"></a>保存设置</h4><p>如果您对top的输出进行了任何更改，则可以按“ W”将其保存以备后用。 top将其配置写入主目录中的.toprc文件。</p>
 <h4 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h4><blockquote><footer><strong>top1</strong><cite><a href="http://man7.org/linux/man-pages/man1/top.1.html" target="_blank" rel="noopener">man7.org</a></cite></footer></blockquote>
@@ -1374,7 +1367,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gamehu.run/2020/03/22/Java%208%20Stream/">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/03/22/Java%208%20Stream/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
@@ -1467,16 +1460,16 @@
       
         
           
-            <img src="/.run//03/22/Java%208%20Stream/computer-keyboard-34153.jpg" class title="Photo by Negative Space from Pexels">
+            <img src="/.io//03/22/Java%208%20Stream/computer-keyboard-34153.jpg" class title="Photo by Negative Space from Pexels">
 
 <p>最近两周被平台组指名道姓拉去当了两周的苦力，写业务层代码，因为逻辑比较复杂数据输入比较多样，所以导致使用集合的概率很高，且常常伴随着过滤、排序等操作，继而用到了很多Streams提供的方法，遂做个简单记录。</p>
 <h3 id="Streams"><a href="#Streams" class="headerlink" title="Streams"></a>Streams</h3><p>Stream是Java 8中引入的新的抽象层，它提供了一些类似SQL语句的声明性方式处理数据。</p>
 <p>流操作分为中间操作和最终操作，元素流在管道中经过中间操作（intermediate operation）的处理，最后由最终操作(terminal operation)得到前面处理的结果。 流管道由一个源（例如Collection，数组，生成器函数或I / O通道）组成； 随后是零个或多个中间操作，例如Stream.filter或Stream.map； 以及诸如Stream.forEach或Stream.reduce之类的终端操作。</p>
-<img src="/.run//03/22/Java%208%20Stream/java-streams.png" class>
+<img src="/.io//03/22/Java%208%20Stream/java-streams.png" class>
 
 <p>即将要处理的元素集合看作一种流， 流在管道中传输， 并且可以在管道中插入节点上进行处理， 比如筛选， 排序，聚合等。</p>
 <p>当然为什么喜欢用它还是因为Stream API 借助于同样新出现的 Lambda 表达式，极大的提高编程效率和程序可读性。会让代码看起来更加简洁当然通常也会更加高效。</p>
-<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><img src="/.run//03/22/Java%208%20Stream/apis.png" class title="api">
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><img src="/.io//03/22/Java%208%20Stream/apis.png" class title="api">
 
 <p>如上图api很多，其中又可以按照最开始说的分为中间操作、最终操作两类，中间（<strong>Intermediate</strong>）操作是可以零个或者多个但是最终（<strong>Terminal</strong>）操作只能有一个，能力有限我就列举一下我常用的。</p>
 <p><strong>可能我们需要注意的一个概念</strong>：因为一个 Stream 可以进行多次中间操作，那是不是就会对 Stream 的每个元素进行转换多次，即时间复杂度就是 N（转换次数）个 ？其实不是这样的，转换操作都是 lazy 的，多个转换操作只会在 Terminal 操作的时候融合起来，一次循环完成。</p>
@@ -1620,7 +1613,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gamehu.run/2020/03/06/tick%E6%A0%88/">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/03/06/tick%E6%A0%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
@@ -1761,7 +1754,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gamehu.run/2020/03/01/Module-bundling/">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/03/01/Module-bundling/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
@@ -1904,7 +1897,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gamehu.run/2020/02/28/Gulp/">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/02/28/Gulp/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
@@ -2012,17 +2005,17 @@
 <li>时间效率：拥有数据后立即开始处理数据所需的时间大大减少，而不必等到整个有效负载都传输完成才开始处理。还是倒水的例子，你倒入河里（Pipe）马上就流走了不会等着一桶水倒完之后才流走。</li>
 </ol>
 <p>Streams的<em>cheatsheet</em>：</p>
-<img src="/.run//02/28/Gulp/stream_cc.png" class title="from https:&#x2F;&#x2F;devhints.io&#x2F;nodejs-stream">
+<img src="/.io//02/28/Gulp/stream_cc.png" class title="from https:&#x2F;&#x2F;devhints.io&#x2F;nodejs-stream">
 
 
 
 <p>Duplex：</p>
-<img src="/.run//02/28/Gulp/duplex.png" class title="from [Duplex](http:&#x2F;&#x2F;codewinds.com&#x2F;blog&#x2F;2013-08-31-nodejs-duplex-streams.html)">
+<img src="/.io//02/28/Gulp/duplex.png" class title="from [Duplex](http:&#x2F;&#x2F;codewinds.com&#x2F;blog&#x2F;2013-08-31-nodejs-duplex-streams.html)">
 
 
 
 <p>Streams内部实现流程图：</p>
-<img src="/.run//02/28/Gulp/stream01.png" class title="from [DauleDK](https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3694288&#x2F;dauledk)">
+<img src="/.io//02/28/Gulp/stream01.png" class title="from [DauleDK](https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3694288&#x2F;dauledk)">
 
 
 
@@ -2052,16 +2045,16 @@
 <p><strong>插件</strong></p>
 <p>Gulp 插件实质上是 <a href="https://github.com/rvagg/through2" target="_blank" rel="noopener">Node 转换流（Transform Streams）</a>，它封装了通过管道（pipeline）转换文件的常见功能，通常是使用 <code>.pipe()</code> 方法并放在 <code>src()</code> 和 <code>dest()</code> 之间。他们可以更改经过流（stream）的每个文件的文件名、元数据或文件内容。</p>
 <p><strong>Gulp</strong></p>
-<img src="/.run//02/28/Gulp/Gulp.png" class title="from 我">
+<img src="/.io//02/28/Gulp/Gulp.png" class title="from 我">
 
 
 
 <p>Gulp的<em>cheatsheet</em>：</p>
-<img src="/.run//02/28/Gulp/gulp01.png" class title="from https:&#x2F;&#x2F;github.com&#x2F;osscafe&#x2F;gulp-cheatsheet">
+<img src="/.io//02/28/Gulp/gulp01.png" class title="from https:&#x2F;&#x2F;github.com&#x2F;osscafe&#x2F;gulp-cheatsheet">
 
 
 
-<img src="/.run//02/28/Gulp/gulp02.png" class title="from https:&#x2F;&#x2F;github.com&#x2F;osscafe&#x2F;gulp-cheatsheet">
+<img src="/.io//02/28/Gulp/gulp02.png" class title="from https:&#x2F;&#x2F;github.com&#x2F;osscafe&#x2F;gulp-cheatsheet">
 
 
 
@@ -2072,12 +2065,12 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall gulp --save-dev</span><br><span class="line">npm uninstall gulp -g</span><br></pre></td></tr></table></figure>
 
 <p>你以为升级完之后是这样色儿的</p>
-<img src="/.run//02/28/Gulp/a.gif" class>
+<img src="/.io//02/28/Gulp/a.gif" class>
 
 <p>但是一执行是这样的：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AssertionError [ERR_ASSERTION]: Task function must be specified</span><br></pre></td></tr></table></figure>
 
-<img src="/.run//02/28/Gulp/b.jpeg" class>
+<img src="/.io//02/28/Gulp/b.jpeg" class>
 
 <p>这是因为Gulp4只支持 2 个参数的 <code>gulp.task</code>了，所以就意味着咱们以前的代码得改了，那咱们就有疑问了怎么改呢？先了解下改了什么。</p>
 <h4 id="series、parallel"><a href="#series、parallel" class="headerlink" title="series、parallel"></a><strong>series、parallel</strong></h4><p>官网说了：Gulp.js 4.0引入了series（）和parallel（）方法来组合任务： </p>
@@ -2169,7 +2162,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gamehu.run/2020/02/25/React%20Hooks(%E4%B8%80)/">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/02/25/React%20Hooks(%E4%B8%80)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
@@ -2262,7 +2255,7 @@
       
         
           
-            <img src="/.run//02/25/React%20Hooks(%E4%B8%80)/title.png" class>
+            <img src="/.io//02/25/React%20Hooks(%E4%B8%80)/title.png" class>
 
 <p>整理自团队内部的分享，因为从17年底启动的产品线，所以用的当时的最新版本16.3.1，由于种种原因一直没有升级，特别是自从出了Hooks之后，我是一直觉得应该进行版本升级了，因为升级这个事是避免不了的，除非你不再接收新的变化。</p>
 <p>去年其实呼吁过一次不过被按下来了，犹不死心，所以就借着分享的机会，再团队内部普及一遍。</p>
@@ -2280,13 +2273,13 @@
 </ol>
 <h2 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h2><h4 id="什么是-Hooks"><a href="#什么是-Hooks" class="headerlink" title="什么是 Hooks?"></a>什么是 Hooks?</h4><p>我的理解啊，是这样，就是当你要完成一个动作（事情…），必然就需要一个过程的，有过程就可以分阶段，而在某个阶段，你可以在其前后插入事项从而实现对整个过程的扩展以及把控，这就是hook做的事情，挤进去搞事情。类似的比如Spring里的AOP。</p>
 <p>而没有React Hooks之前想要实现上述效果，只能用class+生命周期函数，比如下图。</p>
-<img src="/.run//02/25/React%20Hooks(%E4%B8%80)/a.png" class title="from https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;5a062fb551882535cd4a4ce3">
+<img src="/.io//02/25/React%20Hooks(%E4%B8%80)/a.png" class title="from https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;5a062fb551882535cd4a4ce3">
 
 <p>而React Hooks就是允许你在不编写 class 的情况下使用状态(state)和其他 React 特性。 你还可以<strong>构建自己的 Hooks</strong>, 跨组件共享可重用的有状态逻辑。<strong>React Hooks 的意思是，组件尽量写成纯函数，如果需要外部功能和在整个渲染过程中进行功能扩展，就用钩子把外部代码”钩”进来。</strong> </p>
 <p>从图1到图2的进化，忘掉class抱紧hooks。</p>
-<img src="/.run//02/25/React%20Hooks(%E4%B8%80)/5LbsY.jpg" class title="图1">
+<img src="/.io//02/25/React%20Hooks(%E4%B8%80)/5LbsY.jpg" class title="图1">
 
-<img src="/.run//02/25/React%20Hooks(%E4%B8%80)/nTmNe.jpg" class title="图2">
+<img src="/.io//02/25/React%20Hooks(%E4%B8%80)/nTmNe.jpg" class title="图2">
 
 <h4 id="主要应用的Hook"><a href="#主要应用的Hook" class="headerlink" title="主要应用的Hook"></a>主要应用的Hook</h4><p>列举使用频度较高的几个hook。</p>
 <p><strong>useRef</strong> 代替之前的 ref并且更加强大，不仅用于DOM引用。 “ ref”对象是一个通用容器，其当前属性是可变的，并且可以保存任何值，类似于类的实例属性。</p>
@@ -2372,7 +2365,7 @@
 </li>
 <li><p>使用的Hooks必须保证顺序，即内部是通过两个数组来管理的，所以<strong>不要在循环，条件判断，嵌套函数里面调用 Hooks</strong>。使其下标对不上从而导致state发生混乱，这在前期可能很容易发生bug。</p>
 <p>下图可简单理解一下内部的原理：</p>
-<img src="/.run//02/25/React%20Hooks(%E4%B8%80)/lQQX7.png" class>
+<img src="/.io//02/25/React%20Hooks(%E4%B8%80)/lQQX7.png" class>
 </li>
 <li><p>使用hook后，代码归类不会像之前class组件时代的一样有语法的强制规划了，什么意思呢？在class组件时代，redux的有关的代码是放到connect里的，state生命是放constructor里的，其他逻辑是放每个有关的生命周期里的。而在hook的时代，没有这些东西了，一切都直接放在函数组件内部，如果写得混乱，看起来就是<strong>一锅粥</strong>，所以，制定组件的书写规范和通过注释来归类不同功能的逻辑显得尤为重要。这有助于后期的维护，也有助于保持一个团队在代码书写风格上的一致性。</p>
 </li>
@@ -2426,7 +2419,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gamehu.run/2020/02/23/ES%20Module/">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/02/23/ES%20Module/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
@@ -2527,7 +2520,7 @@
 <p>这会将这些函数和变量放入模块范围。模块作用域可用于在模块中的功能之间共享变量。</p>
 <p>但是与函数作用域不同，模块作用域具有一种使其变量也可用于其他模块的方式。他们可以明确地说出模块中的哪些变量，类或函数应该可用。</p>
 <p>当其他模块可以使用某些东西时，这称为导出。导出后，其他模块可以明确地说它们依赖于该变量，类或函数。</p>
-<img src="/.run//02/23/ES%20Module/1.png" class>
+<img src="/.io//02/23/ES%20Module/1.png" class>
 
 <p>因为这是一种明确的关系，所以您可以知道如果删除另一个模块，哪个模块将中断。</p>
 <p>一旦能够在模块之间导出和导入变量，就可以更轻松地将代码分解为可以相互独立工作的小块。然后，您可以组合并重组这些块（类似于积木），以从同一组模块创建所有不同种类的应用程序。</p>
@@ -2568,35 +2561,35 @@
 <p><a href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_script_entry.png" target="_blank" rel="noopener"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_script_entry-500x188.png" alt="具有type = module属性和src URL的脚本标记。 src URL有一个文件，它是条目"></a></p>
 <p>但是，如何找到下一组模块- <code>main.js</code>直接依赖的模块呢？</p>
 <p>这就是导入语句的来源。导入语句的一部分称为模块说明符。它告诉加载程序可以在哪里找到每个下一个模块。</p>
-<img src="/.run//02/23/ES%20Module/2.png" class>
+<img src="/.io//02/23/ES%20Module/2.png" class>
 
 <p>有关模块说明符的一件事：在浏览器和Node之间有时需要对它们进行不同的处理。每个主机都有自己的解释模块说明符字符串的方式。为此，它使用一种称为模块解析算法的模块，该算法在平台之间有所不同。当前，某些可在Node中工作的模块说明符在浏览器中将无法工作，但<a href="https://github.com/domenic/package-name-maps" target="_blank" rel="noopener">仍在进行修复</a>。</p>
 <p>在此问题修复之前，浏览器仅接受URL作为模块说明符。他们将从该URL加载模块文件。但这不会同时出现在整个图表上。在解析文件之前，您不知道模块需要获取哪些依赖项，并且在获取文件之前无法解析文件。</p>
 <p>这意味着我们必须逐层遍历该树，解析一个文件，然后找出其依赖项，然后查找并加载这些依赖项。</p>
-<img src="/.run//02/23/ES%20Module/3.png" class>
+<img src="/.io//02/23/ES%20Module/3.png" class>
 
 <p>如果主线程要等待这些文件中的每一个下载，则许多其他任务将堆积在其队列中。</p>
-<img src="/.run//02/23/ES%20Module/4.png" class>
+<img src="/.io//02/23/ES%20Module/4.png" class>
 
 <p>这样阻塞主线程会使使用模块的应用程序使用起来太慢。这是ES模块规范将算法分为多个阶段的原因之一。将构造分为自己的阶段，使浏览器可以在开始实例化的同步工作之前获取文件并增强对模块图的理解。</p>
 <p>这种方法（算法分为多个阶段）是ES模块和CommonJS模块之间的主要区别之一。</p>
 <p>CommonJS可以做不同的事情，因为从文件系统加载文件比通过Internet下载花费的时间少得多。这意味着Node可以在加载文件时阻止主线程。并且由于文件已经加载，因此仅实例化和求值（在CommonJS中不是单独的阶段）是有意义的。这也意味着在返回模块实例之前，您要遍历整棵树，加载，实例化和评估任何依赖项。</p>
-<img src="/.run//02/23/ES%20Module/5.png" class>
+<img src="/.io//02/23/ES%20Module/5.png" class>
 
 <p>CommonJS方法有一些含义，我将在后面详细解释。但是，这意味着一件事，就是在带有CommonJS模块的Node中，可以在模块说明符中使用变量。<code>require</code>在寻找下一个模块之前，您正在执行该模块中的所有代码（直到语句）。这意味着当您进行模块解析时，变量将具有一个值。</p>
 <p>但是，使用ES模块，您可以在进行任何计算（求值）之前预先建立整个模块图。这意味着您不能在模块说明符中包含变量，因为这些变量尚无值。</p>
-<img src="/.run//02/23/ES%20Module/6.png" class>
+<img src="/.io//02/23/ES%20Module/6.png" class>
 
 <p>但是有时将变量用于模块路径确实很有用。例如，您可能想根据代码在做什么或在什么环境中运行来切换加载的模块。</p>
 <p>为了使ES模块成为可能，有一个建议叫做<a href="https://github.com/tc39/proposal-dynamic-import" target="_blank" rel="noopener">动态导入</a>。有了它，您可以使用类似的导入语句<code>import(</code>${path}/foo.js<code>)</code>。</p>
 <p>动态导入的工作原理是，任何使用<code>import()</code>来导入的文件，都会作为一个入口文件从而创建一棵单独的依赖树，被单独处理。</p>
-<img src="/.run//02/23/ES%20Module/7.png" class>
+<img src="/.io//02/23/ES%20Module/7.png" class>
 
 <p>但是要注意一件事–这两棵树中的任何模块都将共享一个模块实例。这是因为加载程序会缓存模块实例。对于特定全局范围内的每个模块，将只有一个模块实例。</p>
 <p>这意味着浏览器的工作量更少。例如，这意味着即使多个模块依赖该模块文件，该模块文件也只会被提取一次。（这是缓存模块的一个原因。我们将在评估部分中看到另一个原因。）</p>
 <p>加载程序使用称为<a href="https://html.spec.whatwg.org/multipage/webappapis.html#module-map" target="_blank" rel="noopener">模块映射的内容</a>来管理此缓存。每个全局变量在单独的模块图中跟踪其模块。</p>
 <p>当加载程序获取一个URL时，它将把该URL放入模块映射中，并记下它当前正在获取文件。然后它将发出请求并继续以开始获取下一个文件。</p>
-<img src="/.run//02/23/ES%20Module/8.png" class>
+<img src="/.io//02/23/ES%20Module/8.png" class>
 
 <p>如果另一个模块依赖于同一文件会怎样？加载程序将在模块映射中查找每个URL。如果在其中看到<code>fetching</code>，它将继续前进到下一个URL。</p>
 <p>但是模块图不仅跟踪正在获取的文件。模块映射还充当模块的缓存，如下所示。</p>
@@ -2617,19 +2610,19 @@
 <p>首先，JS引擎创建一个<strong>模块环境记录</strong>（Module Environment Record）。它是管理所有模块记录的变量。然后，它会在内存中找到所有export对应的的地址。模块环境记录将跟踪内存中与每个export相关联的地址。</p>
 <p>内存中的这些地址对应的空间尚无法获取其值。只有在运行之后，它们的实际值才会被填写。需要注意的一点是：在此阶段中将初始化所有导出的函数声明。这将使后面的执行阶段变得更加容易。</p>
 <p>为了实例化<strong>模块关系图</strong>，引擎会采用<strong>深度优先的后序遍历方式</strong>。这意味着它将到达关系图的最底部（底部不依赖于其他任何东西），并设置其导出。</p>
-<img src="/.run//02/23/ES%20Module/9.png" class>
+<img src="/.io//02/23/ES%20Module/9.png" class>
 
 <p>最终，引擎会把模块下的所有依赖导出连接到当前模块。接着回到上一层把模块的导入连接起来。</p>
 <p>请注意，导出和导入均指向内存中的同一位置。</p>
-<img src="/.run//02/23/ES%20Module/10.png" class>
+<img src="/.io//02/23/ES%20Module/10.png" class>
 
 <p>这不同于CommonJS模块。在CommonJS中，整个导出对象在导出时被复制。这意味着导出的任何值（如数字）都是副本，所以在CommonJS如果导出模块以后更改了该值，则导入模块将看不到该更改。</p>
 <p>这意味着，如果导出模块以后更改了该值，则导入模块将看不到该更改。</p>
-<img src="/.run//02/23/ES%20Module/11.png" class>
+<img src="/.io//02/23/ES%20Module/11.png" class>
 
 <p>相反，ES模块使用<strong>实时绑定</strong>（Live Binding）。两个模块都指向内存中的相同位置（引用）。这意味着，当导出模块更改值时，该更改将显示在导入模块中。</p>
 <p>导出值的模块可以随时更改这些值，但是导入模块不能更改其导入的值，因为是导入的是<strong>只读引用</strong>。不过如果模块导入了一个对象，则它可以更改该对象上的属性值。</p>
-<img src="/.run//02/23/ES%20Module/12.png" class>
+<img src="/.io//02/23/ES%20Module/12.png" class>
 
 <p>之所以ESM采用实时绑定，是因为可以在不运行任何代码的情况下链接到所有模块。这有助于解决循环依赖的问题，在后面的运行(evaluation)阶段会细说。</p>
 <p>OK，当实例化结束时，我们得到了所有模块实例，并知道了已完成链接的导出/导入变量的内存地址。</p>
@@ -2642,18 +2635,18 @@
 <p>那我们之前谈到的循环依赖怎么处理呢？</p>
 <p>在循环依赖关系中，您最终会在模块关系图中出现循环。你依赖我我依赖你，通常，这会变成很大的循环。</p>
 <p>为了解释这个问题，我举个例子。</p>
- <img src="/.run//02/23/ES%20Module/13.png" class>
+ <img src="/.io//02/23/ES%20Module/13.png" class>
 
 <p>首先让我们看一下如果时CommonJS模块会时什么样的。首先，main模块将执行到require语句。然后它将去加载counter模块。</p>
- <img src="/.run//02/23/ES%20Module/14.png" class>
+ <img src="/.io//02/23/ES%20Module/14.png" class>
 
 <p>然后，counter模块将尝试从访问导出的对象<code>message</code>。但是由于尚未在main模块中执行，因此它将返回undefined。JS引擎将在内存中为局部变量分配空间，并将该值设置为undefined。</p>
 <p><a href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/42_cjs_variable_2.png" target="_blank" rel="noopener"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/42_cjs_variable_2-500x113.png" alt="中间的内存，main.js和内存之间没有连接，但是从counter.js到未定义的内存位置的导入链接"></a></p>
 <p>此时会一直运行持续到counter模块顶级代码的末尾。我们想看看是否最终将获得正确的message（在执行main.js之后），因此我们设置了超时时间。然后继续运行到<code>main.js</code>。</p>
- <img src="/.run//02/23/ES%20Module/15.png" class>
+ <img src="/.io//02/23/ES%20Module/15.png" class>
 
 <p>message变量将被初始化并添加到内存中。但是由于两者之间没有连接，因此message在counter模块中仍然是时undefined。</p>
- <img src="/.run//02/23/ES%20Module/16.png" class>
+ <img src="/.io//02/23/ES%20Module/16.png" class>
 
 <p>如果使用实时绑定处理导出，则counter模块最终将看到正确的值。到超时运行时，<code>main.js</code>的执行就已经完成并填充了值。</p>
 <p>支持循环依赖是 ESM 设计之初就考虑到的一大因素。也正是这种分（三）阶段设计使其成为可能。</p>
@@ -2705,7 +2698,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gamehu.run/2020/02/22/JS%20Modules/">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/02/22/JS%20Modules/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
@@ -2798,7 +2791,7 @@
       
         
           
-            <img src="/.run//02/22/JS%20Modules/a.png" class title="Photo by Sharon McCutcheon from Pexels">
+            <img src="/.io//02/22/JS%20Modules/a.png" class title="Photo by Sharon McCutcheon from Pexels">
 
 <p>模块话，模块化说了那么多次，以为了解个大概就行了，然而在一次面试经历中被问到AMD和ES Module，所以特此来一篇，汇总一下吸收的模块方面的内容。</p>
 <h3 id="为什么模块很重要？"><a href="#为什么模块很重要？" class="headerlink" title="为什么模块很重要？"></a>为什么模块很重要？</h3><p>如果没有模块，你能想象在复杂场景下你得js代码是个什么鬼模样吗？模块解决了名称空间和可维护性等变得越来越难以处理的问题。</p>

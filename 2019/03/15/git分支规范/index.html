@@ -14,13 +14,6 @@
 
 
 
-  
-  
-    
-    
-  <script src="/vendors/pace/pace.min.js?v=1.0.2"></script>
-  <link href="/vendors/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
-
 
 
 
@@ -93,19 +86,19 @@
 <meta name="description" content="背景产线当前在代码库管理遇到了如下挑战：  职责权限不明确，关键操作未收口，分支管理效率不理想。 多功能同时开发时，有功能之间互相Block、提测受影响、新分支建立困难的问题。 无法应对后续应对多客户定制化开发场景的需要。 测试团队人力紧张。  针对以上问题，本模型在旧模型的基础上进行改造，做出以下改变：  分支和tag建立收口到专人负责，不用再互相等待。 多feature并行开发测试，减少开发阶">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git 分支规范">
-<meta property="og:url" content="http://gamehu.run/2019/03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/index.html">
+<meta property="og:url" content="https://gamehu.github.io/2019/03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/index.html">
 <meta property="og:site_name" content="正儿八经">
 <meta property="og:description" content="背景产线当前在代码库管理遇到了如下挑战：  职责权限不明确，关键操作未收口，分支管理效率不理想。 多功能同时开发时，有功能之间互相Block、提测受影响、新分支建立困难的问题。 无法应对后续应对多客户定制化开发场景的需要。 测试团队人力紧张。  针对以上问题，本模型在旧模型的基础上进行改造，做出以下改变：  分支和tag建立收口到专人负责，不用再互相等待。 多feature并行开发测试，减少开发阶">
-<meta property="og:image" content="http://gamehu.run/.run//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/1.png">
-<meta property="og:image" content="http://gamehu.run/.run//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/2.png">
-<meta property="og:image" content="http://gamehu.run/.run//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/3.png">
-<meta property="og:image" content="http://gamehu.run/.run//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/4.png">
+<meta property="og:image" content="https://gamehu.github.io/.io//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/1.png">
+<meta property="og:image" content="https://gamehu.github.io/.io//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/2.png">
+<meta property="og:image" content="https://gamehu.github.io/.io//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/3.png">
+<meta property="og:image" content="https://gamehu.github.io/.io//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/4.png">
 <meta property="article:published_time" content="2019-03-15T06:54:00.000Z">
 <meta property="article:modified_time" content="2020-04-02T11:59:09.100Z">
 <meta property="article:author" content="Gamehu">
 <meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://gamehu.run/.run//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/1.png">
+<meta name="twitter:image" content="https://gamehu.github.io/.io//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/1.png">
 
 
 
@@ -135,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="http://gamehu.run/2019/03/15/git分支规范/"/>
+  <link rel="canonical" href="https://gamehu.github.io/2019/03/15/git分支规范/"/>
 
 
 
@@ -322,7 +315,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gamehu.run/2019/03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
@@ -432,7 +425,7 @@
 </ol>
 <h2 id="实操"><a href="#实操" class="headerlink" title="实操"></a><strong>实操</strong></h2><p>搬运一下我们团队的分支管理办法，大体的思路还是遵循git flow的规范</p>
 <h3 id="develop和release"><a href="#develop和release" class="headerlink" title="develop和release"></a>develop和release</h3><p>当数个feature开发并提测后，进入多feature集成测试阶段。在develop分支进行多feature集成测试，完成后转入实验局测试。完成实验局阶段后，产品团队决定发版，这时从develop拉出release分支并根据版本号命名。此时会做最终的功能集成测试和回归测试，验证功能间是否有冲突导致的BUG和遗漏BUG，测试完成后合并至master和develop分支。</p>
-<img src="/.run//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/1.png" class>
+<img src="/.io//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/1.png" class>
 
 <ul>
 <li><p>步骤1</p>
@@ -496,7 +489,7 @@
 </tr>
 </tbody></table>
 <h3 id="hotfix分支场景"><a href="#hotfix分支场景" class="headerlink" title="hotfix分支场景"></a>hotfix分支场景</h3><p>hotfix分支用于产品稳定版及现场问题的修正。当一线端反馈了BUG并且判定需要作为hotfix修复时，从master拉出hotfix分支。分支修复完成后，重新合并入master和develop分支。若hotfix可能影响定制化feature的场景，由ScrumMaster判断是否需要进行合入。</p>
-<img src="/.run//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/2.png" class>
+<img src="/.io//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/2.png" class>
 
 <ul>
 <li><p>步骤1</p>
@@ -559,7 +552,7 @@
 <h3 id="feature分支场景"><a href="#feature分支场景" class="headerlink" title="feature分支场景"></a>feature分支场景</h3><p>feature分支用于进行新功能开发和上个阶段实验局的缺陷修复。产线管理团队需要规划好功能的相关性和相互依赖，避免把相互依赖的功能放到不同的feature中去。在feature规划完成后，需要建立分支，并在feature分支上完成工程开发、提测阶段。提测成功后，feature分支将被合并至develop分支。</p>
 <p>多个feature分支将在develop进行合并测试，若测试前有feature不满足提测条件，为了不影响其它feature的发布，可以将这个分支延迟合并。</p>
 <p><strong>注意事项</strong>：common包等不参与部署过程的公共模块，在产线管理团队规划时可采用其它的分支管理策略，例如多个虚拟团队公用一个feature分支。</p>
-<img src="/.run//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/3.png" class>
+<img src="/.io//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/3.png" class>
 
 <ul>
 <li><p>步骤1</p>
@@ -615,7 +608,7 @@
 </tr>
 </tbody></table>
 <h3 id="定制化feature分支场景"><a href="#定制化feature分支场景" class="headerlink" title="定制化feature分支场景"></a>定制化feature分支场景</h3><p>当存在定制化需求时，需要建立定制化feature分支。该分支用于定制化客户的功能开发、测试、打包等。在定制化开发过程中，若有影响该分支的release和hotfix出现，则需要合入定制化feature分支。</p>
-<img src="/.run//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/4.png" class>
+<img src="/.io//03/15/git%E5%88%86%E6%94%AF%E8%A7%84%E8%8C%83/4.png" class>
 
 <ul>
 <li><p>步骤1</p>

@@ -14,13 +14,6 @@
 
 
 
-  
-  
-    
-    
-  <script src="/vendors/pace/pace.min.js?v=1.0.2"></script>
-  <link href="/vendors/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
-
 
 
 
@@ -93,16 +86,16 @@
 <meta name="description" content="刚好这段时间对接其他产品，刚好处理了一下跨域的问题，借此机会稍微更加了解一下跨域(Cross-origin resource sharing)。 搬运搬运… 首先什么是同源策略？同源策略是一种Web浏览器安全性机制，旨在防止网站相互攻击。 同源策略限制一个源上的脚本访问另一源的数据。源由URI方案，域和端口号组成。 同源策略是一种限制性的跨域规范，它限制了网站与源域外部资源进行交互的能力。起源于多">
 <meta property="og:type" content="article">
 <meta property="og:title" content="跨域">
-<meta property="og:url" content="http://gamehu.run/2018/08/20/%E8%B7%A8%E5%9F%9F/index.html">
+<meta property="og:url" content="https://gamehu.github.io/2018/08/20/%E8%B7%A8%E5%9F%9F/index.html">
 <meta property="og:site_name" content="正儿八经">
 <meta property="og:description" content="刚好这段时间对接其他产品，刚好处理了一下跨域的问题，借此机会稍微更加了解一下跨域(Cross-origin resource sharing)。 搬运搬运… 首先什么是同源策略？同源策略是一种Web浏览器安全性机制，旨在防止网站相互攻击。 同源策略限制一个源上的脚本访问另一源的数据。源由URI方案，域和端口号组成。 同源策略是一种限制性的跨域规范，它限制了网站与源域外部资源进行交互的能力。起源于多">
-<meta property="og:image" content="http://gamehu.run/.run//08/20/%E8%B7%A8%E5%9F%9F/b.png">
+<meta property="og:image" content="https://gamehu.github.io/.io//08/20/%E8%B7%A8%E5%9F%9F/b.png">
 <meta property="article:published_time" content="2018-08-20T02:46:00.000Z">
 <meta property="article:modified_time" content="2020-03-01T09:09:34.189Z">
 <meta property="article:author" content="Gamehu">
 <meta property="article:tag" content="跨域">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://gamehu.run/.run//08/20/%E8%B7%A8%E5%9F%9F/b.png">
+<meta name="twitter:image" content="https://gamehu.github.io/.io//08/20/%E8%B7%A8%E5%9F%9F/b.png">
 
 
 
@@ -132,7 +125,7 @@
 
 
 
-  <link rel="canonical" href="http://gamehu.run/2018/08/20/跨域/"/>
+  <link rel="canonical" href="https://gamehu.github.io/2018/08/20/跨域/"/>
 
 
 
@@ -319,7 +312,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gamehu.run/2018/08/20/%E8%B7%A8%E5%9F%9F/">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/08/20/%E8%B7%A8%E5%9F%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
@@ -433,7 +426,7 @@
 <p>比较抱歉的是我只用过nginx代理跨域、跨域资源共享（CORS）、WebSocket协议跨域…。</p>
 <h4 id="什么是CORS（跨域资源共享）？"><a href="#什么是CORS（跨域资源共享）？" class="headerlink" title="什么是CORS（跨域资源共享）？"></a>什么是CORS（跨域资源共享）？</h4><p>在大多数情况下，在用户浏览器中运行的脚本仅需要访问源相同的资源（请考虑首先对服务JavaScript代码的同一后端进行API调用）。因此，JavaScript通常无法访问其他来源的资源，这对安全性而言是一件好事。但是有些情况下需要跨域请求的。例如，不同系统间的一些对接。解决该问题就需要实现CORS，跨域资源共享（CORS）是一种浏览器机制，可实现对位于给定域外部的资源的受控访问。</p>
 <h4 id="CORS如何运作"><a href="#CORS如何运作" class="headerlink" title="CORS如何运作"></a>CORS如何运作</h4><p>如果不需要cookie的话，整个<code>CORS</code>通信过程都是浏览器自动完成的，前端不需要做额外的编码。<strong>浏览器一旦发现请求跨源，就会自动添加一些附加的头信息，复杂请求还会多一次预检的请求，但我们是不用感知的</strong>。因此，实现<code>CORS</code>通信的关键是服务器开启CORS。</p>
-<img src="/.run//08/20/%E8%B7%A8%E5%9F%9F/b.png" class>
+<img src="/.io//08/20/%E8%B7%A8%E5%9F%9F/b.png" class>
 
 
 

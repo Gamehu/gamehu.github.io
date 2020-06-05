@@ -14,13 +14,6 @@
 
 
 
-  
-  
-    
-    
-  <script src="/vendors/pace/pace.min.js?v=1.0.2"></script>
-  <link href="/vendors/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
-
 
 
 
@@ -93,19 +86,19 @@
 <meta name="description" content="背景 现公司是传统的ToB业务公司，现在要新开一条产品线，因为公司的之前的产品已经10年了，因为技术等的限制，无法应对现在的快速迭代，公司高层想用现在流行的玩法，寻求突破，刚好之前那家公司的leader，支付宝出来的刚从公司离职，他和事业部的总经理是高中同学，所以瞌睡遇到枕头，就找到他来领头做个事，事业部研发中心在天津，他想做这个事必须得带几个自己信得过并且好用的人（是滴，我很好用），所以我和另外">
 <meta property="og:type" content="article">
 <meta property="og:title" content="12-Factors">
-<meta property="og:url" content="http://gamehu.run/2018/07/04/12-Factors/index.html">
+<meta property="og:url" content="https://gamehu.github.io/2018/07/04/12-Factors/index.html">
 <meta property="og:site_name" content="正儿八经">
 <meta property="og:description" content="背景 现公司是传统的ToB业务公司，现在要新开一条产品线，因为公司的之前的产品已经10年了，因为技术等的限制，无法应对现在的快速迭代，公司高层想用现在流行的玩法，寻求突破，刚好之前那家公司的leader，支付宝出来的刚从公司离职，他和事业部的总经理是高中同学，所以瞌睡遇到枕头，就找到他来领头做个事，事业部研发中心在天津，他想做这个事必须得带几个自己信得过并且好用的人（是滴，我很好用），所以我和另外">
-<meta property="og:image" content="http://gamehu.run/.run//07/04/12-Factors/codebase-deploys.png">
-<meta property="og:image" content="http://gamehu.run/.run//07/04/12-Factors/attached-resources.png">
-<meta property="og:image" content="http://gamehu.run/.run//07/04/12-Factors/release.png">
-<meta property="og:image" content="http://gamehu.run/.run//07/04/12-Factors/process-types.png">
+<meta property="og:image" content="https://gamehu.github.io/.io//07/04/12-Factors/codebase-deploys.png">
+<meta property="og:image" content="https://gamehu.github.io/.io//07/04/12-Factors/attached-resources.png">
+<meta property="og:image" content="https://gamehu.github.io/.io//07/04/12-Factors/release.png">
+<meta property="og:image" content="https://gamehu.github.io/.io//07/04/12-Factors/process-types.png">
 <meta property="article:published_time" content="2018-07-04T04:05:00.000Z">
 <meta property="article:modified_time" content="2020-02-07T11:58:59.847Z">
 <meta property="article:author" content="Gamehu">
 <meta property="article:tag" content="12-Factors">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://gamehu.run/.run//07/04/12-Factors/codebase-deploys.png">
+<meta name="twitter:image" content="https://gamehu.github.io/.io//07/04/12-Factors/codebase-deploys.png">
 
 
 
@@ -135,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="http://gamehu.run/2018/07/04/12-Factors/"/>
+  <link rel="canonical" href="https://gamehu.github.io/2018/07/04/12-Factors/"/>
 
 
 
@@ -322,7 +315,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://gamehu.run/2018/07/04/12-Factors/">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/07/04/12-Factors/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
@@ -422,7 +415,7 @@
 <p><strong>I. 基准代码</strong></p>
 <p>一份基准代码（Codebase），多份部署（deploy）</p>
 <p>我们项目是采用类似git flow的方式来管理代码，首先每个应用肯定只有一份基准代码（master），不管是新功能的开发、bugfix、hostfix、release、tag等最终都是基于master的。这样就保证了所有部署的基准代码相同，但每份部署可以使用其不同的版本</p>
-<img src="/.run//07/04/12-Factors/codebase-deploys.png" class title="来源于12factor.net">
+<img src="/.io//07/04/12-Factors/codebase-deploys.png" class title="来源于12factor.net">
 
 <p><strong>II. 依赖</strong></p>
 <p>显式声明依赖关系（ dependency ）</p>
@@ -433,12 +426,12 @@
 <p><strong>IV. 后端服务</strong></p>
 <p>把后端服务(backing services)当作附加资源</p>
 <p>数据库、消息队列、数据中心等都是作为基础设施存在的，每个应用是与这些组件都是松耦合。不足是现有的客户场景对可能只能做到逻辑上的隔离，比如数据库虽然逻辑上和应用是隔离的但是物理上可能在一个主机上，因为客户现场可能就跟我们提供几台机器。</p>
-<img src="/.run//07/04/12-Factors/attached-resources.png" class title="来源于12factor.net">
+<img src="/.io//07/04/12-Factors/attached-resources.png" class title="来源于12factor.net">
 
 <p>**<br>V. 构建，发布，运行**</p>
 <p>严格分离构建和运行。</p>
 <p>项目采用的是阿里云的ci/cd方案，构建、发布、运行都是分离的。每个版本对应唯一ID。</p>
-<img src="/.run//07/04/12-Factors/release.png" class title="来源于12factor.net">
+<img src="/.io//07/04/12-Factors/release.png" class title="来源于12factor.net">
 
 <p><strong>VI. 进程</strong></p>
 <p>以一个或多个无状态进程运行应用</p>
@@ -450,7 +443,7 @@
 <p><strong>VIII. 并发</strong></p>
 <p>通过进程模型进行扩展。</p>
 <p>这一点没做好，后端采用的java语言，都知道java是典型的线程模式。所以只能给应用分配相应的资源，让其能纵向扩展，但其实效果不是很好。当然我们有比较简单的方式可以使其进行横向扩展，即每个应用部署多实例的方式进行横向扩展，不过目前没有实践。后续会完善。</p>
-<img src="/.run//07/04/12-Factors/process-types.png" class title="来源于12factor.net">
+<img src="/.io//07/04/12-Factors/process-types.png" class title="来源于12factor.net">
 
 <p><strong>IX. 易处理</strong></p>
 <p>快速启动和优雅终止可最大化健壮性。</p>
