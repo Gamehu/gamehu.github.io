@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -60,10 +60,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Mr.Zhong_cute_32px_505864_easyicon.net.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Mr.Zhong_cute_16px_505864_easyicon.net.png?v=5.1.4">
 
 
   <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
@@ -99,9 +99,9 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Mist',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -304,6 +304,34 @@
         <h2>前端<small>分类</small>
         </h2>
       </div>
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h3 class="post-title">
+        
+            <a class="post-title-link" href="/2020/06/05/%E5%89%8D%E7%AB%AF%E5%9F%8B%E7%82%B9(%E4%BA%8C)/" itemprop="url">
+              
+                <span itemprop="name">前端埋点</span>
+              
+            </a>
+        
+      </h3>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2020-06-05T17:52:04+08:00"
+              content="2020-06-05" >
+          06-05
+        </time>
+      </div>
+
+    </header>
+  </article>
+
 
       
         
@@ -558,34 +586,6 @@
 
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/09/11/CSS%20Triggers/" itemprop="url">
-              
-                <span itemprop="name">CSS Triggers</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-11T14:46:00+08:00"
-              content="2018-09-11" >
-          09-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
     </div>
 
   </div>
@@ -645,7 +645,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">98</span>
+                  <span class="site-state-item-count">99</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -715,13 +715,6 @@
       
 
       
-        <div class="back-to-top">
-          <i class="fa fa-arrow-up"></i>
-          
-            <span id="scrollpercent"><span>0</span>%</span>
-          
-        </div>
-      
 
     </div>
   </aside>
@@ -751,7 +744,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 
@@ -789,6 +782,11 @@
     </footer>
 
     
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
 
     
 
@@ -812,6 +810,8 @@
 
   
 
+
+  
 
 
 
@@ -853,6 +853,11 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
   
 
+  
+  
+    <script type="text/javascript" src="/vendors/canvas-nest/canvas-nest.min.js"></script>
+  
+
 
   
 
@@ -865,13 +870,6 @@
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
 
   
 
@@ -1319,7 +1317,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("前端埋点(一)");titles.push("Module bundling");titles.push("Gulp");titles.push("React Hooks(一)");titles.push("ES Module");titles.push("Modules");titles.push("前端-性能优化姿势");titles.push("作用域");titles.push("通用工具类");titles.push("CSS Triggers");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("前端埋点");titles.push("前端埋点(一)");titles.push("Module bundling");titles.push("Gulp");titles.push("React Hooks(一)");titles.push("ES Module");titles.push("Modules");titles.push("前端-性能优化姿势");titles.push("作用域");titles.push("通用工具类");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {

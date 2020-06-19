@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -60,10 +60,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Mr.Zhong_cute_32px_505864_easyicon.net.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Mr.Zhong_cute_16px_505864_easyicon.net.png?v=5.1.4">
 
 
   <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
@@ -99,9 +99,9 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Mist',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -295,6 +295,247 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/02/22/JS%20Modules/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/22/JS%20Modules/" itemprop="url">Modules</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-22T20:11:00+08:00">
+                2020-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <img src="/2020/02/22/JS%20Modules/a.png" class title="Photo by Sharon McCutcheon from Pexels">
+
+<p>模块话，模块化说了那么多次，以为了解个大概就行了，然而在一次面试经历中被问到AMD和ES Module，所以特此来一篇，汇总一下吸收的模块方面的内容。</p>
+<h3 id="为什么模块很重要？"><a href="#为什么模块很重要？" class="headerlink" title="为什么模块很重要？"></a>为什么模块很重要？</h3><p>如果没有模块，你能想象在复杂场景下你得js代码是个什么鬼模样吗？模块解决了名称空间和可维护性等变得越来越难以处理的问题。</p>
+<p>好的模块是高度独立的，具有独特的功能，可以根据需要对它们进行改组，删除或添加，而不会破坏整个系统。</p>
+<h4 id="优势："><a href="#优势：" class="headerlink" title="优势："></a>优势：</h4><p><strong>1）可维护性：</strong>根据定义，模块是独立的。精心设计的模块旨在尽可能减少对代码库各部分的依赖，从而使其能够独立增长和改进。当模块与其他代码解耦时，更新单个模块要容易得多。</p>
+<p><strong>2）命名空间：</strong>在JavaScript中，顶级函数范围之外的变量是全局变量（意味着每个人都可以访问它们）。因此，普遍存在“命名空间污染”，其中完全不相关的代码共享全局变量。</p>
+<p>在不相关的代码之间共享全局变量<a href="http://c2.com/cgi/wiki?GlobalVariablesAreBad" target="_blank" rel="noopener">在开发中</a>是一个很大的<a href="http://c2.com/cgi/wiki?GlobalVariablesAreBad" target="_blank" rel="noopener">禁忌</a>。模块允许我们通过为变量创建私有空间来避免名称空间污染。</p>
+<p><strong>3）可重用性：</strong>抽取通用部分，哪里需要就拿去，不用重复写，当然也对应的第一点，当有修改时只需要该一份。</p>
+<p>早期的时候为了达到“模块模式”，也有很多方式，不过我看了下基本上都是基于匿名闭包的基础上而来的。</p>
+<p>这些方式有一个共同点：<strong>使用单个全局变量将其代码包装在函数中，从而使用闭包作用域为其自身创建私有名称空间，同时自定义公开哪些方法、变量</strong>。</p>
+<p>大家可以看下jQuery的源码，就是这样的实现方式，如下面的代码。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myGradesCalculate = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">  <span class="comment">// Keep this variable private inside this closure scope</span></span><br><span class="line">  <span class="keyword">var</span> myGrades = [<span class="number">93</span>, <span class="number">95</span>, <span class="number">88</span>, <span class="number">0</span>, <span class="number">55</span>, <span class="number">91</span>];</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">var</span> average = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> total = myGrades.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">accumulator, item</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> accumulator + item;</span><br><span class="line">      &#125;, <span class="number">0</span>);</span><br><span class="line">      </span><br><span class="line">    <span class="keyword">return</span><span class="string">'Your average grade is '</span> + total / myGrades.length + <span class="string">'.'</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> failing = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> failingGrades = myGrades.filter(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> item &lt; <span class="number">70</span>;</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'You failed '</span> + failingGrades.length + <span class="string">' times.'</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Explicitly reveal public pointers to the private functions </span></span><br><span class="line">  <span class="comment">// that we want to reveal publicly</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    average: average,</span><br><span class="line">    failing: failing</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">myGradesCalculate.failing(); <span class="comment">// 'You failed 2 times.' </span></span><br><span class="line">myGradesCalculate.average(); <span class="comment">// 'Your average grade is 70.33333333333333.'</span></span><br></pre></td></tr></table></figure>
+
+<p>如您所见，这种方法使我们可以决定将哪些变量/方法设为私有（例如<strong><em>myGrades\</em></strong>），以及通过将它们放在return语句中（例如<strong><em>average\</em></strong>和<strong><em>failing\</em></strong>）来公开哪些变量/方法。</p>
+<ul>
+<li>Addy Osmani的“ <a href="https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript" target="_blank" rel="noopener">学习JavaScript设计模式”</a>：精妙读物中的细节宝库</li>
+<li><a href="http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html" target="_blank" rel="noopener">Ben Cherry的“足够好”</a>：一个有用的概述，其中包含模块模式的高级用法示例</li>
+<li><a href="https://carldanley.com/js-module-pattern/" target="_blank" rel="noopener">Carl Danley的博客</a>：模块模式概述和其他JavaScript模式的资源。</li>
+</ul>
+<p>所以大家可以看出，早期关于模块的写法，尽管每种方法都以其自己的方式有效，但它们也有缺点：</p>
+<ol>
+<li>大家各自发挥的，这样有个最大的问题就是到最后就是乱的，就像为什么需要TC39一样，让大家有一套标准，才能从而写出更友好通用的模块。 </li>
+<li>依赖管理是个问题，需要我们开发人员自己管理依赖，记得刚开始用jQuery这种第三方库的时候，如果没注意到顺序就会报错，所以想象一下如果引用较多时，管理依赖关系并正确解决这些问题会让人头疼。</li>
+<li>全局作用域被污染，上述的方式创建的变量（比如<strong>myGradesCalculate</strong>）都在全局范围内，所以该全局范围内的代码的每个部分都可以更改该变量。恶意代码可以有意更改该变量，以使您的代码执行您不希望这样做的事情，或者非恶意代码可能会无意间破坏了您的变量。</li>
+</ol>
+<p>所以基于上述原因，这个时候我们就需要一套规范了来解决这些个问题：<strong>我们能否设计一种无需遍历全局范围即可请求模块接口的方法</strong></p>
+<h3 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h3><p>现在比较通行得规范有两种：<a href="http://wiki.commonjs.org/wiki/Modules/1.1" target="_blank" rel="noopener">CommonJS</a>和<a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank" rel="noopener">AMD</a>。</p>
+<h4 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a><strong><a href="http://wiki.commonjs.org/wiki/Modules/1.1" target="_blank" rel="noopener">CommonJS</a></strong></h4><p>CommonJS是一个旨在定义一系列规范以帮助开发服务器端JavaScript应用程序的项目。CommonJS团队尝试解决的领域之一就是模块，负责设计和实现用于声明模块的JavaScript API。我听说CommonJS，最早是在15年写Node应用的时候接触的，Node.js最开始就是遵循这套规范弄得模块化，但是据说后来不用该规范了。</p>
+<p>一个CommonJS的模块本质上是一种可重复使用的一段JavaScript代码其中出口特定对象，使它们可用于其他模块需要在他们的计划。</p>
+<p>使用CommonJS，每个JavaScript文件都将模块存储在其自己的唯一模块上下文中（就像将其包装在闭包中一样）。在此范围内，我们使用<em>module.exports</em>对象公开模块，并要求将其导入。</p>
+<p>当您定义CommonJS模块时，它可能看起来像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myModule</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.hello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'hello!'</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.goodbye = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'goodbye!'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = myModule;</span><br></pre></td></tr></table></figure>
+
+<p>我们使用特殊对象模块，并将我们函数的引用放入<em>module.exports中</em>。这使CommonJS模块系统知道我们要公开的内容，以便其他文件可以使用它。</p>
+<p>然后，当某人想要使用<em>myModule时</em>，他们可以在其文件中要求它，如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myModule = <span class="built_in">require</span>(<span class="string">'myModule'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myModuleInstance = <span class="keyword">new</span> myModule();</span><br><span class="line">myModuleInstance.hello(); <span class="comment">// 'hello!'</span></span><br><span class="line">myModuleInstance.goodbye(); <span class="comment">// 'goodbye!'</span></span><br></pre></td></tr></table></figure>
+
+<p>与我们之前讨论的模块模式相比，这种方法有两个明显的好处：</p>
+<ol>
+<li>避免全局命名空间污染</li>
+<li>明确我们的依赖关系</li>
+</ol>
+<p>要注意的另一件事是，CommonJS采用服务器优先的方法并<strong>同步加载</strong>模块。这很重要，因为如果我们有我们需要的其他三个模块<em>需要</em>，它就会加载它们一个接一个。</p>
+<p>现在，它可以在服务器上很好地工作，但是不幸的是，这使得为浏览器编写JavaScript时更难使用，因为服务器端通常是从磁盘读取，而浏览器需要网络请求，所以只要加载模块的脚本一直在运行（JavaScript线程将停止直到代码被加载），它就会阻止浏览器运行其他任何东西，直到加载完成。</p>
+<h4 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a><a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank" rel="noopener">AMD</a></h4><p>从上面我们知道CommonJS是同步的，所以很显然不适用浏览器端，那我们就需要<strong>异步模块定义</strong>的规范，即<strong>AMD</strong>。</p>
+<p>使用AMD加载模块如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">define([<span class="string">'myModule'</span>, <span class="string">'myOtherModule'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">myModule, myOtherModule</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(myModule.hello());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这里发生的是，<strong><em>define</em></strong>函数将每个模块依赖项的数组作为第一个参数。这些依赖项在后台加载（以非阻塞方式），并且一旦加载了<strong><em>define</em></strong>，便调用回调函数。</p>
+<p>接下来，回调函数将加载的依赖项作为参数（在本例中为<strong><em>myModule\</em></strong>和<strong><em>myOtherModule</em></strong>），以允许函数使用这些依赖项。最后，还必须使用<strong><em>define\</em></strong>关键字定义依赖项本身。</p>
+<p>例如，<strong><em>myModule\</em></strong>可能看起来像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">define([], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    hello: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    goodbye: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'goodbye'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>与CommonJS不同，AMD采用了浏览器优先的方法以及<strong>异步</strong>行为来完成工作。</p>
+<p>除了异步之外，AMD的另一个好处是您的模块可以是<strong>对象，函数，构造函数，字符串，JSON和许多其他类型</strong>，而CommonJS仅支持将<strong>对象</strong>作为模块。</p>
+<p>AMD与CommonJS相比，其提供的io，文件系统和其他面向服务器的功能不兼容。</p>
+<h4 id="UMD"><a href="#UMD" class="headerlink" title="UMD"></a><a href="https://github.com/umdjs/umd" target="_blank" rel="noopener">UMD</a></h4><p>对于需要同时支持AMD和CommonJS功能的项目，还有另一种格式：通用模块定义（UMD）。</p>
+<p>UMD本质上创建了一种使用这两种方法之一的方式，同时还支持全局变量定义。结果，UMD模块能够在客户端和服务器上工作。</p>
+<p>以下是UMD如何开展业务的快速体验：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">root, factory</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">'function'</span> &amp;&amp; define.amd) &#123;</span><br><span class="line">      <span class="comment">// AMD</span></span><br><span class="line">    define([<span class="string">'myModule'</span>, <span class="string">'myOtherModule'</span>], factory);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> exports === <span class="string">'object'</span>) &#123;</span><br><span class="line">      <span class="comment">// CommonJS</span></span><br><span class="line">    <span class="built_in">module</span>.exports = factory(<span class="built_in">require</span>(<span class="string">'myModule'</span>), <span class="built_in">require</span>(<span class="string">'myOtherModule'</span>));</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// Browser globals (Note: root is window)</span></span><br><span class="line">    root.returnExports = factory(root.myModule, root.myOtherModule);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;(<span class="keyword">this</span>, <span class="function"><span class="keyword">function</span> (<span class="params">myModule, myOtherModule</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Methods</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">notHelloOrGoodbye</span>(<span class="params"></span>)</span>&#123;&#125;; <span class="comment">// A private method</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params"></span>)</span>&#123;&#125;; <span class="comment">// A public method because it's returned (see below)</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">goodbye</span>(<span class="params"></span>)</span>&#123;&#125;; <span class="comment">// A public method because it's returned (see below)</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Exposed public methods</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">      hello: hello,</span><br><span class="line">      goodbye: goodbye</span><br><span class="line">  &#125;</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/" target="_blank" rel="noopener">ES Module</a></p>
+<p>是我做前端开始听的最多的了，当然也因为无时无刻都在用它。</p>
+<p>上面咱们所说的，都不是JavaScript固有的。不过幸运的是，<a href="https://github.com/tc39" target="_blank" rel="noopener">TC39</a>（定义ECMAScript语法和语义的标准机构）引入了ECMAScript 6（ES6）内置模块。</p>
+<p>ES6提供了多种导入和导出模块的可能性，其他人则做了很好的解释-以下是其中的一些资源：</p>
+<ul>
+<li><a href="http://jsmodules.io/cjs.html" target="_blank" rel="noopener">jsmodules.io</a></li>
+<li><a href="http://exploringjs.com/es6/ch_modules.html" target="_blank" rel="noopener">Explorationjs.com</a></li>
+</ul>
+<p>与CommonJS或AMD相比，ES6模块最大的优点是它能够提供两全其美的优势：紧凑和声明性语法以及异步加载，以及诸如更好地支持依赖项等附加优点。</p>
+<p>ES6模块最让人兴奋的应该是导入是导出的<em>实时</em>只读视图，即是只读引用，不过却可以改写属性。所以你猜到了当你模块里的值属性发生变化时，导入的地方获取的值是一样的。ES Module具体的后面还有一篇文档单讲，不然这文章就太长了。</p>
+<h3 id="最后我们对比一下两种方式吧"><a href="#最后我们对比一下两种方式吧" class="headerlink" title="最后我们对比一下两种方式吧"></a>最后我们对比一下两种方式吧</h3><h4 id="ES-Module与CommonJS"><a href="#ES-Module与CommonJS" class="headerlink" title="ES Module与CommonJS:"></a>ES Module与CommonJS:</h4><ul>
+<li>CommonJS规范通常适用于Node这类服务器端的</li>
+<li>CommonJS模块是对象，是运行时加载，运行时才把模块挂载在exports之上（加载整个模块的所有），加载模块其实就是查找对象属性。</li>
+<li>ES Module不是对象，是使用export显示指定输出（函数、对象、变量等），再通过import导入。为编译时加载，编译时遇到import就会生成一个只读引用。等到运行时就会根据此引用去被加载的模块取值。所以不会加载模块所有方法，仅取所需。</li>
+<li>CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。</li>
+<li>CommonJS 模块是运行时加载，ES6 模块是编译时输出接口</li>
+</ul>
+<h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4><p><a href="https://scotch.io/tutorials/understanding-scope-in-javascript" target="_blank" rel="noopener">全局范围（作用域）</a>          </p>
+<blockquote>
+<ol>
+<li>写在script标签中的JS代码，都在全局作用域 。</li>
+<li>全局作用域在页面打开时创建，在页面关闭时销毁。 </li>
+<li>在全局作用域中有一个全局对象window，它代表的是一个浏览器的窗口，它由浏览器创建我们可以直接使用 。</li>
+<li>全局作用域中，创建变量都会作为window对象的属性保存</li>
+<li>创建的函数都会作为window对象的方法保存</li>
+<li>全局作用域中的变量都是全局变量，在页面的任何部分都可以访问的到并可以修改它</li>
+</ol>
+</blockquote>
+<h4 id="来源："><a href="#来源：" class="headerlink" title="来源："></a>来源：</h4><blockquote><footer><strong>darlyn</strong><cite><a href="https://juejin.im/post/5b7d2f45e51d4538826f4c28" target="_blank" rel="noopener">AMD , CMD, CommonJS，ES Module，UMD</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>Sebastian Peyrott</strong><cite><a href="https://auth0.com/blog/javascript-module-systems-showdown/" target="_blank" rel="noopener">JavaScript Module Systems Showdown: CommonJS vs AMD vs ES2015</a></cite></footer></blockquote>
+
+
+
+
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -1127,7 +1368,46 @@
       
         
           
-            
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>由于我们产品是基于docker做的部署，所以不管在开发过程中还是在处理客户现场问题时，多多少少都要用到一些docker命令，此篇做个简单的记录，把我用到的命令记录下来。</p>
+<h3 id="先看图"><a href="#先看图" class="headerlink" title="先看图"></a>先看图</h3><p>说命令之前先看图了解下便于更有代入感。</p>
+<p><strong>架构图</strong>（不包含Dokcer Engine等细节）</p>
+<img src="/2019/11/26/Docker%20%E4%B8%80%E7%82%B9%E7%82%B9/architecture.png" class title="docs.docker.com">
+
+<img src="/2019/11/26/Docker%20%E4%B8%80%E7%82%B9%E7%82%B9/docker-arch1.jpg" class title="运维之美 -www.hi-linux.com">
+
+<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><h4 id="各种查看"><a href="#各种查看" class="headerlink" title="各种查看"></a>各种查看</h4><h5 id="docker-COMMAND-help"><a href="#docker-COMMAND-help" class="headerlink" title="docker COMMAND --help"></a><code>docker COMMAND --help</code></h5><p>查看docker相关命令的信息，里面有每个命令的说明。</p>
+<h5 id="docker-ps、docker-ps-a"><a href="#docker-ps、docker-ps-a" class="headerlink" title="docker ps、docker ps -a"></a><code>docker ps、docker ps -a</code></h5><p>docker ps 这是最常用的，查看容器的运行状态，查问题时不ps一下心里都没底，该命令会列出所有正在运行的容器，当然 等同于docker container ls。</p>
+<p>另外docker ps -a，可用于显示所有正在运行和退出的容器。</p>
+<h5 id="docker-info、docker-version"><a href="#docker-info、docker-version" class="headerlink" title="docker info、docker version"></a><code>docker info、docker version</code></h5><p>docker info 该命令用于获取当前安装的docker版本以及有关操作系统的几条信息。</p>
+<img src="/2019/11/26/Docker%20%E4%B8%80%E7%82%B9%E7%82%B9/1.png" class>
+
+<p>docker version 列出有关Docker客户端和服务器版本的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Client:</span><br><span class="line"> Version:           18.09.7</span><br><span class="line"> API version:       1.39</span><br><span class="line"> Go version:        go1.10.1</span><br><span class="line"> Git commit:        2d0083d</span><br><span class="line"> Built:             Fri Aug 16 14:20:06 2019</span><br><span class="line"> OS&#x2F;Arch:           linux&#x2F;amd64</span><br><span class="line"> Experimental:      false</span><br><span class="line"></span><br><span class="line">Server:</span><br><span class="line"> Engine:</span><br><span class="line">  Version:          18.09.7</span><br><span class="line">  API version:      1.39 (minimum version 1.12)</span><br><span class="line">  Go version:       go1.10.1</span><br><span class="line">  Git commit:       2d0083d</span><br><span class="line">  Built:            Wed Aug 14 19:41:23 2019</span><br><span class="line">  OS&#x2F;Arch:          linux&#x2F;amd64</span><br><span class="line">  Experimental:     false</span><br></pre></td></tr></table></figure>
+
+<h5 id="docker-search-xxx"><a href="#docker-search-xxx" class="headerlink" title="docker search xxx"></a><code>docker search xxx</code></h5><p>该命令只有在我自己玩得时候用过（不想重复造轮子），搜索registry上得镜像。</p>
+<h5 id="docker-images"><a href="#docker-images" class="headerlink" title="docker images"></a><code>docker images</code></h5><p> 列出所有的镜像，通常只需要关注REPOSITORY、TAG两列就行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">root@feature1_dev:~# docker images</span><br><span class="line">REPOSITORY                                     TAG                                  IMAGE ID            CREATED             SIZE</span><br><span class="line">172.17.162.141:5000&#x2F;baymax-nginx               1.17.6                               231d40e811cd        6 months ago        126MB</span><br><span class="line">172.17.162.141:5000&#x2F;pg10-cmdb                  1.3.0                                284de991364f        10 months ago       370MB</span><br><span class="line">172.17.162.141:5000&#x2F;myflink                    1.8.1                                96c4d2af10fc        10 months ago       449MB</span><br><span class="line">172.17.162.141:5000&#x2F;yandex&#x2F;clickhouse-server   19                                   58006c9044b7        13 months ago       514MB</span><br><span class="line">172.17.162.141:5000&#x2F;zookeeper                  latest                               f336949ce7a1        19 months ago       148MB</span><br><span class="line">172.17.162.141:5000&#x2F;redis                      latest                               1babb1dde7e1        20 months ago       94.9MB</span><br><span class="line">172.17.162.141:5000&#x2F;kafka                      latest                               568143d73a6b        20 months ago       339MB</span><br><span class="line">172.17.162.141:5000&#x2F;dubbo-admin                latest                               954bf5f29e96        2 years ago         492MB</span><br></pre></td></tr></table></figure>
+
+<h5 id="docker-logs-f-container-name"><a href="#docker-logs-f-container-name" class="headerlink" title="docker logs -f container_name"></a><code>docker logs -f container_name</code></h5><p>查看容器的日志，我用的也较少。</p>
+<h5 id="docker-commit-a-quot-gamehu-quot-m-quot-what-f-quot-container-id-IMAGE-REPOSITORY-TAG"><a href="#docker-commit-a-quot-gamehu-quot-m-quot-what-f-quot-container-id-IMAGE-REPOSITORY-TAG" class="headerlink" title="docker commit -a &quot;gamehu&quot; -m &quot;what f&quot; container_id IMAGE_REPOSITORY:TAG`"></a><code>docker commit -a &quot;gamehu&quot; -m &quot;what f&quot; container_id</code> IMAGE_REPOSITORY:TAG`</h5><p>通过容器id创建一个新的镜像，</p>
+<h4 id="Container"><a href="#Container" class="headerlink" title="Container"></a>Container</h4><h5 id="docker-start-、stop、restart、rm、kill"><a href="#docker-start-、stop、restart、rm、kill" class="headerlink" title="docker start 、stop、restart、rm、kill"></a><code>docker start 、stop、restart、rm、kill</code></h5><p>高频使用了，后接 container_id/container_name，依次分别为：启动（已存在）容器、停止容器（会进行正常时间等待其停止）、重启重启、删除（已停止）容器、立即停止容器</p>
+<h5 id="docker-exec-it-container-id"><a href="#docker-exec-it-container-id" class="headerlink" title="docker exec -it container_id"></a><code>docker exec -it container_id</code></h5><p>使用的较多，通常是为了测试而替换容器内的内容，命令用于访问正在运行的容器，并启用交互模式，可用一些基本的命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@feature1_dev:~# docker exec -it 58f5d79c10a3 &#x2F;bin&#x2F;bash</span><br><span class="line">root@58f5d79c10a3:&#x2F;# ls</span><br><span class="line">bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</span><br><span class="line">root@58f5d79c10a3:&#x2F;#</span><br></pre></td></tr></table></figure>
+
+<h5 id="docker-inspect-container-id"><a href="#docker-inspect-container-id" class="headerlink" title="docker inspect container_id"></a><code>docker inspect container_id</code></h5><p>查看容器的相关信息，用的也较少。</p>
+<h4 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h4><h5 id="docker-run、create"><a href="#docker-run、create" class="headerlink" title="docker run、create"></a><code>docker run、create</code></h5><p>基于镜像创建一个新的容器，<code>run</code>是创建并启动，<code>create</code>是创建但不启动。</p>
+<p>示例：<code>docker  run -i -t -p 1000:8000  image_name/image_id:TAG</code>，使用镜像，以后台模式启动一个容器,将容器的 8000 端口映射到主机的 1000 端口</p>
+<h5 id="docker-build-lt-path-to-docker-file-gt"><a href="#docker-build-lt-path-to-docker-file-gt" class="headerlink" title="docker build &lt;path to docker file&gt;"></a><code>docker build &lt;path to docker file&gt;</code></h5><p>此命令用于从指定的dockerfile构建镜像。</p>
+<h5 id="docker-push-IMAGE-NAME-TAG"><a href="#docker-push-IMAGE-NAME-TAG" class="headerlink" title="docker push IMAGE_NAME:TAG"></a><code>docker push IMAGE_NAME:TAG</code></h5><p>做完镜像推送到镜像仓库。</p>
+<h5 id="docker-rmi-image-id-image-name"><a href="#docker-rmi-image-id-image-name" class="headerlink" title="docker rmi image_id/image_name"></a><code>docker rmi image_id/image_name</code></h5><p>删除镜像，通常是处理现场问题，要替换镜像的时候用一用。</p>
+<h5 id="docker-inspect-image-id"><a href="#docker-inspect-image-id" class="headerlink" title="docker inspect image_id"></a><code>docker inspect image_id</code></h5><p>查看镜像相关信息，我制作镜像的时候会用一用，用的很少。</p>
+<h5 id="docker-save-image-id-gt-xx-tar"><a href="#docker-save-image-id-gt-xx-tar" class="headerlink" title="docker save image_id&gt; xx.tar"></a><code>docker save image_id&gt; xx.tar</code></h5><p>导出镜像，通常是修复现场问题时做该操作，导出已修复的镜像。</p>
+<h5 id="docker-load-lt-xx-tar"><a href="#docker-load-lt-xx-tar" class="headerlink" title="docker load &lt; xx.tar"></a><code>docker load &lt; xx.tar</code></h5><p>导入镜像，通常是修复现场问题时做该操作，载入已修复后的镜像。</p>
+<h5 id="docker-tag-image-id-tag-name"><a href="#docker-tag-image-id-tag-name" class="headerlink" title="docker tag image_id tag_name"></a><code>docker tag image_id tag_name</code></h5><p>修改镜像的TAG，通常是修复现场问题时做该操作。</p>
+<p>感谢</p>
+<blockquote><footer><strong>Jeff Hale</strong><cite><a href="https://towardsdatascience.com/15-docker-commands-you-should-know-970ea5203421" target="_blank" rel="noopener">15 Docker Commands You Should Know</a></cite></footer></blockquote>
+
+
           
         
       
@@ -1870,206 +2150,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/" itemprop="url">组织化人才管理的四大领域</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-21T10:11:00+08:00">
-                2019-10-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天内心膨胀的以为自己是个人才，所以随心所欲的看了门课。以下记录了我觉得对我有意义的点。</p>
-<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/mohamed.jpg" class title="Photo by Mohamed Nohassi on Unsplash">
-
-
-
-<p>根据业务布局和业务的洞察来理解和分析业务的变局时什么，再次基础上呢再来看搭建什么样的阵型，组织阵型来匹配业务，为了这样的一个人才搭建，需要准备怎样对人才进行赋能，这个赋能是系统性的赋能，不是对单个个体，甚至不是对团队，而是一个系统性的赋能。最后沉淀褚一套人才管理的机制，用这样的一套人才管理机制不断推动人才。</p>
-<h3 id="人才"><a href="#人才" class="headerlink" title="人才"></a>人才</h3><p><strong>业务布局=人才体积</strong></p>
-<p>人才体积：人才在多大的业务空间中去发挥作用，所以业务布局决定了人才体积</p>
-<p><strong>组织阵型=密度</strong></p>
-<p>人才分布的密度和人才分布的层次</p>
-<p><strong>人才赋能=人才质量</strong></p>
-<p>对组织化导向的人才赋能，我组织想对我整个的人才产生怎样的一个牵引力。核心是我是要提高我得人才适应未来业务成长需求，适应未来变局的整体的能力的拉伸。</p>
-<p><strong>密度=质量/体积</strong></p>
-<p>所以单独对人才进行培训和赋能是不够的，而是要对人才的密度进行一个拉升，即提升人才质量的同时，要让业务体积处于合适的范围内。</p>
-<p>人才称重：人才在组织中的重量，发挥的作用。</p>
-<p>人才称重的三种方式：</p>
-<ol>
-<li>通过人才赋能提升人才质量</li>
-<li>通过业务布局减少人才体积（冗余）</li>
-<li>通过组织机构的调整来优化人才在不同组织单元中的密度，激活组织的有效性。</li>
-</ol>
-<h3 id="四大模型"><a href="#四大模型" class="headerlink" title="四大模型"></a>四大模型</h3><img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/1.jpg" class>
-
-
-
-<p>主要说说人才管理机制模型：</p>
-<p>汰换、激励、约束、牵引</p>
-<p>汰换：这是一个必然的过程，当你想懈怠的时候觉得无趣的时候，问问自己你对于公司的价值是什么</p>
-<p>牵引：企业文化价值的输入、企业向心力的培养等</p>
-<h3 id="业务变局"><a href="#业务变局" class="headerlink" title="业务变局"></a>业务变局</h3><p><strong>业务结构与人才结构</strong></p>
-<p>解释，在什么情况下先发展业务还是先发展人才。</p>
-<p>依赖的手段则是进行<strong>业务摸底</strong>和<strong>人才摸底（核心团队）</strong></p>
-<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/2.jpg" class>
-
-
-
-<h3 id="组织变阵"><a href="#组织变阵" class="headerlink" title="组织变阵"></a>组织变阵</h3><p>说明什么地方配置更加优秀的人才，合理的调整人才结构和组织结构</p>
-<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/3.jpg" class>
-
-
-
-<h3 id="人才赋能"><a href="#人才赋能" class="headerlink" title="人才赋能"></a>人才赋能</h3><p>迎接未来面对变局的能力</p>
-<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/4.jpg" class>
-
-<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/5.jpg" class>
-
-
-
-
-
-<h3 id="人才管理机制"><a href="#人才管理机制" class="headerlink" title="人才管理机制"></a>人才管理机制</h3><p>通过上述内容，沉淀出一套符合自己公司的人才管理机制</p>
-<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/6.jpg" class>
-
-
-
-
-
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>从这个课我知道了人才管理不是我之前那么单纯的理解，很容易被这个词午到，人才管理其实不仅仅说的是人才管理，还包括业务布局、组织变阵、人才赋能、机制建立等因素。</p>
-<p>所以我理解一下下，人才的定义是不是：专业技能过硬，有战略眼光且能适应业务未来的变局，且有组织向心力？</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2123,7 +2203,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">98</span>
+                  <span class="site-state-item-count">99</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2193,13 +2273,6 @@
       
 
       
-        <div class="back-to-top">
-          <i class="fa fa-arrow-up"></i>
-          
-            <span id="scrollpercent"><span>0</span>%</span>
-          
-        </div>
-      
 
     </div>
   </aside>
@@ -2229,7 +2302,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 
@@ -2267,6 +2340,11 @@
     </footer>
 
     
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
 
     
 
@@ -2290,6 +2368,8 @@
 
   
 
+
+  
 
 
 
@@ -2331,6 +2411,11 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
   
 
+  
+  
+    <script type="text/javascript" src="/vendors/canvas-nest/canvas-nest.min.js"></script>
+  
+
 
   
 
@@ -2343,13 +2428,6 @@
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
 
   
 
@@ -2797,7 +2875,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("Root User in Ubuntu");titles.push("领导寄语");titles.push("SSO实践");titles.push("PostgreSQL(1)");titles.push("Docker 一点点");titles.push("理解一个新事物的方法");titles.push("前端-性能优化姿势");titles.push("斜杠");titles.push("延宕");titles.push("组织化人才管理的四大领域");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("Modules");titles.push("Root User in Ubuntu");titles.push("领导寄语");titles.push("SSO实践");titles.push("PostgreSQL(1)");titles.push("Docker 一点点");titles.push("理解一个新事物的方法");titles.push("前端-性能优化姿势");titles.push("斜杠");titles.push("延宕");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {
@@ -2842,4 +2920,5 @@
 
   
 
-<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+</body>
+</html>

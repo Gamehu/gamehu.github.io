@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -60,10 +60,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/Mr.Zhong_cute_32px_505864_easyicon.net.png?v=5.1.4">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/Mr.Zhong_cute_16px_505864_easyicon.net.png?v=5.1.4">
 
 
   <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
@@ -90,7 +90,7 @@
 <meta property="og:site_name" content="正儿八经">
 <meta property="og:description" content="背景我们是做NPMD工具的，但是对自身的产品本身确没有监控，说起来就很惆怅了，当然主要原因还是产品从0到1这个过程，前期放荡不羁的功能造作，导致对基础设施建设这块做的很少。 这是一贯坚持基础建设重要性的我的又一篇分享。关于前端埋点。 所以我当然承认基础建设是体系化的漫长的一个过程，但是因为各种不可抗因素，现没法体系化落地，所以只能先捡最能产生价值的且能引起更多不同之能的同事关注的事开始做，比如前端">
 <meta property="article:published_time" content="2020-04-28T08:52:00.000Z">
-<meta property="article:modified_time" content="2020-05-25T02:42:56.592Z">
+<meta property="article:modified_time" content="2020-06-05T09:49:48.909Z">
 <meta property="article:author" content="Gamehu">
 <meta property="article:tag" content="监控">
 <meta property="article:tag" content="埋点">
@@ -102,9 +102,9 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Mist',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -536,86 +536,65 @@
 </blockquote>
 <p>   <strong>埋点命名规范</strong></p>
 <p>   我们当前的做法是埋点名称只能是由字母、数字、下划线组成，并保证在应用内唯一，比如sw是展示，ck是点击。</p>
-<p>   常用规则的举例如下：<br>   比如行为埋点：<code>{团队|业务|角色}_{组件|页面}_{具体元素}_{动作}</code><br>   示例：<br>   yourteam_fc_all_msg_ck<br>   front_alarm_sw ： front代表项目，alarm代表功能，sw代表页面操作，sw是展示，ck是点击<br>   front_alarm1_detail_table_point_ck ：front代表项目，alarm1_detail代表功能，table组件，point小圆点组件，ck点击</p>
-<p>   <strong>埋点流程规范</strong></p>
-<p>   如果你发现每天有大量埋点错误反馈，并导致很多错误的分析结论，一个错误的分析结果还不如没有数据分析结果。造成这个问题的原因包括：</p>
+<p>   常用规则的举例如下：<br>   比如行为埋点：<code>{团队|业务|角色}_{组件|页面}_{具体元素}_{动作}</code><br>   示例：<br>   front_alarm_sw ： front代表项目，alarm代表功能，sw是展示，ck是点击<br>   front_alarm1_detail_table_point_ck ：front代表项目，alarm1_detail代表功能，table组件，point小圆点组件，ck点击</p>
+<p><strong>埋点流程规范</strong></p>
+<p>如果你发现每天有大量埋点错误反馈，并导致很多错误的分析结论，一个错误的分析结果还不如没有数据分析结果。造成这个问题的原因包括：</p>
 <ol>
-<li><p>前端埋点涉及复杂的交互，难以找准埋点位置；</p>
-</li>
-<li><p>埋点的验收流程不完善，没有经过测试和产品经理的测试和验收，验证不完备；</p>
-<p>好的埋点需求应该和业务功能需求同等重要，也需要经历软件开发的整个生命周期，如果能严格按照一个规范的流程处理埋点，以上问题会得到更好的解决。</p>
+<li>前端埋点涉及复杂的交互，难以找准埋点位置；<ol start="2">
+<li>埋点的验收流程不完善，没有经过测试和产品经理的测试和验收，验证不完备；</li>
+</ol>
 </li>
 </ol>
-<h4 id="规范内容"><a href="#规范内容" class="headerlink" title="规范内容"></a>规范内容</h4><p>   <strong>需求阶段：</strong></p>
-<p>   确定埋点信息，核心包括五方面信息：事件ID、埋点名称、埋点描述、埋点属性以及截图。</p>
-<p>   <em>如何落地：</em></p>
-<p>   如果不按照规则和流程埋点将不会上报相关数据，制定强制规定。</p>
-<p>   <em>开发什么功能：</em></p>
-<p>   埋点全文检索能力、自动找到重复埋点（语义相近或者数据相近）功能。</p>
-<p>   <strong>开发阶段：</strong></p>
-<p>   务必和开发沟通，并让开发在完全理解业务语义的情况下，在前端按照埋点代码规范进行埋点。</p>
-<p>   <em>如何落地：</em></p>
-<p>   静态代码检查。</p>
-<p>   <em>开发什么功能：</em></p>
-<p>   开发探测每个埋点对应到的代码文件和代码行，开发根据人均事件量级进行监控报警功能。</p>
-<p>   <strong>测试阶段：</strong></p>
-<p>   务必和测试沟通，并让测试在完全理解业务语义的情况下，通过CodeReview和埋点测试两种方式对埋点正确性进行验证。</p>
-<p>   <em>如何落地：</em></p>
-<p>   规定如果未经测试的埋点不允许上报埋点数据。</p>
-<p>   <em>开发什么功能：</em></p>
-<p>   提供所见即所得的埋点测试平台。</p>
-<p>   <strong>验收阶段：</strong></p>
-<p>   确保相关人员在完全理解业务语义的情况下，可以通过与自比较和他比较的方式来进行验证。</p>
-<p>   <em>举例：</em></p>
+<p>好的埋点需求应该和业务功能需求同等重要，也需要经历软件开发的整个生命周期，如果能严格按照一个规范的流程处理埋点，以上问题会得到更好的解决。</p>
+<h4 id="规范内容"><a href="#规范内容" class="headerlink" title="规范内容"></a>规范内容</h4><p><strong>需求阶段：</strong></p>
+<p>确定埋点信息，核心包括五方面信息：事件ID、埋点名称、埋点描述、埋点属性以及截图。</p>
+<p><em>如何落地：</em></p>
+<p>如果不按照规则和流程埋点将不会上报相关数据，制定强制规定。</p>
+<p><em>开发什么功能：</em></p>
+<p>埋点全文检索能力、自动找到重复埋点（语义相近或者数据相近）功能。</p>
+<p><strong>开发阶段：</strong></p>
+<p>务必和开发沟通，并让开发在完全理解业务语义的情况下，在前端按照埋点代码规范进行埋点。</p>
+<p><em>如何落地：</em></p>
+<p>静态代码检查。</p>
+<p><em>开发什么功能：</em></p>
+<p>开发探测每个埋点对应到的代码文件和代码行，开发根据人均事件量级进行监控报警功能。</p>
+<p><strong>测试阶段：</strong></p>
+<p>务必和测试沟通，并让测试在完全理解业务语义的情况下，通过CodeReview和埋点测试两种方式对埋点正确性进行验证。</p>
+<p><em>如何落地：</em></p>
+<p>规定如果未经测试的埋点不允许上报埋点数据。</p>
+<p><em>开发什么功能：</em></p>
+<p>提供所见即所得的埋点测试平台。</p>
+<p><strong>验收阶段：</strong></p>
+<p>确保相关人员在完全理解业务语义的情况下，可以通过与自比较和他比较的方式来进行验证。</p>
+<p><em>举例：</em></p>
 <ul>
 <li>他比较验证：前端某业务点数量和对应服务端数据应该基本相当。</li>
 </ul>
-<p>   <em>如何落地：</em></p>
-<p>   规定如果未经验证的埋点不允许上报埋点数据。</p>
-<p>   <em>开发什么功能：</em></p>
-<p>   提供埋点实时数据查询。</p>
-<p>   <strong>清理阶段：</strong></p>
-<p>   确认完全理解语义的情况下，可对业务发生巨大变化或者不在维护的埋点进行废弃。</p>
-<p>   <em>如何落地：</em></p>
-<p>   3个月以上未被使用的埋点、1个月以上数据为0的埋点自动废弃。3个月后使用次日会自动开启采集。</p>
-<p>   <em>开发什么功能：</em></p>
-<p>   根据规则提供针对未使用埋点的计算、并自动废弃。</p>
-<p>   可以看出，规范要落地，需要整个公司的共识，也需要从上而下的压力，还有强势的制度。比如针对全公司个部门做评分，评分规则基于埋点和数据分析抽象出来。</p>
+<p><em>如何落地：</em></p>
+<p>规定如果未经验证的埋点不允许上报埋点数据。</p>
+<p><em>开发什么功能：</em></p>
+<p>提供埋点实时数据查询。</p>
+<p><strong>清理阶段：</strong></p>
+<p>确认完全理解语义的情况下，可对业务发生巨大变化或者不在维护的埋点进行废弃。</p>
+<p><em>如何落地：</em></p>
+<p>3个月以上未被使用的埋点、1个月以上数据为0的埋点自动废弃。3个月后使用次日会自动开启采集。</p>
+<p><em>开发什么功能：</em></p>
+<p>根据规则提供针对未使用埋点的计算、并自动废弃。</p>
+<p>可以看出，规范要落地，需要整个公司的共识，也需要从上而下的压力，还有强势的制度。比如针对全公司个部门做评分，评分规则基于埋点和数据分析抽象出来。</p>
 <hr>
-<p>   另外我们在前端埋点中也遇到过一些注意事项，整理如下，希望对大家有所帮助。</p>
-<p>   <strong>注意事项：</strong></p>
-<p>   <em>一些埋点安全性问题：</em></p>
-<p>   如果你使用普通的http 协议，在数据传输的过程存在被劫持(包括不限于：JS代码注入等)的可能性，造成H5页面中出现诸如：未知的广告或者原网页被重定向等问题。为了降低此类事件发生的可能性，建议最好使用https 协议（倡导全站https），以确保数据传输过程的完整性，安全性。</p>
-<p>   <em>版本迭代的时候埋点需要注意什么？</em></p>
+<p>另外我们在前端埋点中也遇到过一些注意事项，整理如下，希望对大家有所帮助。</p>
+<p><strong>注意事项：</strong></p>
+<p><em>一些埋点安全性问题：</em></p>
+<p>如果你使用普通的http 协议，在数据传输的过程存在被劫持(包括不限于：JS代码注入等)的可能性，造成H5页面中出现诸如：未知的广告或者原网页被重定向等问题。为了降低此类事件发生的可能性，建议最好使用https 协议（倡导全站https），以确保数据传输过程的完整性，安全性。</p>
+<p><em>版本迭代的时候埋点需要注意什么？</em></p>
 <ul>
-<li>如果是公用模块，可以非常放心安全的全量迁移埋点；</li>
+<li>如果是公用模块，可以非常放心安全的全量迁移埋点；<ul>
 <li>如果是新增模块，那就需要注意是否遵循了最新的埋点规范，有没有重复的埋点命名存在，埋点是否符合业务逻辑；</li>
 <li>如果是下线模块，那就需要评估下线后对数据的影响范围，而且要第一时间充分周知相关方，让各方参与评估；</li>
 <li>如果是更新模块，需要评估在原有埋点上需要修改的埋点内容，是否需要重新埋点，删除不需要的埋点，而且要修改功能的数据承接。</li>
 </ul>
-<p>   <strong>关于埋点上报的解决方案</strong></p>
-<p>   一般会实现上个模块，Event收集器，Event缓存器，和Event上报器。</p>
-<p>   <em>Event上报模式</em></p>
-<p>   除了用户个人不希望耗费流量以外，也可能会因为弱网及断网情况，如果确保数据不丢失，基于这些问题而诞生的上传策略，来设计如何上报已收集的所有事件数据。上报一般包括针对内存实时数据的上报和本地持久化数据上报两个部分，分别介绍一下它们的上报策略与实现方式：</p>
-<p>   <em>内存埋点数据的实时上报</em></p>
-<p>   针对内存埋点数据的上报策略一般如下：</p>
-<ol>
-<li><p>基于时间间隔：每隔 n秒（时间间隔可以根据公司的业务情况自定义）</p>
 </li>
-<li><p>基于数据条数：每累积 n条数据（条数可以自定义）</p>
-</li>
-<li><p>不间断实时上报，如果是低频率，数据量小，实时性要求高的数据可以不设限制</p>
-<p>上述条件满足时，便会触发从内存中读取数据，并执行上传操作。Native可以创建了一个并发队列，H5会基于浏览器并发发送。</p>
-</li>
-</ol>
-<p>   <em>本地持久化数据的延迟上报</em></p>
-<p>   为了尽早的上传本地持久化埋点数据，以防用户卸载 App或者关闭浏览器造成本地数据的丢失，针对本地持久化数据的上传策略如下：</p>
-<p>   HTML5相关：</p>
-<ol>
-<li><p>localstorage，浏览器关闭埋点数据并不会被删除，如果用户再次访问，会启动上报</p>
-<p>这里也可以创建一个单独的串行队列，来实现对本地持久化数据的逐个上报。</p>
-</li>
-</ol>
+</ul>
 <h3 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h3><blockquote><footer><strong>前端埋点的那些事</strong><cite><a href="https://www.imooc.com/article/27151?block_id=tuijian_wz" target="_blank" rel="noopener">www.imooc.com/article/27151?block_id=tuijian_wz</a></cite></footer></blockquote>
 
 <blockquote><footer><strong>美团点评前端无痕埋点实践</strong><cite><a href="https://juejin.im/entry/58e8aa25a22b9d00589bd297" target="_blank" rel="noopener">juejin.im/entry/58e8aa25a22b9d00589bd297</a></cite></footer></blockquote>
@@ -785,7 +764,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">98</span>
+                  <span class="site-state-item-count">99</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -871,13 +850,6 @@
       
 
       
-        <div class="back-to-top">
-          <i class="fa fa-arrow-up"></i>
-          
-            <span id="scrollpercent"><span>0</span>%</span>
-          
-        </div>
-      
 
     </div>
   </aside>
@@ -907,7 +879,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 
@@ -945,6 +917,11 @@
     </footer>
 
     
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
 
     
 
@@ -968,6 +945,8 @@
 
   
 
+
+  
 
 
 
@@ -1009,6 +988,11 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
   
 
+  
+  
+    <script type="text/javascript" src="/vendors/canvas-nest/canvas-nest.min.js"></script>
+  
+
 
   
 
@@ -1021,13 +1005,6 @@
 
   
   
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
