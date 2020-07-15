@@ -85,7 +85,7 @@
 
 <meta name="description" content="背景虽然我们系统有建设一些监控工具比如Grafana、Prometheus等，但是很多时候还是愿意直接先到服务器上去瞧一眼，特别是客户现场的问题，因为客户现场暂时不会装这些工具。因为我们是做NPMD的，流量大的时候资源消耗就比较大，加上前期先铺功能非功能需求的细节待完善，所以有时候会出现客户现场机器在一段时间后会变得比较慢的情况，这个时候那当然就说劈里啪啦一堆装逼的命令敲上去瞅瞅服务器咋了。 用的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ps、top、free">
+<meta property="og:title" content="Linux ps、top、free命令">
 <meta property="og:url" content="https://gamehu.github.io/2020/04/21/ps-grep-top-free/index.html">
 <meta property="og:site_name" content="正儿八经">
 <meta property="og:description" content="背景虽然我们系统有建设一些监控工具比如Grafana、Prometheus等，但是很多时候还是愿意直接先到服务器上去瞧一眼，特别是客户现场的问题，因为客户现场暂时不会装这些工具。因为我们是做NPMD的，流量大的时候资源消耗就比较大，加上前期先铺功能非功能需求的细节待完善，所以有时候会出现客户现场机器在一段时间后会变得比较慢的情况，这个时候那当然就说劈里啪啦一堆装逼的命令敲上去瞅瞅服务器咋了。 用的">
@@ -94,7 +94,7 @@
 <meta property="og:image" content="https://gamehu.github.io/2020/04/21/ps-grep-top-free/top.png">
 <meta property="og:image" content="https://gamehu.github.io/2020/04/21/ps-grep-top-free/top1.png">
 <meta property="article:published_time" content="2020-04-21T02:54:00.000Z">
-<meta property="article:modified_time" content="2020-04-22T13:08:24.770Z">
+<meta property="article:modified_time" content="2020-07-07T07:10:17.947Z">
 <meta property="article:author" content="Gamehu">
 <meta property="article:tag" content="command">
 <meta name="twitter:card" content="summary">
@@ -134,7 +134,7 @@
 
 
 
-  <title>ps、top、free | 正儿八经</title>
+  <title>Linux ps、top、free命令 | 正儿八经</title>
   
 
 
@@ -332,7 +332,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">ps、top、free</h2>
+          <h2 class="post-title" itemprop="name headline">Linux ps、top、free命令</h2>
         
 
         <div class="post-meta">
@@ -945,7 +945,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -967,7 +967,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1623,13 +1623,13 @@
       var articles = db.collection('articles')
 
       //https://hexo.io/zh-tw/docs/variables.html
-      var isPost = 'ps、top、free'.length > 0
+      var isPost = 'Linux ps、top、free命令'.length > 0
       var isArchive = '' === 'true'
       var isCategory = ''.length > 0
       var isTag = ''.length > 0
 
       if (isPost) { //is article page
-        var title = 'ps、top、free'
+        var title = 'Linux ps、top、free命令'
         var doc = articles.doc(title)
 
         getCount(doc, true).then(appendCountTo($('.post-meta')))

@@ -309,6 +309,590 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/" itemprop="url">js工具库</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-11T20:48:00+08:00">
+                2020-07-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>最近整理产品中积累下来的工具类，因为要用新框架了要对之前的代码进行移植。当然咱是个追求完美的人，实在是团队小伙伴们一路疯狂操作下来，工具类是茫茫多啊，基本上想要维护是注定两行泪，所以咱们借着这次机会把工具类好好整理一下。</p>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><h4 id="诉求："><a href="#诉求：" class="headerlink" title="诉求："></a>诉求：</h4><ol>
+<li>可维护性强。</li>
+<li>能进行包管理。</li>
+<li>每个方法有详细的说明，且能友好的查看。</li>
+</ol>
+<p><strong>具象化要求</strong></p>
+<ul>
+<li>工具方法需要分门别类，不能一个文件一把梭，一定要控制代码量，不能让人一打开文件，心里就是wc。</li>
+<li>更新（删除、新增、修改）某个工具方法时不影响其它方法的使用，达到我改我的，你别瞪我的效果。</li>
+<li>不能发生函数名、变量名冲突。    </li>
+<li>每个方法的注释遵循统一规范，根据统一规范可生产类似swagger那样的api文档（有张好的面皮大家爱看也耐看，不用不断打扰写方法的人）。</li>
+</ul>
+<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>秉着能抄袭就不自己动手的精神，看了很多star上千的工具库，总结了一下方式方法。</p>
+<ul>
+<li>基本上大家都采用的方式是一个方法一个文件，这一个文件<strong>暴露</strong>出来的就一个方法也只有一个方法，如果该方法需求其他辅助方法，直接通过import引用，而不直接写到该文件中，整个文件特别整洁，如果方法比较复杂则会建立一个文件夹从而存放辅助方法的文件，辅助方法的文件里也只有一个方法。虽然看上去可能这样文件有点多了，但是确实很清晰很整洁，对于维护来说很友好。<em>所以就用这种方式了</em>。</li>
+<li>看了下生产api的几种库，比如jsdoc、ddoc等，大体是jsdoc还是多一些，用起来也挺简单，<em>所以就选jsdoc了</em>。</li>
+</ul>
+<h5 id="编码方式"><a href="#编码方式" class="headerlink" title="编码方式"></a>编码方式</h5><p>一个方法一个文件</p>
+<img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/code.png" class>
+
+<h5 id="rollup"><a href="#rollup" class="headerlink" title="rollup"></a>rollup</h5><img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/rollup.jpg" class>
+
+<p>打包工具用rollup，以为是工具库所以用更简单的rollup。</p>
+<ul>
+<li>自动 Tree-shaking(Tree-shaking, 也被称为 “live code inclusion,” 它是清除实际上并没有在给定项目中使用的代码的过程，但是它可以更加高效。)</li>
+<li>打包速度快</li>
+<li>配置简单</li>
+</ul>
+<h5 id="Jest"><a href="#Jest" class="headerlink" title="Jest"></a>Jest</h5><p> jest开箱即用挺好，另外我们多用react，jest是Facebook出的，与react具有天然亲和力。</p>
+<img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/jest.png" class>
+
+<h5 id="Api-Doc"><a href="#Api-Doc" class="headerlink" title="Api Doc"></a>Api Doc</h5><p>选择了jsdoc，使用简单且较普遍。</p>
+<img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/jsdoc-500.jpg" class>
+
+
+
+<h3 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h3><h5 id="目录"><a href="#目录" class="headerlink" title="目录"></a><strong>目录</strong></h5><img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/dir.png" class>
+
+<h4 id="关键手法"><a href="#关键手法" class="headerlink" title="关键手法"></a><strong>关键手法</strong></h4><h5 id="编码"><a href="#编码" class="headerlink" title="编码"></a><strong>编码</strong></h5><img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/code1.png" class>
+
+<p>进行编码后记得在<code>index.js</code>处暴露方法。</p>
+<h5 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a><strong>单元测试</strong></h5><img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/jest2.png" class>
+
+<img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/jest1.png" class>
+
+<p>单元测试时，如果想打断点，记得修改上图中的配置后重新生成库。</p>
+<h5 id="dist说明"><a href="#dist说明" class="headerlink" title="dist说明"></a><strong>dist说明</strong></h5><img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/dist.png" class>
+
+<h5 id="打包"><a href="#打包" class="headerlink" title="打包"></a><strong>打包</strong></h5><p>如下图：</p>
+<ul>
+<li>每次修改库时，记得改<code>3</code>处的版本号，以及<code>1</code>处的CHANGELOG对本次修改进行一个简要的说明。</li>
+<li><code>2</code>所示部分根据不同时期的需求可对应进行更改，从而改变打包的内容。</li>
+<li>完事之后直接npm publish，如果需要关联到fusion design 则直接iceworks sync就行。</li>
+</ul>
+<img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/package.png" class>
+
+<h5 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a><strong>使用说明</strong></h5><img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/use.png" class>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i @riil-frontend&#x2F;utils</span><br><span class="line"></span><br><span class="line">import &#123; arrayToTree,UnitFormat,Units,getNumberLength &#125; from &#39;@riil-frontend&#x2F;utils&#39;;</span><br></pre></td></tr></table></figure>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/07/08/fusion%20design/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/08/fusion%20design/" itemprop="url">Fusion Design</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-08T15:45:00+08:00">
+                2020-07-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>因为团队要用fusion design，所以按我的习惯我得先知道他是什么、为什么、能做什么，我才好下手。</p>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><p>先不负责任的下一个结论，fusion design是个撒子？</p>
+<p><strong>答案：</strong></p>
+<blockquote>
+<p><strong>一个平台：</strong> fusion.design</p>
+<p><strong>两个工具：</strong></p>
+<ol>
+<li>开发者工具 Iceworks </li>
+<li>设计师工具 FusionCool</li>
+</ol>
+</blockquote>
+<p>可以看作是下图这样纠缠：</p>
+<img src="/2020/07/08/fusion%20design/6.png" class>
+
+<h3 id="Fusion-Design"><a href="#Fusion-Design" class="headerlink" title="Fusion Design"></a>Fusion Design</h3><p>fusion design = 一套基础组件库 @alifd/next + 主题定制平台 <a href="https://fusion.design" target="_blank" rel="noopener">https://fusion.design</a> +  设计师工具 FusionCool+ 物料中心 。</p>
+<p>所以更确切的说 Fusion Design算是一套体系，是一种旨在提升设计与开发之间 UI 构建效率的工作方式 ，<code>我认为理解这点很重要</code>，不然可能咱们用半天还以为他就是另一个库就像我们之前用的antd一样，其实完全不是一回事。</p>
+<p><strong>Fusion Design能解决哪些痛点：</strong></p>
+<ol>
+<li><p>【协作成本】内部（UCD和研发）协作问题，不再需要因为对概念、规范、复用性等问题UCD和研发不断沟通。</p>
+</li>
+<li><p>用户体验一致性问题 ，不同业务功能或者不同迭代功能，同样功能的交互和组件用户体验不一致。</p>
+</li>
+<li><p>【时间成本】重复工作问题，比如不断的review还原度不断的修正、UCD每次都需要对高保真进行规范说明以及关键内容的标注。</p>
+</li>
+</ol>
+<p>   <em>旧模式如下图：</em>红框部分是我们经常重复的内容。</p>
+   <img src="/2020/07/08/fusion%20design/1.png" class title="https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;53117538">
+
+<p><strong>Fusion Design提供了哪些能力来解决上诉的痛点：</strong></p>
+<ul>
+<li><p>物料中心：各种组件、区块、模板（包含官方（Next等）+其它第三方+咱们自研的）</p>
+</li>
+<li><p>UI的可定制能力，设计师根据物料中心的内容定制UI，还可沉淀设计模板。</p>
+</li>
+<li><p>研发都能配合前端工具（iceworks等），开发模块模板更高效，沉淀业务模板，后续可直接套用模板不用再开发。</p>
+</li>
+<li><p>快速定制、切换主题。</p>
+</li>
+</ul>
+<p>  应用fusion design之后，产出过程应该就会像下图：</p>
+  <img src="/2020/07/08/fusion%20design/2.png" class title="fusion design应用">
+
+<p><strong>@alifd/next</strong> </p>
+<ul>
+<li><strong>Next</strong> 是基于 Alibaba Fusion Design 的设计理念实现的一套骨架DPL(Design Pattern Library)类似于咱们之前使用的antd。配合 fusion.design 使用可以实现换肤的能力。</li>
+<li>基于React的组件库。 可以理解<strong><a href="https://github.com/alibaba-fusion/next" target="_blank" rel="noopener">Next</a></strong>是fusion design的技术实现。</li>
+</ul>
+<h4 id="小结一下"><a href="#小结一下" class="headerlink" title="小结一下"></a>小结一下</h4><p>所以综上所述，引人fusion design后，理想状态下设计师和研发产出页面（功能）的过程应该会如下面两张图所示：</p>
+<img src="/2020/07/08/fusion%20design/5.png" class title="前期产出">
+
+<img src="/2020/07/08/fusion%20design/4.png" class title="后期沉淀">
+
+
+
+<h3 id="物料中心"><a href="#物料中心" class="headerlink" title="物料中心"></a>物料中心</h3><p>可以理解成一个仓库，类似maven仓库或者npm仓库，里面可包含用开发好的<strong>物料</strong>(区块、模板、组件)，该物料中心与sketch、iceworks是互通的，相互间可上传可下载。</p>
+<h3 id="FusionCool"><a href="#FusionCool" class="headerlink" title="FusionCool"></a>FusionCool</h3><p>FusionCool：组件分发工具，主要面向所有设计师。当组件构建者完成组件设计发布组件后，每位设计师手上的Fusion Cool都会“自动”接收到构建者的发布的组件样式，确保无缝衔接组件更新。</p>
+<p>FusionCool也可以简单理解为是设计端使用的<strong>sketch</strong> 插件，达到<strong>sketch</strong> 既能设计页面，又能沉淀已经设计完成的模板。即设计师使用的同一套规范的组件，产出的设计稿都是同一套规范。</p>
+<img src="/2020/07/08/fusion%20design/3.png" class>
+
+<h3 id="IceWorks"><a href="#IceWorks" class="headerlink" title="IceWorks"></a>IceWorks</h3><p>飞冰(ICE) 是一套基于 React 的中后台应用解决方案，ICE 包含了一条从设计端到开发端的完整链路，帮助用户快速搭建属于自己的中后台应用，开发者无须关注环境的问题，并且有海量物料可用。目前已经和 Fusion 的物料体系打通，可以轻松使用 Fusion 站点的物料。</p>
+<p>Iceworks 是淘宝飞冰团队开发的面向前端开发者的 GUI 工具，开发者无须关注环境的问题，并且有海量物料可用。目前已经和 Fusion 的物料体系打通，可以轻松使用 Fusion 站点的物料。</p>
+<p>fusion design的御用开发者工具，基于其开发各种组件丰富fusion design站点的<strong>物料中心</strong>，当然iceworks也能轻松使用 Fusion 站点的物料，两者互通。</p>
+<h3 id="总之"><a href="#总之" class="headerlink" title="总之"></a>总之</h3><p>我个人认为fusion design的价值在于提升工作效率，因为它改造了前端（设计师和研发）的工作方式，减少了重复工作的内容，减少了沟通以及甩锅的成本，通过fusion design这个平台，让设计师和研发都能深度参与产品中来且这种参与是互补共赢的，它让设计师和研发之间的一些壁垒或者冲突点慢慢的消失了。</p>
+<p><strong>另外</strong></p>
+<p>对于角色（设计、研发）来说：可能最大变化就是对于通用性的、沉淀下来的物料，<strong>UCD才是老板</strong>，这块的样式布局等需要UCD统一把关收口，研发只需要<strong>更新包</strong>就行。总体上就是UCD的工作内容会增加但是研发时间会减少，协作时间也会减少，同时体验一致性也能达到要求。我估计能达到这种状态应该就可以要自行车了吧？</p>
+<p>但是这玩意都是<strong>线上</strong>的，不知道能不能支持本地搭一套（如果不能搭是不是又不能要自行车了）？</p>
+<h4 id="题外篇：iceworks-server"><a href="#题外篇：iceworks-server" class="headerlink" title="题外篇：iceworks server"></a>题外篇：iceworks server</h4><p>如需使用iceworks提供的一些快捷能力，比如新建项目（基于fusion design、react、typescript）、项目管理等。</p>
+<p>用于练手刚好。</p>
+<h5 id="1-安装iceworks"><a href="#1-安装iceworks" class="headerlink" title="1.安装iceworks"></a>1.安装iceworks</h5><p>npm install iceworks -g –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
+<p>每个命令大家都可以玩一玩，我下面只介绍<code>start</code>的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">D:\baymax_projects\fusion-design-one&gt;iceworks -h</span><br><span class="line">Usage: iceworks &lt;command&gt; [options]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -V, --version                           output the version number</span><br><span class="line">  -h, --help                              output usage information</span><br><span class="line"></span><br><span class="line">Commands:</span><br><span class="line">  start                                   start and open the iceworks</span><br><span class="line">  init [type] [npmName]                   init project&#x2F;material&#x2F;component by template</span><br><span class="line">  add [options] [materialType] [npmName]  add block to current directory</span><br><span class="line">  generate                                generate material collection data(material.json)</span><br><span class="line">  sync [options]                          sync materials data to Fusion Material Center</span><br><span class="line">  use &lt;version&gt;                           specify the iceworks-core version</span><br><span class="line">  config [type] [key] [value]             operate iceworks global config</span><br><span class="line"></span><br><span class="line">  Run iceworks &lt;command&gt; --help for detailed usage of given command.</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-启动-安装iceworks-server"><a href="#2-启动-安装iceworks-server" class="headerlink" title="2.启动 安装iceworks-server"></a>2.启动 安装iceworks-server</h5><p><strong>windows:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iceworks  start</span><br></pre></td></tr></table></figure>
+
+<p><strong>linux：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;sh</span><br><span class="line"># iceworks start</span><br><span class="line">iceworks # open http:&#x2F;&#x2F;localhost:8000&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>3.若提示是否安装iceworks-server 直接Enter 默认是 稍等几分钟 自动启动浏览器</p>
+<h4 id="iceworks-server使用方法"><a href="#iceworks-server使用方法" class="headerlink" title="iceworks server使用方法"></a>iceworks server使用方法</h4><p>1.打开项目,(首先你要有项目包)</p>
+<img src="/2020/07/08/fusion%20design/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_15942030658073.png" class>
+
+<p>2.安装依赖</p>
+<p>如果要切换cnpm源，设置包管理工具cnpm（前提是现状了cnpm），如不需要则跳过此步。</p>
+<p><img src="http://p.qlogo.cn/qqmail_head/Q3auHgzwzM71G0g4z5ytHZ3RnWFG6CQBymPLrJfcn3414aSmCt9kxE3rFpGUyE4mkZAq7swa9ddRWBBE9reucepYTnCFraPo/0" alt="img"></p>
+<p><img src="http://p.qlogo.cn/qqmail_head/Q3auHgzwzM6v4zGcvurETEGvaibCoKpJiaLYIXnT6IQWUwzHpr64y93qJYK3iapia65fAOSFz92XwKagfibU85Ru1xnrFib2YttvcT/0" alt="img"></p>
+<p>3.启动服务</p>
+<p>当然你也可以本地运行</p>
+<img src="/2020/07/08/fusion%20design/image-20200708181243032.png" class>
+
+<p>4.当页面变成这样说明已经启动成功:(会自动跳转到项目页面)</p>
+<img src="/2020/07/08/fusion%20design/image-20200708181842813.png" class>
+
+<p>5.打开编辑器</p>
+<p><img src="http://p.qlogo.cn/qqmail_head/PiajxSqBRaEJVGxo28SB3YVYmnPVIWRrzicm3k0lSgoDfAdpDEwwfic7xdf2CSLwkN5DhaickyISN8y7dXqyHflWnhxz8HiaR8EvG/0" alt="img"></p>
+<img src="/2020/07/08/fusion%20design/image-20200708181919865.png" class>
+
+<h4 id="感谢："><a href="#感谢：" class="headerlink" title="感谢："></a>感谢：</h4><blockquote><footer><strong>阿里中后台UI解决方案 - Fusion</strong><cite><a href="https://zhuanlan.zhihu.com/p/53117538" target="_blank" rel="noopener">zhuanlan.zhihu.com/p/53117538</a></cite></footer></blockquote>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/07/07/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E6%9C%AC%E8%B4%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/07/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E6%9C%AC%E8%B4%A8/" itemprop="url">软件开发本质</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-07T11:24:06+08:00">
+                2020-07-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BB%E4%B9%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">读书</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>最近在工程建设这块浪</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/06/05/%E5%89%8D%E7%AB%AF%E5%9F%8B%E7%82%B9(%E4%BA%8C)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -990,7 +1574,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/04/21/ps-grep-top-free/" itemprop="url">ps、top、free</a></h2>
+                <a class="post-title-link" href="/2020/04/21/ps-grep-top-free/" itemprop="url">Linux ps、top、free命令</a></h2>
         
 
         <div class="post-meta">
@@ -1733,7 +2317,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/03/06/tick%E6%A0%88/">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/03/06/DevOps%E5%AE%9E%E8%B7%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
@@ -1752,7 +2336,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/03/06/tick%E6%A0%88/" itemprop="url">tick栈</a></h2>
+                <a class="post-title-link" href="/2020/03/06/DevOps%E5%AE%9E%E8%B7%B5/" itemprop="url">DevOps实践</a></h2>
         
 
         <div class="post-meta">
@@ -1826,7 +2410,19 @@
       
         
           
-            
+            <p>搬运<a href="https://devops.phodal.com/manual#%E6%80%BB%E8%A7%88" target="_blank" rel="noopener">DevOps实施手册</a></p>
+<ol>
+<li><a href="https://devops.phodal.com/manual#建立愿景与方向" target="_blank" rel="noopener">建立愿景与方向</a></li>
+<li><a href="https://devops.phodal.com/manual#度量" target="_blank" rel="noopener">度量：组织、系统现状</a></li>
+<li><a href="https://devops.phodal.com/manual#准入条件" target="_blank" rel="noopener">准入条件</a>。查看是否满足实施 DevOps 的准入条件。</li>
+<li><a href="https://devops.phodal.com/manual#探索可行方案" target="_blank" rel="noopener">探索可行方案</a>。即 MVP 尝试</li>
+<li><a href="https://devops.phodal.com/manual#mvp" target="_blank" rel="noopener">MVP</a>。一次快速的 DevOps 过程和结果的 showcase。</li>
+<li><a href="https://devops.phodal.com/manual#实施落地" target="_blank" rel="noopener">精细化 DevOps 实施</a></li>
+<li><a href="https://devops.phodal.com/manual#回顾优化" target="_blank" rel="noopener">回顾优化</a></li>
+<li><a href="https://devops.phodal.com/manual#规模化" target="_blank" rel="noopener">规模化 DevOps 落地</a></li>
+</ol>
+<p>对于技术债务，它的利息表现为系统的不稳定性，以及由于临时性手段和缺乏合适的设计、文档工作和测试带来的不断攀升的维护成本。 —— 《架构师应该知道的 97 件事》</p>
+
           
         
       
@@ -1874,7 +2470,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/03/01/Module-bundling/">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/03/01/Module%20bundling/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
@@ -1893,7 +2489,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/03/01/Module-bundling/" itemprop="url">Module bundling</a></h2>
+                <a class="post-title-link" href="/2020/03/01/Module%20bundling/" itemprop="url">Module bundling</a></h2>
         
 
         <div class="post-meta">
@@ -1968,809 +2564,29 @@
         
           
             <p>是的这又是一篇搬运文章，谁让我放荡不羁爱打野呢。作者博客地址<a href="https://www.preethikasireddy.com/" target="_blank" rel="noopener">Preethi Kasireddy</a></p>
-<p>之前有聊过一篇关于<a href>JS Module</a>的文章，这可以看作是续集，讲的事Module bundling。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/02/28/Gulp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/28/Gulp/" itemprop="url">Gulp</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-28T21:11:00+08:00">
-                2020-02-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>是这样的，最近呢在捣鼓一系列升级的问题，刚好就遇到了Gulp从3升到4的过程，所以借机呢稍微深入的了解了一下Gulp，在此做个简单的记录。</p>
-<p>Gulp我一开始理解的他就是个样式处理工具，但实际了解下来，才发现它原来跟Grunt一样是个构建工具。</p>
-<p>那就开整吧，我按我的节奏来哈：</p>
-<ol>
-<li><strong>了解一些底层</strong>，知道是怎么来的。</li>
-<li><strong>了解基本概念</strong>，不但要知道是怎么来的，还要知道是干啥的。</li>
-<li><strong>了解语法</strong> ，3-&gt;4升级实操</li>
-</ol>
-<h3 id="一些底层"><a href="#一些底层" class="headerlink" title="一些底层"></a>一些底层</h3><p>Gulp 是基于 <a href="http://nodejs.org/" target="_blank" rel="noopener">Node.js</a> 的项目，它的核心使用的是Node.js四种流中的<a href="http://nodejs.cn/s/fhVJQM" target="_blank" rel="noopener">Transform</a> - <code>在读写过程中可以修改或转换数据的 Duplex流</code> 。即可读又可写的流，它会对传给它的对象做一些转换的操作。</p>
-<p>因为基于Streams，而Streams和其它数据处理方法相比最大的优点：</p>
-<ol>
-<li>内存效率：我们无需先将大量数据加载到内存中即可进行处理。它就像往河里（Pipe）倒水一样，一桶水你可以分很多次倒。</li>
-<li>时间效率：拥有数据后立即开始处理数据所需的时间大大减少，而不必等到整个有效负载都传输完成才开始处理。还是倒水的例子，你倒入河里（Pipe）马上就流走了不会等着一桶水倒完之后才流走。</li>
-</ol>
-<p>Streams的<em>cheatsheet</em>：</p>
-<img src="/2020/02/28/Gulp/stream_cc.png" class title="from https:&#x2F;&#x2F;devhints.io&#x2F;nodejs-stream">
-
-
-
-<p>Duplex：</p>
-<img src="/2020/02/28/Gulp/duplex.png" class title="from [Duplex](http:&#x2F;&#x2F;codewinds.com&#x2F;blog&#x2F;2013-08-31-nodejs-duplex-streams.html)">
-
-
-
-<p>Streams内部实现流程图：</p>
-<img src="/2020/02/28/Gulp/stream01.png" class title="from [DauleDK](https:&#x2F;&#x2F;stackoverflow.com&#x2F;users&#x2F;3694288&#x2F;dauledk)">
-
-
-
-<p>想了解细节的推荐去看<a href="https://github.com/substack/stream-handbook" target="_blank" rel="noopener">stream-handbook</a>、<a href="http://www.youtube.com/watch?v=QgEuZ52OZtU" target="_blank" rel="noopener">Video introduction to node.js streams</a>。通过学习之后我真的认为Node的Streams是正儿八经牛X的存在，对我来说简直是一颗遗珠啊。</p>
-<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p><strong>Task</strong></p>
-<p>每个 gulp 任务（task）都是一个异步的 JavaScript 函数，此函数是一个可以接收 callback 作为参数的函数，或者是一个返回 stream、promise、event emitter、child process 或 observable (<a href="https://www.gulpjs.com.cn/docs/getting-started/async-completion" target="_blank" rel="noopener">后面会详细讲解</a>) 类型值的函数。 </p>
-<p>任务（tasks）可以是 <strong>public（公开）</strong> 或 <strong>private（私有）</strong> 类型的。</p>
-<ul>
-<li><strong>公开任务（Public tasks）</strong> 从 gulpfile 中被导出（export），可以通过 <code>gulp</code> 命令直接调用。</li>
-<li><strong>私有任务（Private tasks）</strong> 被设计为在内部使用，通常作为 <code>series()</code> 或 <code>parallel()</code> 组合的组成部分。</li>
-</ul>
-<p><strong>Gulpfile</strong></p>
-<p>Gulp 允许你使用现有 JavaScript 知识来书写 gulpfile 文，gulpfile 是项目目录下名为 <code>gulpfile.js</code> （或者首字母大写 <code>Gulpfile.js</code>，就像 Makefile 一样命名）的文件，在运行 <code>gulp</code> 命令时会被自动加载。在这个文件中，你经常会看到类似 <code>src()</code>、<code>dest()</code>、<code>series()</code> 或 <code>parallel()</code> 函数之类的 gulp API，除此之外，纯 JavaScript 代码或 Node 模块也会被使用。任何导出（export）的函数都将注册到 gulp 的任务（task）系统中。</p>
-<p><strong>处理文件</strong></p>
-<p>gulp 暴露了 <code>src()</code> 和 <code>dest()</code> 方法用于处理计算机上存放的文件。</p>
-<p><code>src()</code> 接受 <a href="https://www.gulpjs.com.cn/docs/getting-started/explaining-globs" target="_blank" rel="noopener">glob</a> 参数，并从文件系统中读取文件然后生成一个 <a href="https://nodejs.org/api/stream.html" target="_blank" rel="noopener">Node 流（stream）</a>。它将所有匹配的文件读取到内存中并通过流（stream）进行处理。</p>
-<p>流（stream）所提供的主要的 API 是 <code>.pipe()</code> 方法，用于连接转换流（Transform streams）或可写流（Writable streams）。</p>
-<p><code>dest()</code> 接受一个输出目录作为参数，并且它还会产生一个 <a href="https://nodejs.org/api/stream.html" target="_blank" rel="noopener">Node 流（stream）</a>，通常作为终止流（terminator stream）。当它接收到通过管道（pipeline）传输的文件时，它会将文件内容及文件属性写入到指定的目录中。gulp 还提供了 <code>symlink()</code> 方法，其操作方式类似 <code>dest()</code>，但是创建的是链接而不是文件（ 详情请参阅 <a href="https://www.gulpjs.com.cn/docs/api/symlink" target="_blank" rel="noopener"><code>symlink()</code></a> ）。</p>
-<p>大多数情况下，利用 <code>.pipe()</code> 方法将插件放置在 <code>src()</code> 和 <code>dest()</code> 之间，并转换流（stream）中的文件。</p>
-<p><strong>Glob</strong></p>
-<p>glob 是由普通字符和/或通配字符组成的字符串，用于匹配文件路径。可以利用一个或多个 glob 在文件系统中定位文件。</p>
-<blockquote>
-<p>*(一个星号)：在一个字符串片段中匹配任意数量的字符，包括零个匹配。对于匹配单级目录下的文件很有用。</p>
-<p>** (两个星号)：在多个字符串片段中匹配任意数量的字符，包括零个匹配。 对于匹配嵌套目录下的文件很有用。请确保适当地限制带有两个星号的 glob 的使用，以避免匹配大量不必要的目录。</p>
-<p> ! (取反)：由于 glob 匹配时是按照每个 glob 在数组中的位置依次进行匹配操作的，所以 glob 数组中的取反（negative）glob 必须跟在一个非取反（non-negative）的 glob 后面。第一个 glob 匹配到一组匹配项，然后后面的取反 glob 删除这些匹配项中的一部分。如果取反 glob 只是由普通字符组成的字符串，则执行效率是最高的。</p>
-</blockquote>
-<p><strong>插件</strong></p>
-<p>Gulp 插件实质上是 <a href="https://github.com/rvagg/through2" target="_blank" rel="noopener">Node 转换流（Transform Streams）</a>，它封装了通过管道（pipeline）转换文件的常见功能，通常是使用 <code>.pipe()</code> 方法并放在 <code>src()</code> 和 <code>dest()</code> 之间。他们可以更改经过流（stream）的每个文件的文件名、元数据或文件内容。</p>
-<p><strong>Gulp</strong></p>
-<img src="/2020/02/28/Gulp/Gulp.png" class title="from 我">
-
-
-
-<p>Gulp的<em>cheatsheet</em>：</p>
-<img src="/2020/02/28/Gulp/gulp01.png" class title="from https:&#x2F;&#x2F;github.com&#x2F;osscafe&#x2F;gulp-cheatsheet">
-
-
-
-<img src="/2020/02/28/Gulp/gulp02.png" class title="from https:&#x2F;&#x2F;github.com&#x2F;osscafe&#x2F;gulp-cheatsheet">
-
-
-
-<h3 id="Gulp-3-gt-4-实操"><a href="#Gulp-3-gt-4-实操" class="headerlink" title="Gulp 3 - &gt; 4 实操"></a>Gulp 3 - &gt; 4 实操</h3><p>3其实算是废弃了，当然还是可以用的，只是不维护了。所以升一升还是极好的。</p>
-<ol>
-<li>现卸载现有的</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall gulp --save-dev</span><br><span class="line">npm uninstall gulp -g</span><br></pre></td></tr></table></figure>
-
-<p>你以为升级完之后是这样色儿的</p>
-<img src="/2020/02/28/Gulp/a.gif" class>
-
-<p>但是一执行是这样的：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AssertionError [ERR_ASSERTION]: Task function must be specified</span><br></pre></td></tr></table></figure>
-
-<img src="/2020/02/28/Gulp/b.jpeg" class>
-
-<p>这是因为Gulp4只支持 2 个参数的 <code>gulp.task</code>了，所以就意味着咱们以前的代码得改了，那咱们就有疑问了怎么改呢？先了解下改了什么。</p>
-<h4 id="series、parallel"><a href="#series、parallel" class="headerlink" title="series、parallel"></a><strong>series、parallel</strong></h4><p>官网说了：Gulp.js 4.0引入了series（）和parallel（）方法来组合任务： </p>
-<ul>
-<li><p>series（…）按指定的顺序一次运行一个任务，并返回一个按给定的任务 / 函数的顺序执行的函数。</p>
-</li>
-<li><p>parallel（…）以任何顺序同时运行任务，并返回一个能并行执行给定的任务/函数的函数</p>
-</li>
-</ul>
-<p>  可见Gulp做出了很大的努力来实现对任务运行方式的更多控制，提供了选择顺序或并行执行任务的能力，避免之前需要添加别的依赖（传统上是使用 <a href="https://www.npmjs.com/package/run-sequence" target="_blank" rel="noopener">run-sequence</a>）或者丧心病狂地手动分配任务执行的依赖。。</p>
-<p>所以，如果之前你有这样一个任务：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(&#39;copy_css&#39;, [&#39;clean_temp&#39;], function() &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>它将会变为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(&#39;copy_css&#39;, gulp.series(&#39;clean_temp&#39;, function() &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
-
-<p>当做出这个改变时，不要忘了你的任务函数现在在 <code>gulp.series</code> 的回调函数里。所以你需要在尾部多出来的那个括号。这很容易被忽略。</p>
-<p>注意到 <code>gulp.sereis</code> 与 <code>gulp.parallel</code> 会返回函数，所以它们可以被嵌套。当你的任务有多个依赖时，你可能需要经常地嵌套它们。</p>
-<p>例如，这个常见的模式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(&#39;default&#39;, [&#39;copy_css&#39;, &#39;copy_image&#39;], function() &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>将会变为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(&#39;default&#39;, gulp.series(gulp.parallel(&#39;copy_css&#39;, &#39;copy_image&#39;), function() &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
-
-<h4 id="依赖问题"><a href="#依赖问题" class="headerlink" title="依赖问题"></a>依赖问题</h4><p>这是一个坑点，在 Gulp 3 中，如果你为多个任务指定了同一个依赖，并且它们都在运行时，Gulp 会意识到它们都依赖相同的任务，然后只执行一次这个被依赖的任务。而在 Gulp 4 中，我们不再指定”依赖”，而是使用 <code>series</code> 或 <code>parallel</code> 来组合函数，这导致 Gulp 不能判断哪些任务在当它只应运行一次时会被多次运行。所以我们需要改变我们对依赖的处理方式。我们需要把依赖从任务中抽离出来，并在一个更大的“父级”任务中把依赖指明成一个 <code>series</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 这些任务不再有任何依赖</span><br><span class="line">gulp.task(&#39;copy_css&#39;, function() &#123;...&#125;);</span><br><span class="line">gulp.task(&#39;copy_image&#39;, function() &#123;...&#125;);</span><br><span class="line">gulp.task(&#39;clean_temp&#39;, function() &#123;...&#125;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; default 依赖于 copy_css 与 copy_image</span><br><span class="line">gulp.task(&#39;default&#39;, gulp.series(&#39;clean_temp&#39;, gulp.parallel(&#39;copy_css&#39;, &#39;copy_image&#39;)));</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="使用普通函数"><a href="#使用普通函数" class="headerlink" title="使用普通函数"></a>使用普通函数</h4><p>因为现在每一个任务实际上都只是一个函数，也并没有依赖或者其他特别的东西。所以我们不必每个任务都用 <code>gulp.task</code> 来完成。开始拥抱独立的函数而不用再像之前通过传入 <code>gulp.task</code> 的回调函数来写代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(&#39;copyGlobalImage&#39;, function() &#123;...&#125;);</span><br><span class="line">gulp.task(&#39;copyCss&#39;, function() &#123;...&#125;);</span><br><span class="line">gulp.task(&#39;copyGlobalFont&#39;, function() &#123;...&#125;);</span><br><span class="line">gulp.task(&#39;copyAllImage&#39;, function() &#123;...&#125;);</span><br><span class="line"></span><br><span class="line">gulp.task(&#39;copy&#39;, series([&#39;copy-static&#39;], gulp.parallel(&#39;copyGlobalImage&#39;, &#39;copyCss&#39;,&#39;copyGlobalFont&#39;,&#39;copyAllImage&#39;)));</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;改成以下这样</span><br><span class="line">function themeResourcesCopy(srcPath, destPath, infoMsg) &#123;</span><br><span class="line">  let res &#x3D; null;</span><br><span class="line">  for (let i &#x3D; 0; i &lt; theme.length; i +&#x3D; 1) &#123;</span><br><span class="line">    for (let j &#x3D; 0; j &lt; color.length; j +&#x3D; 1) &#123;</span><br><span class="line">      res &#x3D; gulp</span><br><span class="line">        .src(srcPath)</span><br><span class="line">        .pipe(info(infoMsg))</span><br><span class="line">        .pipe(gulp.dest(&#96;$&#123;buildTargetPath + color[j]&#125;&#x2F;$&#123;theme[i]&#125;$&#123;destPath&#125;&#96;));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function copyGlobalImage() &#123;</span><br><span class="line">  &#x2F;&#x2F; 目前不考虑同步情况</span><br><span class="line">  const g_image &#x3D; &#39;_global&#x2F;image&#x2F;&#39;;</span><br><span class="line">  info(&#96;$&#123;targetTemp + g_image&#125;**&#96;);</span><br><span class="line">  return themeResourcesCopy(&#96;$&#123;targetTemp + g_image&#125;**&#96;, &#39;&#x2F;image&#x2F;&#39;, DIS.image_copy_g);</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 记得去掉引号</span><br><span class="line">gulp.task(&#39;copy&#39;, series([&#39;copy-static&#39;], parallel(copyGlobalImage, copyCss, copyGlobalFont, copyAllImage)));</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>第一次接触所以就这样吧，后续会对这块进行优化，因为我发现之前的同事这块写的太复杂了且没有用一些压缩之类的插件，也是一开始都是大家都是开荒，可能都不是专业的，反正团队里比较open，只要不影响原有的功能，优化没人管。</p>
-<h4 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h4><blockquote><footer><strong>少年阿布DX</strong><cite><a href="https://www.zcfy.cc/article/the-complete-ish-guide-to-upgrading-to-gulp-4" target="_blank" rel="noopener">升级至 Gulp 4 的近完整指南</a></cite></footer></blockquote>
-
-
-
-<blockquote><footer><strong>少年阿布DX</strong><cite><a href="https://www.zcfy.cc/article/the-complete-ish-guide-to-upgrading-to-gulp-4" target="_blank" rel="noopener">升级至 Gulp 4 的近完整指南</a></cite></footer></blockquote>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/02/25/React%20Hooks(%E4%B8%80)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/25/React%20Hooks(%E4%B8%80)/" itemprop="url">React Hooks(一)</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-25T16:57:00+08:00">
-                2020-02-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <img src="/2020/02/25/React%20Hooks(%E4%B8%80)/title.png" class>
-
-<p>整理自团队内部的分享，因为从17年底启动的产品线，所以用的当时的最新版本16.3.1，由于种种原因一直没有升级，特别是自从出了Hooks之后，我是一直觉得应该进行版本升级了，因为升级这个事是避免不了的，除非你不再接收新的变化。</p>
-<p>去年其实呼吁过一次不过被按下来了，犹不死心，所以就借着分享的机会，再团队内部普及一遍。</p>
-<p>当然我说了只是普及不是教程，所以要点就两个：</p>
-<ol>
-<li><strong>Hooks的特性</strong></li>
-<li><strong>在项目中的实践</strong></li>
-</ol>
-<h2 id="Before"><a href="#Before" class="headerlink" title="Before"></a>Before</h2><p>在介绍Hooks之前先说说我在开发中的一些痛点</p>
-<ol>
-<li>类组件没办法写的比较轻巧，毕竟好几个生命周期在那儿摆着，有时候不得不冷静一下想想用哪个生命周期合适。</li>
-<li><strong>本来是个函数组件，就因为需要添加一个变量（state），所以必须改成class组件。</strong></li>
-<li><strong>有关状态管理的逻辑代码很难在组件之间复用、且该业务逻辑的实现代码很多时候被分分散到了不同的生命周期内，当能提组件的时候还好，如果不能提组件那这套代码如果其他地方有用只能重复造轮子</strong></li>
-<li>class组件this的指向问题。</li>
-</ol>
-<h2 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h2><h4 id="什么是-Hooks"><a href="#什么是-Hooks" class="headerlink" title="什么是 Hooks?"></a>什么是 Hooks?</h4><p>我的理解啊，是这样，就是当你要完成一个动作（事情…），必然就需要一个过程的，有过程就可以分阶段，而在某个阶段，你可以在其前后插入事项从而实现对整个过程的扩展以及把控，这就是hook做的事情，挤进去搞事情。类似的比如Spring里的AOP。</p>
-<p>而没有React Hooks之前想要实现上述效果，只能用class+生命周期函数，比如下图。</p>
-<img src="/2020/02/25/React%20Hooks(%E4%B8%80)/a.png" class title="from https:&#x2F;&#x2F;juejin.im&#x2F;post&#x2F;5a062fb551882535cd4a4ce3">
-
-<p>而React Hooks就是允许你在不编写 class 的情况下使用状态(state)和其他 React 特性。 你还可以<strong>构建自己的 Hooks</strong>, 跨组件共享可重用的有状态逻辑。<strong>React Hooks 的意思是，组件尽量写成纯函数，如果需要外部功能和在整个渲染过程中进行功能扩展，就用钩子把外部代码”钩”进来。</strong> </p>
-<p>从图1到图2的进化，忘掉class抱紧hooks。</p>
-<img src="/2020/02/25/React%20Hooks(%E4%B8%80)/5LbsY.jpg" class title="图1">
-
-<img src="/2020/02/25/React%20Hooks(%E4%B8%80)/nTmNe.jpg" class title="图2">
-
-<h4 id="主要应用的Hook"><a href="#主要应用的Hook" class="headerlink" title="主要应用的Hook"></a>主要应用的Hook</h4><p>列举使用频度较高的几个hook。</p>
-<p><strong>useRef</strong> 代替之前的 ref并且更加强大，不仅用于DOM引用。 “ ref”对象是一个通用容器，其当前属性是可变的，并且可以保存任何值，类似于类的实例属性。</p>
-<p><strong>useState</strong> 代替之前的 <strong>state</strong></p>
-<p><strong>useReducer</strong>可实现redux类似的功能，其实state就算基于useReducer实现的</p>
-<p><strong>useEffect</strong> 则可以代替某些生命周期钩子函数，如果你熟悉 React class 的生命周期函数，你可以把 useEffect Hook 看做 componentDidMount，componentDidUpdate 和 componentWillUnmount 这三个函数的组合。</p>
-<h4 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h4><p>结合项目中的代码实操一下，感受一下hooks的魅力。</p>
-<h5 id="示例一"><a href="#示例一" class="headerlink" title="示例一"></a><strong>示例一</strong></h5><p>一个最简单的例子，只是为了加一个变量。</p>
-<p>场景：实现弹出窗体的效果，需要一个变量<span style="color:red">visible</span>控制窗口的显示和隐藏，代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class AlarmCards extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.state &#x3D; &#123; visible: false &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  updateVisible &#x3D; (visible) &#x3D;&gt; &#123;</span><br><span class="line">    this.setState(&#123;</span><br><span class="line">      visible</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    return &#123;...&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><span style="color:red">切换到Hooks代码如下：</span></p>
-<ol>
-<li>class变为函数组件</li>
-<li>用useState</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useState &#125; from &#39;react&#39;;</span><br><span class="line">const AlarmCards &#x3D; (&#123; ...props &#125;) &#x3D;&gt; &#123;</span><br><span class="line">  &#x2F;&#x2F; useState 直接声明变量visible，同时声明方法setVisible来更新visible</span><br><span class="line">  &#x2F;&#x2F; false 初始值</span><br><span class="line">  const [visible, setVisible] &#x3D; useState(false);</span><br><span class="line">  </span><br><span class="line">  return &#123;...页面内容...&#125;;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<hr>
-<h5 id="示例二"><a href="#示例二" class="headerlink" title="示例二"></a><strong>示例二</strong></h5><p>看一个稍微复杂一点点的例子，只涉及到两个生命周期函数。</p>
-<p>场景：从后端获取数据使其更新组件内容，并在该组件卸载时，更新重置状态（变量）到初始值，代码如下：</p>
-<p><strong>变量声明</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">export const initState &#x3D; &#123;</span><br><span class="line">  loading: false,</span><br><span class="line">  data: [],</span><br><span class="line">  header: [],</span><br><span class="line">  &#x2F;&#x2F; 探测结果弹出层是否打开</span><br><span class="line">  visible: false,</span><br><span class="line">  &#x2F;&#x2F; 探测结果弹出层参数对象</span><br><span class="line">  drawerParams: &#123;</span><br><span class="line">    appId: null,</span><br><span class="line">    appName: &#39;&#39;,</span><br><span class="line">    record: null</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><strong>请求方法封装</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 排查对比表</span><br><span class="line"> * @param params 参数对象</span><br><span class="line"> * @returns &#123;Function&#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">export const getComparisonTable &#x3D; (&#123; ...params &#125;) &#x3D;&gt; &#123;</span><br><span class="line">  &#x2F;**</span><br><span class="line">   * alarmRule 告警规则（类型）</span><br><span class="line">   * updateTime 告警更新时间</span><br><span class="line">   * onDotClick 小圆点的点击事件</span><br><span class="line">   * appId 当前告警的应用id</span><br><span class="line">   * span 告警计算时间跨度</span><br><span class="line">   *&#x2F;</span><br><span class="line">  const &#123; alarmId, alarmRule, updateTime, onDotClick, appId, span &#125; &#x3D; params;</span><br><span class="line">  &#x2F;&#x2F; 开始请求</span><br><span class="line">  setState(&#123; loading: true &#125;);</span><br><span class="line">  const errorCallback &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    setState(&#123; loading: false &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">  req(BASE_WEB_API.GET_ALARM_DETAIL_COMPARISON, &#123; alarmId, alarmRule, updateTime &#125;, null, &#123;</span><br><span class="line">    errorCallback</span><br><span class="line">  &#125;).then(result &#x3D;&gt; &#123;</span><br><span class="line">    if (!isAvailableArray(result)) &#123;</span><br><span class="line">      setState(&#123; loading: false &#125;);</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; 生成表格需要的表头和数据</span><br><span class="line">    const data &#x3D; generateTableObjs(result, onDotClick, appId);</span><br><span class="line">    setState(&#123; ...data, loading: false &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p><strong>展示组件</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class AlarmTable extends Component &#123;</span><br><span class="line">  componentDidMount() &#123;</span><br><span class="line">    const &#123; alarmId, alarmRule, updateTime, appId, getComparisonTable, span,</span><br><span class="line">    onDotClick &#125; &#x3D; this.props;</span><br><span class="line">    &#x2F;&#x2F; 获取对比表数据</span><br><span class="line">    getComparisonTable(&#123; alarmId, alarmRule, updateTime, onDotClick, appId, span &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  componentWillUnmount() &#123;</span><br><span class="line">    const &#123; setState &#125; &#x3D; this.props;</span><br><span class="line">    &#x2F;&#x2F; 重置state避免脏数据影响折叠面板展开和关闭</span><br><span class="line">    setState(model.initState);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">render() &#123;</span><br><span class="line">   ....</span><br><span class="line">  return &#123;...页面内容...&#125;;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><span style="color:red"><strong>Hooks切换，代码如下：</strong></span></p>
-<ol>
-<li>class变为函数组件</li>
-<li>用useState+useEffect</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useEffect, useState &#125; from &#39;react&#39;;</span><br><span class="line">const AlarmTable &#x3D; (&#123; ...props &#125;) &#x3D;&gt; &#123;</span><br><span class="line"></span><br><span class="line">  const &#123; alarmId, alarmRule, updateTime, appId, closeLoading, span, onDotClick &#125; &#x3D; props;</span><br><span class="line">    &#x2F;&#x2F; 变量声明</span><br><span class="line">  const [tableData, setTableData] &#x3D; useState(&#123; data: [], header: [] &#125;);</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 开始请求， useEffect可当作componentDidMount，componentDidUpdate 和 </span><br><span class="line">  &#x2F;&#x2F; componentWillUnmount三个生命周期的组合</span><br><span class="line"></span><br><span class="line">useEffect(() &#x3D;&gt; &#123;</span><br><span class="line">  const &#123; alarmId, alarmRule, updateTime, appId, onDotClick, closeLoading &#125; &#x3D; props;</span><br><span class="line">  const errorCallback &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">    closeLoading(false);</span><br><span class="line">  &#125;;</span><br><span class="line">  req(BASE_WEB_API.GET_ALARM_DETAIL_COMPARISON, &#123; alarmId, alarmRule, updateTime &#125;, null, &#123;</span><br><span class="line">    errorCallback</span><br><span class="line">  &#125;).then(result &#x3D;&gt; &#123;</span><br><span class="line">    if (!isAvailableArray(result)) &#123;</span><br><span class="line">      errorCallback();</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; 生成表格需要的表头和数据</span><br><span class="line">    const data &#x3D; generateTableObjs(result, onDotClick, appId);</span><br><span class="line">    setTableData(&#123; ...data &#125;);</span><br><span class="line">    closeLoading(false);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 卸载函数</span><br><span class="line">  return function cleanup() &#123;</span><br><span class="line">    &#x2F;&#x2F; 重置state避免脏数据影响页面呈现</span><br><span class="line">    setTableData((&#123; data: [], header: [] &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">....</span><br><span class="line">  return &#123;...页面内容...&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong><span style="color:red">继续优化：</span></strong></p>
-<p><strong>自定义钩子封装</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">function useCpmparisonTable(closeLoading, alarmId, alarmRule, updateTime, onDotClick, appId) &#123;</span><br><span class="line">  const [drawer, setDrawer] &#x3D; useState(&#123;</span><br><span class="line">    visible: false,</span><br><span class="line">    drawerParams: &#123; appId: null, appName: null, record: null &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  const [tableData, setTableData] &#x3D; useState(&#123; data: [], header: [] &#125;);</span><br><span class="line">  </span><br><span class="line">  useEffect(() &#x3D;&gt; &#123;</span><br><span class="line">    &#x2F;&#x2F; 开始请求</span><br><span class="line">    const errorCallback &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">      closeLoading(false);</span><br><span class="line">    &#125;;</span><br><span class="line">    req(BASE_WEB_API.GET_ALARM_DETAIL_COMPARISON, &#123; alarmId, alarmRule, updateTime &#125;, null, &#123;</span><br><span class="line">      errorCallback</span><br><span class="line">    &#125;).then(result &#x3D;&gt; &#123;</span><br><span class="line">      if (!isAvailableArray(result)) &#123;</span><br><span class="line">        errorCallback();</span><br><span class="line">        return;</span><br><span class="line">      &#125;</span><br><span class="line">      &#x2F;&#x2F; 生成表格需要的表头和数据</span><br><span class="line">      const data &#x3D; generateTableObjs(result, onDotClick, appId);</span><br><span class="line">      setTableData(&#123; ...data &#125;);</span><br><span class="line">      closeLoading(false);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; 功能等同componentWillUnmount</span><br><span class="line">    return  ()&#x3D;&gt; &#123;</span><br><span class="line">       &#x2F;&#x2F; 重置state避免脏数据影响页面呈现</span><br><span class="line">       setTableData((&#123; data: [], header: [] &#125;);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;);</span><br><span class="line">  return [drawer, setDrawer, tableData];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>页面组件</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const AlarmTable &#x3D; (&#123; ...props &#125;) &#x3D;&gt; &#123;</span><br><span class="line">const &#123; alarmId, alarmRule, updateTime, appId, closeLoading, onDotClick &#125; &#x3D; props;</span><br><span class="line">&#x2F;&#x2F; 自定义钩子，通常用use开头于官方的钩子呼应，使其能一眼看出这是一个hook</span><br><span class="line">const [ tableData ] &#x3D; useComparisonTable(closeLoading, alarmId, alarmRule, updateTime, onDotClick, appId);</span><br><span class="line">....</span><br><span class="line">  return &#123;...页面内容...&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>从示例中可以看出Hooks的带来的一些变化，当然篇幅有限只写了两个Hook，useState和useEffect。</p>
-<p>简单总结一下Hooks带来的<strong>优势</strong>。</p>
-<ol>
-<li><p>干掉了生命周期（夸张了一点点），不用在多个生命周期函数中徘徊</p>
-</li>
-<li><p>为后面的第三方组件等升级做铺垫。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">特别是基于React的三方库，比如我们用的Ant Design，</span><br><span class="line">官方前几天发布了4.0有重大升级，假设我们有一天要升级到AntD 4.0，</span><br><span class="line">它会告诉你先要把React升到16.8以后也就是支持Hooks之后的版本。</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>减少代码量，且从面向函数编程细化到面向<strong>业务逻辑块</strong>编程</p>
-<ol>
-<li><p>比如不用再bind方法或者不用再写方法体来改变state可用自定的hook封装业务逻辑 使<strong>业务逻辑内聚</strong>，便于整套业务逻辑能够在不同的组件间复用，组件在使用的时候也不需要关注其内部的实现。 </p>
-</li>
-<li><p>Hook能够在传统的类组件基础上上，实现细化到<strong>逻辑层面的代码复用</strong>，而不仅仅是停留在组件级别， 而且Hook的复用并不是停留在将某些常用的逻辑方法代码抽成一个公共方法，而是可以将之前散落在类组件中各个生命周期中的用于实现某个业务的逻辑代码合并在一起封装成一个自定义的Hook，其他地方随用随调。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">比如我们的各种CRUD的表单...</span><br><span class="line">比如我们的表格一些通用交互，过滤、刷新、排序、查询...</span><br><span class="line">比如我们的图表的一些通用交互，框选、点选...</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-</li>
-</ol>
-<ol start="4">
-<li><p>更简洁易测的组件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">比如后续期望分享的前端单元测试的工具，如果我们要把单元测试用起来，</span><br><span class="line">你会发现class和函数写单元测试的差别真的很大</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ol>
-<h4 id="Hooks不足："><a href="#Hooks不足：" class="headerlink" title="Hooks不足："></a><strong>Hooks不足：</strong></h4><p>当然不能吹爆React的Hooks，虽然业界公认包括官方规划都指出，Hooks是React的未来，未来需要一个过程。</p>
-<ol>
-<li><p>现在的Hooks还不能完全替代class</p>
-</li>
-<li><p>使用的Hooks必须保证顺序，即内部是通过两个数组来管理的，所以<strong>不要在循环，条件判断，嵌套函数里面调用 Hooks</strong>。使其下标对不上从而导致state发生混乱，这在前期可能很容易发生bug。</p>
-<p>下图可简单理解一下内部的原理：</p>
-<img src="/2020/02/25/React%20Hooks(%E4%B8%80)/lQQX7.png" class>
-</li>
-<li><p>使用hook后，代码归类不会像之前class组件时代的一样有语法的强制规划了，什么意思呢？在class组件时代，redux的有关的代码是放到connect里的，state生命是放constructor里的，其他逻辑是放每个有关的生命周期里的。而在hook的时代，没有这些东西了，一切都直接放在函数组件内部，如果写得混乱，看起来就是<strong>一锅粥</strong>，所以，制定组件的书写规范和通过注释来归类不同功能的逻辑显得尤为重要。这有助于后期的维护，也有助于保持一个团队在代码书写风格上的一致性。</p>
-</li>
-</ol>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>   <strong>Peace &amp; Love</strong>，没有银弹。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/02/23/ES%20Module/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/23/ES%20Module/" itemprop="url">ES Module</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-23T22:33:00+08:00">
-                2020-02-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>单独记录一下ES Module，听得太多用的也多，但是一直没深刻的认识一下它。</p>
-<p>同样的节奏先Google找是否有大佬写这方面的文章。</p>
-<p>幸运的是被我找到了<a href="https://twitter.com/linclark" target="_blank" rel="noopener">Lin Clark</a>（之前我学习浏览器方面的知识就是读的她的文章）写的，很喜欢她的文章，讲的很生动和具体。</p>
-<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><p>来来来，搬运一下这一篇<a href="https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/" target="_blank" rel="noopener">ES modules: A cartoon deep-dive</a>。</p>
-<h4 id="模块如何提供帮助？"><a href="#模块如何提供帮助？" class="headerlink" title="模块如何提供帮助？"></a>模块如何提供帮助？</h4><p>模块为您提供了更好的方式来组织这些变量和函数。使用模块，您可以将有意义的变量和函数组合在一起。</p>
-<p>这会将这些函数和变量放入模块范围。模块作用域可用于在模块中的功能之间共享变量。</p>
-<p>但是与函数作用域不同，模块作用域具有一种使其变量也可用于其他模块的方式。他们可以明确地说出模块中的哪些变量，类或函数应该可用。</p>
-<p>当其他模块可以使用某些东西时，这称为导出。导出后，其他模块可以明确地说它们依赖于该变量，类或函数。</p>
-<img src="/2020/02/23/ES%20Module/1.png" class>
-
-<p>因为这是一种明确的关系，所以您可以知道如果删除另一个模块，哪个模块将中断。</p>
-<p>一旦能够在模块之间导出和导入变量，就可以更轻松地将代码分解为可以相互独立工作的小块。然后，您可以组合并重组这些块（类似于积木），以从同一组模块创建所有不同种类的应用程序。</p>
-<h4 id="ES模块如何工作"><a href="#ES模块如何工作" class="headerlink" title="ES模块如何工作"></a>ES模块如何工作</h4><p>在使用模块进行开发时，您将建立一个依赖关系图。不同依赖项之间的连接来自您使用的任何导入语句。</p>
-<p>这些导入语句是浏览器或Node如何确切知道其需要加载哪些代码的方式。您给它一个文件，以用作图形的入口点。从那里开始，它紧随任何import语句以查找其余代码。</p>
-<p><a href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/04_import_graph.png" target="_blank" rel="noopener"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/04_import_graph-500x291.png" alt="具有两个依赖关系的模块。 顶部模块是条目。 另外两个使用import语句关联"></a></p>
-<p>但是文件本身不是浏览器可以使用的东西。它需要解析所有这些文件，以将它们转换为称为模块记录的数据结构。这样，它实际上知道文件中正在发生什么。</p>
-<p><a href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/05_module_record.png" target="_blank" rel="noopener"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/05_module_record-500x287.png" alt="具有各种字段的模块记录，包括RequestedModules和ImportEntries"></a></p>
-<p>之后，需要将模块记录转换为模块实例。实例结合了两件事：代码和状态。</p>
-<p>该代码基本上是一组指令。这就像如何做某食物的食谱。但是就其本身而言，您不能使用该代码执行任何操作。您需要原材料才能与这些代码一起使用。</p>
-<p>什么是状态？就像做食物的原材料。状态是变量在任何时间点的实际值。当然，这些变量只是内存中保存值的空间的昵称。</p>
-<p>因此，模块实例将代码（指令列表）与状态（所有变量的值）组合在一起。</p>
-<p><a href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/06_module_instance.png" target="_blank" rel="noopener"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/06_module_instance-500x372.png" alt="结合了代码和状态的模块实例"></a></p>
-<p>我们需要的是每个模块的模块实例。模块加载的过程将从此入口点文件变为具有模块实例的完整图。</p>
-<p>对于ES模块，这分为三个步骤。</p>
-<ol>
-<li>构造—查找，下载所有文件并将其解析为模块记录。</li>
-<li>实例化—查找内存中的空间以放置所有导出的值（但尚未用值填充它们）。然后使导出和导入都指向内存中的那些空间的位置（地址）。这称为链接（引用）。</li>
-<li>求值—运行代码以将变量的实际值填写在对应的内存空间。</li>
-</ol>
-<p><a href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/07_3_phases.png" target="_blank" rel="noopener"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/07_3_phases-500x184.png" alt="三个阶段。 构建从单个JS文件到多个模块记录。 实例化链接那些记录。 评估执行代码。"></a></p>
-<p>人们谈论ES模块是异步的。您可以将其视为异步的，因为工作分为三个不同的阶段（加载，实例化和评估），并且这些阶段可以分别完成。</p>
-<p>这意味着规范确实引入了CommonJS中不存在的一种异步。我将在后面解释，但是在CommonJS中，模块及其下面的依赖项一次全部被加载，实例化和求值，而中间没有任何中断。</p>
-<p>但是，步骤本身不一定是异步的。它们可以以同步方式完成。这取决于正在执行的加载。这是因为并非所有内容都由ES模块规范控制。实际上有两部分工作，分别由不同的规范涵盖。</p>
-<p>在<a href="https://tc39.github.io/ecma262/#sec-modules" target="_blank" rel="noopener">ES模块规范</a>说，你应该如何解析文件到模块的记录，你应该如何实例化和评估模块。但是，它并没有说明如何首先获取文件。</p>
-<p>加载程序将获取文件。加载程序在其他规范中指定。对于浏览器，该规范是<a href="https://html.spec.whatwg.org/#fetch-a-module-script-tree" target="_blank" rel="noopener">HTML规范</a>。但是您可以根据所使用的平台使用不同的装载程序。</p>
-<p><a href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/07_loader_vs_es.png" target="_blank" rel="noopener"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/07_loader_vs_es-500x286.png" alt="两个卡通人物。 一个代表说明如何加载模块的规范（即HTML规范）。 另一个代表ES模块规范。"></a></p>
-<p>加载程序还精确控制模块的加载方式。它调用ES模块的方法- <code>ParseModule</code>，<code>Module.Instantiate</code>和<code>Module.Evaluate</code>。有点像操纵JS引擎的字符串的p。</p>
-<p><a href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_loader_as_puppeteer.png" target="_blank" rel="noopener"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_loader_as_puppeteer-500x330.png" alt="加载程序图形充当ES模块规范图形的伪造者。"></a></p>
-<p>现在，让我们详细介绍每个步骤。</p>
-<h4 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h4><p>在构建阶段，每个模块发生三件事。</p>
-<ol>
-<li>找出从哪里下载包含模块的文件</li>
-<li>提取文件（通过从URL下载文件或从文件系统加载文件）</li>
-<li>将文件解析为模块记录</li>
-</ol>
-<h4 id="查找并获取文件"><a href="#查找并获取文件" class="headerlink" title="查找并获取文件"></a>查找并获取文件</h4><p>加载程序将负责查找文件并下载。首先，它需要找到入口点文件。在HTML中，您可以通过脚本标记告诉加载程序在哪里找到它。</p>
-<p><a href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_script_entry.png" target="_blank" rel="noopener"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_script_entry-500x188.png" alt="具有type = module属性和src URL的脚本标记。 src URL有一个文件，它是条目"></a></p>
-<p>但是，如何找到下一组模块- <code>main.js</code>直接依赖的模块呢？</p>
-<p>这就是导入语句的来源。导入语句的一部分称为模块说明符。它告诉加载程序可以在哪里找到每个下一个模块。</p>
-<img src="/2020/02/23/ES%20Module/2.png" class>
-
-<p>有关模块说明符的一件事：在浏览器和Node之间有时需要对它们进行不同的处理。每个主机都有自己的解释模块说明符字符串的方式。为此，它使用一种称为模块解析算法的模块，该算法在平台之间有所不同。当前，某些可在Node中工作的模块说明符在浏览器中将无法工作，但<a href="https://github.com/domenic/package-name-maps" target="_blank" rel="noopener">仍在进行修复</a>。</p>
-<p>在此问题修复之前，浏览器仅接受URL作为模块说明符。他们将从该URL加载模块文件。但这不会同时出现在整个图表上。在解析文件之前，您不知道模块需要获取哪些依赖项，并且在获取文件之前无法解析文件。</p>
-<p>这意味着我们必须逐层遍历该树，解析一个文件，然后找出其依赖项，然后查找并加载这些依赖项。</p>
-<img src="/2020/02/23/ES%20Module/3.png" class>
-
-<p>如果主线程要等待这些文件中的每一个下载，则许多其他任务将堆积在其队列中。</p>
-<img src="/2020/02/23/ES%20Module/4.png" class>
-
-<p>这样阻塞主线程会使使用模块的应用程序使用起来太慢。这是ES模块规范将算法分为多个阶段的原因之一。将构造分为自己的阶段，使浏览器可以在开始实例化的同步工作之前获取文件并增强对模块图的理解。</p>
-<p>这种方法（算法分为多个阶段）是ES模块和CommonJS模块之间的主要区别之一。</p>
-<p>CommonJS可以做不同的事情，因为从文件系统加载文件比通过Internet下载花费的时间少得多。这意味着Node可以在加载文件时阻止主线程。并且由于文件已经加载，因此仅实例化和求值（在CommonJS中不是单独的阶段）是有意义的。这也意味着在返回模块实例之前，您要遍历整棵树，加载，实例化和评估任何依赖项。</p>
-<img src="/2020/02/23/ES%20Module/5.png" class>
-
-<p>CommonJS方法有一些含义，我将在后面详细解释。但是，这意味着一件事，就是在带有CommonJS模块的Node中，可以在模块说明符中使用变量。<code>require</code>在寻找下一个模块之前，您正在执行该模块中的所有代码（直到语句）。这意味着当您进行模块解析时，变量将具有一个值。</p>
-<p>但是，使用ES模块，您可以在进行任何计算（求值）之前预先建立整个模块图。这意味着您不能在模块说明符中包含变量，因为这些变量尚无值。</p>
-<img src="/2020/02/23/ES%20Module/6.png" class>
-
-<p>但是有时将变量用于模块路径确实很有用。例如，您可能想根据代码在做什么或在什么环境中运行来切换加载的模块。</p>
-<p>为了使ES模块成为可能，有一个建议叫做<a href="https://github.com/tc39/proposal-dynamic-import" target="_blank" rel="noopener">动态导入</a>。有了它，您可以使用类似的导入语句<code>import(</code>${path}/foo.js<code>)</code>。</p>
-<p>动态导入的工作原理是，任何使用<code>import()</code>来导入的文件，都会作为一个入口文件从而创建一棵单独的依赖树，被单独处理。</p>
-<img src="/2020/02/23/ES%20Module/7.png" class>
-
-<p>但是要注意一件事–这两棵树中的任何模块都将共享一个模块实例。这是因为加载程序会缓存模块实例。对于特定全局范围内的每个模块，将只有一个模块实例。</p>
-<p>这意味着浏览器的工作量更少。例如，这意味着即使多个模块依赖该模块文件，该模块文件也只会被提取一次。（这是缓存模块的一个原因。我们将在评估部分中看到另一个原因。）</p>
-<p>加载程序使用称为<a href="https://html.spec.whatwg.org/multipage/webappapis.html#module-map" target="_blank" rel="noopener">模块映射的内容</a>来管理此缓存。每个全局变量在单独的模块图中跟踪其模块。</p>
-<p>当加载程序获取一个URL时，它将把该URL放入模块映射中，并记下它当前正在获取文件。然后它将发出请求并继续以开始获取下一个文件。</p>
-<img src="/2020/02/23/ES%20Module/8.png" class>
-
-<p>如果另一个模块依赖于同一文件会怎样？加载程序将在模块映射中查找每个URL。如果在其中看到<code>fetching</code>，它将继续前进到下一个URL。</p>
-<p>但是模块图不仅跟踪正在获取的文件。模块映射还充当模块的缓存，如下所示。</p>
-<h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><p>现在我们已经获取了该文件，我们需要将其解析为模块记录。这有助于浏览器了解模块的不同部分。</p>
-<p><a href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/25_file_to_module_record.png" target="_blank" rel="noopener"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/25_file_to_module_record-500x199.png" alt="该图显示了被解析成模块记录的main.js文件"></a></p>
-<p>创建模块记录后，将其放置在模块映射中。这意味着无论何时从此处请求，加载程序都可以将其从该映射中拉出。</p>
-<p><a href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/25_module_map.png" target="_blank" rel="noopener"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/25_module_map-500x239.png" alt="模块映射图中的“获取”占位符被模块记录填充"></a></p>
-<p>解析有一个细节看似微不足道，但实际上有很大的含义。所有模块都像<strong>严格模式</strong>来解析的。也还有其他的小细节，比如，关键字 <code>await</code> 在模块的最顶层是保留字， <code>this</code> 的值为 <code>undefinded</code>。</p>
-<p>这种不同的解析方式称为“解析目标”。如果您解析相同的文件但使用不同的目标，那么最终将得到不同的结果。因此，在开始解析之前就需要知道要解析的文件类型，不管是否是模块。</p>
-<p>在浏览器中，这非常简单。您只需放入<code>type=&quot;module&quot;</code>script标签。这告诉浏览器应将此文件解析为模块。并且由于只能导入模块，因此浏览器知道任何导入也是模块。</p>
-<p><a href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/26_parse_goal.png" target="_blank" rel="noopener"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/26_parse_goal-500x311.png" alt="加载程序确定main.js是一个模块，因为script标签上的type属性表明是这样，而counter.js必须是一个模块，因为它已导入"></a></p>
-<p>但是在Node中，您不使用HTML标记，因此无法选择使用<code>type</code>属性。社区尝试解决此问题的一种方法是使用 <code>.mjs</code>扩展。使用该扩展名告诉Node，“此文件是一个模块”。您会看到人们将其视为解析目标的信号。目前讨论仍在进行中，因此尚不清楚Node社区最终决定使用什么信号。</p>
-<p>无论哪种方式，加载程序都将确定是否将文件解析为模块。如果它是一个模块并且有imports，它将重新开始该过程，直到提取并解析了所有文件。</p>
-<p>在加载过程的最后，您已经从只有一个入口点文件变成了拥有许多模块记录。</p>
-<p><a href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/27_construction.png" target="_blank" rel="noopener"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/27_construction-500x406.png" alt="建设阶段的结果，左侧为JS文件，右侧为3个已解析的模块记录"></a></p>
-<p>下一步是实例化此模块并将所有实例连接在一起。</p>
-<h4 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h4><p>就像我之前提到的，实例化是将代码与状态结合在一起。该状态存在于内存中，因此实例化步骤就是将所有状态链接到内存。</p>
-<p>首先，JS引擎创建一个<strong>模块环境记录</strong>（Module Environment Record）。它是管理所有模块记录的变量。然后，它会在内存中找到所有export对应的的地址。模块环境记录将跟踪内存中与每个export相关联的地址。</p>
-<p>内存中的这些地址对应的空间尚无法获取其值。只有在运行之后，它们的实际值才会被填写。需要注意的一点是：在此阶段中将初始化所有导出的函数声明。这将使后面的执行阶段变得更加容易。</p>
-<p>为了实例化<strong>模块关系图</strong>，引擎会采用<strong>深度优先的后序遍历方式</strong>。这意味着它将到达关系图的最底部（底部不依赖于其他任何东西），并设置其导出。</p>
-<img src="/2020/02/23/ES%20Module/9.png" class>
-
-<p>最终，引擎会把模块下的所有依赖导出连接到当前模块。接着回到上一层把模块的导入连接起来。</p>
-<p>请注意，导出和导入均指向内存中的同一位置。</p>
-<img src="/2020/02/23/ES%20Module/10.png" class>
-
-<p>这不同于CommonJS模块。在CommonJS中，整个导出对象在导出时被复制。这意味着导出的任何值（如数字）都是副本，所以在CommonJS如果导出模块以后更改了该值，则导入模块将看不到该更改。</p>
-<p>这意味着，如果导出模块以后更改了该值，则导入模块将看不到该更改。</p>
-<img src="/2020/02/23/ES%20Module/11.png" class>
-
-<p>相反，ES模块使用<strong>实时绑定</strong>（Live Binding）。两个模块都指向内存中的相同位置（引用）。这意味着，当导出模块更改值时，该更改将显示在导入模块中。</p>
-<p>导出值的模块可以随时更改这些值，但是导入模块不能更改其导入的值，因为是导入的是<strong>只读引用</strong>。不过如果模块导入了一个对象，则它可以更改该对象上的属性值。</p>
-<img src="/2020/02/23/ES%20Module/12.png" class>
-
-<p>之所以ESM采用实时绑定，是因为可以在不运行任何代码的情况下链接到所有模块。这有助于解决循环依赖的问题，在后面的运行(evaluation)阶段会细说。</p>
-<p>OK，当实例化结束时，我们得到了所有模块实例，并知道了已完成链接的导出/导入变量的内存地址。</p>
-<p>现在我们可以开始评估代码，并使用它们的值填充这些内存位置。</p>
-<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><p>最后一步是往解析阶段获取的内存地址所在的空间里填充值。JS 引擎通过运行顶层代码（函数外的代码）来完成填充。</p>
-<p>除了填充值以外，运行代码还可能引发副作用。例如，一个模块可能会请求服务器。</p>
-<p><a href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/40_top_level_code.png" target="_blank" rel="noopener"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/40_top_level_code-500x146.png" alt="模块将在功能之外进行编码，标记为顶级代码"></a></p>
-<p>因为这些潜在副作用的存在，所以<strong>模块代码只能运行一次</strong>。<br>前面我们看到，实例化阶段中发生的链接过程可以多次进行，并且每次的结果都一样。但是，如果运行阶段进行多次的话，则可能会每次都得到不一样的结果。</p>
-<p>这正是为什么需要有模块映射的原因之一。模块映射通过规范URL，缓存模块，因此每个模块只有一个模块记录。这样可以确保每个模块仅执行一次。与实例化一样，这是深度优先的后遍历。</p>
-<p>那我们之前谈到的循环依赖怎么处理呢？</p>
-<p>在循环依赖关系中，您最终会在模块关系图中出现循环。你依赖我我依赖你，通常，这会变成很大的循环。</p>
-<p>为了解释这个问题，我举个例子。</p>
- <img src="/2020/02/23/ES%20Module/13.png" class>
-
-<p>首先让我们看一下如果时CommonJS模块会时什么样的。首先，main模块将执行到require语句。然后它将去加载counter模块。</p>
- <img src="/2020/02/23/ES%20Module/14.png" class>
-
-<p>然后，counter模块将尝试从访问导出的对象<code>message</code>。但是由于尚未在main模块中执行，因此它将返回undefined。JS引擎将在内存中为局部变量分配空间，并将该值设置为undefined。</p>
-<p><a href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/42_cjs_variable_2.png" target="_blank" rel="noopener"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/42_cjs_variable_2-500x113.png" alt="中间的内存，main.js和内存之间没有连接，但是从counter.js到未定义的内存位置的导入链接"></a></p>
-<p>此时会一直运行持续到counter模块顶级代码的末尾。我们想看看是否最终将获得正确的message（在执行main.js之后），因此我们设置了超时时间。然后继续运行到<code>main.js</code>。</p>
- <img src="/2020/02/23/ES%20Module/15.png" class>
-
-<p>message变量将被初始化并添加到内存中。但是由于两者之间没有连接，因此message在counter模块中仍然是时undefined。</p>
- <img src="/2020/02/23/ES%20Module/16.png" class>
-
-<p>如果使用实时绑定处理导出，则counter模块最终将看到正确的值。到超时运行时，<code>main.js</code>的执行就已经完成并填充了值。</p>
-<p>支持循环依赖是 ESM 设计之初就考虑到的一大因素。也正是这种分（三）阶段设计使其成为可能。</p>
-<h4 id="原文地址："><a href="#原文地址：" class="headerlink" title="原文地址："></a>原文地址：</h4><blockquote><footer><strong>Lin Clark</strong><cite><a href="https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/" target="_blank" rel="noopener">ES modules: A cartoon deep-dive</a></cite></footer></blockquote>
+<p>之前有聊过一篇关于<a href="/2020/02/22/Modules/" title="Modules">Modules</a>的文章，主要讲什么是模块以及为什么需要模块。这篇主要讲怎么捆绑（打包）模块也就是模块使用的深一步探讨。</p>
+<h3 id="什么是模块捆绑？"><a href="#什么是模块捆绑？" class="headerlink" title="什么是模块捆绑？"></a>什么是模块捆绑？</h3><p> 从高层次上讲，模块捆绑只是将一组模块（及其依赖项）按正确顺序拼接到单个文件（或一组文件）中的过程。</p>
+<h3 id="为什么需要模块捆绑？"><a href="#为什么需要模块捆绑？" class="headerlink" title="为什么需要模块捆绑？"></a>为什么需要模块捆绑？</h3><p>如果项目中使用的模块过多，那么你就需要一个一个的使用script 标签引入到html中去,然后html运行的时候会一个一个的去加载你引入的模块。</p>
+
+
+<p>像上图那样 one by one 如果用的模块一多，页面的延迟就会过久，用户体验不好。</p>
+<p>为了解决这个问题，我们把所有文件捆绑，或“拼接”到一个文件（有时也是一组文件）中，<strong>正是为了减少请求数</strong>。</p>
+<p>另一个加速构建操作的常用方法是，“缩减”捆绑后的代码。缩减，是把源代码中不需要的字符（如空格、评论、换行符等等）移除，从而减小了代码的总体积，却不改变其功能。</p>
+<p>数据更少，<strong>浏览器处理的时间就更短</strong>，比如经常见到的”xxxmin.js”，相比完整版，缩减版小了好多。</p>
+<h3 id="捆绑模块有哪些不同的方式？"><a href="#捆绑模块有哪些不同的方式？" class="headerlink" title="捆绑模块有哪些不同的方式？"></a>捆绑模块有哪些不同的方式？</h3><p>如果你用的是一种标准模块模式（在 <a href="https://medium.freecodecamp.com/javascript-modules-a-beginner-s-guide-783f7d7a5fcc#.y8hs0nsne" target="_blank" rel="noopener">第一部分</a> 讨论过）来定义模块，比如<em>IIFE、全局导入</em>等，其实就是直接拼接和缩减几堆纯 JavaScript 代码，通常则不用借助工具。</p>
+<p>但如果你用的是非原生模块系统，浏览器不能像 CommonJS、AMD、甚至原生 ES6 模块格式那样解析，你就需要用专门工具先转化成排列正确、浏览器可识别的代码。这正是 Browserify、RequireJS、Webpack 和其他模块捆绑工具，或模块加载工具粉墨登场的时候。</p>
+<p>下面就来过一遍常用的模块捆绑方法：</p>
+<h4 id="Bundling-CommonJS"><a href="#Bundling-CommonJS" class="headerlink" title="Bundling CommonJS"></a>Bundling CommonJS</h4><p> <a href="https://medium.freecodecamp.com/javascript-modules-a-beginner-s-guide-783f7d7a5fcc#.y8hs0nsne" target="_blank" rel="noopener">第一部分</a>所知，CommonJS同步加载模块，它对于浏览器是不适用的。 解决此问题其中一个方法是用Browserify。 Browserify是一个为浏览器编译CommonJS模块的工具。</p>
+<p>例如，假设您有一个main.js文件，该文件导入一个模块来计算数字数组的平均值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var myDependency &#x3D; require（&#39;myDependency&#39;）;</span><br><span class="line">var myGrades &#x3D; [93，95，88，0，91];</span><br><span class="line">var myAverageGrade &#x3D; myDependency.average（myGrades）;</span><br></pre></td></tr></table></figure>
+
+<p>因此，在这种情况下，我们只有一个依赖项（myDependency）。 使用以下命令，Browserify将递归所有必需的模块（从main.js开始）并把它们捆绑到一个名为bundle.js的文件中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">browserify main.js -o bundle.js</span><br></pre></td></tr></table></figure>
+
+<p>Browserify通过跳入每个<strong><em>require</em></strong> 调用的AST解析来遍历项目的整个依赖关系图来实现此目的。 一旦确定了依存关系的结构，便会将它们按正确的顺序捆绑到一个文件中。当需要使用时，则将<strong><em>“bundle.js”</em></strong> 文件的<code>&lt;script&gt;</code>标记插入到html中，以确保所有源代码都在一个HTTP请求中下载。</p>
+<p>同样，如果您有多个具有多个依赖项的文件，则只需告诉Browserify您的条目文件是什么，然后静静等待Browserify进行文件捆绑。</p>
+<p>最后，可以使用Minify-JS之类的工具来缩小捆绑代码。</p>
+<h4 id="Bundling-AMD"><a href="#Bundling-AMD" class="headerlink" title="Bundling AMD"></a>Bundling AMD</h4>
           
         
       
@@ -2809,7 +2625,7 @@
 
   
  <nav class="pagination">
-   <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
+   <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
  </nav>
 
 
@@ -2858,7 +2674,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-count">102</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2880,7 +2696,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">68</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -3530,7 +3346,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("前端埋点");titles.push("Linux ls命令");titles.push("前端埋点(一)");titles.push("ps、top、free");titles.push("Java 8 Streams");titles.push("tick栈");titles.push("Module bundling");titles.push("Gulp");titles.push("React Hooks(一)");titles.push("ES Module");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("js工具库");titles.push("Fusion Design");titles.push("软件开发本质");titles.push("前端埋点");titles.push("Linux ls命令");titles.push("前端埋点(一)");titles.push("Linux ps、top、free命令");titles.push("Java 8 Streams");titles.push("DevOps实践");titles.push("Module bundling");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {
@@ -3575,4 +3391,5 @@
 
   
 
-<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+</body>
+</html>
