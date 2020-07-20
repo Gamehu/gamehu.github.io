@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="测试," />
 
 
 
@@ -83,14 +83,16 @@
 
 
 
-<meta name="description" content="我还是我，看到自己都老火...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="正儿八经">
-<meta property="og:url" content="https://gamehu.github.io/tags/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91/index.html">
+<meta name="description" content="Jestskip，only，each修饰符describe与test可以连接skip，only，each修饰符。如describe.skip(&#39;something&#39;, testFunction)，会在测试时跳过这一个describe。only会使测试只运行指定的测试用例，这在某个测试用例出错Debug时非常好用。each修饰符可以执行多次参数不同的测试，它接受一个数组table和一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jest">
+<meta property="og:url" content="https://gamehu.github.io/2020/07/13/Jest/index.html">
 <meta property="og:site_name" content="正儿八经">
-<meta property="og:description" content="我还是我，看到自己都老火...">
+<meta property="og:description" content="Jestskip，only，each修饰符describe与test可以连接skip，only，each修饰符。如describe.skip(&#39;something&#39;, testFunction)，会在测试时跳过这一个describe。only会使测试只运行指定的测试用例，这在某个测试用例出错Debug时非常好用。each修饰符可以执行多次参数不同的测试，它接受一个数组table和一">
+<meta property="article:published_time" content="2020-07-13T02:18:00.000Z">
+<meta property="article:modified_time" content="2020-07-20T08:06:48.272Z">
 <meta property="article:author" content="Gamehu">
-<meta property="article:tag" content="life">
+<meta property="article:tag" content="测试">
 <meta name="twitter:card" content="summary">
 
 
@@ -121,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="https://gamehu.github.io/tags/软件开发/"/>
+  <link rel="canonical" href="https://gamehu.github.io/2020/07/13/Jest/"/>
 
 
 
 
 
-  <title>标签: 软件开发 | 正儿八经</title>
+  <title>Jest | 正儿八经</title>
   
 
 
@@ -146,7 +148,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 <a href="https://github.com/Gamehu/gamehu.github.io" target="_blank" rel="noopener" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -294,54 +296,266 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>软件开发<small>标签</small>
-        </h2>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/07/13/Jest/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2020/07/07/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E6%9C%AC%E8%B4%A8/" itemprop="url">
-              
-                <span itemprop="name">软件开发本质</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">Jest</h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-07-07T11:24:06+08:00"
-              content="2020-07-07" >
-          07-07
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-13T10:18:00+08:00">
+                2020-07-13
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Jest"><a href="#Jest" class="headerlink" title="Jest"></a>Jest</h3><h5 id="skip，only，each修饰符"><a href="#skip，only，each修饰符" class="headerlink" title="skip，only，each修饰符"></a>skip，only，each修饰符</h5><p><code>describe</code>与<code>test</code>可以连接<code>skip</code>，<code>only</code>，<code>each</code>修饰符。如<code>describe.skip(&#39;something&#39;, testFunction)</code>，会在测试时跳过这一个<code>describe</code>。<code>only</code>会使测试只运行指定的测试用例，这在某个测试用例出错Debug时非常好用。<code>each</code>修饰符可以执行多次参数不同的测试，它接受一个数组<code>table</code>和一个测试函数，<code>table</code>里的元素会作为参数传入测试函数。具体语法可以参见<a href="https://jestjs.io/docs/zh-Hans/api#describeeachtable-name-fn-timeout" target="_blank" rel="noopener">文档</a>。</p>
+<h5 id="beforeAll，afterAll，beforeEach，afterAll钩子函数"><a href="#beforeAll，afterAll，beforeEach，afterAll钩子函数" class="headerlink" title="beforeAll，afterAll，beforeEach，afterAll钩子函数"></a>beforeAll，afterAll，beforeEach，afterAll钩子函数</h5><p>Jest也支持在执行测试用例之前以及之后执行一些代码来做一些工作，像在测试前设置好测试数据、在测试后清理测试数据。这些工作可以作为<code>beforeAll</code>、<code>afterAll</code>、<code>beforeEach</code>、<code>afterAll</code>的回调函数。</p>
+<h4 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h4><p>Jest支持<code>expect</code>式的断言，像<code>expect(1).toBe(1)</code>，其中<code>toBe</code>就是断言部分。Jest支持很丰富的断言。</p>
+<h5 id="相等断言"><a href="#相等断言" class="headerlink" title="相等断言"></a>相等断言</h5><p>断言两个基本类型的值相等使用<code>expect(val1).toBe(val2)</code>。注意<code>toBe</code>断言使用<code>Object.is()</code>判断相等。它与<code>==</code>以及<code>===</code>都有不同。</p>
+<p>如果要断言数组或者Object相等，使用<code>toEqual</code>断言。它会递归地判断每个属性/元素是否是相等的。</p>
+<p>如果要断言数组或者Object相等，使用<code>toEqual</code>断言。它会递归地判断每个属性/元素是否是相等的。</p>
+<blockquote>
+<p><code>toStrictEqual(value)</code></p>
+<p>测试对象具有相同的类型和结构</p>
+<p>和<code>.toEqual</code>不同在于:</p>
+<ol>
+<li>检查具有未定义属性的键。 例如 使用.toStrictEqual时，{a：未定义，b：2}与{b：2}不匹配。</li>
+<li>检查数组。 例如 使用.toStrictEqual时，[，1]与[undefined，1]不匹配</li>
+<li>检查对象类型是否相等。 例如 具有字段a和b的类实例将不等于具有字段a和b的文字对象。</li>
+</ol>
+</blockquote>
+<h5 id="数字大小断言"><a href="#数字大小断言" class="headerlink" title="数字大小断言"></a>数字大小断言</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">test(&#39;two plus two&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">  const value &#x3D; 2 + 2;</span><br><span class="line">  expect(value).toBeGreaterThan(3);&#x2F;&#x2F;大于</span><br><span class="line">  expect(value).toBeGreaterThanOrEqual(3.5);&#x2F;&#x2F;大于等于</span><br><span class="line">  expect(value).toBeLessThan(5);&#x2F;&#x2F;小于</span><br><span class="line">  expect(value).toBeLessThanOrEqual(4.5);&#x2F;&#x2F;小于等于</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;等于</span><br><span class="line">  expect(value).toBe(4);</span><br><span class="line">  expect(value).toEqual(4);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>对于浮点数，不能使用<code>toBe</code>或者<code>toEqual</code>进行相等断言。Jest提供了<code>toBeCloseTo</code>断言，可以在忽略一定误差的情况下，断言浮点数相等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">test(&#39;adding floating point numbers&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">  const value &#x3D; 0.1 + 0.2;</span><br><span class="line">  &#x2F;&#x2F;expect(value).toBe(0.3);           This won&#39;t work because of rounding error</span><br><span class="line">  expect(value).toBeCloseTo(0.3); &#x2F;&#x2F; This works.</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="真值断言（Truthiness）"><a href="#真值断言（Truthiness）" class="headerlink" title="真值断言（Truthiness）"></a>真值断言（Truthiness）</h5><ul>
+<li><p><code>toBeNull</code> 用于 <code>null</code></p>
+</li>
+<li><p><code>toBeUndefined</code>  用于<code>undefined</code></p>
+</li>
+<li><p><code>toBeDefined</code> 与<code>toBeUndefined</code> 相反</p>
+</li>
+<li><p><code>toBeTruthy</code> 用于值为 true</p>
+</li>
+<li><p><code>toBeFalsy</code>  用于值为 false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">test(&#39;null&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">  const n &#x3D; null;</span><br><span class="line">  expect(n).toBeNull();&#x2F;&#x2F;pass</span><br><span class="line">  expect(n).toBeDefined();&#x2F;&#x2F;pass</span><br><span class="line">  expect(n).toBeUndefined();&#x2F;&#x2F; faild</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h5 id="字符串相关"><a href="#字符串相关" class="headerlink" title="字符串相关"></a>字符串相关</h5><p>Jest提供<code>toMatch</code>断言被测试的字符串是否匹配给定正则表达式。</p>
+<p>复制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">test(&#39;but there is a &quot;stop&quot; in Christoph&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">  expect(&#39;Christoph&#39;).toMatch(&#x2F;stop&#x2F;) &#x2F;&#x2F; pass</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h5><p>要断言数组中包含某个子项可以使用<code>toContain</code>断言。</p>
+<p>复制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const shoppingList &#x3D; [</span><br><span class="line">  &#39;diapers&#39;,</span><br><span class="line">  &#39;kleenex&#39;,</span><br><span class="line">  &#39;trash bags&#39;,</span><br><span class="line">  &#39;paper towels&#39;,</span><br><span class="line">  &#39;beer&#39;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">test(&#39;购物清单（shopping list）里面有啤酒（beer）&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">  expect(shoppingList).toContain(&#39;beer&#39;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h5><p>要断言对函数的某些操作会抛出异常可以使用<code>toThrow</code>断言。</p>
+<p>复制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">test(&#39;throws on octopus&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">  expect(() &#x3D;&gt; &#123;</span><br><span class="line">    drinkFlavor(&#39;octopus&#39;);</span><br><span class="line">  &#125;).toThrow();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="not修饰符"><a href="#not修饰符" class="headerlink" title="not修饰符"></a>not修饰符</h5><p><code>not</code>修饰符可以把所有的断言反向，像<code>expect(1).not.toBe(2)</code>。</p>
+<p>Jest提供的断言不止上面提到那么多。常用到的还有像断言长度的<code>toHaveLength</code>，断言对象有某个属性以及属性的值的<code>toHaveProperty</code>。更多断言的可以参见<a href="https://jestjs.io/docs/zh-Hans/expect" target="_blank" rel="noopener">Expect文档</a>。</p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag"># 测试</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/" rel="next" title="js工具库">
+                <i class="fa fa-chevron-left"></i> js工具库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/" rel="prev" title="前端测试">
+                前端测试 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -349,6 +563,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -369,8 +587,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -389,7 +616,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">102</span>
+                  <span class="site-state-item-count">101</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -411,7 +638,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -456,6 +683,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jest"><span class="nav-number">1.</span> <span class="nav-text">Jest</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#skip，only，each修饰符"><span class="nav-number">1.0.1.</span> <span class="nav-text">skip，only，each修饰符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#beforeAll，afterAll，beforeEach，afterAll钩子函数"><span class="nav-number">1.0.2.</span> <span class="nav-text">beforeAll，afterAll，beforeEach，afterAll钩子函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#断言"><span class="nav-number">1.1.</span> <span class="nav-text">断言</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#相等断言"><span class="nav-number">1.1.1.</span> <span class="nav-text">相等断言</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数字大小断言"><span class="nav-number">1.1.2.</span> <span class="nav-text">数字大小断言</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#真值断言（Truthiness）"><span class="nav-number">1.1.3.</span> <span class="nav-text">真值断言（Truthiness）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#字符串相关"><span class="nav-number">1.1.4.</span> <span class="nav-text">字符串相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数组"><span class="nav-number">1.1.5.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#抛出异常"><span class="nav-number">1.1.6.</span> <span class="nav-text">抛出异常</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#not修饰符"><span class="nav-number">1.1.7.</span> <span class="nav-text">not修饰符</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -616,6 +859,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -1047,13 +1294,13 @@
       var articles = db.collection('articles')
 
       //https://hexo.io/zh-tw/docs/variables.html
-      var isPost = ''.length > 0
+      var isPost = 'Jest'.length > 0
       var isArchive = '' === 'true'
       var isCategory = ''.length > 0
       var isTag = ''.length > 0
 
       if (isPost) { //is article page
-        var title = ''
+        var title = 'Jest'
         var doc = articles.doc(title)
 
         getCount(doc, true).then(appendCountTo($('.post-meta')))
@@ -1061,7 +1308,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("软件开发本质");' //if you have a better way to get titles of posts, please change it
+        var postsstr = '' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {
@@ -1106,4 +1353,5 @@
 
   
 
-<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+</body>
+</html>

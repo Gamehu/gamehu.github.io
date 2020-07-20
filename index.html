@@ -309,6 +309,486 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/" itemprop="url">前端测试</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-20T11:24:06+08:00">
+                2020-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>其实老早以前就想在产品中引入单元测试，领导也让我好好做一个分享主题，分享好做花功夫就行，但是我觉得此主题的分享最终目的是为了落地，所以需要一个契机，不然大家听了就完了也没啥x用。</p>
+<p>刚好大佬们上个月做了个决定，决定从前到后整体重新架构，重新梳理，做一个带中台属性的系统，从而是产品能有更多平台能力，也能更好的和另外的产线想结合。当然我说的比较云淡风轻的，干起来你才知道这是一个多么有挑战的目标，扯远了，下面说说前端测试这款的内容。</p>
+<h3 id="为什么需要测试？"><a href="#为什么需要测试？" class="headerlink" title="为什么需要测试？"></a>为什么需要测试？</h3><ul>
+<li>提高代码质量</li>
+<li>倒逼开发对编码的设计更加低耦合以及合理，方便后续的迭代/重构</li>
+<li>最大程度保证产品符合预期（因为各种场景都测试）</li>
+<li>减少测试的投入（比如回归）</li>
+<li>提升开发的信心（bug少）</li>
+</ul>
+<h3 id="前端测试的类型"><a href="#前端测试的类型" class="headerlink" title="前端测试的类型"></a>前端测试的类型</h3><p><strong>单元测试（Unit Test）</strong>、<strong>集成测试（Integration Test）</strong>、<strong>UI 测试（UI Test）</strong></p>
+<h5 id="单元测试应用："><a href="#单元测试应用：" class="headerlink" title="单元测试应用："></a>单元测试应用：</h5><ul>
+<li><p>代码中多个组件共用的工具类库、多个组件共用的子组件等。</p>
+</li>
+<li><p>能进行单元测试的函数/组件，一定是低耦合的，这也从一定程度上保证了我们的代码质量。</p>
+<p>比如我们的<strong>工具库、组件库</strong>这类通用低耦合的内容就比较适用单元测试。</p>
+</li>
+</ul>
+<p><em>「通常情况下，在公共函数/组件中一定要有单元测试来保证代码能够正常工作。单元测试也应该是项目中数量最多、覆盖率最高的。」</em></p>
+<h5 id="集成测试应用："><a href="#集成测试应用：" class="headerlink" title="集成测试应用："></a>集成测试应用：</h5><ul>
+<li>耦合度较高的函数/组件、经过二次封装的函数/组件、多个函数/组件组合而成的函数/组件等。</li>
+<li>集成测试的目的在于，测试经过单元测试后的各个模块组合在一起是否能正常工作。会对组合之后的代码整体暴露在外接口进行测试，查看组合后的代码工作是否符合预期。</li>
+</ul>
+<p>比如我们基于<strong>组件库开发的业务组件或者一些定制化但是具有一定通用型的业务组件</strong>就比较适用集成测试。</p>
+<p><em>「集成测试是安全感较高的测试，能很大程度提升开发者的信心，集成测试用例设计合理且测试都通过能够很大程度保证产品符合预期。」</em></p>
+<h5 id="UI测试应用："><a href="#UI测试应用：" class="headerlink" title="UI测试应用："></a>UI测试应用：</h5><p>先做个说明，大家不要把UI 测试（UI Test）和端到端测试（E2E Test）混为一谈，认为是同一个测试类型。</p>
+<p>事实上，UI 测试（UI Test）和端到端测试（E2E Test）是稍有区别的：</p>
+<blockquote>
+<p>UI 测试（UI Test）只是对于前端的测试，是脱离真实后端环境的，仅仅只是将前端放在真实环境中运行，而后端和数据都应该使用 Mock 的。</p>
+<p>端到端测试（E2E Test）则是将整个应用放到真实的环境中运行，包括数据在内也是需要使用真实的。</p>
+</blockquote>
+<p>就前端而言，UI 测试（UI Test）更贴近于我们的开发流程。在前后端分离的开发模式中，前端开发通常会使用到 Mock 的服务器和数据。因而我们需要在开发基本完成后进行相应的 UI 测试（UI Test）。</p>
+<p>可以理解为交付测试之前的自测阶段我们做的就是UI测试。而测试做的就是端到端测试。</p>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><p><strong>此篇介绍的是单元测试以及集成测试的应用。</strong></p>
+<p>先简单画下边界，此篇只说明基于<code>工具库、组件库，以及应用组件库的业务组件</code>的分享示例。高耦合的组件或者自动化测试应用不在此次讨论范围内。</p>
+<h4 id="选择何种测试思想"><a href="#选择何种测试思想" class="headerlink" title="选择何种测试思想"></a>选择何种测试思想</h4><p>其实本不用做这个说明，因为其实我们已经选好了（BDD）。</p>
+<p>但是避免有像我一样懵懂的同学，所以这儿咱们也简单说明一下。因为测试框架对不同规范的支持可能不一样。所以我们先搞明白测试思想有哪些？</p>
+<p><a href="https://en.wikipedia.org/wiki/Test-driven_development" target="_blank" rel="noopener">测试驱动开发（TDD）</a>和<a href="https://en.wikipedia.org/wiki/Behavior-driven_development" target="_blank" rel="noopener">行为驱动开发（BDD）</a>。</p>
+<p><img src="/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/D:%5Cgit_project%5Cgamehu_hexo%5Cblog%5Csource_posts%5C%E5%89%8D%E7%AB%AF%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%5CTDD.png" alt="image-20200717104606453"></p>
+<p><strong>TDD</strong>是一种开发技术，更多地侧重于功能的实现。</p>
+<blockquote>
+<p>TDD代表测试驱动开发。 在这种软件开发技术中，我们首先创建测试用例，然后编写这些测试用例的基础代码。 尽管TDD是一种开发技术，但它也可以用于自动化测试开发。</p>
+<p>实施TDD的团队需要花费更多的时间进行开发，但是，他们发现的缺陷很少。 <strong>TDD可以提高代码质量</strong>，并提高代码的可重用性和灵活性。</p>
+<p>TDD还有助于实现大约90-100％的高测试覆盖率。 对于遵循TDD的开发人员而言，最具挑战性的事情是在编写代码之前先编写测试用例。</p>
+</blockquote>
+<p><strong>BDD</strong>是一种专注于系统行为的开发技术。</p>
+<blockquote>
+<p>BDD是TDD的扩展，<strong>它不是编写测试用例，而是从编写行为开始</strong>。 后来，我们开发了应用程序执行该行为所需的代码。</p>
+<p>BDD方法中定义的<em>方案使开发人员，测试人员和业务用户易于协作</em>。</p>
+<p>当涉及自动测试时，BDD被认为是最佳实践，因为它专注于应用程序的行为，而不是考虑代码的实现。</p>
+<p>应用程序的行为是BDD的关注重点，它迫使开发人员和测试人员去了解产品以及用户。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">TDD</th>
+<th align="left">BDD</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">该过程从编写测试用例开始。</td>
+<td align="left">该过程从编写测试用例开始。</td>
+</tr>
+<tr>
+<td align="left">TDD专注于功能的实现方式。</td>
+<td align="left">BDD专注于最终用户的应用程序行为。</td>
+</tr>
+<tr>
+<td align="left">测试用例是用编程语言编写的。</td>
+<td align="left">与TDD相比，场景以简单的Given、When、Then关键字编写，因此更具可读性。</td>
+</tr>
+<tr>
+<td align="left">应用程序功能的变化对TDD中的测试用例有很大影响。</td>
+<td align="left">BDD方案基本不受功能更改的影响。</td>
+</tr>
+<tr>
+<td align="left">仅在开发人员之间需要协作。</td>
+<td align="left">所有利益相关者之间都需要合作。</td>
+</tr>
+<tr>
+<td align="left">只有具有编程知识的人才能理解TDD中的测试。</td>
+<td align="left">任何人都可以理解BDD中的测试，包括那些没有任何编程知识的人。</td>
+</tr>
+<tr>
+<td align="left">TDD降低了测试中出现错误的可能性。</td>
+<td align="left">与TDD相比，测试中的错误很难跟踪。</td>
+</tr>
+</tbody></table>
+<h5 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h5><p>我简单总结下大家有个简单的概念，具体有兴趣大家再下去查资料。</p>
+<p><strong>TDD</strong>主体是开发，说白了就是测试用例也是开发来写，先写测试用例，很显然测试用例肯定都过不了因为还没编码，那怎么办呢，就通过编码的方式不断的丰富功能然后再回去跑测试用例，如此循环最终达到所有测试用例都通过。比较适用后端API的测试。</p>
+<p><strong>BDD</strong>没有主体，因为所有人都需要参与（测试、开发、产品），大家用同一套语言来理解产品的功能和用户行为，大家的思考角度会更侧重用户方。比较适用前端测试的场景，因为前端是直接面对用户的。</p>
+<h4 id="找测试框架"><a href="#找测试框架" class="headerlink" title="找测试框架"></a>找测试框架</h4><p><strong>诉求</strong></p>
+<ol>
+<li>能跑JavaScript也能跑React。</li>
+<li>最好能开箱即用，不需要做很多配置。</li>
+<li>社区生态良好，能及时支持新特性且能及时响应issue。</li>
+</ol>
+<h4 id="Jest、Enzyme"><a href="#Jest、Enzyme" class="headerlink" title="Jest、Enzyme"></a>Jest、Enzyme</h4><p><strong>Jest：</strong></p>
+<p>其实测试框架茫茫多，最终选择它的原因就是其完美匹配上诉的所有诉求，Facebook亲生的，star 接近32K，React不用说了，同时也能跑JavaScript。另外Jest还具备Mock等能力，所以Jest不仅仅是个测试框架而且还是一个集合多种能力的结合体，开箱即用。</p>
+<p><strong>Enzyme:</strong></p>
+<p>用于测试的React工具库,可看作是一个集成测试框架，与Jest组合也是备受推崇的。</p>
+<p>Enzyme提供类似于jQuery的API，以查找元素，触发事件处理程序等。即可以很方便的定位到元素以及组件。</p>
+<p><strong>首先任何框架都有优点和缺点，那为什么选这两个呢：</strong></p>
+<ol>
+<li>ice用的就是这两个，有大厂（阿里）的前面探路，对于我们没有经验的团队来说作为第一次的试水我觉得跟风不是一个贬义词。</li>
+<li>基于我们的诉求我也做了一下简单的调研，因为我们主要还是以React为主所以选择Jest是自然而然的过程，另外Enzyme+Jest也是国内外热度都比较高的，两则的社区也比较活跃，所以很显然两者搭配是没有问题的，刚好ice就是用的这两个所以没什么好纠结的。</li>
+</ol>
+<h3 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h3><h4 id="jest社区"><a href="#jest社区" class="headerlink" title="jest社区"></a>jest社区</h4><p><a href="https://github.com/jest-community" target="_blank" rel="noopener">jest-community</a>/<strong><a href="https://github.com/jest-community/awesome-jest" target="_blank" rel="noopener">awesome-jest</a></strong></p>
+<p>提供了很多能力，增强测试的体验。</p>
+<p>以下几个是比较有代表性的</p>
+<ul>
+<li><a href="https://github.com/jest-community/vscode-jest" target="_blank" rel="noopener">vscode-jest</a>，vscode jest插件</li>
+<li><a href="https://github.com/jest-community/jest-extended" target="_blank" rel="noopener">jest-extended</a>，提供结果判断的扩展</li>
+<li><a href="https://github.com/jest-community/eslint-plugin-jest" target="_blank" rel="noopener">eslint-plugin-jest</a></li>
+<li><a href="https://github.com/jest-community/awesome-jest" target="_blank" rel="noopener">awesome-jest</a>，跟jest相关的所有第三方库列表</li>
+</ul>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>vscode插件</p>
+<ul>
+<li><p>jest</p>
+</li>
+<li><p>jest runner</p>
+</li>
+<li><p>jest-extended</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev jest-extended</span><br><span class="line"></span><br><span class="line">jest.config.json</span><br><span class="line"></span><br><span class="line">&quot;jest&quot;: &#123;</span><br><span class="line">  &quot;setupFilesAfterEnv&quot;: [&quot;jest-extended&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>Jest具体的概念说明看<a href="/2020/07/13/Jest/" title="Jest">Jest</a>。</p>
+<p>这儿大体看下实例</p>
+<h5 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h5><p><img src="https://mmbiz.qpic.cn/mmbiz_png/WEEO8Dw0uNlaMrWGWb337x4lWJpklpasEgZBhFbacs4A0bv6traXeBbSqyjzNDWbONRfcJnibzDe7iaBf5Torm2w/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><strong>异步代码测试：</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/WEEO8Dw0uNlaMrWGWb337x4lWJpklpasxA9h4o5IEQy5VjexiagfMrrQnKiaLJgnAiaZJ6OZMouEU9sS3ZibLmP14A/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><strong>生命周期钩子：</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/WEEO8Dw0uNlaMrWGWb337x4lWJpklpasAESfyBoqc35jPPdaicpCItQM7RWBkgG8o9Saa144OM4JeY62nb8zeyg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><strong>函数 Mock</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/WEEO8Dw0uNlaMrWGWb337x4lWJpklpas0WwoDJ8QWSOt8ic5EUAiclzrPUmOTGOONe6Qia20ibOzPtHicMiaGJuf0Gjg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/WEEO8Dw0uNlaMrWGWb337x4lWJpklpasd6ibp2y2C2LVNveZX5rm1Swj5s9YntsVglJJoD8wcq13oaDz12tIiaPg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<h5 id="测试报告"><a href="#测试报告" class="headerlink" title="测试报告"></a>测试报告</h5><ul>
+<li>% Stmts是语句覆盖率（statement coverage）：是否每个语句都执行了</li>
+<li>% Branch分支覆盖率（branch coverage）：是否每个分支代码块都执行了（if, ||, ? : ）</li>
+<li>% Funcs函数覆盖率（function coverage）：是否每个函数都调用了</li>
+<li>% Lines行覆盖率（line coverage）：覆盖的行</li>
+<li>% Uncovered Line #s 行覆盖率（line coverage）：是否每一行都执行了</li>
+</ul>
+<h4 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h4><blockquote><footer><strong>TDD Vs BDD – Analyze The Differences With Examples</strong><cite><a href="https://www.softwaretestinghelp.com/tdd-vs-bdd/" target="_blank" rel="noopener">www.softwaretestinghelp.com/tdd-vs-bdd</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>前端自动化测试探索和实践</strong><cite><a href="https://mp.weixin.qq.com/s?__biz=Mzg2NDAzMjE5NQ==&mid=2247486072&idx=2&sn=43e99a7a755b47c93500d02ebbfed557&chksm=ce6eced4f91947c2b2df99ad48b8508f53ffb4d02ddf9799d6d15b6b86c1be50df3748d301ba&mpshare=1&scene=1&srcid=0720CJXc51rAx9qFl6kPH0ZW&sharer_sharetime=1595207922217&sharer_shareid=77df2eafd0a472623696abf038541666&version=3.0.25.2103&platform=win&rd2werd=1#wechat_redirect" target="_blank" rel="noopener">mp.weixin.qq.com/s?__biz=Mzg2NDAzMjE5NQ==&mid=2247486072&idx=2&sn=43e99a7a755b47c93500d02ebbfed557&chksm=ce6eced4f91947c2b2df99ad48b8508f53ffb4d02ddf9799d6d15b6b86c1be50df3748d301ba&mpshare=1&scene=1&srcid=0720CJXc51rAx9qFl6kPH0ZW&sharer_sharetime=1595207922217&sharer_shareid=77df2eafd0a472623696abf038541666&version=3.0.25.2103&platform=win&rd2werd=1#wechat_redirect</a></cite></footer></blockquote>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/07/13/Jest/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/13/Jest/" itemprop="url">Jest</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-13T10:18:00+08:00">
+                2020-07-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Jest"><a href="#Jest" class="headerlink" title="Jest"></a>Jest</h3><h5 id="skip，only，each修饰符"><a href="#skip，only，each修饰符" class="headerlink" title="skip，only，each修饰符"></a>skip，only，each修饰符</h5><p><code>describe</code>与<code>test</code>可以连接<code>skip</code>，<code>only</code>，<code>each</code>修饰符。如<code>describe.skip(&#39;something&#39;, testFunction)</code>，会在测试时跳过这一个<code>describe</code>。<code>only</code>会使测试只运行指定的测试用例，这在某个测试用例出错Debug时非常好用。<code>each</code>修饰符可以执行多次参数不同的测试，它接受一个数组<code>table</code>和一个测试函数，<code>table</code>里的元素会作为参数传入测试函数。具体语法可以参见<a href="https://jestjs.io/docs/zh-Hans/api#describeeachtable-name-fn-timeout" target="_blank" rel="noopener">文档</a>。</p>
+<h5 id="beforeAll，afterAll，beforeEach，afterAll钩子函数"><a href="#beforeAll，afterAll，beforeEach，afterAll钩子函数" class="headerlink" title="beforeAll，afterAll，beforeEach，afterAll钩子函数"></a>beforeAll，afterAll，beforeEach，afterAll钩子函数</h5><p>Jest也支持在执行测试用例之前以及之后执行一些代码来做一些工作，像在测试前设置好测试数据、在测试后清理测试数据。这些工作可以作为<code>beforeAll</code>、<code>afterAll</code>、<code>beforeEach</code>、<code>afterAll</code>的回调函数。</p>
+<h4 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h4><p>Jest支持<code>expect</code>式的断言，像<code>expect(1).toBe(1)</code>，其中<code>toBe</code>就是断言部分。Jest支持很丰富的断言。</p>
+<h5 id="相等断言"><a href="#相等断言" class="headerlink" title="相等断言"></a>相等断言</h5><p>断言两个基本类型的值相等使用<code>expect(val1).toBe(val2)</code>。注意<code>toBe</code>断言使用<code>Object.is()</code>判断相等。它与<code>==</code>以及<code>===</code>都有不同。</p>
+<p>如果要断言数组或者Object相等，使用<code>toEqual</code>断言。它会递归地判断每个属性/元素是否是相等的。</p>
+<p>如果要断言数组或者Object相等，使用<code>toEqual</code>断言。它会递归地判断每个属性/元素是否是相等的。</p>
+<blockquote>
+<p><code>toStrictEqual(value)</code></p>
+<p>测试对象具有相同的类型和结构</p>
+<p>和<code>.toEqual</code>不同在于:</p>
+<ol>
+<li>检查具有未定义属性的键。 例如 使用.toStrictEqual时，{a：未定义，b：2}与{b：2}不匹配。</li>
+<li>检查数组。 例如 使用.toStrictEqual时，[，1]与[undefined，1]不匹配</li>
+<li>检查对象类型是否相等。 例如 具有字段a和b的类实例将不等于具有字段a和b的文字对象。</li>
+</ol>
+</blockquote>
+<h5 id="数字大小断言"><a href="#数字大小断言" class="headerlink" title="数字大小断言"></a>数字大小断言</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">test(&#39;two plus two&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">  const value &#x3D; 2 + 2;</span><br><span class="line">  expect(value).toBeGreaterThan(3);&#x2F;&#x2F;大于</span><br><span class="line">  expect(value).toBeGreaterThanOrEqual(3.5);&#x2F;&#x2F;大于等于</span><br><span class="line">  expect(value).toBeLessThan(5);&#x2F;&#x2F;小于</span><br><span class="line">  expect(value).toBeLessThanOrEqual(4.5);&#x2F;&#x2F;小于等于</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;等于</span><br><span class="line">  expect(value).toBe(4);</span><br><span class="line">  expect(value).toEqual(4);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>对于浮点数，不能使用<code>toBe</code>或者<code>toEqual</code>进行相等断言。Jest提供了<code>toBeCloseTo</code>断言，可以在忽略一定误差的情况下，断言浮点数相等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">test(&#39;adding floating point numbers&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">  const value &#x3D; 0.1 + 0.2;</span><br><span class="line">  &#x2F;&#x2F;expect(value).toBe(0.3);           This won&#39;t work because of rounding error</span><br><span class="line">  expect(value).toBeCloseTo(0.3); &#x2F;&#x2F; This works.</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="真值断言（Truthiness）"><a href="#真值断言（Truthiness）" class="headerlink" title="真值断言（Truthiness）"></a>真值断言（Truthiness）</h5><ul>
+<li><p><code>toBeNull</code> 用于 <code>null</code></p>
+</li>
+<li><p><code>toBeUndefined</code>  用于<code>undefined</code></p>
+</li>
+<li><p><code>toBeDefined</code> 与<code>toBeUndefined</code> 相反</p>
+</li>
+<li><p><code>toBeTruthy</code> 用于值为 true</p>
+</li>
+<li><p><code>toBeFalsy</code>  用于值为 false</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">test(&#39;null&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">  const n &#x3D; null;</span><br><span class="line">  expect(n).toBeNull();&#x2F;&#x2F;pass</span><br><span class="line">  expect(n).toBeDefined();&#x2F;&#x2F;pass</span><br><span class="line">  expect(n).toBeUndefined();&#x2F;&#x2F; faild</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h5 id="字符串相关"><a href="#字符串相关" class="headerlink" title="字符串相关"></a>字符串相关</h5><p>Jest提供<code>toMatch</code>断言被测试的字符串是否匹配给定正则表达式。</p>
+<p>复制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">test(&#39;but there is a &quot;stop&quot; in Christoph&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">  expect(&#39;Christoph&#39;).toMatch(&#x2F;stop&#x2F;) &#x2F;&#x2F; pass</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h5><p>要断言数组中包含某个子项可以使用<code>toContain</code>断言。</p>
+<p>复制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const shoppingList &#x3D; [</span><br><span class="line">  &#39;diapers&#39;,</span><br><span class="line">  &#39;kleenex&#39;,</span><br><span class="line">  &#39;trash bags&#39;,</span><br><span class="line">  &#39;paper towels&#39;,</span><br><span class="line">  &#39;beer&#39;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">test(&#39;购物清单（shopping list）里面有啤酒（beer）&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">  expect(shoppingList).toContain(&#39;beer&#39;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h5><p>要断言对函数的某些操作会抛出异常可以使用<code>toThrow</code>断言。</p>
+<p>复制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">test(&#39;throws on octopus&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">  expect(() &#x3D;&gt; &#123;</span><br><span class="line">    drinkFlavor(&#39;octopus&#39;);</span><br><span class="line">  &#125;).toThrow();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h5 id="not修饰符"><a href="#not修饰符" class="headerlink" title="not修饰符"></a>not修饰符</h5><p><code>not</code>修饰符可以把所有的断言反向，像<code>expect(1).not.toBe(2)</code>。</p>
+<p>Jest提供的断言不止上面提到那么多。常用到的还有像断言长度的<code>toHaveLength</code>，断言对象有某个属性以及属性的值的<code>toHaveProperty</code>。更多断言的可以参见<a href="https://jestjs.io/docs/zh-Hans/expect" target="_blank" rel="noopener">Expect文档</a>。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -704,148 +1184,6 @@
 <img src="/2020/07/08/fusion%20design/image-20200708181919865.png" class>
 
 <h4 id="感谢："><a href="#感谢：" class="headerlink" title="感谢："></a>感谢：</h4><blockquote><footer><strong>阿里中后台UI解决方案 - Fusion</strong><cite><a href="https://zhuanlan.zhihu.com/p/53117538" target="_blank" rel="noopener">zhuanlan.zhihu.com/p/53117538</a></cite></footer></blockquote>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/07/07/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E6%9C%AC%E8%B4%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/07/%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E6%9C%AC%E8%B4%A8/" itemprop="url">软件开发本质</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-07T11:24:06+08:00">
-                2020-07-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BB%E4%B9%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">读书</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>最近在工程建设这块浪</p>
-
           
         
       
@@ -2457,170 +2795,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/03/01/Module%20bundling/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/01/Module%20bundling/" itemprop="url">Module bundling</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-01T20:23:00+08:00">
-                2020-03-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>是的这又是一篇搬运文章，谁让我放荡不羁爱打野呢。作者博客地址<a href="https://www.preethikasireddy.com/" target="_blank" rel="noopener">Preethi Kasireddy</a></p>
-<p>之前有聊过一篇关于<a href="/2020/02/22/Modules/" title="Modules">Modules</a>的文章，主要讲什么是模块以及为什么需要模块。这篇主要讲怎么捆绑（打包）模块也就是模块使用的深一步探讨。</p>
-<h3 id="什么是模块捆绑？"><a href="#什么是模块捆绑？" class="headerlink" title="什么是模块捆绑？"></a>什么是模块捆绑？</h3><p> 从高层次上讲，模块捆绑只是将一组模块（及其依赖项）按正确顺序拼接到单个文件（或一组文件）中的过程。</p>
-<h3 id="为什么需要模块捆绑？"><a href="#为什么需要模块捆绑？" class="headerlink" title="为什么需要模块捆绑？"></a>为什么需要模块捆绑？</h3><p>如果项目中使用的模块过多，那么你就需要一个一个的使用script 标签引入到html中去,然后html运行的时候会一个一个的去加载你引入的模块。</p>
-
-
-<p>像上图那样 one by one 如果用的模块一多，页面的延迟就会过久，用户体验不好。</p>
-<p>为了解决这个问题，我们把所有文件捆绑，或“拼接”到一个文件（有时也是一组文件）中，<strong>正是为了减少请求数</strong>。</p>
-<p>另一个加速构建操作的常用方法是，“缩减”捆绑后的代码。缩减，是把源代码中不需要的字符（如空格、评论、换行符等等）移除，从而减小了代码的总体积，却不改变其功能。</p>
-<p>数据更少，<strong>浏览器处理的时间就更短</strong>，比如经常见到的”xxxmin.js”，相比完整版，缩减版小了好多。</p>
-<h3 id="捆绑模块有哪些不同的方式？"><a href="#捆绑模块有哪些不同的方式？" class="headerlink" title="捆绑模块有哪些不同的方式？"></a>捆绑模块有哪些不同的方式？</h3><p>如果你用的是一种标准模块模式（在 <a href="https://medium.freecodecamp.com/javascript-modules-a-beginner-s-guide-783f7d7a5fcc#.y8hs0nsne" target="_blank" rel="noopener">第一部分</a> 讨论过）来定义模块，比如<em>IIFE、全局导入</em>等，其实就是直接拼接和缩减几堆纯 JavaScript 代码，通常则不用借助工具。</p>
-<p>但如果你用的是非原生模块系统，浏览器不能像 CommonJS、AMD、甚至原生 ES6 模块格式那样解析，你就需要用专门工具先转化成排列正确、浏览器可识别的代码。这正是 Browserify、RequireJS、Webpack 和其他模块捆绑工具，或模块加载工具粉墨登场的时候。</p>
-<p>下面就来过一遍常用的模块捆绑方法：</p>
-<h4 id="Bundling-CommonJS"><a href="#Bundling-CommonJS" class="headerlink" title="Bundling CommonJS"></a>Bundling CommonJS</h4><p> <a href="https://medium.freecodecamp.com/javascript-modules-a-beginner-s-guide-783f7d7a5fcc#.y8hs0nsne" target="_blank" rel="noopener">第一部分</a>所知，CommonJS同步加载模块，它对于浏览器是不适用的。 解决此问题其中一个方法是用Browserify。 Browserify是一个为浏览器编译CommonJS模块的工具。</p>
-<p>例如，假设您有一个main.js文件，该文件导入一个模块来计算数字数组的平均值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var myDependency &#x3D; require（&#39;myDependency&#39;）;</span><br><span class="line">var myGrades &#x3D; [93，95，88，0，91];</span><br><span class="line">var myAverageGrade &#x3D; myDependency.average（myGrades）;</span><br></pre></td></tr></table></figure>
-
-<p>因此，在这种情况下，我们只有一个依赖项（myDependency）。 使用以下命令，Browserify将递归所有必需的模块（从main.js开始）并把它们捆绑到一个名为bundle.js的文件中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">browserify main.js -o bundle.js</span><br></pre></td></tr></table></figure>
-
-<p>Browserify通过跳入每个<strong><em>require</em></strong> 调用的AST解析来遍历项目的整个依赖关系图来实现此目的。 一旦确定了依存关系的结构，便会将它们按正确的顺序捆绑到一个文件中。当需要使用时，则将<strong><em>“bundle.js”</em></strong> 文件的<code>&lt;script&gt;</code>标记插入到html中，以确保所有源代码都在一个HTTP请求中下载。</p>
-<p>同样，如果您有多个具有多个依赖项的文件，则只需告诉Browserify您的条目文件是什么，然后静静等待Browserify进行文件捆绑。</p>
-<p>最后，可以使用Minify-JS之类的工具来缩小捆绑代码。</p>
-<h4 id="Bundling-AMD"><a href="#Bundling-AMD" class="headerlink" title="Bundling AMD"></a>Bundling AMD</h4>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2674,7 +2848,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">102</span>
+                  <span class="site-state-item-count">101</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2696,7 +2870,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -3346,7 +3520,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("js工具库");titles.push("Fusion Design");titles.push("软件开发本质");titles.push("前端埋点");titles.push("Linux ls命令");titles.push("前端埋点(一)");titles.push("Linux ps、top、free命令");titles.push("Java 8 Streams");titles.push("DevOps实践");titles.push("Module bundling");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("前端测试");titles.push("Jest");titles.push("js工具库");titles.push("Fusion Design");titles.push("前端埋点");titles.push("Linux ls命令");titles.push("前端埋点(一)");titles.push("Linux ps、top、free命令");titles.push("Java 8 Streams");titles.push("DevOps实践");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {

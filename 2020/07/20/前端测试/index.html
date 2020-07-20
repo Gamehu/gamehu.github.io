@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="测试," />
 
 
 
@@ -83,17 +83,24 @@
 
 
 
-<meta name="description" content="古人云：大志得中，中志的小，小志不得。">
+<meta name="description" content="背景其实老早以前就想在产品中引入单元测试，领导也让我好好做一个分享主题，分享好做花功夫就行，但是我觉得此主题的分享最终目的是为了落地，所以需要一个契机，不然大家听了就完了也没啥x用。 刚好大佬们上个月做了个决定，决定从前到后整体重新架构，重新梳理，做一个带中台属性的系统，从而是产品能有更多平台能力，也能更好的和另外的产线想结合。当然我说的比较云淡风轻的，干起来你才知道这是一个多么有挑战的目标，扯远">
 <meta property="og:type" content="article">
-<meta property="og:title" content="梦想金山-成长">
-<meta property="og:url" content="https://gamehu.github.io/2018/09/12/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1-%E6%88%90%E9%95%BF/index.html">
+<meta property="og:title" content="前端测试">
+<meta property="og:url" content="https://gamehu.github.io/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/index.html">
 <meta property="og:site_name" content="正儿八经">
-<meta property="og:description" content="古人云：大志得中，中志的小，小志不得。">
-<meta property="article:published_time" content="2018-09-12T08:40:00.000Z">
-<meta property="article:modified_time" content="2018-09-12T08:41:14.642Z">
+<meta property="og:description" content="背景其实老早以前就想在产品中引入单元测试，领导也让我好好做一个分享主题，分享好做花功夫就行，但是我觉得此主题的分享最终目的是为了落地，所以需要一个契机，不然大家听了就完了也没啥x用。 刚好大佬们上个月做了个决定，决定从前到后整体重新架构，重新梳理，做一个带中台属性的系统，从而是产品能有更多平台能力，也能更好的和另外的产线想结合。当然我说的比较云淡风轻的，干起来你才知道这是一个多么有挑战的目标，扯远">
+<meta property="og:image" content="https://gamehu.github.io/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/D:%5Cgit_project%5Cgamehu_hexo%5Cblog%5Csource_posts%5C%E5%89%8D%E7%AB%AF%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%5CTDD.png">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/WEEO8Dw0uNlaMrWGWb337x4lWJpklpasEgZBhFbacs4A0bv6traXeBbSqyjzNDWbONRfcJnibzDe7iaBf5Torm2w/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/WEEO8Dw0uNlaMrWGWb337x4lWJpklpasxA9h4o5IEQy5VjexiagfMrrQnKiaLJgnAiaZJ6OZMouEU9sS3ZibLmP14A/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/WEEO8Dw0uNlaMrWGWb337x4lWJpklpasAESfyBoqc35jPPdaicpCItQM7RWBkgG8o9Saa144OM4JeY62nb8zeyg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/WEEO8Dw0uNlaMrWGWb337x4lWJpklpas0WwoDJ8QWSOt8ic5EUAiclzrPUmOTGOONe6Qia20ibOzPtHicMiaGJuf0Gjg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/WEEO8Dw0uNlaMrWGWb337x4lWJpklpasd6ibp2y2C2LVNveZX5rm1Swj5s9YntsVglJJoD8wcq13oaDz12tIiaPg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="article:published_time" content="2020-07-20T03:24:06.000Z">
+<meta property="article:modified_time" content="2020-07-20T08:11:40.114Z">
 <meta property="article:author" content="Gamehu">
-<meta property="article:tag" content="life">
+<meta property="article:tag" content="测试">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gamehu.github.io/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/D:%5Cgit_project%5Cgamehu_hexo%5Cblog%5Csource_posts%5C%E5%89%8D%E7%AB%AF%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%5CTDD.png">
 
 
 
@@ -123,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="https://gamehu.github.io/2018/09/12/梦想金山-成长/"/>
+  <link rel="canonical" href="https://gamehu.github.io/2020/07/20/前端测试/"/>
 
 
 
 
 
-  <title>梦想金山-成长 | 正儿八经</title>
+  <title>前端测试 | 正儿八经</title>
   
 
 
@@ -310,7 +317,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/09/12/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1-%E6%88%90%E9%95%BF/">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Gamehu">
@@ -327,7 +334,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">梦想金山-成长</h2>
+          <h2 class="post-title" itemprop="name headline">前端测试</h2>
         
 
         <div class="post-meta">
@@ -339,8 +346,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-12T16:40:00+08:00">
-                2018-09-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-20T11:24:06+08:00">
+                2020-07-20
               </time>
             
 
@@ -362,8 +369,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BB%E4%B9%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">读书</span>
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
                   </a>
                 </span>
 
@@ -404,7 +411,153 @@
       
 
       
-        <p>古人云：大志得中，中志的小，小志不得。</p>
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>其实老早以前就想在产品中引入单元测试，领导也让我好好做一个分享主题，分享好做花功夫就行，但是我觉得此主题的分享最终目的是为了落地，所以需要一个契机，不然大家听了就完了也没啥x用。</p>
+<p>刚好大佬们上个月做了个决定，决定从前到后整体重新架构，重新梳理，做一个带中台属性的系统，从而是产品能有更多平台能力，也能更好的和另外的产线想结合。当然我说的比较云淡风轻的，干起来你才知道这是一个多么有挑战的目标，扯远了，下面说说前端测试这款的内容。</p>
+<h3 id="为什么需要测试？"><a href="#为什么需要测试？" class="headerlink" title="为什么需要测试？"></a>为什么需要测试？</h3><ul>
+<li>提高代码质量</li>
+<li>倒逼开发对编码的设计更加低耦合以及合理，方便后续的迭代/重构</li>
+<li>最大程度保证产品符合预期（因为各种场景都测试）</li>
+<li>减少测试的投入（比如回归）</li>
+<li>提升开发的信心（bug少）</li>
+</ul>
+<h3 id="前端测试的类型"><a href="#前端测试的类型" class="headerlink" title="前端测试的类型"></a>前端测试的类型</h3><p><strong>单元测试（Unit Test）</strong>、<strong>集成测试（Integration Test）</strong>、<strong>UI 测试（UI Test）</strong></p>
+<h5 id="单元测试应用："><a href="#单元测试应用：" class="headerlink" title="单元测试应用："></a>单元测试应用：</h5><ul>
+<li><p>代码中多个组件共用的工具类库、多个组件共用的子组件等。</p>
+</li>
+<li><p>能进行单元测试的函数/组件，一定是低耦合的，这也从一定程度上保证了我们的代码质量。</p>
+<p>比如我们的<strong>工具库、组件库</strong>这类通用低耦合的内容就比较适用单元测试。</p>
+</li>
+</ul>
+<p><em>「通常情况下，在公共函数/组件中一定要有单元测试来保证代码能够正常工作。单元测试也应该是项目中数量最多、覆盖率最高的。」</em></p>
+<h5 id="集成测试应用："><a href="#集成测试应用：" class="headerlink" title="集成测试应用："></a>集成测试应用：</h5><ul>
+<li>耦合度较高的函数/组件、经过二次封装的函数/组件、多个函数/组件组合而成的函数/组件等。</li>
+<li>集成测试的目的在于，测试经过单元测试后的各个模块组合在一起是否能正常工作。会对组合之后的代码整体暴露在外接口进行测试，查看组合后的代码工作是否符合预期。</li>
+</ul>
+<p>比如我们基于<strong>组件库开发的业务组件或者一些定制化但是具有一定通用型的业务组件</strong>就比较适用集成测试。</p>
+<p><em>「集成测试是安全感较高的测试，能很大程度提升开发者的信心，集成测试用例设计合理且测试都通过能够很大程度保证产品符合预期。」</em></p>
+<h5 id="UI测试应用："><a href="#UI测试应用：" class="headerlink" title="UI测试应用："></a>UI测试应用：</h5><p>先做个说明，大家不要把UI 测试（UI Test）和端到端测试（E2E Test）混为一谈，认为是同一个测试类型。</p>
+<p>事实上，UI 测试（UI Test）和端到端测试（E2E Test）是稍有区别的：</p>
+<blockquote>
+<p>UI 测试（UI Test）只是对于前端的测试，是脱离真实后端环境的，仅仅只是将前端放在真实环境中运行，而后端和数据都应该使用 Mock 的。</p>
+<p>端到端测试（E2E Test）则是将整个应用放到真实的环境中运行，包括数据在内也是需要使用真实的。</p>
+</blockquote>
+<p>就前端而言，UI 测试（UI Test）更贴近于我们的开发流程。在前后端分离的开发模式中，前端开发通常会使用到 Mock 的服务器和数据。因而我们需要在开发基本完成后进行相应的 UI 测试（UI Test）。</p>
+<p>可以理解为交付测试之前的自测阶段我们做的就是UI测试。而测试做的就是端到端测试。</p>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><p><strong>此篇介绍的是单元测试以及集成测试的应用。</strong></p>
+<p>先简单画下边界，此篇只说明基于<code>工具库、组件库，以及应用组件库的业务组件</code>的分享示例。高耦合的组件或者自动化测试应用不在此次讨论范围内。</p>
+<h4 id="选择何种测试思想"><a href="#选择何种测试思想" class="headerlink" title="选择何种测试思想"></a>选择何种测试思想</h4><p>其实本不用做这个说明，因为其实我们已经选好了（BDD）。</p>
+<p>但是避免有像我一样懵懂的同学，所以这儿咱们也简单说明一下。因为测试框架对不同规范的支持可能不一样。所以我们先搞明白测试思想有哪些？</p>
+<p><a href="https://en.wikipedia.org/wiki/Test-driven_development" target="_blank" rel="noopener">测试驱动开发（TDD）</a>和<a href="https://en.wikipedia.org/wiki/Behavior-driven_development" target="_blank" rel="noopener">行为驱动开发（BDD）</a>。</p>
+<p><img src="/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/D:%5Cgit_project%5Cgamehu_hexo%5Cblog%5Csource_posts%5C%E5%89%8D%E7%AB%AF%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%5CTDD.png" alt="image-20200717104606453"></p>
+<p><strong>TDD</strong>是一种开发技术，更多地侧重于功能的实现。</p>
+<blockquote>
+<p>TDD代表测试驱动开发。 在这种软件开发技术中，我们首先创建测试用例，然后编写这些测试用例的基础代码。 尽管TDD是一种开发技术，但它也可以用于自动化测试开发。</p>
+<p>实施TDD的团队需要花费更多的时间进行开发，但是，他们发现的缺陷很少。 <strong>TDD可以提高代码质量</strong>，并提高代码的可重用性和灵活性。</p>
+<p>TDD还有助于实现大约90-100％的高测试覆盖率。 对于遵循TDD的开发人员而言，最具挑战性的事情是在编写代码之前先编写测试用例。</p>
+</blockquote>
+<p><strong>BDD</strong>是一种专注于系统行为的开发技术。</p>
+<blockquote>
+<p>BDD是TDD的扩展，<strong>它不是编写测试用例，而是从编写行为开始</strong>。 后来，我们开发了应用程序执行该行为所需的代码。</p>
+<p>BDD方法中定义的<em>方案使开发人员，测试人员和业务用户易于协作</em>。</p>
+<p>当涉及自动测试时，BDD被认为是最佳实践，因为它专注于应用程序的行为，而不是考虑代码的实现。</p>
+<p>应用程序的行为是BDD的关注重点，它迫使开发人员和测试人员去了解产品以及用户。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">TDD</th>
+<th align="left">BDD</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">该过程从编写测试用例开始。</td>
+<td align="left">该过程从编写测试用例开始。</td>
+</tr>
+<tr>
+<td align="left">TDD专注于功能的实现方式。</td>
+<td align="left">BDD专注于最终用户的应用程序行为。</td>
+</tr>
+<tr>
+<td align="left">测试用例是用编程语言编写的。</td>
+<td align="left">与TDD相比，场景以简单的Given、When、Then关键字编写，因此更具可读性。</td>
+</tr>
+<tr>
+<td align="left">应用程序功能的变化对TDD中的测试用例有很大影响。</td>
+<td align="left">BDD方案基本不受功能更改的影响。</td>
+</tr>
+<tr>
+<td align="left">仅在开发人员之间需要协作。</td>
+<td align="left">所有利益相关者之间都需要合作。</td>
+</tr>
+<tr>
+<td align="left">只有具有编程知识的人才能理解TDD中的测试。</td>
+<td align="left">任何人都可以理解BDD中的测试，包括那些没有任何编程知识的人。</td>
+</tr>
+<tr>
+<td align="left">TDD降低了测试中出现错误的可能性。</td>
+<td align="left">与TDD相比，测试中的错误很难跟踪。</td>
+</tr>
+</tbody></table>
+<h5 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h5><p>我简单总结下大家有个简单的概念，具体有兴趣大家再下去查资料。</p>
+<p><strong>TDD</strong>主体是开发，说白了就是测试用例也是开发来写，先写测试用例，很显然测试用例肯定都过不了因为还没编码，那怎么办呢，就通过编码的方式不断的丰富功能然后再回去跑测试用例，如此循环最终达到所有测试用例都通过。比较适用后端API的测试。</p>
+<p><strong>BDD</strong>没有主体，因为所有人都需要参与（测试、开发、产品），大家用同一套语言来理解产品的功能和用户行为，大家的思考角度会更侧重用户方。比较适用前端测试的场景，因为前端是直接面对用户的。</p>
+<h4 id="找测试框架"><a href="#找测试框架" class="headerlink" title="找测试框架"></a>找测试框架</h4><p><strong>诉求</strong></p>
+<ol>
+<li>能跑JavaScript也能跑React。</li>
+<li>最好能开箱即用，不需要做很多配置。</li>
+<li>社区生态良好，能及时支持新特性且能及时响应issue。</li>
+</ol>
+<h4 id="Jest、Enzyme"><a href="#Jest、Enzyme" class="headerlink" title="Jest、Enzyme"></a>Jest、Enzyme</h4><p><strong>Jest：</strong></p>
+<p>其实测试框架茫茫多，最终选择它的原因就是其完美匹配上诉的所有诉求，Facebook亲生的，star 接近32K，React不用说了，同时也能跑JavaScript。另外Jest还具备Mock等能力，所以Jest不仅仅是个测试框架而且还是一个集合多种能力的结合体，开箱即用。</p>
+<p><strong>Enzyme:</strong></p>
+<p>用于测试的React工具库,可看作是一个集成测试框架，与Jest组合也是备受推崇的。</p>
+<p>Enzyme提供类似于jQuery的API，以查找元素，触发事件处理程序等。即可以很方便的定位到元素以及组件。</p>
+<p><strong>首先任何框架都有优点和缺点，那为什么选这两个呢：</strong></p>
+<ol>
+<li>ice用的就是这两个，有大厂（阿里）的前面探路，对于我们没有经验的团队来说作为第一次的试水我觉得跟风不是一个贬义词。</li>
+<li>基于我们的诉求我也做了一下简单的调研，因为我们主要还是以React为主所以选择Jest是自然而然的过程，另外Enzyme+Jest也是国内外热度都比较高的，两则的社区也比较活跃，所以很显然两者搭配是没有问题的，刚好ice就是用的这两个所以没什么好纠结的。</li>
+</ol>
+<h3 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h3><h4 id="jest社区"><a href="#jest社区" class="headerlink" title="jest社区"></a>jest社区</h4><p><a href="https://github.com/jest-community" target="_blank" rel="noopener">jest-community</a>/<strong><a href="https://github.com/jest-community/awesome-jest" target="_blank" rel="noopener">awesome-jest</a></strong></p>
+<p>提供了很多能力，增强测试的体验。</p>
+<p>以下几个是比较有代表性的</p>
+<ul>
+<li><a href="https://github.com/jest-community/vscode-jest" target="_blank" rel="noopener">vscode-jest</a>，vscode jest插件</li>
+<li><a href="https://github.com/jest-community/jest-extended" target="_blank" rel="noopener">jest-extended</a>，提供结果判断的扩展</li>
+<li><a href="https://github.com/jest-community/eslint-plugin-jest" target="_blank" rel="noopener">eslint-plugin-jest</a></li>
+<li><a href="https://github.com/jest-community/awesome-jest" target="_blank" rel="noopener">awesome-jest</a>，跟jest相关的所有第三方库列表</li>
+</ul>
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>vscode插件</p>
+<ul>
+<li><p>jest</p>
+</li>
+<li><p>jest runner</p>
+</li>
+<li><p>jest-extended</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev jest-extended</span><br><span class="line"></span><br><span class="line">jest.config.json</span><br><span class="line"></span><br><span class="line">&quot;jest&quot;: &#123;</span><br><span class="line">  &quot;setupFilesAfterEnv&quot;: [&quot;jest-extended&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>Jest具体的概念说明看<a href="/2020/07/13/Jest/" title="Jest">Jest</a>。</p>
+<p>这儿大体看下实例</p>
+<h5 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h5><p><img src="https://mmbiz.qpic.cn/mmbiz_png/WEEO8Dw0uNlaMrWGWb337x4lWJpklpasEgZBhFbacs4A0bv6traXeBbSqyjzNDWbONRfcJnibzDe7iaBf5Torm2w/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><strong>异步代码测试：</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/WEEO8Dw0uNlaMrWGWb337x4lWJpklpasxA9h4o5IEQy5VjexiagfMrrQnKiaLJgnAiaZJ6OZMouEU9sS3ZibLmP14A/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><strong>生命周期钩子：</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/WEEO8Dw0uNlaMrWGWb337x4lWJpklpasAESfyBoqc35jPPdaicpCItQM7RWBkgG8o9Saa144OM4JeY62nb8zeyg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><strong>函数 Mock</strong></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/WEEO8Dw0uNlaMrWGWb337x4lWJpklpas0WwoDJ8QWSOt8ic5EUAiclzrPUmOTGOONe6Qia20ibOzPtHicMiaGJuf0Gjg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/WEEO8Dw0uNlaMrWGWb337x4lWJpklpasd6ibp2y2C2LVNveZX5rm1Swj5s9YntsVglJJoD8wcq13oaDz12tIiaPg/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<h5 id="测试报告"><a href="#测试报告" class="headerlink" title="测试报告"></a>测试报告</h5><ul>
+<li>% Stmts是语句覆盖率（statement coverage）：是否每个语句都执行了</li>
+<li>% Branch分支覆盖率（branch coverage）：是否每个分支代码块都执行了（if, ||, ? : ）</li>
+<li>% Funcs函数覆盖率（function coverage）：是否每个函数都调用了</li>
+<li>% Lines行覆盖率（line coverage）：覆盖的行</li>
+<li>% Uncovered Line #s 行覆盖率（line coverage）：是否每一行都执行了</li>
+</ul>
+<h4 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h4><blockquote><footer><strong>TDD Vs BDD – Analyze The Differences With Examples</strong><cite><a href="https://www.softwaretestinghelp.com/tdd-vs-bdd/" target="_blank" rel="noopener">www.softwaretestinghelp.com/tdd-vs-bdd</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>前端自动化测试探索和实践</strong><cite><a href="https://mp.weixin.qq.com/s?__biz=Mzg2NDAzMjE5NQ==&mid=2247486072&idx=2&sn=43e99a7a755b47c93500d02ebbfed557&chksm=ce6eced4f91947c2b2df99ad48b8508f53ffb4d02ddf9799d6d15b6b86c1be50df3748d301ba&mpshare=1&scene=1&srcid=0720CJXc51rAx9qFl6kPH0ZW&sharer_sharetime=1595207922217&sharer_shareid=77df2eafd0a472623696abf038541666&version=3.0.25.2103&platform=win&rd2werd=1#wechat_redirect" target="_blank" rel="noopener">mp.weixin.qq.com/s?__biz=Mzg2NDAzMjE5NQ==&mid=2247486072&idx=2&sn=43e99a7a755b47c93500d02ebbfed557&chksm=ce6eced4f91947c2b2df99ad48b8508f53ffb4d02ddf9799d6d15b6b86c1be50df3748d301ba&mpshare=1&scene=1&srcid=0720CJXc51rAx9qFl6kPH0ZW&sharer_sharetime=1595207922217&sharer_shareid=77df2eafd0a472623696abf038541666&version=3.0.25.2103&platform=win&rd2werd=1#wechat_redirect</a></cite></footer></blockquote>
+
 
       
     </div>
@@ -420,6 +573,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag"># 测试</a>
+          
+        </div>
+      
 
       
       
@@ -429,8 +588,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/11/CSS%20Triggers/" rel="next" title="CSS Triggers">
-                <i class="fa fa-chevron-left"></i> CSS Triggers
+              <a href="/2020/07/13/Jest/" rel="next" title="Jest">
+                <i class="fa fa-chevron-left"></i> Jest
               </a>
             
           </div>
@@ -438,10 +597,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/20/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1-%E4%BC%98%E7%A7%80%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%91%98/" rel="prev" title="梦想金山-优秀的程序员">
-                梦想金山-优秀的程序员 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -531,8 +686,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -551,7 +715,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">102</span>
+                  <span class="site-state-item-count">101</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -573,7 +737,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -618,6 +782,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要测试？"><span class="nav-number">2.</span> <span class="nav-text">为什么需要测试？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前端测试的类型"><span class="nav-number">3.</span> <span class="nav-text">前端测试的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#单元测试应用："><span class="nav-number">3.0.1.</span> <span class="nav-text">单元测试应用：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#集成测试应用："><span class="nav-number">3.0.2.</span> <span class="nav-text">集成测试应用：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#UI测试应用："><span class="nav-number">3.0.3.</span> <span class="nav-text">UI测试应用：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始"><span class="nav-number">4.</span> <span class="nav-text">开始</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#选择何种测试思想"><span class="nav-number">4.1.</span> <span class="nav-text">选择何种测试思想</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#小结："><span class="nav-number">4.1.1.</span> <span class="nav-text">小结：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#找测试框架"><span class="nav-number">4.2.</span> <span class="nav-text">找测试框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Jest、Enzyme"><span class="nav-number">4.3.</span> <span class="nav-text">Jest、Enzyme</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实操"><span class="nav-number">5.</span> <span class="nav-text">实操</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#jest社区"><span class="nav-number">5.1.</span> <span class="nav-text">jest社区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装"><span class="nav-number">5.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#示例"><span class="nav-number">5.3.</span> <span class="nav-text">示例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Number"><span class="nav-number">5.3.1.</span> <span class="nav-text">Number</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#测试报告"><span class="nav-number">5.3.2.</span> <span class="nav-text">测试报告</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感谢"><span class="nav-number">5.4.</span> <span class="nav-text">感谢</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1213,13 +1393,13 @@
       var articles = db.collection('articles')
 
       //https://hexo.io/zh-tw/docs/variables.html
-      var isPost = '梦想金山-成长'.length > 0
+      var isPost = '前端测试'.length > 0
       var isArchive = '' === 'true'
       var isCategory = ''.length > 0
       var isTag = ''.length > 0
 
       if (isPost) { //is article page
-        var title = '梦想金山-成长'
+        var title = '前端测试'
         var doc = articles.doc(title)
 
         getCount(doc, true).then(appendCountTo($('.post-meta')))
@@ -1272,4 +1452,5 @@
 
   
 
-<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+</body>
+</html>

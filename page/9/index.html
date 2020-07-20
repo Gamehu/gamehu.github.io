@@ -309,211 +309,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/08/16/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/16/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB/" itemprop="url">前后端分离</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-16T11:52:00+08:00">
-                2018-08-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%97%B2%E6%89%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">闲扯</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>事业部去年年底开始推前后端分离，到现在我参与了前端，也参与了后端。一点心得体会说一说。</p>
-<p>首先为什么要前后端分离，其实原因没那么复杂，比较简单就一条。</p>
-<ol>
-<li>试错，因为在这之前都是传统的研发，前后端不分家，至于是好还是不好，就不多说了，这个跟很多因素有关，比如客户场景、公司资源等等。既然有问题，所以就想试试新的玩法，看是否利大于弊。是否适合我们的公司和场景。</li>
-</ol>
-<p>当然肯定不是随随便便的试错，试错是带有愿景的。</p>
-<ol>
-<li>分流，清晰的职能划分，让大家更加专注，也给大家更多选择，当然还是尽量让专业的人做专业的事。</li>
-<li>能跟上小步快跑的产品节奏，及时响应需求。</li>
-<li>提升开发效率，并以此做好工程实践以及开发规范的落地。</li>
-</ol>
-<p>目前来看愿景是基本上都达到了，只是有待精进。我要说的是，前后端分离后跟我们带来的最大的问题，即前后端的边界问题，哪些是前端干的哪些是后端干的。扯皮就从这儿拉开了帷幕。</p>
-<p>前后端分离后很多友爱温馨的画面就出现了。</p>
-<pre><code>前端：这个字段能不能跟我处理一下.
-后端：这个应该是前端干的，我不管。
-前端：我顶你个肺，明明是后端处理更方便。
-后端：我也顶你个肺，这个前端也能处理。
-..........................
-
-前端：这个数据能不能跟我转换一下.
-后端：这个应该是前端干的，我不管。
-前端：我顶你个肺，明明应该是后端处理。
-后端：我也顶你个肺，这个明明是前端处理。
-.................
-
-
-后端：这个我这边不好处理，你多发一次请求自己组装吧。
-前端：不应该是组装好了给我吗？
-..........................</code></pre><p>为什么会出现这样的局面，我认为究其原因就是前后端的边界不清晰，如果一开始没有一个前后端的《开发边界协议》，到后面就是各种甩锅的操作。前端抱怨后端，后端抱怨前端。慢慢的负能量。</p>
-<p>我觉得边界的界定不是一刀切，应该是和公司文化、组织结构、业务场景等等契合的。在我们事业部，我认为可以从这些层面来作为划分边界的参考。</p>
-<ul>
-<li><p>业务场景：因为我们是做的APM，本身就是监控别人，这样的系统在客户那儿大概率就是个二线系统，那你就不能奢望客户能给你怎样怎样的资源，我们自己心里有数，要做到尽可能的少用客户的资源，并且要响应快速。</p>
-</li>
-<li><p>人员配置：高层领导基于各方面的考虑，没有专门招聘更多专业的前端，而是从后端研发里抽调几人到前端，边学边做。</p>
-</li>
-<li><p>前后端实现的复杂度。</p>
-</li>
-</ul>
-<p>我们是这么做的，首先<strong>大</strong>的前提有两个：</p>
-<ol>
-<li>所有的API跟着详设走，所有的前后端交互接口录入RAP，参数结构、返回数据结构、业务响应码、异常信息都做好了同步。</li>
-<li>原则上前端只负责解析数据，后端负责组装数据。前端倾向于呈现。* 前端着重处理用户体验相关的问题；后端则倾处于业务逻辑、数据处理和持久化等。在设计清晰的情况下，后端只需要以数据为中心对业务处理算法负责，并按约定为前端提供 API 接口；而前端使用这些接口对用户体验负责-<a href="https://my.oschina.net/jamesfancy/blog/1604237" target="_blank" rel="noopener">https://my.oschina.net/jamesfancy/blog/1604237</a>* </li>
-</ol>
-<p>但是有了这些前提之后前后端还是存在公共地带，有些是前端可以做后端也可以做。比如字段值得转换，某些数据的补点或者聚合等等，我们都会具体情况参照上面《开发边界协议》进行权衡。</p>
-<p>1.比如需要前端多发请求的肯定移到后端，通过后端的tcp代替前端的http。</p>
-<p>2.前端如果需要改多个地方，而后端只需要加一段代码的能实现的，由后端做。</p>
-<p>3.业务逻辑尽量放在后端，前端聚焦于交互和样式。</p>
-<p>4.前端不做复杂的运算，尽可能让前端小而轻，哪怕后端重一点也无所谓，因为后端有太多方案变快，但是前端页面、样式等就是一套，轻就是轻，重就是重。</p>
-<p>5.参照<strong>伯斯塔尔法则</strong>，后端尽量严谨保守给数据，减少前端解析数据的多样性，前端做好数据解析的校验，尽量开放接收数据，不理想化。</p>
-<p><strong>其实说那么多，最重要的还是那句话，让专业的人做专业的事，让前端把大部分的精力都投入到交互、样式、以及优化上面。后端做好一切的兜底方案，前端要什么后端给什么就完了。</strong></p>
-<p><strong>实际操作还是建议以前端为主导，因为前端是对用户负责。前端就像一个消息中心，研发阶段，対前连接产品、UCd、测试，对后对接后端服务提供方。所以前端主导后端兜底是比较合适的方案。</strong></p>
-<h2 id="关键字解释"><a href="#关键字解释" class="headerlink" title="关键字解释"></a>关键字解释</h2><p><strong>伯斯塔尔法则</strong></p>
-<p>源引：</p>
-<blockquote><footer><strong>使用空列表，避免返回null</strong><cite><a href="http://janlay.com/blog/2013/always-use-empty-list-instead-of-null/" target="_blank" rel="noopener">janlay.com/blog/2013/always-use-empty-list-instead-of-null</a></cite></footer></blockquote>
-
-
-
-
-
-
-
-
-
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/08/15/%E4%B9%A6%E6%96%B9%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2016,6 +1811,166 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/07/17/%E9%A1%B9%E7%9B%AE%E8%84%9A%E6%89%8B%E6%9E%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/17/%E9%A1%B9%E7%9B%AE%E8%84%9A%E6%89%8B%E6%9E%B6/" itemprop="url">项目脚手架</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T10:12:00+08:00">
+                2018-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>之前在12-Factors时提过我们在搭一个脚手架，这篇简单介绍一下，老话说得好再丑也要出来吓人嘛。</p>
+<h2 id="项目模块"><a href="#项目模块" class="headerlink" title="项目模块"></a>项目模块</h2><p>项目模块是基于maven做的项目生成脚手架，基于此脚手架生成 maven 项目模块， 开发人员能快速的基于模版进行开发，减少前期熟悉开发框架时间。同时 也通过此模版来统一平台开发规范，实现工程能力提升，沉淀工程规范。</p>
+<img src="/2018/07/17/%E9%A1%B9%E7%9B%AE%E8%84%9A%E6%89%8B%E6%9E%B6/01.png" class title="脚手架生成的项目">
+
+<p><strong>结构说明</strong></p>
+<ul>
+<li><p>app-bom 工程依赖管理.</p>
+</li>
+<li><p>app-manager 工程胶合层，service 层通用能力下沉，复杂 dao 组合.</p>
+</li>
+<li><p>app-repository 数据操作层，与数据库进行交互.</p>
+</li>
+<li><p>app-rpc-api 服务向外暴露的 rpc api 接口.</p>
+</li>
+<li><p>app-service 服务业务逻辑实现.</p>
+</li>
+<li><p>app-web 服务 restful 接口.</p>
+</li>
+</ul>
+<h2 id="maven脚手架"><a href="#maven脚手架" class="headerlink" title="maven脚手架"></a>maven脚手架</h2><img src="/2018/07/17/%E9%A1%B9%E7%9B%AE%E8%84%9A%E6%89%8B%E6%9E%B6/01.png" class title="脚手架">
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -2069,7 +2024,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">102</span>
+                  <span class="site-state-item-count">101</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2091,7 +2046,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2741,7 +2696,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("前后端分离");titles.push("读书方法");titles.push("自律(一)");titles.push("中美贸易战");titles.push("乔布斯");titles.push("GraphQL");titles.push("观看之道");titles.push("Code Review");titles.push("详细设计");titles.push("疫苗你妹");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("读书方法");titles.push("自律(一)");titles.push("中美贸易战");titles.push("乔布斯");titles.push("GraphQL");titles.push("观看之道");titles.push("Code Review");titles.push("详细设计");titles.push("疫苗你妹");titles.push("项目脚手架");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {
@@ -2786,4 +2741,5 @@
 
   
 
-<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+</body>
+</html>
