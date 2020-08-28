@@ -313,6 +313,62 @@
 
       <h3 class="post-title">
         
+            <a class="post-title-link" href="/2020/08/06/Ice-js%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" itemprop="url">
+              
+                <span itemprop="name">Ice.js单元测试</span>
+              
+            </a>
+        
+      </h3>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2020-08-06T15:22:00+08:00"
+              content="2020-08-06" >
+          08-06
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h3 class="post-title">
+        
+            <a class="post-title-link" href="/2020/07/30/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/" itemprop="url">
+              
+                <span itemprop="name">前端安全</span>
+              
+            </a>
+        
+      </h3>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2020-07-30T11:04:00+08:00"
+              content="2020-07-30" >
+          07-30
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h3 class="post-title">
+        
             <a class="post-title-link" href="/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/" itemprop="url">
               
                 <span itemprop="name">前端测试</span>
@@ -425,9 +481,9 @@
 
       <h3 class="post-title">
         
-            <a class="post-title-link" href="/2020/06/05/%E5%89%8D%E7%AB%AF%E5%9F%8B%E7%82%B9(%E4%BA%8C)/" itemprop="url">
+            <a class="post-title-link" href="/2020/06/05/%E5%89%8D%E7%AB%AF%E7%9B%91%E6%8E%A7/" itemprop="url">
               
-                <span itemprop="name">前端埋点</span>
+                <span itemprop="name">前端监控</span>
               
             </a>
         
@@ -435,7 +491,7 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2020-06-05T17:52:04+08:00"
+              datetime="2020-06-05T17:52:00+08:00"
               content="2020-06-05" >
           06-05
         </time>
@@ -530,62 +586,6 @@
 
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2020/02/25/React%20Hooks(%E4%B8%80)/" itemprop="url">
-              
-                <span itemprop="name">React Hooks(一)</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-02-25T16:57:00+08:00"
-              content="2020-02-25" >
-          02-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2020/02/23/ES%20Module/" itemprop="url">
-              
-                <span itemprop="name">ES Module</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2020-02-23T22:33:00+08:00"
-              content="2020-02-23" >
-          02-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
     </div>
 
   </div>
@@ -645,7 +645,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">101</span>
+                  <span class="site-state-item-count">104</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -656,7 +656,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -667,7 +667,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-count">70</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -748,6 +748,14 @@
 
 
 
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
 
         
 <div class="busuanzi-count">
@@ -1317,7 +1325,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("前端测试");titles.push("Jest");titles.push("js工具库");titles.push("Fusion Design");titles.push("前端埋点");titles.push("前端埋点(一)");titles.push("Module bundling");titles.push("Gulp");titles.push("React Hooks(一)");titles.push("ES Module");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("Ice.js单元测试");titles.push("前端安全");titles.push("前端测试");titles.push("Jest");titles.push("js工具库");titles.push("Fusion Design");titles.push("前端监控");titles.push("前端埋点(一)");titles.push("Module bundling");titles.push("Gulp");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {
@@ -1362,5 +1370,4 @@
 
   
 
-</body>
-</html>
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
