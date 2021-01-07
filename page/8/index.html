@@ -309,6 +309,1365 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/02/25/%E5%90%88%E4%BB%A3%E7%A0%81de%E5%86%85%E5%BF%83%E7%8B%AC%E7%99%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/25/%E5%90%88%E4%BB%A3%E7%A0%81de%E5%86%85%E5%BF%83%E7%8B%AC%E7%99%BD/" itemprop="url">合代码de内心独白</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-25T10:39:00+08:00">
+                2019-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>上周五产线领导派了一个活，合并前端和后端rest服务的代码，release合到develop。其实是一个很简单很日常的工作，但是因为种种原因，现在的版本周期过长，导致新增和修改的代码很多（特别是前端一堆的css、less、jsx、js….）。所以你知道我心中有多少只草泥马了。</p>
+<img src="/2019/02/25/%E5%90%88%E4%BB%A3%E7%A0%81de%E5%86%85%E5%BF%83%E7%8B%AC%E7%99%BD/frontend.png" class title="前端">
+
+<img src="/2019/02/25/%E5%90%88%E4%BB%A3%E7%A0%81de%E5%86%85%E5%BF%83%E7%8B%AC%E7%99%BD/backend.png" class title="rest后端">
+
+<p>这个时候需要的是冷静，蛋定。找个本子合一支笔，列清楚怎么做这件事情，一定要花时间考虑清楚再下手。</p>
+<h2 id="行动清单"><a href="#行动清单" class="headerlink" title="行动清单"></a>行动清单</h2><ol>
+<li><p>摸清楚分支情况，看看改动到底有多大，根据摸排的情况，判断是否需要上升到领导，因为如果动作太大势必会对团队的一些代码方面的操作有影响，需要领导提供协助，让团队配合合理解。</p>
+</li>
+<li><p>把涉及到修改人都和其确认一下，代码改动的分支以及模块，看是否与自己的理解存在误差，及时修正误差。 </p>
+</li>
+<li><p>借助命令（git log、git diff、git show…）以及工具（meld）对代码进行比对合并，设计面广最好不要直接往develop上合，先拉一个本地分支往上合，合完之后，验证通过再往develop合并。</p>
+</li>
+<li><p>合并之前，明确通知合并开始的时间点，并告知团队此时间段内不要再往分支上提交代码。</p>
+</li>
+<li><p>合并代码的时候手别抖，心别慌，扎稳马步，看清楚再合并，其实也不怕，因为你是单独拉的分支，哪怕整坏了也无所谓。所以就跟开车一样，胆大心细。 </p>
+</li>
+<li><p>合并完之后，本地测试是否功能有问题，一定要测。</p>
+</li>
+</ol>
+<hr>
+<p>合并代码有个坑，在于自动合并，它往往会给人错觉表示这块代码或者这几个文件时没问题的，但是很多时候往往是有问题，因为git并不知道这几个文件是否存在因果联系，这样就往往容易漏掉。我就遇到了这个问题，合并代码之后哪儿都ok就是一直提示license有问题，几个人轮番查了几波，排除了可能的原因，最终就落到了代码合并上，猜测是代码合并造成的，所以就查代码，最后发现确实是权限过滤的url那儿没有添加上license相关的url，导致license的url每次都被拦截了。</p>
+<p><strong>小结</strong></p>
+<p>干越复杂越麻烦的事，越不能心慌，理清思路，列出行动项，一个个啃掉。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/02/24/%E5%89%8D%E7%AB%AF%E5%B0%8F%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/24/%E5%89%8D%E7%AB%AF%E5%B0%8F%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B/" itemprop="url">前端小总结一下</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-24T11:59:00+08:00">
+                2019-02-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近前后端都在写，而且相对来说前端写的多一些，因为领导说了，咱们这条产线实行前后端分离策略，但是团队里不再招专业前端，那xxx你先上，你不是常说你是一块砖吗，哪里需要哪里搬。是的，xxx就是我，所以朋友们在公司切记谨言慎行。当然主要还是我觉得了解下前端还是可以的（但是打死不写css）。</p>
+<p>所以我就从一个后端干到了前端，当然团队里肯定是有专业得前端的，不过因为咱们事业部有几条产线，所以资源稍有紧张，给到咱们产线就两个前端，有一个只会css，css肯定得有得，不然你想想啊，就算领导放心让你写css，你也肝颤啊。so，我就从产品mvp开始到正式产品立项，就主要精力在前端。</p>
+<h2 id="一入前端深似海啊"><a href="#一入前端深似海啊" class="headerlink" title="一入前端深似海啊"></a>一入前端深似海啊</h2><img src="/2019/02/24/%E5%89%8D%E7%AB%AF%E5%B0%8F%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B/gratisography-sad-bunny-thumbnail.jpg" class title="from gratisography">
+
+<p>前段的东西太多，而且层出不穷。抵御诱惑的最好办法是什么？我觉得是先仔细想想需不需它，当不确定时，先放着不着急做决定，只要坚定自己所要的东西，什么诱惑对你都是过眼云烟。</p>
+<p>脚手架的选择就出现了两派，一派以我为首，崇尚拿来即用避免重复造轮子，一派以专业前端同学为首，崇尚自己搭一套脚手架。具体就不细说，反正双方谁也说服不了谁。最终领导说了，谁是主要负责人谁说了算，当然专业前端是主要负责人，所以最终就决定自己搭建脚手架。当然这个过程是很痛苦的，时间也很长…曾今一度放弃这个方案，但是想着已经花了那么多精力了，就咬咬牙继续整了。最终大概前前后后花了3-4个月时间才算稳定了，当然这个过程编码还是断断继续在进行的。</p>
+<p>所以这块主要说下webpack，现在的前端打包工具我估计没谁说不用webpack吧，webpack教程我就不恬不知耻的讲了，网上一堆。不过我还是觉得大家尽量系统的看教程，别东一块西一块凑。</p>
+<h2 id="脚手架"><a href="#脚手架" class="headerlink" title="脚手架"></a>脚手架</h2><p>对于<strong>webpack</strong>打包工具，涉及到性能，我认为的三个关注点：</p>
+<ol>
+<li><p>包大小</p>
+<p> <em>主要是从压缩、去重（注意依赖公共部分单独打包）方面考虑，能从现有的配置解决的就不要引入新的插件，用了插件需要在官方了解每个数的意义。</em></p>
+<p> <em>项目中：js压缩用的UglifyJsPlugin，第三方库处理我们用的是CommonsChunkPlugin（有人说DllPlugin更好用），后面会抽时间试下。</em></p>
+</li>
+<li><p>包拆分</p>
+<p> <em>打包时，注意包的拆分，按模块按页面，可以分得细一些，让页面按需加载…，别都打到一个包里，一开始我们就遇到这个问题，打开一个页面光渲染所需的内容就要下载半天。</em></p>
+</li>
+</ol>
+<ol start="3">
+<li><p>打包速度</p>
+<p> <em>能用缓存的用缓存，不需要转译的就别转译，Happypack能多进程执行打包，会快点</em></p>
+<p> <em>有两个很漂亮的可视化插件，<strong>JARVIS、webpack-bundle-analyzer</strong> ，对于优化打包很有用。</em></p>
+</li>
+</ol>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ul>
+<li><p>前端选型一定要适合团队和自己业务发展的。其它人觉得好用，你得看看其它人的场景和公司的体量。</p>
+</li>
+<li><p>没有特别与众不同的要求或者很多的个性化，避免重复造轮子。</p>
+</li>
+<li><p>当资源有限的时候，先保证功能性，再保证性能，但是性能优化一定是一个长期的非功能需求。</p>
+</li>
+</ul>
+<h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><p>没什么好说的……，都是主流的</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/02/19/2019%E5%B9%B4%E5%BC%80%E5%A7%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/19/2019%E5%B9%B4%E5%BC%80%E5%A7%8B/" itemprop="url">2019年开始</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-19T11:02:00+08:00">
+                2019-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index">
+                    <span itemprop="name">成长</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>嗯…..19年过了两个月了是时候开始做个19的规划了，为什么一开始没做，因为我相当不专业的忘了…看斗自己都老火，这就体现了我和专业人士的区别，还是比较业余，谁叫我放荡不羁爱浪，需要自我克制一下，所以19规划还是得做。</p>
+<img src="/2019/02/19/2019%E5%B9%B4%E5%BC%80%E5%A7%8B/gratisography-421H.jpg" class title="from gratisography">
+
+
+<h2 id="ok-2019年我需要这么规划一下"><a href="#ok-2019年我需要这么规划一下" class="headerlink" title="ok 2019年我需要这么规划一下"></a>ok 2019年我需要这么规划一下</h2><p><strong>知识丰富</strong></p>
+<p><em>时间分布：地铁上、睡前半小时、上班的午间休息、周末每天2-3小时</em></p>
+<ol>
+<li>一个季度看2-3本书，根据书的厚薄进行动态调整，内容：技术类（谁叫我时程序员呢）、提升认知类（说起高大上，就是看一些扫盲的）、自个儿国家人文类（你会发现中国人的牛气冲天以及中国文化的博大精深，绝对时认真的）、心理学类（看看自己内心到底有多么黑暗）</li>
+</ol>
+<ol start="2">
+<li>几个知识付费的课程学完，花钱买教训（知识）。</li>
+</ol>
+<ol start="3">
+<li>国外的几个网站多逛逛，看英文文档。好歹对得起自己高中唯一一次英文及格的辉煌（而且是在高考）。</li>
+</ol>
+<p><strong>提升影响力</strong></p>
+<ol>
+<li><p>用心经营自己的社交圈，别让自己太独孤求败。</p>
+</li>
+<li><p>让领导清楚自己在干什么，多和领导进行沟通。</p>
+</li>
+<li><p>把团队内分享这事做得更好</p>
+</li>
+</ol>
+<p><strong>继续坚持</strong></p>
+<p>目标笔记小程序：</p>
+<ol>
+<li><p>小目标定好，每天上班路上做好目标规划以及时间规划。下班回家睡觉前想一想然后回顾一下。</p>
+</li>
+<li><p>大目标（按月、年）定好，每天看一遍，为其调整为其努力。</p>
+</li>
+</ol>
+<p>番茄土豆APP：</p>
+<p>按照番茄土豆的时间节奏进行，注意身体，保持高效。</p>
+<p><strong>变得完美</strong></p>
+<ol>
+<li><p>为成为完美的男人而努力，经常对着镜子反思自己的缺点，把缺点改的不那么缺。</p>
+</li>
+<li><p>养成早起早睡的习惯，嗯 现在已经比之前提前了一个小时起床，赞一个。要继续加油。</p>
+</li>
+<li><p>雾霾散去，锻炼身体，一周2-3次，一次20-30分钟，根据自己老的程度，动态调整。</p>
+</li>
+<li><p>治理拖延症（指生活上的，工作上我从不拖延！！！），想到事情了马上做，听到指令后马上做（这条主要是针对媳妇儿的教导）</p>
+</li>
+</ol>
+<p><strong>休闲清单</strong></p>
+<p><em>时间分布：晚上9点半之前、周末3-4小时</em></p>
+<ol>
+<li><p>除了学习和工作时间外的休息时间（作为凡人，需要偷懒放松），可供选择的休闲方式：</p>
+</li>
+<li><p>看电影（嗯，一个月怎么滴也得一场）</p>
+</li>
+<li><p>网络视频（Running Man、圆桌派、这就是街舞）</p>
+</li>
+<li><p>听音乐（各种直击灵魂和耳朵的音乐）</p>
+</li>
+<li><p>偶然性看小说（如果阴差阳错发现有喜欢的，就看一部，下班地铁上会看）</p>
+</li>
+</ol>
+<p><strong>心愿清单</strong></p>
+<ol>
+<li><p>至少给媳妇儿准备一个惊喜，希望她每天都高高兴兴的。</p>
+</li>
+<li><p>带老婆孩子去海边玩几天（国外）。</p>
+</li>
+<li><p>双方父母做一个全面体检，根据身体情况配置上对应的保险。</p>
+</li>
+<li><p>2-3次自驾游。</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/12/26/%E6%80%8E%E4%B9%88%E8%AE%A9%E5%B7%A5%E4%BD%9C%E6%9B%B4%E5%8A%A0%E9%AB%98%E6%95%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/26/%E6%80%8E%E4%B9%88%E8%AE%A9%E5%B7%A5%E4%BD%9C%E6%9B%B4%E5%8A%A0%E9%AB%98%E6%95%88/" itemprop="url">怎么让工作更加高效</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-26T11:39:00+08:00">
+                2018-12-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index">
+                    <span itemprop="name">成长</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近报了一个课程-<strong>告别低效，人人必备的聪明工作法</strong>,少数派出品。</p>
+<p>其实很早以前就接触了相关的内容，还买了几本书，买了几个工具，其中有本书对我还是比较有用的，这本书更多强调的是工具，是术的方面，让我学会了用工具做时间管理。比如番茄钟、滴答清单等。</p>
+<p>之所以再报这门课程是为因为，之前的时间管理训练做的不是很好，没有坚持下来，国外传来的四象限法、GTD、SMART、精力管理…这些很多地方出现的词语，主要还是讲思路方面的问题，对于我来说现在可能能真正落地的更合适，而这门课程里面的某些内容就是我需要的，同时想要通过这门课程让自己能更加重视提升工作效率的重要性，能提升一点也是好的。</p>
+<h2 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h2><p>这个应该是我做的最差的，文件都是摆满桌面，一通找，不过后来我找到了两个工具，超级超级超级好用，<strong>Everything+Wox</strong> 这两个东西真的是帮了我的大忙，让我不至于老是风中凌乱。我是觉得这两个就已经基本上解决了我的诉求，让我能快速的找到我的文件，不过稍有遗憾的是你的大概记得住你的文件名或者文件夹名才能有用，所以做好文件的管理是基础。课程中讲了一个工具<strong>Droplt</strong>，亲测好用，能根据我的规则帮我进行文件的分门别类。你也能设置自动分类。</p>
+<h2 id="高效获取信息"><a href="#高效获取信息" class="headerlink" title="高效获取信息"></a>高效获取信息</h2><ul>
+<li>信息源的质量<ul>
+<li>信息源的半衰期（信息的有效时间）、信息源的稀缺程度（价值高低），通常是半衰期越长，稀缺程度越高。</li>
+</ul>
+</li>
+</ul>
+<img src="/2018/12/26/%E6%80%8E%E4%B9%88%E8%AE%A9%E5%B7%A5%E4%BD%9C%E6%9B%B4%E5%8A%A0%E9%AB%98%E6%95%88/%E4%BF%A1%E6%81%AF%E6%BA%90.png" class>
+
+<ul>
+<li>掌握信息获取的主动权<ul>
+<li>获取信息尽量是通过pull而不是push（推送，通常不是有价值的信息），pull就表示是自己主动去寻找的信息</li>
+<li>避免回声效应，即老是停留在自己的认知层面，屏蔽了外面的信息。</li>
+</ul>
+</li>
+</ul>
+<h2 id="浪起来的我-效率提升工具"><a href="#浪起来的我-效率提升工具" class="headerlink" title="浪起来的我-效率提升工具"></a>浪起来的我-效率提升工具</h2><p>我这儿就笼统的分享一下我为了提升效率而使用的一套工具，有些花钱有些用的免费的，这儿说的提升效率包括工作、学习、生活上的。</p>
+<p><strong>工作节奏：</strong>滴答清单付费版、ToDoist、番茄土豆</p>
+<p><strong>文件搜索：</strong>Everything、Wox</p>
+<p><strong>学习：</strong>记录、收藏：印象笔记付费版，Pocket（稍后阅读）</p>
+<p><strong>回顾：</strong>目标笔记</p>
+<p>适合自己的才是最好的，你觉得用的爽然后确实有改善那就行了。</p>
+<h2 id="学习提升方法论"><a href="#学习提升方法论" class="headerlink" title="学习提升方法论"></a>学习提升方法论</h2><p>在学习记忆中始终保持必要难度是必要的，这样才能训练自己的记忆能力。</p>
+<p><strong>提升知识记忆的内化效果方法</strong></p>
+<p>1.复述意识=&gt;复述学习的内容，比如用康奈尔笔记法做知识回顾</p>
+<img src="/2018/12/26/%E6%80%8E%E4%B9%88%E8%AE%A9%E5%B7%A5%E4%BD%9C%E6%9B%B4%E5%8A%A0%E9%AB%98%E6%95%88/%E5%BA%B7%E5%A5%88%E5%B0%94%E7%AC%94%E8%AE%B0%E6%B3%95.png" class>
+
+<p>2.间隔学习，知识交叉，不能长时间一直学习某个知识，因为这样就没有保证记忆的难度。</p>
+<p>3.费曼学习法=&gt;把学到的知识讲给非专业人士听，用于检测自身是否对知识理解不到位，然后再反过头来深化</p>
+<p><strong>记忆方法-记忆宫殿</strong></p>
+<p>即把需要记忆的内容，抽象成图画，最终转化为情景式的关联记忆，因为人的空间记忆能力是超强的，所以用大脑的这块区域来记忆，坚持训练，肯定对记忆力有提升。我小试了几天，发现通过想象画面来记忆真的比死记硬背更有效且更有劲。</p>
+<p>课程还提到了一个工具：anki，加强记忆力的工具。</p>
+<img src="/2018/12/26/%E6%80%8E%E4%B9%88%E8%AE%A9%E5%B7%A5%E4%BD%9C%E6%9B%B4%E5%8A%A0%E9%AB%98%E6%95%88/%E8%AE%B0%E5%BF%86.png" class>
+
+
+<h2 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h2><ol>
+<li><p>邮件FAST法则</p>
+<img src="/2018/12/26/%E6%80%8E%E4%B9%88%E8%AE%A9%E5%B7%A5%E4%BD%9C%E6%9B%B4%E5%8A%A0%E9%AB%98%E6%95%88/fast.png" class title="邮件FAST法则">
+</li>
+<li><p>邮件ABC法则</p>
+</li>
+</ol>
+<img src="/2018/12/26/%E6%80%8E%E4%B9%88%E8%AE%A9%E5%B7%A5%E4%BD%9C%E6%9B%B4%E5%8A%A0%E9%AB%98%E6%95%88/abc.png" class title="邮件ABC法则">
+
+<ol start="2">
+<li>思维导图做会议记录</li>
+</ol>
+<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><p>任务管理LTF体系：List（列表，行动项） Tag（标签，标识） Filter（过滤器，搜索）<br>邮件FAST法则：Fliter（过滤） Archive（归档） Transfer（流转） Snooze（延后）</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/10/13/%E7%BD%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/13/%E7%BD%B2/" itemprop="url">部署</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-13T12:11:00+08:00">
+                2018-10-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%83%A8%E7%BD%B2/" itemprop="url" rel="index">
+                    <span itemprop="name">部署</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>部署方案推敲以及评审，最好有PlanB。</p>
+<p>确认部署方案，相关人员和部门配合，进行演练</p>
+<p>记录部署问题，优化部署方案。</p>
+<p>现场部署，做好问题记录，拿回公司做分析和优化。</p>
+<p><strong>一定要考虑客户的生产环境，公司做好随时支援现场的准备。</strong></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/09/29/%E6%95%8F%E6%8D%B7%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/29/%E6%95%8F%E6%8D%B7%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/" itemprop="url">敏捷自动化测试</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-29T09:33:00+08:00">
+                2018-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%8F%E6%8D%B7/" itemprop="url" rel="index">
+                    <span itemprop="name">敏捷</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>公司组织了一次敏捷得自动化测试，先做个课堂笔记，不久后公司会推自动化测试，到时候根据实践，再具体聊聊。</p>
+<p>塔克曼模型</p>
+<p>需求很多时候其实是在抢占资源。</p>
+<p>持续集成平台搭建</p>
+<ul>
+<li>Jenkins 服务器搭建</li>
+<li>Gitlab 平台搭建并且与 Jenkins 整合</li>
+<li>用 Git 进行版本控制的策略</li>
+<li>自动化单元测试</li>
+</ul>
+<p>团队压力大-解决方法</p>
+<ul>
+<li>需求整流</li>
+<li>团队从止血到造血</li>
+<li>形成业务版本节奏、和团队交付节奏</li>
+</ul>
+<p>代码质量保证手段的建立</p>
+<ul>
+<li>Sonar Qube 平台搭建与培训 </li>
+<li>代码评审制度建立</li>
+</ul>
+<p>实例化需求</p>
+<ul>
+<li>用户故事和验收条件的编写规范 </li>
+<li>采用实例化需求的方式来梳理需求</li>
+<li>采用 Cucumber 编写自动化验收测试</li>
+<li>采用 Selenium 驱动用户界面测试</li>
+</ul>
+<p>实际迭代工作中的团队协作</p>
+<ul>
+<li>度量</li>
+<li>测试用例可追溯性</li>
+<li>缺陷周期时间</li>
+<li>缺陷泄漏率</li>
+<li>测试覆盖率</li>
+<li>绩效考评</li>
+</ul>
+<p>单元测试</p>
+<p>Robot Framework</p>
+<h3 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h3><p>现公司推的工具是Katalon，写Xpath可以用java等语言写。</p>
+<p>前端自动化测试：</p>
+<ol>
+<li>用ID这类唯一性的属性标识元素，使测试用例能更少的维护，只要id在元素结构不发生大的变化都能继续用。</li>
+<li>业务代码加ID，通用组件加ID，根据唯一标识写Xpath</li>
+</ol>
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/09/21/%E6%83%B3%E9%87%91%E5%B1%B1-%E4%BA%A7%E5%93%81%E7%8E%8B%E9%81%93%E4%B8%89%E5%A4%A7%E6%B3%95%E5%AE%9D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/21/%E6%83%B3%E9%87%91%E5%B1%B1-%E4%BA%A7%E5%93%81%E7%8E%8B%E9%81%93%E4%B8%89%E5%A4%A7%E6%B3%95%E5%AE%9D/" itemprop="url">梦想金山-产品王道三大法宝</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-21T17:47:00+08:00">
+                2018-09-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BB%E4%B9%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">读书</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>1.以用户为中心<br>2.玩者之心<br>3.”瘦身运动”</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/09/20/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1-%E4%BC%98%E7%A7%80%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%91%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/20/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1-%E4%BC%98%E7%A7%80%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%91%98/" itemprop="url">梦想金山-优秀的程序员</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-20T17:42:00+08:00">
+                2018-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AF%BB%E4%B9%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">读书</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>优秀程序员四大修为</p>
+<p>1.坚韧不拔<br>2.知识全面<br>3.完美主义<br>4.团结协作</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/09/11/CSS%20Triggers/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -597,1206 +1956,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/09/10/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1-%E4%BA%BA%E7%89%A9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/10/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1-%E4%BA%BA%E7%89%A9/" itemprop="url">梦想金山-人物</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-10T15:16:00+08:00">
-                2018-09-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%BB%E4%B9%A6/" itemprop="url" rel="index">
-                    <span itemprop="name">读书</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>求伯君自己成功的经验三点：</p>
-<ol>
-<li>天赋</li>
-<li>个人的不懈努力</li>
-<li>机遇，遇到了一个时代和一些人</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/09/07/%E9%80%83%E9%81%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/07/%E9%80%83%E9%81%BF/" itemprop="url">逃避</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-07T14:29:00+08:00">
-                2018-09-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%97%B2%E6%89%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">闲扯</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/08/29/%E8%81%8C%E4%B8%9A%E5%B1%82%E7%BA%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/29/%E8%81%8C%E4%B8%9A%E5%B1%82%E7%BA%A7/" itemprop="url">职业层级</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-29T11:20:00+08:00">
-                2018-08-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%97%B2%E6%89%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">闲扯</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>近段时间较焦虑， 因为职业生涯的第一个5年到了，但是回过头来看自己走过的这5年，倒是经历了很多捶打，个人成长了很多，但是在技术层面并没有多少成长，些许恐慌才下脑头又上了心头。对自己的未来没有把握太可怕了，所以要好好想想自己未来的路了。</p>
-<h3 id="开始思考"><a href="#开始思考" class="headerlink" title="开始思考"></a>开始思考</h3><p>了解了腾讯、阿里的职级，本来以为职场发展的这条线够用了，直到看到了吴老师的《硅谷来信》，里面有关于职场上的内容，让我对职业层级有了更广阔的认知，对我触动很大，在此简单做的记录。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/08/28/%E6%88%91%E5%B8%8C%E6%9C%9B%E6%88%91%E6%98%AF%E7%8C%AB%E5%A4%B4%E9%B9%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/28/%E6%88%91%E5%B8%8C%E6%9C%9B%E6%88%91%E6%98%AF%E7%8C%AB%E5%A4%B4%E9%B9%B0/" itemprop="url">我希望我是'猫头鹰'</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-28T11:31:00+08:00">
-                2018-08-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%97%B2%E6%89%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">闲扯</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <img src="/2018/08/28/%E6%88%91%E5%B8%8C%E6%9C%9B%E6%88%91%E6%98%AF%E7%8C%AB%E5%A4%B4%E9%B9%B0/DlpAaqOWsAIz97B.jpg" class title="来源于Street Art Magic">
-
-<p>首先解释一下啊 ，这儿的猫头鹰表示，晚睡晚起一族，当然我就是晚睡晚起一族，那为什么我还要说我希望呢，因为我想实现的是文章中对猫头鹰的定义，很显然我还没达到那种境界，所以是希望。</p>
-<p>文章中的这句话是需要划重点的。这就是我的目标，哈哈哈哈…<strong>虽然俗语说”早睡早起，健康、聪明又富有”，但有一项研究表明，”猫头鹰”跟”百灵鸟”一样健康，一样聪明，甚至更加富有。</strong></p>
-<blockquote><footer><strong>为什么不应该强迫自己早睡早起？</strong><cite><a href="https://www.bbc.com/ukchina/simp/vert-cap-42339836?ocid=socialflow_twitter" target="_blank" rel="noopener">www.bbc.com/ukchina/simp/vert-cap-42339836?ocid=socialflow_twitter</a></cite></footer></blockquote>
-
-<p>其实从文章中我们可以提取到几点信息。</p>
-<ol>
-<li>别听风就是雨的，实践见真知。</li>
-<li>外国人挺闲（褒义）的，在我看来虽然不是什么高大上的课题，但是比我们所谓的国内专家靠谱多了，别人的出发点是探索，探索才能减少无知。</li>
-<li>外国人看世界都是带着疑问、好奇、较真、求知的想法的，相比这一点我们国人太容易一刀切，这就是我认为当前我们的国人在认知上和欧美people最大的差距。</li>
-<li>所谓实践见真知，是基于各种实验各种样本数据而得出的，不是你去炒了个番茄炒蛋，就能得出这应该是个荤菜的道理。</li>
-</ol>
-<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><p><strong>百灵鸟</strong></p>
-<p>表面解释：早睡早起，深度解释请看文章。</p>
-<p><strong>猫头鹰</strong></p>
-<p>表面解释：晚睡晚起，深度解释请看文章。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/08/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url">计算机网络</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-27T17:06:00+08:00">
-                2018-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
-                    <span itemprop="name">工作</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>作为NPMD的厂商</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/08/22/%E7%94%9F%E8%82%B2%E5%9F%BA%E9%87%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/22/%E7%94%9F%E8%82%B2%E5%9F%BA%E9%87%91/" itemprop="url">生育基金</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-22T11:07:00+08:00">
-                2018-08-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%97%B2%E6%89%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">闲扯</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <img src="/2018/08/22/%E7%94%9F%E8%82%B2%E5%9F%BA%E9%87%91/a.jpg" class title="来源于Street Art Magic">
-
-<p>最近生育基金的事闹得沸沸扬扬，更有甚者，江苏的《新华日报》携手，南京大学长江产业经济研究院 刘志彪、张 晔两位砖家，发表了不但应该缴生育基金还他么说了不生就只要老了才能取。</p>
-<p>我就想说，这两位究竟平时吃什么，大脑那么奔放。我觉得马光远先生评论改事件的时候有句话很到位，<strong>“老百姓不是负责交税和交配的”</strong></p>
-<p>基本的问题是什么，自己心里没点数么？光让生不用养吗？养得起吗？养得好吗？能养活吗？</p>
-<ol>
-<li>房价？光知道贷款、卖地，搞GDP有毛用啊，老百姓得到了什么？正经住的地方都没有还生？</li>
-<li>孕妇权益？孕妇敢怀孕吗？一怀孕就失业。产假够么？报销能到位么？医院收么？</li>
-<li>教育？都拿来盖房子,有盖学校的地么？幼儿教育规范么，有监管么？各种补习班开着，学校干嘛的？各种作业交给家长，老师干嘛的？</li>
-<li>医疗？医疗设施跟上了么，有监管么？孕妇体检能保障么？生孩子能保障吗？</li>
-<li>对企业的税收有考虑放松么？政策有考虑放宽么？企业紧巴巴，员工能好过么？</li>
-</ol>
-<p>…….</p>
-<p>一大堆根本上的问题不出方案，这种拍马屁不要脸的舔着上。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/08/20/%E8%B7%A8%E5%9F%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/20/%E8%B7%A8%E5%9F%9F/" itemprop="url">跨域</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-20T10:46:00+08:00">
-                2018-08-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
-                    <span itemprop="name">工作</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>刚好这段时间对接其他产品，刚好处理了一下跨域的问题，借此机会稍微更加了解一下跨域(Cross-origin resource sharing)。</p>
-<p>搬运搬运…</p>
-<h4 id="首先什么是同源策略？"><a href="#首先什么是同源策略？" class="headerlink" title="首先什么是同源策略？"></a>首先什么是同源策略？</h4><p>同源策略是一种Web浏览器安全性机制，旨在防止网站相互攻击。</p>
-<p>同源策略限制一个源上的脚本访问另一源的数据。源由URI方案，域和端口号组成。</p>
-<p>同源策略是一种限制性的跨域规范，它限制了网站与源域外部资源进行交互的能力。起源于多年前的策略是针对潜在的恶意跨域交互（例如，一个网站从另一个网站窃取私人数据）做出的响应。通常，它允许一个域向其他域发出请求，但不允许访问响应。</p>
-<p>同源策略它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，浏览器很容易受到XSS、CSFR等攻击。所谓同源是指”协议+域名+端口”三者相同，即便两个不同的域名指向同一个ip地址，也非同源。</p>
-<p>同源策略限制以下几种行为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.) Cookie、LocalStorage、IndexedDB 等存储</span><br><span class="line">2.) DOM查询</span><br><span class="line">3.) AJAX 请求</span><br></pre></td></tr></table></figure>
-
-<p>但是有三个标签是允许跨域加载资源：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src&#x3D;XXX&gt; </span><br><span class="line"></span><br><span class="line">&lt;link href&#x3D;XXX&gt;</span><br><span class="line"></span><br><span class="line">&lt;script src&#x3D;XXX&gt;</span><br></pre></td></tr></table></figure>
-
-<h4 id="常见跨域场景"><a href="#常见跨域场景" class="headerlink" title="常见跨域场景"></a><strong>常见跨域场景</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">URL                                      说明                    是否允许通信</span><br><span class="line">http:&#x2F;&#x2F;www.domain.com&#x2F;a.js</span><br><span class="line">http:&#x2F;&#x2F;www.domain.com&#x2F;b.js         同一域名，不同文件或路径           允许</span><br><span class="line">http:&#x2F;&#x2F;www.domain.com&#x2F;lab&#x2F;c.js</span><br><span class="line"></span><br><span class="line">http:&#x2F;&#x2F;www.domain.com:8000&#x2F;a.js</span><br><span class="line">http:&#x2F;&#x2F;www.domain.com&#x2F;b.js         同一域名，不同端口                不允许</span><br><span class="line"> </span><br><span class="line">http:&#x2F;&#x2F;www.domain.com&#x2F;a.js</span><br><span class="line">https:&#x2F;&#x2F;www.domain.com&#x2F;b.js        同一域名，不同协议                不允许</span><br><span class="line"> </span><br><span class="line">http:&#x2F;&#x2F;www.domain.com&#x2F;a.js</span><br><span class="line">http:&#x2F;&#x2F;192.168.4.12&#x2F;b.js           域名和域名对应相同ip              不允许</span><br><span class="line"> </span><br><span class="line">http:&#x2F;&#x2F;www.domain.com&#x2F;a.js</span><br><span class="line">http:&#x2F;&#x2F;x.domain.com&#x2F;b.js           主域相同，子域不同                不允许</span><br><span class="line">http:&#x2F;&#x2F;domain.com&#x2F;c.js</span><br><span class="line"> </span><br><span class="line">http:&#x2F;&#x2F;www.domain1.com&#x2F;a.js</span><br><span class="line">http:&#x2F;&#x2F;www.domain2.com&#x2F;b.js        不同域名                         不允许</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="跨域解决方案"><a href="#跨域解决方案" class="headerlink" title="跨域解决方案"></a><strong>跨域解决方案</strong></h4><p>1、 通过jsonp跨域<br>2、 iframe跨域<br>5、 postMessage跨域<br>6、 跨域资源共享（CORS）<br>7、 nginx代理跨域<br>8、 nodejs中间件代理跨域<br>9、 WebSocket协议跨域</p>
-<p>比较抱歉的是我只用过nginx代理跨域、跨域资源共享（CORS）、WebSocket协议跨域…。</p>
-<h4 id="什么是CORS（跨域资源共享）？"><a href="#什么是CORS（跨域资源共享）？" class="headerlink" title="什么是CORS（跨域资源共享）？"></a>什么是CORS（跨域资源共享）？</h4><p>在大多数情况下，在用户浏览器中运行的脚本仅需要访问源相同的资源（请考虑首先对服务JavaScript代码的同一后端进行API调用）。因此，JavaScript通常无法访问其他来源的资源，这对安全性而言是一件好事。但是有些情况下需要跨域请求的。例如，不同系统间的一些对接。解决该问题就需要实现CORS，跨域资源共享（CORS）是一种浏览器机制，可实现对位于给定域外部的资源的受控访问。</p>
-<h4 id="CORS如何运作"><a href="#CORS如何运作" class="headerlink" title="CORS如何运作"></a>CORS如何运作</h4><p>如果不需要cookie的话，整个<code>CORS</code>通信过程都是浏览器自动完成的，前端不需要做额外的编码。<strong>浏览器一旦发现请求跨源，就会自动添加一些附加的头信息，复杂请求还会多一次预检的请求，但我们是不用感知的</strong>。因此，实现<code>CORS</code>通信的关键是服务器开启CORS。</p>
-<img src="/2018/08/20/%E8%B7%A8%E5%9F%9F/b.png" class>
-
-
-
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><blockquote><footer><strong>KRISTOPHER SANDOVAL</strong><cite><a href="https://nordicapis.com/what-is-cors-cross-origin-resource-sharing/" target="_blank" rel="noopener">What is CORS</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>w3c</strong><cite><a href="https://www.w3.org/TR/2014/REC-cors-20140116/" target="_blank" rel="noopener">Cross-Origin Resource Sharing</a></cite></footer></blockquote>
-<blockquote><footer><strong>阮一峰</strong><cite><a href="https://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">跨域资源共享 CORS 详解</a></cite></footer></blockquote>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/08/19/%E5%90%8C%E7%90%86%E5%BF%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/19/%E5%90%8C%E7%90%86%E5%BF%83/" itemprop="url">同理心</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-19T10:48:00+08:00">
-                2018-08-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%97%B2%E6%89%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">闲扯</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
  <nav class="pagination">
-   <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
+   <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
  </nav>
 
 
@@ -1845,7 +2009,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">104</span>
+                  <span class="site-state-item-count">112</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1856,7 +2020,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1867,7 +2031,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">70</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1926,7 +2090,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -2525,7 +2689,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("CSS Triggers");titles.push("梦想金山-运营");titles.push("梦想金山-人物");titles.push("逃避");titles.push("职业层级");titles.push("我希望我是'猫头鹰'");titles.push("计算机网络");titles.push("生育基金");titles.push("跨域");titles.push("同理心");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("合代码de内心独白");titles.push("前端小总结一下");titles.push("2019年开始");titles.push("怎么让工作更加高效");titles.push("部署");titles.push("敏捷自动化测试");titles.push("梦想金山-产品王道三大法宝");titles.push("梦想金山-优秀的程序员");titles.push("CSS Triggers");titles.push("梦想金山-运营");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {
@@ -2570,4 +2734,5 @@
 
   
 
-<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+</body>
+</html>

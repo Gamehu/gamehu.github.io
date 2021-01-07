@@ -83,17 +83,22 @@
 
 
 
-<meta name="description" content="背景其实老早就想做监控，之前整理的前端埋点(一)里头有说一些相关的内容。 不痛就不慌，所以说说我们痛的地方：  因为我们的产品都是部署在客户内网的，所以对于debug及其不友好，客户现场问题排查前端几乎没有任何输入，难弄。 产品迭代了多个版本，但是没有任何客户现场的用户行为等数据，产品优化少了一些输入。  录制：rrweb TimeCat sentry https:&#x2F;&#x2F;tldp.org&#x2F;LDP&#x2F;a">
+<meta name="description" content="背景其实老早就想做监控，之前整理的前端埋点(一)里头有说一些相关的内容。 不痛就不慌，所以说说我们痛的地方：  因为我们的产品都是部署在客户内网的，所以对于debug及其不友好，客户现场问题排查前端几乎没有任何输入，难弄。 产品迭代了多个版本，但是没有任何客户现场的用户行为等数据，产品优化少了一些输入。  本来计划是自研，但是由于业务压力突然来袭，所以就搁置了，不过我犹不放弃，觉得自研既然短期不现">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端监控">
 <meta property="og:url" content="https://gamehu.github.io/2020/06/05/%E5%89%8D%E7%AB%AF%E7%9B%91%E6%8E%A7/index.html">
 <meta property="og:site_name" content="正儿八经">
-<meta property="og:description" content="背景其实老早就想做监控，之前整理的前端埋点(一)里头有说一些相关的内容。 不痛就不慌，所以说说我们痛的地方：  因为我们的产品都是部署在客户内网的，所以对于debug及其不友好，客户现场问题排查前端几乎没有任何输入，难弄。 产品迭代了多个版本，但是没有任何客户现场的用户行为等数据，产品优化少了一些输入。  录制：rrweb TimeCat sentry https:&#x2F;&#x2F;tldp.org&#x2F;LDP&#x2F;a">
+<meta property="og:description" content="背景其实老早就想做监控，之前整理的前端埋点(一)里头有说一些相关的内容。 不痛就不慌，所以说说我们痛的地方：  因为我们的产品都是部署在客户内网的，所以对于debug及其不友好，客户现场问题排查前端几乎没有任何输入，难弄。 产品迭代了多个版本，但是没有任何客户现场的用户行为等数据，产品优化少了一些输入。  本来计划是自研，但是由于业务压力突然来袭，所以就搁置了，不过我犹不放弃，觉得自研既然短期不现">
+<meta property="og:image" content="https://picb.zhimg.com/v2-8e7849c3630d23eb2d5f8586b8d388aa_r.jpg">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/XIibZ0YbvibkWRcKibvw8Iic9FeJvR9mU8FuJuPBAvRsOvYl00ZoNtPYbolvxxSzGSsNgBGn573TfjTfkjm00ZoichQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/XIibZ0YbvibkWRcKibvw8Iic9FeJvR9mU8FubycbpicgLSjnEiamlGm14Hoq4ayriaZibDDNqHRMTMa4hYAic0DJt1wE7dA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/XIibZ0YbvibkWRcKibvw8Iic9FeJvR9mU8FuGtyE0qJ1E6Y3VuXjMPy82ciamb0ud6RyjtUgPlq7XlnX84YCDAbBoGw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1">
 <meta property="article:published_time" content="2020-06-05T09:52:00.000Z">
-<meta property="article:modified_time" content="2020-08-27T10:41:34.381Z">
+<meta property="article:modified_time" content="2020-10-09T10:09:55.612Z">
 <meta property="article:author" content="Gamehu">
 <meta property="article:tag" content="监控">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://picb.zhimg.com/v2-8e7849c3630d23eb2d5f8586b8d388aa_r.jpg">
 
 
 
@@ -410,13 +415,52 @@
 <li>因为我们的产品都是部署在客户内网的，所以对于debug及其不友好，客户现场问题排查前端几乎没有任何输入，难弄。</li>
 <li>产品迭代了多个版本，但是没有任何客户现场的用户行为等数据，产品优化少了一些输入。</li>
 </ol>
-<h3 id="录制："><a href="#录制：" class="headerlink" title="录制："></a>录制：</h3><p><a href="https://github.com/rrweb-io/rrweb" target="_blank" rel="noopener">rrweb</a></p>
-<p><a href="https://github.com/oct16/TimeCat" target="_blank" rel="noopener">TimeCat</a></p>
-<p><a href="https://github.com/getsentry/sentry" target="_blank" rel="noopener">sentry</a></p>
-<p><a href="https://tldp.org/LDP/abs/html/exitcodes.html" target="_blank" rel="noopener">https://tldp.org/LDP/abs/html/exitcodes.html</a></p>
-<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><h2 id="代码之上：我们落地-GraphQL-背后的故事"><a href="#代码之上：我们落地-GraphQL-背后的故事" class="headerlink" title="代码之上：我们落地 GraphQL 背后的故事"></a><a href="https://zhuanlan.zhihu.com/p/141629697" target="_blank" rel="noopener">代码之上：我们落地 GraphQL 背后的故事</a></h2><h3 id="重复提交"><a href="#重复提交" class="headerlink" title="重复提交"></a>重复提交</h3><p>加节流防止重复提交</p>
-<p><a href="https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/5" target="_blank" rel="noopener">防抖和节流</a></p>
-<p><a href="https://juejin.im/post/6844904004850286605" target="_blank" rel="noopener">https://juejin.im/post/6844904004850286605</a></p>
+<p>本来计划是自研，但是由于业务压力突然来袭，所以就搁置了，不过我犹不放弃，觉得自研既然短期不现实，那可以站在巨人肩膀上搞一搞。</p>
+<p>找了两个工具Sentry+rrweb，基于两个工具做一些定制化，手里不久有东西了吗。</p>
+<h3 id="Sentry"><a href="#Sentry" class="headerlink" title="Sentry"></a>Sentry</h3><p>Sentry的应用程序监视平台可为每位开发人员提供帮助诊断，修复和优化其代码的性能。</p>
+<p><a href="https://docs.sentry.io/platforms/native/configuration/options/" target="_blank" rel="noopener">config</a></p>
+<p><a href="https://docs.sentry.io/platforms/javascript/" target="_blank" rel="noopener">config for JavaScript</a></p>
+<p><a href="https://sentry.io/features/" target="_blank" rel="noopener">React</a></p>
+<p><a href="https://blog.sentry.io/2019/03/06/new-features-greater-visibility/" target="_blank" rel="noopener">features</a></p>
+<h4 id="package"><a href="#package" class="headerlink" title="package"></a>package</h4><p>@sentry/tracing 性能监控</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Using npm</span></span><br><span class="line">$ npm install --save @sentry/react @sentry/tracing</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="config"><a href="#config" class="headerlink" title="config"></a>config</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Sentry.init(&#123;</span><br><span class="line">  dsn: <span class="string">'http://cb4e9b434f004c53a51af8ab45346635@172.17.162.101:9100/2'</span>,</span><br><span class="line">  integrations: [<span class="keyword">new</span> Integrations.BrowserTracing()],<span class="comment">//性能监控配置</span></span><br><span class="line">  <span class="comment">// beforeSend (event, hint) &#123;</span></span><br><span class="line">  <span class="comment">//   // Check if it is an exception, and if so, show the report dialog 错误弹窗</span></span><br><span class="line">  <span class="comment">//   if (event.exception) &#123;</span></span><br><span class="line">  <span class="comment">//     Sentry.showReportDialog(&#123; eventId: event.event_id &#125;);</span></span><br><span class="line">  <span class="comment">//   &#125;</span></span><br><span class="line">  <span class="comment">//   return event;</span></span><br><span class="line">  <span class="comment">// &#125;,</span></span><br><span class="line">  debug: <span class="literal">false</span>,<span class="comment">// 调试模式</span></span><br><span class="line">  attachStacktrace: <span class="literal">false</span>,<span class="comment">//附上堆栈信息</span></span><br><span class="line">  tracesSampleRate: <span class="number">1</span>,<span class="comment">// Be sure to lower this in production</span></span><br><span class="line">  environment: <span class="string">'development'</span>,</span><br><span class="line">  <span class="comment">// logLevel: 2,</span></span><br><span class="line">  release: <span class="string">'sentryTest-0.1.0'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个 全局scope ，可以理解为上报数据的附加信息</span></span><br><span class="line">Sentry.configureScope(<span class="function">(<span class="params">scope</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="comment">//标签，可用于筛选</span></span><br><span class="line"> scope.setTag(<span class="string">"first-tag"</span>, <span class="string">"Guide"</span>);</span><br><span class="line"> <span class="comment">//绑定用户信息</span></span><br><span class="line"> scope.setUser(&#123;</span><br><span class="line">  id: <span class="number">1</span>,</span><br><span class="line">  name: <span class="string">"gamehu"</span>,</span><br><span class="line">  email: <span class="string">"gamehu@yeah.net"</span>,</span><br><span class="line"> &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//局部：自定义上下文，补充信息</span></span><br><span class="line">    Sentry.setContext(<span class="string">"zhangsan"</span>, &#123;</span><br><span class="line">      name: <span class="string">"zhangsan"</span>,</span><br><span class="line">      age: <span class="number">19</span>,</span><br><span class="line">      attack_type: <span class="string">"zhangsan"</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 创建一个零时到 scope ，配置到 context 上面</span></span><br><span class="line">    <span class="keyword">const</span> scope = <span class="keyword">new</span> Sentry.Scope();</span><br><span class="line">    scope.setTag(<span class="string">"section"</span>, <span class="string">"articles"</span>);</span><br><span class="line">    scope.setUser(&#123;</span><br><span class="line">      id: <span class="number">2</span>,</span><br><span class="line">      name: <span class="string">"zhangsan"</span>,</span><br><span class="line">      email: <span class="string">"zhangsan@yeah.net"</span>,</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="sourceMap"><a href="#sourceMap" class="headerlink" title="sourceMap"></a>sourceMap</h4><p>sentry-cli releases -o 组织 -p 项目 files <a href="mailto:staging@1.0.1">staging@1.0.1</a> upload-sourcemaps js文件所在目录 –url-prefix 线上资源URI</p>
+<p>sentry-cli releases files sentryTest-0.1.0 upload-sourcemaps –url-<strong>prefix</strong> ‘<a href="http://172.17.162.101:9100/organizations/sentry/issues/61/?project=2&amp;query=is%3Aunresolved&#39;" target="_blank" rel="noopener">http://172.17.162.101:9100/organizations/sentry/issues/61/?project=2&amp;query=is%3Aunresolved&#39;</a> ‘./dist/<strong>static</strong>/js’</p>
+<h4 id="添加一个-EventProcessor-对全局生效"><a href="#添加一个-EventProcessor-对全局生效" class="headerlink" title="添加一个 EventProcessor 对全局生效"></a>添加一个 EventProcessor 对全局生效</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> attachmentUrlFromDsn = <span class="function">(<span class="params">dsn, eventId</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; host, path, projectId, port, protocol, user &#125; = dsn;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;protocol&#125;</span>://<span class="subst">$&#123;host&#125;</span><span class="subst">$&#123;port !== <span class="string">''</span> ? <span class="string">`:<span class="subst">$&#123;port&#125;</span>`</span> : <span class="string">''</span>&#125;</span><span class="subst">$&#123;path !== <span class="string">''</span> ? <span class="string">`/<span class="subst">$&#123;path&#125;</span>`</span> : <span class="string">''</span></span></span></span><br><span class="line"><span class="string"><span class="subst">    &#125;</span>/api/<span class="subst">$&#123;projectId&#125;</span>/events/<span class="subst">$&#123;eventId&#125;</span>/attachments/?sentry_key=<span class="subst">$&#123;user&#125;</span>&amp;sentry_version=7&amp;sentry_client=custom-javascript`</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加一个 EventProcessor 对全局生效</span></span><br><span class="line">Sentry.addGlobalEventProcessor(<span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> client = Sentry.getCurrentHub().getClient();</span><br><span class="line">    <span class="keyword">const</span> endpoint = attachmentUrlFromDsn(</span><br><span class="line">      client.getDsn(),</span><br><span class="line">      event.event_id</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">const</span> formData = <span class="keyword">new</span> FormData();</span><br><span class="line">    <span class="keyword">const</span> data = <span class="built_in">JSON</span>.stringify(&#123; <span class="attr">logEntries</span>: [<span class="string">"sentryTest"</span>], <span class="attr">message</span>: event.message, <span class="attr">logger</span>: event.logger &#125;);</span><br><span class="line">    formData.append(</span><br><span class="line">      <span class="string">'my-attachment'</span>,</span><br><span class="line">      <span class="keyword">new</span> Blob([data], &#123;</span><br><span class="line">        type: <span class="string">'application/json'</span>,</span><br><span class="line">      &#125;),</span><br><span class="line">      event.event_id + <span class="string">'.json'</span></span><br><span class="line">    );</span><br><span class="line">    fetch(endpoint, &#123;</span><br><span class="line">      method: <span class="string">'POST'</span>,</span><br><span class="line">      body: formData,</span><br><span class="line">    &#125;).catch(<span class="function">(<span class="params">ex</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// we have to catch this otherwise it throws an infinite loop in Sentry</span></span><br><span class="line">      <span class="built_in">console</span>.error(ex);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> event;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(ex);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="RRWEB-TimeCat"><a href="#RRWEB-TimeCat" class="headerlink" title="RRWEB/TimeCat"></a>RRWEB/TimeCat</h4><p>录制回放工具，可单独使用也可搭配Sentry使用，可对用户操作录屏，针对一些现场问题可作为排查问题得输入.</p>
+<p><a href="https://github.com/rrweb-io/rrweb/blob/master/guide.zh_CN.md" target="_blank" rel="noopener">rrweb使用指南</a></p>
+<p><img src="https://picb.zhimg.com/v2-8e7849c3630d23eb2d5f8586b8d388aa_r.jpg" alt="preview"></p>
+<h3 id="监控理论的记录"><a href="#监控理论的记录" class="headerlink" title="监控理论的记录"></a>监控理论的记录</h3><p>要做监控先做设计，根据产品、研发、测试等的输入，整理出监控数据类别：</p>
+<ul>
+<li><strong>JS</strong> 的异常错误；</li>
+<li>资源测速；</li>
+<li>接口的成功率、失败率；</li>
+<li>性能。</li>
+</ul>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/XIibZ0YbvibkWRcKibvw8Iic9FeJvR9mU8FuJuPBAvRsOvYl00ZoNtPYbolvxxSzGSsNgBGn573TfjTfkjm00ZoichQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/XIibZ0YbvibkWRcKibvw8Iic9FeJvR9mU8FubycbpicgLSjnEiamlGm14Hoq4ayriaZibDDNqHRMTMa4hYAic0DJt1wE7dA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<p><img src="https://mmbiz.qpic.cn/mmbiz_png/XIibZ0YbvibkWRcKibvw8Iic9FeJvR9mU8FuGtyE0qJ1E6Y3VuXjMPy82ciamb0ud6RyjtUgPlq7XlnX84YCDAbBoGw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
+<h2 id><a href="#" class="headerlink" title></a></h2><blockquote><footer><strong>FEX-zhangjunah</strong><cite><a href="http://fex.baidu.com/blog/2014/05/front_end-data/" target="_blank" rel="noopener">前端数据之美 -- 基础篇</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>FEX-zhangtao</strong><cite><a href="https://fex.baidu.com/blog/2014/05/build-performance-monitor-in-7-days/" target="_blank" rel="noopener">7 天打造前端性能监控系统</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>何方舟-前端之巅</strong><cite><a href="https://mp.weixin.qq.com/s/aqO55IyVCZzh9yhKuOKSCQ" target="_blank" rel="noopener">前端越管越宽，腾讯Now直播如何把监控体系做到极致？</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>LDP</strong><cite><a href="https://tldp.org/LDP/abs/html/exitcodes.html" target="_blank" rel="noopener">Advanced Bash-Scripting Guide</a></cite></footer></blockquote>
+
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
 
       
     </div>
@@ -578,7 +622,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">104</span>
+                  <span class="site-state-item-count">112</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -589,7 +633,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -600,7 +644,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">70</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -655,7 +699,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#录制："><span class="nav-number">2.</span> <span class="nav-text">录制：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询"><span class="nav-number">3.</span> <span class="nav-text">查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码之上：我们落地-GraphQL-背后的故事"><span class="nav-number"></span> <span class="nav-text">代码之上：我们落地 GraphQL 背后的故事</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重复提交"><span class="nav-number">1.</span> <span class="nav-text">重复提交</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sentry"><span class="nav-number">2.</span> <span class="nav-text">Sentry</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#package"><span class="nav-number">2.1.</span> <span class="nav-text">package</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#config"><span class="nav-number">2.2.</span> <span class="nav-text">config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sourceMap"><span class="nav-number">2.3.</span> <span class="nav-text">sourceMap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加一个-EventProcessor-对全局生效"><span class="nav-number">2.4.</span> <span class="nav-text">添加一个 EventProcessor 对全局生效</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RRWEB-TimeCat"><span class="nav-number">2.5.</span> <span class="nav-text">RRWEB&#x2F;TimeCat</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#监控理论的记录"><span class="nav-number">3.</span> <span class="nav-text">监控理论的记录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number"></span> <span class="nav-text"></span></a></div>
             
 
           </div>
@@ -675,7 +719,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -1323,4 +1367,5 @@
 
   
 
-<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+</body>
+</html>

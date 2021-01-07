@@ -309,6 +309,1613 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/11/26/Docker%20%E4%B8%80%E7%82%B9%E7%82%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/26/Docker%20%E4%B8%80%E7%82%B9%E7%82%B9/" itemprop="url">Docker 一点点</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-26T15:32:00+08:00">
+                2019-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>由于我们产品是基于docker做的部署，所以不管在开发过程中还是在处理客户现场问题时，多多少少都要用到一些docker命令，此篇做个简单的记录，把我用到的命令记录下来。</p>
+<h3 id="先看图"><a href="#先看图" class="headerlink" title="先看图"></a>先看图</h3><p>说命令之前先看图了解下便于更有代入感。</p>
+<p><strong>架构图</strong>（不包含Dokcer Engine等细节）</p>
+<img src="/2019/11/26/Docker%20%E4%B8%80%E7%82%B9%E7%82%B9/architecture.png" class title="docs.docker.com">
+
+<img src="/2019/11/26/Docker%20%E4%B8%80%E7%82%B9%E7%82%B9/docker-arch1.jpg" class title="运维之美 -www.hi-linux.com">
+
+<h3 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h3><h4 id="各种查看"><a href="#各种查看" class="headerlink" title="各种查看"></a>各种查看</h4><h5 id="docker-COMMAND-help"><a href="#docker-COMMAND-help" class="headerlink" title="docker COMMAND --help"></a><code>docker COMMAND --help</code></h5><p>查看docker相关命令的信息，里面有每个命令的说明。</p>
+<h5 id="docker-ps、docker-ps-a"><a href="#docker-ps、docker-ps-a" class="headerlink" title="docker ps、docker ps -a"></a><code>docker ps、docker ps -a</code></h5><p>docker ps 这是最常用的，查看容器的运行状态，查问题时不ps一下心里都没底，该命令会列出所有正在运行的容器，当然 等同于docker container ls。</p>
+<p>另外docker ps -a，可用于显示所有正在运行和退出的容器。</p>
+<h5 id="docker-info、docker-version"><a href="#docker-info、docker-version" class="headerlink" title="docker info、docker version"></a><code>docker info、docker version</code></h5><p>docker info 该命令用于获取当前安装的docker版本以及有关操作系统的几条信息。</p>
+<img src="/2019/11/26/Docker%20%E4%B8%80%E7%82%B9%E7%82%B9/1.png" class>
+
+<p>docker version 列出有关Docker客户端和服务器版本的信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Client:</span><br><span class="line"> Version:           18.09.7</span><br><span class="line"> API version:       1.39</span><br><span class="line"> Go version:        go1.10.1</span><br><span class="line"> Git commit:        2d0083d</span><br><span class="line"> Built:             Fri Aug 16 14:20:06 2019</span><br><span class="line"> OS&#x2F;Arch:           linux&#x2F;amd64</span><br><span class="line"> Experimental:      false</span><br><span class="line"></span><br><span class="line">Server:</span><br><span class="line"> Engine:</span><br><span class="line">  Version:          18.09.7</span><br><span class="line">  API version:      1.39 (minimum version 1.12)</span><br><span class="line">  Go version:       go1.10.1</span><br><span class="line">  Git commit:       2d0083d</span><br><span class="line">  Built:            Wed Aug 14 19:41:23 2019</span><br><span class="line">  OS&#x2F;Arch:          linux&#x2F;amd64</span><br><span class="line">  Experimental:     false</span><br></pre></td></tr></table></figure>
+
+<h5 id="docker-search-xxx"><a href="#docker-search-xxx" class="headerlink" title="docker search xxx"></a><code>docker search xxx</code></h5><p>该命令只有在我自己玩得时候用过（不想重复造轮子），搜索registry上得镜像。</p>
+<h5 id="docker-images"><a href="#docker-images" class="headerlink" title="docker images"></a><code>docker images</code></h5><p> 列出所有的镜像，通常只需要关注REPOSITORY、TAG两列就行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">root@feature1_dev:~# docker images</span><br><span class="line">REPOSITORY                                     TAG                                  IMAGE ID            CREATED             SIZE</span><br><span class="line">172.17.162.141:5000&#x2F;baymax-nginx               1.17.6                               231d40e811cd        6 months ago        126MB</span><br><span class="line">172.17.162.141:5000&#x2F;pg10-cmdb                  1.3.0                                284de991364f        10 months ago       370MB</span><br><span class="line">172.17.162.141:5000&#x2F;myflink                    1.8.1                                96c4d2af10fc        10 months ago       449MB</span><br><span class="line">172.17.162.141:5000&#x2F;yandex&#x2F;clickhouse-server   19                                   58006c9044b7        13 months ago       514MB</span><br><span class="line">172.17.162.141:5000&#x2F;zookeeper                  latest                               f336949ce7a1        19 months ago       148MB</span><br><span class="line">172.17.162.141:5000&#x2F;redis                      latest                               1babb1dde7e1        20 months ago       94.9MB</span><br><span class="line">172.17.162.141:5000&#x2F;kafka                      latest                               568143d73a6b        20 months ago       339MB</span><br><span class="line">172.17.162.141:5000&#x2F;dubbo-admin                latest                               954bf5f29e96        2 years ago         492MB</span><br></pre></td></tr></table></figure>
+
+<h5 id="docker-logs-f-container-name"><a href="#docker-logs-f-container-name" class="headerlink" title="docker logs -f container_name"></a><code>docker logs -f container_name</code></h5><p>查看容器的日志，我用的也较少。</p>
+<h5 id="docker-commit-a-quot-gamehu-quot-m-quot-what-f-quot-container-id-IMAGE-REPOSITORY-TAG"><a href="#docker-commit-a-quot-gamehu-quot-m-quot-what-f-quot-container-id-IMAGE-REPOSITORY-TAG" class="headerlink" title="docker commit -a &quot;gamehu&quot; -m &quot;what f&quot; container_id IMAGE_REPOSITORY:TAG`"></a><code>docker commit -a &quot;gamehu&quot; -m &quot;what f&quot; container_id</code> IMAGE_REPOSITORY:TAG`</h5><p>通过容器id创建一个新的镜像，</p>
+<h4 id="Container"><a href="#Container" class="headerlink" title="Container"></a>Container</h4><h5 id="docker-start-、stop、restart、rm、kill"><a href="#docker-start-、stop、restart、rm、kill" class="headerlink" title="docker start 、stop、restart、rm、kill"></a><code>docker start 、stop、restart、rm、kill</code></h5><p>高频使用了，后接 container_id/container_name，依次分别为：启动（已存在）容器、停止容器（会进行正常时间等待其停止）、重启重启、删除（已停止）容器、立即停止容器</p>
+<h5 id="docker-exec-it-container-id"><a href="#docker-exec-it-container-id" class="headerlink" title="docker exec -it container_id"></a><code>docker exec -it container_id</code></h5><p>使用的较多，通常是为了测试而替换容器内的内容，命令用于访问正在运行的容器，并启用交互模式，可用一些基本的命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@feature1_dev:~# docker exec -it 58f5d79c10a3 &#x2F;bin&#x2F;bash</span><br><span class="line">root@58f5d79c10a3:&#x2F;# ls</span><br><span class="line">bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var</span><br><span class="line">root@58f5d79c10a3:&#x2F;#</span><br></pre></td></tr></table></figure>
+
+<h5 id="docker-inspect-container-id"><a href="#docker-inspect-container-id" class="headerlink" title="docker inspect container_id"></a><code>docker inspect container_id</code></h5><p>查看容器的相关信息，用的也较少。</p>
+<h4 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h4><h5 id="docker-run、create"><a href="#docker-run、create" class="headerlink" title="docker run、create"></a><code>docker run、create</code></h5><p>基于镜像创建一个新的容器，<code>run</code>是创建并启动，<code>create</code>是创建但不启动。</p>
+<p>示例：<code>docker  run -i -t -p 1000:8000  image_name/image_id:TAG</code>，使用镜像，以后台模式启动一个容器,将容器的 8000 端口映射到主机的 1000 端口</p>
+<h5 id="docker-build-lt-path-to-docker-file-gt"><a href="#docker-build-lt-path-to-docker-file-gt" class="headerlink" title="docker build &lt;path to docker file&gt;"></a><code>docker build &lt;path to docker file&gt;</code></h5><p>此命令用于从指定的dockerfile构建镜像。</p>
+<h5 id="docker-push-IMAGE-NAME-TAG"><a href="#docker-push-IMAGE-NAME-TAG" class="headerlink" title="docker push IMAGE_NAME:TAG"></a><code>docker push IMAGE_NAME:TAG</code></h5><p>做完镜像推送到镜像仓库。</p>
+<h5 id="docker-rmi-image-id-image-name"><a href="#docker-rmi-image-id-image-name" class="headerlink" title="docker rmi image_id/image_name"></a><code>docker rmi image_id/image_name</code></h5><p>删除镜像，通常是处理现场问题，要替换镜像的时候用一用。</p>
+<h5 id="docker-inspect-image-id"><a href="#docker-inspect-image-id" class="headerlink" title="docker inspect image_id"></a><code>docker inspect image_id</code></h5><p>查看镜像相关信息，我制作镜像的时候会用一用，用的很少。</p>
+<h5 id="docker-save-image-id-gt-xx-tar"><a href="#docker-save-image-id-gt-xx-tar" class="headerlink" title="docker save image_id&gt; xx.tar"></a><code>docker save image_id&gt; xx.tar</code></h5><p>导出镜像，通常是修复现场问题时做该操作，导出已修复的镜像。</p>
+<h5 id="docker-load-lt-xx-tar"><a href="#docker-load-lt-xx-tar" class="headerlink" title="docker load &lt; xx.tar"></a><code>docker load &lt; xx.tar</code></h5><p>导入镜像，通常是修复现场问题时做该操作，载入已修复后的镜像。</p>
+<h5 id="docker-tag-image-id-tag-name"><a href="#docker-tag-image-id-tag-name" class="headerlink" title="docker tag image_id tag_name"></a><code>docker tag image_id tag_name</code></h5><p>修改镜像的TAG，通常是修复现场问题时做该操作。</p>
+<h4 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h4><blockquote><footer><strong>Jeff Hale</strong><cite><a href="https://towardsdatascience.com/15-docker-commands-you-should-know-970ea5203421" target="_blank" rel="noopener">15 Docker Commands You Should Know</a></cite></footer></blockquote>
+
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/11/20/%E7%90%86%E8%A7%A3%E4%B8%80%E4%B8%AA%E6%96%B0%E4%BA%8B%E7%89%A9%E7%9A%84%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/20/%E7%90%86%E8%A7%A3%E4%B8%80%E4%B8%AA%E6%96%B0%E4%BA%8B%E7%89%A9%E7%9A%84%E6%96%B9%E6%B3%95/" itemprop="url">理解一个新事物的方法</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-20T10:29:01+08:00">
+                2019-11-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>最近看了李笑来先生写的《区块链小白书》对其中的理解一个新事物正确的姿势在此做一个备忘。</p>
+<h3 id="1-不要滥用类比"><a href="#1-不要滥用类比" class="headerlink" title="1. 不要滥用类比"></a>1. 不要滥用类比</h3><p>你将要尝试着学习并理解的，是一个前所未有的重大创新，其中有很多你一下子难以理解透彻的概念，很少有人能一下子全都弄明白…… </p>
+<p>在这样的时候，人们会不由自主地抄近路走捷径 —— 滥用类比：</p>
+<blockquote>
+<p>“哦！ 我明白了，这就好像是……” </p>
+</blockquote>
+<p>比如，你经常会看到人们挣扎着理解了半天，突然冒出一句：“哦，我懂了，比特币就是电子黄金！” <strong>类比</strong>是约等号（≈），而“<strong>这就是</strong>”是等号（=），约等号和等号之间的差别有时甚至超过十万八千里。 比特币与电子黄金之间的关系甚至干脆就谈不上是约等于…… 全然不是一个东西。</p>
+<p>在理解全新事物的时候，滥用类比的危害非常大，因为你压根就找不到什么过往已经存在的东西真的和这个创新竟然一模一样 —— 否则，它也不可能被称为创新了，是不是？</p>
+<p>这种不恰当的类比被滥用多次之后，就再也没办法形成正确的理解了 —— 因为理解一个创新需要理解多个前所未有的概念，每个都做了不恰当的类比之后，多次非常不恰当的<strong>约等于</strong>拼接起来之后，无论如何都没办法达到一个与正确理解相近的效果。</p>
+<p>请务必注意，每次你的脑子里不由自主地冒出 “这就好像……” 这个念头的时候，你都要把它强压回去。</p>
+<h3 id="2-重复重复再重复"><a href="#2-重复重复再重复" class="headerlink" title="2. 重复重复再重复"></a>2. 重复重复再重复</h3><p>遇到暂时无法理解的概念，不要担心、不要纠结、不要停顿，你要做的事情很简单：</p>
+<blockquote>
+<ul>
+<li>继续读下去；</li>
+<li>读完之后再<strong>重复读很多次</strong>……</li>
+</ul>
+</blockquote>
+<p>这是学习任何新知识或者在任何新领域探索的 “必杀技”。这背后有一个重要的原理：</p>
+<blockquote>
+<p>绝大多数难以理解的知识，是因为它内部有很多 “前置引用”。</p>
+</blockquote>
+<p>所谓的前置引用，就是一个在后面才能深入理解的概念竟然在此之前已经被引用了，导致的结果是学习者总是处于懵懂的状态。学校里的知识却不是这样的，学校里的知识总是线性层层递进的，理解了前面，就能理解后面…… 关于 “前置引用”。</p>
+<p>“硬着头皮读完，而后重复读很多次” 这个策略，就是可以轻松突破 “前置引用” 所设置的障碍。这个技巧，事实上可以用在任何领域。</p>
+<h3 id="3-借助群智的力量"><a href="#3-借助群智的力量" class="headerlink" title="3.借助群智的力量"></a>3.借助群智的力量</h3><p>快速掌握新知识，快速适应新领域，还有个重要的技巧，就是借助群智的力量。事实上，在学校里，你早就应该发现这个技巧了 —— 如果你能跟那些学霸经常聊天，经常玩耍，你就会发现总是在不经意之间，很多重点难点就那样轻而易举地被解决掉了……</p>
+<p>这首先因为人是社交动物，然而更为重要的是，交流这个东西，随意的交流总是比刻意的交流更为有效 —— 因为随意的交流总是刻意解决那些连你自己都没意识到的问题…… 可偏偏，这些你自己意识不到的问题恰恰是最重要甚至最关键的问题。如果不借助这种群智的力量，很难想象还有什么办法可以解决这种隐秘的关键问题。</p>
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/11/04/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/04/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/" itemprop="url">前端工程化</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-04T22:20:00+08:00">
+                2019-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>过去一年多的时间，整个产品是从0到1的，整个前端团队也几乎是从0到1（大多都是后端转的前端），被产品迭代的车路推动，滚滚向前，处于野蛮生长的阶段。最近产品大体进入了一个思考过去未来的阶段，相对较平缓。可以有喘息的时间干点想干的事情了。</p>
+<p>你知道的，干一行爱一行，既然在前端了就想着咋个把它做的更好，因为以前做后端，后端的工程化的工具箱（CI、CD、监控…有一大堆实践）是很成熟的也较容易搭建起来，不过前端相对就很陌生了，据说也没那么容易。</p>
+<h3 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h3><p>刚好关注了【前端早早聊】，发现里面有这部分的内容，盗了两张图，让我对前端工程化有了很宽的认识，做个记录，后续慢慢实践。</p>
+<img src="/2019/11/04/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/1.jpeg" class="前端早早聊大会">
+
+<img src="/2019/11/04/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%8C%96/2.png" class="前端早早聊大会">
+
+<p><code>本文引用的图片，如有侵权请联系我删除。</code></p>
+<blockquote><footer><strong>前端早早聊大会</strong><cite><a href="https://www.yuque.com/zaotalk/road/gn7l3z" target="_blank" rel="noopener">www.yuque.com/zaotalk/road/gn7l3z</a></cite></footer></blockquote>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/11/03/%E6%96%9C%E6%9D%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/03/%E6%96%9C%E6%9D%A0/" itemprop="url">斜杠</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-03T21:25:00+08:00">
+                2019-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9C%86%E6%A1%8C%E6%B4%BE/" itemprop="url" rel="index">
+                    <span itemprop="name">圆桌派</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近看《圆桌派》聊的一个话题<strong>斜杠：理想还是欲望？一专还是多能？</strong>。想在这儿随便说说。</p>
+<p>这个词其实前两年说的比较多，当时另一个说法是一个人的<strong>标签</strong>很多。为什么出现的频率高，也流行，更多的原因是在于那其实是大大多数的梦想。</p>
+<p>里面窦先生说了一下，欲望和理想的区别：一定要结果的就是欲望，热爱过程的是理想。所以对于追求<strong>斜杠</strong>，你是出于欲望还是理想？从我个人来说，我对斜杠的追求我归为欲望，因为很显然我是需要结果的，不管是物质上的还是精神上的我都是有所求的。</p>
+<p>我一直认为，斜杠青年：其实是一个很奢侈的一个愿望。</p>
+<img src="/2019/11/03/%E6%96%9C%E6%9D%A0/dream_big.jpg" class title="Photo by Randy Tarampi on Unsplash">
+
+
+
+<p>我比较俗啊，我对斜杠的定义是，每个斜杠都应该是一份事业且他们是相互独立（跨界）的，就像《圆桌派》里说的一样你虽然干了很多份事业但是其实他们都是有关联性或者有递进性的这其实不算是斜杠，因为你始终还是在那个圈里。</p>
+<p>既然是事业那就肯定会有付出和回报当然咱们谈的不仅限于钱，最起码你要花时间和精力去做，且会收到反馈。人的时间和精力都是有限的，你把有限的时间和精力花在了多个不同的行业，且都得到反馈，这才算是斜杠。</p>
+<p>比如你上午卖炒河粉，下午coding，晚上酒吧驻唱。这我觉得可以说是：餐饮/互联网/演艺，三个斜杠。</p>
+<p>所以为什么说斜杠是很奢侈的，首先你的精力要跟上，其次你的时间能自己做主，然后你还得技术过硬。当然跟现实生活中一样奢侈品再贵，也总有些人是能消费的。所以不是说斜杠就没有，只是那是很小的一部分。</p>
+<p>大家别把斜杠玩坏了，也别一味的飘飘然的追求斜杠，很多时候你自己要先静一静想一想，别听风就是雨的，不仅飞不高还摔得疼。</p>
+<p>就算你有这个欲望，不得现有实力和条件吗，先让自己有这些条件然后再想吧。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/10/31/%E5%BB%B6%E5%AE%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/31/%E5%BB%B6%E5%AE%95/" itemprop="url">延宕</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-31T16:16:00+08:00">
+                2019-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index">
+                    <span itemprop="name">成长</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>延宕</strong>其实直白的说就是拖延的意思，有人就感觉了，装逼非要搞个不常见的，就是因为不常见所以你才会好奇啊，才会去查一下这个词时代表什么意思。良苦用心在于为了加深印象撒。</p>
+<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>此篇内容源起最近要准备进行一次分享，筛选分享主题时，想到了<strong>拖延</strong>，首先我自身就有这个问题，然后我敞开怀抱感受了一下，身边很多人都或多或少存在<strong>拖延</strong>的问题。</p>
+<p><strong>目录</strong></p>
+<ul>
+<li>拖延原因分析</li>
+<li>拖延的特征</li>
+<li>造成的危害</li>
+<li>怎么破</li>
+</ul>
+<p>首先这篇不是一个从心理学角度写的东西，当然咱也没这个段位。这是一个不严谨但具有严重个人色彩的分享，只在于刨析自己从而能给朋友们提供一些思考和建议。</p>
+<h4 id="拖延原因分析"><a href="#拖延原因分析" class="headerlink" title="拖延原因分析"></a>拖延原因分析</h4><p>白话点说可能有下面四个原因：</p>
+<ol>
+<li>对成功所需的能力缺乏自信</li>
+<li>对要去完成某个任务有反感心理：认定做事的过程中会遭遇很多困难，结局也会很惨</li>
+<li><strong>目标和回报太遥远，感受不到对我有什么意义</strong></li>
+<li><strong>无法自我约束，例如容易冲动和分心</strong></li>
+</ol>
+<p>加粗部分是我认为对我影响最突出的部分。</p>
+<p>首先咱们得说导致拖延的因素有很多，具体你是哪一类，你可以买本《拖延心理学》对号入座。我暂时认为自己时拖延早期患者，所以列出的主要是自己审视有的。</p>
+<h5 id="目标和回报太遥远，感受不到对我有什么意义"><a href="#目标和回报太遥远，感受不到对我有什么意义" class="headerlink" title="目标和回报太遥远，感受不到对我有什么意义"></a>目标和回报太遥远，感受不到对我有什么意义</h5><p>先分析一下，<strong>目标和回报太遥远，感受不到对我有什么意义</strong>，这个点其实很有意思，你回过头看一下自己列的目标也好还是flag之类的…，大多数都会有一个比较共通的点，那就是列的太大太虚，然后也没有反馈的环节。</p>
+<img src="/2019/10/31/%E5%BB%B6%E5%AE%95/a.png" class title="我的目标">
+
+<p>上图所示就是以前我列的目标，注意看打勾的标识完成的，红圈的表示未达成的。我来自我检讨一下啊，首先打圈的一看就不符合smart原则，当然也没法用PDCA那套。第二个原因是这几个都没有进行反馈设定，这就让你总感觉这个目标好像老离我挺远，慢慢的就觉得没意思了，也没用积极性了。</p>
+<p>但是相反打勾的我都完成了，主要有两方面的原因。</p>
+<ol>
+<li>这几个都是有明显的反馈环节的，比如团队分享，首先意义对我和对同事而言都是正向的。分享完之后也能收到同事给与的一些讨论和评价，这也是一个反馈的环节。这就让这件事变得有结束有结果有意义了，当然就有积极性。</li>
+<li>这件事很具体，也比较小，跨越的周期不长，比较符合smart原则，事情就变得可达。</li>
+</ol>
+<h5 id="无法自我约束，例如容易冲动和分心"><a href="#无法自我约束，例如容易冲动和分心" class="headerlink" title="无法自我约束，例如容易冲动和分心"></a>无法自我约束，例如容易冲动和分心</h5><p>先根据 Tim Urban在TED的演讲，刨析一下拖延时的大脑活动情况，我觉得真是讲到我心里去了，具体大家可以搜一下演讲的名字叫&lt;<a href="http://open.163.com/newview/movie/free?pid=MBHQSM52F&mid=MBI15O7QE" target="_blank" rel="noopener">你有拖延症吗</a>&gt;。</p>
+<img src="/2019/10/31/%E5%BB%B6%E5%AE%95/procrastination_brain.png" class title="wait but way">
+
+<p>如上图在有拖延症的大脑里会有一只Monkey（分心/诱惑），它经常会跳出来，告诉你其实你的时间还有很多，要不我们逛逛YouTobe、BiliBIli…，它会不断的骚扰你，最终你会沦陷让其掌握大脑。其实就是抵御不了诱惑，容易分心。那什么时候我们会突然警醒呢，就是有一个东西出现的时候，如下图，这个东西叫<strong>恐慌</strong>。它一来Monkey就被吓跑了，但是往往这个时候，已经来不及了，被动了。</p>
+
+
+<h4 id="拖延特征"><a href="#拖延特征" class="headerlink" title="拖延特征"></a>拖延特征</h4><p>我们说说怎么辨别，你是否存在拖延这个问题。</p>
+<ol>
+<li><p><strong>看它是不是让你烦恼不已</strong></p>
+<p>内在结果：必须承受某些内在情绪的折磨，从恼怒、后悔到强烈的自我谴责和绝望  </p>
+<p>外在结果：影响家庭、工作、社交….</p>
+</li>
+<li><p><strong>在一开始，你往往信心满满</strong> </p>
+<p>在完成目标的一开始，往往信心满满  ，但是最后其实都不能很好的的完成或者说完成不了，往往整个过程如下图。</p>
+<img src="/2019/10/31/%E5%BB%B6%E5%AE%95/b.png" class title="拖延心理学">
+</li>
+<li><p><strong>自我</strong></p>
+<p>自我价值感 =能力（具有独立性，反对受控制） =表现（通过拖延，“我”说了算）,不愿意遵守那些不是我们自己所制定的规则并顺应别人的需要 。</p>
+</li>
+<li><p><strong>追求完美</strong></p>
+<p>咋一看还挺牛x，原来拖延还有这么美丽的特征，但是注意我们这儿说的是<strong>适应不良型的完美主义</strong>，“完美主义”者往往对自己期待过高，不够现实，当无法实现这样的要求是，就不知所措。失望之余，通过拖延让自己从中退却。适应不良型的完美主义，对自己的要求跟对自己的表现的期待之间存在一种矛盾。</p>
+</li>
+</ol>
+<h4 id="拖延的伤害"><a href="#拖延的伤害" class="headerlink" title="拖延的伤害"></a>拖延的伤害</h4><img src="/2019/10/31/%E5%BB%B6%E5%AE%95/huaiyi.jpg" class title="怀疑自己">
+
+<img src="/2019/10/31/%E5%BB%B6%E5%AE%95/wushen.jpg" class title="精神萎靡">
+
+<img src="/2019/10/31/%E5%BB%B6%E5%AE%95/ziwo.png" class title="变得自我">
+
+<img src="/2019/10/31/%E5%BB%B6%E5%AE%95/sikao.jpg" class title="无法实现自己的想法">
+
+<img src="/2019/10/31/%E5%BB%B6%E5%AE%95/xinli.jpg" class title="心理疾病">
+
+
+
+<h4 id="怎么破"><a href="#怎么破" class="headerlink" title="怎么破"></a>怎么破</h4><p>说了那么多，最终咱们得找到解法，当然前提是你有拖延困扰并且你愿意付诸行动改变这个毛病。</p>
+<p>以下是我亲身实践且认为效果良好的方子，现在我也还在这么做，这是个持久战别想着10天半个月就有多大的改变，也别相信什么21天就能养成xx习惯，普通人就踏踏实实干就行了。</p>
+<h5 id="破法1：你得接受"><a href="#破法1：你得接受" class="headerlink" title="破法1：你得接受"></a><strong>破法1：你得接受</strong></h5><ul>
+<li>​    接受自己能力有限这个事实得人不太会为此过于烦恼 。</li>
+<li>​    接受遵守那些不是我们自己所制定的规则并顺应别人的需要。</li>
+</ul>
+<h5 id="破法2：和原因对上号"><a href="#破法2：和原因对上号" class="headerlink" title="破法2：和原因对上号"></a><strong>破法2：和原因对上号</strong></h5><ul>
+<li>看看这方面的书以及专业的一些心理视频或者找心理方面的人士咨询，找到自身造成的拖延的原因，才能对症下药，人是个体，个体就有差异千万别总去套别人那套方法论，要找到适合自己的。</li>
+</ul>
+<h5 id="破法3：明确的目标与可行性的计划"><a href="#破法3：明确的目标与可行性的计划" class="headerlink" title="破法3：明确的目标与可行性的计划"></a><strong>破法3：明确的目标与可行性的计划</strong></h5><p>找到一个目标，然后将它分解成几个小的步骤，跨出小小的第一步，学习怎样记录时间，以及如何优化周围环境使之向有利于成功的方向推进。</p>
+<img src="/2019/10/31/%E5%BB%B6%E5%AE%95/target.png" class>
+
+<ul>
+<li><p>目标smart且够小，可达。既非常小，又可以给你带来进步感和成就感。</p>
+</li>
+<li><p>执行过程中引入监督、奖惩机制  </p>
+</li>
+<li><p>整个执行目标的过程按照PDCA不断循环</p>
+</li>
+<li><p><strong>训练强大的执行力</strong>  </p>
+<blockquote>
+<p>执行能力的基本要素：注意力控制、 认知弹性、 目标设定、 信息处理  </p>
+<p>1.启动任务（起始，产生行动的想法）。</p>
+<p>2.维持注意力（持续跟进，专注于一个事项）。 </p>
+<p>3.抑制冲动（在行动前有所思考，而不是马上反应）。 </p>
+<p>4.转换注意力（从一个事项到另一个事项，转变关注的焦点，有弹性地加以回应）。 </p>
+<p>5.流程记忆（记得计划、指令和以前学到的知识，在学习新知识和应对新环境的时候可以记起和运用到旧的知识）。</p>
+<p>6.情绪控制（调整和管理情绪）。 </p>
+<p>7.组织材料（获取所需的材料，并依序编排）。</p>
+<p>8.自我监测（具备自我评价的相应语言能力，在必要的时候能够通过自我交谈闯过难关）。 </p>
+<p>9.时间管理（时间意识，以及对待时间的务实态度）。 </p>
+<p>10.计划（按优先次序考虑问题，找出达成目标的各个步骤，提前为以后的需要和相关进程做好准备）</p>
+</blockquote>
+</li>
+</ul>
+<h5 id="破法4：学会怎样判断时间"><a href="#破法4：学会怎样判断时间" class="headerlink" title="破法4：学会怎样判断时间**"></a><strong>破法</strong>4：学会怎样判断时间**</h5><blockquote>
+<p>时间四象限</p>
+<p>学会利用零碎时间</p>
+<p><strong>预防意外干扰，抵制诱惑</strong></p>
+<p>不要太分散精力</p>
+<p>找出你的最佳时间</p>
+<p>享受你的“自由”时间</p>
+</blockquote>
+<ul>
+<li>主观时间和客观时间，做到平滑过渡。很多人就是忽略客观时间所以才老是导致拖延，时间不是跟着你的意志走的。</li>
+<li>列出“非计划”时间，除开必须做的事情，剩下多少时间可以用于实现你的目标，给他排出来。</li>
+<li>积极的时间约束（番茄工作法…），主要是提高专注力，人不可能24小时都是专注的，就算你说你可以那请你看看猝死的例子…</li>
+</ul>
+<h5 id="破法5：积极一点"><a href="#破法5：积极一点" class="headerlink" title="破法5：积极一点"></a><strong>破法5：积极一点</strong></h5><p>记住一点：不断地否定自己或者消极对待是要消耗很多能量地。</p>
+<p>领导告诉了我一句话：<strong>如果你今年没觉得去年的自己是个SB那你就没有在成长</strong>，所以别动不动就沮丧、消极。</p>
+<p>所以又对应上前面说的，要从一个个小成就不断地激励自己。</p>
+<p> <strong>破法6：利用你的身体减轻拖延</strong> </p>
+<p>锻炼，很多人一提到锻炼就会马上接一个词“身体”，其实锻炼不仅仅是锻炼身体其实还是一种脑力的、心理的活动，锻炼是一种释放，通常锻炼你是不会受其他东西影响的，比如你不能玩手机不能看电视等等…这就迫使你专注起来，并且大脑会开始想事情，有点类似冥想的意思。</p>
+<p>你的大脑是比较放空的，你可以进行整理、归纳、思考等一系列活动，同时锻炼完事之后又特别爽，释放了身体和心理上的一些无用的东西。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/" itemprop="url">组织化人才管理的四大领域</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-21T10:11:00+08:00">
+                2019-10-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天内心膨胀的以为自己是个人才，所以随心所欲的看了门课。以下记录了我觉得对我有意义的点。</p>
+<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/mohamed.jpg" class title="Photo by Mohamed Nohassi on Unsplash">
+
+
+
+<p>根据业务布局和业务的洞察来理解和分析业务的变局时什么，再次基础上呢再来看搭建什么样的阵型，组织阵型来匹配业务，为了这样的一个人才搭建，需要准备怎样对人才进行赋能，这个赋能是系统性的赋能，不是对单个个体，甚至不是对团队，而是一个系统性的赋能。最后沉淀褚一套人才管理的机制，用这样的一套人才管理机制不断推动人才。</p>
+<h3 id="人才"><a href="#人才" class="headerlink" title="人才"></a>人才</h3><p><strong>业务布局=人才体积</strong></p>
+<p>人才体积：人才在多大的业务空间中去发挥作用，所以业务布局决定了人才体积</p>
+<p><strong>组织阵型=密度</strong></p>
+<p>人才分布的密度和人才分布的层次</p>
+<p><strong>人才赋能=人才质量</strong></p>
+<p>对组织化导向的人才赋能，我组织想对我整个的人才产生怎样的一个牵引力。核心是我是要提高我得人才适应未来业务成长需求，适应未来变局的整体的能力的拉伸。</p>
+<p><strong>密度=质量/体积</strong></p>
+<p>所以单独对人才进行培训和赋能是不够的，而是要对人才的密度进行一个拉升，即提升人才质量的同时，要让业务体积处于合适的范围内。</p>
+<p>人才称重：人才在组织中的重量，发挥的作用。</p>
+<p>人才称重的三种方式：</p>
+<ol>
+<li>通过人才赋能提升人才质量</li>
+<li>通过业务布局减少人才体积（冗余）</li>
+<li>通过组织机构的调整来优化人才在不同组织单元中的密度，激活组织的有效性。</li>
+</ol>
+<h3 id="四大模型"><a href="#四大模型" class="headerlink" title="四大模型"></a>四大模型</h3><img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/1.jpg" class>
+
+
+
+<p>主要说说人才管理机制模型：</p>
+<p>汰换、激励、约束、牵引</p>
+<p>汰换：这是一个必然的过程，当你想懈怠的时候觉得无趣的时候，问问自己你对于公司的价值是什么</p>
+<p>牵引：企业文化价值的输入、企业向心力的培养等</p>
+<h3 id="业务变局"><a href="#业务变局" class="headerlink" title="业务变局"></a>业务变局</h3><p><strong>业务结构与人才结构</strong></p>
+<p>解释，在什么情况下先发展业务还是先发展人才。</p>
+<p>依赖的手段则是进行<strong>业务摸底</strong>和<strong>人才摸底（核心团队）</strong></p>
+<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/2.jpg" class>
+
+
+
+<h3 id="组织变阵"><a href="#组织变阵" class="headerlink" title="组织变阵"></a>组织变阵</h3><p>说明什么地方配置更加优秀的人才，合理的调整人才结构和组织结构</p>
+<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/3.jpg" class>
+
+
+
+<h3 id="人才赋能"><a href="#人才赋能" class="headerlink" title="人才赋能"></a>人才赋能</h3><p>迎接未来面对变局的能力</p>
+<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/4.jpg" class>
+
+<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/5.jpg" class>
+
+
+
+
+
+<h3 id="人才管理机制"><a href="#人才管理机制" class="headerlink" title="人才管理机制"></a>人才管理机制</h3><p>通过上述内容，沉淀出一套符合自己公司的人才管理机制</p>
+<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/6.jpg" class>
+
+
+
+
+
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>从这个课我知道了人才管理不是我之前那么单纯的理解，很容易被这个词午到，人才管理其实不仅仅说的是人才管理，还包括业务布局、组织变阵、人才赋能、机制建立等因素。</p>
+<p>所以我理解一下下，人才的定义是不是：专业技能过硬，有战略眼光且能适应业务未来的变局，且有组织向心力？</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/10/08/%E4%B8%AA%E4%BA%BA%E5%8F%91%E5%B1%95%E6%88%98%E7%95%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/08/%E4%B8%AA%E4%BA%BA%E5%8F%91%E5%B1%95%E6%88%98%E7%95%A5/" itemprop="url">个人发展战略</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-08T21:46:00+08:00">
+                2019-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <img src="/2019/10/08/%E4%B8%AA%E4%BA%BA%E5%8F%91%E5%B1%95%E6%88%98%E7%95%A5/0.jpg" class title="下班路上">
+
+<h3 id="为什么要谈个人发展"><a href="#为什么要谈个人发展" class="headerlink" title="为什么要谈个人发展?"></a>为什么要谈个人发展?</h3><p>这个话题其实我很怕的….，因为我发育迟读书少，所以一直都懵懵懂懂+凄凄惨惨戚戚，自认为放荡不羁其实就是无知逗逼。我是从17年开始才意识到有个概念叫“以后的路咋走”，文气点就是<strong>个人发展</strong>。因为17年开始面临买房、小孩儿上学等一系列问题，深深感到自己的无力，表象就是缺钱，内里就是焦虑。那段时间常常展开双臂抬头望问天“咋整？我该咋整？”，夜深人静常常哭湿了我的小黄人枕巾。就想着不能这样，得变，得抗。</p>
+<p>这两年其实我一直在摸索适合自己地发展路径，包括之前地一篇也在写<span style="color:blue;"></span>，从个人定位=&gt;个人发展，我认为应该是这样地顺序，虽然现在个人发展长远地战略还不是非常明确，但是至少我认识到了个人发展地重要性，并且找到了最近3-5年自己地发展路径。</p>
+<p>当然这篇不是来说我的，是结合之前老大的分享以及平时自己的学习来试着说明一下，个人发展的必要性。</p>
+<p>*<em>我们先聊聊几个点，看是否能达成共识。达不成共识可能这篇文章对你来说就没什么意义 *</em></p>
+<h2 id="工作压力大，没时间"><a href="#工作压力大，没时间" class="headerlink" title="工作压力大，没时间"></a><span style="color:red;">工作压力大，没时间</span></h2><p>不用我说大家都知道，个人发展是需要时间来铺垫的，同时个人发展肯定跟工作会有联系，这种联系根据个人的处境可强可弱。另外一个共识点是，工作肯定会压缩我们的可自由支配的时间。所以很多时候我们会得出一个结论，<strong>工作压力大，没时间</strong>。作为程序员我承认确实会存在这样的情况，究其原因：公司的业务压力大，需要堆人堆时间来跟上时代的节奏。另外一点则是个人的精力有限，就像电池一样，在工作上就把电耗尽了，就算会有一些休息时间，也已经没电了。但是我们可以这么想想：现在的工作强度是否有利于个人发展？得到报酬能否多到让我暂时放弃个人发展的程度？工作压力是否真的有我们想象得那么大，时间是否真的就没了？</p>
+<p>所以核心的问题是，我们对个人发展这件事情有多重视？愿意投资多少时间和精力？</p>
+<p>我的观点是：如果光感受到工作压力大让你没有时间，但又无法获得一些正反馈，那这不是你有没有时间得问题，而是先考虑这份工作是不是应该继续做下去的问题。如果有正反馈，我们再想想是否现在处境就算我想要的的”个人发展”。</p>
+<p>怎么来判断，我通常是这样做的：</p>
+<ol start="2">
+<li>列出来公司的晋升制度，薪酬制度。</li>
+<li>尽可能的根据各种反馈，试着评估一下公司的发展前景或者产品线的发展前景。</li>
+<li>列出来所在职位的工作内容（在不晋升的情况下），以及如果晋升了的工作内容（从与领导交流，加上观察基本上能预估出80%左右）。</li>
+<li>列出来如果因为某些因素，导致被动的离开公司，自己会怎样？</li>
+</ol>
+<p>不出意外你列完之后，会说一句“卧槽xxxx”，这样就对了，好好考虑一下个人发展的重要性吧。</p>
+<p><strong>有点扯远了，其实我是想说，自己愿意的话，不会没有时间。</strong></p>
+<h2 id="工作生活要平衡"><a href="#工作生活要平衡" class="headerlink" title="工作生活要平衡"></a><span style="color:red;">工作生活要平衡</span></h2><p><strong>我不想这么辛苦，我期望生活和工作平衡</strong></p>
+<blockquote>
+<p>很多人都期望活少钱多还开心，朋友圈那些天天晒美食，旅行，老婆孩子热炕头的生活就是理想人生。每个行业都有其辛苦的部分，这才是现实。有的要付出体力之苦，有的要付出健康的代价，有的要付出脑力之苦。既然选择了薪酬相对高一些的IT行业，持续学习新技术，新知识就是你必须面对的。你是想要今天的生活和工作平衡，还是中年油腻后的生计艰难？</p>
+<p>假如你不是富二代，官二代，还是更现实，更长期地看待工作和生活平衡的事情。如果你从事的工作是你热爱的工作，不存在平衡问题，从中获得的成就感就是你生活的一部分。如果你从事的工作是你谋生的手段，想持续获得这个收入，就遵循这个工作的本质规律。</p>
+</blockquote>
+<p>以上是老大的原话我觉得已经说的很透彻了，我认为要想追求工作生活的平衡是不可能的，当然我不是说工作和生活就必须得纠缠在一起才好，我是觉得<strong>平衡</strong>这词应该是心理上的划分而不是物理上的划分。</p>
+<h3 id="个人发展战略"><a href="#个人发展战略" class="headerlink" title="个人发展战略"></a>个人发展战略</h3><p>然后我们再来说怎么找到属于自己的个人发展战略，内容总结来自<strong>圈外商学院</strong>的个人发展战略主体纲要，因为平台不让看了，我就直接不要脸的引用有识之士的了。大家如果觉得有用请去链接点赞，就当我对其微薄的回报了。</p>
+<p><strong>一、一个模型，帮你找到真正热爱的工作</strong></p>
+<ul>
+<li><p>冰山模型；美国著名心理学家麦克利兰</p>
+</li>
+<li><ul>
+<li><p>显性30%；</p>
+</li>
+<li><ul>
+<li>知识（专业，书籍），慌乱</li>
+<li>技能（编程，技术），焦虑</li>
+<li>能力（思考能力，学习能力），挫败低效</li>
+</ul>
+</li>
+<li><p>隐性70%；</p>
+</li>
+<li><ul>
+<li>价值观（判断事物标准），矛盾纠结</li>
+<li>性格特质（行为偏好），心累</li>
+<li>动机（成就动机，权力动机），没热情</li>
+</ul>
+</li>
+<li><p>四个步骤找到适合的工作</p>
+</li>
+<li><ul>
+<li>找专业；找自己喜欢的专业和爱好的相关岗位</li>
+<li>搜索岗位；在招聘网上，搜索岗位的要求</li>
+<li>分析需求；用冰山模型，分析这份岗位需要的知识，技能和能力</li>
+<li>对比自己；用冰山模型匹配自己的价值观，性格特质和动机，确定适不适合。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>二、四大要素，决定你的市场价值</strong></p>
+<ul>
+<li><p>用冰山模型说明该投入到哪里，才能提升自己的市场价值</p>
+</li>
+<li><ul>
+<li>投入知识；容易获取，但如果不能运用来解决问题，几乎没有竞争力。</li>
+<li>投入技能；有门槛，但市场价值取决于稀缺程度，所有技能都会走向供需平衡，高收入不可持续，需要不断持续学习新技能。</li>
+<li>投入能力；能力可迁移，积累到一定高度，行业不对称，也能发挥作用。</li>
+<li>投入自我发现；难以改变和发现，但如有清晰的认识，找到相匹配的工作也能提升价值。</li>
+</ul>
+</li>
+<li><p>为什么大多数人都选择投入到知识和技能，不断碎片化学习，练习并不稀缺的技能。</p>
+</li>
+<li><ul>
+<li>因为知识和技能容易习得</li>
+<li>惰性让自身受限于岗位</li>
+<li>没明白工作本质是解决问题</li>
+</ul>
+</li>
+<li><p>汇总；我们的时间，永远应该花在正确的事情上，而不是容易的事情上。</p>
+</li>
+</ul>
+<p><strong>三、四类迹象，发现你的隐藏能力</strong></p>
+<ul>
+<li><ul>
+<li>虽然成功的道路有千万条，但成功人士基本都在遵循了一个原则，就是将自己的自身天赋发挥到了极致。</li>
+<li>天赋就是隐藏的能力，让一个人可以在同样起点的情况下，更加加速成长。</li>
+</ul>
+</li>
+<li><p><strong>天赋探索方法；“SIGN”</strong></p>
+</li>
+<li><ul>
+<li>自我效能（Self-efficacy）；对某类事情非常有信心，觉得自己肯定能做好。</li>
+<li>本能（Instinct）；迫不及待想要尝试的事情</li>
+<li>成长（Growth）；发现自己明显比别人进步的快一些</li>
+<li>满足（Needs）；做完后及时很累，也会觉得满足</li>
+</ul>
+</li>
+<li><p>如何在日常中发现自己的SIGN特质</p>
+</li>
+<li><ul>
+<li><p>围绕SIGN特质问自己</p>
+</li>
+<li><ul>
+<li>自我效能；认为自己能教别人什么？别人向你请教什么？跟别人聊天倾向聊什么？聊什么话题会让你感到自信？做什么事情不会感到焦虑和担心？</li>
+<li>本能；做什么事的时候很少拖延？长时间休息后，你最想念工作的哪个方面？你宁愿放弃休息时间也要做的事情是什么？</li>
+<li>成长；什么事情会让你沉浸其中忘记时间？不容易感到疲累和厌烦？</li>
+<li>满足；过去工作和生活中，有什么让你获得巨大的成就感和满足感？</li>
+</ul>
+</li>
+<li><p>围绕SIGN特质问他人</p>
+</li>
+<li><ul>
+<li><p>你觉得我身上有什么不同于别人的特质？</p>
+</li>
+<li><p>你最欣赏或者佩服我的方面是什么？</p>
+</li>
+<li><p>在你看来，我做什么的时候最兴奋？</p>
+</li>
+<li><p>我做过什么让你印象深刻的事情么？</p>
+</li>
+<li><p>在以下方面，你觉得我那些更加擅长？</p>
+</li>
+<li><ul>
+<li>思维方式；条理清晰，逻辑严密，脑洞很大，专注专业</li>
+<li>沟通协调；化解冲突，争取资源，知人善用</li>
+<li>计划执行；执行力强，强求完美，目标导向</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>四、三种方法，将知识内化成能力</strong></p>
+<ul>
+<li><p>惰性知识；不能及时有效调用，占用大脑内存的知识</p>
+</li>
+<li><p>如何把知识内化成能力，让自己的能力快速提升的三个方法</p>
+</li>
+<li><ul>
+<li><p>1.掌握20%的核心；二八原则，一个领域的20%的核心内容，能够解决80%的问题</p>
+</li>
+<li><ul>
+<li>如结构化思维20%的三个特征；主题鲜明，归类分明，逻辑递进。</li>
+<li>擅长找师傅，找领域内专业人士，了解领域的核心20%</li>
+</ul>
+</li>
+<li><p>2.知识和问题相互靠</p>
+</li>
+<li><ul>
+<li><p>让知识和问题链接起来，知识向问题靠，问题向知识靠。</p>
+</li>
+<li><p>知识（想应用）问题；看到一个知识就去思考这个知识可以用来解决什么问题？</p>
+</li>
+<li><ul>
+<li>如；马斯洛的五层次需求，可以用来分析奢侈品为什么这么贵？</li>
+</ul>
+</li>
+<li><p>问题（找解释）知识，遇到问题，抛弃第一反应，去想想有什么方法论模型可以用</p>
+</li>
+<li><ul>
+<li>看书遇到有趣的理论，先记下思考3个可以用该模型解决的问题。下次不要下意识反应，学会去翻一下以前的笔记，把问题补充到笔记里。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>3.做系统化训练</p>
+</li>
+<li><ul>
+<li>刻意练习；一个月中，显示每天练习三段式，再提炼主题，然后积累结构</li>
+<li>我们的习惯，是高估几天的变化，而低估几个月的变化。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>汇总；如何具体到行动中；</p>
+</li>
+<li><p>1.找专业人士了解领域的核心20%，先去学习20%</p>
+</li>
+<li><p>2.在学习的过程中，思考各个知识点的应用场景，并记录下来，遇到问题再回去找</p>
+</li>
+<li><p>3.能力提升是一个系统性过程，所以需要坚持至少1个月。</p>
+</li>
+</ul>
+<p><strong>五、三大系统，让学习不靠意志力</strong></p>
+<ul>
+<li><p>为什么我们如此难坚持</p>
+</li>
+<li><ul>
+<li>意志力是有限的，并不是学习这件事情类到你，而是“坚持”</li>
+<li>移动互联网时代，诱惑越来越多</li>
+<li>威尔海姆。霍夫曼主持的一项研究表明；人们醒着的时候，把大约1/4的时间用来抵制欲望。</li>
+</ul>
+</li>
+<li><p>意志力不够用，就用行为改变来学习。</p>
+</li>
+<li><ul>
+<li>决定事情时起作用的大脑内部的两个系统；理性和感性。</li>
+</ul>
+</li>
+<li><p>如何让我们坚持做一件事的三个关键因素；</p>
+</li>
+<li><ul>
+<li><p>理性上；知道要学习（树立明确的目标）</p>
+</li>
+<li><ul>
+<li>明确的目标是坚持学习的第一步</li>
+</ul>
+</li>
+<li><p>感性上；愿意去学习（利用情绪冲动）</p>
+</li>
+<li><ul>
+<li>截止日期的紧迫感</li>
+<li>比较产生的焦虑感</li>
+<li>鼓励带来的成就感</li>
+</ul>
+</li>
+<li><p>情景上；制造适合学习的场景（创造学习环境）</p>
+</li>
+<li><ul>
+<li>人是社会动物，我们会观察周围人的行为来调整自己的行为。</li>
+<li>如果可以利用环境，就不要用你的意志力来抵制欲望</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>六、三个建议，让你不做“定制化人才”</strong></p>
+<ul>
+<li>1.调整主体，给自己定好发展方向</li>
+<li>2.提升能力，让自己成为横向可迁移的人才</li>
+<li>3.提升认知高度，让自己成为纵向可拓展的人才</li>
+</ul>
+<p>源引感谢：</p>
+<blockquote><footer><strong>圈外同学——个人发展战略</strong><cite><a href="https://zhuanlan.zhihu.com/p/68267559" target="_blank" rel="noopener">zhuanlan.zhihu.com/p/68267559</a></cite></footer></blockquote>
+
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/09/30/%E6%8A%89%E6%8B%A9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/30/%E6%8A%89%E6%8B%A9/" itemprop="url">抉择</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-30T10:24:00+08:00">
+                2019-09-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index">
+                    <span itemprop="name">成长</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近看了《抉择》，虽说本身是一本企业管理的书，但是对人自身也是特别有指导意义的…</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/09/27/%E5%AE%89%E5%85%A8%E6%89%AB%E6%8F%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -465,6 +2072,7 @@
 
 <p> 因为我们用了graphql，有些地方还用了dsl，所以正则是魔鬼，我写崩溃了差点，当然如果有更好的方法请告诉我，万分感谢。</p>
 <p>长出一口气…..</p>
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
 
           
         
@@ -643,1611 +2251,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/09/22/%E6%80%8E%E4%B9%88%E5%81%9A%E5%A5%BDPresentation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/22/%E6%80%8E%E4%B9%88%E5%81%9A%E5%A5%BDPresentation/" itemprop="url">怎么做好Presentation</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-22T15:41:00+08:00">
-                2019-09-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index">
-                    <span itemprop="name">成长</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>近段时间刚好，做的分享和听的分享较多。刚好缘分就是那么奇妙，在一个网课平台刚好看到了这个网课《如何提高Presentation的展现能力》，在此做个记录。</p>
-<p><strong>图1</strong>所阐述的观点，是我个人觉得做得最契合的。确实我一直认为，Presentation别弄太多文字类或者花哨的东西，PPT应该是辅助我们说明白一个事情，所以主次需要分清。</p>
-<img src="/2019/09/22/%E6%80%8E%E4%B9%88%E5%81%9A%E5%A5%BDPresentation/1.png" class title="图1">
-
-<p><strong>图2</strong>所说几个点</p>
-<ul>
-<li><p>底稿我觉得如果是很正式或者很重要的Presentation是个很好的减少风险的点。</p>
-</li>
-<li><p>另外关于互动，这点是很重要的，不管是眼神还是肢体还是语言，他能让讲解人和听众建立联系，如果没有互动，那就感觉像是下命令了，你们只管听我只管讲，不能有异议这样的场景特别糟糕。</p>
-</li>
-<li><p>时间管理特别重要，我特别厌烦那种拖沓的，慢条斯理的Presentation，让氛围很疲惫，这种效果很差，这点我也需要改进，虽然我很注意时间控制，但是也没有做到掐表的程度，但是我认为有些情况是可以掐表，比如做分享。</p>
-</li>
-</ul>
-<img src="/2019/09/22/%E6%80%8E%E4%B9%88%E5%81%9A%E5%A5%BDPresentation/2.png" class title="图2">
-
-<p><strong>图3</strong>是我最没有底气的点，Presentation事后的修正和反思做得比较少，特别是修正，要想整个Presentation比较有质量，确实这块是不可或缺的，尽量不因此留下遗憾。</p>
-<img src="/2019/09/22/%E6%80%8E%E4%B9%88%E5%81%9A%E5%A5%BDPresentation/3.jpg" class title="图3">
-
-<p><strong>Presentation</strong>：我觉得可解释为：具有分享、议题、同步等性质的会议。</p>
-<p>图片摘自：<blockquote><footer><strong>如何提高Presentation的展现能力</strong><cite><a href="https://m.qlchat.com/topic/details?topicId=2000003738397093" target="_blank" rel="noopener">圈外同学-Andy Pan</a></cite></footer></blockquote></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/09/20/Chrome%20Tools-Sources/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/20/Chrome%20Tools-Sources/" itemprop="url">Chrome Tools-Sources</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-20T14:29:00+08:00">
-                2019-09-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
-                    <span itemprop="name">工作</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>嗯，跟前端暧昧的时间还是挺长了，是时候展现真正的技术了。</p>
-<img src="/2019/09/20/Chrome%20Tools-Sources/1.jpg" class>
-
-<p>常在写代码哪有不bug的道理，那对于前端朋友来讲chrome的工具栏基本上能满足大多数场景下的bug排查，对于奉行<strong>假如你暂时不够牛逼，那就善用工具</strong>的我来说，我心荡漾啊。必须记录一下，当然chrome提供的工具太多了，今天暂且主要聊聊Sources，也是我使用频率Top 2，结合一些网上的一些说明加自身的实践来说一说。</p>
-<img src="/2019/09/20/Chrome%20Tools-Sources/Inked0_LI.jpg" class title="就是这玩意">
-
-<p>不用再于数字不好看这些细节，我们走的是放荡不羁的路线，咱们挨个说啊。</p>
-<style> table th:first-of-type { width: 80px; } </style>  
-
-<table>
-<thead>
-<tr>
-<th>数字</th>
-<th>表头</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>点击该箭头，移动鼠标到页面上定位到页面元素，跳转到Elements 工具栏。</td>
-</tr>
-<tr>
-<td>2</td>
-<td>用于模拟移动设备上的效果。</td>
-</tr>
-<tr>
-<td>3</td>
-<td>必用的模块，已加载的全部资源，以域名划分文件夹，调试时从这儿下手找源码，当然我通常直接快捷键Ctrl+P定位文件。</td>
-</tr>
-<tr>
-<td>4、5</td>
-<td>Filesystem &amp; Overrides 可以加载本地文件夹，把Chrome当成IDE用。</td>
-</tr>
-<tr>
-<td>6</td>
-<td>Content scripts 扩展工具的脚本，比如百度翻译插件等</td>
-</tr>
-<tr>
-<td>7</td>
-<td>Snippets 代码片段，不会因为刷新丢失，使用：添加=&gt;保存(ctrl+s)=&gt;运行(Run)=&gt;不用则移除(Remove)</td>
-</tr>
-<tr>
-<td>8</td>
-<td>源码面板，在此处进行打断点、修改端点等操作</td>
-</tr>
-<tr>
-<td>9</td>
-<td>调试的快捷键面板</td>
-</tr>
-<tr>
-<td>10</td>
-<td>变量监察：添加个变量后会一直监察这个变量的值，当前作用域无值时显示&lt; not availble &gt;</td>
-</tr>
-<tr>
-<td>11</td>
-<td>Call Stack 函数调用栈，会列出断点的调用堆栈列表。</td>
-</tr>
-<tr>
-<td>12</td>
-<td>Scope 断点所在作用域列表，级别划分如下： <ul> <li>Local 当前作用域 展示作用域下的变量</li><li>Closure (x) 闭包作用域，x是函数名称</li><li>Script 标签作用域</li><li>Global 全局作用域Window</li></ul></td>
-</tr>
-<tr>
-<td>13</td>
-<td>Breakpoints 源码的断点列表。</td>
-</tr>
-<tr>
-<td>14</td>
-<td>XHR/fetch Breakpoints 请求断点：ajax和fetch请求都可以在这里打断点并在Call Stack显示调用栈，很方便追踪。</td>
-</tr>
-<tr>
-<td>15</td>
-<td>DOM Breakpoints 这里列出html的断点。</td>
-</tr>
-<tr>
-<td>16</td>
-<td>Global Listeners 全局监听器：指的是绑定在 window 对象上的事件。</td>
-</tr>
-<tr>
-<td>17</td>
-<td>Event Listeners Breakpoints 所有事件的断点：勾选指定类型，比如Mouse/click，则所有的click事件都会被断住。</td>
-</tr>
-</tbody></table>
-<p>markdown搞出这个表格太费劲，anyway看着舒服就好，下面聊聊对应上面表格中的一些具体的使用场景。    </p>
-<ul>
-<li>Filesystem Chrome式的IDE，可以编辑各种文件并且在当前页就可以实时刷新看到效果，如果写单个模块时蛮有用的，比较快。修改后ctrl+s保存，修改的是本地文件，刷新可看到效果。   </li>
-</ul>
-<img src="/2019/09/20/Chrome%20Tools-Sources/Filesystem.gif" class title="演示一哈">   
-
-<ul>
-<li><p>Overrides 覆盖网络请求的资源，即html、js、css、图片等资源，注意一定是同域名同路径同名的文件才能产生覆盖效果。勾选，Enable Local Overrides，修改文件后ctrl+s保存，修改的是Save as Overrides到本地的文件，刷新可看到效果。  </p>
-<img src="/2019/09/20/Chrome%20Tools-Sources/network-overrides.gif" class title="这个就不亲自演示了，网上找一个">  
-</li>
-<li><p><span style="color:#17640E;background-color:#DDA71D;"><strong>Snippets</strong></span>，也是我使用比较多的功能，以前不知道的时候都是找网上现场的js编辑器，但是受网络和维护的影响，有些时候不好用，而且很多还要区分ES5、ES6，自从有了Snippets，随便写各种代码片段超级好用。     但是要注意变量的作用域问题，所以最好用IIFE方式写代码，避免出现错误。  <img src="/2019/09/20/Chrome%20Tools-Sources/snippets.gif" class title="演示一波">  </p>
-</li>
-</ul>
-<h3 id="源码面板"><a href="#源码面板" class="headerlink" title="源码面板"></a>源码面板</h3><ul>
-<li>这也是调试的时候使用频率超级高的区域，ctrl+p定位到文件，行号处右键出现对断点操作的一些选项，分新增和编辑两类。  </li>
-</ul>
-<img src="/2019/09/20/Chrome%20Tools-Sources/breakpoints.gif" class title="演示一波"> 
-
-<ul>
-<li>Add conditional breakpoint/edit breakpoint ，添加/修改带条件的断点，比如写a===”a”，则表示当a等于”a”时才触发断点，如下图。当条件表达式为真时，触发断点（条件性行断点的颜色为橙色）</li>
-</ul>
-<img src="/2019/09/20/Chrome%20Tools-Sources/debug03.gif" class>
-
-<ul>
-<li>Blackbox Script，黑盒脚本，很多时候是要引用第三方库或框架的，当我们调试时，调试的对象应该是我们自己写的代码，但很多时候，我们经常在焦灼地进行下一步下一步时，突然代码跳到了第三方库或框架的源码上去，多数情况下我们不会关注这些地方的内容，但是它就要跳过去，这种是比较蛋疼的。黑盒脚本就是用来解决这个问题的，它能够把一个脚本文件标记为 “Blackbox Script”，那么我们就永远不可能进入这个文件内部，这个文件对我们来讲就是一个黑盒子。为什么要强调“永远”呢？因为不仅普通的断点不能访问这个被标记了的脚本，其他的，比如说 DOM 断点、事件断点等等都无法访问那个脚本文件内部。</li>
-</ul>
-<ul>
-<li>调试面板：Pause on exceptions，在发生异常的地方停顿</li>
-</ul>
-<img src="/2019/09/20/Chrome%20Tools-Sources/debug04.gif" class>
-
-
-<h3 id="Watch面板"><a href="#Watch面板" class="headerlink" title="Watch面板"></a>Watch面板</h3><ul>
-<li>用于监视变量的值。<img src="/2019/09/20/Chrome%20Tools-Sources/watch.png" class>
-
-</li>
-</ul>
-<p>点击<span style="color:red;"><strong>1</strong></span>处，将打开一个内联输入框，您可以在输入框中输入要监视的变量名称。输入完毕，按Enter键，即可将其添加到列表中。监视器将显示添加时变量的当前值。如果变量未设置或找不到，值将显示为<Not available>。</Not></p>
-<p>点击<span style="color:red;"><strong>2</strong></span>手动刷新变量。注：监视列表不是变量的实时视图，除非逐步执行。当使用断点逐步执行时，监视列表中的值将自动更新</p>
-<p>点击<span style="color:red;"><strong>3</strong></span>，删除变量。</p>
-<h3 id="Call-stack"><a href="#Call-stack" class="headerlink" title="Call stack"></a>Call stack</h3><p>代码暂停时，可以在Call Stack窗口查看当前的调用栈。展示了代码到暂停处的完整执行路径，这让我们能够深入代码去找出导致错误的原因。最后调用函数在最顶上，所以最好别用匿名函数，不利于调用栈查看。</p>
-<h3 id="Scope"><a href="#Scope" class="headerlink" title="Scope"></a>Scope</h3><p>作用域：显示断点所在的作用域，级别划分如下：</p>
-<p>Local 当前作用域 展开作用域下的变量<br>Closure (x) 闭包作用域，x是函数名称<br>Script 标签作用域<br>Global 全局作用域Window</p>
-<h3 id="DOM-Breakpoints"><a href="#DOM-Breakpoints" class="headerlink" title="DOM Breakpoints"></a>DOM Breakpoints</h3><p>当改变一个节点或者其子元素时，可以设置一个DOM断点：</p>
-<ol>
-<li><p>点击Elements面板 </p>
-</li>
-<li><p>找到想要设置断点的元素 </p>
-</li>
-<li><p>在此元素上右键</p>
-</li>
-<li><p>Break on –&gt; Subtree modifications / Attribute modifications / Node removal</p>
-<p> Subtree modifications（子树修改）：当前选中的元素，删除、增加其子代或者改变其子代的内容。修改子元素的属性或者当前选中元素有任何改变都不会触发此类型断点<br> Attributes modifications（属性修改）：当前选中的元素，增加、删除其属性，或者修改某个属性值<br> Node Removal（节点移除）：移除当前选中的元素</p>
-</li>
-</ol>
-<h3 id="XHR-Fetch-Breakpoints"><a href="#XHR-Fetch-Breakpoints" class="headerlink" title="XHR/Fetch Breakpoints"></a>XHR/Fetch Breakpoints</h3><p>当XHR的请求URL包含某一特定的字符串时，可以暂停调试代码。DevTools会在XHR调用send()那行代码的地方暂停。</p>
-<ol>
-<li>点击Sources面板 </li>
-<li>展开XHR Breakpoints小窗口</li>
-<li>点击“增加断点（Add breakpoint）”</li>
-<li>输入一个字符串，只要在某个XHR的请求URL中包含此字符串， 会进入断点（暂停），如下图。 </li>
-</ol>
-<img src="/2019/09/20/Chrome%20Tools-Sources/xhr.gif" class>
-
-<h3 id="Event-Listeners-Breakpoints"><a href="#Event-Listeners-Breakpoints" class="headerlink" title="Event Listeners Breakpoints"></a>Event Listeners Breakpoints</h3><p>这个断点类型也算是比较常用的一个了，特别是当我们调试别人的代码时，触发某个事件，想找到对应的代码。事件类型可以是很具体的，比如click事件，也可以是某一类别的事件，比如“鼠标事件”。</p>
-<ol>
-<li>点击Sources面板</li>
-<li>展开Event Listener Breakpoints小窗口</li>
-<li>勾选某一类别的事件或者是某一具体的事件</li>
-</ol>
-<p>PS：</p>
-<img src="/2019/09/20/Chrome%20Tools-Sources/point_types.png" class title="南风一溅-https:&#x2F;&#x2F;juejin.im&#x2F;user&#x2F;5754e1575bbb500064496593">
-
-<p>感谢：</p>
-<blockquote><footer><strong>无名小贝勒</strong><cite><a href="https://segmentfault.com/a/1190000008396389" target="_blank" rel="noopener">Chrome DevTools — JS调试</a></cite></footer></blockquote>
-<blockquote><footer><strong>lsc183</strong><cite><a href="https://www.cnblogs.com/lsc183/p/9915285.html" target="_blank" rel="noopener">Chrome DevTools 的 Sources 调试</a></cite></footer></blockquote>
-<blockquote><footer><strong>QAQ-YS</strong><cite><a href="https://zhuanlan.zhihu.com/p/80768870" target="_blank" rel="noopener">使用 chrome-devtools Sources 面板</a></cite></footer></blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/09/18/%E5%BA%95%E5%B1%82%E7%B3%BB%E7%BB%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/18/%E5%BA%95%E5%B1%82%E7%B3%BB%E7%BB%9F/" itemprop="url">底层系统</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-18T10:40:00+08:00">
-                2019-09-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index">
-                    <span itemprop="name">成长</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天看到一篇文章，是以我媳妇儿的男神马云老师为引得文章。</p>
-<p>所有为了能更完美的适配我媳妇儿的诉求，当然我就毫不犹豫的要点进去的看看。</p>
-<p>我心甚慰啊，是这两天引发我思考最多的文章，特此记录一下。</p>
-<p>文章指出底层系统定义：那些驱动你的核心动力。</p>
-<p><strong>体现在两个方面：大局观和是非观。</strong></p>
-<p>是非观决定你能走多久。什么事能做什么事不能做，自己心里衡量。有界限。</p>
-<p>大局观决定你能走多远。你想进步你的格局就要大于你的现状。</p>
-<p>所以前者指引方向，后者决定边界。</p>
-<p>所以当你想做什么的时候，先自省一下，自己的底层系统，看有没有bug。</p>
-<p>其中<strong>大局观</strong>是我感慨最多也是我认为自己最需要严肃对待的。</p>
-<p>虽然我这两年都在有意识的往这方面努力，但是还远远不够。</p>
-<h3 id="记录下我粗糙的认识"><a href="#记录下我粗糙的认识" class="headerlink" title="记录下我粗糙的认识"></a>记录下我粗糙的认识</h3><p>我认为的大局观，首先需要对抗的就是，老守着自己的一亩三分地，事不关己高高挂起，满足于现状的状态（这也是我在正在经历的阶段），需要跳脱出来，换角度，纵向、横向的看自己看周围看世界。</p>
-<p>说起来有点虚，我一开始看别人动不动用跳脱、升华、灵魂这类词语我就特别不屑，总觉得的是吹牛x。但是亲测真的有效，很多时候做某件事的时候我就强迫自己，重新审视一下要做的事。</p>
-<p>那怎么才能重新审视呢，那就涉及到要需要换角色换角度了，那怎么才能换角色换角度呢，这个时候就会突然在头脑中会出现，自己扮演产品经理、研发总监（公司副总）、总经理的角色，另外还会出现一个专门发出质疑的“自己”。这时候你就会萌发很多很多想法，这时候你会发现你考虑事项的方式以及处理事项的方式往往会和你一开始你想的有出入（当然这里肯定有一个边界，那就是你得从你的现状出发），这种出入不见得一定优于之前的想法，但是它肯定会带来附加效果，这种附加效果有可能会来的快也可能来得晚，有可能好有可能坏，但是正因为这样我们才能不断修正自己，我想这种修正应该会让我向大局观进一步。</p>
-<p>最近在看一本书《系统之美》，看起来有些艰涩，但是真的很受用，我觉得其中有句话就很符合我对大局观的理解</p>
-<blockquote>
-<p>重塑系统，发现更大的世界</p>
-</blockquote>
-<p>对于怎么才叫有大局观，我其实也没摸到精确的定义，但是这不妨碍我想得到她。人神奇的地方不就是能不断的折腾吗。能捏碎也能重塑。</p>
-<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>我觉得作为程序员，别顽固（坚守哪个语言第一、接受不了改变…）、别看谁都不顺眼（你看那说话的SB、你看那写代码的SB、你看那群里发图的SB….）、别老想着对抗（产品、ucd、测试、运维….，感觉他么的一个公司全是你的敌人），我们应该多想想如果我保持现状到底跟自己的职业生涯、跟同事、跟领导、跟公司能带来什么。</p>
-<p>我们是不是得抽时间找找自己？</p>
-<img src="/2019/09/18/%E5%BA%95%E5%B1%82%E7%B3%BB%E7%BB%9F/lost-1605501_1920.jpg" class title="Image by Jan Alexander from Pixabay">
-
-
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/09/06/%E5%B7%A5%E5%85%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/06/%E5%B7%A5%E5%85%B7/" itemprop="url">工具</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-06T22:48:00+08:00">
-                2019-09-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index">
-                    <span itemprop="name">成长</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>当你不够牛逼时，那就善用工具</strong></p>
-<p>我简单整理了一下我最近比较常用的工具，也会摘一些做一些分析，多偏向于前端，因为最近前端写得多。</p>
-<img src="/2019/09/06/%E5%B7%A5%E5%85%B7/tool.png" class>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/09/03/Lint%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/03/Lint%E7%AC%94%E8%AE%B0/" itemprop="url">Lint笔记-ESLint</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-03T15:23:00+08:00">
-                2019-09-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
-                    <span itemprop="name">工作</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>由于尽量不想让自己在编码路上留下的足迹会让后人觉得像屎一样…年初到现在断断续续的都在想办法提升个人的工程能力</p>
-<p>关于Lint最早是前两年写了一段时间的nodejs，然后知道了一个叫ESLint的玩意…这东西好用啊，让代码可以不太像屎一样了所以最近就捡起来了，当然工具是辅助最重要的还是基础。</p>
-<p>伴随着格言 do not BB，show me code。刚好同事让我帮忙跟他弄一下ESLint，那我想着干脆整个文档，那不就简单了，大家都能用。</p>
-<p>以下就是跟我们项目贴合度比较高的ESLint简单的配置教程出来（为博客凑个数，话说确实太懒了文章写的少），然后有时间再分析其原理的东西。</p>
-<h2 id="ESLint-配置"><a href="#ESLint-配置" class="headerlink" title="ESLint 配置"></a>ESLint 配置</h2><h3 id="安装ESLint相关库"><a href="#安装ESLint相关库" class="headerlink" title="安装ESLint相关库"></a>安装ESLint相关库</h3><pre><code>npm install -g eslint 
-// 用了 React 需要再安一个babel-eslint  
-npm install -D eslint babel-eslint
-//如果要用大厂的需安装对应的库，比如用airbnb的
-npm install -D eslint-config-airbnb
-// 因为要校验 Reac 语法，所以这里需要下载一个 React 语法规则的包  
-npm install -D eslint-plugin-react</code></pre><p>可能不全，但是总之一句话，别想太多提示差什么包就装什么包就对了。</p>
-<h3 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h3><pre><code>node_modules/.bin/eslint --init
-//如果全局安装了 可以直接
-eslint --init  </code></pre><p>会出现一个界面，根据模板创建ESLint的配置文件，最终填完之后大概就是下面这样</p>
-<img src="/2019/09/03/Lint%E7%AC%94%E8%AE%B0/eslint.png" class>
-
-<p><strong>演示一把：</strong></p>
-<p>选一种方式生成配置文件，可根据需求选择，建议第一个问题选第二种Use a popular style guide（使用大厂的），然后选一个，通常用airbnb的. 跟着界面依次填写下面的内容，最终会在你根目录下生成一个文件名为.eslintrc.js的配置文件 。</p>
-<p>根据模板创建配置文件，可以选个模板，也可以自己回答问题</p>
-<pre><code>PS E:\eslint&gt; eslint --init
-? How would you like to configure ESLint? Use a popular style guide
-? Which style guide do you want to follow? (Use arrow keys)
-&gt; Airbnb (https://github.com/airbnb/javascript)
-  Standard (https://github.com/standard/standard)
-  Google (https://github.com/google/eslint-config-google)</code></pre><p>比如选airbnb</p>
-<pre><code>module.exports = {
-&quot;extends&quot;: &quot;airbnb&quot;
-};</code></pre><p>也可以自己回答问题来创建</p>
-<pre><code>&gt; eslint --init
-
-? How would you like to configure ESLint? Answer questions about your style
-// 是否校验 Es6 语法
-? Are you using ECMAScript 6 features? Yes  
-// 是否校验 Es6 模块语法
-? Are you using ES6 modules? Yes   
-// 代码运行环境，Browser 指浏览器 
-? Where will your code run? Browser   
-// 是否校验 CommonJs 语法  
-? Do you use CommonJS? Yes  
-// 是否校验 JSX 语法
-? Do you use JSX? Yes   
-// 是否校验 React 语法
-? Do you use React? Yes 
-// 首行空白选择 Tab 键还是 Space
-? What style of indentation do you use? Tabs
-// 字符串使用单引号 &apos;string&apos; 还是双引号 &quot;string&quot;
-? What quotes do you use for strings? Double
-// 操作系统
-? What line endings do you use? Windows 
-// 每行代码结尾是否校验加分号 ;
-? Do you require semicolons? Yes
-// 以 .js 格式生成配置文件
-? What format do you want your config file to be in? JavaScript   </code></pre><p><em>PS</em>：也可以直接在根目录下手动建一个文件.eslintrc.js（后缀也可以是JSON、YAML等），然后手动写配置</p>
-<p><strong><em>贴一个我的（手动写的）</em></strong></p>
-<p>如果只用于JS语法类扫描，可参考但不建议直接使用，因为配置的东西有点多</p>
-<pre><code>module.exports = {
-&quot;extends&quot;: [&quot;airbnb&quot;, &quot;prettier&quot;,&quot;prettier/react&quot;],
-&quot;parser&quot;: &quot;babel-eslint&quot;,
-//如果我们想对一些非标准 JS 语法添加 Lint 怎么办呢？有办法，ESLint 还支持我们自定义 parser。 parser是为了非标准语法能生的，plugin是针对符合js语法的规则集合的扩展。
-&quot;plugins&quot;: [
-    &quot;prettier&quot;,
-    &quot;react&quot;,
-    &quot;jsx-a11y&quot;,
-    &quot;import&quot;],
-//自定义规则，可以覆盖掉extends的配置。
-&quot;rules&quot;: {
-    &quot;jsx-a11y/click-events-have-key-events&quot;:0,
-    &quot;jsx-a11y/interactive-supports-focus&quot;:0,
-    &quot;jsx-a11y/no-static-element-interactions &quot;:0,
-    // &apos;one-var&apos;:2,//&quot;error&quot; 或 2 开启规则，使用错误级别的错误
-    // 强制驼峰命名规则
-    &quot;camelcase&quot;: [0, {
-        &quot;properties&quot;: &quot;never&quot;
-    }],
-    &quot;prettier/prettier&quot;: [&quot;error&quot;],
-    &quot;react/prop-types&quot;: [&quot;warn&quot;],
-    &quot;react/jsx-uses-react&quot;: &quot;error&quot;,
-    &quot;react/jsx-uses-vars&quot;: &quot;error&quot;,
-    &quot;no-unused-vars&quot;: 1,//&quot;warn&quot; 或 1 - 开启规则，使用警告级别的错误
-    &quot;global-require&quot;: 0,//&quot;off&quot; 或 0 - 关闭规则
-    &quot;prefer-destructuring&quot;: 0,
-    &quot;class-methods-use-this&quot;: 0,
-    &quot;react/no-unused-state&quot;: 1,
-    &quot;jsx-a11y/no-static-element-interactions&quot;:0,
-    &quot;import/extensions&quot;:0
-},
-&quot;env&quot;:{
-    //定义env会带进来一些全局变量，browser会添加所有的浏览器变量比如Windows
-    &quot;browser&quot;: true,
-    &quot;es6&quot;: true
-},
-//当我们将默认的解析器从Espree改为babel-eslint的时候，我们需要指定parseOptions，这个是必须的。parserOptions ESLint 允许你指定你想要支持的 JavaScript 语言选项。默认情况下，ESLint 支持 ECMAScript 5 语法。你可以覆盖该设置，以启用对 ECMAScript 其它版本和 JSX 的支持。
-&quot;parserOptions&quot;: {
-    &quot;sourceType&quot;: &quot;module&quot;,
-    &quot;ecmaFeatures&quot;: {
-        &quot;jsx&quot;: true// 启用 JSX
-    },
-    &quot;ecmaVersion&quot;: 6
-},
-
-};`</code></pre><h3 id="配置IDE"><a href="#配置IDE" class="headerlink" title="配置IDE"></a>配置IDE</h3><p><em>VSCode配置需自行上网搜索</em></p>
-<p>启用ESLint插件</p>
-<img src="/2019/09/03/Lint%E7%AC%94%E8%AE%B0/idea_eslint.png" class>
-
-<p>配置触发ESLint自动修复的快捷键</p>
-<img src="/2019/09/03/Lint%E7%AC%94%E8%AE%B0/idea_eslint01.png" class>
-
-<p>ESLint的使用方法</p>
-<img src="/2019/09/03/Lint%E7%AC%94%E8%AE%B0/idea_eslint02.png" class>
-<img src="/2019/09/03/Lint%E7%AC%94%E8%AE%B0/idea_eslint03.png" class>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/08/27/%E4%BD%9C%E7%94%A8%E5%9F%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/27/%E4%BD%9C%E7%94%A8%E5%9F%9F/" itemprop="url">作用域</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-27T15:16:00+08:00">
-                2019-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://scotch.io/tutorials/understanding-scope-in-javascript#toc-lexical-scope" target="_blank" rel="noopener">https://scotch.io/tutorials/understanding-scope-in-javascript#toc-lexical-scope</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/08/27/%E5%A6%82%E4%BD%95%E5%81%9A%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/27/%E5%A6%82%E4%BD%95%E5%81%9A%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/" itemprop="url">如何做职业规划</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-27T15:16:00+08:00">
-                2019-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index">
-                    <span itemprop="name">成长</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="冰山模型"><a href="#冰山模型" class="headerlink" title="冰山模型"></a>冰山模型</h3><p>这玩意能比较通透的了解自己有几斤几两。</p>
-<img src="/2019/08/27/%E5%A6%82%E4%BD%95%E5%81%9A%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/ice.jpg" class>
-
-
-
-<ol>
-<li>认知迷茫<ul>
-<li>危机感的缺失<ul>
-<li>物质需求基本满足，过于安逸</li>
-</ul>
-</li>
-<li>经验传承的断层<ul>
-<li>父辈那一代的经验和技能不能很好的借鉴</li>
-</ul>
-</li>
-<li>失败的自我认知教育</li>
-<li>文化信仰的缺失</li>
-</ul>
-</li>
-</ol>
-<p>最终的表现就是，同样的起点，同样的终点，迷茫的人会走很多很多弯路。</p>
-<h3 id="如何做职业规划"><a href="#如何做职业规划" class="headerlink" title="如何做职业规划"></a>如何做职业规划</h3><ol start="2">
-<li><p>找到人生目标</p>
-<ul>
-<li>马斯洛需求理论 </li>
-<li>从欲望的角度</li>
-</ul>
-</li>
-<li><p>拆解人生目标</p>
-<ul>
-<li>逻辑树</li>
-</ul>
-</li>
-<li><p>选择职业目标</p>
-<ul>
-<li>工具<ul>
-<li>逻辑树，拆解自己的选择标准</li>
-<li>决策矩阵<ul>
-<li>简化的矩阵，选择维度=2时</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>标准<ul>
-<li>感性因素（随心所欲）、理性因素（扬长避短、顺势而为）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>梳理职业路径</p>
-<ul>
-<li>职业路径图，搞清楚所在职业整个的路径是什么。</li>
-<li>对标管理，每个小目标都可以选择一个最佳实践<ul>
-<li>对标的目标的评估标准（CQ、RQ、IQ），找到自己与对标对象之间的差距，补足</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>制定发展计划</p>
-<ul>
-<li>甘特图，小目标转化为计划</li>
-</ul>
-</li>
-<li><p>总结：工具包</p>
-<img src="/2019/08/27/%E5%A6%82%E4%BD%95%E5%81%9A%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/0.jpg" class>
-</li>
-<li><p>延伸问题</p>
-<ul>
-<li>如果第一步就卡住了怎么办<br>不着急，但是无论无何要把它搞出来。 </li>
-<li>为什么我的目标不够坚定<br>有红利期，就有人扑上去，那我扑不扑。</li>
-</ul>
-</li>
-</ol>
-<p>可能的解法</p>
-<img src="/2019/08/27/%E5%A6%82%E4%BD%95%E5%81%9A%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92/a.png" class>
-
-<p>感谢：</p>
-<blockquote><footer><strong>用麦肯锡思维做职业规划</strong><cite><a href="https://m.qlchat.com/topic/details?topicId=2000005041181222&kfAppId=wx831c57337f22d123&kfOpenId=oCbyZ0S8wRNxulWNSM2fKNeI2xB4" target="_blank" rel="noopener">圈外同学-很帅的投资客</a></cite></footer></blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/08/23/%E6%A0%B9%E5%9B%A0%E5%88%86%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/23/%E6%A0%B9%E5%9B%A0%E5%88%86%E6%9E%90/" itemprop="url">根因分析</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-23T15:37:00+08:00">
-                2019-08-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
-                    <span itemprop="name">工作</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近研发老大牵头组织了异常关于根因分析的讨论，目的在于让大家学会做根因分析，因为往往大家都是直接下结论（给答案），既容易发生矛盾也同时也没有解决根本问题。</p>
-<h3 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h3><p>1.当有问题出现时，往往根据现象再加上以往的经验或者直接拍出一个结论，这种情况在短期内的效果是可以的，但是从长期来看会掩盖掉很多底层的问题。结果就是问题该出还出，不仅没有提升团队的效率反而降低了团队的效率。</p>
-<p>2.当问题出现时就代表甩锅以及互怼的开始，没有经过根因分析，上来先下个结论，开始界定责任，然后开始扯皮。</p>
-<h3 id="根因分析"><a href="#根因分析" class="headerlink" title="根因分析"></a>根因分析</h3><h5 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h5><p><em>（什么时间<strong>-</strong>什么地点<strong>-</strong>什么产品<strong>-</strong>什么人物<strong>-</strong>发生什么故障现象<strong>-</strong>造成什么影响）</em></p>
-<p>示例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">时间：2019-09-02</span><br><span class="line">地点：XX现场</span><br><span class="line">产品：XX产品&#x2F;XX版本</span><br><span class="line">发现人：XX现场交付人员</span><br><span class="line">故障现象描述：客服在正常登陆系统提单的时候报错，并且提交不了工单</span><br><span class="line">【帮助】如有多个故障现象，应分别描述；</span><br><span class="line">结果影响：系统XX时间不可用，导致客户非常不满，造成XXX损失</span><br></pre></td></tr></table></figure>
-
-<h5 id="过程还原"><a href="#过程还原" class="headerlink" title="过程还原"></a>过程还原</h5><p><em>直接叙述工作过程，有问题的环节或阶段，什么人，做了什么事，当时是怎么考虑的，在这个动作后结果是什么。</em></p>
-<h5 id="问题定位"><a href="#问题定位" class="headerlink" title="问题定位"></a>问题定位</h5><p><em>描述最终定位到的直接原因是什么。举个例子，比如某段代码编写存在<strong>XXX</strong>错误</em></p>
-<h5 id="技术根因分析"><a href="#技术根因分析" class="headerlink" title="技术根因分析"></a><strong>技术根因分析</strong></h5><p><strong>引入环节：</strong></p>
-<ol>
-<li>产品设计是否有问题？</li>
-<li>需求分析是否有问题？</li>
-<li>设计环节是否有问题？</li>
-<li>代码编写是否有问题？</li>
-<li>其他</li>
-</ol>
-<p><strong>流出环节：</strong></p>
-<ol>
-<li>各评审环节是否有遗漏？</li>
-<li>是否进行研发自测？</li>
-<li>测试场景、测试用例是否覆盖全？</li>
-<li>是否进行了系统测试？</li>
-<li>其他？</li>
-</ol>
-<p><strong>确定关键根因是什么</strong>：</p>
-<p>如果有多个根因在逻辑层次上相同，则取关键的原因，根因应该是具体的、客观的、在目前组织能力下可被改进的。</p>
-<h5 id="管理根因分析"><a href="#管理根因分析" class="headerlink" title="管理根因分析"></a>管理根因分析</h5><ul>
-<li>流程/制度原因：</li>
-<li>组织因素：</li>
-<li>执行原因：</li>
-</ul>
-<p>【帮助】流程/制度方面：考虑组织管理上是否有合适的流程、指导书、管理Checklist；</p>
-<p>组织因素方面：考虑人员分配、个人技能、培训、组织环境等原因；</p>
-<p>执行方面：考虑计划、监控、沟通方面的原因。</p>
-<h5 id="纠正、预防措施"><a href="#纠正、预防措施" class="headerlink" title="纠正、预防措施"></a>纠正、预防措施</h5><table>
-<thead>
-<tr>
-<th><strong>根本原因</strong></th>
-<th><strong>措施类型</strong></th>
-<th><strong>措施内容</strong></th>
-<th><strong>责任人</strong></th>
-<th><strong>预定完成日期</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><em>技术根因：</em>  <em>例如，XX特性，在大规格、灵活配置等方面需求设计不充分</em></td>
-<td>纠正措施</td>
-<td><em>例如：对XX特性组织进行重新设计，刷新XX方案</em></td>
-<td></td>
-<td><em>2018/11/1</em></td>
-</tr>
-<tr>
-<td>预防措施</td>
-<td><em>例如：更新××技术规范、工具、checklist等等</em></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><em>管理根因：</em>组织管理、流程方面的原因，比如xx，没有按照流程，但是最终还是交付了。</td>
-<td>纠正措施</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>预防措施</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>上诉的内容，关键还是在于给一个框架，让问题发生人，根据框架的引导，能比较深刻的挖掘出问题的根因，按此框架填写后，往往会伴随着评审，最终判断分析的彻底性以及合理性。</p>
-<p>当然这只是一种方式，一段时间实践下来，其实是有助于减少问题发生率以及增加个人问题的处理成本从而倒逼相关人员注意到质量的重要性。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
  <nav class="pagination">
-   <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
+   <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
  </nav>
 
 
@@ -2296,7 +2304,7 @@ eslint --init  </code></pre><p>会出现一个界面，根据模板创建ESLint�
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">104</span>
+                  <span class="site-state-item-count">112</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2307,7 +2315,7 @@ eslint --init  </code></pre><p>会出现一个界面，根据模板创建ESLint�
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2318,7 +2326,7 @@ eslint --init  </code></pre><p>会出现一个界面，根据模板创建ESLint�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">70</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2377,7 +2385,7 @@ eslint --init  </code></pre><p>会出现一个界面，根据模板创建ESLint�
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -2976,7 +2984,7 @@ eslint --init  </code></pre><p>会出现一个界面，根据模板创建ESLint�
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("XSS、SQL注入");titles.push("高难度沟通");titles.push("怎么做好Presentation");titles.push("Chrome Tools-Sources");titles.push("底层系统");titles.push("工具");titles.push("Lint笔记-ESLint");titles.push("作用域");titles.push("如何做职业规划");titles.push("根因分析");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("Docker 一点点");titles.push("理解一个新事物的方法");titles.push("前端工程化");titles.push("斜杠");titles.push("延宕");titles.push("组织化人才管理的四大领域");titles.push("个人发展战略");titles.push("抉择");titles.push("XSS、SQL注入");titles.push("高难度沟通");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {
@@ -3021,4 +3029,5 @@ eslint --init  </code></pre><p>会出现一个界面，根据模板创建ESLint�
 
   
 
-<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+</body>
+</html>

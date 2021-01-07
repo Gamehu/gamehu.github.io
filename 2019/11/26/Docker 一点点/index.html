@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://gamehu.github.io/2019/11/26/Docker%20%E4%B8%80%E7%82%B9%E7%82%B9/docker-arch1.jpg">
 <meta property="og:image" content="https://gamehu.github.io/2019/11/26/Docker%20%E4%B8%80%E7%82%B9%E7%82%B9/1.png">
 <meta property="article:published_time" content="2019-11-26T07:32:00.000Z">
-<meta property="article:modified_time" content="2020-06-17T06:29:07.314Z">
+<meta property="article:modified_time" content="2020-09-21T13:35:35.502Z">
 <meta property="article:author" content="Gamehu">
 <meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
@@ -444,9 +444,9 @@
 <h5 id="docker-save-image-id-gt-xx-tar"><a href="#docker-save-image-id-gt-xx-tar" class="headerlink" title="docker save image_id&gt; xx.tar"></a><code>docker save image_id&gt; xx.tar</code></h5><p>导出镜像，通常是修复现场问题时做该操作，导出已修复的镜像。</p>
 <h5 id="docker-load-lt-xx-tar"><a href="#docker-load-lt-xx-tar" class="headerlink" title="docker load &lt; xx.tar"></a><code>docker load &lt; xx.tar</code></h5><p>导入镜像，通常是修复现场问题时做该操作，载入已修复后的镜像。</p>
 <h5 id="docker-tag-image-id-tag-name"><a href="#docker-tag-image-id-tag-name" class="headerlink" title="docker tag image_id tag_name"></a><code>docker tag image_id tag_name</code></h5><p>修改镜像的TAG，通常是修复现场问题时做该操作。</p>
-<p>感谢</p>
-<blockquote><footer><strong>Jeff Hale</strong><cite><a href="https://towardsdatascience.com/15-docker-commands-you-should-know-970ea5203421" target="_blank" rel="noopener">15 Docker Commands You Should Know</a></cite></footer></blockquote>
+<h4 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h4><blockquote><footer><strong>Jeff Hale</strong><cite><a href="https://towardsdatascience.com/15-docker-commands-you-should-know-970ea5203421" target="_blank" rel="noopener">15 Docker Commands You Should Know</a></cite></footer></blockquote>
 
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
 
       
     </div>
@@ -608,7 +608,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">104</span>
+                  <span class="site-state-item-count">112</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -619,7 +619,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -630,7 +630,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">70</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -685,7 +685,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#先看图"><span class="nav-number">2.</span> <span class="nav-text">先看图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">3.</span> <span class="nav-text">命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#各种查看"><span class="nav-number">3.1.</span> <span class="nav-text">各种查看</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-COMMAND-help"><span class="nav-number">3.1.1.</span> <span class="nav-text">docker COMMAND --help</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-ps、docker-ps-a"><span class="nav-number">3.1.2.</span> <span class="nav-text">docker ps、docker ps -a</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-info、docker-version"><span class="nav-number">3.1.3.</span> <span class="nav-text">docker info、docker version</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-search-xxx"><span class="nav-number">3.1.4.</span> <span class="nav-text">docker search xxx</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-images"><span class="nav-number">3.1.5.</span> <span class="nav-text">docker images</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-logs-f-container-name"><span class="nav-number">3.1.6.</span> <span class="nav-text">docker logs -f container_name</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-commit-a-quot-gamehu-quot-m-quot-what-f-quot-container-id-IMAGE-REPOSITORY-TAG"><span class="nav-number">3.1.7.</span> <span class="nav-text">docker commit -a &quot;gamehu&quot; -m &quot;what f&quot; container_id IMAGE_REPOSITORY:TAG&#96;</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Container"><span class="nav-number">3.2.</span> <span class="nav-text">Container</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-start-、stop、restart、rm、kill"><span class="nav-number">3.2.1.</span> <span class="nav-text">docker start 、stop、restart、rm、kill</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-exec-it-container-id"><span class="nav-number">3.2.2.</span> <span class="nav-text">docker exec -it container_id</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-inspect-container-id"><span class="nav-number">3.2.3.</span> <span class="nav-text">docker inspect container_id</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Image"><span class="nav-number">3.3.</span> <span class="nav-text">Image</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-run、create"><span class="nav-number">3.3.1.</span> <span class="nav-text">docker run、create</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-build-lt-path-to-docker-file-gt"><span class="nav-number">3.3.2.</span> <span class="nav-text">docker build &lt;path to docker file&gt;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-push-IMAGE-NAME-TAG"><span class="nav-number">3.3.3.</span> <span class="nav-text">docker push IMAGE_NAME:TAG</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-rmi-image-id-image-name"><span class="nav-number">3.3.4.</span> <span class="nav-text">docker rmi image_id&#x2F;image_name</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-inspect-image-id"><span class="nav-number">3.3.5.</span> <span class="nav-text">docker inspect image_id</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-save-image-id-gt-xx-tar"><span class="nav-number">3.3.6.</span> <span class="nav-text">docker save image_id&gt; xx.tar</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-load-lt-xx-tar"><span class="nav-number">3.3.7.</span> <span class="nav-text">docker load &lt; xx.tar</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-tag-image-id-tag-name"><span class="nav-number">3.3.8.</span> <span class="nav-text">docker tag image_id tag_name</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#先看图"><span class="nav-number">2.</span> <span class="nav-text">先看图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令"><span class="nav-number">3.</span> <span class="nav-text">命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#各种查看"><span class="nav-number">3.1.</span> <span class="nav-text">各种查看</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-COMMAND-help"><span class="nav-number">3.1.1.</span> <span class="nav-text">docker COMMAND --help</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-ps、docker-ps-a"><span class="nav-number">3.1.2.</span> <span class="nav-text">docker ps、docker ps -a</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-info、docker-version"><span class="nav-number">3.1.3.</span> <span class="nav-text">docker info、docker version</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-search-xxx"><span class="nav-number">3.1.4.</span> <span class="nav-text">docker search xxx</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-images"><span class="nav-number">3.1.5.</span> <span class="nav-text">docker images</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-logs-f-container-name"><span class="nav-number">3.1.6.</span> <span class="nav-text">docker logs -f container_name</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-commit-a-quot-gamehu-quot-m-quot-what-f-quot-container-id-IMAGE-REPOSITORY-TAG"><span class="nav-number">3.1.7.</span> <span class="nav-text">docker commit -a &quot;gamehu&quot; -m &quot;what f&quot; container_id IMAGE_REPOSITORY:TAG&#96;</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Container"><span class="nav-number">3.2.</span> <span class="nav-text">Container</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-start-、stop、restart、rm、kill"><span class="nav-number">3.2.1.</span> <span class="nav-text">docker start 、stop、restart、rm、kill</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-exec-it-container-id"><span class="nav-number">3.2.2.</span> <span class="nav-text">docker exec -it container_id</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-inspect-container-id"><span class="nav-number">3.2.3.</span> <span class="nav-text">docker inspect container_id</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Image"><span class="nav-number">3.3.</span> <span class="nav-text">Image</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-run、create"><span class="nav-number">3.3.1.</span> <span class="nav-text">docker run、create</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-build-lt-path-to-docker-file-gt"><span class="nav-number">3.3.2.</span> <span class="nav-text">docker build &lt;path to docker file&gt;</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-push-IMAGE-NAME-TAG"><span class="nav-number">3.3.3.</span> <span class="nav-text">docker push IMAGE_NAME:TAG</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-rmi-image-id-image-name"><span class="nav-number">3.3.4.</span> <span class="nav-text">docker rmi image_id&#x2F;image_name</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-inspect-image-id"><span class="nav-number">3.3.5.</span> <span class="nav-text">docker inspect image_id</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-save-image-id-gt-xx-tar"><span class="nav-number">3.3.6.</span> <span class="nav-text">docker save image_id&gt; xx.tar</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-load-lt-xx-tar"><span class="nav-number">3.3.7.</span> <span class="nav-text">docker load &lt; xx.tar</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-tag-image-id-tag-name"><span class="nav-number">3.3.8.</span> <span class="nav-text">docker tag image_id tag_name</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感谢"><span class="nav-number">3.4.</span> <span class="nav-text">感谢</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -705,7 +705,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -1353,4 +1353,5 @@
 
   
 
-<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+</body>
+</html>
