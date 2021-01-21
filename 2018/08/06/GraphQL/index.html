@@ -90,7 +90,7 @@
 <meta property="og:site_name" content="正儿八经">
 <meta property="og:description" content="前后端关于CMDB的交互决定选用GraphQL，因为第一次听说就抓紧时间了解了以下是个什么东西。 GraphQL干嘛的？Overviewspec.graphql.cn&#x2F;#sec-Overview-  GraphQL语言致力于提供一种直观的弹性语法系统，用以描述客户端程序设计时的数据需求以及数据交互行为。 说的直白点就是能让API设计变得更加的灵活，你想要什么数据就给你什么数据，不多不少。 实践目前">
 <meta property="article:published_time" content="2018-08-06T07:24:00.000Z">
-<meta property="article:modified_time" content="2019-03-03T13:51:09.999Z">
+<meta property="article:modified_time" content="2021-01-08T10:12:36.846Z">
 <meta property="article:author" content="Gamehu">
 <meta property="article:tag" content="graphql">
 <meta name="twitter:card" content="summary">
@@ -417,6 +417,9 @@
 <p><strong>这种时候痛点就出现了，不重用接口则没法提高开发效率，重用接口则会有这些问题。</strong></p>
 <p>这个时候GraphQL就体现它的优势了，我认为它的出现就是为了解决上面的痛点。出现上面的问题的根本原因我认为在于，前端不能直白的告诉后端我要什么数据，必须通过后端经过对应的翻译转换，因为前端没有合适的方式来告诉我们A只需要name，B只需要name+sex，它可能就给我们一个userId然后给个businessCase然后我们根据businessCase来进行逻辑判断，进行数据查询，进行数据筛选以及过滤。</p>
 <h2 id="GraphQL"><a href="#GraphQL" class="headerlink" title="GraphQL"></a>GraphQL</h2><p>花点时间写这个，是因为觉得GraphQL算是开阔了我的技术视野，我们其实还用的很浅，他的<strong>一切皆是图</strong>、<strong>API无版本（某些场景）</strong>的思想，以及schema、别名、片段、指令、mutation、元字段等概念让GraphQL灵活的像猴哥，至少目前我们没有遇到有什么场景是满足不了的，至少对于技术浅薄的我来说是有开到脑洞。</p>
+<p><code>更新2021-01-08：</code></p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzI4Njc5NjM1NQ==&mid=2247501981&idx=1&sn=4cefea59913ac291f7fafcf4a3a007a0&chksm=ebd5f7b1dca27ea779ea35b8521d91b85239d9b5d64489e394be76347c72a0968ce616b1597d&mpshare=1&scene=1&srcid=0108kwmT37WixQYNhMCOnZQ4&sharer_sharetime=1610066466233&sharer_shareid=77df2eafd0a472623696abf038541666&version=3.1.1.3001&platform=win#rd" target="_blank" rel="noopener">我为什么要放弃RESTful，选择拥抱GraphQL</a></p>
+<p><a href="https://github.com/chentsulin/awesome-graphql" target="_blank" rel="noopener">graphql工具社区</a></p>
 <p>学习地址：</p>
 <blockquote><footer><strong>learn</strong><cite><a href="http://graphql.cn/learn/" target="_blank" rel="noopener">graphql.cn/learn</a></cite></footer></blockquote>
 
@@ -597,7 +600,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -642,12 +645,6 @@
                     <a href="mailto:gamehu520@gmail.com" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="https://twitter.com/Gamehu520" target="_blank" title="Twitter">
-                      
-                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
                   </span>
                 
             </div>

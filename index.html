@@ -309,6 +309,312 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2021/01/13/pnpm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/13/pnpm/" itemprop="url">pnpm</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-13T14:30:00+08:00">
+                2021-01-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>因为最近遇到一个包多版本依赖的问题，遂研究研究npm包管理…</p>
+<p>结果发现了这个宝藏<strong><a href="https://github.com/pnpm" target="_blank" rel="noopener">pnpm</a></strong></p>
+<p><a href="https://zhuanlan.zhihu.com/p/137535779" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/137535779</a></p>
+<h3 id="PNPM"><a href="#PNPM" class="headerlink" title="PNPM"></a>PNPM</h3><p>pnpm使用内容可寻址文件系统将磁盘上所有模块目录中的所有文件存储在磁盘上。 </p>
+<p> 使用pnpm，lodash将存储在可寻址内容的存储中，因此：</p>
+<p>如果您依赖lodash的不同版本，则仅将不同的文件添加到存储中。 如果lodash有100个文件，而新版本仅对其中一个文件进行了更改，则pnpm update将仅向存储添加1个新文件。</p>
+<p>所有文件都保存在磁盘上的单个位置。 安装软件包时，它们的文件从该单个位置链接，不占用额外的磁盘空间。 使用硬链接或ref链接（写时复制）执行链接。</p>
+<p>结果，您在磁盘上节省了数GB的空间，并且安装速度大大提高了！ 如果您想了解有关pnpm创建的唯一node_modules结构以及为什么它可以在Node.js生态系统中正常工作的更多详细信息，请阅读这篇小文章：平坦的node_modules不是唯一的方法。</p>
+<img src="/2021/01/13/pnpm/a.png" class>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2021/01/11/JVM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2021/01/11/JVM/" itemprop="url">JVM</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-11T10:22:00+08:00">
+                2021-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="JVM-Architecture"><a href="#JVM-Architecture" class="headerlink" title="JVM Architecture"></a>JVM Architecture</h3><p><img src="https://www.freecodecamp.org/news/content/images/size/w600/2021/01/image-39.png" alt="img"></p>
+<p><img src="https://www.freecodecamp.org/news/content/images/size/w600/2021/01/image-32.png" alt="img"></p>
+<p>   JVM中的类的加载器主要有三种:<strong><em>\</em>启动类加载器**</strong>，<strong><em>\</em>拓展类加载器**</strong>，<strong><em>\</em>应用类加载器。**</strong></p>
+<p>   <strong>启动类加载器(Bootstrap classLoader):</strong>又称为引导类加载器，由C++编写，无法通过程序得到。主要负责加载JAVA中的                                    一些核心类库，主要是位于<JAVA_HOME>/lib/rt.jar中。</JAVA_HOME></p>
+<p>   <strong>拓展类加载器(Extension classLoader):</strong>主要加载JAVA中的一些拓展类，位于<JAVA_HOME>/lib/ext中,是启动类加载器                                    的子类。</JAVA_HOME></p>
+<p>   <strong>应用类加载器(System classLoader):</strong>  又称为系统类加载器,主要用于加载CLASSPATH路径下我们自己写的类，是拓展类                                    加载器的子类。</p>
+<p><a href="https://www.freecodecamp.org/news/jvm-tutorial-java-virtual-machine-architecture-explained-for-beginners/" target="_blank" rel="noopener">https://www.freecodecamp.org/news/jvm-tutorial-java-virtual-machine-architecture-explained-for-beginners/</a></p>
+<h4 id="Types-of-Java-Garbage-Collectors"><a href="#Types-of-Java-Garbage-Collectors" class="headerlink" title="Types of Java Garbage Collectors"></a>Types of Java Garbage Collectors</h4><p><a href="https://www.cnblogs.com/woshimrf/p/jvm-garbage.html" target="_blank" rel="noopener">https://www.cnblogs.com/woshimrf/p/jvm-garbage.html</a></p>
+<p><a href="https://javapapers.com/java/types-of-java-garbage-collectors/" target="_blank" rel="noopener">https://javapapers.com/java/types-of-java-garbage-collectors/</a></p>
+<p><img src="https://i.stack.imgur.com/XHfx0.jpg" alt="img"></p>
+<p><img src="https://static001.infoq.cn/resource/image/75/a4/754f1ab05e6527107cfd8578d98a80a4.png" alt="img"></p>
+<p><a href="https://www.infoq.cn/article/3wyretkqrhivtw4frmr3" target="_blank" rel="noopener">https://www.infoq.cn/article/3wyretkqrhivtw4frmr3</a></p>
+<p> <a href="https://www.cnblogs.com/dolphin0520/p/3784171.html" target="_blank" rel="noopener">Java 如何有效地避免OOM：善于利用软引用和弱引用</a></p>
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/12/29/PO%E5%92%8C%E7%A0%94%E5%8F%91%E5%85%8D%E5%B9%B2%E6%9E%B6%E6%B2%9F%E9%80%9A%E6%8C%87%E5%8D%97-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -633,6 +939,150 @@
 <td><em>2020/11/1</em></td>
 </tr>
 </tbody></table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/12/17/%E6%95%8F%E6%8D%B7%E5%92%8B%E6%95%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/12/17/%E6%95%8F%E6%8D%B7%E5%92%8B%E6%95%B4/" itemprop="url">敏捷</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-17T18:15:00+08:00">
+                2020-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>前前后后经历了几个公司敏捷的做法，有些些感悟，在此表一表。</p>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><p>敏捷我最早是在14年的时候知道的，我的直接领导是公司敏捷的推崇者，当时两个研发团队也是按照敏捷走的，但是敏捷到底是个啥？当时老大给了我一本书让我自己去悟。书名好像是《Scrum敏捷软件开发》。之后大体有了个了解，至少对<code>站会、用户故事、backlog、sprint、SM、PO</code>等词有个概念。</p>
+<p>那时候觉得挺新鲜因为在此之前我只知道瀑布模式。在这家公司时我对敏捷印象是最深的，因为我经历了新旧之间的碰撞，不仅是思想上的还有实操上的。因为公司还有个管评审的主管，年龄挺大了，他刚好更偏向于瀑布模式</p>
 
           
         
@@ -1453,557 +1903,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/09/01/%E5%BE%AE%E5%89%8D%E7%AB%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/09/01/%E5%BE%AE%E5%89%8D%E7%AB%AF/" itemprop="url">微前端</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-01T15:23:00+08:00">
-                2020-09-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>因为我们这次重构的一个很大的原因就是为了搞中台，所以当看到<a href="https://ice.work/docs/icestark/about" target="_blank" rel="noopener">飞冰</a>对微前端的输出时，个人觉得后续我们的产品应该会用到这套思路。所以先做个记录。</p>
-<blockquote><footer><strong>clark</strong><cite><a href="https://zhuanlan.zhihu.com/p/201186206" target="_blank" rel="noopener">重塑应用架构，让上古应用重新焕发光彩</a></cite></footer></blockquote>
-
-
-
-<blockquote><footer><strong>张浩</strong><cite><a href="https://www.infoq.cn/article/3AZwpv801cUAUHiSKowb" target="_blank" rel="noopener">网易严选企业级微前端解决方案与落地实践</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>蚂蚁金服</strong><cite><a href="https://qiankun.umijs.org/" target="_blank" rel="noopener">qiankun</a></cite></footer></blockquote>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/08/27/CMDB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/08/27/CMDB/" itemprop="url">CMDB</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-27T14:18:00+08:00">
-                2020-08-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/DevOps/" itemprop="url" rel="index">
-                    <span itemprop="name">DevOps</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>之前有提过现阶段要把之前的产品推翻重做，做带中台调性的新监控。其中一块核心的内容就是CMDB，虽然CMDB的设计主要是架构师以及后端同学的活，但是架不住我爱掺合啊，这块的前端是我来弄，所以也有正当理由摸鱼撒。所以简单也做个记录，稍微深入的了解下CMDB这玩意，也不能细说一个是我没那么精通另一个我不得保护我们的产品知识产权吗不然老板不把我弄死啊…跑题了。</p>
-<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><p>CMDB刚开始接触的时候我把它笼统的理解为资产管理，当然这种理解肯定是不对的，太局限。</p>
-<p>因为我们的产品大多数情况下都是部署在客户的内网，CMDB在我们产品中的定位：</p>
-<ul>
-<li>运维对象管理系统。</li>
-<li>支撑监控能力的基础设施。</li>
-<li>以应用为核心对象串联其它资源。</li>
-</ul>
-<p><strong>识别运维对象，主要分为两个部分：</strong></p>
-<p>基础设施层面：网络设备、服务器、存储设备等；</p>
-<p>应用层面：应用元信息、告警配置信息等</p>
-<p>当我们识别出运维对象和对象间的关系，并形成了统一的标准之后，接下来要做的事情就是将这些标准固化，固化到信息管理平台中，也就形成了我们说的CMDB（配置管理）。</p>
-<h4 id="运维对象识别"><a href="#运维对象识别" class="headerlink" title="运维对象识别"></a>运维对象识别</h4><p>思路跟下图很像，从消费场景入手，识别对象以及对象具有的元素应该有哪些。</p>
-<img src="/2020/08/27/CMDB/1.jpg" class title="公众号-高效运维">
-
-<img src="/2020/08/27/CMDB/2.png" class title="公众号-高效运维">
-
-<p>最终细化一下会识别出几种类型，一个是<strong>基础资源对象</strong>，一个是<strong>应用对象</strong>，一个是<strong>逻辑对象</strong>（组织和人），把这几种类型对象按照相应的规则的建立关系，从而管理属性、关系、状态、场景。</p>
-<h4 id="发现"><a href="#发现" class="headerlink" title="发现"></a>发现</h4><p>前一小结确定了运维对象识别的核心思想，其中一个大的作用就是指导<strong>资源发现</strong>，我们第一版的发现的方式包含两种：</p>
-<ul>
-<li><p>网络拓扑发现（自动）：通过SNMP扫描网络，发现其中的网络设备，并判定其间的网络连接关系。</p>
-</li>
-<li><p>指定类型发现（人工或者流程）：用户指定资产类型，发现时不需要依据判定规则。</p>
-<p>下图是我傍的一个后端大佬画的，我悄悄盗过来，镇场面。</p>
-</li>
-</ul>
-<pre class="mermaid">classDiagram
-
-    class 发现规则 {
-        + 判定规则
-        + 收集规则
-    }
-
-
-    任务 "1" -- "N" 任务执行
-    发现代理 -- 发现结果
-    任务执行 -- 发现代理
-    任务执行 -- 资产数据
-    资产数据 -- CMDB
-
-    发现规则 -- 发现代理
-    全局例外 -- 发现代理
-    SNMP特殊判定 -- 发现规则
-    任务 "1" -- "N" 连接信息</pre>
-
-
-
-<h4 id="建立关系"><a href="#建立关系" class="headerlink" title="建立关系"></a>建立关系</h4><p>首先明确一点，以<code>应用为中心</code>，从应用的视角去看，从应用的角度构建资源管理的关系（拓扑关系）。</p>
-<p>看了几篇相关的文章基本上，关系类型可简化为下面几种：</p>
-<ul>
-<li>主从关系。这种关系是一种强父子关系，主不存在了，则从就不存在了。比如主机和网卡、硬盘。</li>
-<li>依赖关系。是一种对象属性级之间的关联关系，比如说服务器放在机柜上，机柜摆在某个机房内，这是对象级别的关系。通过对象的属性关联来表达。</li>
-<li>连接关系。主机和存储、主机和网络设备的关系，是连接关系。这种关系是动态生成的，是一种实例级的关系。</li>
-</ul>
-<p>依赖关系和连接关系有什么不同？</p>
-<ul>
-<li>依赖是一对多的关系，并且这个关系是靠人维护的，比如说机柜上放了很多服务器。</li>
-<li>连接是多对多关系，并且这个关系是因为某种“连接”产生的，比如说服务器连接了交换机。通常是通过自动发现来实现。</li>
-</ul>
-<img src="/2020/08/27/CMDB/3.png" class title="公众号-互联网运维杂谈">
-
-<p>我们产品第一版关系设计跟上诉差不太多，只是叫法有一些区别。</p>
-<blockquote>
-<p>比如主从关系：属于、包含。</p>
-<p>依赖关系：运行在</p>
-<p>连接关系：连接</p>
-</blockquote>
-<p>由于各种原因，大概就整理这么多。</p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>大体围绕CMDB的设计思路如下图。</p>
-<img src="/2020/08/27/CMDB/4.png" class title="me">
-
-<p><strong>设计的时候考虑的要点：</strong></p>
-<ol>
-<li>领导要参与，团队理解要一致。通过场景带入的方式。</li>
-<li><code>领域</code>分析是核心，除非有必要，不然不考虑技术实现。<ol>
-<li>为啥DDD，建立研发、产品等各方的通用语言。</li>
-<li>为啥DDD，DDD是一套完整而系统的设计方法，基于这套方法使面对高复杂度的业务，设计思路能更加清晰，设计过程也能更加规范。</li>
-</ol>
-</li>
-<li>从应用视角切入，应用是核心。</li>
-<li>CMDB最好分为两个维度的内容进行共创：配置管理、资源管理（资源管理 ≠ 资产管理）。</li>
-<li>整理的资源都是服务于各种消费场景的，原则上不应该存在游离态的资源。</li>
-<li>CMDB的模型定义一定是有层次的，比如分为核心模型和扩展模型。<ol>
-<li>核心模型记录业务、应用和主机，有了核心模型系统基本就能跑起来了。</li>
-<li>扩展模型是依赖核心模型扩展出来的，比如基于主机找到关联的机柜等信息，这块信息是有核心模型驱动逐步完善的。</li>
-</ol>
-</li>
-</ol>
-<p><code>本文引用的图片，如有侵权请联系我删除。</code></p>
-<h4 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h4><blockquote><footer><strong>优维科技 高效运维</strong><cite><a href="https://mp.weixin.qq.com/s?__biz=MzA4Nzg5Nzc5OA==&mid=2651674578&idx=2&sn=939e98e465b7f1a7bb0b241027a46515&chksm=8bcb947bbcbc1d6d5a4928f209f81aede528233f9b0657dd931735d5730c57674885099cd2f7&mpshare=1&scene=1&srcid=0819MkW8c80sVuYCmwUpP13Z&sharer_sharetime=1597831810952&sharer_shareid=77df2eafd0a472623696abf038541666&version=3.0.27.2701&platform=win&rd2werd=1#wechat_redirect" target="_blank" rel="noopener">构建应用CMDB需掌握的三个要素：资源、动作和状态</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>老王 互联网运维杂谈</strong><cite><a href="https://mp.weixin.qq.com/s/iSEw5eVrTrHXjrHP0b1K0g?st=E6D56F7C7B073C5CA0BE786C5363D3A81166FAEBE74EB9D48310237737FC81BD8E64D2FFDEEFBC38EDA177DA423B6883F2B6561AE7376BE1C85EFBCD908AA2B3DE7BB684878EFBE2E586376BB913EE53E2D08AA0984CD4DFBD27CCDCF0F8AAB16CBDC85E4AB545F1397E0650A753DB1066E4FC0020796E606A4D511395EC7BC2&vid=1688851803314412&cst=3B9A8FB5F8073A54B16F68BFD18A87478E098A6169FFDD65418DADA3EC51851EC020FA4E767BF96883B70D4BC62638E2&deviceid=c9cb6c9b-5ea8-4bb7-87a6-280f14284b4f&version=3.0.27.2701&platform=win" target="_blank" rel="noopener">如何理解CMDB的套路</a></cite></footer></blockquote>
-
-
-
-<blockquote><footer><strong>资源模型</strong><cite><a href="https://zstack-cn.readthedocs.io/zh/latest/userManual/resource.html" target="_blank" rel="noopener">zstack</a></cite></footer></blockquote>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/08/06/Ice-js%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/08/06/Ice-js%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/" itemprop="url">Ice.js单元测试</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-06T15:22:00+08:00">
-                2020-08-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>新建构是基于Ice.js搭建的，在写单元测试的时候遇到一些问题，此篇作为填坑记录。</p>
-<p>一开始ice是不支持运行单元测试，因为暴露出来的ice是alias出来的虚包，所以直接在单元测试里import是没法运行的，遂到社区提了issue，前几天传来利好，有了alpha版本能支持写单元测试了，所以下面实践一把。</p>
-<h3 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h3><h4 id="services"><a href="#services" class="headerlink" title="services"></a><strong>services</strong></h4><p>测试services（ice框架）里的方法</p>
-<p>比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import &#123; request &#125; from &quot;ice&quot;;</span><br><span class="line"></span><br><span class="line">const mockId &#x3D; &quot;00000000-0d00-0000-0000-000000000000&quot;;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  async fetchList(params, config&#x3D;&#123;&#125;) &#123;</span><br><span class="line">    return await request.post(</span><br><span class="line">      &quot;&#x2F;api&#x2F;v1&#x2F;domain&#x2F;getResourcesByDomainId&quot;,</span><br><span class="line">      &#123;</span><br><span class="line">        ...params,</span><br><span class="line">        id: mockId,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123; ...config &#125;</span><br><span class="line">    );</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>测试用例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * @jest-environment node</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;@jest-environment node 表示测试环境你，默认为jsdom(类浏览器)，node表示为node服务的方式(测试跨域请求时需要用到)</span><br><span class="line">import listService from &#39;..&#x2F;..&#x2F;..&#x2F;..&#x2F;src&#x2F;pages&#x2F;ResourceCenter&#x2F;services&#x2F;list&#39;</span><br><span class="line">import getCookie from &#39;..&#x2F;..&#x2F;..&#x2F;_helper&#x2F;getCookie&#39;</span><br><span class="line"></span><br><span class="line">let headers &#x3D; &#123;&#125;</span><br><span class="line">beforeEach(async () &#x3D;&gt; &#123;</span><br><span class="line">	const Cookie &#x3D; await getCookie()</span><br><span class="line">	headers &#x3D; &#123; Cookie &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">describe(&#39;fetchList&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">	test(&#39;listService fetchList&#39;, async () &#x3D;&gt; &#123;</span><br><span class="line">		const params &#x3D; &#123; pageNum: 1, pageSize: 10 &#125;</span><br><span class="line">		const config &#x3D; &#123;</span><br><span class="line">			withCredentials: true,</span><br><span class="line">			headers: &#123; ...headers &#125;,</span><br><span class="line">		&#125;</span><br><span class="line">		const data &#x3D; await listService.fetchList(params, config)</span><br><span class="line">		expect(data).not.toBeNull()</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="带store的组件"><a href="#带store的组件" class="headerlink" title="带store的组件"></a>带store的组件</h4><p>比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useEffect &#125; from &#39;react&#39;;</span><br><span class="line">import &#123; Grid, Tab &#125; from &#39;@alifd&#x2F;next&#39;;</span><br><span class="line">import &#123; store as pageStore &#125; from &#39;ice&#x2F;ResourceCenter&#39;;</span><br><span class="line">import ResourceList from &#39;.&#x2F;components&#x2F;list.jsx&#39;;</span><br><span class="line">import styles from &#39;.&#x2F;index.module.scss&#39;;</span><br><span class="line">import ResourceTypeTree from &#39;.&#x2F;components&#x2F;tree.jsx&#39;;</span><br><span class="line">import DetailConfig from &#39;.&#x2F;components&#x2F;detail_config.jsx&#39;;</span><br><span class="line"></span><br><span class="line">const &#123; Row, Col &#125; &#x3D; Grid;</span><br><span class="line"></span><br><span class="line">const AlarmAnalyze &#x3D; () &#x3D;&gt; &#123;</span><br><span class="line">  const [treeState, treeDispatchers] &#x3D; pageStore.useModel(&#39;tree&#39;);</span><br><span class="line">  const [listState, listDispatchers] &#x3D; pageStore.useModel(&#39;list&#39;);</span><br><span class="line">  useEffect(() &#x3D;&gt; &#123;</span><br><span class="line">    treeDispatchers.fetchTree();</span><br><span class="line">    listDispatchers.fetchList();</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;Row&gt;</span><br><span class="line">        &lt;Col span&#x3D;&quot;4&quot;&gt;</span><br><span class="line">          &lt;div className&#x3D;&#123;styles[&#39;layout-aside&#39;]&#125;&gt;</span><br><span class="line">            &lt;ResourceTypeTree data&#x3D;&#123;treeState.data&#125; &#x2F;&gt;</span><br><span class="line">          &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;Col&gt;</span><br><span class="line">        &lt;Col span&#x3D;&quot;20&quot;&gt;</span><br><span class="line">          &lt;div className&#x3D;&quot;layout-content&quot;&gt;</span><br><span class="line">            &lt;Tab&gt;</span><br><span class="line">              &lt;Tab.Item title&#x3D;&quot;xxx&quot; key&#x3D;&quot;1&quot;&gt;</span><br><span class="line">                &lt;ResourceList data&#x3D;&#123;listState&#125; &#x2F;&gt;</span><br><span class="line">              &lt;&#x2F;Tab.Item&gt;</span><br><span class="line">              &lt;Tab.Item title&#x3D;&quot;xxx&quot; key&#x3D;&quot;2&quot;&gt;</span><br><span class="line">                &lt;DetailConfig data&#x3D;&#123;listState&#125; &#x2F;&gt;</span><br><span class="line">              &lt;&#x2F;Tab.Item&gt;</span><br><span class="line">            &lt;&#x2F;Tab&gt;</span><br><span class="line">          &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;&#x2F;Col&gt;</span><br><span class="line">      &lt;&#x2F;Row&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export default AlarmAnalyze;</span><br><span class="line">AlarmAnalyze.pageConfig&#x3D;&#123;</span><br><span class="line">  auth:[&quot;&#x2F;resourceCenter&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>测试用例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">import React from &#39;react&#39;</span><br><span class="line">import AlarmAnalyze from &#39;..&#x2F;..&#x2F;..&#x2F;src&#x2F;pages&#x2F;ResourceCenter&#x2F;index&#39;</span><br><span class="line">import &#123; store as pageStore &#125; from &#39;ice&#x2F;ResourceCenter&#39;</span><br><span class="line">import &#123; shallow, mount &#125; from &#39;enzyme&#39;</span><br><span class="line">&#x2F;&#x2F;测试内容中需要处理store时，需要用provider包裹</span><br><span class="line">const PageProvider &#x3D; pageStore.Provider</span><br><span class="line"></span><br><span class="line">const WithPageModel &#x3D; (props) &#x3D;&gt; &#123;</span><br><span class="line">	return (</span><br><span class="line">		&lt;PageProvider&gt;</span><br><span class="line">			&lt;AlarmAnalyze &#123;...props&#125; &#x2F;&gt;</span><br><span class="line">		&lt;&#x2F;PageProvider&gt;</span><br><span class="line">	)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let wrapper</span><br><span class="line">beforeEach(() &#x3D;&gt; &#123;</span><br><span class="line">	wrapper &#x3D; mount(&lt;WithPageModel &#x2F;&gt;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">describe(&#39;render&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">	test(&#39;Test ResourceList  &#39;, () &#x3D;&gt; &#123;</span><br><span class="line">		const cwrapper &#x3D; wrapper.find(&#39;ResourceList&#39;)</span><br><span class="line">		expect(cwrapper.prop(&#39;data&#39;)).toEqual(&#123; ciType: &#39;&#39;, current: 1, keyword: &#39;&#39;, list: [], pageSize: 10, total: 0 &#125;)</span><br><span class="line">		&#x2F;&#x2F;取消挂载</span><br><span class="line">		wrapper.unmount()</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	test(&#39;Test pagination  &#39;, () &#x3D;&gt; &#123;</span><br><span class="line">		const pagination &#x3D; wrapper.find(&#39;Pagination&#39;)</span><br><span class="line">		expect(pagination.prop(&#39;total&#39;)).toBe(0)</span><br><span class="line">		&#x2F;&#x2F;取消挂载</span><br><span class="line">		wrapper.unmount()</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	test(&#39;Test ResourceTypeTree  &#39;, () &#x3D;&gt; &#123;</span><br><span class="line">		const cwrapper &#x3D; wrapper.find(&#39;ResourceTypeTree&#39;)</span><br><span class="line">		expect(cwrapper.prop(&#39;data&#39;)).toEqual(expect.arrayContaining([]))</span><br><span class="line">		&#x2F;&#x2F;取消挂载</span><br><span class="line">		wrapper.unmount()</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h4><p>注意只能用icejs来运行，想想也是应该的，因为你要测的东西就是ice那一套的，不可能随便拽个Jest就能跑，Jest咋知道哪跟哪呢。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;icetest:watch&quot;: &quot;icejs test --jest-watch&quot;,</span><br><span class="line">&quot;ice:coverage&quot;: &quot;icejs test --jest-coverage&quot;,</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2057,7 +1956,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2102,12 +2001,6 @@
                     <a href="mailto:gamehu520@gmail.com" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="https://twitter.com/Gamehu520" target="_blank" title="Twitter">
-                      
-                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
                   </span>
                 
             </div>
@@ -2737,7 +2630,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("PO和研发免干架沟通指南(1)");titles.push("问题解法咋聊(1)");titles.push("AHA");titles.push("ESLint(no-prototype-builtins)");titles.push("nginx-docker");titles.push("nodeJs 部署");titles.push("DDD(1)");titles.push("微前端");titles.push("CMDB");titles.push("Ice.js单元测试");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("pnpm");titles.push("JVM");titles.push("PO和研发免干架沟通指南(1)");titles.push("问题解法咋聊(1)");titles.push("敏捷");titles.push("AHA");titles.push("ESLint(no-prototype-builtins)");titles.push("nginx-docker");titles.push("nodeJs 部署");titles.push("DDD(1)");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {

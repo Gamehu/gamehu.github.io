@@ -309,6 +309,543 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/08/23/%E6%A0%B9%E5%9B%A0%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/23/%E6%A0%B9%E5%9B%A0%E5%88%86%E6%9E%90/" itemprop="url">根因分析</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-23T15:37:00+08:00">
+                2019-08-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近研发老大牵头组织了异常关于根因分析的讨论，目的在于让大家学会做根因分析，因为往往大家都是直接下结论（给答案），既容易发生矛盾也同时也没有解决根本问题。</p>
+<h3 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h3><p>1.当有问题出现时，往往根据现象再加上以往的经验或者直接拍出一个结论，这种情况在短期内的效果是可以的，但是从长期来看会掩盖掉很多底层的问题。结果就是问题该出还出，不仅没有提升团队的效率反而降低了团队的效率。</p>
+<p>2.当问题出现时就代表甩锅以及互怼的开始，没有经过根因分析，上来先下个结论，开始界定责任，然后开始扯皮。</p>
+<h3 id="根因分析"><a href="#根因分析" class="headerlink" title="根因分析"></a>根因分析</h3><h5 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h5><p><em>（什么时间<strong>-</strong>什么地点<strong>-</strong>什么产品<strong>-</strong>什么人物<strong>-</strong>发生什么故障现象<strong>-</strong>造成什么影响）</em></p>
+<p>示例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">时间：2019-09-02</span><br><span class="line">地点：XX现场</span><br><span class="line">产品：XX产品&#x2F;XX版本</span><br><span class="line">发现人：XX现场交付人员</span><br><span class="line">故障现象描述：客服在正常登陆系统提单的时候报错，并且提交不了工单</span><br><span class="line">【帮助】如有多个故障现象，应分别描述；</span><br><span class="line">结果影响：系统XX时间不可用，导致客户非常不满，造成XXX损失</span><br></pre></td></tr></table></figure>
+
+<h5 id="过程还原"><a href="#过程还原" class="headerlink" title="过程还原"></a>过程还原</h5><p><em>直接叙述工作过程，有问题的环节或阶段，什么人，做了什么事，当时是怎么考虑的，在这个动作后结果是什么。</em></p>
+<h5 id="问题定位"><a href="#问题定位" class="headerlink" title="问题定位"></a>问题定位</h5><p><em>描述最终定位到的直接原因是什么。举个例子，比如某段代码编写存在<strong>XXX</strong>错误</em></p>
+<h5 id="技术根因分析"><a href="#技术根因分析" class="headerlink" title="技术根因分析"></a><strong>技术根因分析</strong></h5><p><strong>引入环节：</strong></p>
+<ol>
+<li>产品设计是否有问题？</li>
+<li>需求分析是否有问题？</li>
+<li>设计环节是否有问题？</li>
+<li>代码编写是否有问题？</li>
+<li>其他</li>
+</ol>
+<p><strong>流出环节：</strong></p>
+<ol>
+<li>各评审环节是否有遗漏？</li>
+<li>是否进行研发自测？</li>
+<li>测试场景、测试用例是否覆盖全？</li>
+<li>是否进行了系统测试？</li>
+<li>其他？</li>
+</ol>
+<p><strong>确定关键根因是什么</strong>：</p>
+<p>如果有多个根因在逻辑层次上相同，则取关键的原因，根因应该是具体的、客观的、在目前组织能力下可被改进的。</p>
+<h5 id="管理根因分析"><a href="#管理根因分析" class="headerlink" title="管理根因分析"></a>管理根因分析</h5><ul>
+<li>流程/制度原因：</li>
+<li>组织因素：</li>
+<li>执行原因：</li>
+</ul>
+<p>【帮助】流程/制度方面：考虑组织管理上是否有合适的流程、指导书、管理Checklist；</p>
+<p>组织因素方面：考虑人员分配、个人技能、培训、组织环境等原因；</p>
+<p>执行方面：考虑计划、监控、沟通方面的原因。</p>
+<h5 id="纠正、预防措施"><a href="#纠正、预防措施" class="headerlink" title="纠正、预防措施"></a>纠正、预防措施</h5><table>
+<thead>
+<tr>
+<th><strong>根本原因</strong></th>
+<th><strong>措施类型</strong></th>
+<th><strong>措施内容</strong></th>
+<th><strong>责任人</strong></th>
+<th><strong>预定完成日期</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>技术根因：</em>  <em>例如，XX特性，在大规格、灵活配置等方面需求设计不充分</em></td>
+<td>纠正措施</td>
+<td><em>例如：对XX特性组织进行重新设计，刷新XX方案</em></td>
+<td></td>
+<td><em>2018/11/1</em></td>
+</tr>
+<tr>
+<td>预防措施</td>
+<td><em>例如：更新××技术规范、工具、checklist等等</em></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><em>管理根因：</em>组织管理、流程方面的原因，比如xx，没有按照流程，但是最终还是交付了。</td>
+<td>纠正措施</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>预防措施</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>上诉的内容，关键还是在于给一个框架，让问题发生人，根据框架的引导，能比较深刻的挖掘出问题的根因，按此框架填写后，往往会伴随着评审，最终判断分析的彻底性以及合理性。</p>
+<p>当然这只是一种方式，一段时间实践下来，其实是有助于减少问题发生率以及增加个人问题的处理成本从而倒逼相关人员注意到质量的重要性。</p>
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/08/22/How-To-Master-A-Skill-In-A-Short-Period-Of-Time/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/22/How-To-Master-A-Skill-In-A-Short-Period-Of-Time/" itemprop="url">How To Master A Skill In A Short Period Of Time?</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-22T22:05:00+08:00">
+                2019-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index">
+                    <span itemprop="name">成长</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>都怪我放荡不羁爱打野。</p>
+<p>今天看了一个Dan lok的视频</p>
+<p><a href="https://www.youtube.com/watch?v=cC9DOCs4lo0&t=136s" target="_blank" rel="noopener" title="How To Master A Skill In A Short Period Of Time?">https://www.youtube.com/watch?v=cC9DOCs4lo0&amp;t=136s</a></p>
+<h2 id="Best-way-Have-a-mentor"><a href="#Best-way-Have-a-mentor" class="headerlink" title="Best way : Have a mentor"></a>Best way : Have a mentor</h2><ol>
+<li>it takes repetition</li>
+<li>learning and practice</li>
+</ol>
+<p><strong>transformation is doesn’t happen in islation</strong></p>
+<p><strong>communicate with others</strong></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/08/21/%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/21/%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87/" itemprop="url">提高效率</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-21T21:14:00+08:00">
+                2019-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index">
+                    <span itemprop="name">成长</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近个人成长KPI抓的严，为了能心安理得的继续IT事业，不管强迫自己多花时间在个人成长上。</p>
+<p>刚好瞌睡遇到枕头，这两天经少数派，关注了B站的<strong><em>锦堂生活空间</em></strong>。</p>
+<p>看到他的一个视频<strong>“我保持高效率奋斗的5大因素”</strong>，个人感觉是对我有用的。</p>
+<h3 id="一个远大的理想"><a href="#一个远大的理想" class="headerlink" title="一个远大的理想"></a>一个远大的理想</h3><ol>
+<li>理想要可衡量</li>
+<li>要足够大</li>
+<li>分段立目标，逐个完成</li>
+</ol>
+<h3 id="将所在领域内的偶像贴在工作墙上"><a href="#将所在领域内的偶像贴在工作墙上" class="headerlink" title="将所在领域内的偶像贴在工作墙上"></a>将所在领域内的偶像贴在工作墙上</h3><ol>
+<li>时刻提醒自己，不放松。</li>
+</ol>
+<h3 id="绝对不要进入自己不感兴趣的领域"><a href="#绝对不要进入自己不感兴趣的领域" class="headerlink" title="绝对不要进入自己不感兴趣的领域"></a>绝对不要进入自己不感兴趣的领域</h3><ol>
+<li>没有所谓的能力不足，只有你对这件事感不感兴趣</li>
+<li>一定要确保你你再做着你自己喜欢的事情</li>
+</ol>
+<h3 id="学习新知识的时候，必须要不断的停下来思考"><a href="#学习新知识的时候，必须要不断的停下来思考" class="headerlink" title="学习新知识的时候，必须要不断的停下来思考"></a>学习新知识的时候，必须要不断的停下来思考</h3><ol>
+<li>思考自己的缺点，怎么应用到我得生活和工作中。</li>
+<li>费曼学习法，怎么让自己和别人明白，复杂的知识简单化</li>
+<li>将简单化的知识点以口语化写进笔记本</li>
+</ol>
+<h3 id="准备一个笔记本记录激励你的话或者成功人士的小视频"><a href="#准备一个笔记本记录激励你的话或者成功人士的小视频" class="headerlink" title="准备一个笔记本记录激励你的话或者成功人士的小视频"></a>准备一个笔记本记录激励你的话或者成功人士的小视频</h3><p>在开始奋斗之前花几分钟时间看激励自己的东西，让自己亢奋起来</p>
+<img src="/2019/08/21/%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87/1.jpg" class title="http:&#x2F;&#x2F;tech.sina.com.cn&#x2F;csj&#x2F;2018-10-22&#x2F;doc-ifxeuwws6781626.shtml">
+
+<h2 id="源引："><a href="#源引：" class="headerlink" title="源引："></a>源引：</h2><blockquote><footer><strong>我保持高效率奋斗的5大因素</strong><cite><a href="https://www.bilibili.com/video/av51329012" target="_blank" rel="noopener">www.bilibili.com/video/av51329012</a></cite></footer></blockquote>
+
+
+
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/08/20/git%E5%AE%9E%E8%B7%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1548,701 +2085,6 @@ git checkout -b remote分支名 本地分支名</code></pre><p> <strong>git 撤�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/07/18/%E8%87%AA%E7%94%B1%E6%88%90%E9%95%BF%E6%B4%BB%E5%8A%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/18/%E8%87%AA%E7%94%B1%E6%88%90%E9%95%BF%E6%B4%BB%E5%8A%A8/" itemprop="url">自由成长活动</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-18T11:33:00+08:00">
-                2019-07-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
-                    <span itemprop="name">工作</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/05/15/Linux%20Source%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/15/Linux%20Source%E5%91%BD%E4%BB%A4/" itemprop="url">Linux Source命令</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-15T20:08:00+08:00">
-                2019-05-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
-                    <span itemprop="name">工作</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>项目前期运维工具没有铺开的时候很多时候都是直接上服务器敲命令，这里记录一下source命令，也是某段时间很常用的一个命令。</p>
-<p>我用source命令主要是为了刷新环境变量。刚好前段时间看到一篇文章</p>
-<p><a href="https://linuxhandbook.com/source-command/，对source命令有了更深入的了解，在这搬运一下。" target="_blank" rel="noopener">https://linuxhandbook.com/source-command/，对source命令有了更深入的了解，在这搬运一下。</a></p>
-<h3 id="Linux中的源命令是什么"><a href="#Linux中的源命令是什么" class="headerlink" title="Linux中的源命令是什么?"></a>Linux中的源命令是什么?</h3><p>source命令的是从当前shell中的文件执行。它也可以用于刷新环境变量，通常source命令的主要用途是刷新环境变量。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source filename [options]</span><br></pre></td></tr></table></figure>
-
-<p>您也可以使用.（点）代替这样的源命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">. filename [options]</span><br></pre></td></tr></table></figure>
-
-<h3 id="源命令如何工作？"><a href="#源命令如何工作？" class="headerlink" title="源命令如何工作？"></a>源命令如何工作？</h3><img src="/2019/05/15/Linux%20Source%E5%91%BD%E4%BB%A4/source.png" class title="https:&#x2F;&#x2F;linuxhandbook.com&#x2F;source-command&#x2F;">
-
-<p>该命令的语法很简单，但是要理解它，需要更深入地了解一些Linux概念。</p>
-<p>在继续之前，我先对变量给出一个简短的解释。</p>
-<h4 id="变量概述"><a href="#变量概述" class="headerlink" title="变量概述"></a>变量概述</h4><p>您可以打开任何bash终端并创建新变量。变量可以被视为占位符，可用于将系统指向一条信息（字母，数字或符号）。</p>
-<p>让我们来看一个例子。我将创建一个名为name的新变量，并将为值Christopher赋值。</p>
-<p>在bash中，这是使用公式完成的：<strong>variable_name = your_variable</strong>。请勿在<strong>=</strong>符号和您的文本之间添加任何空格。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">christopher@linuxhandbook:~$ name&#x3D;Christopher</span><br><span class="line">christopher@linuxhandbook:~$ echo $name</span><br><span class="line">Christopher</span><br></pre></td></tr></table></figure>
-
-<p>如果我只输入变量名会怎样？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">christopher@linuxhandbook:~$ echo name</span><br><span class="line">name</span><br></pre></td></tr></table></figure>
-
-<p>如果您忘记了该符号，bash将返回您输入的文本。在这里，我告诉它回显或打印“名称”。没有$符号，bash无法识别您要使用已创建的变量。</p>
-<p>您的变量将被插入到调用它的位置。因此，我也可以将其包含在这样的句子中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">christopher@linuxhandbook:~$ echo &quot;Hello, $name. $name is a great name. It&#39;s good to meet you.&quot;</span><br><span class="line">Hello, Christopher. Christopher is a great name. It&#39;s good to meet you.</span><br></pre></td></tr></table></figure>
-
-<p>您可以使用变量做很多事情，但是我希望该入门足以使任何阅读本文的人都能理解它们的工作原理。</p>
-<h4 id="环境变量与shell（本地）变量"><a href="#环境变量与shell（本地）变量" class="headerlink" title="环境变量与shell（本地）变量"></a>环境变量与shell（本地）变量</h4><p>对于理解源命令的下一个关键，让我们谈谈持久性。这是考虑shell变量和环境变量之间差异的简便方法。您可能还根据上下文根据“可移植性”来考虑它。</p>
-<p>简而言之，如果在终端shell中创建变量，则退出该shell后该变量将丢失。</p>
-<p>相反，<a href="https://help.ubuntu.com/community/EnvironmentVariables" target="_blank" rel="noopener">环境变量</a>在您的操作系统中具有持久性。这些变量通常使用所有大写字母来区分自己。</p>
-<p>例如，您的用户名被操作系统称为$ USER。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">christopher@linuxhandbook:~$ echo $USER</span><br><span class="line">christopher</span><br></pre></td></tr></table></figure>
-
-<p>好的，因此您花了很多时间来研究环境变量和shell变量之间的差异。这与source有什么关系？如果不了解这块则，运行<strong>source</strong>和<strong>bash</strong>不会有任何区别。</p>
-<h4 id="Source-vs-Bash"><a href="#Source-vs-Bash" class="headerlink" title="Source vs Bash"></a>Source vs Bash</h4><p>如果您使用Linux已有一段时间，那么您可能会遇到这些命令，并认为它们做了相同的事情。毕竟，这两个命令都可以用来执行脚本。</p>
-<p><strong>source</strong>在当前shell中工作，与运行bash会创建一个新shell不同。这并不明显，因为没有显示新窗口。</p>
-<p>比如编写一个非常简单的脚本（将其称为echo.sh），如下所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#! bin&#x2F;bash</span><br><span class="line"></span><br><span class="line">echo $USER</span><br><span class="line">echo $name</span><br></pre></td></tr></table></figure>
-
-<p>在终端中执行其他任何操作之前，请将值分配给变量名称。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">christopher@linuxhandbook:~$ name&#x3D;chris</span><br></pre></td></tr></table></figure>
-
-<p>接下来，我将向您展示在分配变量的同一终端中尝试所有3条命令时会发生什么。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">christopher@linuxhandbook:~$ bash echo.sh </span><br><span class="line">christopher</span><br><span class="line"></span><br><span class="line">christopher@linuxhandbook:~$ source echo.sh </span><br><span class="line">christopher</span><br><span class="line">chris</span><br><span class="line">christopher@linuxhandbook:~$ . echo.sh </span><br><span class="line">christopher</span><br><span class="line">chris</span><br></pre></td></tr></table></figure>
-
-<p>如您所见，通过<strong>bash</strong>执行脚本时，无法识别本地变量。</p>
-<h3 id="使用source命令刷新环境变量"><a href="#使用source命令刷新环境变量" class="headerlink" title="使用source命令刷新环境变量"></a>使用source命令刷新环境变量</h3><p>Source也可以用于更新当前Shell中的环境变量。此任务的常见应用程序是在当前shell中更新bash配置文件。</p>
-<p>用户可能想要修改其bash配置文件以<a href="https://linuxhandbook.com/linux-alias-command/" target="_blank" rel="noopener">创建别名</a>。通常，一旦保存了配置，您将需要打开一个新的终端窗口以进行更改。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">christopher@linuxhandbook:~$ source .bashrc</span><br></pre></td></tr></table></figure>
-
-<p>运行此命令将刷新当前外壳程序中的设置，而不会强制您打开新终端。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/04/30/%E5%89%8D%E7%AB%AF%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/30/%E5%89%8D%E7%AB%AF%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83/" itemprop="url">前端编码规范</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-30T15:15:00+08:00">
-                2019-04-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
-                    <span itemprop="name">工作</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>通过几个迭代后，前端代码变得越来越臃肿越来越乱。所以编码规范就排上日程。</p>
-<p>结合这段时间我们的经验加上从网上搜集到的实用的编码规范，做一个简单整理。</p>
-<h1 id="前端编码规范意见稿"><a href="#前端编码规范意见稿" class="headerlink" title="前端编码规范意见稿"></a>前端编码规范意见稿</h1><ul>
-<li>统一ESLint文件<ul>
-<li>比如用Airbnb，随着积累可以在其基础上进行扩展。</li>
-</ul>
-</li>
-<li>React组件<ul>
-<li>如果组件需要维护自己的state或者使用其生命周期方法则用class，除此以外都用function。</li>
-</ul>
-</li>
-<li>Redux<ul>
-<li>除了纯渲染组件（没有复杂的交互、逻辑），其余都用redux<blockquote>
-<pre><code>redux使代码结构更加清晰，可读性较强便于维护（倒逼组件或者模块拆的更加合理）。
-redux可当成全局内存库来用，当没有更新state时，无论何时何地都能到一样的数据，便于通用组件的开发
-redux可以减少数据的传递，不用依次往下传，随用随取，特别是针对组件层级比较深的情况</code></pre></blockquote>
-</li>
-</ul>
-</li>
-<li>统一格式化插件（如果要用格式化插件）<ul>
-<li>比如VSCode的prettier或者beauty，千万避免多人用多套格式化插件的情况</li>
-</ul>
-</li>
-</ul>
-<h2 id="JS开发规范"><a href="#JS开发规范" class="headerlink" title="JS开发规范"></a>JS开发规范</h2><h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><ul>
-<li>不要使用关键字作为key或者属性<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">var user &#x3D; &#123;</span><br><span class="line">  private: true</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">var user &#x3D; &#123;</span><br><span class="line">  hidden: true</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><ul>
-<li><p>如果你不知道数组的长度，使用push</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var userArr &#x3D; [];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">userArr[index] &#x3D; &#39;gamehu&#39;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">userArr.push(&#39;gamehu&#39;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>当你需要拷贝数组时</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var len &#x3D; users.length,</span><br><span class="line">    usersCopy &#x3D; [],</span><br><span class="line">    i;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">for (i &#x3D; 0; i &lt; len; i++) &#123;</span><br><span class="line">  usersCopy[i] &#x3D; items[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">usersCopy &#x3D; users.slice();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;good ES6</span><br><span class="line"></span><br><span class="line">usersCopy &#x3D; [...users];</span><br><span class="line"></span><br><span class="line">usersCopy&#x3D;Array.from(users);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>将类数组的对象转成数组.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let args &#x3D; [].slice.apply(users);</span><br><span class="line"> </span><br><span class="line">&#x2F;&#x2F; ES6</span><br><span class="line">let args&#x3D;Array.from(users);</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><ul>
-<li>对字符串使用单引号 ‘’<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">var name &#x3D; &quot;Gamehu&quot;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">var name &#x3D; &#39;Gamehu&#39;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">var fullName &#x3D; &quot;Gamehu &quot; + this.lastName;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">var fullName &#x3D; &#39;Gamehu &#39; + this.lastName;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><ul>
-<li><p>绝对不要把参数命名为 arguments, 将覆盖作用域内传过来的 arguments 对象.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">function nope(name, options, arguments) &#123;</span><br><span class="line">  &#x2F;&#x2F; ...stuff...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">function yup(name, options, args) &#123;</span><br><span class="line">  &#x2F;&#x2F; ...stuff...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>当函数的参数特别多的时候用对象封装起来再传递.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;&#x2F;bad</span><br><span class="line"></span><br><span class="line">export const resourceStoreDynamicFormForEdit &#x3D; (group, data, index, form, editableIndex, sortItems, formItemLayout, validatorMap, dataMap, ciType, selectedCiEditable, showAlarmSlowStrategy) &#x3D;&gt; &#123;&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line"></span><br><span class="line">const params&#x3D;&#123;&#125;;</span><br><span class="line"></span><br><span class="line">params&#x3D;&#123;</span><br><span class="line">	group:group, xxx</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export const resourceStoreDynamicFormForEdit&#x3D;(params) &#x3D;&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>函数应该只在一个抽象层次上做一件事.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">function getUserRouteHandler (req, res) &#123;</span><br><span class="line">  const &#123; userId &#125; &#x3D; req.params</span><br><span class="line">  &#x2F;&#x2F; inline SQL query</span><br><span class="line">  knex(&#39;user&#39;)</span><br><span class="line">    .where(&#123; id: userId &#125;)</span><br><span class="line">    .first()</span><br><span class="line">    .then((user) &#x3D;&gt; res.json(user))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">&#x2F;&#x2F; User model (eg. models&#x2F;user.js)</span><br><span class="line">const tableName &#x3D; &#39;user&#39;</span><br><span class="line">const User &#x3D; &#123;</span><br><span class="line">  getOne (userId) &#123;</span><br><span class="line">    return knex(tableName)</span><br><span class="line">      .where(&#123; id: userId &#125;)</span><br><span class="line">      .first()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; route handler (eg. server&#x2F;routes&#x2F;user&#x2F;get.js)</span><br><span class="line">function getUserRouteHandler (req, res) &#123;</span><br><span class="line">  const &#123; userId &#125; &#x3D; req.params</span><br><span class="line">  User.getOne(userId)</span><br><span class="line">    .then((user) &#x3D;&gt; res.json(user))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>更高层次的函数在低层次函数的前面，便于阅读.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">&#x2F;&#x2F; &quot;I need the full name for something...&quot;</span><br><span class="line">function getFullName (user) &#123;</span><br><span class="line">  return &#96;$&#123;user.firstName&#125; $&#123;user.lastName&#125;&#96;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function renderEmailTemplate (user) &#123;</span><br><span class="line">  &#x2F;&#x2F; &quot;oh, here&quot;</span><br><span class="line">  const fullName &#x3D; getFullName(user)</span><br><span class="line">  return &#96;Dear $&#123;fullName&#125;, ...&#96;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">function renderEmailTemplate (user) &#123;</span><br><span class="line">  &#x2F;&#x2F; &quot;I need the full name of the user&quot;</span><br><span class="line">  const fullName &#x3D; getFullName(user)</span><br><span class="line">  return &#96;Dear $&#123;fullName&#125;, ...&#96;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; &quot;I use this for the email template rendering&quot;</span><br><span class="line">function getFullName (user) &#123;</span><br><span class="line">  return &#96;$&#123;user.firstName&#125; $&#123;user.lastName&#125;&#96;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>声明函数时最好设置默认值.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;es6</span><br><span class="line">function (a&#x3D;1, b&#x3D;1) &#123; &#x2F;&#x2F; function code &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果想避免var变量造成的命名冲突，不存在特殊场景时可考虑使用立即执行函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">立即执行函数，即Immediately Invoked Function Expression (IIFE)，正如它的名字，</span><br><span class="line">就是创建函数的同时立即执行。它没有绑定任何事件，也无需等待任何异步操作：</span><br><span class="line">(function() &#123;</span><br><span class="line">     &#x2F;&#x2F; 代码</span><br><span class="line">     &#x2F;&#x2F; ...</span><br><span class="line">&#125;)();</span><br><span class="line">function()&#123;…&#125;是一个匿名函数，包围它的一对括号将其转换为一个表达式，</span><br><span class="line">紧跟其后的一对括号调用了这个函数。立即执行函数也可以理解为立即调用一个匿名函数。</span><br><span class="line">立即执行函数最常见的应用场景就是：将var变量的作用域限制于你们函数内，这样可以避免命名冲突。</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>当有场景需要使用私有属性时，使用闭包定义私有变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">function Product() &#123;</span><br><span class="line"></span><br><span class="line">	var name;</span><br><span class="line"></span><br><span class="line">    this.setName &#x3D; function(value) &#123;</span><br><span class="line">        name &#x3D; value;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    this.getName &#x3D; function() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var p &#x3D; new Product();</span><br><span class="line">p.setName(&quot;Fundebug&quot;);</span><br><span class="line"></span><br><span class="line">console.log(p.name); &#x2F;&#x2F; 输出undefined</span><br><span class="line">console.log(p.getName()); &#x2F;&#x2F; 输出Fundebug</span><br><span class="line">代码中，对象p的的name属性为私有属性，使用p.name不能直接访问。</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><ul>
-<li><p>总是使用 let、const、var来声明变量，如果不这么做将导致产生全局变量，我们要避免污染全局命名空间。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">superPower &#x3D; new SuperPower();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">var superPower &#x3D; new SuperPower();</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用一个 let 以及新行声明多个变量，缩进4个空格。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">let items &#x3D; getItems();</span><br><span class="line">let goSportsTeam &#x3D; true;</span><br><span class="line">let dragonball &#x3D; &#39;z&#39;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">let items &#x3D; getItems(),</span><br><span class="line">    goSportsTeam &#x3D; true,</span><br><span class="line">    dragonball &#x3D; &#39;z&#39;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>最后再声明未赋值的变量，当你想引用之前已赋值变量的时候很有用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">var i, len,hidden &#x3D; true,</span><br><span class="line">    items &#x3D; getItems();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">var i, items &#x3D; getItems(),</span><br><span class="line">    hidden &#x3D; true,</span><br><span class="line">    len;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">var items &#x3D; getItems(),</span><br><span class="line">    hidden &#x3D; true,</span><br><span class="line">    length,</span><br><span class="line">    i;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在作用域顶部声明变量，避免变量声明和赋值引起的相关问题。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">function() &#123;</span><br><span class="line">  test();</span><br><span class="line">  console.log(&#39;doing stuff..&#39;);</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;..other stuff..</span><br><span class="line"></span><br><span class="line">  var name &#x3D; getName();</span><br><span class="line"></span><br><span class="line">  if (name &#x3D;&#x3D;&#x3D; &#39;test&#39;) &#123;</span><br><span class="line">    return false;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">function() &#123;</span><br><span class="line">  var name &#x3D; getName();</span><br><span class="line"></span><br><span class="line">  test();</span><br><span class="line">  console.log(&#39;doing stuff..&#39;);</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;..other stuff..</span><br><span class="line"></span><br><span class="line">  if (name &#x3D;&#x3D;&#x3D; &#39;test&#39;) &#123;</span><br><span class="line">    return false;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">function() &#123;</span><br><span class="line">  var name &#x3D; getName();</span><br><span class="line"></span><br><span class="line">  if (!arguments.length) &#123;</span><br><span class="line">    return false;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">function() &#123;</span><br><span class="line">  if (!arguments.length) &#123;</span><br><span class="line">    return false;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  var name &#x3D; getName();</span><br><span class="line"></span><br><span class="line">  return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在声明变量时初始化变量。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var firstName &#x3D; &quot;&quot;,</span><br><span class="line">lastName &#x3D; &quot;&quot;,</span><br><span class="line">price &#x3D; 0,</span><br><span class="line">discount &#x3D; 0,</span><br><span class="line">fullPrice &#x3D; 0,</span><br><span class="line">myArray &#x3D; [],</span><br><span class="line">myObject &#x3D; &#123;&#125;;</span><br></pre></td></tr></table></figure></li>
-<li><p>在声明变量时别用对象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Use &#123;&#125; instead of new Object()</span><br><span class="line">Use &quot;&quot; instead of new String()</span><br><span class="line">Use 0 instead of new Number()</span><br><span class="line">Use false instead of new Boolean()</span><br><span class="line">Use [] instead of new Array()</span><br><span class="line">Use &#x2F;()&#x2F; instead of new RegExp()</span><br><span class="line">Use function ()&#123;&#125; instead of new Function()</span><br></pre></td></tr></table></figure></li>
-<li><p>用===代替==，因为==会在比较之前进行类型转换。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">0 &#x3D;&#x3D; &quot;&quot;;        &#x2F;&#x2F; true</span><br><span class="line">1 &#x3D;&#x3D; &quot;1&quot;;       &#x2F;&#x2F; true</span><br><span class="line">1 &#x3D;&#x3D; true;      &#x2F;&#x2F; true</span><br><span class="line"></span><br><span class="line">0 &#x3D;&#x3D;&#x3D; &quot;&quot;;       &#x2F;&#x2F; false</span><br><span class="line">1 &#x3D;&#x3D;&#x3D; &quot;1&quot;;      &#x2F;&#x2F; false</span><br><span class="line">1 &#x3D;&#x3D;&#x3D; true;     &#x2F;&#x2F; false</span><br></pre></td></tr></table></figure></li>
-<li><p>注意数字和字符串之间的转换。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var x &#x3D; 5 + 7;       &#x2F;&#x2F; x.valueOf() is 12,  typeof x is a number</span><br><span class="line">var x &#x3D; 5 + &quot;7&quot;;     &#x2F;&#x2F; x.valueOf() is 57,  typeof x is a string</span><br><span class="line">var x &#x3D; &quot;5&quot; + 7;     &#x2F;&#x2F; x.valueOf() is 57,  typeof x is a string</span><br><span class="line">var x &#x3D; 5 - 7;       &#x2F;&#x2F; x.valueOf() is -2,  typeof x is a number</span><br><span class="line">var x &#x3D; 5 - &quot;7&quot;;     &#x2F;&#x2F; x.valueOf() is -2,  typeof x is a number</span><br><span class="line">var x &#x3D; &quot;5&quot; - 7;     &#x2F;&#x2F; x.valueOf() is -2,  typeof x is a number</span><br><span class="line">var x &#x3D; 5 - &quot;x&quot;;     &#x2F;&#x2F; x.valueOf() is NaN, typeof x is a number</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在for循环的每次迭代中都不要让JavaScript读取数组的长度。 将长度值存储在另一个变量中。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;bad</span><br><span class="line">var names &#x3D; [&#39;George&#39;,</span><br><span class="line">&#39;Ringo&#39;,</span><br><span class="line">&#39;Paul&#39;,</span><br><span class="line">&#39;John&#39;];</span><br><span class="line">for(var i&#x3D;0;i&lt;names.length;i++)&#123;</span><br><span class="line">   doSomethingWith(names[i]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;good</span><br><span class="line">var names &#x3D; [&#39;George&#39;,</span><br><span class="line">&#39;Ringo&#39;,</span><br><span class="line">&#39;Paul&#39;,</span><br><span class="line">&#39;John&#39;];</span><br><span class="line">for(var i&#x3D;0,j&#x3D;names.length;i&lt;j;i++)&#123;</span><br><span class="line">   doSomethingWith(names[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-<h2 id="条件表达式和等号"><a href="#条件表达式和等号" class="headerlink" title="条件表达式和等号"></a>条件表达式和等号</h2><ul>
-<li><p>合理使用 === 和 !== 以及 == 和 !=.</p>
-</li>
-<li><p>合理使用表达式逻辑操作运算</p>
-</li>
-<li><p>条件表达式的强制类型转换遵循以下规则：</p>
-</li>
-<li><p>switch时一定要用default结束</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1: 对象 被计算为 true</span><br><span class="line">2: Undefined 被计算为 false</span><br><span class="line">3: Null 被计算为 false</span><br><span class="line">4: 布尔值 被计算为 布尔的值</span><br><span class="line">5: 数字 如果是 +0, -0, or NaN 被计算为 false , 否则为 true</span><br><span class="line">6: 字符串 如果是空字符串 &#39;&#39; 则被计算为 false, 否则为 true</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用快捷方式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">if (name !&#x3D;&#x3D; &#39;&#39;) &#123;</span><br><span class="line">  &#x2F;&#x2F; ...stuff...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">if (name) &#123;</span><br><span class="line">  &#x2F;&#x2F; ...stuff...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">if (collection.length &gt; 0) &#123;</span><br><span class="line">  &#x2F;&#x2F; ...stuff...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">if (collection.length) &#123;</span><br><span class="line">  &#x2F;&#x2F; ...stuff...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;bad</span><br><span class="line">if(v)&#123;</span><br><span class="line">   var x &#x3D; v;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">   var x &#x3D;10;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;good</span><br><span class="line">var x &#x3D; v || 10;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;bad</span><br><span class="line">var direction;</span><br><span class="line">if(x &gt; 100)&#123;</span><br><span class="line">   direction &#x3D; 1;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">   direction &#x3D; -1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;good</span><br><span class="line">var direction &#x3D; (x &gt; 100) ? 1 : -1;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="块"><a href="#块" class="headerlink" title="块"></a>块</h2><ul>
-<li><p>给所有多行的块使用大括号</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">if (test)</span><br><span class="line">  return false;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">if (test) return false;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">if (test) &#123;</span><br><span class="line">  return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">function() &#123; return false; &#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">function() &#123;</span><br><span class="line">  return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2></li>
-<li><p>使用 /** … */ 进行多行注释，包括描述，指定类型以及参数值和返回值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> &#x2F;&#x2F; bad</span><br><span class="line">&#x2F;&#x2F; make() returns a new element</span><br><span class="line">&#x2F;&#x2F; based on the passed in tag name</span><br><span class="line">&#x2F;&#x2F;</span><br><span class="line">&#x2F;&#x2F; @param &lt;String&gt; tag</span><br><span class="line">&#x2F;&#x2F; @return &lt;Element&gt; element</span><br><span class="line">function make(tag) &#123;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; ...stuff...</span><br><span class="line"></span><br><span class="line">  return element;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">&#x2F;**</span><br><span class="line"> * make() returns a new element</span><br><span class="line"> * based on the passed in tag name</span><br><span class="line"> *</span><br><span class="line"> * @param &lt;String&gt; tag</span><br><span class="line"> * @return &lt;Element&gt; element</span><br><span class="line"> *&#x2F;</span><br><span class="line">function make(tag) &#123;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; ...stuff...</span><br><span class="line"></span><br><span class="line">  return element;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>使用 // 进行单行注释，在评论对象的上面进行单行注释，注释前放一个空行.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> &#x2F;&#x2F; bad</span><br><span class="line">var active &#x3D; true;  &#x2F;&#x2F; is current tab</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">&#x2F;&#x2F; is current tab</span><br><span class="line">var active &#x3D; true;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">function getType() &#123;</span><br><span class="line">  console.log(&#39;fetching type...&#39;);</span><br><span class="line">  &#x2F;&#x2F; set the default type to &#39;no type&#39;</span><br><span class="line">  var type &#x3D; this._type || &#39;no type&#39;;</span><br><span class="line"></span><br><span class="line">  return type;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">function getType() &#123;</span><br><span class="line">  console.log(&#39;fetching type...&#39;);</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; set the default type to &#39;no type&#39;</span><br><span class="line">  var type &#x3D; this._type || &#39;no type&#39;;</span><br><span class="line"></span><br><span class="line">  return type;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>如果你有一个问题需要重新来看一下或如果你建议一个需要被实现的解决方法的话需要在你的注释前面加上 FIXME 或 TODO 帮助其他人迅速理解<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> function Calculator() &#123;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; FIXME: shouldn&#39;t use a global here</span><br><span class="line">  total &#x3D; 0;</span><br><span class="line"></span><br><span class="line">  return this;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> function Calculator() &#123;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; TODO: total should be configurable by an options param</span><br><span class="line">  this.total &#x3D; 0;</span><br><span class="line"></span><br><span class="line">  return this;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="空白"><a href="#空白" class="headerlink" title="空白"></a>空白</h2><ul>
-<li><p>缩进、格式化能帮助团队更快得定位修复代码BUG.</p>
-</li>
-<li><p>将tab设为4个空格</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">function() &#123;</span><br><span class="line">∙∙var name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">function() &#123;</span><br><span class="line">∙var name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">function() &#123;</span><br><span class="line">∙∙∙∙var name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>大括号前放一个空格</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &#x2F;&#x2F; bad</span><br><span class="line">function test()&#123;</span><br><span class="line">  console.log(&#39;test&#39;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">function test() &#123;</span><br><span class="line">  console.log(&#39;test&#39;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">dog.set(&#39;attr&#39;,&#123;</span><br><span class="line">  age: &#39;1 year&#39;,</span><br><span class="line">  breed: &#39;Bernese Mountain Dog&#39;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">dog.set(&#39;attr&#39;, &#123;</span><br><span class="line">  age: &#39;1 year&#39;,</span><br><span class="line">  breed: &#39;Bernese Mountain Dog&#39;</span><br><span class="line">&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>在做长方法链时使用缩进.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">$(&#39;#items&#39;).find(&#39;.selected&#39;).highlight().end().find(&#39;.open&#39;).updateCount();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">$(&#39;#items&#39;)</span><br><span class="line">  .find(&#39;.selected&#39;)</span><br><span class="line">    .highlight()</span><br><span class="line">    .end()</span><br><span class="line">  .find(&#39;.open&#39;)</span><br><span class="line">    .updateCount();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">var leds &#x3D; stage.selectAll(&#39;.led&#39;).data(data).enter().append(&#39;svg:svg&#39;).class(&#39;led&#39;, true)</span><br><span class="line">    .attr(&#39;width&#39;,  (radius + margin) * 2).append(&#39;svg:g&#39;)</span><br><span class="line">    .attr(&#39;transform&#39;, &#39;translate(&#39; + (radius + margin) + &#39;,&#39; + (radius + margin) + &#39;)&#39;)</span><br><span class="line">    .call(tron.led);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">var leds &#x3D; stage.selectAll(&#39;.led&#39;)</span><br><span class="line">    .data(data)</span><br><span class="line">  .enter().append(&#39;svg:svg&#39;)</span><br><span class="line">    .class(&#39;led&#39;, true)</span><br><span class="line">    .attr(&#39;width&#39;,  (radius + margin) * 2)</span><br><span class="line">  .append(&#39;svg:g&#39;)</span><br><span class="line">    .attr(&#39;transform&#39;, &#39;translate(&#39; + (radius + margin) + &#39;,&#39; + (radius + margin) + &#39;)&#39;)</span><br><span class="line">    .call(tron.led);</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="逗号"><a href="#逗号" class="headerlink" title="逗号"></a>逗号</h2><ul>
-<li><p>不要将逗号放前面</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">var once</span><br><span class="line">  , upon</span><br><span class="line">  , aTime;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">var once,</span><br><span class="line">    upon,</span><br><span class="line">    aTime;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">var hero &#x3D; &#123;</span><br><span class="line">    firstName: &#39;Bob&#39;</span><br><span class="line">  , lastName: &#39;Parr&#39;</span><br><span class="line">  , heroName: &#39;Mr. Incredible&#39;</span><br><span class="line">  , superPower: &#39;strength&#39;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">var hero &#x3D; &#123;</span><br><span class="line">  firstName: &#39;Bob&#39;,</span><br><span class="line">  lastName: &#39;Parr&#39;,</span><br><span class="line">  heroName: &#39;Mr. Incredible&#39;,</span><br><span class="line">  superPower: &#39;strength&#39;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>不要加多余的逗号，这可能会在IE下引起错误，同时如果多一个逗号某些ES3的实现会计算多数组的长度。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">var hero &#x3D; &#123;</span><br><span class="line">  firstName: &#39;Kevin&#39;,</span><br><span class="line">  lastName: &#39;Flynn&#39;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var heroes &#x3D; [</span><br><span class="line">  &#39;Batman&#39;,</span><br><span class="line">  &#39;Superman&#39;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">var hero &#x3D; &#123;</span><br><span class="line">  firstName: &#39;Kevin&#39;,</span><br><span class="line">  lastName: &#39;Flynn&#39;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var heroes &#x3D; [</span><br><span class="line">  &#39;Batman&#39;,</span><br><span class="line">  &#39;Superman&#39;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="分号"><a href="#分号" class="headerlink" title="分号"></a>分号</h2><ul>
-<li>语句结束一定要加分号<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">(function() &#123;</span><br><span class="line">  var name &#x3D; &#39;Skywalker&#39;</span><br><span class="line">  return name</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">(function() &#123;</span><br><span class="line">  var name &#x3D; &#39;Skywalker&#39;;</span><br><span class="line">  return name;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">;(function() &#123;</span><br><span class="line">  var name &#x3D; &#39;Skywalker&#39;;</span><br><span class="line">  return name;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><ul>
-<li><p>在语句的开始执行类型转换.</p>
-</li>
-<li><p>字符串</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;  &#x3D;&gt; this.reviewScore &#x3D; 9;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">var totalScore &#x3D; this.reviewScore + &#39;&#39;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">var totalScore &#x3D; &#39;&#39; + this.reviewScore;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">var totalScore &#x3D; &#39;&#39; + this.reviewScore + &#39; total score&#39;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">var totalScore &#x3D; this.reviewScore + &#39; total score&#39;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>对数字使用 parseInt 并且总是带上类型转换的基数.，如parseInt(value, 10)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">var inputValue &#x3D; &#39;4&#39;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">var val &#x3D; new Number(inputValue);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">var val &#x3D; +inputValue;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">var val &#x3D; inputValue &gt;&gt; 0;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">var val &#x3D; parseInt(inputValue);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">var val &#x3D; Number(inputValue);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">var val &#x3D; parseInt(inputValue, 10);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">&#x2F;**</span><br><span class="line"> * parseInt was the reason my code was slow.</span><br><span class="line"> * Bitshifting the String to coerce it to a</span><br><span class="line"> * Number made it a lot faster.</span><br><span class="line"> *&#x2F;</span><br><span class="line">var val &#x3D; inputValue &gt;&gt; 0;</span><br></pre></td></tr></table></figure></li>
-<li><p>布尔值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var age &#x3D; 0;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">var hasAge &#x3D; new Boolean(age);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">var hasAge &#x3D; Boolean(age);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">var hasAge &#x3D; !!age;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="命名约定"><a href="#命名约定" class="headerlink" title="命名约定"></a>命名约定</h2><ul>
-<li><p>避免单个字符名，让你的变量名有描述意义。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">function q() &#123;</span><br><span class="line">  &#x2F;&#x2F; ...stuff...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">function query() &#123;</span><br><span class="line">  &#x2F;&#x2F; ..stuff..</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>当命名对象、函数和实例时使用驼峰命名规则</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">var OBJEcttsssss &#x3D; &#123;&#125;;</span><br><span class="line">var this_is_my_object &#x3D; &#123;&#125;;</span><br><span class="line">var this-is-my-object &#x3D; &#123;&#125;;</span><br><span class="line">function c() &#123;&#125;;</span><br><span class="line">var u &#x3D; new user(&#123;</span><br><span class="line">  name: &#39;Bob Parr&#39;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">var thisIsMyObject &#x3D; &#123;&#125;;</span><br><span class="line">function thisIsMyFunction() &#123;&#125;;</span><br><span class="line">var user &#x3D; new User(&#123;</span><br><span class="line">  name: &#39;Bob Parr&#39;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>当命名构造函数或类时使用驼峰式大写</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">function user(options) &#123;</span><br><span class="line">  this.name &#x3D; options.name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var bad &#x3D; new user(&#123;</span><br><span class="line">  name: &#39;nope&#39;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">function User(options) &#123;</span><br><span class="line">  this.name &#x3D; options.name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var good &#x3D; new User(&#123;</span><br><span class="line">  name: &#39;yup&#39;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>命名私有属性时前面加个下划线 _</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">this.__firstName__ &#x3D; &#39;Panda&#39;;</span><br><span class="line">this.firstName_ &#x3D; &#39;Panda&#39;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">this._firstName &#x3D; &#39;Panda&#39;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>模块开发的常量定义必须包含“完整的模块名称“</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">export const GET_ASSET_LIST &#x3D; &#39;GET_ASSET_LIST&#39;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">export const GET_ASSET_LIST &#x3D; &#39;ALARM_GET_ASSET_LIST&#39;;</span><br></pre></td></tr></table></figure></li>
-<li><p>望名知意，建议驼峰命名（函数也适用）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">let fItem;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">let formItem;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;bad</span><br><span class="line">let yUnit &#x3D; unitObj.unit;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;good</span><br><span class="line">let yAxisUnit &#x3D; unitObj.unit;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="存取器"><a href="#存取器" class="headerlink" title="存取器"></a>存取器</h2><ul>
-<li><p>属性的存取器函数不是必需的</p>
-</li>
-<li><p>如果你确实有存取器函数的话使用getVal() 和 setVal(‘hello’),java getter、setter风格或者jQuery风格</p>
-</li>
-<li><p>如果属性是布尔值，使用isVal() 或 hasVal()</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">if (!dragon.age()) &#123;</span><br><span class="line">  return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">if (!dragon.hasAge()) &#123;</span><br><span class="line">  return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>可以创建get()和set()函数，但是要保持一致</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function Jedi(options) &#123;</span><br><span class="line">  options || (options &#x3D; &#123;&#125;);</span><br><span class="line">  var lightsaber &#x3D; options.lightsaber || &#39;blue&#39;;</span><br><span class="line">  this.set(&#39;lightsaber&#39;, lightsaber);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Jedi.prototype.set &#x3D; function(key, val) &#123;</span><br><span class="line">  this[key] &#x3D; val;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Jedi.prototype.get &#x3D; function(key) &#123;</span><br><span class="line">  return this[key];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h2></li>
-<li><p>给对象原型分配方法，而不是用一个新的对象覆盖原型，覆盖原型会使继承出现问题。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">function Jedi() &#123;</span><br><span class="line">  console.log(&#39;new jedi&#39;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">Jedi.prototype &#x3D; &#123;</span><br><span class="line">  fight: function fight() &#123;</span><br><span class="line">    console.log(&#39;fighting&#39;);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  block: function block() &#123;</span><br><span class="line">    console.log(&#39;blocking&#39;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">Jedi.prototype.fight &#x3D; function fight() &#123;</span><br><span class="line">  console.log(&#39;fighting&#39;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Jedi.prototype.block &#x3D; function block() &#123;</span><br><span class="line">  console.log(&#39;blocking&#39;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li><p>方法可以返回 this 帮助方法可链。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">Jedi.prototype.jump &#x3D; function() &#123;</span><br><span class="line">  this.jumping &#x3D; true;</span><br><span class="line">  return true;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Jedi.prototype.setHeight &#x3D; function(height) &#123;</span><br><span class="line">  this.height &#x3D; height;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var luke &#x3D; new Jedi();</span><br><span class="line">luke.jump(); &#x2F;&#x2F; &#x3D;&gt; true</span><br><span class="line">luke.setHeight(20) &#x2F;&#x2F; &#x3D;&gt; undefined</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; good</span><br><span class="line">Jedi.prototype.jump &#x3D; function() &#123;</span><br><span class="line">  this.jumping &#x3D; true;</span><br><span class="line">  return this;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Jedi.prototype.setHeight &#x3D; function(height) &#123;</span><br><span class="line">  this.height &#x3D; height;</span><br><span class="line">  return this;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var luke &#x3D; new Jedi();</span><br><span class="line"></span><br><span class="line">luke.jump()</span><br><span class="line">  .setHeight(20);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>可以写一个自定义的toString()方法，但是确保它工作正常并且不会有副作用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function Jedi(options) &#123;</span><br><span class="line">  options || (options &#x3D; &#123;&#125;);</span><br><span class="line">  this.name &#x3D; options.name || &#39;no name&#39;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Jedi.prototype.getName &#x3D; function getName() &#123;</span><br><span class="line">  return this.name;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Jedi.prototype.toString &#x3D; function toString() &#123;</span><br><span class="line">  return &#39;Jedi - &#39; + this.getName();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2></li>
-<li><p>当给事件附加数据时，传入一个哈希而不是原始值，这可以让后面维护时加入更多数据到事件数据里而不用找出并更新那个事件的事件处理器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; bad</span><br><span class="line">$(this).trigger(&#39;listingUpdated&#39;, listing.id);</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">$(this).on(&#39;listingUpdated&#39;, function(e, listingId) &#123;</span><br><span class="line">  &#x2F;&#x2F; do something with listingId</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></li>
-<li><p>更好:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; good</span><br><span class="line">$(this).trigger(&#39;listingUpdated&#39;, &#123; listingId : listing.id &#125;);</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">$(this).on(&#39;listingUpdated&#39;, function(e, data) &#123;</span><br><span class="line">  &#x2F;&#x2F; do something with data.listingId</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><ul>
-<li>文件应该以驼峰命名，并在同名文件夹下，同时导出的时候名字一致</li>
-</ul>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote><footer><strong>András Tóth (@tthndrs)</strong><cite><a href="https://blog.risingstack.com/javascript-clean-coding-best-practices-node-js-at-scale/" target="_blank" rel="noopener">JavaScript Clean Coding Best Practices</a></cite></footer></blockquote>
-
-
-<blockquote><footer><strong>w3schools</strong><cite><a href="https://www.w3schools.com/js/js_mistakes.asp" target="_blank" rel="noopener">JavaScript Common Mistakess</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>thinkful</strong><cite><a href="https://www.thinkful.com/learn/javascript-best-practices-1/Summary" target="_blank" rel="noopener">javascript-best-practices</a></cite></footer></blockquote>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2296,7 +2138,7 @@ redux可以减少数据的传递，不用依次往下传，随用随取，特别
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2341,12 +2183,6 @@ redux可以减少数据的传递，不用依次往下传，随用随取，特别
                     <a href="mailto:gamehu520@gmail.com" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="https://twitter.com/Gamehu520" target="_blank" title="Twitter">
-                      
-                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
                   </span>
                 
             </div>
@@ -2976,7 +2812,7 @@ redux可以减少数据的传递，不用依次往下传，随用随取，特别
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("git实践");titles.push("吃力不讨好");titles.push("编写可读代码的艺术");titles.push("Personal Growth");titles.push("代码写的好看一点");titles.push("浏览器渲染");titles.push("始于愤怒必终于羞愧");titles.push("自由成长活动");titles.push("Linux Source命令");titles.push("前端编码规范");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("根因分析");titles.push("How To Master A Skill In A Short Period Of Time?");titles.push("提高效率");titles.push("git实践");titles.push("吃力不讨好");titles.push("编写可读代码的艺术");titles.push("Personal Growth");titles.push("代码写的好看一点");titles.push("浏览器渲染");titles.push("始于愤怒必终于羞愧");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {
