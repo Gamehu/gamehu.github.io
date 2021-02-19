@@ -309,6 +309,177 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/08/20/%E8%B7%A8%E5%9F%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/20/%E8%B7%A8%E5%9F%9F/" itemprop="url">跨域</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-20T10:46:00+08:00">
+                2018-08-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>刚好这段时间对接其他产品，刚好处理了一下跨域的问题，借此机会稍微更加了解一下跨域(Cross-origin resource sharing)。</p>
+<p>搬运搬运…</p>
+<h4 id="首先什么是同源策略？"><a href="#首先什么是同源策略？" class="headerlink" title="首先什么是同源策略？"></a>首先什么是同源策略？</h4><p>同源策略是一种Web浏览器安全性机制，旨在防止网站相互攻击。</p>
+<p>同源策略限制一个源上的脚本访问另一源的数据。源由URI方案，域和端口号组成。</p>
+<p>同源策略是一种限制性的跨域规范，它限制了网站与源域外部资源进行交互的能力。起源于多年前的策略是针对潜在的恶意跨域交互（例如，一个网站从另一个网站窃取私人数据）做出的响应。通常，它允许一个域向其他域发出请求，但不允许访问响应。</p>
+<p>同源策略它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，浏览器很容易受到XSS、CSFR等攻击。所谓同源是指”协议+域名+端口”三者相同，即便两个不同的域名指向同一个ip地址，也非同源。</p>
+<p>同源策略限制以下几种行为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.) Cookie、LocalStorage、IndexedDB 等存储</span><br><span class="line">2.) DOM查询</span><br><span class="line">3.) AJAX 请求</span><br></pre></td></tr></table></figure>
+
+<p>但是有三个标签是允许跨域加载资源：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src&#x3D;XXX&gt; </span><br><span class="line"></span><br><span class="line">&lt;link href&#x3D;XXX&gt;</span><br><span class="line"></span><br><span class="line">&lt;script src&#x3D;XXX&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="常见跨域场景"><a href="#常见跨域场景" class="headerlink" title="常见跨域场景"></a><strong>常见跨域场景</strong></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">URL                                      说明                    是否允许通信</span><br><span class="line">http:&#x2F;&#x2F;www.domain.com&#x2F;a.js</span><br><span class="line">http:&#x2F;&#x2F;www.domain.com&#x2F;b.js         同一域名，不同文件或路径           允许</span><br><span class="line">http:&#x2F;&#x2F;www.domain.com&#x2F;lab&#x2F;c.js</span><br><span class="line"></span><br><span class="line">http:&#x2F;&#x2F;www.domain.com:8000&#x2F;a.js</span><br><span class="line">http:&#x2F;&#x2F;www.domain.com&#x2F;b.js         同一域名，不同端口                不允许</span><br><span class="line"> </span><br><span class="line">http:&#x2F;&#x2F;www.domain.com&#x2F;a.js</span><br><span class="line">https:&#x2F;&#x2F;www.domain.com&#x2F;b.js        同一域名，不同协议                不允许</span><br><span class="line"> </span><br><span class="line">http:&#x2F;&#x2F;www.domain.com&#x2F;a.js</span><br><span class="line">http:&#x2F;&#x2F;192.168.4.12&#x2F;b.js           域名和域名对应相同ip              不允许</span><br><span class="line"> </span><br><span class="line">http:&#x2F;&#x2F;www.domain.com&#x2F;a.js</span><br><span class="line">http:&#x2F;&#x2F;x.domain.com&#x2F;b.js           主域相同，子域不同                不允许</span><br><span class="line">http:&#x2F;&#x2F;domain.com&#x2F;c.js</span><br><span class="line"> </span><br><span class="line">http:&#x2F;&#x2F;www.domain1.com&#x2F;a.js</span><br><span class="line">http:&#x2F;&#x2F;www.domain2.com&#x2F;b.js        不同域名                         不允许</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="跨域解决方案"><a href="#跨域解决方案" class="headerlink" title="跨域解决方案"></a><strong>跨域解决方案</strong></h4><p>1、 通过jsonp跨域<br>2、 iframe跨域<br>5、 postMessage跨域<br>6、 跨域资源共享（CORS）<br>7、 nginx代理跨域<br>8、 nodejs中间件代理跨域<br>9、 WebSocket协议跨域</p>
+<p>比较抱歉的是我只用过nginx代理跨域、跨域资源共享（CORS）、WebSocket协议跨域…。</p>
+<h4 id="什么是CORS（跨域资源共享）？"><a href="#什么是CORS（跨域资源共享）？" class="headerlink" title="什么是CORS（跨域资源共享）？"></a>什么是CORS（跨域资源共享）？</h4><p>在大多数情况下，在用户浏览器中运行的脚本仅需要访问源相同的资源（请考虑首先对服务JavaScript代码的同一后端进行API调用）。因此，JavaScript通常无法访问其他来源的资源，这对安全性而言是一件好事。但是有些情况下需要跨域请求的。例如，不同系统间的一些对接。解决该问题就需要实现CORS，跨域资源共享（CORS）是一种浏览器机制，可实现对位于给定域外部的资源的受控访问。</p>
+<h4 id="CORS如何运作"><a href="#CORS如何运作" class="headerlink" title="CORS如何运作"></a>CORS如何运作</h4><p>如果不需要cookie的话，整个<code>CORS</code>通信过程都是浏览器自动完成的，前端不需要做额外的编码。<strong>浏览器一旦发现请求跨源，就会自动添加一些附加的头信息，复杂请求还会多一次预检的请求，但我们是不用感知的</strong>。因此，实现<code>CORS</code>通信的关键是服务器开启CORS。</p>
+<img src="/2018/08/20/%E8%B7%A8%E5%9F%9F/b.png" class>
+
+
+
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><blockquote><footer><strong>KRISTOPHER SANDOVAL</strong><cite><a href="https://nordicapis.com/what-is-cors-cross-origin-resource-sharing/" target="_blank" rel="noopener">What is CORS</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>w3c</strong><cite><a href="https://www.w3.org/TR/2014/REC-cors-20140116/" target="_blank" rel="noopener">Cross-Origin Resource Sharing</a></cite></footer></blockquote>
+<blockquote><footer><strong>阮一峰</strong><cite><a href="https://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">跨域资源共享 CORS 详解</a></cite></footer></blockquote>
+
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/08/19/%E5%90%8C%E7%90%86%E5%BF%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1832,191 +2003,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/08/01/Code%20Review/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/01/Code%20Review/" itemprop="url">Code Review</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-01T09:47:00+08:00">
-                2018-08-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
-                    <span itemprop="name">工作</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>以前我对code review是抗拒的，原因在于两方面：</p>
-<ol>
-<li>总感觉有点脱光了让人看的感觉，没脸。</li>
-<li>觉得是浪费时间，研发周期时间都不够还做什么code review。</li>
-</ol>
-<p>不过后来发现之前的自己是多么愚蠢</p>
-<img src="/2018/08/01/Code%20Review/code_review_hierarchy.png" class>
-
-
-
-<h2 id="Why"><a href="#Why" class="headerlink" title="Why"></a>Why</h2><ul>
-<li><p>倒逼团队成员写出更有质量的代码</p>
-<blockquote>
-<p>（基于编码规范等），让代码可以更好的组织起来，有更易读，有更高的维护性，同时可以达到知识共享，找到bug只是其中的副产品</p>
-</blockquote>
-</li>
-<li><p>确认自己的设计和实现是一个清楚和简单、正确的</p>
-<blockquote>
-<p>并且通过review找到问题代码，减少错误和暗坑</p>
-</blockquote>
-</li>
-<li><p>让更多的人了解你所写的模块，并能促进相互学习对方的长处和优点。</p>
-</li>
-<li><p>提前暴露影响性能和安全的问题</p>
-</li>
-</ul>
-<img src="/2018/08/01/Code%20Review/cr001.png" class>
-
-
-<h2 id="When"><a href="#When" class="headerlink" title="When"></a>When</h2><ul>
-<li>自动化测试之后，提测之前</li>
-<li>前后端联调之后（如果自动化测试还没实现）</li>
-</ul>
-<h2 id="What"><a href="#What" class="headerlink" title="What"></a>What</h2><p>评判标准</p>
-<ul>
-<li>编码规范（比如后端《阿里编程规范》，前端ESLint）</li>
-<li>需求覆盖度是否100%</li>
-<li>测试用例覆盖度至少满足80/20原则</li>
-</ul>
-<h2 id="How"><a href="#How" class="headerlink" title="How"></a>How</h2><ul>
-<li>提升团队意识，让大家知道code review的好处和重要性，切忌别把时间安排与code review拿在一起说，它们是两回事，时间够不够条件够不够跟code review好不好无关。</li>
-<li>code review落实到产线的专项目标，指定责任人。 </li>
-<li>组件core view 团队，定义code view的关注点，持续改进。</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2070,7 +2056,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-count">115</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2081,7 +2067,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2092,7 +2078,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">78</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2744,7 +2730,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("同理心");titles.push("React一点点");titles.push("前后端分离");titles.push("读书方法");titles.push("自律(一)");titles.push("中美贸易战");titles.push("乔布斯");titles.push("GraphQL");titles.push("观看之道");titles.push("Code Review");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("跨域");titles.push("同理心");titles.push("React一点点");titles.push("前后端分离");titles.push("读书方法");titles.push("自律(一)");titles.push("中美贸易战");titles.push("乔布斯");titles.push("GraphQL");titles.push("观看之道");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {
@@ -2789,4 +2775,5 @@
 
   
 
-<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+</body>
+</html>
