@@ -309,6 +309,647 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/12/01/AHA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/12/01/AHA/" itemprop="url">AHA</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-01T17:52:00+08:00">
+                2020-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <img src="/2020/12/01/AHA/a.jpg" class title="[Collin Armstrong](https:&#x2F;&#x2F;unsplash.com&#x2F;@brazofuerte)">
+
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>干研发的有个高频词语：<strong>抽象</strong>，这个词语可应用于各种场景，我今天聊的是代码抽象，在此篇就比较low逼的理解成代码复用吧，不然感觉有点虚。</p>
+<p>为啥记录这个呢还是源于近段时间遇到的一些矛盾，重复代码该不该都抽出来，在这之前我会毫不犹豫的说应该，包括现在团队里也几乎是这样的声音，但是是不是就一定对呢？现在我觉得这个观点是不对的，因为我发现有些代码抽出来之后反倒变得越来越不可掌控。</p>
+<p>所以我在思考<strong>克制抽象</strong>是不是也应该提出来。为了验证这个思考，遂搜了搜，别说还真有那么些大佬早就提出了这个观点。</p>
+<h4 id="AHA"><a href="#AHA" class="headerlink" title="AHA"></a>AHA</h4><p><code>AHA</code> (读作”<a href="https://kentcdodds.com/blog/aha-programming" target="_blank" rel="noopener">Aha</a>!” ):<strong>Avoid Hasty Abstractions</strong>（避免草率的抽象）</p>
+<p>读了几篇文章特别感动，尤其是Sandi Metz的 <a href="https://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction" target="_blank" rel="noopener">The Wrong Abstraction</a>，特别有共鸣。</p>
+<p><strong>核心观点就是</strong></p>
+<blockquote>
+<p>宁愿复制而不是错误的抽象</p>
+</blockquote>
+<p>具体的支撑<strong>克制抽象</strong>内容，这几篇文章说的很清楚了，我就不再来一遍了。</p>
+<h5 id="我就给个现实的例子"><a href="#我就给个现实的例子" class="headerlink" title="我就给个现实的例子"></a>我就给个现实的例子</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取某个CI模型数据 v1.0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;object&#125;</span> </span>code 模型code</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;object&#125;</span>  </span>格式化之后的模型对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getCi = <span class="keyword">async</span> (code) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> meta = <span class="keyword">await</span> request.post(<span class="string">'/api/v1/model/ci/getCi'</span>, &#123; code &#125;);</span><br><span class="line">  <span class="comment">// 绑定数据字典</span></span><br><span class="line">  meta.attributes = meta.attributes.map(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> attr = &#123; ...item &#125;;</span><br><span class="line">    <span class="keyword">if</span> (attr.changeValue === <span class="string">'dict'</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!DICT.get(attr.code)) &#123;</span><br><span class="line">        rlog.error(<span class="string">`找不到 <span class="subst">$&#123;attr.code&#125;</span> 对应的数据字典`</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        attr.dict = DICT.get(attr.code).items;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> attr;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> meta;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取某个CI模型数据  v2.0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;object&#125;</span> </span>code 模型code</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;boolean&#125;</span> </span>userVisibleFilter 是否按照模型的userVisible过滤，发现页面不过滤</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;object&#125;</span>  </span>格式化之后的模型对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getCi = <span class="keyword">async</span> (code, userVisibleFilter = <span class="literal">true</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> meta = <span class="keyword">await</span> request.post(<span class="string">'/api/v1/model/ci/getCi'</span>, &#123; code &#125;);</span><br><span class="line">  <span class="comment">// 获取过滤userVisible=true的属性(用户可见)</span></span><br><span class="line">  <span class="keyword">const</span> &#123; attributes &#125; = meta;</span><br><span class="line">  <span class="keyword">const</span> visibleAttributes = userVisibleFilter</span><br><span class="line">    ? attributes.filter(<span class="function">(<span class="params">item</span>) =&gt;</span> item.userVisible)</span><br><span class="line">    : attributes;</span><br><span class="line">  <span class="comment">// 属性绑定数据字典</span></span><br><span class="line">  meta.attributes = visibleAttributes.map(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> attr = &#123; ...item &#125;;</span><br><span class="line">    <span class="keyword">if</span> (attr.changeValue === <span class="string">'dict'</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (!DICT.get(attr.code)) &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(<span class="string">`找不到 <span class="subst">$&#123;attr.code&#125;</span> 对应的数据字典`</span>);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        attr.dict = DICT.get(attr.code).items;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> attr;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> meta;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 获取某个CI模型数据 </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;object&#125;</span> </span>code 模型code</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;boolean&#125;</span> </span>userVisibleFilter 是否按照模型的userVisible过滤，发现页面不过滤</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;boolean&#125;</span> </span>dict 是否需要绑定数据字典</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;object&#125;</span> </span>格式化之后的模型对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getCi = <span class="keyword">async</span> (code, userVisibleFilter = <span class="literal">true</span>, dict = <span class="literal">true</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; meta, visibleAttributes &#125; = <span class="keyword">await</span> formatMeta(code, userVisibleFilter);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!dict) &#123;</span><br><span class="line">    meta.attributes = visibleAttributes;</span><br><span class="line">    <span class="keyword">return</span> meta;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 属性绑定数据字典</span></span><br><span class="line">  <span class="keyword">return</span> bindDict(meta, visibleAttributes);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 获取某个CI模型数据  v3.0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;object&#125;</span> </span>code 模型code</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;boolean&#125;</span> </span>userVisibleFilter 是否按照模型的userVisible过滤，发现页面不过滤</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;boolean&#125;</span> </span>dict 是否需要绑定数据字典</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;object&#125;</span>  </span>格式化之后的模型对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getCi = <span class="keyword">async</span> (code, userVisibleFilter = <span class="literal">true</span>, dict = <span class="literal">true</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> meta = <span class="keyword">await</span> formatVisibleAttributes(code, userVisibleFilter);</span><br><span class="line">  <span class="keyword">if</span> (!dict) &#123;</span><br><span class="line">    <span class="comment">// 属性绑定数据字典</span></span><br><span class="line">    <span class="keyword">return</span> bindDict(meta);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> meta;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 获取某个CI模型数据  v4.0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;object&#125;</span> </span>code 模型code</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;boolean&#125;</span> </span>userVisibleFilter 是否按照模型的userVisible过滤，发现页面不过滤</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;boolean&#125;</span> </span>dict 是否需要绑定数据字典</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getCi = <span class="keyword">async</span> (code, userVisibleFilter = <span class="literal">true</span>, dict = <span class="literal">true</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> meta = <span class="keyword">await</span> formatVisibleAttributes(code, userVisibleFilter);</span><br><span class="line">  <span class="comment">// 属性绑定数据字典</span></span><br><span class="line">  <span class="keyword">if</span> (dict) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="comment">// 用户自建属性（数据字典）</span></span><br><span class="line">      <span class="keyword">const</span> userDict = <span class="keyword">await</span> getUserDicts(code);</span><br><span class="line">      <span class="keyword">return</span> bindDict(meta, userDict);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">      rlog.error(error);</span><br><span class="line">      <span class="keyword">return</span> meta;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> meta;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 过滤可见属性</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> <span class="variable">code</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;boolean&#125;</span> <span class="variable">userVisibleFilter</span></span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;object&#125;</span>  </span>只包含可见属性的模型对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">formatVisibleAttributes</span>(<span class="params">code, userVisibleFilter</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> meta = <span class="keyword">await</span> request.post(<span class="string">'/api/v1/model/getCi'</span>, &#123; code &#125;);</span><br><span class="line">  <span class="keyword">if</span> (meta) &#123;</span><br><span class="line">    <span class="keyword">let</span> &#123; attributes &#125; = meta;</span><br><span class="line">    <span class="keyword">if</span> (!attributes) &#123;</span><br><span class="line">      <span class="keyword">return</span> meta;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 适配后端，使属性正序</span></span><br><span class="line">    attributes = attributes.reverse();</span><br><span class="line">    <span class="comment">// 获取过滤userVisible=true的属性(用户可见)</span></span><br><span class="line">    <span class="keyword">if</span> (userVisibleFilter) &#123;</span><br><span class="line">      meta.attributes = attributes.filter(</span><br><span class="line">        (item) =&gt; item.userVisible === <span class="string">'true'</span></span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> meta;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> meta;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h6 id="如上所示"><a href="#如上所示" class="headerlink" title="如上所示"></a>如上所示</h6><blockquote>
+<p>总共经历了至少4次的改动，逻辑变得越来越复杂，因为需要适配多种场景，本来我一开始抽出来，理由很简单，因为该api是一个获取底层数据的api，大多数前端的功能都需要调用该api，且都是需要有数据字典的，因为要正确的展示数据，所以我抽了一个方法。</p>
+<p>这个时候还是很美好的，不过后续就像 <a href="https://www.sandimetz.com/blog/2016/1/20/the-wrong-abstraction" target="_blank" rel="noopener">The Wrong Abstraction</a>里写的一样，各个使用方或找我或自己对该方法进行了扩展，这方法那是叫惨不忍睹啊，就这还是我重构之后的样子，没重构之前更丑。</p>
+<p>那有人就问了，为什么就扩展了呢？</p>
+<ol>
+<li>个人风格问题，该方法之前满足我得需求现在不满足了，所以我要改它，这样最简单，我可不管其它模块需不需要这个逻辑。</li>
+<li>我也知道可能在上面加不太合适，因为加的扩展逻辑不是所有模块都需要的，但是也不是我一个人需要的，比如A、B、C、D…，A、B都需要，那为了不重复写代码，在原有方法上扩展我觉得也还行。</li>
+<li>…</li>
+</ol>
+<p>后来当我发现的时候，我就在群里发出了一个共识。</p>
+<ol>
+<li>这类公共的api原则上不加<em>个性化的扩展</em>但是可加通用性（不影响整体数据结构且没有业务逻辑，比如：对原始数据进行数据筛选（eg:可见、不可见））的扩展，且加的时候需要与该api的最初作者对齐。</li>
+<li>如果要扩展个性化，请自行copy一份代码再修改。</li>
+</ol>
+<p>我的理由是如果再这么搞那我就不维护了爱咋咋滴………………..当然前面是意淫的咱们是一个team，和为贵。</p>
+<p><strong>真正的理由是维护成本会越来越高且与当初抽象的意义渐行渐远。</strong></p>
+</blockquote>
+<p>可能我给的例子不够有足够力量的说服力，但是我还是觉得，抽象不一定就一定时好的必须的，有些时候我们得反过来想想，任何事情都有两面性。虽然咱没有能力提出牛逼得理论和观点，但是我们可以基于大佬们提出得理论和观点，做些反思、验证…。</p>
+<p>有句话不是说吗：<strong>站在巨人的肩膀上。这句话我理解不是说巨人的肩膀才稳，而是说能看得更远。</strong></p>
+<h5 id="You-Know"><a href="#You-Know" class="headerlink" title="You Know"></a>You Know</h5><p>Duplication is far cheaper than the wrong abstraction</p>
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/11/24/ESLint-no-prototype-builtins/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/11/24/ESLint-no-prototype-builtins/" itemprop="url">ESLint(no-prototype-builtins)</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-24T14:56:00+08:00">
+                2020-11-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>  // eslint-disable-next-line no-prototype-builtins</p>
+<p>​    if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) return 0;</p>
+<p><a href="https://eslint.org/docs/rules/no-prototype-builtins" target="_blank" rel="noopener">no-prototype-builtins - Rules - ESLint - Pluggable JavaScript linter</a></p>
+<h2 id="Rule-Details"><a href="#Rule-Details" class="headerlink" title="Rule Details"></a>Rule Details</h2><p>This rule disallows calling some <code>Object.prototype</code> methods directly on object instances.</p>
+<p>Examples of <strong>incorrect</strong> code for this rule:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*eslint no-prototype-builtins: &quot;error&quot;*&#x2F;</span><br><span class="line"></span><br><span class="line">var hasBarProperty &#x3D; foo.hasOwnProperty(&quot;bar&quot;);</span><br><span class="line"></span><br><span class="line">var isPrototypeOfBar &#x3D; foo.isPrototypeOf(bar);</span><br><span class="line"></span><br><span class="line">var barIsEnumerable &#x3D; foo.propertyIsEnumerable(&quot;bar&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>Examples of <strong>correct</strong> code for this rule:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*eslint no-prototype-builtins: &quot;error&quot;*&#x2F;</span><br><span class="line"></span><br><span class="line">var hasBarProperty &#x3D; Object.prototype.hasOwnProperty.call(foo, &quot;bar&quot;);</span><br><span class="line"></span><br><span class="line">var isPrototypeOfBar &#x3D; Object.prototype.isPrototypeOf.call(foo, bar);</span><br><span class="line"></span><br><span class="line">var barIsEnumerable &#x3D; &#123;&#125;.propertyIsEnumerable.call(foo, &quot;bar&quot;);</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/11/21/nginx-docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/11/21/nginx-docker/" itemprop="url">nginx-docker</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-21T11:12:00+08:00">
+                2020-11-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>由于事业部专门成立团队做部署平台，由于各种因素迟迟没有上线，以前的Jenkins也不能用了，但是前后端需要有环境进行联调，后端还好说每个模块本地起个服务就行，前端就尴尬了本地起服务限制太多，所以需要想办法搞个环境，遂想着悄悄咪咪（深藏功与名…）搞了个环境让大家能先跑起来不至于耽误工期。</p>
+<p>满足以下要求：</p>
+<ol>
+<li>前端更新简单</li>
+<li>无脑一条命令搞定start\stop\restart</li>
+<li>于生成环境尽量贴合</li>
+</ol>
+<h3 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h3><p>因为生成环境是基于docker做部署，所以先弄个nginx的镜像。nginx的镜像茫茫多，不过大体都很全面，我觉得太重，所以就弄了个最简单的。</p>
+<h4 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3.1'</span></span><br><span class="line"><span class="attr">web:</span></span><br><span class="line">  <span class="attr">my-nginx:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">new-monitor-nginx</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">logging:</span></span><br><span class="line">      <span class="attr">driver:</span> <span class="string">"journald"</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/home/xxx/mount/nginx.conf:/etc/nginx/nginx.conf</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/home/xxx/mount/html:/etc/nginx/html</span></span><br><span class="line"> </span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">"443:443"</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">"bridge"</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">TZ=Asia/Shanghai</span></span><br><span class="line">    <span class="attr">ulimits:</span></span><br><span class="line">      <span class="attr">core:</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 用官方的nginx镜像</span></span><br><span class="line">FROM nginx</span><br><span class="line"><span class="meta">#</span><span class="bash"> ENTRYPOINT 类似于 CMD 指令，但其不会被 docker run 的命令行参数指定的指令所覆盖，用于传参。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> eg:docker run  nginx:one -c /etc/nginx/new.conf,容器内会运行nginx -c /etc/nginx/new.conf</span></span><br><span class="line">ENTRYPOINT ["nginx", "-c"] </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">COPY 复制，从上下文目录中复制文件或者目录到容器里指定路径。</span></span><br><span class="line">COPY nginx.conf /etc/nginx/nginx.conf</span><br><span class="line">COPY html /etc/nginx/html</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> RUN，在 docker build时作用</span></span><br><span class="line">RUN rm /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> EXPOSE 声明端口，镜像服务的守护端口，以方便配置映射。</span></span><br><span class="line">EXPOSE 8088</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> VOLUME 用于挂载数据卷</span></span><br><span class="line">VOLUME /var/log/nginx/log</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">CMD 类似于 RUN 指令，在docker run 时运行。</span></span><br><span class="line">CMD ["nginx", "-g", "daemon off;"]</span><br></pre></td></tr></table></figure>
+
+<h4 id="构建、启动容器"><a href="#构建、启动容器" class="headerlink" title="构建、启动容器"></a>构建、启动容器</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker build -t xxx</span><br><span class="line">docker-compose down</span><br><span class="line">sleep 10</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>后续直接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart 容器名</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><p>其实最终我又把docker干掉了….因为有同事悄悄咪咪手动装了nginx，优化了一下把nginx挂到了系统服务上，同样的也是直接systemctl xxx就行了。</p>
+<p>反正结果是好的，结合alibaba toolkit也是玩的飞快了。</p>
+<p>干研发的不就得折腾吗，对吧。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/10/29/nodeJs-%E9%83%A8%E7%BD%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/10/29/nodeJs-%E9%83%A8%E7%BD%B2/" itemprop="url">nodeJs 部署</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-29T10:18:00+08:00">
+                2020-10-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>最近新产品线，因为架构调整，增加了一个node应用，关于node混淆部署了解了一下，保护自主知识产权嘛。</p>
+<p>在这儿简单做个记录。</p>
+<h4 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h4><p><a href="https://sailsjs.com/" target="_blank" rel="noopener">https://sailsjs.com/</a></p>
+<p>安装 forever：sudo npm install -g forever<br>更多关于 forever 的资讯：<a href="https://github.com/nodejitsu/forever" target="_blank" rel="noopener">https://github.com/nodejitsu/forever</a><br>或安装 PM2：sudo npm install pm2 -g –unsafe-perm<br>更多关于 PM2 的资讯：<a href="https://github.com/Unitech/pm2" target="_blank" rel="noopener">https://github.com/Unitech/pm2</a></p>
+<p><a href="https://github.com/Unitech/pm2" target="_blank" rel="noopener">https://github.com/Unitech/pm2</a></p>
+<p><a href="https://github.com/vercel/ncc" target="_blank" rel="noopener">https://github.com/vercel/ncc</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/09/09/DDD-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1620,841 +2261,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/07/13/Jest/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/13/Jest/" itemprop="url">Jest</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-13T10:18:00+08:00">
-                2020-07-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Jest"><a href="#Jest" class="headerlink" title="Jest"></a>Jest</h3><h5 id="skip，only，each修饰符"><a href="#skip，only，each修饰符" class="headerlink" title="skip，only，each修饰符"></a>skip，only，each修饰符</h5><p><code>describe</code>与<code>test</code>可以连接<code>skip</code>，<code>only</code>，<code>each</code>修饰符。如<code>describe.skip(&#39;something&#39;, testFunction)</code>，会在测试时跳过这一个<code>describe</code>。<code>only</code>会使测试只运行指定的测试用例，这在某个测试用例出错Debug时非常好用。<code>each</code>修饰符可以执行多次参数不同的测试，它接受一个数组<code>table</code>和一个测试函数，<code>table</code>里的元素会作为参数传入测试函数。具体语法可以参见<a href="https://jestjs.io/docs/zh-Hans/api#describeeachtable-name-fn-timeout" target="_blank" rel="noopener">文档</a>。</p>
-<h5 id="beforeAll，afterAll，beforeEach，afterAll钩子函数"><a href="#beforeAll，afterAll，beforeEach，afterAll钩子函数" class="headerlink" title="beforeAll，afterAll，beforeEach，afterAll钩子函数"></a>beforeAll，afterAll，beforeEach，afterAll钩子函数</h5><p>Jest也支持在执行测试用例之前以及之后执行一些代码来做一些工作，像在测试前设置好测试数据、在测试后清理测试数据。这些工作可以作为<code>beforeAll</code>、<code>afterAll</code>、<code>beforeEach</code>、<code>afterAll</code>的回调函数。</p>
-<h4 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h4><p>Jest支持<code>expect</code>式的断言，像<code>expect(1).toBe(1)</code>，其中<code>toBe</code>就是断言部分。Jest支持很丰富的断言。</p>
-<h5 id="相等断言"><a href="#相等断言" class="headerlink" title="相等断言"></a>相等断言</h5><p>断言两个基本类型的值相等使用<code>expect(val1).toBe(val2)</code>。注意<code>toBe</code>断言使用<code>Object.is()</code>判断相等。它与<code>==</code>以及<code>===</code>都有不同。</p>
-<p>如果要断言数组或者Object相等，使用<code>toEqual</code>断言。它会递归地判断每个属性/元素是否是相等的。</p>
-<p>如果要断言数组或者Object相等，使用<code>toEqual</code>断言。它会递归地判断每个属性/元素是否是相等的。</p>
-<blockquote>
-<p><code>toStrictEqual(value)</code></p>
-<p>测试对象具有相同的类型和结构</p>
-<p>和<code>.toEqual</code>不同在于:</p>
-<ol>
-<li>检查具有未定义属性的键。 例如 使用.toStrictEqual时，{a：未定义，b：2}与{b：2}不匹配。</li>
-<li>检查数组。 例如 使用.toStrictEqual时，[，1]与[undefined，1]不匹配</li>
-<li>检查对象类型是否相等。 例如 具有字段a和b的类实例将不等于具有字段a和b的文字对象。</li>
-</ol>
-</blockquote>
-<h5 id="数字大小断言"><a href="#数字大小断言" class="headerlink" title="数字大小断言"></a>数字大小断言</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">test(&#39;two plus two&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">  const value &#x3D; 2 + 2;</span><br><span class="line">  expect(value).toBeGreaterThan(3);&#x2F;&#x2F;大于</span><br><span class="line">  expect(value).toBeGreaterThanOrEqual(3.5);&#x2F;&#x2F;大于等于</span><br><span class="line">  expect(value).toBeLessThan(5);&#x2F;&#x2F;小于</span><br><span class="line">  expect(value).toBeLessThanOrEqual(4.5);&#x2F;&#x2F;小于等于</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;等于</span><br><span class="line">  expect(value).toBe(4);</span><br><span class="line">  expect(value).toEqual(4);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>对于浮点数，不能使用<code>toBe</code>或者<code>toEqual</code>进行相等断言。Jest提供了<code>toBeCloseTo</code>断言，可以在忽略一定误差的情况下，断言浮点数相等。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">test(&#39;adding floating point numbers&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">  const value &#x3D; 0.1 + 0.2;</span><br><span class="line">  &#x2F;&#x2F;expect(value).toBe(0.3);           This won&#39;t work because of rounding error</span><br><span class="line">  expect(value).toBeCloseTo(0.3); &#x2F;&#x2F; This works.</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="真值断言（Truthiness）"><a href="#真值断言（Truthiness）" class="headerlink" title="真值断言（Truthiness）"></a>真值断言（Truthiness）</h5><ul>
-<li><p><code>toBeNull</code> 用于 <code>null</code></p>
-</li>
-<li><p><code>toBeUndefined</code>  用于<code>undefined</code></p>
-</li>
-<li><p><code>toBeDefined</code> 与<code>toBeUndefined</code> 相反</p>
-</li>
-<li><p><code>toBeTruthy</code> 用于值为 true</p>
-</li>
-<li><p><code>toBeFalsy</code>  用于值为 false</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">test(&#39;null&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">  const n &#x3D; null;</span><br><span class="line">  expect(n).toBeNull();&#x2F;&#x2F;pass</span><br><span class="line">  expect(n).toBeDefined();&#x2F;&#x2F;pass</span><br><span class="line">  expect(n).toBeUndefined();&#x2F;&#x2F; faild</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h5 id="字符串相关"><a href="#字符串相关" class="headerlink" title="字符串相关"></a>字符串相关</h5><p>Jest提供<code>toMatch</code>断言被测试的字符串是否匹配给定正则表达式。</p>
-<p>复制</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">test(&#39;but there is a &quot;stop&quot; in Christoph&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">  expect(&#39;Christoph&#39;).toMatch(&#x2F;stop&#x2F;) &#x2F;&#x2F; pass</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h5 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h5><p>要断言数组中包含某个子项可以使用<code>toContain</code>断言。</p>
-<p>复制</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const shoppingList &#x3D; [</span><br><span class="line">  &#39;diapers&#39;,</span><br><span class="line">  &#39;kleenex&#39;,</span><br><span class="line">  &#39;trash bags&#39;,</span><br><span class="line">  &#39;paper towels&#39;,</span><br><span class="line">  &#39;beer&#39;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">test(&#39;购物清单（shopping list）里面有啤酒（beer）&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">  expect(shoppingList).toContain(&#39;beer&#39;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h5 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h5><p>要断言对函数的某些操作会抛出异常可以使用<code>toThrow</code>断言。</p>
-<p>复制</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">test(&#39;throws on octopus&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">  expect(() &#x3D;&gt; &#123;</span><br><span class="line">    drinkFlavor(&#39;octopus&#39;);</span><br><span class="line">  &#125;).toThrow();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h5 id="not修饰符"><a href="#not修饰符" class="headerlink" title="not修饰符"></a>not修饰符</h5><p><code>not</code>修饰符可以把所有的断言反向，像<code>expect(1).not.toBe(2)</code>。</p>
-<p>Jest提供的断言不止上面提到那么多。常用到的还有像断言长度的<code>toHaveLength</code>，断言对象有某个属性以及属性的值的<code>toHaveProperty</code>。更多断言的可以参见<a href="https://jestjs.io/docs/zh-Hans/expect" target="_blank" rel="noopener">Expect文档</a>。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/" itemprop="url">js工具库</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-11T20:48:00+08:00">
-                2020-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>最近整理产品中积累下来的工具类，因为要用新框架了要对之前的代码进行移植。当然咱是个追求完美的人，实在是团队小伙伴们一路疯狂操作下来，工具类是茫茫多啊，基本上想要维护是注定两行泪，所以咱们借着这次机会把工具类好好整理一下。</p>
-<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><h4 id="诉求："><a href="#诉求：" class="headerlink" title="诉求："></a>诉求：</h4><ol>
-<li>可维护性强。</li>
-<li>能进行包管理。</li>
-<li>每个方法有详细的说明，且能友好的查看。</li>
-</ol>
-<p><strong>具象化要求</strong></p>
-<ul>
-<li>工具方法需要分门别类，不能一个文件一把梭，一定要控制代码量，不能让人一打开文件，心里就是wc。</li>
-<li>更新（删除、新增、修改）某个工具方法时不影响其它方法的使用，达到我改我的，你别瞪我的效果。</li>
-<li>不能发生函数名、变量名冲突。    </li>
-<li>每个方法的注释遵循统一规范，根据统一规范可生产类似swagger那样的api文档（有张好的面皮大家爱看也耐看，不用不断打扰写方法的人）。</li>
-</ul>
-<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>秉着能抄袭就不自己动手的精神，看了很多star上千的工具库，总结了一下方式方法。</p>
-<ul>
-<li>基本上大家都采用的方式是一个方法一个文件，这一个文件<strong>暴露</strong>出来的就一个方法也只有一个方法，如果该方法需求其他辅助方法，直接通过import引用，而不直接写到该文件中，整个文件特别整洁，如果方法比较复杂则会建立一个文件夹从而存放辅助方法的文件，辅助方法的文件里也只有一个方法。虽然看上去可能这样文件有点多了，但是确实很清晰很整洁，对于维护来说很友好。<em>所以就用这种方式了</em>。</li>
-<li>看了下生产api的几种库，比如jsdoc、ddoc等，大体是jsdoc还是多一些，用起来也挺简单，<em>所以就选jsdoc了</em>。</li>
-</ul>
-<h5 id="编码方式"><a href="#编码方式" class="headerlink" title="编码方式"></a>编码方式</h5><p>一个方法一个文件</p>
-<img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/code.png" class>
-
-<h5 id="rollup"><a href="#rollup" class="headerlink" title="rollup"></a>rollup</h5><img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/rollup.jpg" class>
-
-<p>打包工具用rollup，以为是工具库所以用更简单的rollup。</p>
-<ul>
-<li>自动 Tree-shaking(Tree-shaking, 也被称为 “live code inclusion,” 它是清除实际上并没有在给定项目中使用的代码的过程，但是它可以更加高效。)</li>
-<li>打包速度快</li>
-<li>配置简单</li>
-</ul>
-<h5 id="Jest"><a href="#Jest" class="headerlink" title="Jest"></a>Jest</h5><p> jest开箱即用挺好，另外我们多用react，jest是Facebook出的，与react具有天然亲和力。</p>
-<img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/jest.png" class>
-
-<h5 id="Api-Doc"><a href="#Api-Doc" class="headerlink" title="Api Doc"></a>Api Doc</h5><p>选择了jsdoc，使用简单且较普遍。</p>
-<img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/jsdoc-500.jpg" class>
-
-
-
-<h3 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h3><h5 id="目录"><a href="#目录" class="headerlink" title="目录"></a><strong>目录</strong></h5><img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/dir.png" class>
-
-<h4 id="关键手法"><a href="#关键手法" class="headerlink" title="关键手法"></a><strong>关键手法</strong></h4><h5 id="编码"><a href="#编码" class="headerlink" title="编码"></a><strong>编码</strong></h5><img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/code1.png" class>
-
-<p>进行编码后记得在<code>index.js</code>处暴露方法。</p>
-<h5 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a><strong>单元测试</strong></h5><img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/jest2.png" class>
-
-<img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/jest1.png" class>
-
-<p>单元测试时，如果想打断点，记得修改上图中的配置后重新生成库。</p>
-<h5 id="dist说明"><a href="#dist说明" class="headerlink" title="dist说明"></a><strong>dist说明</strong></h5><img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/dist.png" class>
-
-<h5 id="打包"><a href="#打包" class="headerlink" title="打包"></a><strong>打包</strong></h5><p>如下图：</p>
-<ul>
-<li>每次修改库时，记得改<code>3</code>处的版本号，以及<code>1</code>处的CHANGELOG对本次修改进行一个简要的说明。</li>
-<li><code>2</code>所示部分根据不同时期的需求可对应进行更改，从而改变打包的内容。</li>
-<li>完事之后直接npm publish，如果需要关联到fusion design 则直接iceworks sync就行。</li>
-</ul>
-<img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/package.png" class>
-
-<h5 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a><strong>使用说明</strong></h5><img src="/2020/07/11/js%E5%B7%A5%E5%85%B7%E5%BA%93/use.png" class>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i @riil-frontend&#x2F;utils</span><br><span class="line"></span><br><span class="line">import &#123; arrayToTree,UnitFormat,Units,getNumberLength &#125; from &#39;@riil-frontend&#x2F;utils&#39;;</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="重复提交"><a href="#重复提交" class="headerlink" title="重复提交"></a>重复提交</h5><p>加节流防止重复提交</p>
-<p><a href="https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/5" target="_blank" rel="noopener">防抖和节流</a></p>
-<p><a href="https://juejin.im/post/6844904004850286605" target="_blank" rel="noopener">https://juejin.im/post/6844904004850286605</a></p>
-<p><a href="https://www.lodashjs.com/" target="_blank" rel="noopener">https://www.lodashjs.com/</a></p>
-<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h4><p>如果本身已经引入了第三方得工具库，比如lodash、underscore等，先看看它们得API看是否有现成得，如果没有再自己整一个，不然重复造轮子没多大意思，更何况有可能你造的轮子有可能是扁的…</p>
-<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/07/08/fusion%20design/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/08/fusion%20design/" itemprop="url">Fusion Design</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-08T15:45:00+08:00">
-                2020-07-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>因为团队要用fusion design，所以按我的习惯我得先知道他是什么、为什么、能做什么，我才好下手。</p>
-<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><p>先不负责任的下一个结论，fusion design是个撒子？</p>
-<p><strong>答案：</strong></p>
-<blockquote>
-<p><strong>一个平台：</strong> fusion.design</p>
-<p><strong>两个工具：</strong></p>
-<ol>
-<li>开发者工具 Iceworks </li>
-<li>设计师工具 FusionCool</li>
-</ol>
-</blockquote>
-<p>可以看作是下图这样纠缠：</p>
-<img src="/2020/07/08/fusion%20design/6.png" class>
-
-<h3 id="Fusion-Design"><a href="#Fusion-Design" class="headerlink" title="Fusion Design"></a>Fusion Design</h3><p>fusion design = 一套基础组件库 @alifd/next + 主题定制平台 <a href="https://fusion.design" target="_blank" rel="noopener">https://fusion.design</a> +  设计师工具 FusionCool+ 物料中心 。</p>
-<p>所以更确切的说 Fusion Design算是一套体系，是一种旨在提升设计与开发之间 UI 构建效率的工作方式 ，<code>我认为理解这点很重要</code>，不然可能咱们用半天还以为他就是另一个库就像我们之前用的antd一样，其实完全不是一回事。</p>
-<p><strong>Fusion Design能解决哪些痛点：</strong></p>
-<ol>
-<li><p>【协作成本】内部（UCD和研发）协作问题，不再需要因为对概念、规范、复用性等问题UCD和研发不断沟通。</p>
-</li>
-<li><p>用户体验一致性问题 ，不同业务功能或者不同迭代功能，同样功能的交互和组件用户体验不一致。</p>
-</li>
-<li><p>【时间成本】重复工作问题，比如不断的review还原度不断的修正、UCD每次都需要对高保真进行规范说明以及关键内容的标注。</p>
-</li>
-</ol>
-<p>   <em>旧模式如下图：</em>红框部分是我们经常重复的内容。</p>
-   <img src="/2020/07/08/fusion%20design/1.png" class title="https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;53117538">
-
-<p><strong>Fusion Design提供了哪些能力来解决上诉的痛点：</strong></p>
-<ul>
-<li><p>物料中心：各种组件、区块、模板（包含官方（Next等）+其它第三方+咱们自研的）</p>
-</li>
-<li><p>UI的可定制能力，设计师根据物料中心的内容定制UI，还可沉淀设计模板。</p>
-</li>
-<li><p>研发都能配合前端工具（iceworks等），开发模块模板更高效，沉淀业务模板，后续可直接套用模板不用再开发。</p>
-</li>
-<li><p>快速定制、切换主题。</p>
-</li>
-</ul>
-<p>  应用fusion design之后，产出过程应该就会像下图：</p>
-  <img src="/2020/07/08/fusion%20design/2.png" class title="fusion design应用">
-
-<p><strong>@alifd/next</strong> </p>
-<ul>
-<li><strong>Next</strong> 是基于 Alibaba Fusion Design 的设计理念实现的一套骨架DPL(Design Pattern Library)类似于咱们之前使用的antd。配合 fusion.design 使用可以实现换肤的能力。</li>
-<li>基于React的组件库。 可以理解<strong><a href="https://github.com/alibaba-fusion/next" target="_blank" rel="noopener">Next</a></strong>是fusion design的技术实现。</li>
-</ul>
-<h4 id="小结一下"><a href="#小结一下" class="headerlink" title="小结一下"></a>小结一下</h4><p>所以综上所述，引人fusion design后，理想状态下设计师和研发产出页面（功能）的过程应该会如下面两张图所示：</p>
-<img src="/2020/07/08/fusion%20design/5.png" class title="前期产出">
-
-<img src="/2020/07/08/fusion%20design/4.png" class title="后期沉淀">
-
-
-
-<h3 id="物料中心"><a href="#物料中心" class="headerlink" title="物料中心"></a>物料中心</h3><p>可以理解成一个仓库，类似maven仓库或者npm仓库，里面可包含用开发好的<strong>物料</strong>(区块、模板、组件)，该物料中心与sketch、iceworks是互通的，相互间可上传可下载。</p>
-<h3 id="FusionCool"><a href="#FusionCool" class="headerlink" title="FusionCool"></a>FusionCool</h3><p>FusionCool：组件分发工具，主要面向所有设计师。当组件构建者完成组件设计发布组件后，每位设计师手上的Fusion Cool都会“自动”接收到构建者的发布的组件样式，确保无缝衔接组件更新。</p>
-<p>FusionCool也可以简单理解为是设计端使用的<strong>sketch</strong> 插件，达到<strong>sketch</strong> 既能设计页面，又能沉淀已经设计完成的模板。即设计师使用的同一套规范的组件，产出的设计稿都是同一套规范。</p>
-<img src="/2020/07/08/fusion%20design/3.png" class>
-
-<h3 id="IceWorks"><a href="#IceWorks" class="headerlink" title="IceWorks"></a>IceWorks</h3><p>飞冰(ICE) 是一套基于 React 的中后台应用解决方案，ICE 包含了一条从设计端到开发端的完整链路，帮助用户快速搭建属于自己的中后台应用，开发者无须关注环境的问题，并且有海量物料可用。目前已经和 Fusion 的物料体系打通，可以轻松使用 Fusion 站点的物料。</p>
-<p>Iceworks 是淘宝飞冰团队开发的面向前端开发者的 GUI 工具，开发者无须关注环境的问题，并且有海量物料可用。目前已经和 Fusion 的物料体系打通，可以轻松使用 Fusion 站点的物料。</p>
-<p>fusion design的御用开发者工具，基于其开发各种组件丰富fusion design站点的<strong>物料中心</strong>，当然iceworks也能轻松使用 Fusion 站点的物料，两者互通。</p>
-<h3 id="总之"><a href="#总之" class="headerlink" title="总之"></a>总之</h3><p>我个人认为fusion design的价值在于提升工作效率，因为它改造了前端（设计师和研发）的工作方式，减少了重复工作的内容，减少了沟通以及甩锅的成本，通过fusion design这个平台，让设计师和研发都能深度参与产品中来且这种参与是互补共赢的，它让设计师和研发之间的一些壁垒或者冲突点慢慢的消失了。</p>
-<p><strong>另外</strong></p>
-<p>对于角色（设计、研发）来说：可能最大变化就是对于通用性的、沉淀下来的物料，<strong>UCD才是老板</strong>，这块的样式布局等需要UCD统一把关收口，研发只需要<strong>更新包</strong>就行。总体上就是UCD的工作内容会增加但是研发时间会减少，协作时间也会减少，同时体验一致性也能达到要求。我估计能达到这种状态应该就可以要自行车了吧？</p>
-<p>但是这玩意都是<strong>线上</strong>的，不知道能不能支持本地搭一套（如果不能搭是不是又不能要自行车了）？</p>
-<h4 id="题外篇：iceworks-server"><a href="#题外篇：iceworks-server" class="headerlink" title="题外篇：iceworks server"></a>题外篇：iceworks server</h4><p>如需使用iceworks提供的一些快捷能力，比如新建项目（基于fusion design、react、typescript）、项目管理等。</p>
-<p>用于练手刚好。</p>
-<h5 id="1-安装iceworks"><a href="#1-安装iceworks" class="headerlink" title="1.安装iceworks"></a>1.安装iceworks</h5><p>npm install iceworks -g –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
-<p>每个命令大家都可以玩一玩，我下面只介绍<code>start</code>的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">D:\baymax_projects\fusion-design-one&gt;iceworks -h</span><br><span class="line">Usage: iceworks &lt;command&gt; [options]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -V, --version                           output the version number</span><br><span class="line">  -h, --help                              output usage information</span><br><span class="line"></span><br><span class="line">Commands:</span><br><span class="line">  start                                   start and open the iceworks</span><br><span class="line">  init [type] [npmName]                   init project&#x2F;material&#x2F;component by template</span><br><span class="line">  add [options] [materialType] [npmName]  add block to current directory</span><br><span class="line">  generate                                generate material collection data(material.json)</span><br><span class="line">  sync [options]                          sync materials data to Fusion Material Center</span><br><span class="line">  use &lt;version&gt;                           specify the iceworks-core version</span><br><span class="line">  config [type] [key] [value]             operate iceworks global config</span><br><span class="line"></span><br><span class="line">  Run iceworks &lt;command&gt; --help for detailed usage of given command.</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="2-启动-安装iceworks-server"><a href="#2-启动-安装iceworks-server" class="headerlink" title="2.启动 安装iceworks-server"></a>2.启动 安装iceworks-server</h5><p><strong>windows:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iceworks  start</span><br></pre></td></tr></table></figure>
-
-<p><strong>linux：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;sh</span><br><span class="line"># iceworks start</span><br><span class="line">iceworks # open http:&#x2F;&#x2F;localhost:8000&#x2F;</span><br></pre></td></tr></table></figure>
-
-<p>3.若提示是否安装iceworks-server 直接Enter 默认是 稍等几分钟 自动启动浏览器</p>
-<h4 id="iceworks-server使用方法"><a href="#iceworks-server使用方法" class="headerlink" title="iceworks server使用方法"></a>iceworks server使用方法</h4><p>1.打开项目,(首先你要有项目包)</p>
-<img src="/2020/07/08/fusion%20design/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_15942030658073.png" class>
-
-<p>2.安装依赖</p>
-<p>如果要切换cnpm源，设置包管理工具cnpm（前提是现状了cnpm），如不需要则跳过此步。</p>
-<p><img src="http://p.qlogo.cn/qqmail_head/Q3auHgzwzM71G0g4z5ytHZ3RnWFG6CQBymPLrJfcn3414aSmCt9kxE3rFpGUyE4mkZAq7swa9ddRWBBE9reucepYTnCFraPo/0" alt="img"></p>
-<p><img src="http://p.qlogo.cn/qqmail_head/Q3auHgzwzM6v4zGcvurETEGvaibCoKpJiaLYIXnT6IQWUwzHpr64y93qJYK3iapia65fAOSFz92XwKagfibU85Ru1xnrFib2YttvcT/0" alt="img"></p>
-<p>3.启动服务</p>
-<p>当然你也可以本地运行</p>
-<img src="/2020/07/08/fusion%20design/image-20200708181243032.png" class>
-
-<p>4.当页面变成这样说明已经启动成功:(会自动跳转到项目页面)</p>
-<img src="/2020/07/08/fusion%20design/image-20200708181842813.png" class>
-
-<p>5.打开编辑器</p>
-<p><img src="http://p.qlogo.cn/qqmail_head/PiajxSqBRaEJVGxo28SB3YVYmnPVIWRrzicm3k0lSgoDfAdpDEwwfic7xdf2CSLwkN5DhaickyISN8y7dXqyHflWnhxz8HiaR8EvG/0" alt="img"></p>
-<img src="/2020/07/08/fusion%20design/image-20200708181919865.png" class>
-
-<h4 id="感谢："><a href="#感谢：" class="headerlink" title="感谢："></a>感谢：</h4><blockquote><footer><strong>阿里中后台UI解决方案 - Fusion</strong><cite><a href="https://zhuanlan.zhihu.com/p/53117538" target="_blank" rel="noopener">zhuanlan.zhihu.com/p/53117538</a></cite></footer></blockquote>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/06/05/%E5%89%8D%E7%AB%AF%E7%9B%91%E6%8E%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/05/%E5%89%8D%E7%AB%AF%E7%9B%91%E6%8E%A7/" itemprop="url">前端监控</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-05T17:52:00+08:00">
-                2020-06-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>其实老早就想做监控，之前整理的<a href="/2020/04/28/%E5%89%8D%E7%AB%AF%E5%9F%8B%E7%82%B9(%E4%B8%80)/" title="前端埋点(一)">前端埋点(一)</a>里头有说一些相关的内容。</p>
-<p>不痛就不慌，所以说说我们痛的地方：</p>
-<ol>
-<li>因为我们的产品都是部署在客户内网的，所以对于debug及其不友好，客户现场问题排查前端几乎没有任何输入，难弄。</li>
-<li>产品迭代了多个版本，但是没有任何客户现场的用户行为等数据，产品优化少了一些输入。</li>
-</ol>
-<p>本来计划是自研，但是由于业务压力突然来袭，所以就搁置了，不过我犹不放弃，觉得自研既然短期不现实，那可以站在巨人肩膀上搞一搞。</p>
-<p>找了两个工具Sentry+rrweb，基于两个工具做一些定制化，手里不久有东西了吗。</p>
-<h3 id="Sentry"><a href="#Sentry" class="headerlink" title="Sentry"></a>Sentry</h3><p>Sentry的应用程序监视平台可为每位开发人员提供帮助诊断，修复和优化其代码的性能。</p>
-<p><a href="https://docs.sentry.io/platforms/native/configuration/options/" target="_blank" rel="noopener">config</a></p>
-<p><a href="https://docs.sentry.io/platforms/javascript/" target="_blank" rel="noopener">config for JavaScript</a></p>
-<p><a href="https://sentry.io/features/" target="_blank" rel="noopener">React</a></p>
-<p><a href="https://blog.sentry.io/2019/03/06/new-features-greater-visibility/" target="_blank" rel="noopener">features</a></p>
-<h4 id="package"><a href="#package" class="headerlink" title="package"></a>package</h4><p>@sentry/tracing 性能监控</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Using npm</span></span><br><span class="line">$ npm install --save @sentry/react @sentry/tracing</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="config"><a href="#config" class="headerlink" title="config"></a>config</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Sentry.init(&#123;</span><br><span class="line">  dsn: <span class="string">'http://cb4e9b434f004c53a51af8ab45346635@172.17.162.101:9100/2'</span>,</span><br><span class="line">  integrations: [<span class="keyword">new</span> Integrations.BrowserTracing()],<span class="comment">//性能监控配置</span></span><br><span class="line">  <span class="comment">// beforeSend (event, hint) &#123;</span></span><br><span class="line">  <span class="comment">//   // Check if it is an exception, and if so, show the report dialog 错误弹窗</span></span><br><span class="line">  <span class="comment">//   if (event.exception) &#123;</span></span><br><span class="line">  <span class="comment">//     Sentry.showReportDialog(&#123; eventId: event.event_id &#125;);</span></span><br><span class="line">  <span class="comment">//   &#125;</span></span><br><span class="line">  <span class="comment">//   return event;</span></span><br><span class="line">  <span class="comment">// &#125;,</span></span><br><span class="line">  debug: <span class="literal">false</span>,<span class="comment">// 调试模式</span></span><br><span class="line">  attachStacktrace: <span class="literal">false</span>,<span class="comment">//附上堆栈信息</span></span><br><span class="line">  tracesSampleRate: <span class="number">1</span>,<span class="comment">// Be sure to lower this in production</span></span><br><span class="line">  environment: <span class="string">'development'</span>,</span><br><span class="line">  <span class="comment">// logLevel: 2,</span></span><br><span class="line">  release: <span class="string">'sentryTest-0.1.0'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个 全局scope ，可以理解为上报数据的附加信息</span></span><br><span class="line">Sentry.configureScope(<span class="function">(<span class="params">scope</span>) =&gt;</span> &#123;</span><br><span class="line"> <span class="comment">//标签，可用于筛选</span></span><br><span class="line"> scope.setTag(<span class="string">"first-tag"</span>, <span class="string">"Guide"</span>);</span><br><span class="line"> <span class="comment">//绑定用户信息</span></span><br><span class="line"> scope.setUser(&#123;</span><br><span class="line">  id: <span class="number">1</span>,</span><br><span class="line">  name: <span class="string">"gamehu"</span>,</span><br><span class="line">  email: <span class="string">"gamehu@yeah.net"</span>,</span><br><span class="line"> &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//局部：自定义上下文，补充信息</span></span><br><span class="line">    Sentry.setContext(<span class="string">"zhangsan"</span>, &#123;</span><br><span class="line">      name: <span class="string">"zhangsan"</span>,</span><br><span class="line">      age: <span class="number">19</span>,</span><br><span class="line">      attack_type: <span class="string">"zhangsan"</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 创建一个零时到 scope ，配置到 context 上面</span></span><br><span class="line">    <span class="keyword">const</span> scope = <span class="keyword">new</span> Sentry.Scope();</span><br><span class="line">    scope.setTag(<span class="string">"section"</span>, <span class="string">"articles"</span>);</span><br><span class="line">    scope.setUser(&#123;</span><br><span class="line">      id: <span class="number">2</span>,</span><br><span class="line">      name: <span class="string">"zhangsan"</span>,</span><br><span class="line">      email: <span class="string">"zhangsan@yeah.net"</span>,</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="sourceMap"><a href="#sourceMap" class="headerlink" title="sourceMap"></a>sourceMap</h4><p>sentry-cli releases -o 组织 -p 项目 files <a href="mailto:staging@1.0.1">staging@1.0.1</a> upload-sourcemaps js文件所在目录 –url-prefix 线上资源URI</p>
-<p>sentry-cli releases files sentryTest-0.1.0 upload-sourcemaps –url-<strong>prefix</strong> ‘<a href="http://172.17.162.101:9100/organizations/sentry/issues/61/?project=2&amp;query=is%3Aunresolved&#39;" target="_blank" rel="noopener">http://172.17.162.101:9100/organizations/sentry/issues/61/?project=2&amp;query=is%3Aunresolved&#39;</a> ‘./dist/<strong>static</strong>/js’</p>
-<h4 id="添加一个-EventProcessor-对全局生效"><a href="#添加一个-EventProcessor-对全局生效" class="headerlink" title="添加一个 EventProcessor 对全局生效"></a>添加一个 EventProcessor 对全局生效</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> attachmentUrlFromDsn = <span class="function">(<span class="params">dsn, eventId</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; host, path, projectId, port, protocol, user &#125; = dsn;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;protocol&#125;</span>://<span class="subst">$&#123;host&#125;</span><span class="subst">$&#123;port !== <span class="string">''</span> ? <span class="string">`:<span class="subst">$&#123;port&#125;</span>`</span> : <span class="string">''</span>&#125;</span><span class="subst">$&#123;path !== <span class="string">''</span> ? <span class="string">`/<span class="subst">$&#123;path&#125;</span>`</span> : <span class="string">''</span></span></span></span><br><span class="line"><span class="string"><span class="subst">    &#125;</span>/api/<span class="subst">$&#123;projectId&#125;</span>/events/<span class="subst">$&#123;eventId&#125;</span>/attachments/?sentry_key=<span class="subst">$&#123;user&#125;</span>&amp;sentry_version=7&amp;sentry_client=custom-javascript`</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//添加一个 EventProcessor 对全局生效</span></span><br><span class="line">Sentry.addGlobalEventProcessor(<span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> client = Sentry.getCurrentHub().getClient();</span><br><span class="line">    <span class="keyword">const</span> endpoint = attachmentUrlFromDsn(</span><br><span class="line">      client.getDsn(),</span><br><span class="line">      event.event_id</span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">const</span> formData = <span class="keyword">new</span> FormData();</span><br><span class="line">    <span class="keyword">const</span> data = <span class="built_in">JSON</span>.stringify(&#123; <span class="attr">logEntries</span>: [<span class="string">"sentryTest"</span>], <span class="attr">message</span>: event.message, <span class="attr">logger</span>: event.logger &#125;);</span><br><span class="line">    formData.append(</span><br><span class="line">      <span class="string">'my-attachment'</span>,</span><br><span class="line">      <span class="keyword">new</span> Blob([data], &#123;</span><br><span class="line">        type: <span class="string">'application/json'</span>,</span><br><span class="line">      &#125;),</span><br><span class="line">      event.event_id + <span class="string">'.json'</span></span><br><span class="line">    );</span><br><span class="line">    fetch(endpoint, &#123;</span><br><span class="line">      method: <span class="string">'POST'</span>,</span><br><span class="line">      body: formData,</span><br><span class="line">    &#125;).catch(<span class="function">(<span class="params">ex</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// we have to catch this otherwise it throws an infinite loop in Sentry</span></span><br><span class="line">      <span class="built_in">console</span>.error(ex);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> event;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">    <span class="built_in">console</span>.error(ex);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h4 id="RRWEB-TimeCat"><a href="#RRWEB-TimeCat" class="headerlink" title="RRWEB/TimeCat"></a>RRWEB/TimeCat</h4><p>录制回放工具，可单独使用也可搭配Sentry使用，可对用户操作录屏，针对一些现场问题可作为排查问题得输入.</p>
-<p><a href="https://github.com/rrweb-io/rrweb/blob/master/guide.zh_CN.md" target="_blank" rel="noopener">rrweb使用指南</a></p>
-<p><img src="https://picb.zhimg.com/v2-8e7849c3630d23eb2d5f8586b8d388aa_r.jpg" alt="preview"></p>
-<h3 id="监控理论的记录"><a href="#监控理论的记录" class="headerlink" title="监控理论的记录"></a>监控理论的记录</h3><p>要做监控先做设计，根据产品、研发、测试等的输入，整理出监控数据类别：</p>
-<ul>
-<li><strong>JS</strong> 的异常错误；</li>
-<li>资源测速；</li>
-<li>接口的成功率、失败率；</li>
-<li>性能。</li>
-</ul>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/XIibZ0YbvibkWRcKibvw8Iic9FeJvR9mU8FuJuPBAvRsOvYl00ZoNtPYbolvxxSzGSsNgBGn573TfjTfkjm00ZoichQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/XIibZ0YbvibkWRcKibvw8Iic9FeJvR9mU8FubycbpicgLSjnEiamlGm14Hoq4ayriaZibDDNqHRMTMa4hYAic0DJt1wE7dA/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<p><img src="https://mmbiz.qpic.cn/mmbiz_png/XIibZ0YbvibkWRcKibvw8Iic9FeJvR9mU8FuGtyE0qJ1E6Y3VuXjMPy82ciamb0ud6RyjtUgPlq7XlnX84YCDAbBoGw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1" alt="img"></p>
-<h2 id><a href="#" class="headerlink" title></a></h2><blockquote><footer><strong>FEX-zhangjunah</strong><cite><a href="http://fex.baidu.com/blog/2014/05/front_end-data/" target="_blank" rel="noopener">前端数据之美 -- 基础篇</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>FEX-zhangtao</strong><cite><a href="https://fex.baidu.com/blog/2014/05/build-performance-monitor-in-7-days/" target="_blank" rel="noopener">7 天打造前端性能监控系统</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>何方舟-前端之巅</strong><cite><a href="https://mp.weixin.qq.com/s/aqO55IyVCZzh9yhKuOKSCQ" target="_blank" rel="noopener">前端越管越宽，腾讯Now直播如何把监控体系做到极致？</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>LDP</strong><cite><a href="https://tldp.org/LDP/abs/html/exitcodes.html" target="_blank" rel="noopener">Advanced Bash-Scripting Guide</a></cite></footer></blockquote>
-
-<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2508,7 +2314,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">115</span>
+                  <span class="site-state-item-count">119</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2530,7 +2336,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">84</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -3182,7 +2988,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("DDD(1)");titles.push("拖延");titles.push("CMDB");titles.push("Ice.js单元测试");titles.push("前端安全");titles.push("前端测试");titles.push("Jest");titles.push("js工具库");titles.push("Fusion Design");titles.push("前端监控");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("AHA");titles.push("ESLint(no-prototype-builtins)");titles.push("nginx-docker");titles.push("nodeJs 部署");titles.push("DDD(1)");titles.push("拖延");titles.push("CMDB");titles.push("Ice.js单元测试");titles.push("前端安全");titles.push("前端测试");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {
@@ -3227,5 +3033,4 @@
 
   
 
-</body>
-</html>
+<script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
