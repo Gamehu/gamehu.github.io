@@ -309,6 +309,418 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/12/19/%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/12/19/%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E6%B3%95/" itemprop="url">问题解法咋聊(1)</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-19T11:32:00+08:00">
+                2020-12-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>因为团队内部经常会有问题复盘以及技术故事讨论等活动，怎么让这个讨论是有营养且找到根因，保证最终能落到具体的行动项上面。我觉得这是一门很大的学问。</p>
+<p>不信你留心观察你参加相关会议或者讨论，你会发现弄了半天问题好像解了又好像没解，过程可能还会伴有撕逼和甩锅…，有句古语说得好：我在旁边坐，锅从天上来。</p>
+<h4 id="那咋聊呢"><a href="#那咋聊呢" class="headerlink" title="那咋聊呢"></a>那咋聊呢</h4><h5 id="Point-1-描述问题"><a href="#Point-1-描述问题" class="headerlink" title="Point 1 描述问题"></a>Point 1 描述问题</h5><p>描述问题，切忌采用<strong>下结论</strong>的思维和话语，比如：我认为、我觉得…。</p>
+<p>我们是为了解问题的，所以你只需要言简意赅的把问题说清楚，这个时候你是一个莫得感情的机器。</p>
+<h6 id="怎么言简意赅呢"><a href="#怎么言简意赅呢" class="headerlink" title="怎么言简意赅呢?"></a>怎么言简意赅呢?</h6><p>站在第三视角陈述：只说现象不说结论，时间、环境、人物、操作过程、发生的现象、造成什么影响…。</p>
+<p>如果有必要还可以进行一个动作：<strong>过程还原</strong></p>
+<p><em>直接叙述工作过程，有问题的环节或阶段，什么人，做了什么事，当时是怎么考虑的，在这个动作后结果是什么。</em></p>
+<h5 id="Point-2-根因分析"><a href="#Point-2-根因分析" class="headerlink" title="Point 2 根因分析"></a>Point 2 根因分析</h5><p>描述之后这个时候可以说说自己的看法了：<em>描述最终定位到的直接原因是什么</em></p>
+<h6 id="有个模板可参考"><a href="#有个模板可参考" class="headerlink" title="有个模板可参考"></a><strong>有个模板可参考</strong></h6><p><strong>1.技术根因分析</strong></p>
+<ul>
+<li><p>引入环节：</p>
+<blockquote>
+<p>产品设计是否有问题？</p>
+<p>需求分析是否有问题？</p>
+<p>设计环节是否有问题？</p>
+<p>代码编写是否有问题？</p>
+<p>其他？</p>
+</blockquote>
+</li>
+<li><p>流出环节：</p>
+<blockquote>
+<p>各评审环节是否有遗漏？</p>
+<p>是否进行研发自测？</p>
+<p>测试场景、测试用例是否覆盖全？</p>
+<p>是否进行了系统测试？</p>
+<p>其他？</p>
+</blockquote>
+</li>
+<li><p>确定关键根因是什么：</p>
+<p>如果有多个根因在逻辑层次上相同，则取关键的原因，根因应该是具体的、客观的、在目前组织能力下可被改进的。</p>
+</li>
+</ul>
+<p><strong>2.管理根因分析</strong></p>
+<ul>
+<li><p>流程/制度原因：</p>
+</li>
+<li><p>组织因素：</p>
+</li>
+<li><p>执行原因：</p>
+<p>【帮助】流程/制度方面：考虑组织管理上是否有合适的流程、指导书、管理Checklist；</p>
+<p>组织因素方面：考虑人员分配、个人技能、培训、组织环境等原因；</p>
+<p>执行方面：考虑计划、监控、沟通方面的原因。</p>
+</li>
+</ul>
+<p> <font color="#4169E1" size="3"><strong>这个活动一定要有被随便蹂躏的那种奔放和豁达！！！</strong></font></p>
+<h5 id="Point-3-纠正、预防措施"><a href="#Point-3-纠正、预防措施" class="headerlink" title="Point 3 纠正、预防措施"></a>Point 3 纠正、预防措施</h5><p>分析完了之后，一定要有落地的行动项。</p>
+<table>
+<thead>
+<tr>
+<th><strong>根本原因</strong></th>
+<th>措施类型</th>
+<th><strong>措施内容</strong></th>
+<th>责任人</th>
+<th><strong>预定完成日期</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><em>技术根因：</em>  <em>例如，XX特性，在大规格、灵活配置等方面需求设计不充分</em></td>
+<td>纠正措施</td>
+<td><em>例如：对XX特性组织进行重新设计，刷新XX方案</em></td>
+<td>Jack Ma</td>
+<td><em>2020/11/1</em></td>
+</tr>
+<tr>
+<td></td>
+<td>预防措施</td>
+<td><em>例如：更新××技术规范、工具、checklist等等</em></td>
+<td>Pony Ma</td>
+<td><em>2020/11/1</em></td>
+</tr>
+</tbody></table>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/12/17/%E6%95%8F%E6%8D%B7%E5%92%8B%E6%95%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/12/17/%E6%95%8F%E6%8D%B7%E5%92%8B%E6%95%B4/" itemprop="url">敏捷</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-12-17T18:15:00+08:00">
+                2020-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <img src="/2020/12/17/%E6%95%8F%E6%8D%B7%E5%92%8B%E6%95%B4/scrum.jpg" class title="Photo by İrfan Simsar on Unsplash">
+
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>前前后后经历了几个公司敏捷的做法，有些些感悟，在此表一表。</p>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><p>让我知道<strong>敏捷</strong>的公司，那是在14年我进了一家主打3D数字建模的公司，我的直接领导是公司敏捷的推崇者，当时两个研发团队也是按照敏捷走的，但是敏捷到底是个啥？当时老大给了我一本书让我自己去悟。书名好像是《Scrum敏捷软件开发》。之后大体有了个了解，至少对<code>站会、用户故事、backlog、sprint、SM、PO</code>等词有个概念。</p>
+<p>那时候觉得挺新鲜因为在此之前我只知道瀑布模式。在这家公司时我对敏捷印象是最深的，因为我经历了新旧之间的碰撞，不仅是思想上的还有实操上的。因为公司还有个管评审的年长型主管A大，他刚好更偏向于瀑布模式。</p>
+<h4 id="正文"><a href="#正文" class="headerlink" title="正文"></a><strong>正文</strong></h4><p><strong>chapter 1 ：</strong></p>
+<p>先交代一些往事，当时的我，迷茫的一逼，感觉写代码不适合我，我想要转产品，当然我说的产品不是UE性质那种产品哈，我说的是正儿八经的那种产品经理，“那种”指的是：从0到1打造适合用户且用户要买单的那种产品的产品经理。</p>
+<p>刚好我的leader就有个类似经历的人，他曾经因为在上海的一个研究所交付的产品令客户不满意，他去呆了3个月，硬生生从0到1重新根据需求设计产品，最终成功交付，当时研究所的人对他的评价是，他比我更懂我得工作。不然为啥他被现在的公司拉去当了副总？你品一品他当时只是一个研发岗。</p>
+<p>我虽然面试的是开发岗，刚好当时负责面试的人有事出去了，他刚好遇到了就说先跟他聊一聊，当我告诉他有意向走产品的时候，由于聊的很好，他果断把我留下来当他的助手了。所以我入职是没有经过技术面试的…。</p>
+<p>入职的title是<em>产品助理</em>，前期主要干的事就是看书，用Latex写公司宣传文档和摸鱼，后期就让我跟项目，主要是做项目需求。</p>
+<p>由于我们的客户多是各种工厂所以通常位置都比较偏僻，想去泡个脚都要摩托转公交再转出租的节奏。</p>
+<p>犹记得当时把我一个人丢到工厂的时候，那种无助…工厂里的人通常都比较务实比较直接。被怼的体无完肤到和颜悦色，中间也就是几顿酒的事….故事太多以后写小说再用。</p>
+<p>说这些是怎么个意思呢？其实没啥意思，就是说说一些背景，任何事物都是有联系的，你再细品。</p>
+<p><strong>chapter 2：</strong></p>
+<p>接上，在工厂第一次差不多进一个月，工作内容就是梳理各个环节各个干系人的需求，并整理成文档。</p>
+<p>感觉终于告一段落之后，速度赶回北京。然后就是评审，这个时候问题就来了，我老大觉得现有的需求可以开始准备进入研发了，遇到需求问题再澄清就行，但是评审主管就不干了，说你这需求文档需要细化的地方还有挺多，不能进入研发，所以评审没过。会后两位大佬分别拉我谈了一次，一个觉得需求不够完整（瀑布），一个觉得需求已经够了（敏捷）。那为什么双方没有达成一致呢，在我看来当时我老大推崇的敏捷没有玩好，比如A提的一点，研发是敏捷了节奏都挺快，交付周期也缩短了，但是交付结果不太好，老有返工，导致一个项目迟迟不能最终验收，这就是A不赞同的根本原因，因为连客户想要什么都没有完全搞清楚。</p>
+<p>对应到<strong>敏捷</strong>里的内容就是，在<strong>检视和调整</strong>两块没有足够重视。也就是下面的几个会议没有开好：</p>
+<ol>
+<li>Sprint 计划会议 </li>
+<li>每日 Scrum 站会 </li>
+<li>Sprint 评审会议 </li>
+<li>Sprint 回顾会议</li>
+</ol>
+<p>我理解以上四个会议就是每个迭代里防止走偏的措施，但最后还是走偏了。</p>
+<p><strong>chapter 3：</strong></p>
+<p>现公司一进来就是敏捷，但是大多数时间也是走的不顺，有段时间还专门找了教练带着跑了几个月，效果也是一般般。</p>
+<p>当时我想了想可能原因有下面几方面：</p>
+<ol>
+<li><p>公司是家传统意义上的软件公司，前面都是瀑布模式，虽然是新产品线但是也有很多老员工，所以不管从公司还是从人来说，这个转变是需要时间且需要强有力的刺激，<strong>很明显是时间给够了但是刺激不够</strong>。我们都知道有刺激才会有反应。</p>
+</li>
+<li><p>大家对敏捷的理解参差不齐，很多朋友是随波逐流，且最致命的是这类朋友基本上都认为自己是懂敏捷的，但是真的懂吗，大概率不是的或者只停留在字面上的理解（我其实也是一知半解）。</p>
+<blockquote>
+<p>敏捷应用其实在我看来是一系列的动作的组合，该套组合需是不断优化且需要组织严格遵守的，组合好之后，把该组合套在软件的开发周期里，然后一遍一遍的重复重复再重复。</p>
+<p>另外很多人的误解是，敏捷就不用写任何文档了，在我看来不是的，必要的文档还是需要的比如设计文档。</p>
+</blockquote>
+</li>
+</ol>
+<p>前段时间公司大佬给够了刺激，比如重新梳理组织架构、丰富了工具、完善了开发/评审流程（必要的设计文档等）、强制执行双周迭代、双周演示会等等，我的感受是团队的流转效率是有提高的。</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a><strong>小结</strong></h4><p>我理解的敏捷其实是门大学问，不是只有简单的一些关键词，比如还有“以赋能和信任个人为中心的文化”这类的理念内容，持续学习中。</p>
+<p>所以其实我没啥发言权，不过随便说说，也没谁管得着，反正是我自己的博客….。</p>
+<p>从我的经历来看，敏捷是个好东西，但是落地也确实不容易，除了敏捷本身就代表一种变革（动作大）以外，它本身也涉及到很多关于人的因素，比如人的思维、习惯、团队文化等，但是如果因为对敏捷应用的不成功，就觉得敏捷不好用，并怀疑它的价值，不可取哈。</p>
+<p>另外敏捷只是解决问题的一种方式，也不要把它捧得太高。</p>
+<p><strong>任何方法或者工具都有它所适用的上下文。</strong></p>
+<blockquote>
+<p>我认为敏捷是解决问题的一种方式，技术越来越多成为变现的一种手段。那当然你会问谁先行呢？思维观念要变，同时也需要给搭配上不同的手段，谁先谁后并不是主要矛盾。— DXcon</p>
+</blockquote>
+<p><strong>敏捷的价值观</strong></p>
+<blockquote>
+<p>摘自&lt;说透敏捷&gt;</p>
+</blockquote>
+<ol>
+<li>个体和交互胜过过程和工具。</li>
+<li>可以工作的软件胜过面面俱到的文档。</li>
+<li>客户合作胜过合同谈判。</li>
+<li>响应变化胜过遵循计划。</li>
+<li>虽然右项有价值，但我们更重视<strong>左项</strong>。</li>
+</ol>
+<p>一个公司或者团队要应用敏捷，不代表要全套接收，有可能只需要敏捷里的某块就可以，不信谣不传谣。</p>
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/12/01/AHA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1636,636 +2048,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/07/30/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/30/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/" itemprop="url">前端安全</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-30T11:04:00+08:00">
-                2020-07-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>我们的产品通常进入客户现场之前都会有一系列的安全扫描（公司级的、客户级的），去年我们团队就解决了好几个安全问题，不过通常都是后端的方式来解决，但其实某些安全问题前端也能解，有些问题前端解更合适，这不借着重新出发的春风，往前端工程化中加了一步<strong>安全</strong>。</p>
-<p>此篇文章收获颇多。<a href="https://mp.weixin.qq.com/s?__biz=MjM5MjY3OTgwMA==&mid=2652469355&idx=1&sn=fd1a47ea216beae53f5d807c21186566&chksm=bd4f4a7c8a38c36a116a659c10e08367b217448a24752ac677e378cad1b9e1cf9b2d6705e113&mpshare=1&scene=1&srcid=0717EknGxzkoHpNBlCIP6O4G&sharer_sharetime=1594989878682&sharer_shareid=77df2eafd0a472623696abf038541666&version=3.0.25.2103&platform=win&rd2werd=1#wechat_redirect" target="_blank" rel="noopener">WEB前端安全自查和加固</a></p>
-<h3 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h3><h5 id="对于安全方面的共识"><a href="#对于安全方面的共识" class="headerlink" title="对于安全方面的共识"></a>对于安全方面的共识</h5><ol>
-<li>对于第三方包的引入，必须经过<code>npm audit+snyk</code>安全扫描后且经过小组内评审通过后方才能引入。</li>
-<li>对于我们自己发布的包，必须去掉敏感信息。</li>
-<li>每次更新了package.json之后都需要进行安全扫描。</li>
-</ol>
-<p>如下图，是我们项目里我用<strong>snyk</strong>执行扫描之后报出问题的包信息。</p>
-<img src="/2020/07/30/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/image-20200730110550740.png" class>
-
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>后续会把考虑把该步骤拿到流水线里去做，因为虽然大家意识层面共识了，落地的时候可能还是会有各种遗漏，所以干脆直接交给机器来做。</p>
-<p>安全无小事，先动起来！</p>
-<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/" itemprop="url">前端测试</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-20T11:24:06+08:00">
-                2020-07-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>其实老早以前就想在产品中引入单元测试，领导也让我好好做一个分享主题，分享好做花功夫就行，但是我觉得此主题的分享最终目的是为了落地，所以需要一个契机，不然大家听了就完了也没啥x用。</p>
-<p>刚好大佬们上个月做了个决定，决定从前到后整体重新架构，重新梳理，做一个带中台属性的系统，从而是产品能有更多平台能力，也能更好的和另外的产线想结合。当然我说的比较云淡风轻的，干起来你才知道这是一个多么有挑战的目标，扯远了，下面说说前端测试这块的内容。</p>
-<h3 id="名词定义"><a href="#名词定义" class="headerlink" title="名词定义"></a>名词定义</h3><p>基础组件：antd、next等提供的组件。</p>
-<p>通用组件：咱们系统中抽取出来的组件公用的组件（完全自定义的以及基于基础组件改造的）=&gt;<strong>单元测试</strong>（UI测试可选）</p>
-<p>业务组件：通过基础组件、通用组件等组合起来的组件（区块）=&gt;<strong>单元测试、集成测试</strong>（UI测试可选）</p>
-<h3 id="为什么需要测试？"><a href="#为什么需要测试？" class="headerlink" title="为什么需要测试？"></a>为什么需要测试？</h3><ul>
-<li>提高代码质量</li>
-<li>倒逼开发对编码的设计更加低耦合以及合理，方便后续的迭代/重构</li>
-<li>最大程度保证产品符合预期（因为各种场景都测试）</li>
-<li>减少测试的投入（比如回归）</li>
-<li>提升开发的信心（bug少）</li>
-</ul>
-<h3 id="前端测试的类型"><a href="#前端测试的类型" class="headerlink" title="前端测试的类型"></a>前端测试的类型</h3><p><strong>单元测试（Unit Test）</strong>、<strong>集成测试（Integration Test）</strong>、<strong>UI 测试（UI Test）</strong></p>
-<h5 id="单元测试应用："><a href="#单元测试应用：" class="headerlink" title="单元测试应用："></a>单元测试应用：</h5><ul>
-<li><p>代码中多个组件共用的工具类库、多个组件共用的子组件等。</p>
-</li>
-<li><p>能进行单元测试的函数/组件，一定是低耦合的，这也从一定程度上保证了我们的代码质量。</p>
-<p>比如我们的<strong>工具库、组件库</strong>这类通用低耦合的内容就比较适用单元测试。</p>
-</li>
-</ul>
-<p><em>「通常情况下，在公共函数/组件中一定要有单元测试来保证代码能够正常工作。单元测试也应该是项目中数量最多、覆盖率最高的。」</em></p>
-<h5 id="集成测试应用："><a href="#集成测试应用：" class="headerlink" title="集成测试应用："></a>集成测试应用：</h5><ul>
-<li>耦合度较高的函数/组件、经过二次封装的函数/组件、多个函数/组件组合而成的函数/组件等。</li>
-<li>集成测试的目的在于，测试经过单元测试后的各个模块组合在一起是否能正常工作。会对组合之后的代码整体暴露在外接口进行测试，查看组合后的代码工作是否符合预期。</li>
-</ul>
-<p><em>「集成测试是安全感较高的测试，能很大程度提升开发者的信心，集成测试用例设计合理且测试都通过能够很大程度保证产品符合预期。」</em></p>
-<h5 id="UI测试应用："><a href="#UI测试应用：" class="headerlink" title="UI测试应用："></a>UI测试应用：</h5><p>先做个说明，大家不要把UI 测试（UI Test）和端到端测试（E2E Test）混为一谈，认为是同一个测试类型。</p>
-<p>事实上，UI 测试（UI Test）和端到端测试（E2E Test）是稍有区别的：</p>
-<blockquote>
-<p>UI 测试（UI Test）只是对于前端的测试，是脱离真实后端环境的，仅仅只是将前端放在真实环境中运行，而后端和数据都应该使用 Mock 的。</p>
-<p>端到端测试（E2E Test）则是将整个应用放到真实的环境中运行，包括数据在内也是需要使用真实的。</p>
-</blockquote>
-<p>就前端而言，UI 测试（UI Test）更贴近于我们的开发流程。在前后端分离的开发模式中，前端开发通常会使用到 Mock 的服务器和数据。因而我们需要在开发基本完成后进行相应的 UI 测试（UI Test）。</p>
-<p>可以理解为交付测试之前的自测阶段我们做的就是UI测试。而测试做的就是<strong>端到端</strong>测试。</p>
-<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><p><strong>此篇介绍的是单元测试的应用。</strong></p>
-<p>先简单画下边界，此篇只说明基于<code>工具库、组件库</code>的分享示例。高耦合的组件或者自动化测试应用不在此次讨论范围内。</p>
-<h4 id="选择何种测试思想"><a href="#选择何种测试思想" class="headerlink" title="选择何种测试思想"></a>选择何种测试思想</h4><p>其实本不用做这个说明，因为其实我们已经选好了（BDD）。</p>
-<p>但是避免有像我一样懵懂的同学，所以这儿咱们也简单说明一下。因为测试框架对不同规范的支持可能不一样。所以我们先搞明白测试思想有哪些？</p>
-<p><a href="https://en.wikipedia.org/wiki/Test-driven_development" target="_blank" rel="noopener">测试驱动开发（TDD）</a>和<a href="https://en.wikipedia.org/wiki/Behavior-driven_development" target="_blank" rel="noopener">行为驱动开发（BDD）</a>。</p>
-<img src="/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/TDD.png" class>
-
-
-
-<p><strong>TDD</strong>是一种开发技术，更多地侧重于功能的实现。</p>
-<blockquote>
-<p>TDD代表测试驱动开发。 在这种软件开发技术中，我们首先创建测试用例，然后编写这些测试用例的基础代码。 尽管TDD是一种开发技术，但它也可以用于自动化测试开发。</p>
-<p>实施TDD的团队需要花费更多的时间进行开发，但是，他们发现的缺陷很少。 <strong>TDD可以提高代码质量</strong>，并提高代码的可重用性和灵活性。</p>
-<p>TDD还有助于实现大约90-100％的高测试覆盖率。 对于遵循TDD的开发人员而言，最具挑战性的事情是在编写代码之前先编写测试用例。</p>
-</blockquote>
-<p><strong>BDD</strong>是一种专注于系统行为的开发技术。</p>
-<blockquote>
-<p>BDD是TDD的扩展，<strong>它不是编写测试用例，而是从编写行为开始</strong>。 后来，我们开发了应用程序执行该行为所需的代码。</p>
-<p>BDD方法中定义的<em>方案使开发人员，测试人员和业务用户易于协作</em>。</p>
-<p>当涉及自动测试时，BDD被认为是最佳实践，因为它专注于应用程序的行为，而不是考虑代码的实现。</p>
-<p>应用程序的行为是BDD的关注重点，它迫使开发人员和测试人员去了解产品以及用户。</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th align="left">TDD</th>
-<th align="left">BDD</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">该过程从编写测试用例开始。</td>
-<td align="left">该过程从编写测试用例开始。</td>
-</tr>
-<tr>
-<td align="left">TDD专注于功能的实现方式。</td>
-<td align="left">BDD专注于最终用户的应用程序行为。</td>
-</tr>
-<tr>
-<td align="left">测试用例是用编程语言编写的。</td>
-<td align="left">与TDD相比，场景以简单的Given、When、Then关键字编写，因此更具可读性。</td>
-</tr>
-<tr>
-<td align="left">应用程序功能的变化对TDD中的测试用例有很大影响。</td>
-<td align="left">BDD方案基本不受功能更改的影响。</td>
-</tr>
-<tr>
-<td align="left">仅在开发人员之间需要协作。</td>
-<td align="left">所有利益相关者之间都需要合作。</td>
-</tr>
-<tr>
-<td align="left">只有具有编程知识的人才能理解TDD中的测试。</td>
-<td align="left">任何人都可以理解BDD中的测试，包括那些没有任何编程知识的人。</td>
-</tr>
-<tr>
-<td align="left">TDD降低了测试中出现错误的可能性。</td>
-<td align="left">与TDD相比，测试中的错误很难跟踪。</td>
-</tr>
-</tbody></table>
-<h5 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h5><p>我简单总结下大家有个简单的概念，具体有兴趣大家再下去查资料。</p>
-<p><strong>TDD</strong>主体是开发，说白了就是测试用例也是开发来写，先写测试用例，很显然测试用例肯定都过不了因为还没编码，那怎么办呢，就通过编码的方式不断的丰富功能然后再回去跑测试用例，如此循环最终达到所有测试用例都通过。比较适用后端API的测试。</p>
-<p><strong>BDD</strong>没有主体，因为所有人都需要参与（测试、开发、产品），大家用同一套语言来理解产品的功能和用户行为，大家的思考角度会更侧重用户方。比较适用前端测试的场景，因为前端是直接面对用户的。</p>
-<p><em>Jest用的断言库就是BDD的思维。eg：expect(wrapper.find(‘.bar’)).toHaveLength(3);一品就是given、when、then的路数</em></p>
-<h4 id="找测试框架"><a href="#找测试框架" class="headerlink" title="找测试框架"></a>找测试框架</h4><p><strong>诉求</strong></p>
-<ol>
-<li>能跑JavaScript也能跑React。</li>
-<li>最好能开箱即用，不需要做很多配置。</li>
-<li>社区生态良好，能及时支持新特性且能及时响应issue。</li>
-</ol>
-<h4 id="Jest、Enzyme"><a href="#Jest、Enzyme" class="headerlink" title="Jest、Enzyme"></a>Jest、Enzyme</h4><blockquote>
-<p><strong>Jest：</strong></p>
-<p>其实测试框架茫茫多，最终选择它的原因就是其完美匹配上诉的所有诉求，Facebook亲生的，star 接近32K，React不用说了，同时也能跑JavaScript。另外Jest还具备Mock等能力，所以Jest不仅仅是个测试框架而且还是一个集合多种能力的结合体，开箱即用。</p>
-</blockquote>
-<blockquote>
-<p><strong>Enzyme:</strong></p>
-<p>用于测试的React工具库,可看作是一个集成测试框架，与Jest组合也是备受推崇的。它提供获取元素的能力。</p>
-<p>Enzyme渲染一个或多个组件，以及查找元素以及与元素进行交互的能力，触发事件处理程序等能力。</p>
-</blockquote>
-<p><strong>首先任何框架都有优点和缺点，那为什么选这两个呢：</strong></p>
-<ol>
-<li>ice用的就是这两个，有大厂（阿里）的前面探路，对于我们没有经验的团队来说作为第一次的试水我觉得跟风不是一个贬义词。</li>
-<li>基于我们的诉求我也做了一下简单的调研，因为我们主要还是以React为主所以选择Jest是自然而然的过程，另外Enzyme+Jest也是国内外热度都比较高的，两则的社区也比较活跃，所以很显然两者搭配是没有问题的，刚好ice就是用的这两个所以没什么好纠结的。</li>
-</ol>
-<p>Enzyme只是提供了额外的能力对React组件进行测试，不用Enzyme只用Jest可测试，但是只有Enzyme则不能测试，Enzyme是在测试框架上能力的扩展。</p>
-<ul>
-<li><strong>Jest主要提供测试框架（提供测试需要的所有能力）</strong></li>
-<li><strong>Enzyme（React测试工具库）基于Jest等测试框架增加DOM操作的能力，提供了强大的 API 能力支持 UI 交互测试</strong></li>
-</ul>
-<h2 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h2><h3 id="Jest"><a href="#Jest" class="headerlink" title="Jest"></a>Jest</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install jest</span><br><span class="line">npm install babel-plugin-transform-class-properties --save-dev</span><br><span class="line">npm install react-test-renderer</span><br></pre></td></tr></table></figure>
-
-<p><strong>修改根目录下.babelrc</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;presets&quot;: [&quot;@babel&#x2F;preset-env&quot;, &quot;@babel&#x2F;preset-react&quot;],</span><br><span class="line">	&quot;plugins&quot;: [&quot;@babel&#x2F;plugin-syntax-jsx&quot;,&quot;transform-class-properties&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="学习文档"><a href="#学习文档" class="headerlink" title="学习文档"></a>学习文档</h4><p><a href="https://www.bookstack.cn/read/ice-0.x/dev-test.md" target="_blank" rel="noopener">icejs测试</a></p>
-<p><a href="https://github.com/jest-community" target="_blank" rel="noopener">jest-community</a>/<strong><a href="https://github.com/jest-community/awesome-jest" target="_blank" rel="noopener">awesome-jest</a></strong></p>
-<p>提供了很多能力，增强测试的体验。</p>
-<p>以下几个是比较有代表性的</p>
-<ul>
-<li><a href="https://github.com/jest-community/vscode-jest" target="_blank" rel="noopener">vscode-jest</a>，vscode jest插件</li>
-<li><a href="https://github.com/jest-community/jest-extended" target="_blank" rel="noopener">jest-extended</a>，提供结果判断的扩展</li>
-<li><a href="https://github.com/jest-community/eslint-plugin-jest" target="_blank" rel="noopener">eslint-plugin-jest</a></li>
-<li><a href="https://github.com/jest-community/awesome-jest" target="_blank" rel="noopener">awesome-jest</a>，跟jest相关的所有第三方库列表</li>
-</ul>
-<h4 id="Snapshot"><a href="#Snapshot" class="headerlink" title="Snapshot"></a>Snapshot</h4><p>Jest使用 Snapshot 进行 UI 测试</p>
-<p>Snapshot 测试是 Jest 提供的能力，可以自动生成组件 UI 输出的描述文件，确保你的 UI 不会发生意外的改变。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;更新快照</span><br><span class="line">jest --updateSnapshot</span><br></pre></td></tr></table></figure>
-
-<p>组件实现代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> import React from &quot;react&quot;;</span><br><span class="line">import &#123; Card, Button &#125; from &quot;@alifd&#x2F;next&quot;;</span><br><span class="line"></span><br><span class="line">const RCard &#x3D; (props) &#x3D;&gt; &#123;</span><br><span class="line">  const &#123; title, subTitle, content, deleteFunc &#125; &#x3D; props;</span><br><span class="line">  const commonProps &#x3D; &#123;</span><br><span class="line">    subTitle: subTitle || &quot;&quot;,</span><br><span class="line">  &#125;;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;Card free style&#x3D;&#123;&#123; width: 300 &#125;&#125;&gt;</span><br><span class="line">        &lt;Card.Header title&#x3D;&#123;title || &quot;&quot;&#125; &#123;...commonProps&#125; &#x2F;&gt;</span><br><span class="line">        &lt;Card.Content&gt;&#123;content || &quot;&quot;&#125;&lt;&#x2F;Card.Content&gt;</span><br><span class="line">        &lt;Card.Actions&gt;</span><br><span class="line">          &lt;Button type&#x3D;&quot;primary&quot; onClick&#x3D;&#123;deleteFunc || null&#125;&gt;</span><br><span class="line">            删除</span><br><span class="line">          &lt;&#x2F;Button&gt;</span><br><span class="line">        &lt;&#x2F;Card.Actions&gt;</span><br><span class="line">      &lt;&#x2F;Card&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export default RCard;</span><br></pre></td></tr></table></figure>
-
-<p>组件测试代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import React from &#39;react&#39;</span><br><span class="line">import renderer from &#39;react-test-renderer&#39;</span><br><span class="line">import RCard from &#39;..&#x2F;..&#x2F;..&#x2F;src&#x2F;components&#x2F;Card&#x2F;index&#39;</span><br><span class="line">import &#123; shallow &#125; from &#39;enzyme&#39;</span><br><span class="line"></span><br><span class="line">const props &#x3D; &#123;</span><br><span class="line">    title: &#39;firstRCard&#39;,</span><br><span class="line">    subTitle: &#39;测试&#39;,</span><br><span class="line">    content: &#39;这是第一个测试demo&#39;,</span><br><span class="line">    deleteFunc: jest.fn((e) &#x3D;&gt; &#123;</span><br><span class="line">        &#x2F;&#x2F; throw &#39;error&#39;</span><br><span class="line">        return &#39;OK&#39;</span><br><span class="line">    &#125;),</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; UI快照测试</span><br><span class="line">test(&#39;jest renders Snapshot&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">    const tree &#x3D; renderer.create(&lt;RCard &#123;...props&#125; &#x2F;&gt;).toJSON()</span><br><span class="line">    expect(tree).toMatchSnapshot()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-<p>在第一次运行后，Jest Snapshot 将会生成对应的 <code>.snap</code> 文件。</p>
-<img src="/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/snapshot.png" class>
-
-<p>对于一个React组件而言， 传入相同的props，我们是期望得到相同的输出，所以后续如果组件的输出内容发生变更，则会导致测试用例无法通过。</p>
-<p><strong>ice结合 Jest CLI参数</strong></p>
-<p>–watch</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eg：&quot;test&quot;: &quot;icejs test --jest-watch&quot;,</span><br></pre></td></tr></table></figure>
-
-<p>监视文件是否有更改，并重新运行与已更改文件相关的测试。 如果要在文件更改后重新运行所有测试，请改用–watchAll选项。</p>
-<p>–watchAll</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eg：&quot;test&quot;: &quot;icejs test --jest-watchAll&quot;,</span><br></pre></td></tr></table></figure>
-
-<p>监视文件中的更改，并在发生更改时重新运行所有测试。 如果只想重新运行依赖于已更改文件的测试，请使用–watch选项。</p>
-<p><strong>也可单独运行</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;package.json</span><br><span class="line">&quot;coverage&quot;: &quot;jest --colors --coverage&quot;,</span><br><span class="line">&quot;test&quot;: &quot;jest --watch&quot;,</span><br></pre></td></tr></table></figure>
-
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p><strong>vscode插件</strong></p>
-<ul>
-<li><p>jest</p>
-</li>
-<li><p>jest runner</p>
-</li>
-</ul>
-<p><strong>编辑根目录下的jest.config.js</strong></p>
-<p>使其支持jsx、es6等</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">	verbose: true,</span><br><span class="line">	roots: [&#39;&lt;rootDir&gt;&#x2F;src&#x2F;&#39;, &#39;&lt;rootDir&gt;&#x2F;test&#x2F;&#39;],</span><br><span class="line">	testMatch: [&#39;&lt;rootDir&gt;&#x2F;test&#x2F;**&#x2F;*.js&#39;],</span><br><span class="line">	setupFilesAfterEnv: [&#39;&lt;rootDir&gt;&#x2F;src&#x2F;setupTests.js&#39;],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>Jest具体的概念说明看<a href="/2020/07/13/Jest/" title="Jest">Jest</a>。</p>
-<p><a href="https://jestjs.io/docs/en/expect" target="_blank" rel="noopener">expect</a>，各种断言。</p>
-<p>随便看几个实例</p>
-<h5 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h5><img src="/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/1.png" class title="from Hello FE">
-
-<p><strong>Jest生命周期钩子：</strong></p>
-<img src="/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/2.png" class title="from Hello FE">
-
-<p><strong>异步代码测试</strong></p>
-<img src="/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/3.png" class title="from Hello FE">
-
-
-
-<h3 id="使用-Enzyme-测试组件"><a href="#使用-Enzyme-测试组件" class="headerlink" title="使用 Enzyme 测试组件"></a>使用 Enzyme 测试组件</h3><p><a href="https://enzymejs.github.io/enzyme/" target="_blank" rel="noopener">Enzyme</a> 是 Airbnb 提供的测试类库，它提供了一套简洁强大的 API。能够灵活操作 DOM，是 React 社区推荐的测试方案。</p>
-<h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><p>安装测试相关依赖包</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install --save-dev enzyme enzyme-adapter-react-16 react-test-renderer</span><br></pre></td></tr></table></figure>
-
-<p>基于 React 开发的测试，需要安装对应的 React Adapter 来保证 enzyme 渲染的版本和项目中使用的版本一致，以 react 16 版本为例，需要进行如下设置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import &#123; configure &#125; from &#39;enzyme&#39;;</span><br><span class="line">import Adapter from &#39;enzyme-adapter-react-16&#39;;</span><br><span class="line">configure(&#123; adapter: new Adapter() &#125;);</span><br></pre></td></tr></table></figure>
-
-<p>如果不想每个测试用例都去定义一遍，可以将上述内容保存至 <code>src/setupTests.js</code> 文件中，并自定义 Jest 配置中的 <code>setupFilesAfterEnv</code> ：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; jest.config.js</span><br><span class="line">module.exports &#x3D; &#123;  setupFilesAfterEnv: [&#39;&lt;rootDir&gt;&#x2F;src&#x2F;setupTests.js&#39;],&#125;;</span><br></pre></td></tr></table></figure>
-
-<h4 id="Mount-Shallow-Render"><a href="#Mount-Shallow-Render" class="headerlink" title="Mount, Shallow, Render"></a>Mount, Shallow, Render</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123; mount, shallow, render &#125; from ‘enzyme&#39;;</span><br></pre></td></tr></table></figure>
-
-<p>为了具有要测试的组件，必须使用上述之一，如上面的示例所示。</p>
-<p><a href="http://airbnb.io/enzyme/docs/api/mount.html" target="_blank" rel="noopener">mount（常用）</a></p>
-<ul>
-<li>完整的DOM渲染，包括子组件</li>
-<li>当您具有可能与DOM API交互的组件或使用React生命周期方法以完全测试组件的用例时，它是理想的选择</li>
-<li>由于它实际上是将组件安装在DOM中，因此应在每次测试后调用unmount（），以停止相互影响的测试</li>
-<li>允许访问直接传递到根组件中的props（包括默认props）和传递到子组件中的props</li>
-</ul>
-<p><a href="http://airbnb.io/enzyme/docs/api/shallow.html" target="_blank" rel="noopener">Shallow（常用）</a></p>
-<ul>
-<li>仅渲染单个组件，<strong>不包括其子组件</strong>。 这对于隔离组件进行纯单元测试很有用。 它可以防止子组件中的更改影响测试输出。</li>
-<li>默认情况下，浅层组件可以访问生命周期方法</li>
-<li>无法访问传递到根组件的props （因此也不是默认props ），但是可以访问传递到子组件的props ，并且可以测试传递到根组件的props 的效果。 </li>
-</ul>
-<p><a href="http://airbnb.io/enzyme/docs/api/render.html" target="_blank" rel="noopener">Render</a></p>
-<ul>
-<li>渲染为静态HTML，包括子级</li>
-<li>没有访问React生命周期方法的权限</li>
-<li>比mount简单，但功能较少</li>
-</ul>
-<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><blockquote>
-<p>react测试利器enzyme有三种渲染方式：shallow, mount, render。</p>
-<p>shallow渲染叫浅渲染，仅仅对当前jsx结构内的顶级组件进行渲染，而不对这些组件的内部子组件进行渲染，因此，它的性能上最快的，大部分情况下，如果不深入组件内部测试，那么可以使用shallow渲染。Shallow Rendering （浅渲染）指的是，将一个组件渲染成虚拟DOM对象，但是只渲染第一层，不渲染所有子组件，所以处理速度非常快。它不需要DOM环境，因为根本没有加载进DOM。</p>
-<p>mount则会进行完整渲染，而且完全依赖DOM API，也就是说mount渲染的结果和浏览器渲染结果说一样的，结合jsdom这个工具，可以对上面提到的有内部子组件实现复杂交互功能的组件进行测试。</p>
-<p>render也会进行完整渲染，但不依赖DOM API，而是渲染成HTML结构，并利用cheerio实现html节点的选择，它相当于只调用了组件的render方法，得到jsx并转码为html，所以组件的生命周期方法内的逻辑都测试不到，所以render常常只用来测试一些数据（结构）一致性对比的场景。</p>
-<p>在<a href="https://github.com/airbnb/enzyme/issues/465" target="_blank" rel="noopener">这里</a>还提到，shallow实际上也测试不到componentDidMount/componentDidUpdate这两个方法内的逻辑。</p>
-<p>shallow和mount对组件的渲染结果不是html的dom树，而是react树，如果你chrome装了react devtool插件，<br>他的渲染结果就是react devtool tab下查看的组件结构，而render函数的结果是element tab下查看的结果。</p>
-<p><strong>render</strong>: render采用的是第三方库<code>Cheerio</code>的渲染，渲染结果是普通的html结构，对于snapshot使用render比较合适。</p>
-<p>这些只是渲染结果上的差别，更大的差别是shallow和mount的结果是个被封装的 <code>ReactWrapper</code>，<br>可以进行多种操作，譬如find()、parents()、children()等选择器进行元素查找；<br>state()、props()进行数据查找，setState()、setprops()操作数据；<br>simulate()模拟事件触发。</p>
-</blockquote>
-<h4 id="常用方法示例"><a href="#常用方法示例" class="headerlink" title="常用方法示例"></a>常用方法示例</h4><h4 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h4><ul>
-<li>simulate(event, mock)：用来模拟事件触发，event为事件名称，mock为一个event object；</li>
-<li>instance()：返回测试组件的实例；</li>
-<li>find(selector)：根据选择器查找节点，selector可以是CSS中的选择器，也可以是组件的构造函数，以及组件的display name等；</li>
-<li>at(index)：返回一个渲染过的对象；</li>
-<li>get(index)：返回一个react node，要测试它，需要重新渲染；</li>
-<li>contains(nodeOrNodes)：当前对象是否包含参数重点 node，参数类型为react对象或对象数组；</li>
-<li>text()：返回当前组件的文本内容；</li>
-<li>html()： 返回当前组件的HTML代码形式；</li>
-<li>props()：返回根组件的所有属性；</li>
-<li>prop(key)：返回根组件的指定属性；</li>
-<li>state()：返回根组件的状态；</li>
-<li>setState(nextState)：设置根组件的状态；</li>
-<li>setProps(nextProps)：设置根组件的属性；</li>
-</ul>
-<h5 id="find-selector-gt-ShallowWrapper"><a href="#find-selector-gt-ShallowWrapper" class="headerlink" title=".find(selector) =&gt; ShallowWrapper"></a>.find(selector) =&gt; ShallowWrapper</h5><p><a href="https://enzymejs.github.io/enzyme/docs/api/selector.html" target="_blank" rel="noopener">selector</a>选择器</p>
-<blockquote>
-<p>从渲染树中查找与提供的选择器匹配的每个节点。</p>
-<p><strong>Arguments</strong></p>
-<ol>
-<li><code>selector</code> (<a href="https://enzymejs.github.io/enzyme/docs/api/selector.html" target="_blank" rel="noopener"><code>EnzymeSelector</code></a>): The selector to match.</li>
-</ol>
-<p><strong>Examples</strong></p>
-<p>CSS Selectors:</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> wrapper = shallow(<span class="xml"><span class="tag">&lt;<span class="name">MyComponent</span> /&gt;</span></span>);</span><br><span class="line">expect(wrapper.find(<span class="string">'.foo'</span>)).toHaveLength(<span class="number">1</span>);</span><br><span class="line">expect(wrapper.find(<span class="string">'.bar'</span>)).toHaveLength(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// compound selector</span></span><br><span class="line">expect(wrapper.find(<span class="string">'div.some-class'</span>)).toHaveLength(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// CSS id selector</span></span><br><span class="line">expect(wrapper.find(<span class="string">'#foo'</span>)).toHaveLength(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h5 id="simulate-event-mock"><a href="#simulate-event-mock" class="headerlink" title="simulate(event[, mock])"></a>simulate(event[, mock])</h5><blockquote>
-<p>在对应的元素节点上模拟事件。 </p>
-<p><strong>Arguments</strong></p>
-<ol>
-<li><code>event</code> (<code>String</code>): 事件名称</li>
-<li><code>mock</code> (<code>Object</code> [optional]): 模拟事件对象，它将与传递给处理程序的事件对象合并</li>
-</ol>
-<p><strong>Returns</strong></p>
-<p><code>ReactWrapper</code>: Returns itself.</p>
-</blockquote>
-<h6 id="Example-class-component"><a href="#Example-class-component" class="headerlink" title="Example class component"></a>Example <code>class component</code></h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Foo extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.state &#x3D; &#123; count: 0 &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    const &#123; count &#125; &#x3D; this.state;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;div className&#x3D;&#123;&#96;clicks-$&#123;count&#125;&#96;&#125;&gt;</span><br><span class="line">          &#123;count&#125; clicks</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;a href&#x3D;&quot;url&quot; onClick&#x3D;&#123;() &#x3D;&gt; &#123; this.setState(&#123; count: count + 1 &#125;); &#125;&#125;&gt;</span><br><span class="line">          Increment</span><br><span class="line">        &lt;&#x2F;a&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const wrapper &#x3D; shallow(&lt;Foo &#x2F;&gt;);</span><br><span class="line"></span><br><span class="line">expect(wrapper.find(&#39;.clicks-0&#39;).length).to.equal(1);</span><br><span class="line">wrapper.find(&#39;a&#39;).simulate(&#39;click&#39;);</span><br><span class="line">expect(wrapper.find(&#39;.clicks-1&#39;).length).to.equal(1);</span><br></pre></td></tr></table></figure>
-
-<h6 id="Example-functional-component"><a href="#Example-functional-component" class="headerlink" title="Example functional component"></a>Example <code>functional component</code></h6><p>component</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useState &#125; from &quot;react&quot;;</span><br><span class="line">import PropTypes from &quot;prop-types&quot;;</span><br><span class="line">import &#123; Form, Input, Select, Button &#125; from &quot;@alifd&#x2F;next&quot;;</span><br><span class="line"></span><br><span class="line">const FormItem &#x3D; Form.Item;</span><br><span class="line"></span><br><span class="line">const formItemLayout &#x3D; &#123;</span><br><span class="line">  labelCol: &#123;</span><br><span class="line">    span: 6,</span><br><span class="line">  &#125;,</span><br><span class="line">  wrapperCol: &#123;</span><br><span class="line">    span: 14,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">const SearchInput &#x3D; (&#123; placeholder, onSearch &#125;) &#x3D;&gt; &#123;</span><br><span class="line">  const submitHandle &#x3D; (values) &#x3D;&gt; &#123;</span><br><span class="line">    if (Object.keys(values).length &#x3D;&#x3D;&#x3D; 0) &#123;</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line">    onSearch(values.search);</span><br><span class="line">  &#125;;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div</span><br><span class="line">      style&#x3D;&#123;&#123;</span><br><span class="line">        marginBottom: &quot;10px&quot;,</span><br><span class="line">        marginTop: &quot;5px&quot;,</span><br><span class="line">        marginLeft: &quot;5px&quot;,</span><br><span class="line">        width: &quot;420px&quot;,</span><br><span class="line">      &#125;&#125;</span><br><span class="line">    &gt;</span><br><span class="line">      &lt;Form inline&gt;</span><br><span class="line">        &lt;Form.Item</span><br><span class="line">          label&#x3D;&quot;策略名称:&quot;</span><br><span class="line">          key&#x3D;&quot;search&quot;</span><br><span class="line">          required</span><br><span class="line">          requiredTrigger&#x3D;&quot;onBlur&quot;</span><br><span class="line">          hasFeedback</span><br><span class="line">          requiredMessage&#x3D;&quot;请输入&quot;</span><br><span class="line">        &gt;</span><br><span class="line">          &lt;Input placeholder&#x3D;&#123;placeholder&#125; name&#x3D;&quot;search&quot; &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;Form.Item&gt;</span><br><span class="line">        &lt;FormItem wrapperCol&#x3D;&#123;&#123; offset: 5 &#125;&#125;&gt;</span><br><span class="line">          &lt;Form.Submit</span><br><span class="line">            validate</span><br><span class="line">            type&#x3D;&quot;primary&quot;</span><br><span class="line">            onClick&#x3D;&#123;submitHandle&#125;</span><br><span class="line">            style&#x3D;&#123;&#123; marginRight: 10 &#125;&#125;</span><br><span class="line">          &gt;</span><br><span class="line">            搜索</span><br><span class="line">          &lt;&#x2F;Form.Submit&gt;</span><br><span class="line">        &lt;&#x2F;FormItem&gt;</span><br><span class="line">      &lt;&#x2F;Form&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line">SearchInput.propTypes &#x3D; &#123;</span><br><span class="line">  onChange: PropTypes.func,</span><br><span class="line">  onClick: PropTypes.func,</span><br><span class="line">&#125;;</span><br><span class="line">export default SearchInput;</span><br></pre></td></tr></table></figure>
-
-<p><strong>测试用例</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">import SearchInput from &#39;..&#x2F;index&#39;</span><br><span class="line">import &#123; mount &#125; from &#39;enzyme&#39;</span><br><span class="line">import React from &#39;react&#39;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;describe相当于一个块，可以将测试用例放在一个块中</span><br><span class="line">describe(&#39;SearchInput unit test&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">	&#x2F;&#x2F; case1 标签选择器+修改props</span><br><span class="line">	test(&#39;SearchInput tag selector&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">		const wrapper &#x3D; mount(&lt;SearchInput placeholder&#x3D;&quot;please input&quot; &#x2F;&gt;)</span><br><span class="line">		expect(wrapper.find(&#39;input&#39;).at(0).prop(&#39;placeholder&#39;)).toEqual(&#39;please input&#39;)</span><br><span class="line">		&#x2F;&#x2F;设置属性</span><br><span class="line">		wrapper.setProps(&#123; placeholder: &#39;请输入&#39; &#125;)</span><br><span class="line">		expect(wrapper.find(&#39;input&#39;).at(0).prop(&#39;placeholder&#39;)).toEqual(&#39;请输入&#39;)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; case2属性选择器+修改props</span><br><span class="line">	test(&#39;SearchInput props&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">		const wrapper &#x3D; mount(&lt;SearchInput placeholder&#x3D;&quot;&quot; &#x2F;&gt;)</span><br><span class="line">		&#x2F;&#x2F; 判断是否存在输入框</span><br><span class="line">		expect(wrapper.exists(&#39;input[name&#x3D;&quot;search&quot;]&#39;)).toBeTruthy</span><br><span class="line">		expect(wrapper.find(&#39;input[name&#x3D;&quot;search&quot;]&#39;)).toHaveLength(1)</span><br><span class="line">		&#x2F;&#x2F;设置属性</span><br><span class="line">		wrapper.setProps(&#123; placeholder: &#39;serach&#39; &#125;)</span><br><span class="line">		expect(wrapper.find(&#39;input#search&#39;).prop(&#39;placeholder&#39;)).toBe(&#39;serach&#39;)</span><br><span class="line">	&#125;)</span><br><span class="line">	&#x2F;&#x2F;修改state</span><br><span class="line">	test(&#39;SearchInput state&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">		const wrapper &#x3D; mount(&lt;SearchInput placeholder&#x3D;&quot;&quot; &#x2F;&gt;)</span><br><span class="line">		&#x2F;&#x2F; 判断是否存在输入框</span><br><span class="line">		expect(wrapper.exists(&#39;input[name&#x3D;&quot;search&quot;]&#39;)).toBeTruthy</span><br><span class="line">		expect(wrapper.find(&#39;input[name&#x3D;&quot;search&quot;]&#39;)).toHaveLength(1)</span><br><span class="line">		&#x2F;&#x2F;设置state，只有class components才可以使用</span><br><span class="line">		&#x2F;&#x2F; wrapper.setState(&#123; loading: true &#125;)</span><br><span class="line">		&#x2F;&#x2F; expect(wrapper.find(&#39;.next-btn next-medium next-btn-primary next-btn-loading&#39;)).toHaveLength(1)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="看前面的一堆代码可能削微有点绕啊"><a href="#看前面的一堆代码可能削微有点绕啊" class="headerlink" title="看前面的一堆代码可能削微有点绕啊"></a>看前面的一堆代码可能削微有点绕啊</h4><p><strong>简单总结一下：</strong></p>
-<p><code>expect</code>是Jest提供的断言，所以当你需要该判断结果是否正确的时候去Jest查expect的<a href="https://jestjs.io/docs/en/expect" target="_blank" rel="noopener">文档</a>就行。</p>
-<p><code>wrapper</code>可看做是enzyme提供了一套类似Jquery的API。所以Jquery做的她都能做，如：查找元素、获取元素及其属性、触发元素行为等。对应的也直接去enzyme查<a href="https://enzymejs.github.io/enzyme/docs/api/" target="_blank" rel="noopener">文档</a>就行</p>
-<h3 id="测试报告解读"><a href="#测试报告解读" class="headerlink" title="测试报告解读"></a>测试报告解读</h3><img src="/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/4.png" class>
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>File</td>
-<td>测试用例文件</td>
-</tr>
-<tr>
-<td>% Stmts</td>
-<td>是语句覆盖率（statement coverage）：是否每个语句都执行了</td>
-</tr>
-<tr>
-<td>% Branch</td>
-<td>分支覆盖率（branch coverage）：是否每个分支代码块都执行了（if,||,?:)</td>
-</tr>
-<tr>
-<td>% Funcs</td>
-<td>函数覆盖率（function coverage）：是否每个函数都调用了</td>
-</tr>
-<tr>
-<td>% Lines</td>
-<td>行覆盖率（line coverage）：覆盖的行</td>
-</tr>
-<tr>
-<td>% Uncovered Line #s</td>
-<td>行覆盖率（line coverage）：是否每一行都执行了</td>
-</tr>
-<tr>
-<td>Test Suites</td>
-<td>测试用例文件个数</td>
-</tr>
-<tr>
-<td>Tests</td>
-<td>测试用例个数</td>
-</tr>
-<tr>
-<td>Snapshots</td>
-<td>UI快照个数</td>
-</tr>
-</tbody></table>
-<p><code>本文引用的图片，如有侵权请联系我删除。</code></p>
-<h3 id="测试外传"><a href="#测试外传" class="headerlink" title="测试外传"></a>测试外传</h3><p>测试框架有很多基于不同的需求不同的语言选择不同，比如Puppeteer、@testing-library库等等，有机会咱也试一试。</p>
-<p>现阶段在团队里落地的案例：核心的方法(覆盖率100%)、核心的组件(覆盖率&gt;80%)</p>
-<h4 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h4><blockquote><footer><strong>softwaretestinghelp</strong><cite><a href="https://www.softwaretestinghelp.com/tdd-vs-bdd/" target="_blank" rel="noopener">TDD Vs BDD – Analyze The Differences With Examples</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>code秘密花园</strong><cite><a href="https://mp.weixin.qq.com/s?__biz=Mzg2NDAzMjE5NQ==&mid=2247486072&idx=2&sn=43e99a7a755b47c93500d02ebbfed557&chksm=ce6eced4f91947c2b2df99ad48b8508f53ffb4d02ddf9799d6d15b6b86c1be50df3748d301ba&mpshare=1&scene=1&srcid=0720CJXc51rAx9qFl6kPH0ZW&sharer_sharetime=1595207922217&sharer_shareid=77df2eafd0a472623696abf038541666&version=3.0.25.2103&platform=win&rd2werd=1#wechat_redirect" target="_blank" rel="noopener">前端自动化测试探索和实践</a></cite></footer></blockquote>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
  <nav class="pagination">
-   <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
+   <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
  </nav>
 
 
@@ -2314,7 +2101,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">119</span>
+                  <span class="site-state-item-count">121</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2336,7 +2123,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">84</span>
+                  <span class="site-state-item-count">85</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2988,7 +2775,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("AHA");titles.push("ESLint(no-prototype-builtins)");titles.push("nginx-docker");titles.push("nodeJs 部署");titles.push("DDD(1)");titles.push("拖延");titles.push("CMDB");titles.push("Ice.js单元测试");titles.push("前端安全");titles.push("前端测试");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("问题解法咋聊(1)");titles.push("敏捷");titles.push("AHA");titles.push("ESLint(no-prototype-builtins)");titles.push("nginx-docker");titles.push("nodeJs 部署");titles.push("DDD(1)");titles.push("拖延");titles.push("CMDB");titles.push("Ice.js单元测试");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {

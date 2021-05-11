@@ -309,6 +309,631 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/07/30/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/30/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/" itemprop="url">前端安全</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-30T11:04:00+08:00">
+                2020-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>我们的产品通常进入客户现场之前都会有一系列的安全扫描（公司级的、客户级的），去年我们团队就解决了好几个安全问题，不过通常都是后端的方式来解决，但其实某些安全问题前端也能解，有些问题前端解更合适，这不借着重新出发的春风，往前端工程化中加了一步<strong>安全</strong>。</p>
+<p>此篇文章收获颇多。<a href="https://mp.weixin.qq.com/s?__biz=MjM5MjY3OTgwMA==&mid=2652469355&idx=1&sn=fd1a47ea216beae53f5d807c21186566&chksm=bd4f4a7c8a38c36a116a659c10e08367b217448a24752ac677e378cad1b9e1cf9b2d6705e113&mpshare=1&scene=1&srcid=0717EknGxzkoHpNBlCIP6O4G&sharer_sharetime=1594989878682&sharer_shareid=77df2eafd0a472623696abf038541666&version=3.0.25.2103&platform=win&rd2werd=1#wechat_redirect" target="_blank" rel="noopener">WEB前端安全自查和加固</a></p>
+<h3 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h3><h5 id="对于安全方面的共识"><a href="#对于安全方面的共识" class="headerlink" title="对于安全方面的共识"></a>对于安全方面的共识</h5><ol>
+<li>对于第三方包的引入，必须经过<code>npm audit+snyk</code>安全扫描后且经过小组内评审通过后方才能引入。</li>
+<li>对于我们自己发布的包，必须去掉敏感信息。</li>
+<li>每次更新了package.json之后都需要进行安全扫描。</li>
+</ol>
+<p>如下图，是我们项目里我用<strong>snyk</strong>执行扫描之后报出问题的包信息。</p>
+<img src="/2020/07/30/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/image-20200730110550740.png" class>
+
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>后续会把考虑把该步骤拿到流水线里去做，因为虽然大家意识层面共识了，落地的时候可能还是会有各种遗漏，所以干脆直接交给机器来做。</p>
+<p>安全无小事，先动起来！</p>
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/" itemprop="url">前端测试</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-20T11:24:06+08:00">
+                2020-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>其实老早以前就想在产品中引入单元测试，领导也让我好好做一个分享主题，分享好做花功夫就行，但是我觉得此主题的分享最终目的是为了落地，所以需要一个契机，不然大家听了就完了也没啥x用。</p>
+<p>刚好大佬们上个月做了个决定，决定从前到后整体重新架构，重新梳理，做一个带中台属性的系统，从而是产品能有更多平台能力，也能更好的和另外的产线想结合。当然我说的比较云淡风轻的，干起来你才知道这是一个多么有挑战的目标，扯远了，下面说说前端测试这块的内容。</p>
+<h3 id="名词定义"><a href="#名词定义" class="headerlink" title="名词定义"></a>名词定义</h3><p>基础组件：antd、next等提供的组件。</p>
+<p>通用组件：咱们系统中抽取出来的组件公用的组件（完全自定义的以及基于基础组件改造的）=&gt;<strong>单元测试</strong>（UI测试可选）</p>
+<p>业务组件：通过基础组件、通用组件等组合起来的组件（区块）=&gt;<strong>单元测试、集成测试</strong>（UI测试可选）</p>
+<h3 id="为什么需要测试？"><a href="#为什么需要测试？" class="headerlink" title="为什么需要测试？"></a>为什么需要测试？</h3><ul>
+<li>提高代码质量</li>
+<li>倒逼开发对编码的设计更加低耦合以及合理，方便后续的迭代/重构</li>
+<li>最大程度保证产品符合预期（因为各种场景都测试）</li>
+<li>减少测试的投入（比如回归）</li>
+<li>提升开发的信心（bug少）</li>
+</ul>
+<h3 id="前端测试的类型"><a href="#前端测试的类型" class="headerlink" title="前端测试的类型"></a>前端测试的类型</h3><p><strong>单元测试（Unit Test）</strong>、<strong>集成测试（Integration Test）</strong>、<strong>UI 测试（UI Test）</strong></p>
+<h5 id="单元测试应用："><a href="#单元测试应用：" class="headerlink" title="单元测试应用："></a>单元测试应用：</h5><ul>
+<li><p>代码中多个组件共用的工具类库、多个组件共用的子组件等。</p>
+</li>
+<li><p>能进行单元测试的函数/组件，一定是低耦合的，这也从一定程度上保证了我们的代码质量。</p>
+<p>比如我们的<strong>工具库、组件库</strong>这类通用低耦合的内容就比较适用单元测试。</p>
+</li>
+</ul>
+<p><em>「通常情况下，在公共函数/组件中一定要有单元测试来保证代码能够正常工作。单元测试也应该是项目中数量最多、覆盖率最高的。」</em></p>
+<h5 id="集成测试应用："><a href="#集成测试应用：" class="headerlink" title="集成测试应用："></a>集成测试应用：</h5><ul>
+<li>耦合度较高的函数/组件、经过二次封装的函数/组件、多个函数/组件组合而成的函数/组件等。</li>
+<li>集成测试的目的在于，测试经过单元测试后的各个模块组合在一起是否能正常工作。会对组合之后的代码整体暴露在外接口进行测试，查看组合后的代码工作是否符合预期。</li>
+</ul>
+<p><em>「集成测试是安全感较高的测试，能很大程度提升开发者的信心，集成测试用例设计合理且测试都通过能够很大程度保证产品符合预期。」</em></p>
+<h5 id="UI测试应用："><a href="#UI测试应用：" class="headerlink" title="UI测试应用："></a>UI测试应用：</h5><p>先做个说明，大家不要把UI 测试（UI Test）和端到端测试（E2E Test）混为一谈，认为是同一个测试类型。</p>
+<p>事实上，UI 测试（UI Test）和端到端测试（E2E Test）是稍有区别的：</p>
+<blockquote>
+<p>UI 测试（UI Test）只是对于前端的测试，是脱离真实后端环境的，仅仅只是将前端放在真实环境中运行，而后端和数据都应该使用 Mock 的。</p>
+<p>端到端测试（E2E Test）则是将整个应用放到真实的环境中运行，包括数据在内也是需要使用真实的。</p>
+</blockquote>
+<p>就前端而言，UI 测试（UI Test）更贴近于我们的开发流程。在前后端分离的开发模式中，前端开发通常会使用到 Mock 的服务器和数据。因而我们需要在开发基本完成后进行相应的 UI 测试（UI Test）。</p>
+<p>可以理解为交付测试之前的自测阶段我们做的就是UI测试。而测试做的就是<strong>端到端</strong>测试。</p>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><p><strong>此篇介绍的是单元测试的应用。</strong></p>
+<p>先简单画下边界，此篇只说明基于<code>工具库、组件库</code>的分享示例。高耦合的组件或者自动化测试应用不在此次讨论范围内。</p>
+<h4 id="选择何种测试思想"><a href="#选择何种测试思想" class="headerlink" title="选择何种测试思想"></a>选择何种测试思想</h4><p>其实本不用做这个说明，因为其实我们已经选好了（BDD）。</p>
+<p>但是避免有像我一样懵懂的同学，所以这儿咱们也简单说明一下。因为测试框架对不同规范的支持可能不一样。所以我们先搞明白测试思想有哪些？</p>
+<p><a href="https://en.wikipedia.org/wiki/Test-driven_development" target="_blank" rel="noopener">测试驱动开发（TDD）</a>和<a href="https://en.wikipedia.org/wiki/Behavior-driven_development" target="_blank" rel="noopener">行为驱动开发（BDD）</a>。</p>
+<img src="/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/TDD.png" class>
+
+
+
+<p><strong>TDD</strong>是一种开发技术，更多地侧重于功能的实现。</p>
+<blockquote>
+<p>TDD代表测试驱动开发。 在这种软件开发技术中，我们首先创建测试用例，然后编写这些测试用例的基础代码。 尽管TDD是一种开发技术，但它也可以用于自动化测试开发。</p>
+<p>实施TDD的团队需要花费更多的时间进行开发，但是，他们发现的缺陷很少。 <strong>TDD可以提高代码质量</strong>，并提高代码的可重用性和灵活性。</p>
+<p>TDD还有助于实现大约90-100％的高测试覆盖率。 对于遵循TDD的开发人员而言，最具挑战性的事情是在编写代码之前先编写测试用例。</p>
+</blockquote>
+<p><strong>BDD</strong>是一种专注于系统行为的开发技术。</p>
+<blockquote>
+<p>BDD是TDD的扩展，<strong>它不是编写测试用例，而是从编写行为开始</strong>。 后来，我们开发了应用程序执行该行为所需的代码。</p>
+<p>BDD方法中定义的<em>方案使开发人员，测试人员和业务用户易于协作</em>。</p>
+<p>当涉及自动测试时，BDD被认为是最佳实践，因为它专注于应用程序的行为，而不是考虑代码的实现。</p>
+<p>应用程序的行为是BDD的关注重点，它迫使开发人员和测试人员去了解产品以及用户。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">TDD</th>
+<th align="left">BDD</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">该过程从编写测试用例开始。</td>
+<td align="left">该过程从编写测试用例开始。</td>
+</tr>
+<tr>
+<td align="left">TDD专注于功能的实现方式。</td>
+<td align="left">BDD专注于最终用户的应用程序行为。</td>
+</tr>
+<tr>
+<td align="left">测试用例是用编程语言编写的。</td>
+<td align="left">与TDD相比，场景以简单的Given、When、Then关键字编写，因此更具可读性。</td>
+</tr>
+<tr>
+<td align="left">应用程序功能的变化对TDD中的测试用例有很大影响。</td>
+<td align="left">BDD方案基本不受功能更改的影响。</td>
+</tr>
+<tr>
+<td align="left">仅在开发人员之间需要协作。</td>
+<td align="left">所有利益相关者之间都需要合作。</td>
+</tr>
+<tr>
+<td align="left">只有具有编程知识的人才能理解TDD中的测试。</td>
+<td align="left">任何人都可以理解BDD中的测试，包括那些没有任何编程知识的人。</td>
+</tr>
+<tr>
+<td align="left">TDD降低了测试中出现错误的可能性。</td>
+<td align="left">与TDD相比，测试中的错误很难跟踪。</td>
+</tr>
+</tbody></table>
+<h5 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h5><p>我简单总结下大家有个简单的概念，具体有兴趣大家再下去查资料。</p>
+<p><strong>TDD</strong>主体是开发，说白了就是测试用例也是开发来写，先写测试用例，很显然测试用例肯定都过不了因为还没编码，那怎么办呢，就通过编码的方式不断的丰富功能然后再回去跑测试用例，如此循环最终达到所有测试用例都通过。比较适用后端API的测试。</p>
+<p><strong>BDD</strong>没有主体，因为所有人都需要参与（测试、开发、产品），大家用同一套语言来理解产品的功能和用户行为，大家的思考角度会更侧重用户方。比较适用前端测试的场景，因为前端是直接面对用户的。</p>
+<p><em>Jest用的断言库就是BDD的思维。eg：expect(wrapper.find(‘.bar’)).toHaveLength(3);一品就是given、when、then的路数</em></p>
+<h4 id="找测试框架"><a href="#找测试框架" class="headerlink" title="找测试框架"></a>找测试框架</h4><p><strong>诉求</strong></p>
+<ol>
+<li>能跑JavaScript也能跑React。</li>
+<li>最好能开箱即用，不需要做很多配置。</li>
+<li>社区生态良好，能及时支持新特性且能及时响应issue。</li>
+</ol>
+<h4 id="Jest、Enzyme"><a href="#Jest、Enzyme" class="headerlink" title="Jest、Enzyme"></a>Jest、Enzyme</h4><blockquote>
+<p><strong>Jest：</strong></p>
+<p>其实测试框架茫茫多，最终选择它的原因就是其完美匹配上诉的所有诉求，Facebook亲生的，star 接近32K，React不用说了，同时也能跑JavaScript。另外Jest还具备Mock等能力，所以Jest不仅仅是个测试框架而且还是一个集合多种能力的结合体，开箱即用。</p>
+</blockquote>
+<blockquote>
+<p><strong>Enzyme:</strong></p>
+<p>用于测试的React工具库,可看作是一个集成测试框架，与Jest组合也是备受推崇的。它提供获取元素的能力。</p>
+<p>Enzyme渲染一个或多个组件，以及查找元素以及与元素进行交互的能力，触发事件处理程序等能力。</p>
+</blockquote>
+<p><strong>首先任何框架都有优点和缺点，那为什么选这两个呢：</strong></p>
+<ol>
+<li>ice用的就是这两个，有大厂（阿里）的前面探路，对于我们没有经验的团队来说作为第一次的试水我觉得跟风不是一个贬义词。</li>
+<li>基于我们的诉求我也做了一下简单的调研，因为我们主要还是以React为主所以选择Jest是自然而然的过程，另外Enzyme+Jest也是国内外热度都比较高的，两则的社区也比较活跃，所以很显然两者搭配是没有问题的，刚好ice就是用的这两个所以没什么好纠结的。</li>
+</ol>
+<p>Enzyme只是提供了额外的能力对React组件进行测试，不用Enzyme只用Jest可测试，但是只有Enzyme则不能测试，Enzyme是在测试框架上能力的扩展。</p>
+<ul>
+<li><strong>Jest主要提供测试框架（提供测试需要的所有能力）</strong></li>
+<li><strong>Enzyme（React测试工具库）基于Jest等测试框架增加DOM操作的能力，提供了强大的 API 能力支持 UI 交互测试</strong></li>
+</ul>
+<h2 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h2><h3 id="Jest"><a href="#Jest" class="headerlink" title="Jest"></a>Jest</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install jest</span><br><span class="line">npm install babel-plugin-transform-class-properties --save-dev</span><br><span class="line">npm install react-test-renderer</span><br></pre></td></tr></table></figure>
+
+<p><strong>修改根目录下.babelrc</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;presets&quot;: [&quot;@babel&#x2F;preset-env&quot;, &quot;@babel&#x2F;preset-react&quot;],</span><br><span class="line">	&quot;plugins&quot;: [&quot;@babel&#x2F;plugin-syntax-jsx&quot;,&quot;transform-class-properties&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="学习文档"><a href="#学习文档" class="headerlink" title="学习文档"></a>学习文档</h4><p><a href="https://www.bookstack.cn/read/ice-0.x/dev-test.md" target="_blank" rel="noopener">icejs测试</a></p>
+<p><a href="https://github.com/jest-community" target="_blank" rel="noopener">jest-community</a>/<strong><a href="https://github.com/jest-community/awesome-jest" target="_blank" rel="noopener">awesome-jest</a></strong></p>
+<p>提供了很多能力，增强测试的体验。</p>
+<p>以下几个是比较有代表性的</p>
+<ul>
+<li><a href="https://github.com/jest-community/vscode-jest" target="_blank" rel="noopener">vscode-jest</a>，vscode jest插件</li>
+<li><a href="https://github.com/jest-community/jest-extended" target="_blank" rel="noopener">jest-extended</a>，提供结果判断的扩展</li>
+<li><a href="https://github.com/jest-community/eslint-plugin-jest" target="_blank" rel="noopener">eslint-plugin-jest</a></li>
+<li><a href="https://github.com/jest-community/awesome-jest" target="_blank" rel="noopener">awesome-jest</a>，跟jest相关的所有第三方库列表</li>
+</ul>
+<h4 id="Snapshot"><a href="#Snapshot" class="headerlink" title="Snapshot"></a>Snapshot</h4><p>Jest使用 Snapshot 进行 UI 测试</p>
+<p>Snapshot 测试是 Jest 提供的能力，可以自动生成组件 UI 输出的描述文件，确保你的 UI 不会发生意外的改变。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;更新快照</span><br><span class="line">jest --updateSnapshot</span><br></pre></td></tr></table></figure>
+
+<p>组件实现代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> import React from &quot;react&quot;;</span><br><span class="line">import &#123; Card, Button &#125; from &quot;@alifd&#x2F;next&quot;;</span><br><span class="line"></span><br><span class="line">const RCard &#x3D; (props) &#x3D;&gt; &#123;</span><br><span class="line">  const &#123; title, subTitle, content, deleteFunc &#125; &#x3D; props;</span><br><span class="line">  const commonProps &#x3D; &#123;</span><br><span class="line">    subTitle: subTitle || &quot;&quot;,</span><br><span class="line">  &#125;;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;Card free style&#x3D;&#123;&#123; width: 300 &#125;&#125;&gt;</span><br><span class="line">        &lt;Card.Header title&#x3D;&#123;title || &quot;&quot;&#125; &#123;...commonProps&#125; &#x2F;&gt;</span><br><span class="line">        &lt;Card.Content&gt;&#123;content || &quot;&quot;&#125;&lt;&#x2F;Card.Content&gt;</span><br><span class="line">        &lt;Card.Actions&gt;</span><br><span class="line">          &lt;Button type&#x3D;&quot;primary&quot; onClick&#x3D;&#123;deleteFunc || null&#125;&gt;</span><br><span class="line">            删除</span><br><span class="line">          &lt;&#x2F;Button&gt;</span><br><span class="line">        &lt;&#x2F;Card.Actions&gt;</span><br><span class="line">      &lt;&#x2F;Card&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">export default RCard;</span><br></pre></td></tr></table></figure>
+
+<p>组件测试代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import React from &#39;react&#39;</span><br><span class="line">import renderer from &#39;react-test-renderer&#39;</span><br><span class="line">import RCard from &#39;..&#x2F;..&#x2F;..&#x2F;src&#x2F;components&#x2F;Card&#x2F;index&#39;</span><br><span class="line">import &#123; shallow &#125; from &#39;enzyme&#39;</span><br><span class="line"></span><br><span class="line">const props &#x3D; &#123;</span><br><span class="line">    title: &#39;firstRCard&#39;,</span><br><span class="line">    subTitle: &#39;测试&#39;,</span><br><span class="line">    content: &#39;这是第一个测试demo&#39;,</span><br><span class="line">    deleteFunc: jest.fn((e) &#x3D;&gt; &#123;</span><br><span class="line">        &#x2F;&#x2F; throw &#39;error&#39;</span><br><span class="line">        return &#39;OK&#39;</span><br><span class="line">    &#125;),</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; UI快照测试</span><br><span class="line">test(&#39;jest renders Snapshot&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">    const tree &#x3D; renderer.create(&lt;RCard &#123;...props&#125; &#x2F;&gt;).toJSON()</span><br><span class="line">    expect(tree).toMatchSnapshot()</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在第一次运行后，Jest Snapshot 将会生成对应的 <code>.snap</code> 文件。</p>
+<img src="/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/snapshot.png" class>
+
+<p>对于一个React组件而言， 传入相同的props，我们是期望得到相同的输出，所以后续如果组件的输出内容发生变更，则会导致测试用例无法通过。</p>
+<p><strong>ice结合 Jest CLI参数</strong></p>
+<p>–watch</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eg：&quot;test&quot;: &quot;icejs test --jest-watch&quot;,</span><br></pre></td></tr></table></figure>
+
+<p>监视文件是否有更改，并重新运行与已更改文件相关的测试。 如果要在文件更改后重新运行所有测试，请改用–watchAll选项。</p>
+<p>–watchAll</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eg：&quot;test&quot;: &quot;icejs test --jest-watchAll&quot;,</span><br></pre></td></tr></table></figure>
+
+<p>监视文件中的更改，并在发生更改时重新运行所有测试。 如果只想重新运行依赖于已更改文件的测试，请使用–watch选项。</p>
+<p><strong>也可单独运行</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;package.json</span><br><span class="line">&quot;coverage&quot;: &quot;jest --colors --coverage&quot;,</span><br><span class="line">&quot;test&quot;: &quot;jest --watch&quot;,</span><br></pre></td></tr></table></figure>
+
+<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p><strong>vscode插件</strong></p>
+<ul>
+<li><p>jest</p>
+</li>
+<li><p>jest runner</p>
+</li>
+</ul>
+<p><strong>编辑根目录下的jest.config.js</strong></p>
+<p>使其支持jsx、es6等</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">module.exports &#x3D; &#123;</span><br><span class="line">	verbose: true,</span><br><span class="line">	roots: [&#39;&lt;rootDir&gt;&#x2F;src&#x2F;&#39;, &#39;&lt;rootDir&gt;&#x2F;test&#x2F;&#39;],</span><br><span class="line">	testMatch: [&#39;&lt;rootDir&gt;&#x2F;test&#x2F;**&#x2F;*.js&#39;],</span><br><span class="line">	setupFilesAfterEnv: [&#39;&lt;rootDir&gt;&#x2F;src&#x2F;setupTests.js&#39;],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>Jest具体的概念说明看<a href="/2020/07/13/Jest/" title="Jest">Jest</a>。</p>
+<p><a href="https://jestjs.io/docs/en/expect" target="_blank" rel="noopener">expect</a>，各种断言。</p>
+<p>随便看几个实例</p>
+<h5 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h5><img src="/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/1.png" class title="from Hello FE">
+
+<p><strong>Jest生命周期钩子：</strong></p>
+<img src="/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/2.png" class title="from Hello FE">
+
+<p><strong>异步代码测试</strong></p>
+<img src="/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/3.png" class title="from Hello FE">
+
+
+
+<h3 id="使用-Enzyme-测试组件"><a href="#使用-Enzyme-测试组件" class="headerlink" title="使用 Enzyme 测试组件"></a>使用 Enzyme 测试组件</h3><p><a href="https://enzymejs.github.io/enzyme/" target="_blank" rel="noopener">Enzyme</a> 是 Airbnb 提供的测试类库，它提供了一套简洁强大的 API。能够灵活操作 DOM，是 React 社区推荐的测试方案。</p>
+<h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><p>安装测试相关依赖包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install --save-dev enzyme enzyme-adapter-react-16 react-test-renderer</span><br></pre></td></tr></table></figure>
+
+<p>基于 React 开发的测试，需要安装对应的 React Adapter 来保证 enzyme 渲染的版本和项目中使用的版本一致，以 react 16 版本为例，需要进行如下设置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import &#123; configure &#125; from &#39;enzyme&#39;;</span><br><span class="line">import Adapter from &#39;enzyme-adapter-react-16&#39;;</span><br><span class="line">configure(&#123; adapter: new Adapter() &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>如果不想每个测试用例都去定义一遍，可以将上述内容保存至 <code>src/setupTests.js</code> 文件中，并自定义 Jest 配置中的 <code>setupFilesAfterEnv</code> ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; jest.config.js</span><br><span class="line">module.exports &#x3D; &#123;  setupFilesAfterEnv: [&#39;&lt;rootDir&gt;&#x2F;src&#x2F;setupTests.js&#39;],&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Mount-Shallow-Render"><a href="#Mount-Shallow-Render" class="headerlink" title="Mount, Shallow, Render"></a>Mount, Shallow, Render</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123; mount, shallow, render &#125; from ‘enzyme&#39;;</span><br></pre></td></tr></table></figure>
+
+<p>为了具有要测试的组件，必须使用上述之一，如上面的示例所示。</p>
+<p><a href="http://airbnb.io/enzyme/docs/api/mount.html" target="_blank" rel="noopener">mount（常用）</a></p>
+<ul>
+<li>完整的DOM渲染，包括子组件</li>
+<li>当您具有可能与DOM API交互的组件或使用React生命周期方法以完全测试组件的用例时，它是理想的选择</li>
+<li>由于它实际上是将组件安装在DOM中，因此应在每次测试后调用unmount（），以停止相互影响的测试</li>
+<li>允许访问直接传递到根组件中的props（包括默认props）和传递到子组件中的props</li>
+</ul>
+<p><a href="http://airbnb.io/enzyme/docs/api/shallow.html" target="_blank" rel="noopener">Shallow（常用）</a></p>
+<ul>
+<li>仅渲染单个组件，<strong>不包括其子组件</strong>。 这对于隔离组件进行纯单元测试很有用。 它可以防止子组件中的更改影响测试输出。</li>
+<li>默认情况下，浅层组件可以访问生命周期方法</li>
+<li>无法访问传递到根组件的props （因此也不是默认props ），但是可以访问传递到子组件的props ，并且可以测试传递到根组件的props 的效果。 </li>
+</ul>
+<p><a href="http://airbnb.io/enzyme/docs/api/render.html" target="_blank" rel="noopener">Render</a></p>
+<ul>
+<li>渲染为静态HTML，包括子级</li>
+<li>没有访问React生命周期方法的权限</li>
+<li>比mount简单，但功能较少</li>
+</ul>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><blockquote>
+<p>react测试利器enzyme有三种渲染方式：shallow, mount, render。</p>
+<p>shallow渲染叫浅渲染，仅仅对当前jsx结构内的顶级组件进行渲染，而不对这些组件的内部子组件进行渲染，因此，它的性能上最快的，大部分情况下，如果不深入组件内部测试，那么可以使用shallow渲染。Shallow Rendering （浅渲染）指的是，将一个组件渲染成虚拟DOM对象，但是只渲染第一层，不渲染所有子组件，所以处理速度非常快。它不需要DOM环境，因为根本没有加载进DOM。</p>
+<p>mount则会进行完整渲染，而且完全依赖DOM API，也就是说mount渲染的结果和浏览器渲染结果说一样的，结合jsdom这个工具，可以对上面提到的有内部子组件实现复杂交互功能的组件进行测试。</p>
+<p>render也会进行完整渲染，但不依赖DOM API，而是渲染成HTML结构，并利用cheerio实现html节点的选择，它相当于只调用了组件的render方法，得到jsx并转码为html，所以组件的生命周期方法内的逻辑都测试不到，所以render常常只用来测试一些数据（结构）一致性对比的场景。</p>
+<p>在<a href="https://github.com/airbnb/enzyme/issues/465" target="_blank" rel="noopener">这里</a>还提到，shallow实际上也测试不到componentDidMount/componentDidUpdate这两个方法内的逻辑。</p>
+<p>shallow和mount对组件的渲染结果不是html的dom树，而是react树，如果你chrome装了react devtool插件，<br>他的渲染结果就是react devtool tab下查看的组件结构，而render函数的结果是element tab下查看的结果。</p>
+<p><strong>render</strong>: render采用的是第三方库<code>Cheerio</code>的渲染，渲染结果是普通的html结构，对于snapshot使用render比较合适。</p>
+<p>这些只是渲染结果上的差别，更大的差别是shallow和mount的结果是个被封装的 <code>ReactWrapper</code>，<br>可以进行多种操作，譬如find()、parents()、children()等选择器进行元素查找；<br>state()、props()进行数据查找，setState()、setprops()操作数据；<br>simulate()模拟事件触发。</p>
+</blockquote>
+<h4 id="常用方法示例"><a href="#常用方法示例" class="headerlink" title="常用方法示例"></a>常用方法示例</h4><h4 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h4><ul>
+<li>simulate(event, mock)：用来模拟事件触发，event为事件名称，mock为一个event object；</li>
+<li>instance()：返回测试组件的实例；</li>
+<li>find(selector)：根据选择器查找节点，selector可以是CSS中的选择器，也可以是组件的构造函数，以及组件的display name等；</li>
+<li>at(index)：返回一个渲染过的对象；</li>
+<li>get(index)：返回一个react node，要测试它，需要重新渲染；</li>
+<li>contains(nodeOrNodes)：当前对象是否包含参数重点 node，参数类型为react对象或对象数组；</li>
+<li>text()：返回当前组件的文本内容；</li>
+<li>html()： 返回当前组件的HTML代码形式；</li>
+<li>props()：返回根组件的所有属性；</li>
+<li>prop(key)：返回根组件的指定属性；</li>
+<li>state()：返回根组件的状态；</li>
+<li>setState(nextState)：设置根组件的状态；</li>
+<li>setProps(nextProps)：设置根组件的属性；</li>
+</ul>
+<h5 id="find-selector-gt-ShallowWrapper"><a href="#find-selector-gt-ShallowWrapper" class="headerlink" title=".find(selector) =&gt; ShallowWrapper"></a>.find(selector) =&gt; ShallowWrapper</h5><p><a href="https://enzymejs.github.io/enzyme/docs/api/selector.html" target="_blank" rel="noopener">selector</a>选择器</p>
+<blockquote>
+<p>从渲染树中查找与提供的选择器匹配的每个节点。</p>
+<p><strong>Arguments</strong></p>
+<ol>
+<li><code>selector</code> (<a href="https://enzymejs.github.io/enzyme/docs/api/selector.html" target="_blank" rel="noopener"><code>EnzymeSelector</code></a>): The selector to match.</li>
+</ol>
+<p><strong>Examples</strong></p>
+<p>CSS Selectors:</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> wrapper = shallow(<span class="xml"><span class="tag">&lt;<span class="name">MyComponent</span> /&gt;</span></span>);</span><br><span class="line">expect(wrapper.find(<span class="string">'.foo'</span>)).toHaveLength(<span class="number">1</span>);</span><br><span class="line">expect(wrapper.find(<span class="string">'.bar'</span>)).toHaveLength(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// compound selector</span></span><br><span class="line">expect(wrapper.find(<span class="string">'div.some-class'</span>)).toHaveLength(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// CSS id selector</span></span><br><span class="line">expect(wrapper.find(<span class="string">'#foo'</span>)).toHaveLength(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h5 id="simulate-event-mock"><a href="#simulate-event-mock" class="headerlink" title="simulate(event[, mock])"></a>simulate(event[, mock])</h5><blockquote>
+<p>在对应的元素节点上模拟事件。 </p>
+<p><strong>Arguments</strong></p>
+<ol>
+<li><code>event</code> (<code>String</code>): 事件名称</li>
+<li><code>mock</code> (<code>Object</code> [optional]): 模拟事件对象，它将与传递给处理程序的事件对象合并</li>
+</ol>
+<p><strong>Returns</strong></p>
+<p><code>ReactWrapper</code>: Returns itself.</p>
+</blockquote>
+<h6 id="Example-class-component"><a href="#Example-class-component" class="headerlink" title="Example class component"></a>Example <code>class component</code></h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Foo extends React.Component &#123;</span><br><span class="line">  constructor(props) &#123;</span><br><span class="line">    super(props);</span><br><span class="line">    this.state &#x3D; &#123; count: 0 &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    const &#123; count &#125; &#x3D; this.state;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;div className&#x3D;&#123;&#96;clicks-$&#123;count&#125;&#96;&#125;&gt;</span><br><span class="line">          &#123;count&#125; clicks</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;a href&#x3D;&quot;url&quot; onClick&#x3D;&#123;() &#x3D;&gt; &#123; this.setState(&#123; count: count + 1 &#125;); &#125;&#125;&gt;</span><br><span class="line">          Increment</span><br><span class="line">        &lt;&#x2F;a&gt;</span><br><span class="line">      &lt;&#x2F;div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const wrapper &#x3D; shallow(&lt;Foo &#x2F;&gt;);</span><br><span class="line"></span><br><span class="line">expect(wrapper.find(&#39;.clicks-0&#39;).length).to.equal(1);</span><br><span class="line">wrapper.find(&#39;a&#39;).simulate(&#39;click&#39;);</span><br><span class="line">expect(wrapper.find(&#39;.clicks-1&#39;).length).to.equal(1);</span><br></pre></td></tr></table></figure>
+
+<h6 id="Example-functional-component"><a href="#Example-functional-component" class="headerlink" title="Example functional component"></a>Example <code>functional component</code></h6><p>component</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useState &#125; from &quot;react&quot;;</span><br><span class="line">import PropTypes from &quot;prop-types&quot;;</span><br><span class="line">import &#123; Form, Input, Select, Button &#125; from &quot;@alifd&#x2F;next&quot;;</span><br><span class="line"></span><br><span class="line">const FormItem &#x3D; Form.Item;</span><br><span class="line"></span><br><span class="line">const formItemLayout &#x3D; &#123;</span><br><span class="line">  labelCol: &#123;</span><br><span class="line">    span: 6,</span><br><span class="line">  &#125;,</span><br><span class="line">  wrapperCol: &#123;</span><br><span class="line">    span: 14,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">const SearchInput &#x3D; (&#123; placeholder, onSearch &#125;) &#x3D;&gt; &#123;</span><br><span class="line">  const submitHandle &#x3D; (values) &#x3D;&gt; &#123;</span><br><span class="line">    if (Object.keys(values).length &#x3D;&#x3D;&#x3D; 0) &#123;</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line">    onSearch(values.search);</span><br><span class="line">  &#125;;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div</span><br><span class="line">      style&#x3D;&#123;&#123;</span><br><span class="line">        marginBottom: &quot;10px&quot;,</span><br><span class="line">        marginTop: &quot;5px&quot;,</span><br><span class="line">        marginLeft: &quot;5px&quot;,</span><br><span class="line">        width: &quot;420px&quot;,</span><br><span class="line">      &#125;&#125;</span><br><span class="line">    &gt;</span><br><span class="line">      &lt;Form inline&gt;</span><br><span class="line">        &lt;Form.Item</span><br><span class="line">          label&#x3D;&quot;策略名称:&quot;</span><br><span class="line">          key&#x3D;&quot;search&quot;</span><br><span class="line">          required</span><br><span class="line">          requiredTrigger&#x3D;&quot;onBlur&quot;</span><br><span class="line">          hasFeedback</span><br><span class="line">          requiredMessage&#x3D;&quot;请输入&quot;</span><br><span class="line">        &gt;</span><br><span class="line">          &lt;Input placeholder&#x3D;&#123;placeholder&#125; name&#x3D;&quot;search&quot; &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;Form.Item&gt;</span><br><span class="line">        &lt;FormItem wrapperCol&#x3D;&#123;&#123; offset: 5 &#125;&#125;&gt;</span><br><span class="line">          &lt;Form.Submit</span><br><span class="line">            validate</span><br><span class="line">            type&#x3D;&quot;primary&quot;</span><br><span class="line">            onClick&#x3D;&#123;submitHandle&#125;</span><br><span class="line">            style&#x3D;&#123;&#123; marginRight: 10 &#125;&#125;</span><br><span class="line">          &gt;</span><br><span class="line">            搜索</span><br><span class="line">          &lt;&#x2F;Form.Submit&gt;</span><br><span class="line">        &lt;&#x2F;FormItem&gt;</span><br><span class="line">      &lt;&#x2F;Form&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line">SearchInput.propTypes &#x3D; &#123;</span><br><span class="line">  onChange: PropTypes.func,</span><br><span class="line">  onClick: PropTypes.func,</span><br><span class="line">&#125;;</span><br><span class="line">export default SearchInput;</span><br></pre></td></tr></table></figure>
+
+<p><strong>测试用例</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">import SearchInput from &#39;..&#x2F;index&#39;</span><br><span class="line">import &#123; mount &#125; from &#39;enzyme&#39;</span><br><span class="line">import React from &#39;react&#39;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;describe相当于一个块，可以将测试用例放在一个块中</span><br><span class="line">describe(&#39;SearchInput unit test&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">	&#x2F;&#x2F; case1 标签选择器+修改props</span><br><span class="line">	test(&#39;SearchInput tag selector&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">		const wrapper &#x3D; mount(&lt;SearchInput placeholder&#x3D;&quot;please input&quot; &#x2F;&gt;)</span><br><span class="line">		expect(wrapper.find(&#39;input&#39;).at(0).prop(&#39;placeholder&#39;)).toEqual(&#39;please input&#39;)</span><br><span class="line">		&#x2F;&#x2F;设置属性</span><br><span class="line">		wrapper.setProps(&#123; placeholder: &#39;请输入&#39; &#125;)</span><br><span class="line">		expect(wrapper.find(&#39;input&#39;).at(0).prop(&#39;placeholder&#39;)).toEqual(&#39;请输入&#39;)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; case2属性选择器+修改props</span><br><span class="line">	test(&#39;SearchInput props&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">		const wrapper &#x3D; mount(&lt;SearchInput placeholder&#x3D;&quot;&quot; &#x2F;&gt;)</span><br><span class="line">		&#x2F;&#x2F; 判断是否存在输入框</span><br><span class="line">		expect(wrapper.exists(&#39;input[name&#x3D;&quot;search&quot;]&#39;)).toBeTruthy</span><br><span class="line">		expect(wrapper.find(&#39;input[name&#x3D;&quot;search&quot;]&#39;)).toHaveLength(1)</span><br><span class="line">		&#x2F;&#x2F;设置属性</span><br><span class="line">		wrapper.setProps(&#123; placeholder: &#39;serach&#39; &#125;)</span><br><span class="line">		expect(wrapper.find(&#39;input#search&#39;).prop(&#39;placeholder&#39;)).toBe(&#39;serach&#39;)</span><br><span class="line">	&#125;)</span><br><span class="line">	&#x2F;&#x2F;修改state</span><br><span class="line">	test(&#39;SearchInput state&#39;, () &#x3D;&gt; &#123;</span><br><span class="line">		const wrapper &#x3D; mount(&lt;SearchInput placeholder&#x3D;&quot;&quot; &#x2F;&gt;)</span><br><span class="line">		&#x2F;&#x2F; 判断是否存在输入框</span><br><span class="line">		expect(wrapper.exists(&#39;input[name&#x3D;&quot;search&quot;]&#39;)).toBeTruthy</span><br><span class="line">		expect(wrapper.find(&#39;input[name&#x3D;&quot;search&quot;]&#39;)).toHaveLength(1)</span><br><span class="line">		&#x2F;&#x2F;设置state，只有class components才可以使用</span><br><span class="line">		&#x2F;&#x2F; wrapper.setState(&#123; loading: true &#125;)</span><br><span class="line">		&#x2F;&#x2F; expect(wrapper.find(&#39;.next-btn next-medium next-btn-primary next-btn-loading&#39;)).toHaveLength(1)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="看前面的一堆代码可能削微有点绕啊"><a href="#看前面的一堆代码可能削微有点绕啊" class="headerlink" title="看前面的一堆代码可能削微有点绕啊"></a>看前面的一堆代码可能削微有点绕啊</h4><p><strong>简单总结一下：</strong></p>
+<p><code>expect</code>是Jest提供的断言，所以当你需要该判断结果是否正确的时候去Jest查expect的<a href="https://jestjs.io/docs/en/expect" target="_blank" rel="noopener">文档</a>就行。</p>
+<p><code>wrapper</code>可看做是enzyme提供了一套类似Jquery的API。所以Jquery做的她都能做，如：查找元素、获取元素及其属性、触发元素行为等。对应的也直接去enzyme查<a href="https://enzymejs.github.io/enzyme/docs/api/" target="_blank" rel="noopener">文档</a>就行</p>
+<h3 id="测试报告解读"><a href="#测试报告解读" class="headerlink" title="测试报告解读"></a>测试报告解读</h3><img src="/2020/07/20/%E5%89%8D%E7%AB%AF%E6%B5%8B%E8%AF%95/4.png" class>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>File</td>
+<td>测试用例文件</td>
+</tr>
+<tr>
+<td>% Stmts</td>
+<td>是语句覆盖率（statement coverage）：是否每个语句都执行了</td>
+</tr>
+<tr>
+<td>% Branch</td>
+<td>分支覆盖率（branch coverage）：是否每个分支代码块都执行了（if,||,?:)</td>
+</tr>
+<tr>
+<td>% Funcs</td>
+<td>函数覆盖率（function coverage）：是否每个函数都调用了</td>
+</tr>
+<tr>
+<td>% Lines</td>
+<td>行覆盖率（line coverage）：覆盖的行</td>
+</tr>
+<tr>
+<td>% Uncovered Line #s</td>
+<td>行覆盖率（line coverage）：是否每一行都执行了</td>
+</tr>
+<tr>
+<td>Test Suites</td>
+<td>测试用例文件个数</td>
+</tr>
+<tr>
+<td>Tests</td>
+<td>测试用例个数</td>
+</tr>
+<tr>
+<td>Snapshots</td>
+<td>UI快照个数</td>
+</tr>
+</tbody></table>
+<p><code>本文引用的图片，如有侵权请联系我删除。</code></p>
+<h3 id="测试外传"><a href="#测试外传" class="headerlink" title="测试外传"></a>测试外传</h3><p>测试框架有很多基于不同的需求不同的语言选择不同，比如Puppeteer、@testing-library库等等，有机会咱也试一试。</p>
+<p>现阶段在团队里落地的案例：核心的方法(覆盖率100%)、核心的组件(覆盖率&gt;80%)</p>
+<h4 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h4><blockquote><footer><strong>softwaretestinghelp</strong><cite><a href="https://www.softwaretestinghelp.com/tdd-vs-bdd/" target="_blank" rel="noopener">TDD Vs BDD – Analyze The Differences With Examples</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>code秘密花园</strong><cite><a href="https://mp.weixin.qq.com/s?__biz=Mzg2NDAzMjE5NQ==&mid=2247486072&idx=2&sn=43e99a7a755b47c93500d02ebbfed557&chksm=ce6eced4f91947c2b2df99ad48b8508f53ffb4d02ddf9799d6d15b6b86c1be50df3748d301ba&mpshare=1&scene=1&srcid=0720CJXc51rAx9qFl6kPH0ZW&sharer_sharetime=1595207922217&sharer_shareid=77df2eafd0a472623696abf038541666&version=3.0.25.2103&platform=win&rd2werd=1#wechat_redirect" target="_blank" rel="noopener">前端自动化测试探索和实践</a></cite></footer></blockquote>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/07/13/Jest/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2416,377 +3041,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/03/06/DevOps%E5%AE%9E%E8%B7%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/06/DevOps%E5%AE%9E%E8%B7%B5/" itemprop="url">DevOps实践</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-06T15:45:00+08:00">
-                2020-03-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
-                    <span itemprop="name">工作</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>搬运<a href="https://devops.phodal.com/manual#%E6%80%BB%E8%A7%88" target="_blank" rel="noopener">DevOps实施手册</a></p>
-<ol>
-<li><a href="https://devops.phodal.com/manual#建立愿景与方向" target="_blank" rel="noopener">建立愿景与方向</a></li>
-<li><a href="https://devops.phodal.com/manual#度量" target="_blank" rel="noopener">度量：组织、系统现状</a></li>
-<li><a href="https://devops.phodal.com/manual#准入条件" target="_blank" rel="noopener">准入条件</a>。查看是否满足实施 DevOps 的准入条件。</li>
-<li><a href="https://devops.phodal.com/manual#探索可行方案" target="_blank" rel="noopener">探索可行方案</a>。即 MVP 尝试</li>
-<li><a href="https://devops.phodal.com/manual#mvp" target="_blank" rel="noopener">MVP</a>。一次快速的 DevOps 过程和结果的 showcase。</li>
-<li><a href="https://devops.phodal.com/manual#实施落地" target="_blank" rel="noopener">精细化 DevOps 实施</a></li>
-<li><a href="https://devops.phodal.com/manual#回顾优化" target="_blank" rel="noopener">回顾优化</a></li>
-<li><a href="https://devops.phodal.com/manual#规模化" target="_blank" rel="noopener">规模化 DevOps 落地</a></li>
-</ol>
-<p>对于技术债务，它的利息表现为系统的不稳定性，以及由于临时性手段和缺乏合适的设计、文档工作和测试带来的不断攀升的维护成本。 —— 《架构师应该知道的 97 件事》</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/03/01/Module%20bundling/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/01/Module%20bundling/" itemprop="url">Module bundling</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-01T20:23:00+08:00">
-                2020-03-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>是的这又是一篇搬运文章，谁让我放荡不羁爱打野呢。作者博客地址<a href="https://www.preethikasireddy.com/" target="_blank" rel="noopener">Preethi Kasireddy</a></p>
-<p>之前有聊过一篇关于<a href="/2020/02/22/Modules/" title="Modules">Modules</a>的文章，主要讲什么是模块以及为什么需要模块。这篇主要讲怎么捆绑（打包）模块也就是模块使用的深一步探讨。</p>
-<h3 id="什么是模块捆绑？"><a href="#什么是模块捆绑？" class="headerlink" title="什么是模块捆绑？"></a>什么是模块捆绑？</h3><p> 从高层次上讲，模块捆绑只是将一组模块（及其依赖项）按正确顺序拼接到单个文件（或一组文件）中的过程。</p>
-<h3 id="为什么需要模块捆绑？"><a href="#为什么需要模块捆绑？" class="headerlink" title="为什么需要模块捆绑？"></a>为什么需要模块捆绑？</h3><p>如果项目中使用的模块过多，那么你就需要一个一个的使用script 标签引入到html中去,然后html运行的时候会一个一个的去加载你引入的模块。</p>
-
-
-<p>像上图那样 one by one 如果用的模块一多，页面的延迟就会过久，用户体验不好。</p>
-<p>为了解决这个问题，我们把所有文件捆绑，或“拼接”到一个文件（有时也是一组文件）中，<strong>正是为了减少请求数</strong>。</p>
-<p>另一个加速构建操作的常用方法是，“缩减”捆绑后的代码。缩减，是把源代码中不需要的字符（如空格、评论、换行符等等）移除，从而减小了代码的总体积，却不改变其功能。</p>
-<p>数据更少，<strong>浏览器处理的时间就更短</strong>，比如经常见到的”xxxmin.js”，相比完整版，缩减版小了好多。</p>
-<h3 id="捆绑模块有哪些不同的方式？"><a href="#捆绑模块有哪些不同的方式？" class="headerlink" title="捆绑模块有哪些不同的方式？"></a>捆绑模块有哪些不同的方式？</h3><p>如果你用的是一种标准模块模式（在 <a href="https://medium.freecodecamp.com/javascript-modules-a-beginner-s-guide-783f7d7a5fcc#.y8hs0nsne" target="_blank" rel="noopener">第一部分</a> 讨论过）来定义模块，比如<em>IIFE、全局导入</em>等，其实就是直接拼接和缩减几堆纯 JavaScript 代码，通常则不用借助工具。</p>
-<p>但如果你用的是非原生模块系统，浏览器不能像 CommonJS、AMD、甚至原生 ES6 模块格式那样解析，你就需要用专门工具先转化成排列正确、浏览器可识别的代码。这正是 Browserify、RequireJS、Webpack 和其他模块捆绑工具，或模块加载工具粉墨登场的时候。</p>
-<p>下面就来过一遍常用的模块捆绑方法：</p>
-<h4 id="Bundling-CommonJS"><a href="#Bundling-CommonJS" class="headerlink" title="Bundling CommonJS"></a>Bundling CommonJS</h4><p> <a href="https://medium.freecodecamp.com/javascript-modules-a-beginner-s-guide-783f7d7a5fcc#.y8hs0nsne" target="_blank" rel="noopener">第一部分</a>所知，CommonJS同步加载模块，它对于浏览器是不适用的。 解决此问题其中一个方法是用Browserify。 Browserify是一个为浏览器编译CommonJS模块的工具。</p>
-<p>例如，假设您有一个main.js文件，该文件导入一个模块来计算数字数组的平均值：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var myDependency &#x3D; require（&#39;myDependency&#39;）;</span><br><span class="line">var myGrades &#x3D; [93，95，88，0，91];</span><br><span class="line">var myAverageGrade &#x3D; myDependency.average（myGrades）;</span><br></pre></td></tr></table></figure>
-
-<p>因此，在这种情况下，我们只有一个依赖项（myDependency）。 使用以下命令，Browserify将递归所有必需的模块（从main.js开始）并把它们捆绑到一个名为bundle.js的文件中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">browserify main.js -o bundle.js</span><br></pre></td></tr></table></figure>
-
-<p>Browserify通过跳入每个<strong><em>require</em></strong> 调用的AST解析来遍历项目的整个依赖关系图来实现此目的。 一旦确定了依存关系的结构，便会将它们按正确的顺序捆绑到一个文件中。当需要使用时，则将<strong><em>“bundle.js”</em></strong> 文件的<code>&lt;script&gt;</code>标记插入到html中，以确保所有源代码都在一个HTTP请求中下载。</p>
-<p>同样，如果您有多个具有多个依赖项的文件，则只需告诉Browserify您的条目文件是什么，然后静静等待Browserify进行文件捆绑。</p>
-<p>最后，可以使用Minify-JS之类的工具来缩小捆绑代码。</p>
-<h4 id="Bundling-AMD"><a href="#Bundling-AMD" class="headerlink" title="Bundling AMD"></a>Bundling AMD</h4><p>如果是AMD，则需要使用诸如RequireJS或Curl之类的AMD加载器。 模块加载器（相对于捆绑器）动态加载程序需要的模块。</p>
-<p>AMD与CommonJS的主要区别之一是它加载模块的方式为异步。 所以对于AMD，从技术上讲，实际上不需要构建步骤，因为是异步加载模块的，因此无需将模块捆绑到一个文件中。这意味着运行程序时仅会逐步下载执行该命令所必需的那些文件，而不是在用户首次访问该页面时立即下载所有文件。</p>
-<p>但是，实际上，随着时间的推移，随着产品复杂性的增加，随着程序依赖的模块越来越多， 大多数情况下仍然使用构建工具来捆绑和缩小其AMD模块，以实现最佳性能，例如使用诸如RequireJS优化器，r.js之类的工具。</p>
-<p>总的来说，AMD与CommonJS之间的区别在于：AMD是异步加载，CommonJS时同步加载。</p>
-<p>有关CommonJS与AMD的有趣讨论，请查看Tom Dale博客中的<a href="https://tomdale.net/2012/01/amd-is-not-the-answer/#too-much-ceremony" target="_blank" rel="noopener">这篇</a>文章。</p>
-<h3 id="ES6-modules"><a href="#ES6-modules" class="headerlink" title="ES6 modules"></a>ES6 modules</h3><p> 接下来谈谈ES6模块，它在某些方面可以减少将来对捆绑器的需求。</p>
-<p>当前的JS模块格式（CommonJS，AMD）和ES6模块之间最重要的区别是ES6模块在设计时考虑了<strong>静态分析</strong>。 这意味着在导入模块时，将在编译时（即在脚本开始执行之前）解决导入问题。 这使我们可以在运行程序之前删除其他模块未使用的导出。 删除未使用的导出可以节省大量空间，从而减轻浏览器的压力。</p>
-<p>一个常见的问题是：与使用UglifyJS之类的代码来缩小代码时所产生的死代码消除有什么不同？这得分情况 。</p>
-<p>有时，清除死代码可能在UglifyJS和ES6模块之间完全相同，而有时则不行。 </p>
-<p>使ES6模块与众不同的是消除死代码的不同方法，称为<code>tree shaken</code>。 tree shaken本质上是消除死代码的反向操作。 它仅包含捆绑软件需要运行的代码，而不排除捆绑软件不需要的代码。 让我们看一个例子：</p>
-<p>假设我们有一个utils.js文件，其中包含以下函数，我们使用ES6语法导出每个函数：:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">each</span>(<span class="params">collection, iterator</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(collection)) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; collection.length; i++) &#123;</span><br><span class="line">      iterator(collection[i], i, collection);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> collection) &#123;</span><br><span class="line">      iterator(collection[key], key, collection);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">filter</span>(<span class="params">collection, test</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> filtered = [];</span><br><span class="line">  each(collection, <span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (test(item)) &#123;</span><br><span class="line">      filtered.push(item);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> filtered;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">map</span>(<span class="params">collection, iterator</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> mapped = [];</span><br><span class="line">  each(collection, <span class="function"><span class="keyword">function</span>(<span class="params">value, key, collection</span>) </span>&#123;</span><br><span class="line">    mapped.push(iterator(value));</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> mapped;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">reduce</span>(<span class="params">collection, iterator, accumulator</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> startingValueMissing = accumulator === <span class="literal">undefined</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    each(collection, <span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(startingValueMissing) &#123;</span><br><span class="line">        accumulator = item;</span><br><span class="line">        startingValueMissing = <span class="literal">false</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        accumulator = iterator(accumulator, item);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> accumulator;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>接下来，假设我们不知道要在程序中使用哪些utils函数，因此我们继续将所有模块导入main.js中，如下所示：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> Utils <span class="keyword">from</span> ‘./utils.js’;</span><br></pre></td></tr></table></figure>
-
-<p>然后我们最终只使用each函数:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> Utils <span class="keyword">from</span> ‘./utils.js’;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Utils.each([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123; <span class="built_in">console</span>.log(x) &#125;);</span><br></pre></td></tr></table></figure>
-
-<p>模块加载后，main.js文件的“tree shaken”版本将如下所示：:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">each</span>(<span class="params">collection, iterator</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(collection)) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; collection.length; i++) &#123;</span><br><span class="line">      iterator(collection[i], i, collection);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> collection) &#123;</span><br><span class="line">      iterator(collection[key], key, collection);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">each([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123; <span class="built_in">console</span>.log(x) &#125;);</span><br></pre></td></tr></table></figure>
-
-<p>所以你会发现除了 <strong>each</strong>函数其他函数都没有了.</p>
-<p>Meanwhile, if we decide to use the filter function instead of the each function, we wind up looking at something like this:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> Utils <span class="keyword">from</span> ‘./utils.js’;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Utils.filter([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123; <span class="keyword">return</span> x === <span class="number">2</span> &#125;);</span><br></pre></td></tr></table></figure>
-
-<p>The tree shaken version looks like:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">each</span>(<span class="params">collection, iterator</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(collection)) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; collection.length; i++) &#123;</span><br><span class="line">      iterator(collection[i], i, collection);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> collection) &#123;</span><br><span class="line">      iterator(collection[key], key, collection);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span>(<span class="params">collection, test</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> filtered = [];</span><br><span class="line">  each(collection, <span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (test(item)) &#123;</span><br><span class="line">      filtered.push(item);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> filtered;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">filter([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123; <span class="keyword">return</span> x === <span class="number">2</span> &#125;);</span><br></pre></td></tr></table></figure>
-
-<p>注意这次是如何同时包含<strong>filter</strong>和<strong>each</strong>的。 这是filter使用each，因此我们需要导出这两个函数模块才能正常工作.</p>
-<p>有兴趣可以试试Rollup.js <a href="http://rollupjs.org/" target="_blank" rel="noopener">live demo and editor</a>。看看它对Tree-Shaking的应用。</p>
-<h3 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h3><p>就打包器而言，Webpack是新手。 它的设计与您使用的模块系统无关，允许开发人员酌情使用CommonJS，AMD或ES6。</p>
-<p>您可能想知道为什么当我们已经有其他捆绑器（如Browserify和RequireJS）完成工作并做得很好时，为什么我们需要Webpack。 其中一个原因是，Webpack提供了一些有用的功能，例如“代码拆分”-一种将您的代码库拆分为“块”（按需加载）的方法。</p>
-<p>例如，如果您的Web应用程序仅在某些情况下需要使用代码块，则将整个代码库放入单个大型捆绑文件中可能没有效率。 在这种情况下，您可以使用代码拆分将代码提取为可按需加载的捆绑块，从而避免了在大多数用户只需要应用程序核心的情况下使用较大的前期有效负载的麻烦。</p>
-<p>代码拆分只是Webpack提供的众多引人注目的功能之一，并且Internet上对于Webpack还是Browserify更好是有很多意见。 以下是一些我认为有助于解决问题的更高级的讨论：:</p>
-<ul>
-<li><a href="https://gist.github.com/substack/68f8d502be42d5cd4942" target="_blank" rel="noopener">https://gist.github.com/substack/68f8d502be42d5cd4942</a></li>
-<li><a href="http://mattdesl.svbtle.com/browserify-vs-webpack" target="_blank" rel="noopener">http://mattdesl.svbtle.com/browserify-vs-webpack</a></li>
-<li><a href="http://blog.namangoel.com/browserify-vs-webpack-js-drama" target="_blank" rel="noopener">http://blog.namangoel.com/browserify-vs-webpack-js-drama</a></li>
-</ul>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>这篇文章比较老了，但是它对我来说是在于扫盲，毕竟概念性的东西是不过时的。</p>
-<ul>
-<li><p>CommonJs主要针对服务端，AMD主要针对浏览器端。（顺便提一下，针对服务器端和针对浏览器端有什么本质的区别呢？服务器端一般采用同步加载文件，也就是说需要某个模块，服务器端便停下来，等待它加载再执行。而浏览器端要保证效率，需要采用异步加载，这就需要一个预处理，提前将所需要的模块文件并行加载好。）</p>
-</li>
-<li><p>AMD是预加载，在并行加载js文件同时，还会解析执行该模块（因为还需要执行，所以在加载某个模块前，这个模块的依赖模块需要先加载完成），即不能懒加载。不过因为AMD并行解析，加载快速，所以同一时间可以解析多个文件。当然也因为并行加载，异步处理，加载顺序不一定，所以不注意的情况下可能会造成程序会出现一些问题。</p>
-</li>
-<li><p>ES6 module的静态分析，配合tree sharking特性，做到用那些导哪些，也不用像AMD那样需要用define包装函数，当然这篇文章比较老了啊，现在其实ES6 module已经是普及了。</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
  <nav class="pagination">
-   <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
+   <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
  </nav>
 
 
@@ -2835,7 +3094,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">119</span>
+                  <span class="site-state-item-count">121</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2857,7 +3116,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">84</span>
+                  <span class="site-state-item-count">85</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -3509,7 +3768,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("Jest");titles.push("js工具库");titles.push("Fusion Design");titles.push("前端监控");titles.push("Linux ls命令");titles.push("前端埋点(一)");titles.push("Linux ps、top、free命令");titles.push("Java 8 Streams");titles.push("DevOps实践");titles.push("Module bundling");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("前端安全");titles.push("前端测试");titles.push("Jest");titles.push("js工具库");titles.push("Fusion Design");titles.push("前端监控");titles.push("Linux ls命令");titles.push("前端埋点(一)");titles.push("Linux ps、top、free命令");titles.push("Java 8 Streams");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {

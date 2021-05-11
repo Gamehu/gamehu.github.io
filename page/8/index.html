@@ -309,6 +309,321 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/04/22/%E5%95%A5%E6%97%B6%E5%80%99%E7%94%A8Redux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/22/%E5%95%A5%E6%97%B6%E5%80%99%E7%94%A8Redux/" itemprop="url">啥时候用Redux</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-22T10:23:00+08:00">
+                2019-04-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <img src="/2019/04/22/%E5%95%A5%E6%97%B6%E5%80%99%E7%94%A8Redux/001.png" class>
+
+<p>一个小迭代结束之后，我们前端做了一个几次code revew，其中有个问题就是什么时候应该redux，因为redux其实有些重，但是某些场景其实很简单当让组件也很简单，有观点觉得没有必要上redux。</p>
+<p>这个问题需要有个解法。</p>
+<p><strong>我觉得需要根据现有的环境来几个方面来考虑。</strong></p>
+<ol>
+<li>现在我们产品前端组件类别：基础组件、业务通用组件、定制化组件。</li>
+<li>产品的体量，我们产品是ToB产品，功能比较多，代码量比较大。</li>
+<li>业务场景的复杂度，因为是ToB，所以场景覆盖比较全，同时定制化需求稍微比较多，所以复杂度比较高。</li>
+</ol>
+<p><strong>好，接着我们再看看Redux，要讨论是否需要用它或者什么时候用它我们得搞清楚它的作用是什么。</strong></p>
+<p>首先咱们得确定一点React本身其实就是一个UI(View)层它不是一个前端框架， 如果是个复杂的产品，前端光负责View很显然是不够的，所以这几年出现了很多前端架构，比如MVVM架构下的Angular就是一套前端框架.</p>
+<p>正因为这样，所以FaceBook提出了Flux的架构，就是为了能推出以React为基础的一套前端框架，让React不再孤单.</p>
+<p>至于什么是Flux，阮老师说的很清楚： <a href="http://www.ruanyifeng.com/blog/2016/01/flux.html" target="_blank" rel="noopener" title="Flux 架构入门教程">http://www.ruanyifeng.com/blog/2016/01/flux.html</a></p>
+<p><strong>看完之后你会发现，redux其实就是Flux的一种实现，主要解决两个问题：</strong></p>
+<ol>
+<li>清晰的代码层次结构，让复杂的前端变得更加健壮和易维护（action、dispatch、reducer等）.</li>
+<li>让React组件之间通信变得更有效率和更方便（通过store能在任何组件访问想要的数据，不管是横向的还是纵向的层级，而不用依次传递经过根本不需要该数据的组件，真正做到按需使用）</li>
+</ol>
+<p><strong>所以说到这儿我们可以简单列一下使用Redux的好处</strong></p>
+<ul>
+<li>大多数情况下可以用reducer友好的把state从组件里分离出来，使组件更加的轻量化也增加了代码可读性.</li>
+<li>Redux的store可以当成缓存使用，并且是全局的，你可以在任何地方使用它，只要不更新state，无论何时何地获取的数据都是一样的，使数据共享变得容易.</li>
+<li>Redux友好的把state统一放到了store里，通过action、dispatch、reducer，让state的变化变得可预测，让数据流变得清晰明朗，易于维护.</li>
+<li>Redux的store让数据的传递变得更有效率，无需依次进行数据传递（哪怕该组件根本不需要这个数据），可以满足需要的时候再获取.</li>
+<li>Redux更有利于公共组件的开发，公共组件无论在哪儿使用，可以通过dispatch触发其行为.</li>
+</ul>
+<h3 id="试着回答一下"><a href="#试着回答一下" class="headerlink" title="试着回答一下"></a>试着回答一下</h3><p>我觉得除非已经明确的定义某个组件只是一个纯UI类组件，不会存在其它业务逻辑或者行为，那我觉得没有必要用Redux，比如我们产品中的一些展示组件，这些组件一个最大的特点就是，只需要给它数据，它渲染就完事了不会有额外的一些操作,那完全就一个jsx就搞定了.<strong>除此以外都建议用Redux，虽然它复杂了些，但是你会慢慢发现他的好.</strong></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/04/17/%E6%90%9C%E7%B4%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/17/%E6%90%9C%E7%B4%A2/" itemprop="url">搜索</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-17T14:22:00+08:00">
+                2019-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>简单记录一下我平时使用搜索套路。</p>
+<img src="/2019/04/17/%E6%90%9C%E7%B4%A2/001.png" class>
+
+
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/04/14/%E6%80%8E%E6%A0%B7%E4%BF%9D%E6%8C%81%E5%8A%A8%E5%8A%9B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1811,349 +2126,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/02/25/%E5%90%88%E4%BB%A3%E7%A0%81de%E5%86%85%E5%BF%83%E7%8B%AC%E7%99%BD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/25/%E5%90%88%E4%BB%A3%E7%A0%81de%E5%86%85%E5%BF%83%E7%8B%AC%E7%99%BD/" itemprop="url">合代码de内心独白</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-25T10:39:00+08:00">
-                2019-02-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
-                    <span itemprop="name">工作</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>上周五产线领导派了一个活，合并前端和后端rest服务的代码，release合到develop。其实是一个很简单很日常的工作，但是因为种种原因，现在的版本周期过长，导致新增和修改的代码很多（特别是前端一堆的css、less、jsx、js….）。所以你知道我心中有多少只草泥马了。</p>
-<img src="/2019/02/25/%E5%90%88%E4%BB%A3%E7%A0%81de%E5%86%85%E5%BF%83%E7%8B%AC%E7%99%BD/frontend.png" class title="前端">
-
-<img src="/2019/02/25/%E5%90%88%E4%BB%A3%E7%A0%81de%E5%86%85%E5%BF%83%E7%8B%AC%E7%99%BD/backend.png" class title="rest后端">
-
-<p>这个时候需要的是冷静，蛋定。找个本子合一支笔，列清楚怎么做这件事情，一定要花时间考虑清楚再下手。</p>
-<h2 id="行动清单"><a href="#行动清单" class="headerlink" title="行动清单"></a>行动清单</h2><ol>
-<li><p>摸清楚分支情况，看看改动到底有多大，根据摸排的情况，判断是否需要上升到领导，因为如果动作太大势必会对团队的一些代码方面的操作有影响，需要领导提供协助，让团队配合合理解。</p>
-</li>
-<li><p>把涉及到修改人都和其确认一下，代码改动的分支以及模块，看是否与自己的理解存在误差，及时修正误差。 </p>
-</li>
-<li><p>借助命令（git log、git diff、git show…）以及工具（meld）对代码进行比对合并，设计面广最好不要直接往develop上合，先拉一个本地分支往上合，合完之后，验证通过再往develop合并。</p>
-</li>
-<li><p>合并之前，明确通知合并开始的时间点，并告知团队此时间段内不要再往分支上提交代码。</p>
-</li>
-<li><p>合并代码的时候手别抖，心别慌，扎稳马步，看清楚再合并，其实也不怕，因为你是单独拉的分支，哪怕整坏了也无所谓。所以就跟开车一样，胆大心细。 </p>
-</li>
-<li><p>合并完之后，本地测试是否功能有问题，一定要测。</p>
-</li>
-</ol>
-<hr>
-<p>合并代码有个坑，在于自动合并，它往往会给人错觉表示这块代码或者这几个文件时没问题的，但是很多时候往往是有问题，因为git并不知道这几个文件是否存在因果联系，这样就往往容易漏掉。我就遇到了这个问题，合并代码之后哪儿都ok就是一直提示license有问题，几个人轮番查了几波，排除了可能的原因，最终就落到了代码合并上，猜测是代码合并造成的，所以就查代码，最后发现确实是权限过滤的url那儿没有添加上license相关的url，导致license的url每次都被拦截了。</p>
-<p><strong>小结</strong></p>
-<p>干越复杂越麻烦的事，越不能心慌，理清思路，列出行动项，一个个啃掉。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/02/24/%E5%89%8D%E7%AB%AF%E5%B0%8F%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/02/24/%E5%89%8D%E7%AB%AF%E5%B0%8F%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B/" itemprop="url">前端小总结一下</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-24T11:59:00+08:00">
-                2019-02-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近前后端都在写，而且相对来说前端写的多一些，因为领导说了，咱们这条产线实行前后端分离策略，但是团队里不再招专业前端，那xxx你先上，你不是常说你是一块砖吗，哪里需要哪里搬。是的，xxx就是我，所以朋友们在公司切记谨言慎行。当然主要还是我觉得了解下前端还是可以的（但是打死不写css）。</p>
-<p>所以我就从一个后端干到了前端，当然团队里肯定是有专业得前端的，不过因为咱们事业部有几条产线，所以资源稍有紧张，给到咱们产线就两个前端，有一个只会css，css肯定得有得，不然你想想啊，就算领导放心让你写css，你也肝颤啊。so，我就从产品mvp开始到正式产品立项，就主要精力在前端。</p>
-<h2 id="一入前端深似海啊"><a href="#一入前端深似海啊" class="headerlink" title="一入前端深似海啊"></a>一入前端深似海啊</h2><img src="/2019/02/24/%E5%89%8D%E7%AB%AF%E5%B0%8F%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B/gratisography-sad-bunny-thumbnail.jpg" class title="from gratisography">
-
-<p>前段的东西太多，而且层出不穷。抵御诱惑的最好办法是什么？我觉得是先仔细想想需不需它，当不确定时，先放着不着急做决定，只要坚定自己所要的东西，什么诱惑对你都是过眼云烟。</p>
-<p>脚手架的选择就出现了两派，一派以我为首，崇尚拿来即用避免重复造轮子，一派以专业前端同学为首，崇尚自己搭一套脚手架。具体就不细说，反正双方谁也说服不了谁。最终领导说了，谁是主要负责人谁说了算，当然专业前端是主要负责人，所以最终就决定自己搭建脚手架。当然这个过程是很痛苦的，时间也很长…曾今一度放弃这个方案，但是想着已经花了那么多精力了，就咬咬牙继续整了。最终大概前前后后花了3-4个月时间才算稳定了，当然这个过程编码还是断断继续在进行的。</p>
-<p>所以这块主要说下webpack，现在的前端打包工具我估计没谁说不用webpack吧，webpack教程我就不恬不知耻的讲了，网上一堆。不过我还是觉得大家尽量系统的看教程，别东一块西一块凑。</p>
-<h2 id="脚手架"><a href="#脚手架" class="headerlink" title="脚手架"></a>脚手架</h2><p>对于<strong>webpack</strong>打包工具，涉及到性能，我认为的三个关注点：</p>
-<ol>
-<li><p>包大小</p>
-<p> <em>主要是从压缩、去重（注意依赖公共部分单独打包）方面考虑，能从现有的配置解决的就不要引入新的插件，用了插件需要在官方了解每个数的意义。</em></p>
-<p> <em>项目中：js压缩用的UglifyJsPlugin，第三方库处理我们用的是CommonsChunkPlugin（有人说DllPlugin更好用），后面会抽时间试下。</em></p>
-</li>
-<li><p>包拆分</p>
-<p> <em>打包时，注意包的拆分，按模块按页面，可以分得细一些，让页面按需加载…，别都打到一个包里，一开始我们就遇到这个问题，打开一个页面光渲染所需的内容就要下载半天。</em></p>
-</li>
-</ol>
-<ol start="3">
-<li><p>打包速度</p>
-<p> <em>能用缓存的用缓存，不需要转译的就别转译，Happypack能多进程执行打包，会快点</em></p>
-<p> <em>有两个很漂亮的可视化插件，<strong>JARVIS、webpack-bundle-analyzer</strong> ，对于优化打包很有用。</em></p>
-</li>
-</ol>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ul>
-<li><p>前端选型一定要适合团队和自己业务发展的。其它人觉得好用，你得看看其它人的场景和公司的体量。</p>
-</li>
-<li><p>没有特别与众不同的要求或者很多的个性化，避免重复造轮子。</p>
-</li>
-<li><p>当资源有限的时候，先保证功能性，再保证性能，但是性能优化一定是一个长期的非功能需求。</p>
-</li>
-</ul>
-<h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><p>没什么好说的……，都是主流的</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
  <nav class="pagination">
-   <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
+   <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
  </nav>
 
 
@@ -2202,7 +2179,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">119</span>
+                  <span class="site-state-item-count">121</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2224,7 +2201,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">84</span>
+                  <span class="site-state-item-count">85</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2876,7 +2853,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("怎样保持动力");titles.push("React Lifecycle");titles.push("React 条件渲染");titles.push("通用工具类");titles.push("git 分支规范");titles.push("中间件到底该不该用");titles.push("系统之美");titles.push("几个版本之后");titles.push("合代码de内心独白");titles.push("前端小总结一下");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("啥时候用Redux");titles.push("搜索");titles.push("怎样保持动力");titles.push("React Lifecycle");titles.push("React 条件渲染");titles.push("通用工具类");titles.push("git 分支规范");titles.push("中间件到底该不该用");titles.push("系统之美");titles.push("几个版本之后");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {

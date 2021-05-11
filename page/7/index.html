@@ -309,6 +309,386 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/08/20/git%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/20/git%E5%AE%9E%E8%B7%B5/" itemprop="url">git实践</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-20T16:57:00+08:00">
+                2019-08-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>据说再2016年我就开始接触git，当时还用台式机、笔记本作为两个用户进行git的一些实践和原理的了解，但是正儿八经在项目中用git还是现在，经过一年多的实践呢，入了一些坑所以觉得是时候展现真正的技术了，简单积累一下我比较常用的。</p>
+<img src="/2019/08/20/git%E5%AE%9E%E8%B7%B5/boat-164989.jpg" class title="Image by Pixabay License from Pixabay">
+
+<p>** git提交规范 **</p>
+<p>这块是很重要很重要的，在代码评审、问题追溯、代码回滚、代码培训等的时候都需要用到这个东西，但是团队内暂时还没有对此做硬性要求。不过我个人是一直比较注重提交的内容，因为以前吃过亏，没有友好的commit内容某些场景下很难定位。虽然我比较注重但是还是比较游击队的打法，最近看到了个东西叫commitizen，它可以配置一套标准的提交规范，所以准备用起来。</p>
+<p><strong>配置commitizen</strong></p>
+<p><a href="https://juejin.im/post/5cbd1fdf5188250a546f565f" target="_blank" rel="noopener" title="安装链接">https://juejin.im/post/5cbd1fdf5188250a546f565f</a></p>
+<ul>
+<li>可借助工具使提交更加规范：安装cz-conventional-changelog，即使用第三方的提交模板，这儿表示用的AngularJS的提交模板</li>
+</ul>
+<ul>
+<li>用husky配合git hooks 进行预检查</li>
+</ul>
+<p>package.json</p>
+<pre><code>{</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&quot;husky&quot;: &#123;</span><br><span class="line">  &quot;hooks&quot;: &#123;</span><br><span class="line">   &quot;commit-msg&quot;: &quot;(echo HUSKY_GIT_PARAMS: %HUSKY_GIT_PARAMS%) &amp;&amp; commitlint -E HUSKY_GIT_PARAMS&quot;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;,</span><br><span class="line">&quot;config&quot;: &#123;</span><br><span class="line">  &quot;commitizen&quot;: &#123;</span><br><span class="line">   &quot;path&quot;: &quot;.&#x2F;node_modules&#x2F;cz-conventional-changelog&quot;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>git 储藏</strong></p>
+<pre><code>常用git stash命令：
+
+（1）git stash save &quot;save message&quot;  : 执行存储时，添加备注，方便查找，只有git stash 也要可以的，但查找时不方便识别。
+
+（2）git stash list  ：查看stash了哪些存储
+
+（3）git stash show ：显示做了哪些改动，默认show第一个存储,如果要显示其他存贮，后面加stash@{$num}，比如第二个 git stash show stash@{1}
+
+（4）git stash show -p : 显示第一个存储的改动，如果想显示其他存存储，命令：git stash show  stash@{$num}  -p ，比如第二个：git stash show  stash@{1}  -p
+
+（5）git stash apply :应用某个存储,但不会把存储从存储列表中删除，默认使用第一个存储,即stash@{0}，如果要使用其他个，git stash apply stash@{$num} ， 比如第二个：git stash apply stash@{1} 
+
+（6）git stash pop ：命令恢复之前缓存的工作目录，将缓存堆栈中的对应stash删除，并将对应修改应用到当前的工作目录下,默认为第一个stash,即stash@{0}，如果要应用并删除其他stash，命令：git stash pop stash@{$num} ，比如应用并删除第二个：git stash pop stash@{1}
+
+（7）git stash drop stash@{$num} ：丢弃stash@{$num}存储，从列表中删除这个存储
+
+（8）git stash clear ：删除所有缓存的stash</code></pre><p><strong>git 回滚</strong></p>
+<pre><code>//回滚上一次提交
+git reset HEAD~ 
+// 修改最近一次提交的备注
+git commit --amend
+// 修改某一次提交的备注，最后的数字2指的是显示到倒数第几次
+git rebase -i HEAD~2</code></pre><p><strong>git 合并</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;是将远程主机的最新内容拉到本地，用户在检查了以后决定是否合并到工作本机分支中</span><br><span class="line">  git fetch</span><br><span class="line">  &#x2F;&#x2F;是将远程主机的最新内容拉到本地并合并</span><br><span class="line">  git pull</span><br></pre></td></tr></table></figure>
+
+<p><strong>git 切换分支</strong></p>
+<pre><code>//对于已经拉取到本地的分支之间的切换
+git checkout 分支名
+//对于还没有拉取到本地的分支
+git checkout -b remote分支名 本地分支名</code></pre><p> <strong>git 撤销merge</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;经常在切换分支时，一不小心就merge错了分支或者合并时遇到冲突想取消操作，这命令就好用了</span><br><span class="line">git merge --abort</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;撤销指定的merge</span><br><span class="line">1.找到最后一次提交到master分支的版本号，即【merge前的版本号】</span><br><span class="line">git log --pretty&#x3D;oneline</span><br><span class="line">2.回退到某个版本号</span><br><span class="line">git reset --hard 【merge前的版本号】</span><br></pre></td></tr></table></figure>
+
+<p> <strong>git 撤销</strong></p>
+<img src="/2019/08/20/git%E5%AE%9E%E8%B7%B5/reset.jpg" class>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft: 将分支回退到指定提交，工作区维持现状不变,暂存区会在现有基础上增加该commit之后的提交。</span><br><span class="line">git reset --mixed: （默认操作）将分支回退到指定提交，暂存区也被同步为该指定提交，工作区保持不变。</span><br><span class="line">git reset --hard: 将分支回退到指定分支，暂存区和工作区都会被同步为该指定的提交。</span><br><span class="line">git reset --hard 可以回退到某个提交</span><br><span class="line">git revert可以撤销某个提交，撤销会产生一个新的提交</span><br></pre></td></tr></table></figure>
+
+<p> <strong>回退到某个版本并应用指定的几次提交</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">切换到目标分支上， 假如当前状态为新合并进了一条commit，只需执行 git reset --hard HEAD~1即可回退到合并前。</span><br><span class="line">或者回退到任何你想要的状态中 git reset --hard commitId, 其中commitId为你想要处于的版本hash code。</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">git reset --hard 1d7444 #回退到某个版本</span><br><span class="line">git cherry-pick 626335 #将某次commit的更改应用到当前版本 </span><br><span class="line">git push origin HEAD --force  #强制提交</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>根据关键字搜索提交记录</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git log --all-match --grep&#x3D;登录</span><br><span class="line"></span><br><span class="line">commit 9f3e61ad63626c3e2e7541430d4af9693e3357ccAuthor: caofu &lt;[caofu@ruijie.com.cn](mailto:caofu@ruijie.com.cn)&gt;Date:  Fri Dec 7 13:09:55 2018 +0800  完成单点登录xxxx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#查看某次提交的内容</span><br><span class="line">git show 9f3e61ad63626c3e2e7541430d4af9693e3357cc</span><br></pre></td></tr></table></figure>
+
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/08/19/%E5%90%83%E5%8A%9B%E4%B8%8D%E8%AE%A8%E5%A5%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/19/%E5%90%83%E5%8A%9B%E4%B8%8D%E8%AE%A8%E5%A5%BD/" itemprop="url">吃力不讨好</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-19T11:08:00+08:00">
+                2019-08-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>话说2018.07.31的x安公司的谢XX和李XX，在摄像头下两人进行了比较随心所欲的肢体接触，网传是因为产品经理要求程序员实现APP主题根据手机壳变颜色的需求，程序员忍无可忍从而释放自我的过程。当然这是网传版本，据说完全不是那么回事。</p>
+<p>但是为什么这个事件就那么红呢。我觉得有两方面的原因：</p>
+<ol>
+<li>程序员一向是被整个社会调侃最多的职业之一（之一比较谦虚），热点够大。</li>
+<li>网传的需求太他么奇葩，迎合了大多的吃瓜群众。</li>
+</ol>
+<p>作为程序员其实我们为什么也觉得有趣，是因为产品和程序员多多少少都会有不对付（矛盾）的情况发生。这件事刚好映射了此情况。我个人觉得该矛盾的核心点还是在于同理心这一点上，双方好像都很难理解对方。其实主要就是很少站在对方的角度和位置上，客观的理解对象所说的事情。</p>
+<img src="/2019/08/19/%E5%90%83%E5%8A%9B%E4%B8%8D%E8%AE%A8%E5%A5%BD/tom-gainor-ABjAtsf3XDA-unsplash.jpg" class title="来源于https:&#x2F;&#x2F;unsplash.com&#x2F;photos&#x2F;ABjAtsf3XDA">
+
+<p>讲的有点多了，为什么想说”吃力不讨好”，是因为本周周会复盘时，刚好遇到了一个同事出现了此情况，当事人肯定很难受也比较委屈,这位同事暂时起名小波，方便叙述。</p>
+<p>当然这篇文章主要是站在技术人员的角度写的，其它职位的待我深入了解后再有资格叨叨。</p>
+<p>为什么需要复盘一下呢，明面上的原因是小波任务delay了进而导致周目标delay了，在PO验收时结果有些不太理想。所以SM就拉着大家做了一下复盘，<br>流程是：</p>
+<ul>
+<li>首先小波先说明一下整个delay的原因</li>
+<li>分析根因</li>
+<li>大家发表一下看法和建议</li>
+<li>形成改进项或者规约之类的东西</li>
+<li>团队是否认同</li>
+<li>改进项的责任人进行跟进</li>
+</ul>
+<p>大体的原因是在于，小波在研发时，鉴于程序员的伟大使命感，总想着抽象进而方便后人，但是在研发前期准备时不管是<strong>关键路径</strong>还是<strong>详设</strong>，都没能体现这块内容，关键是这块内容占用的时间还比较长，所以最终导致整个计划delay。这本身不是个问题，因为想法时好的，问题在于这是个”吃力不讨好”的事，因为这是过程产物，PO等人是看不到的，更大的问题是小波没有和任何人进行同步，一个人吭哧吭哧干了半天，那就大家都不知情，所以导致他很被动。</p>
+<p>所以我给的建议是：</p>
+<ol>
+<li>吃力不讨好的事一定得让干系人知道，好事不留名大多数情况下是扯淡的说法。</li>
+<li>自己得有一定得心理准备或者做一定的心里建设，因为既然是吃力不讨好的事，那就不能指望所有人能念你的好。</li>
+</ol>
+<p><strong>当然最终团队形成了一些改进项</strong></p>
+<ol>
+<li>尽量提前在”关键路径“阶段列出所有研发内容，功能性的和非功能性的，使后面的工程计划能更加准确。</li>
+<li>定义承载过程产物的文档格式以及标准，目的是为了体现研发过程。</li>
+<li>周目标的check标准更加细化，能提升更早暴露风险的时间。</li>
+<li>当在研发中遇到此类问题时，一定要马上同步到相关的人，评估计划方案之后再动手。</li>
+</ol>
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/08/09/%E7%BC%96%E5%86%99%E5%8F%AF%E8%AF%BB%E4%BB%A3%E7%A0%81%E7%9A%84%E8%89%BA%E6%9C%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1863,326 +2243,11 @@ redux可以减少数据的传递，不用依次往下传，随用随取，特别
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/04/22/%E5%95%A5%E6%97%B6%E5%80%99%E7%94%A8Redux/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/22/%E5%95%A5%E6%97%B6%E5%80%99%E7%94%A8Redux/" itemprop="url">啥时候用Redux</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-22T10:23:00+08:00">
-                2019-04-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
-                    <span itemprop="name">工作</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <img src="/2019/04/22/%E5%95%A5%E6%97%B6%E5%80%99%E7%94%A8Redux/001.png" class>
-
-<p>一个小迭代结束之后，我们前端做了一个几次code revew，其中有个问题就是什么时候应该redux，因为redux其实有些重，但是某些场景其实很简单当让组件也很简单，有观点觉得没有必要上redux。</p>
-<p>这个问题需要有个解法。</p>
-<p><strong>我觉得需要根据现有的环境来几个方面来考虑。</strong></p>
-<ol>
-<li>现在我们产品前端组件类别：基础组件、业务通用组件、定制化组件。</li>
-<li>产品的体量，我们产品是ToB产品，功能比较多，代码量比较大。</li>
-<li>业务场景的复杂度，因为是ToB，所以场景覆盖比较全，同时定制化需求稍微比较多，所以复杂度比较高。</li>
-</ol>
-<p><strong>好，接着我们再看看Redux，要讨论是否需要用它或者什么时候用它我们得搞清楚它的作用是什么。</strong></p>
-<p>首先咱们得确定一点React本身其实就是一个UI(View)层它不是一个前端框架， 如果是个复杂的产品，前端光负责View很显然是不够的，所以这几年出现了很多前端架构，比如MVVM架构下的Angular就是一套前端框架.</p>
-<p>正因为这样，所以FaceBook提出了Flux的架构，就是为了能推出以React为基础的一套前端框架，让React不再孤单.</p>
-<p>至于什么是Flux，阮老师说的很清楚： <a href="http://www.ruanyifeng.com/blog/2016/01/flux.html" target="_blank" rel="noopener" title="Flux 架构入门教程">http://www.ruanyifeng.com/blog/2016/01/flux.html</a></p>
-<p><strong>看完之后你会发现，redux其实就是Flux的一种实现，主要解决两个问题：</strong></p>
-<ol>
-<li>清晰的代码层次结构，让复杂的前端变得更加健壮和易维护（action、dispatch、reducer等）.</li>
-<li>让React组件之间通信变得更有效率和更方便（通过store能在任何组件访问想要的数据，不管是横向的还是纵向的层级，而不用依次传递经过根本不需要该数据的组件，真正做到按需使用）</li>
-</ol>
-<p><strong>所以说到这儿我们可以简单列一下使用Redux的好处</strong></p>
-<ul>
-<li>大多数情况下可以用reducer友好的把state从组件里分离出来，使组件更加的轻量化也增加了代码可读性.</li>
-<li>Redux的store可以当成缓存使用，并且是全局的，你可以在任何地方使用它，只要不更新state，无论何时何地获取的数据都是一样的，使数据共享变得容易.</li>
-<li>Redux友好的把state统一放到了store里，通过action、dispatch、reducer，让state的变化变得可预测，让数据流变得清晰明朗，易于维护.</li>
-<li>Redux的store让数据的传递变得更有效率，无需依次进行数据传递（哪怕该组件根本不需要这个数据），可以满足需要的时候再获取.</li>
-<li>Redux更有利于公共组件的开发，公共组件无论在哪儿使用，可以通过dispatch触发其行为.</li>
-</ul>
-<h3 id="试着回答一下"><a href="#试着回答一下" class="headerlink" title="试着回答一下"></a>试着回答一下</h3><p>我觉得除非已经明确的定义某个组件只是一个纯UI类组件，不会存在其它业务逻辑或者行为，那我觉得没有必要用Redux，比如我们产品中的一些展示组件，这些组件一个最大的特点就是，只需要给它数据，它渲染就完事了不会有额外的一些操作,那完全就一个jsx就搞定了.<strong>除此以外都建议用Redux，虽然它复杂了些，但是你会慢慢发现他的好.</strong></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/04/17/%E6%90%9C%E7%B4%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/17/%E6%90%9C%E7%B4%A2/" itemprop="url">搜索</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-17T14:22:00+08:00">
-                2019-04-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
-                    <span itemprop="name">工作</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>简单记录一下我平时使用搜索套路。</p>
-<img src="/2019/04/17/%E6%90%9C%E7%B4%A2/001.png" class>
-
-
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
  <nav class="pagination">
-   <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
+   <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="accessibility.prev_page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="accessibility.next_page"></i></a>
  </nav>
 
 
@@ -2231,7 +2296,7 @@ redux可以减少数据的传递，不用依次往下传，随用随取，特别
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">119</span>
+                  <span class="site-state-item-count">121</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2253,7 +2318,7 @@ redux可以减少数据的传递，不用依次往下传，随用随取，特别
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">84</span>
+                  <span class="site-state-item-count">85</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2905,7 +2970,7 @@ redux可以减少数据的传递，不用依次往下传，随用随取，特别
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("编写可读代码的艺术");titles.push("Personal Growth");titles.push("代码写的好看一点");titles.push("浏览器渲染");titles.push("始于愤怒必终于羞愧");titles.push("自由成长活动");titles.push("Linux Source命令");titles.push("前端编码规范");titles.push("啥时候用Redux");titles.push("搜索");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("git实践");titles.push("吃力不讨好");titles.push("编写可读代码的艺术");titles.push("Personal Growth");titles.push("代码写的好看一点");titles.push("浏览器渲染");titles.push("始于愤怒必终于羞愧");titles.push("自由成长活动");titles.push("Linux Source命令");titles.push("前端编码规范");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {
