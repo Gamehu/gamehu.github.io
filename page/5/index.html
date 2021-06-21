@@ -309,6 +309,973 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/02/22/Modules/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/22/Modules/" itemprop="url">Modules</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-22T20:11:00+08:00">
+                2020-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <img src="/2020/02/22/Modules/a.png" class title="Photo by Sharon McCutcheon from Pexels">
+
+<p>模块话，模块化说了那么多次，以为了解个大概就行了，然而在一次面试经历中被问到AMD和ES Module，所以特此来一篇，汇总一下吸收的模块方面的内容。</p>
+<p>又是一篇搬运文章，谁让我放荡不羁爱打野呢。作者博客地址<a href="https://www.preethikasireddy.com/" target="_blank" rel="noopener">Preethi Kasireddy</a></p>
+<h3 id="为什么模块很重要？"><a href="#为什么模块很重要？" class="headerlink" title="为什么模块很重要？"></a>为什么模块很重要？</h3><p>如果没有模块，你能想象在复杂场景下你得js代码是个什么鬼模样吗？模块解决了名称空间和可维护性等变得越来越难以处理的问题。</p>
+<p>好的模块是高度独立的，具有独特的功能，可以根据需要对它们进行改组，删除或添加，而不会破坏整个系统。</p>
+<h4 id="优势："><a href="#优势：" class="headerlink" title="优势："></a>优势：</h4><p><strong>1）可维护性：</strong>根据定义，模块是独立的。精心设计的模块旨在尽可能减少对代码库各部分的依赖，从而使其能够独立增长和改进。当模块与其他代码解耦时，更新单个模块要容易得多。</p>
+<p><strong>2）命名空间：</strong>在JavaScript中，顶级函数范围之外的变量是全局变量（意味着每个人都可以访问它们）。因此，普遍存在“命名空间污染”，其中完全不相关的代码共享全局变量。</p>
+<p>在不相关的代码之间共享全局变量<a href="http://c2.com/cgi/wiki?GlobalVariablesAreBad" target="_blank" rel="noopener">在开发中</a>是一个很大的<a href="http://c2.com/cgi/wiki?GlobalVariablesAreBad" target="_blank" rel="noopener">禁忌</a>。模块允许我们通过为变量创建私有空间来避免名称空间污染。</p>
+<p><strong>3）可重用性：</strong>抽取通用部分，哪里需要就拿去，不用重复写，当然也对应的第一点，当有修改时只需要该一份。</p>
+<p>早期的时候为了达到“模块模式”，也有很多方式，不过我看了下基本上都是基于匿名闭包的基础上而来的。</p>
+<p>这些方式有一个共同点：<strong>使用单个全局变量将其代码包装在函数中，从而使用闭包作用域为其自身创建私有名称空间，同时自定义公开哪些方法、变量</strong>。</p>
+<p>大家可以看下jQuery的源码，就是这样的实现方式，如下面的代码。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myGradesCalculate = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">  <span class="comment">// Keep this variable private inside this closure scope</span></span><br><span class="line">  <span class="keyword">var</span> myGrades = [<span class="number">93</span>, <span class="number">95</span>, <span class="number">88</span>, <span class="number">0</span>, <span class="number">55</span>, <span class="number">91</span>];</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">var</span> average = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> total = myGrades.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">accumulator, item</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> accumulator + item;</span><br><span class="line">      &#125;, <span class="number">0</span>);</span><br><span class="line">      </span><br><span class="line">    <span class="keyword">return</span><span class="string">'Your average grade is '</span> + total / myGrades.length + <span class="string">'.'</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> failing = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> failingGrades = myGrades.filter(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> item &lt; <span class="number">70</span>;</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'You failed '</span> + failingGrades.length + <span class="string">' times.'</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Explicitly reveal public pointers to the private functions </span></span><br><span class="line">  <span class="comment">// that we want to reveal publicly</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    average: average,</span><br><span class="line">    failing: failing</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">myGradesCalculate.failing(); <span class="comment">// 'You failed 2 times.' </span></span><br><span class="line">myGradesCalculate.average(); <span class="comment">// 'Your average grade is 70.33333333333333.'</span></span><br></pre></td></tr></table></figure>
+
+<p>如您所见，这种方法使我们可以决定将哪些变量/方法设为私有（例如<strong><em>myGrades\</em></strong>），以及通过将它们放在return语句中（例如<strong><em>average\</em></strong>和<strong><em>failing\</em></strong>）来公开哪些变量/方法。</p>
+<ul>
+<li>Addy Osmani的“ <a href="https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript" target="_blank" rel="noopener">学习JavaScript设计模式”</a>：精妙读物中的细节宝库</li>
+<li><a href="http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html" target="_blank" rel="noopener">Ben Cherry的“足够好”</a>：一个有用的概述，其中包含模块模式的高级用法示例</li>
+<li><a href="https://carldanley.com/js-module-pattern/" target="_blank" rel="noopener">Carl Danley的博客</a>：模块模式概述和其他JavaScript模式的资源。</li>
+</ul>
+<p>所以大家可以看出，早期关于模块的写法，尽管每种方法都以其自己的方式有效，但它们也有缺点：</p>
+<ol>
+<li>大家各自发挥的，这样有个最大的问题就是到最后就是乱的，就像为什么需要TC39一样，让大家有一套标准，才能从而写出更友好通用的模块。 </li>
+<li>依赖管理是个问题，需要我们开发人员自己管理依赖，记得刚开始用jQuery这种第三方库的时候，如果没注意到顺序就会报错，所以想象一下如果引用较多时，管理依赖关系并正确解决这些问题会让人头疼。</li>
+<li>全局作用域被污染，上述的方式创建的变量（比如<strong>myGradesCalculate</strong>）都在全局范围内，所以该全局范围内的代码的每个部分都可以更改该变量。恶意代码可以有意更改该变量，以使您的代码执行您不希望这样做的事情，或者非恶意代码可能会无意间破坏了您的变量。</li>
+</ol>
+<p>所以基于上述原因，这个时候我们就需要一套规范了来解决这些个问题：<strong>我们能否设计一种无需遍历全局范围即可请求模块接口的方法</strong></p>
+<h3 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h3><p>现在比较通行得规范有两种：<a href="http://wiki.commonjs.org/wiki/Modules/1.1" target="_blank" rel="noopener">CommonJS</a>和<a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank" rel="noopener">AMD</a>。</p>
+<h4 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a><strong><a href="http://wiki.commonjs.org/wiki/Modules/1.1" target="_blank" rel="noopener">CommonJS</a></strong></h4><p>CommonJS是一个旨在定义一系列规范以帮助开发服务器端JavaScript应用程序的项目。CommonJS团队尝试解决的领域之一就是模块，负责设计和实现用于声明模块的JavaScript API。我听说CommonJS，最早是在15年写Node应用的时候接触的，Node.js最开始就是遵循这套规范弄得模块化，但是据说后来不用该规范了。</p>
+<p>一个CommonJS的模块本质上是一种可重复使用的一段JavaScript代码其中出口特定对象，使它们可用于其他模块需要在他们的计划。</p>
+<p>使用CommonJS，每个JavaScript文件都将模块存储在其自己的唯一模块上下文中（就像将其包装在闭包中一样）。在此范围内，我们使用<em>module.exports</em>对象公开模块，并要求将其导入。</p>
+<p>当您定义CommonJS模块时，它可能看起来像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myModule</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.hello = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'hello!'</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.goodbye = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'goodbye!'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = myModule;</span><br></pre></td></tr></table></figure>
+
+<p>我们使用特殊对象模块，并将我们函数的引用放入<em>module.exports中</em>。这使CommonJS模块系统知道我们要公开的内容，以便其他文件可以使用它。</p>
+<p>然后，当某人想要使用<em>myModule时</em>，他们可以在其文件中要求它，如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myModule = <span class="built_in">require</span>(<span class="string">'myModule'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myModuleInstance = <span class="keyword">new</span> myModule();</span><br><span class="line">myModuleInstance.hello(); <span class="comment">// 'hello!'</span></span><br><span class="line">myModuleInstance.goodbye(); <span class="comment">// 'goodbye!'</span></span><br></pre></td></tr></table></figure>
+
+<p>与我们之前讨论的模块模式相比，这种方法有两个明显的好处：</p>
+<ol>
+<li>避免全局命名空间污染</li>
+<li>明确我们的依赖关系</li>
+</ol>
+<p>要注意的另一件事是，CommonJS采用服务器优先的方法并<strong>同步加载</strong>模块。这很重要，因为如果我们有我们需要的其他三个模块<em>需要</em>，它就会加载它们一个接一个。</p>
+<p>现在，它可以在服务器上很好地工作，但是不幸的是，这使得为浏览器编写JavaScript时更难使用，因为服务器端通常是从磁盘读取，而浏览器需要网络请求，所以只要加载模块的脚本一直在运行（JavaScript线程将停止直到代码被加载），它就会阻止浏览器运行其他任何东西，直到加载完成。</p>
+<h4 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a><a href="https://github.com/amdjs/amdjs-api/wiki/AMD" target="_blank" rel="noopener">AMD</a></h4><p>从上面我们知道CommonJS是同步的，所以很显然不适用浏览器端，那我们就需要<strong>异步模块定义</strong>的规范，即<strong>AMD</strong>。</p>
+<p>使用AMD加载模块如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">define([<span class="string">'myModule'</span>, <span class="string">'myOtherModule'</span>], <span class="function"><span class="keyword">function</span>(<span class="params">myModule, myOtherModule</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(myModule.hello());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这里发生的是，<strong><em>define</em></strong>函数将每个模块依赖项的数组作为第一个参数。这些依赖项在后台加载（以非阻塞方式），并且一旦加载了<strong><em>define</em></strong>，便调用回调函数。</p>
+<p>接下来，回调函数将加载的依赖项作为参数（在本例中为<strong><em>myModule\</em></strong>和<strong><em>myOtherModule</em></strong>），以允许函数使用这些依赖项。最后，还必须使用<strong><em>define\</em></strong>关键字定义依赖项本身。</p>
+<p>例如，<strong><em>myModule\</em></strong>可能看起来像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">define([], <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    hello: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'hello'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    goodbye: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'goodbye'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>与CommonJS不同，AMD采用了浏览器优先的方法以及<strong>异步</strong>行为来完成工作。</p>
+<p>除了异步之外，AMD的另一个好处是您的模块可以是<strong>对象，函数，构造函数，字符串，JSON和许多其他类型</strong>，而CommonJS仅支持将<strong>对象</strong>作为模块。</p>
+<p>AMD与CommonJS相比，其提供的io，文件系统和其他面向服务器的功能不兼容。</p>
+<h4 id="UMD"><a href="#UMD" class="headerlink" title="UMD"></a><a href="https://github.com/umdjs/umd" target="_blank" rel="noopener">UMD</a></h4><p>对于需要同时支持AMD和CommonJS功能的项目，还有另一种格式：通用模块定义（UMD）。</p>
+<p>UMD本质上创建了一种使用这两种方法之一的方式，同时还支持全局变量定义。结果，UMD模块能够在客户端和服务器上工作。</p>
+<p>以下是UMD如何开展业务的快速体验：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">root, factory</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">'function'</span> &amp;&amp; define.amd) &#123;</span><br><span class="line">      <span class="comment">// AMD</span></span><br><span class="line">    define([<span class="string">'myModule'</span>, <span class="string">'myOtherModule'</span>], factory);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> exports === <span class="string">'object'</span>) &#123;</span><br><span class="line">      <span class="comment">// CommonJS</span></span><br><span class="line">    <span class="built_in">module</span>.exports = factory(<span class="built_in">require</span>(<span class="string">'myModule'</span>), <span class="built_in">require</span>(<span class="string">'myOtherModule'</span>));</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// Browser globals (Note: root is window)</span></span><br><span class="line">    root.returnExports = factory(root.myModule, root.myOtherModule);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;(<span class="keyword">this</span>, <span class="function"><span class="keyword">function</span> (<span class="params">myModule, myOtherModule</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Methods</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">notHelloOrGoodbye</span>(<span class="params"></span>)</span>&#123;&#125;; <span class="comment">// A private method</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params"></span>)</span>&#123;&#125;; <span class="comment">// A public method because it's returned (see below)</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">goodbye</span>(<span class="params"></span>)</span>&#123;&#125;; <span class="comment">// A public method because it's returned (see below)</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Exposed public methods</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">      hello: hello,</span><br><span class="line">      goodbye: goodbye</span><br><span class="line">  &#125;</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a href="https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/" target="_blank" rel="noopener">ES Module</a></p>
+<p>是我做前端开始听的最多的了，当然也因为无时无刻都在用它。</p>
+<p>上面咱们所说的，都不是JavaScript固有的。不过幸运的是，<a href="https://github.com/tc39" target="_blank" rel="noopener">TC39</a>（定义ECMAScript语法和语义的标准机构）引入了ECMAScript 6（ES6）内置模块。</p>
+<p>ES6提供了多种导入和导出模块的可能性，其他人则做了很好的解释-以下是其中的一些资源：</p>
+<ul>
+<li><a href="http://jsmodules.io/cjs.html" target="_blank" rel="noopener">jsmodules.io</a></li>
+<li><a href="http://exploringjs.com/es6/ch_modules.html" target="_blank" rel="noopener">Explorationjs.com</a></li>
+</ul>
+<p>与CommonJS或AMD相比，ES6模块最大的优点是它能够提供两全其美的优势：紧凑和声明性语法以及异步加载，以及诸如更好地支持依赖项等附加优点。</p>
+<p>ES6模块最让人兴奋的应该是导入是导出的<em>实时</em>只读视图，即是只读引用，不过却可以改写属性。所以你猜到了当你模块里的值属性发生变化时，导入的地方获取的值是一样的。ES Module具体的后面还有一篇文档单讲，不然这文章就太长了。</p>
+<h3 id="最后我们对比一下两种方式吧"><a href="#最后我们对比一下两种方式吧" class="headerlink" title="最后我们对比一下两种方式吧"></a>最后我们对比一下两种方式吧</h3><h4 id="ES-Module与CommonJS"><a href="#ES-Module与CommonJS" class="headerlink" title="ES Module与CommonJS:"></a>ES Module与CommonJS:</h4><ul>
+<li>CommonJS规范通常适用于Node这类服务器端的</li>
+<li>CommonJS模块是对象，是运行时加载，运行时才把模块挂载在exports之上（加载整个模块的所有），加载模块其实就是查找对象属性。</li>
+<li>ES Module不是对象，是使用export显示指定输出（函数、对象、变量等），再通过import导入。为编译时加载，编译时遇到import就会生成一个只读引用。等到运行时就会根据此引用去被加载的模块取值。所以不会加载模块所有方法，仅取所需。</li>
+<li>CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。</li>
+<li>CommonJS 模块是运行时加载，ES6 模块是编译时输出接口</li>
+</ul>
+<h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4><p><a href="https://scotch.io/tutorials/understanding-scope-in-javascript" target="_blank" rel="noopener">全局范围（作用域）</a>          </p>
+<blockquote>
+<ol>
+<li>写在script标签中的JS代码，都在全局作用域 。</li>
+<li>全局作用域在页面打开时创建，在页面关闭时销毁。 </li>
+<li>在全局作用域中有一个全局对象window，它代表的是一个浏览器的窗口，它由浏览器创建我们可以直接使用 。</li>
+<li>全局作用域中，创建变量都会作为window对象的属性保存</li>
+<li>创建的函数都会作为window对象的方法保存</li>
+<li>全局作用域中的变量都是全局变量，在页面的任何部分都可以访问的到并可以修改它</li>
+</ol>
+</blockquote>
+<h4 id="来源："><a href="#来源：" class="headerlink" title="来源："></a>来源：</h4><blockquote><footer><strong>darlyn</strong><cite><a href="https://juejin.im/post/5b7d2f45e51d4538826f4c28" target="_blank" rel="noopener">AMD , CMD, CommonJS，ES Module，UMD</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>Sebastian Peyrott</strong><cite><a href="https://auth0.com/blog/javascript-module-systems-showdown/" target="_blank" rel="noopener">JavaScript Module Systems Showdown: CommonJS vs AMD vs ES2015</a></cite></footer></blockquote>
+
+
+
+
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/02/13/Root-User-in-Ubuntu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/13/Root-User-in-Ubuntu/" itemprop="url">Root User in Ubuntu</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-13T21:20:00+08:00">
+                2020-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
+                    <span itemprop="name">学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>话说从接触Linux那一天起，就有一种独领风骚的傲气，命令走天下的这种霸气，那时候感觉精通Linux的连女朋友都带光环。</p>
+<p>我最开始接触Linux是从Ubuntu开始，当时笔记本装了双系统，我就鼓捣了一个Ubuntu，现在用的较多的CentOS，首先入门都是先从了解root开始，我其实一直对root很好奇，刚好今天看到twitter上ruanyf大佬推了一篇文章<a href="https://itsfoss.com/root-user-ubuntu/" target="_blank" rel="noopener">Root User in Ubuntu: Important Things You Should Know</a>讲基于Ubuntu的root的文章，基础好用，我们现在做的产品的安装包刚好也是基于Ubuntu做的，所以更有必要在此做个中文版记录。</p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>文章主要讲了以下四块：</p>
+<ol>
+<li>为什么在Ubuntu中禁用root用户</li>
+<li>以root身份使用命令</li>
+<li>切换到root用户</li>
+<li>解锁root用户</li>
+</ol>
+<h3 id="什么是root用户？为什么将其锁定在Ubuntu中？"><a href="#什么是root用户？为什么将其锁定在Ubuntu中？" class="headerlink" title="什么是root用户？为什么将其锁定在Ubuntu中？"></a>什么是root用户？为什么将其锁定在Ubuntu中？</h3><p><img src="https://i0.wp.com/itsfoss.com/wp-content/uploads/2020/01/root_user_ubuntu.png?ssl=1" alt="根用户Ubuntu"></p>
+<p>稍微了解Linux的都知道，在Linux中，有一个称为<a href="http://www.linfo.org/root.html" target="_blank" rel="noopener">root</a>的超级用户。这是超级管理员帐户，可以使用系统执行任何操作。它可以访问任何文件并在Linux系统上运行任何命令。</p>
+<p>拥有权利的同时也被赋予了重大的责任。超级用户可以为您提供对系统的完全控制权，因此也格外谨慎。超级用户可以访问系统文件并运行命令来更改系统配置。因此，错误的命令可能会造成无法挽回的损失，比如网上老说的一个梗：当rm -rf 之后我跑路了。所以一般情况下都不会给root权限，管理员会分配部分权限建对应的用户供对应的人使用。</p>
+<p>这也说明了为什么<a href="https://ubuntu.com/" target="_blank" rel="noopener">Ubuntu</a>默认情况下锁定了root用户，就是为了避免意外灾难。</p>
+<p>您无需具有root特权即可执行日常任务，例如将文件移动到主目录中，从Internet下载文件，创建文档等。</p>
+<p><strong><em>以此类比更好地理解它。如果必须切水果，可以使用菜刀。如果必须砍伐树木，则必须使用锯。现在，您可以使用锯切水果，但这不明智，是吗？\</em></strong></p>
+<p>这是否意味着您不能成为Ubuntu的root用户或无法使用具有root用户特权的系统？不，您仍然可以在“ sudo”的帮助下获得root用户访问权限（在下一节中说明）。</p>
+<blockquote>
+<p>重点：</p>
+<p>用户功能强大，无法用于常规任务。这就是为什么不建议始终使用root的原因。您仍然可以使用root运行特定命令。</p>
+</blockquote>
+<h3 id="如何在Ubuntu中以root用户身份运行命令？"><a href="#如何在Ubuntu中以root用户身份运行命令？" class="headerlink" title="如何在Ubuntu中以root用户身份运行命令？"></a>如何在Ubuntu中以root用户身份运行命令？</h3><p><img src="https://i2.wp.com/itsfoss.com/wp-content/uploads/2020/01/sudo_sandwich.png?ssl=1" alt="须藤三明治xkcd">)图片来源：<a href="https://xkcd.com/149/" target="_blank" rel="noopener">xkcd</a></p>
+<p>当你需要某些系统特定任务的root特权。例如，如果要<a href="https://itsfoss.com/update-ubuntu/" target="_blank" rel="noopener">通过命令行更新Ubuntu</a>，则不能以常规用户身份运行该命令。会有以下类似的错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">Reading package lists... Done</span><br><span class="line">E: Could not open lock file &#x2F;var&#x2F;lib&#x2F;apt&#x2F;lists&#x2F;lock - open (13: Permission denied)</span><br><span class="line">E: Unable to lock directory &#x2F;var&#x2F;lib&#x2F;apt&#x2F;lists&#x2F;</span><br><span class="line">W: Problem unlinking the file &#x2F;var&#x2F;cache&#x2F;apt&#x2F;pkgcache.bin - RemoveCaches (13: Permission denied)</span><br><span class="line">W: Problem unlinking the file &#x2F;var&#x2F;cache&#x2F;apt&#x2F;srcpkgcache.bin - RemoveCaches (13: Permission denied)</span><br></pre></td></tr></table></figure>
+
+<p>那么，这个时候怎么做呢？简单的答案是在需要以root身份运行的命令之前添加sudo。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
+
+<p>Ubuntu和许多其他Linux发行版使用一种称为sudo的特殊机制。Sudo是一个程序，用于以root（或其他用户）身份控制对运行命令的访问。</p>
+<p>Sudo实际上是一个多功能的工具。可以将其配置为允许用户以root用户身份运行所有命令。您可以配置它仅以root身份运行选定的几个命令。您也可以配置为<a href="https://linuxhandbook.com/sudo-without-password/" target="_blank" rel="noopener">不带密码运行sudo</a>。</p>
+<p><a href="https://itsfoss.com/install-ubuntu/" target="_blank" rel="noopener">在安装Ubuntu时</a>，必须创建一个用户帐户。该用户帐户在您的系统上以管理员身份运行，并且按照Ubuntu中的默认sudo策略，它可以使用root特权在系统上运行任何命令。</p>
+<p>运行<strong>sudo不需要root密码，但需要用户自己的password</strong>。</p>
+<p>这就是为什么当使用sudo运行命令时，总会一开始就询问密码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gamehu@nuc:~$ sudo apt update</span><br><span class="line">[sudo] password for gamehu:</span><br></pre></td></tr></table></figure>
+
+<p>如您在上面的示例中看到的，用户gamehu试图使用<em>sudo</em>运行’apt update’命令，系统要求输入gamehu的密码。</p>
+<p><strong>要注意当您开始在终端中输入密码时，屏幕上什么都没有发生不会有任何显示，也没有所谓的删除键、退格键…这里会记录你按下的所有键。因为作为默认安全功能，屏幕上不显示任何内容。甚至没有星号（*）。您输入密码，然后按Enter。*</strong></p>
+<blockquote>
+<p>划重点：</p>
+<p>要在Ubuntu中以root身份运行命令，请在命令前添加sudo。<br>当要求输入密码时，输入您的帐户密码。<br>在屏幕上键入密码时，看不到任何内容。只需继续正确的输入密码，然后按Enter。</p>
+</blockquote>
+<h3 id="如何在Ubuntu中成为root用户？"><a href="#如何在Ubuntu中成为root用户？" class="headerlink" title="如何在Ubuntu中成为root用户？"></a>如何在Ubuntu中成为root用户？</h3><p>你可以使用sudo以root身份运行命令。但是，在某些情况下，您必须以root用户身份运行多个命令，则可以临时切换为root用户。</p>
+<p>sudo命令允许您使用以下命令模拟root登录shell：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo -i</span><br><span class="line">gamehu@nuc:~$ sudo -i</span><br><span class="line">[sudo] password for gamehu: </span><br><span class="line">root@nuc:~# whoami</span><br><span class="line">root</span><br><span class="line">root@nuc:~#</span><br></pre></td></tr></table></figure>
+
+<p>您会注意到，切换到root用户时，shell命令提示符将从$（美元键符号）更改为＃（磅键符号）。</p>
+<p><strong><em>尽管已向您展示了如何成为root用户，但我必须警告你，应避免将系统用作root用户。毕竟出于某种原因，我们不建议这样做。\</em></strong></p>
+<p>临时切换到root用户的另一种方法是使用su命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br></pre></td></tr></table></figure>
+
+<p>如果您尝试在不使用sudo的情况下使用su命令，则会遇到“ su身份验证失败”错误。</p>
+<p>您可以使用exit命令恢复为普通用户。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="如何在Ubuntu中启用root用户？"><a href="#如何在Ubuntu中启用root用户？" class="headerlink" title="如何在Ubuntu中启用root用户？"></a>如何在Ubuntu中启用root用户？</h3><p>到目前为止，您已经知道默认情况下，root用户在基于Ubuntu的发行版中被锁定。</p>
+<p>Linux使您可以自由地对系统进行任何操作。解锁root用户是这些自由之一。</p>
+<p>如果出于某种原因决定启用root用户，则可以通过为它设置密码来启用它：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure>
+
+<p>同样，不建议这样做，我也不鼓励您在桌面上执行此操作。如果忘记了密码，将无法再次<a href="https://itsfoss.com/how-to-hack-ubuntu-password/" target="_blank" rel="noopener">在Ubuntu中更改root密码</a>。</p>
+<p>您可以通过删除密码来再次锁定root用户：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd -dl root</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/02/03/%E9%A2%86%E5%AF%BC%E5%AF%84%E8%AF%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/03/%E9%A2%86%E5%AF%BC%E5%AF%84%E8%AF%AD/" itemprop="url">领导寄语</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-03T16:59:00+08:00">
+                2020-02-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index">
+                    <span itemprop="name">成长</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <img src="/2020/02/03/%E9%A2%86%E5%AF%BC%E5%AF%84%E8%AF%AD/a.png" class title="Photo by DJ Johnson on Unsplash">
+
+<p>记录近两年各种机会下与事业部头部三剑客交流收获的一些真知灼见。</p>
+<p><strong>关于合作</strong></p>
+<blockquote>
+<p>目标一致</p>
+</blockquote>
+<p>看上去的完美搭档其实是一个很磨人的过程，一开始恨不得一见面就呼巴掌作为打招呼的方式，最终能达成默契或者说合作，目标一致最重要的前提。</p>
+<p>不管你怎么看不惯一个人，三观有多么不合，但是当你发现大家目标都是一致的时候，静下来的时候大家总会想一想，是不是我有问题，慢慢的就变得能够互相包容，所以要做成事首要条件不是考虑要找多要好的人多默契的人，关键在于你们的目标是否一致，只要目标一致你会发现你们很难分割彼此。</p>
+<p>所以有目标是一件重要紧急的事。</p>
+<p><strong>关于做事</strong></p>
+<blockquote>
+<p>干一行，爱一行，不然干不了大事。</p>
+</blockquote>
+<p>最深刻的一句话，我记得当时是我谈起对我现在做的事好像也没到喜欢的程度的时候，领导对我说了这句话，听后我记得当时醍醐灌顶，然后手脚冰凉，内心很奔溃，至此以后我逐渐爱上了我现在做的事，虽然还是有很厌烦的时候，不过总能爱回去。</p>
+<blockquote>
+<p>勇于释放自己，学会利用资源，学会影响上级。</p>
+</blockquote>
+<p>这句话是我最亲近的老大对我说的，当我在抱怨做事的一些困惑时。这是最有挑战的不过收获也是最大的，这句话不是教我怎么在领导面前表现，而是告诉我领导在意的是你的结果，当你结果好的时候，才会在意过程，从而改变对你的一些印象。当你做出结果时，他们会关注到的。</p>
+<p><strong>关于自信</strong></p>
+<blockquote>
+<p>当你进入了公司就不要再因为自己的出身、学历等感到自卑，因为能进来表示公司已经认可了你，接下来你要想的是，怎么做到比别人牛逼。</p>
+</blockquote>
+<blockquote>
+<p>否定自己是很耗能量的一件事，积极一点。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/12/27/SSO%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/27/SSO%E5%AE%9E%E8%B7%B5/" itemprop="url">SSO实践</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-27T17:49:00+08:00">
+                2019-12-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <img src="/2019/12/27/SSO%E5%AE%9E%E8%B7%B5/florian-olivo-4hbJ-eymZ1o-unsplash.jpg" class title="Photo by Florian Olivo on Unsplash">
+
+
+
+<h1 id="OK，正式说明了"><a href="#OK，正式说明了" class="headerlink" title="OK，正式说明了"></a>OK，正式说明了</h1><p>SSO的说明网上有很多我就不在这儿丢人了。找了张小图SSO的作用一目了然。</p>
+<img src="/2019/12/27/SSO%E5%AE%9E%E8%B7%B5/whatis-single_sign_on-h.png" class title="https:&#x2F;&#x2F;searchsecurity.techtarget.com&#x2F;definition&#x2F;single-sign-on">
+
+<p>以下主要记录一下我在产品中SSO的实践案例。</p>
+<h2 id="案例1"><a href="#案例1" class="headerlink" title="案例1"></a>案例1</h2><p><strong>案例1</strong> 是比较标准的基于OpenID方式的SSO，用Node.js写的。</p>
+<p>案例1没什么说的，网上样例很多，如果有兴趣可以看下我之前写的，不过比较老了，也是第一次写nodejs。</p>
+<blockquote><footer><strong>OpenID+MongoDB实现的数据交换中心</strong><cite><a href="https://github.com/WebHu/async_data_exchange_center.git" target="_blank" rel="noopener">github.com/WebHu/async_data_exchange_center.git</a></cite></footer></blockquote>
+
+
+
+<h3 id="案例2"><a href="#案例2" class="headerlink" title="案例2"></a><strong>案例2</strong></h3><p>则是非标的SSO，用Java+javascript写的。</p>
+<p>案例2虽然不是非标的，不过整体流程是具备的，比较适用特定编码场景（Spring Security+OpenID），可能有需要的同学，反正我是没在网上找到这类案例。</p>
+<img src="/2019/12/27/SSO%E5%AE%9E%E8%B7%B5/sso.png" class title="场景说明">
+
+<p>客户现场的系统A需要登入到我们提供的系统B，没有单独用户中心即也不存在用户同步，客户要求的是能无缝登入，所以解决办法有用户则直接登入无用户则创建后再登入，登录效果与从登录页面发起的登录一样，所以token解析后用Security的方式执行登录。</p>
+<h4 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * sso出现在路径末尾 react router方式 目前采用这种方式 http:&#x2F;&#x2F;...&#x2F;frame&#x2F;#&#x2F;module&#x2F;xxx?sso&#x3D;xxx 避免sso一直保留</span><br><span class="line"> * @param key 需要获取url参数key</span><br><span class="line"> * @returns &#123;string|null&#125;</span><br><span class="line"> *&#x2F;</span><br><span class="line">export function getSsoString(key) &#123;</span><br><span class="line">  const str &#x3D; location.hash;</span><br><span class="line">  if (str &#x3D;&#x3D; null || str.length &lt; 2) &#123;</span><br><span class="line">    return null;</span><br><span class="line">  &#125;</span><br><span class="line">  const arr &#x3D; str.split(&#39;?&#39;);</span><br><span class="line">  if (arr !&#x3D; null &amp;&amp; arr.length &#x3D;&#x3D;&#x3D; 2) &#123;</span><br><span class="line">    const query &#x3D; arr[1];</span><br><span class="line">    if (query !&#x3D; null &amp;&amp; query.length &gt; 0) &#123;</span><br><span class="line">      const words &#x3D; query.split(&#39;&amp;&#39;);</span><br><span class="line">      &#x2F;&#x2F; 将每一个数组元素以&#x3D;分隔并赋给obj对象</span><br><span class="line">      for (let i &#x3D; 0; i &lt; words.length; i++) &#123;</span><br><span class="line">        const tmp_arr &#x3D; words[i].split(&#39;&#x3D;&#39;);</span><br><span class="line">        const k &#x3D; decodeURIComponent(tmp_arr[0]);</span><br><span class="line">        const v &#x3D; decodeURIComponent(tmp_arr[1]);</span><br><span class="line">        if (k &#x3D;&#x3D;&#x3D; key) &#123;</span><br><span class="line">          return v;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 单点登录逻辑 在页面token发送到后端进行验证</span><br><span class="line"> * @param callback</span><br><span class="line"> *&#x2F;</span><br><span class="line">export function sso(callback) &#123;</span><br><span class="line">  const token &#x3D; getSsoString(&#39;sso&#39;);</span><br><span class="line">  if (token !&#x3D; null) &#123;</span><br><span class="line">    req(BASE_WEB_API.SSO, &#123; token &#125;, null, &#123; validateError: true &#125;)</span><br><span class="line">      .then(response &#x3D;&gt; &#123;</span><br><span class="line">        &#x2F;&#x2F; do something....</span><br><span class="line">        if (callback !&#x3D; null) &#123;</span><br><span class="line">          callback();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">      .catch(e &#x3D;&gt; &#123;</span><br><span class="line">        console.error(&#39;failed sso --&gt; &#39;, e);</span><br><span class="line">        if (callback !&#x3D; null) &#123;</span><br><span class="line">          callback();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125; else if (callback !&#x3D; null) &#123;</span><br><span class="line">    callback();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 跳转到猎豹系统</span><br><span class="line"> *</span><br><span class="line"> * @param response</span><br><span class="line"> * @throws Exception</span><br><span class="line"> *&#x2F;</span><br><span class="line">@PostMapping(value &#x3D; &quot;&#x2F;cheetah&quot;, produces &#x3D; MediaType.APPLICATION_JSON_UTF8_VALUE)</span><br><span class="line">public String cheetah(@RequestBody SSOVO ssovo,</span><br><span class="line">                      HttpServletRequest request,</span><br><span class="line">                      HttpServletResponse response) throws Exception &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        &#x2F;&#x2F; 验证license</span><br><span class="line">        if (!licenseService.isValid()) &#123;</span><br><span class="line">            LOGGER.error(&quot;license is invalid&quot;);</span><br><span class="line">            return validateTokenError(request, LICENSE_ERROR_MSG);</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;解析token</span><br><span class="line">        Context.Token userToken &#x3D; Context.getUserInfoFromToken(ssovo.getToken());</span><br><span class="line">        if (isNullOrEmpty(userToken.getUserName()) || isNullOrEmpty(userToken.getPassword())) &#123;</span><br><span class="line">            LOGGER.warn(&quot;token is invalid:&#123;&#125;&quot;, ssovo.getToken());</span><br><span class="line">            return validateTokenError(request);</span><br><span class="line">        &#125;</span><br><span class="line">        LOGGER.info(&quot;当前单点登录的用户信息为:&#123;&#125;&quot;, JSON.toJSONString(userToken));</span><br><span class="line">        &#x2F;&#x2F;验证内置用户是否存在，不存在则创建</span><br><span class="line">        SSOUserVO user &#x3D; ssoService.checkUser(userToken.getUserName(), Context.getCmsContext());</span><br><span class="line">        if (user !&#x3D; null) &#123;</span><br><span class="line">            &#x2F;&#x2F; 执行登录</span><br><span class="line">            user.setPassword(userToken.getPassword());</span><br><span class="line">            return ssoLogin(request, response, user);</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;异常时跳转到登录页</span><br><span class="line">        return validateTokenError(request);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        LOGGER.error(&quot;sso登录失败:&#123;&#125;&quot;, e.getMessage());</span><br><span class="line">        return validateTokenError(request);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private String validateTokenError(HttpServletRequest request) &#123;</span><br><span class="line">    return validateError(request, SSO_VERIFICATION_ERROR_MSG);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private String validateTokenError(HttpServletRequest request, String msg) &#123;</span><br><span class="line">    return validateError(request, msg);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private String validateError(HttpServletRequest request, String msg) &#123;</span><br><span class="line">    HttpSession session &#x3D; request.getSession();</span><br><span class="line">    if (session !&#x3D; null) &#123;</span><br><span class="line">        &#x2F;&#x2F;使session失效</span><br><span class="line">        session.invalidate();</span><br><span class="line">    &#125;</span><br><span class="line">    SSOErrorVO errorVo &#x3D; new SSOErrorVO(SSO_VERIFICATION_ERROR, msg);</span><br><span class="line">    return JSON.toJSONString(errorVo);</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;**</span><br><span class="line"> * 执行登录</span><br><span class="line"> *</span><br><span class="line"> * @param request</span><br><span class="line"> * @param response</span><br><span class="line"> * @param userToken</span><br><span class="line"> * @return</span><br><span class="line"> * @throws IOException</span><br><span class="line"> * @throws ServletException</span><br><span class="line"> *&#x2F;</span><br><span class="line">private String ssoLogin(HttpServletRequest request, HttpServletResponse response, SSOUserVO userToken) throws IOException, ServletException &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        &#x2F;&#x2F;登录</span><br><span class="line">        UsernamePasswordAuthenticationToken authReq</span><br><span class="line">                &#x3D; new UsernamePasswordAuthenticationToken(userToken.getUserName(), userToken.getPassword());</span><br><span class="line">        authReq.setDetails(new WebAuthenticationDetails(request));</span><br><span class="line">        Authentication auth &#x3D; authenticationManagerBean.authenticate(authReq);</span><br><span class="line">        SecurityContextHolder.getContext().setAuthentication(auth);</span><br><span class="line">        HttpSession session &#x3D; request.getSession(true);</span><br><span class="line">        &#x2F;&#x2F; 永不超时</span><br><span class="line">        session.setMaxInactiveInterval(-1);</span><br><span class="line">        &#x2F;&#x2F;TODO 静态导入</span><br><span class="line">        session.setAttribute(SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());</span><br><span class="line">        baymaxLoginSuccessHandler.onAuthenticationSuccess(request, response, auth);</span><br><span class="line">    &#125; catch (AuthenticationException failed) &#123;</span><br><span class="line">        LOGGER.warn(</span><br><span class="line">                &quot;sso: InternalAuthenticationServiceException occurred while trying to authenticate the user.&quot;,</span><br><span class="line">                failed);</span><br><span class="line">        SecurityContextHolder.clearContext();</span><br><span class="line">        baymaxAuthenticationFailureHandler.onAuthenticationFailure(request, response, failed);</span><br><span class="line">        validateTokenError(request);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * 根据用户名，获取用户的token</span><br><span class="line"> *</span><br><span class="line"> * @param userName</span><br><span class="line"> * @param response</span><br><span class="line"> * @return</span><br><span class="line"> *&#x2F;</span><br><span class="line">@RequestMapping(value &#x3D; &quot;&#x2F;getToken&#x2F;&#123;userName&#125;&quot;, produces &#x3D; MediaType.APPLICATION_JSON_UTF8_VALUE)</span><br><span class="line">public String getToken(@PathVariable(value &#x3D; &quot;userName&quot;, required &#x3D; false) String userName, HttpServletResponse response) &#123;</span><br><span class="line"></span><br><span class="line">    try &#123;</span><br><span class="line">        return Context.createToken(userName, PasswordUtil.getPlaintextPwd());</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        LOGGER.error(&quot;获取token失败:&#123;&#125;&quot;, e.getMessage());</span><br><span class="line">        formatErrorResponse(response, HttpServletResponse.SC_BAD_REQUEST, e.getMessage());</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void formatErrorResponse(HttpServletResponse response, int httpCode, String errorMsg) &#123;</span><br><span class="line">    response.setStatus(httpCode);</span><br><span class="line">    response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);</span><br><span class="line">    try (PrintWriter out &#x3D; response.getWriter();) &#123;</span><br><span class="line">        String errorMsgVo &#x3D; JSON.toJSONString(ImmutableMap.of(&quot;code&quot;, SSO_GET_TOKEN_ERROR, &quot;message&quot;, errorMsg));</span><br><span class="line">        out.write(errorMsgVo);</span><br><span class="line">        out.flush();</span><br><span class="line">    &#125; catch (IOException ex) &#123;</span><br><span class="line">        LOGGER.warn(&quot;get token :&#123;&#125;&quot;, ex.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>处理400异常避免出现白页</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * @author Gamehu</span><br><span class="line"> * @description 接管400异常，个性化错误提示</span><br><span class="line"> * @date 2019&#x2F;12&#x2F;19</span><br><span class="line"> *&#x2F;</span><br><span class="line">@RestControllerAdvice(assignableTypes &#x3D; SSOController.class)</span><br><span class="line">@Order(Ordered.HIGHEST_PRECEDENCE)</span><br><span class="line">@Slf4j</span><br><span class="line">@Component</span><br><span class="line">public class SSO400ExceptionHandler &#123;</span><br><span class="line">    @ExceptionHandler(value &#x3D; Exception.class)</span><br><span class="line">    @ResponseStatus(HttpStatus.BAD_REQUEST)</span><br><span class="line">    public Object defaultErrorHandler(Exception e) &#123;</span><br><span class="line">        log.warn(&quot;---SSO验证异常---  ERROR: &#123;&#125;&quot;, e.getMessage());</span><br><span class="line">        return ImmutableMap.of(&quot;code&quot;, SSO_VERIFICATION_ERROR, &quot;message&quot;, e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="引伸阅读："><a href="#引伸阅读：" class="headerlink" title="引伸阅读："></a>引伸阅读：</h3><blockquote><footer><strong>OpenID versus OAuth from the user’s perspective</strong><cite><a href="http://cakebaker.42dh.com/2008/04/01/openid-versus-oauth-from-the-users-perspective/" target="_blank" rel="noopener">cakebaker.42dh.com/2008/04/01/openid-versus-oauth-from-the-users-perspective</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>OAUTH-OPENID: YOU’RE BARKING UP THE WRONG TREE IF YOU THINK THEY’RE THE SAME THING</strong><cite><a href="http://softwareas.com/oauth-openid-youre-barking-up-the-wrong-tree-if-you-think-theyre-the-same-thing/" target="_blank" rel="noopener">softwareas.com/oauth-openid-youre-barking-up-the-wrong-tree-if-you-think-theyre-the-same-thing</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>What's the difference between OpenID and OAuth?</strong><cite><a href="https://stackoverflow.com/questions/1087031/whats-the-difference-between-openid-and-oauth" target="_blank" rel="noopener">stackoverflow.com/questions/1087031/whats-the-difference-between-openid-and-oauth</a></cite></footer></blockquote>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/11/29/postgresql(1)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/11/29/postgresql(1)/" itemprop="url">PostgreSQL(1)</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-29T10:45:00+08:00">
+                2019-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <img src="/2019/11/29/postgresql(1)/1.jpg" class title="Photo by fabio on Unsplash">
+
+<p>最近产品提了一个需求，要做菜单优化。</p>
+<p>菜单优化：</p>
+<ol>
+<li>重写菜单数据初始化sql脚本，数据结构两层变为三层</li>
+<li>权限数据调整</li>
+<li>兼容原有菜单权限数据</li>
+</ol>
+<p>这里面第三点是最麻烦的，兼容原有的菜单数据，我给需求说了两个方案。</p>
+<p>PlanA：从时间方面（因为是个小迭代，整个迭代的功能只有一周时间开发）考虑管理员菜单权限保留，其它普通角色菜单权限一律置空，需求也接受（因为客户现场大多数情况都是用管理员账号）。</p>
+<p>PlanB：保留原有数据，但是需要1-2天预研一下升级方案是否可行，我提出的方案是直接用sql脚本做，需求也认可，PlanA为兜底方案。</p>
+<p>我就提个解决方案，结果这事最后让我支援一下给做了…，所以在这简单记录一下过程产物。</p>
+<h3 id="PLV8"><a href="#PLV8" class="headerlink" title="PLV8"></a>PLV8</h3><p>简单地说就算PostgreSQL里加个扩展，这个扩展就是V8引擎，是的，你理解的没错，就是Google开源的JavaScript引擎，有了这个扩展那就能在sql里写js代码了，这对于在脚本里写逻辑那可是爽歪歪了。</p>
+<p>安装过程我就不多说了，网上有很多，大体流程就是</p>
+<ol>
+<li>从GitHub wget 下来</li>
+<li>make install</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#添加扩展</span><br><span class="line">CREATE EXTENSION plv8;</span><br><span class="line"></span><br><span class="line">#验证plv8的版本，出来版本号就证明装上了</span><br><span class="line">SELECT plv8_version();</span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后你就可以写JS代码了，ES6、coffeeScript等都可以，只要最终是v8能解析的就成。</p>
+<h3 id="写"><a href="#写" class="headerlink" title="写"></a>写</h3><p>好现在开始写了，一开始不太了解，打算用存储过程做，但是后来老前辈提醒我，我这个是升级脚本，只需要执行一遍就成，所以没必要做存储过程，最后还得删掉，因为留着没意义。</p>
+<p>然后建议我用DO $$的写法,此方式执行完不会留下其它痕迹就跟执行一条长sql一样，贴个代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">DO</span><br><span class="line">$$</span><br><span class="line">plv8.elog(INFO, &#39;------------------------------------update user menus start------------------------------------&#39;);</span><br><span class="line">buildTree &#x3D; function(list) &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    let temp &#x3D; &#123;&#125;;</span><br><span class="line">    let tree &#x3D; &#123;&#125;;</span><br><span class="line">    for (let menu of list) &#123;</span><br><span class="line">      temp[menu.id] &#x3D; menu;</span><br><span class="line">    &#125;</span><br><span class="line">    for (let i in temp) &#123;</span><br><span class="line">      if (temp[i].parent) &#123;</span><br><span class="line">        if (!temp[temp[i].parent].children) &#123;</span><br><span class="line">          temp[temp[i].parent].children &#x3D; &#123;&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        temp[temp[i].parent].children[temp[i].id] &#x3D; temp[i];</span><br><span class="line">      &#125; else &#123;</span><br><span class="line"></span><br><span class="line">        tree[temp[i].id] &#x3D; temp[i];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return tree;</span><br><span class="line"></span><br><span class="line">  &#125; catch (error) &#123;</span><br><span class="line">    plv8.elog(ERROR, &#39;buildTree &#39; + error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">getTreeOfMenus &#x3D; function() &#123;</span><br><span class="line">  let cmdb &#x3D; require(&#39;xxx&#39;);</span><br><span class="line">  let result &#x3D; cmdb.service.query(&#39;default&#39;, &#39;&#123;xxx&#123;id name&#125;&#125;&#39;, &#123;&#125;);</span><br><span class="line">  return buildTree(result);</span><br><span class="line">&#125;;</span><br><span class="line">let allMenus &#x3D; getTreeOfMenus();</span><br><span class="line"></span><br><span class="line">delete allMenus[&#39;xxx&#39;];</span><br><span class="line"></span><br><span class="line">let ids &#x3D; [];</span><br><span class="line">idsOfflatten &#x3D; function(data) &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    for (let id in data) &#123;</span><br><span class="line">      ids.push(id);</span><br><span class="line">      if (data[id].children) &#123;</span><br><span class="line">        idsOfflatten(data[id].children);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return ids;</span><br><span class="line">  &#125; catch (error) &#123;</span><br><span class="line">    plv8.elog(ERROR, &#39;idsOfflatten &#39; + error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">let flatIds &#x3D; idsOfflatten(allMenus);</span><br><span class="line">plv8.elog(INFO, &#39;new menu ids:&#39; + flatIds);</span><br><span class="line">getNormalMenus &#x3D; function(menus) &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    plv8.elog(INFO, &#39;old menus : &#39; + JSON.stringify(menus));</span><br><span class="line">    let old_keys &#x3D; Object.keys(menus);</span><br><span class="line">    old_keys.forEach(id &#x3D;&gt; &#123;</span><br><span class="line">      if (!flatIds.includes(id)) &#123;</span><br><span class="line">        plv8.elog(INFO, &#39;delete menu id: &#39; + id);</span><br><span class="line">        delete menus[id];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    return menus;</span><br><span class="line">  &#125; catch (error) &#123;</span><br><span class="line">    plv8.elog(ERROR, &#39;getNormalMenus &#39; + error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">updateMenus &#x3D; function() &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    let ROLE_ADMIN &#x3D; &#39;admin&#39;,</span><br><span class="line">      ROLE_DOMAIN &#x3D; &#39;domain&#39;;</span><br><span class="line">    let query &#x3D; &#39;SELECT name,  menus, role_type FROM xxx&#39;;</span><br><span class="line">    let updateAdmin &#x3D;</span><br><span class="line">      &#39;UPDATE xxx SET  menus&#x3D;NULL,  last_modified&#x3D;CURRENT_TIMESTAMP where  name &#x3D; $1&#39;;</span><br><span class="line">    let updateNormal &#x3D; &#39;UPDATE xxx SET  menus&#x3D;$1, last_modified&#x3D;CURRENT_TIMESTAMP where name &#x3D; $2&#39;;</span><br><span class="line">    let execCount&#x3D;0;</span><br><span class="line">    plv8.execute(query).forEach(row &#x3D;&gt; &#123;</span><br><span class="line">      let roleType &#x3D; row.role_type;</span><br><span class="line">      if (roleType &#x3D;&#x3D;&#x3D; ROLE_DOMAIN || roleType &#x3D;&#x3D;&#x3D; ROLE_ADMIN) &#123;  </span><br><span class="line">        let adminCount &#x3D; plv8.execute(updateAdmin, [row.name]);</span><br><span class="line">        plv8.elog(INFO, &#39;update admin user menus is null ,count: &#39;+adminCount );</span><br><span class="line">        adminCount&gt;0 ? execCount+&#x3D;1:null;</span><br><span class="line">        return;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      let newMenus &#x3D; getNormalMenus(row.menus);</span><br><span class="line">      let normalCount &#x3D; plv8.execute(updateNormal, [newMenus, row.name]);</span><br><span class="line">      plv8.elog(INFO, &#39;update normal user menus , &#39; + JSON.stringify(newMenus)+&#39;,count:&#39;+normalCount);</span><br><span class="line">      normalCount&gt;0 ? execCount+&#x3D;1:null;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">   return execCount;</span><br><span class="line">  &#125; catch (error) &#123;</span><br><span class="line">    plv8.elog(ERROR, &#39;updateMenus &#39; + error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">let updateCount&#x3D;updateMenus();</span><br><span class="line">plv8.elog(INFO,&#39;total of successes :&#39;+updateCount);</span><br><span class="line">plv8.elog(INFO,&#39;------------------------------------update user menus end------------------------------------&#39;);</span><br><span class="line">$$ LANGUAGE plv8;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h3><p>PostgreSQL很强大，这是我初试水，后续有机会会再写写工作中的一些PostgreSQL的实践例子。</p>
+<p>其实PostgreSQL几乎可扩展主流的所有编程语言比如C++、Java、nodejs等。</p>
+<p>参考文档：</p>
+<blockquote><footer><strong>plv8 documention</strong><cite><a href="https://plv8.github.io/" target="_blank" rel="noopener">plv8.github.io</a></cite></footer></blockquote>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/11/26/Docker%20%E4%B8%80%E7%82%B9%E7%82%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1184,1073 +2151,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/" itemprop="url">组织化人才管理的四大领域</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-21T10:11:00+08:00">
-                2019-10-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天内心膨胀的以为自己是个人才，所以随心所欲的看了门课。以下记录了我觉得对我有意义的点。</p>
-<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/mohamed.jpg" class title="Photo by Mohamed Nohassi on Unsplash">
-
-
-
-<p>根据业务布局和业务的洞察来理解和分析业务的变局时什么，再次基础上呢再来看搭建什么样的阵型，组织阵型来匹配业务，为了这样的一个人才搭建，需要准备怎样对人才进行赋能，这个赋能是系统性的赋能，不是对单个个体，甚至不是对团队，而是一个系统性的赋能。最后沉淀褚一套人才管理的机制，用这样的一套人才管理机制不断推动人才。</p>
-<h3 id="人才"><a href="#人才" class="headerlink" title="人才"></a>人才</h3><p><strong>业务布局=人才体积</strong></p>
-<p>人才体积：人才在多大的业务空间中去发挥作用，所以业务布局决定了人才体积</p>
-<p><strong>组织阵型=密度</strong></p>
-<p>人才分布的密度和人才分布的层次</p>
-<p><strong>人才赋能=人才质量</strong></p>
-<p>对组织化导向的人才赋能，我组织想对我整个的人才产生怎样的一个牵引力。核心是我是要提高我得人才适应未来业务成长需求，适应未来变局的整体的能力的拉伸。</p>
-<p><strong>密度=质量/体积</strong></p>
-<p>所以单独对人才进行培训和赋能是不够的，而是要对人才的密度进行一个拉升，即提升人才质量的同时，要让业务体积处于合适的范围内。</p>
-<p>人才称重：人才在组织中的重量，发挥的作用。</p>
-<p>人才称重的三种方式：</p>
-<ol>
-<li>通过人才赋能提升人才质量</li>
-<li>通过业务布局减少人才体积（冗余）</li>
-<li>通过组织机构的调整来优化人才在不同组织单元中的密度，激活组织的有效性。</li>
-</ol>
-<h3 id="四大模型"><a href="#四大模型" class="headerlink" title="四大模型"></a>四大模型</h3><img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/1.jpg" class>
-
-
-
-<p>主要说说人才管理机制模型：</p>
-<p>汰换、激励、约束、牵引</p>
-<p>汰换：这是一个必然的过程，当你想懈怠的时候觉得无趣的时候，问问自己你对于公司的价值是什么</p>
-<p>牵引：企业文化价值的输入、企业向心力的培养等</p>
-<h3 id="业务变局"><a href="#业务变局" class="headerlink" title="业务变局"></a>业务变局</h3><p><strong>业务结构与人才结构</strong></p>
-<p>解释，在什么情况下先发展业务还是先发展人才。</p>
-<p>依赖的手段则是进行<strong>业务摸底</strong>和<strong>人才摸底（核心团队）</strong></p>
-<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/2.jpg" class>
-
-
-
-<h3 id="组织变阵"><a href="#组织变阵" class="headerlink" title="组织变阵"></a>组织变阵</h3><p>说明什么地方配置更加优秀的人才，合理的调整人才结构和组织结构</p>
-<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/3.jpg" class>
-
-
-
-<h3 id="人才赋能"><a href="#人才赋能" class="headerlink" title="人才赋能"></a>人才赋能</h3><p>迎接未来面对变局的能力</p>
-<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/4.jpg" class>
-
-<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/5.jpg" class>
-
-
-
-
-
-<h3 id="人才管理机制"><a href="#人才管理机制" class="headerlink" title="人才管理机制"></a>人才管理机制</h3><p>通过上述内容，沉淀出一套符合自己公司的人才管理机制</p>
-<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/6.jpg" class>
-
-
-
-
-
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>从这个课我知道了人才管理不是我之前那么单纯的理解，很容易被这个词午到，人才管理其实不仅仅说的是人才管理，还包括业务布局、组织变阵、人才赋能、机制建立等因素。</p>
-<p>所以我理解一下下，人才的定义是不是：专业技能过硬，有战略眼光且能适应业务未来的变局，且有组织向心力？</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/10/08/%E4%B8%AA%E4%BA%BA%E5%8F%91%E5%B1%95%E6%88%98%E7%95%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/08/%E4%B8%AA%E4%BA%BA%E5%8F%91%E5%B1%95%E6%88%98%E7%95%A5/" itemprop="url">个人发展战略</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-08T21:46:00+08:00">
-                2019-10-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index">
-                    <span itemprop="name">学习</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <img src="/2019/10/08/%E4%B8%AA%E4%BA%BA%E5%8F%91%E5%B1%95%E6%88%98%E7%95%A5/0.jpg" class title="下班路上">
-
-<h3 id="为什么要谈个人发展"><a href="#为什么要谈个人发展" class="headerlink" title="为什么要谈个人发展?"></a>为什么要谈个人发展?</h3><p>这个话题其实我很怕的….，因为我发育迟读书少，所以一直都懵懵懂懂+凄凄惨惨戚戚，自认为放荡不羁其实就是无知逗逼。我是从17年开始才意识到有个概念叫“以后的路咋走”，文气点就是<strong>个人发展</strong>。因为17年开始面临买房、小孩儿上学等一系列问题，深深感到自己的无力，表象就是缺钱，内里就是焦虑。那段时间常常展开双臂抬头望问天“咋整？我该咋整？”，夜深人静常常哭湿了我的小黄人枕巾。就想着不能这样，得变，得抗。</p>
-<p>这两年其实我一直在摸索适合自己地发展路径，包括之前地一篇也在写<span style="color:blue;"></span>，从个人定位=&gt;个人发展，我认为应该是这样地顺序，虽然现在个人发展长远地战略还不是非常明确，但是至少我认识到了个人发展地重要性，并且找到了最近3-5年自己地发展路径。</p>
-<p>当然这篇不是来说我的，是结合之前老大的分享以及平时自己的学习来试着说明一下，个人发展的必要性。</p>
-<p>*<em>我们先聊聊几个点，看是否能达成共识。达不成共识可能这篇文章对你来说就没什么意义 *</em></p>
-<h2 id="工作压力大，没时间"><a href="#工作压力大，没时间" class="headerlink" title="工作压力大，没时间"></a><span style="color:red;">工作压力大，没时间</span></h2><p>不用我说大家都知道，个人发展是需要时间来铺垫的，同时个人发展肯定跟工作会有联系，这种联系根据个人的处境可强可弱。另外一个共识点是，工作肯定会压缩我们的可自由支配的时间。所以很多时候我们会得出一个结论，<strong>工作压力大，没时间</strong>。作为程序员我承认确实会存在这样的情况，究其原因：公司的业务压力大，需要堆人堆时间来跟上时代的节奏。另外一点则是个人的精力有限，就像电池一样，在工作上就把电耗尽了，就算会有一些休息时间，也已经没电了。但是我们可以这么想想：现在的工作强度是否有利于个人发展？得到报酬能否多到让我暂时放弃个人发展的程度？工作压力是否真的有我们想象得那么大，时间是否真的就没了？</p>
-<p>所以核心的问题是，我们对个人发展这件事情有多重视？愿意投资多少时间和精力？</p>
-<p>我的观点是：如果光感受到工作压力大让你没有时间，但又无法获得一些正反馈，那这不是你有没有时间得问题，而是先考虑这份工作是不是应该继续做下去的问题。如果有正反馈，我们再想想是否现在处境就算我想要的的”个人发展”。</p>
-<p>怎么来判断，我通常是这样做的：</p>
-<ol start="2">
-<li>列出来公司的晋升制度，薪酬制度。</li>
-<li>尽可能的根据各种反馈，试着评估一下公司的发展前景或者产品线的发展前景。</li>
-<li>列出来所在职位的工作内容（在不晋升的情况下），以及如果晋升了的工作内容（从与领导交流，加上观察基本上能预估出80%左右）。</li>
-<li>列出来如果因为某些因素，导致被动的离开公司，自己会怎样？</li>
-</ol>
-<p>不出意外你列完之后，会说一句“卧槽xxxx”，这样就对了，好好考虑一下个人发展的重要性吧。</p>
-<p><strong>有点扯远了，其实我是想说，自己愿意的话，不会没有时间。</strong></p>
-<h2 id="工作生活要平衡"><a href="#工作生活要平衡" class="headerlink" title="工作生活要平衡"></a><span style="color:red;">工作生活要平衡</span></h2><p><strong>我不想这么辛苦，我期望生活和工作平衡</strong></p>
-<blockquote>
-<p>很多人都期望活少钱多还开心，朋友圈那些天天晒美食，旅行，老婆孩子热炕头的生活就是理想人生。每个行业都有其辛苦的部分，这才是现实。有的要付出体力之苦，有的要付出健康的代价，有的要付出脑力之苦。既然选择了薪酬相对高一些的IT行业，持续学习新技术，新知识就是你必须面对的。你是想要今天的生活和工作平衡，还是中年油腻后的生计艰难？</p>
-<p>假如你不是富二代，官二代，还是更现实，更长期地看待工作和生活平衡的事情。如果你从事的工作是你热爱的工作，不存在平衡问题，从中获得的成就感就是你生活的一部分。如果你从事的工作是你谋生的手段，想持续获得这个收入，就遵循这个工作的本质规律。</p>
-</blockquote>
-<p>以上是老大的原话我觉得已经说的很透彻了，我认为要想追求工作生活的平衡是不可能的，当然我不是说工作和生活就必须得纠缠在一起才好，我是觉得<strong>平衡</strong>这词应该是心理上的划分而不是物理上的划分。</p>
-<h3 id="个人发展战略"><a href="#个人发展战略" class="headerlink" title="个人发展战略"></a>个人发展战略</h3><p>然后我们再来说怎么找到属于自己的个人发展战略，内容总结来自<strong>圈外商学院</strong>的个人发展战略主体纲要，因为平台不让看了，我就直接不要脸的引用有识之士的了。大家如果觉得有用请去链接点赞，就当我对其微薄的回报了。</p>
-<p><strong>一、一个模型，帮你找到真正热爱的工作</strong></p>
-<ul>
-<li><p>冰山模型；美国著名心理学家麦克利兰</p>
-</li>
-<li><ul>
-<li><p>显性30%；</p>
-</li>
-<li><ul>
-<li>知识（专业，书籍），慌乱</li>
-<li>技能（编程，技术），焦虑</li>
-<li>能力（思考能力，学习能力），挫败低效</li>
-</ul>
-</li>
-<li><p>隐性70%；</p>
-</li>
-<li><ul>
-<li>价值观（判断事物标准），矛盾纠结</li>
-<li>性格特质（行为偏好），心累</li>
-<li>动机（成就动机，权力动机），没热情</li>
-</ul>
-</li>
-<li><p>四个步骤找到适合的工作</p>
-</li>
-<li><ul>
-<li>找专业；找自己喜欢的专业和爱好的相关岗位</li>
-<li>搜索岗位；在招聘网上，搜索岗位的要求</li>
-<li>分析需求；用冰山模型，分析这份岗位需要的知识，技能和能力</li>
-<li>对比自己；用冰山模型匹配自己的价值观，性格特质和动机，确定适不适合。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>二、四大要素，决定你的市场价值</strong></p>
-<ul>
-<li><p>用冰山模型说明该投入到哪里，才能提升自己的市场价值</p>
-</li>
-<li><ul>
-<li>投入知识；容易获取，但如果不能运用来解决问题，几乎没有竞争力。</li>
-<li>投入技能；有门槛，但市场价值取决于稀缺程度，所有技能都会走向供需平衡，高收入不可持续，需要不断持续学习新技能。</li>
-<li>投入能力；能力可迁移，积累到一定高度，行业不对称，也能发挥作用。</li>
-<li>投入自我发现；难以改变和发现，但如有清晰的认识，找到相匹配的工作也能提升价值。</li>
-</ul>
-</li>
-<li><p>为什么大多数人都选择投入到知识和技能，不断碎片化学习，练习并不稀缺的技能。</p>
-</li>
-<li><ul>
-<li>因为知识和技能容易习得</li>
-<li>惰性让自身受限于岗位</li>
-<li>没明白工作本质是解决问题</li>
-</ul>
-</li>
-<li><p>汇总；我们的时间，永远应该花在正确的事情上，而不是容易的事情上。</p>
-</li>
-</ul>
-<p><strong>三、四类迹象，发现你的隐藏能力</strong></p>
-<ul>
-<li><ul>
-<li>虽然成功的道路有千万条，但成功人士基本都在遵循了一个原则，就是将自己的自身天赋发挥到了极致。</li>
-<li>天赋就是隐藏的能力，让一个人可以在同样起点的情况下，更加加速成长。</li>
-</ul>
-</li>
-<li><p><strong>天赋探索方法；“SIGN”</strong></p>
-</li>
-<li><ul>
-<li>自我效能（Self-efficacy）；对某类事情非常有信心，觉得自己肯定能做好。</li>
-<li>本能（Instinct）；迫不及待想要尝试的事情</li>
-<li>成长（Growth）；发现自己明显比别人进步的快一些</li>
-<li>满足（Needs）；做完后及时很累，也会觉得满足</li>
-</ul>
-</li>
-<li><p>如何在日常中发现自己的SIGN特质</p>
-</li>
-<li><ul>
-<li><p>围绕SIGN特质问自己</p>
-</li>
-<li><ul>
-<li>自我效能；认为自己能教别人什么？别人向你请教什么？跟别人聊天倾向聊什么？聊什么话题会让你感到自信？做什么事情不会感到焦虑和担心？</li>
-<li>本能；做什么事的时候很少拖延？长时间休息后，你最想念工作的哪个方面？你宁愿放弃休息时间也要做的事情是什么？</li>
-<li>成长；什么事情会让你沉浸其中忘记时间？不容易感到疲累和厌烦？</li>
-<li>满足；过去工作和生活中，有什么让你获得巨大的成就感和满足感？</li>
-</ul>
-</li>
-<li><p>围绕SIGN特质问他人</p>
-</li>
-<li><ul>
-<li><p>你觉得我身上有什么不同于别人的特质？</p>
-</li>
-<li><p>你最欣赏或者佩服我的方面是什么？</p>
-</li>
-<li><p>在你看来，我做什么的时候最兴奋？</p>
-</li>
-<li><p>我做过什么让你印象深刻的事情么？</p>
-</li>
-<li><p>在以下方面，你觉得我那些更加擅长？</p>
-</li>
-<li><ul>
-<li>思维方式；条理清晰，逻辑严密，脑洞很大，专注专业</li>
-<li>沟通协调；化解冲突，争取资源，知人善用</li>
-<li>计划执行；执行力强，强求完美，目标导向</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>四、三种方法，将知识内化成能力</strong></p>
-<ul>
-<li><p>惰性知识；不能及时有效调用，占用大脑内存的知识</p>
-</li>
-<li><p>如何把知识内化成能力，让自己的能力快速提升的三个方法</p>
-</li>
-<li><ul>
-<li><p>1.掌握20%的核心；二八原则，一个领域的20%的核心内容，能够解决80%的问题</p>
-</li>
-<li><ul>
-<li>如结构化思维20%的三个特征；主题鲜明，归类分明，逻辑递进。</li>
-<li>擅长找师傅，找领域内专业人士，了解领域的核心20%</li>
-</ul>
-</li>
-<li><p>2.知识和问题相互靠</p>
-</li>
-<li><ul>
-<li><p>让知识和问题链接起来，知识向问题靠，问题向知识靠。</p>
-</li>
-<li><p>知识（想应用）问题；看到一个知识就去思考这个知识可以用来解决什么问题？</p>
-</li>
-<li><ul>
-<li>如；马斯洛的五层次需求，可以用来分析奢侈品为什么这么贵？</li>
-</ul>
-</li>
-<li><p>问题（找解释）知识，遇到问题，抛弃第一反应，去想想有什么方法论模型可以用</p>
-</li>
-<li><ul>
-<li>看书遇到有趣的理论，先记下思考3个可以用该模型解决的问题。下次不要下意识反应，学会去翻一下以前的笔记，把问题补充到笔记里。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>3.做系统化训练</p>
-</li>
-<li><ul>
-<li>刻意练习；一个月中，显示每天练习三段式，再提炼主题，然后积累结构</li>
-<li>我们的习惯，是高估几天的变化，而低估几个月的变化。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>汇总；如何具体到行动中；</p>
-</li>
-<li><p>1.找专业人士了解领域的核心20%，先去学习20%</p>
-</li>
-<li><p>2.在学习的过程中，思考各个知识点的应用场景，并记录下来，遇到问题再回去找</p>
-</li>
-<li><p>3.能力提升是一个系统性过程，所以需要坚持至少1个月。</p>
-</li>
-</ul>
-<p><strong>五、三大系统，让学习不靠意志力</strong></p>
-<ul>
-<li><p>为什么我们如此难坚持</p>
-</li>
-<li><ul>
-<li>意志力是有限的，并不是学习这件事情类到你，而是“坚持”</li>
-<li>移动互联网时代，诱惑越来越多</li>
-<li>威尔海姆。霍夫曼主持的一项研究表明；人们醒着的时候，把大约1/4的时间用来抵制欲望。</li>
-</ul>
-</li>
-<li><p>意志力不够用，就用行为改变来学习。</p>
-</li>
-<li><ul>
-<li>决定事情时起作用的大脑内部的两个系统；理性和感性。</li>
-</ul>
-</li>
-<li><p>如何让我们坚持做一件事的三个关键因素；</p>
-</li>
-<li><ul>
-<li><p>理性上；知道要学习（树立明确的目标）</p>
-</li>
-<li><ul>
-<li>明确的目标是坚持学习的第一步</li>
-</ul>
-</li>
-<li><p>感性上；愿意去学习（利用情绪冲动）</p>
-</li>
-<li><ul>
-<li>截止日期的紧迫感</li>
-<li>比较产生的焦虑感</li>
-<li>鼓励带来的成就感</li>
-</ul>
-</li>
-<li><p>情景上；制造适合学习的场景（创造学习环境）</p>
-</li>
-<li><ul>
-<li>人是社会动物，我们会观察周围人的行为来调整自己的行为。</li>
-<li>如果可以利用环境，就不要用你的意志力来抵制欲望</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>六、三个建议，让你不做“定制化人才”</strong></p>
-<ul>
-<li>1.调整主体，给自己定好发展方向</li>
-<li>2.提升能力，让自己成为横向可迁移的人才</li>
-<li>3.提升认知高度，让自己成为纵向可拓展的人才</li>
-</ul>
-<p>源引感谢：</p>
-<blockquote><footer><strong>圈外同学——个人发展战略</strong><cite><a href="https://zhuanlan.zhihu.com/p/68267559" target="_blank" rel="noopener">zhuanlan.zhihu.com/p/68267559</a></cite></footer></blockquote>
-
-<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/09/30/%E6%8A%89%E6%8B%A9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/30/%E6%8A%89%E6%8B%A9/" itemprop="url">抉择</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-30T10:24:00+08:00">
-                2019-09-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index">
-                    <span itemprop="name">成长</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近看了《抉择》，虽说本身是一本企业管理的书，但是对人自身也是特别有指导意义的…</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/09/27/%E5%AE%89%E5%85%A8%E6%89%AB%E6%8F%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/27/%E5%AE%89%E5%85%A8%E6%89%AB%E6%8F%8F/" itemprop="url">XSS、SQL注入</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-27T16:04:00+08:00">
-                2019-09-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
-                    <span itemprop="name">工作</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <img src="/2019/09/27/%E5%AE%89%E5%85%A8%E6%89%AB%E6%8F%8F/shield.jpg" class title="Image by marian anbu juwan from Pixabay">
-
-<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>由于某些客户现场以及我们公司自身的要求，产品上线之前都会有一轮的安全扫描，用AppScan等这类工具扫一扫，最近就处理了几个安全扫描的问题，虽说处理的比较原始但是还是需要记录一下，你晓得哇，因为比较折磨人。</p>
-<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><p>什么交XSS、SQL注入网上一大堆我就不出丑了哈，要解决这块问题那就先得搞清楚AppScan这类软件的工作原理。</p>
-<p>AppScan 工作原理小结如下：</p>
-<ul>
-<li>通过爬行配置的整个 Web 应用，了解其结构找到接口等信息</li>
-<li>根据分析的结果，发送修改后的Request 进行攻击尝试（扫描规则库模拟XSS、SQL注入等操作）</li>
-<li>最后分析 Respone ，验证是否符合预期是否存在安全漏洞</li>
-</ul>
-<p>所以由此看出处理XSS、SQL注入等问题只能在第二个和第三个环节出手。</p>
-<h3 id="处理姿势"><a href="#处理姿势" class="headerlink" title="处理姿势"></a>处理姿势</h3><p>处理这类问题我所知道的通常就3种姿势：</p>
-<ol>
-<li><p>拦截</p>
-<p>触发了这类校验直接拦截掉并提示不让其做任何操作，简单粗暴但是不人性化。经常让人很懵逼。</p>
-</li>
-<li><p>替换</p>
-<p>把可触发这类校验的关键字全部替换为其它字符或者转换为字符串等。这种容易破坏原有的表达。</p>
-</li>
-<li><p>加密</p>
-<p>这是种欺骗扫描软件的方式，直接前后端约定加密方式，对所有的输入进行统一加密，后端再统一解密，这样扫描软件识别不了任何关键字。我同事就这样干过，虽然说性能上会有一点问题但是好在不用动任何代码。嗯，这种只能说骚操作。</p>
-</li>
-</ol>
-<h3 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h3><p>最后和架构师定的方式是通过filter+正则这种最原始最简单的方式来做，我们这是toB的运维系统所以让大家失望了没上高大上的安全策略。</p>
-<img src="/2019/09/27/%E5%AE%89%E5%85%A8%E6%89%AB%E6%8F%8F/1.png" class>
-
-
-
-<h4 id="输入流"><a href="#输入流" class="headerlink" title="输入流"></a>输入流</h4><p>需要先搞清楚为什么需要处理输入流，因为 reqeust.getInputStream 方法只能读取一次。我们可以大概捋一下是咋回事。</p>
-<p>我们需要输入流所以需要调用reqest.getInputStream()，getInputStream返回值为ServletInputStream，所以我们先看看ServletInputStream。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public abstract class ServletInputStream extends InputStream &#123;</span><br><span class="line">    protected ServletInputStream() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int readLine(byte[] b, int off, int len) throws IOException &#123;</span><br><span class="line">        if (len &lt;&#x3D; 0) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            int count &#x3D; 0;</span><br><span class="line"></span><br><span class="line">            int c;</span><br><span class="line">            while((c &#x3D; this.read()) !&#x3D; -1) &#123;</span><br><span class="line">                b[off++] &#x3D; (byte)c;</span><br><span class="line">                ++count;</span><br><span class="line">                if (c &#x3D;&#x3D; 10 || count &#x3D;&#x3D; len) &#123;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            return count &gt; 0 ? count : -1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public abstract boolean isFinished();</span><br><span class="line"></span><br><span class="line">    public abstract boolean isReady();</span><br><span class="line"></span><br><span class="line">    public abstract void setReadListener(ReadListener var1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后知道是继承自InputStream，所以我们先看InputStream，注意read和reset方法。</p>
-<p>read方法告诉我们会从输入流一直读取下一个字节、如果以达到末尾侧返回-1。</p>
-<p>reset告诉我们可以<strong>重置</strong>读取的位置。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">public abstract class InputStream implements Closeable &#123;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; MAX_SKIP_BUFFER_SIZE is used to determine the maximum buffer size to</span><br><span class="line">    &#x2F;&#x2F; use when skipping.</span><br><span class="line">    private static final int MAX_SKIP_BUFFER_SIZE &#x3D; 2048;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * Reads the next byte of data from the input stream. The value byte is</span><br><span class="line">     * returned as an &lt;code&gt;int&lt;&#x2F;code&gt; in the range &lt;code&gt;0&lt;&#x2F;code&gt; to</span><br><span class="line">     * &lt;code&gt;255&lt;&#x2F;code&gt;. If no byte is available because the end of the stream</span><br><span class="line">     * has been reached, the value &lt;code&gt;-1&lt;&#x2F;code&gt; is returned. This method</span><br><span class="line">     * blocks until input data is available, the end of the stream is detected,</span><br><span class="line">     * or an exception is thrown.</span><br><span class="line">     *</span><br><span class="line">     * &lt;p&gt; A subclass must provide an implementation of this method.</span><br><span class="line">     *</span><br><span class="line">     * @return     the next byte of data, or &lt;code&gt;-1&lt;&#x2F;code&gt; if the end of the</span><br><span class="line">     *             stream is reached.</span><br><span class="line">     * @exception  IOException  if an I&#x2F;O error occurs.</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public abstract int read() throws IOException;</span><br><span class="line">    </span><br><span class="line">    &#x2F;**</span><br><span class="line">     * Repositions this stream to the position at the time the</span><br><span class="line">     * &lt;code&gt;mark&lt;&#x2F;code&gt; method was last called on this input stream.</span><br><span class="line">     *</span><br><span class="line">     * &lt;p&gt; The general contract of &lt;code&gt;reset&lt;&#x2F;code&gt; is:</span><br><span class="line">     *</span><br><span class="line">     * &lt;ul&gt;</span><br><span class="line">     * &lt;li&gt; If the method &lt;code&gt;markSupported&lt;&#x2F;code&gt; returns</span><br><span class="line">     * &lt;code&gt;true&lt;&#x2F;code&gt;, then:</span><br><span class="line">     *</span><br><span class="line">     *     &lt;ul&gt;&lt;li&gt; If the method &lt;code&gt;mark&lt;&#x2F;code&gt; has not been called since</span><br><span class="line">     *     the stream was created, or the number of bytes read from the stream</span><br><span class="line">     *     since &lt;code&gt;mark&lt;&#x2F;code&gt; was last called is larger than the argument</span><br><span class="line">     *     to &lt;code&gt;mark&lt;&#x2F;code&gt; at that last call, then an</span><br><span class="line">     *     &lt;code&gt;IOException&lt;&#x2F;code&gt; might be thrown.</span><br><span class="line">     *</span><br><span class="line">     *     &lt;li&gt; If such an &lt;code&gt;IOException&lt;&#x2F;code&gt; is not thrown, then the</span><br><span class="line">     *     stream is reset to a state such that all the bytes read since the</span><br><span class="line">     *     most recent call to &lt;code&gt;mark&lt;&#x2F;code&gt; (or since the start of the</span><br><span class="line">     *     file, if &lt;code&gt;mark&lt;&#x2F;code&gt; has not been called) will be resupplied</span><br><span class="line">     *     to subsequent callers of the &lt;code&gt;read&lt;&#x2F;code&gt; method, followed by</span><br><span class="line">     *     any bytes that otherwise would have been the next input data as of</span><br><span class="line">     *     the time of the call to &lt;code&gt;reset&lt;&#x2F;code&gt;. &lt;&#x2F;ul&gt;</span><br><span class="line">     *</span><br><span class="line">     * &lt;li&gt; If the method &lt;code&gt;markSupported&lt;&#x2F;code&gt; returns</span><br><span class="line">     * &lt;code&gt;false&lt;&#x2F;code&gt;, then:</span><br><span class="line">     *</span><br><span class="line">     *     &lt;ul&gt;&lt;li&gt; The call to &lt;code&gt;reset&lt;&#x2F;code&gt; may throw an</span><br><span class="line">     *     &lt;code&gt;IOException&lt;&#x2F;code&gt;.</span><br><span class="line">     *</span><br><span class="line">     *     &lt;li&gt; If an &lt;code&gt;IOException&lt;&#x2F;code&gt; is not thrown, then the stream</span><br><span class="line">     *     is reset to a fixed state that depends on the particular type of the</span><br><span class="line">     *     input stream and how it was created. The bytes that will be supplied</span><br><span class="line">     *     to subsequent callers of the &lt;code&gt;read&lt;&#x2F;code&gt; method depend on the</span><br><span class="line">     *     particular type of the input stream. &lt;&#x2F;ul&gt;&lt;&#x2F;ul&gt;</span><br><span class="line">     *</span><br><span class="line">     * &lt;p&gt;The method &lt;code&gt;reset&lt;&#x2F;code&gt; for class &lt;code&gt;InputStream&lt;&#x2F;code&gt;</span><br><span class="line">     * does nothing except throw an &lt;code&gt;IOException&lt;&#x2F;code&gt;.</span><br><span class="line">     *</span><br><span class="line">     * @exception  IOException  if this stream has not been marked or if the</span><br><span class="line">     *               mark has been invalidated.</span><br><span class="line">     * @see     java.io.InputStream#mark(int)</span><br><span class="line">     * @see     java.io.IOException</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public synchronized void reset() throws IOException &#123;</span><br><span class="line">        throw new IOException(&quot;mark&#x2F;reset not supported&quot;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>所以从上面可以得知ServletInputStream是没有重写r关键的reset方法，所以行为是与InputStream保持一致的即输入流读取一遍之后就没了后续就一直返回-1。</p>
-<p>所以解决办法就是找到重写reset的方法的类，即就找到我们常用的ByteArrayInputStream也是继承自InputStream，但是其重写了reset等方法。</p>
-<p>我们看下源码：</p>
-<p>注意read里面的<strong>pos</strong>变量，它是标识现在读取的流的位置，所以如果我们想多次读取输入流，需要调用上面说的reset方法重置pos为0。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">public</span><br><span class="line">class ByteArrayInputStream extends InputStream &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * The currently marked position in the stream.</span><br><span class="line">     * ByteArrayInputStream objects are marked at position zero by</span><br><span class="line">     * default when constructed.  They may be marked at another</span><br><span class="line">     * position within the buffer by the &lt;code&gt;mark()&lt;&#x2F;code&gt; method.</span><br><span class="line">     * The current buffer position is set to this point by the</span><br><span class="line">     * &lt;code&gt;reset()&lt;&#x2F;code&gt; method.</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * If no mark has been set, then the value of mark is the offset</span><br><span class="line">     * passed to the constructor (or 0 if the offset was not supplied).</span><br><span class="line">     *</span><br><span class="line">     * @since   JDK1.1</span><br><span class="line">     *&#x2F;</span><br><span class="line">    protected int mark &#x3D; 0;</span><br><span class="line">    </span><br><span class="line">    &#x2F;**</span><br><span class="line">     * The index of the next character to read from the input stream buffer.</span><br><span class="line">     * This value should always be nonnegative</span><br><span class="line">     * and not larger than the value of &lt;code&gt;count&lt;&#x2F;code&gt;.</span><br><span class="line">     * The next byte to be read from the input stream buffer</span><br><span class="line">     * will be &lt;code&gt;buf[pos]&lt;&#x2F;code&gt;.</span><br><span class="line">     *&#x2F;</span><br><span class="line">    protected int pos;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * Reads the next byte of data from this input stream. The value</span><br><span class="line">     * byte is returned as an &lt;code&gt;int&lt;&#x2F;code&gt; in the range</span><br><span class="line">     * &lt;code&gt;0&lt;&#x2F;code&gt; to &lt;code&gt;255&lt;&#x2F;code&gt;. If no byte is available</span><br><span class="line">     * because the end of the stream has been reached, the value</span><br><span class="line">     * &lt;code&gt;-1&lt;&#x2F;code&gt; is returned.</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * This &lt;code&gt;read&lt;&#x2F;code&gt; method</span><br><span class="line">     * cannot block.</span><br><span class="line">     *</span><br><span class="line">     * @return  the next byte of data, or &lt;code&gt;-1&lt;&#x2F;code&gt; if the end of the</span><br><span class="line">     *          stream has been reached.</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public synchronized int read() &#123;</span><br><span class="line">        return (pos &lt; count) ? (buf[pos++] &amp; 0xff) : -1;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">     &#x2F;**</span><br><span class="line">     * Resets the buffer to the marked position.  The marked position</span><br><span class="line">     * is 0 unless another position was marked or an offset was specified</span><br><span class="line">     * in the constructor.</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public synchronized void reset() &#123;</span><br><span class="line">        pos &#x3D; mark;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>这些搞清楚之后就是看怎么能在到咱们的filter的时候得到的request是可以读取多次同时又不影响其它地方的读取（比如controller），刚好severlet.api提供了一个叫HttpServletRequestWrapper的东西，刚好提供一种包装（专业名词：装饰器模式）的手法让我们可以包装request请求对象使其可扩展其它能力。包装高富帅哪里都吃得开。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * @author Gamehu</span><br><span class="line"> * @date 2019&#x2F;5&#x2F;9 18:32</span><br><span class="line"> * @description sql注入问题，前置处理输入流，避免输入流获取一次以后失效导致系统异常</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class xxxHttpServletRequestWrapper extends HttpServletRequestWrapper &#123;</span><br><span class="line">    private static final Logger LOGGER &#x3D; LoggerFactory.getLogger(SqlInjectHttpServletRequestWrapper.class);</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 存储请求输入流</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private byte[] body;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public SqlInjectHttpServletRequestWrapper(HttpServletRequest request) &#123;</span><br><span class="line">        super(request);</span><br><span class="line">        try &#123;</span><br><span class="line">            body &#x3D; inputStreamToByte(request.getInputStream());</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            throw RiilExceptionUtils.bizException(e, BaseWebErrorCode.SecurityConstant.ERROR, BaseWebErrorMsg.SecurityConstant.ERROR_MSG);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 流转 字节数组</span><br><span class="line">     *</span><br><span class="line">     * @param is</span><br><span class="line">     * @return</span><br><span class="line">     * @throws IOException</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private byte[] inputStreamToByte(InputStream is) throws IOException &#123;</span><br><span class="line">        ByteArrayOutputStream byteStream &#x3D; new ByteArrayOutputStream();</span><br><span class="line">        byte[] buffer &#x3D; new byte[1024];</span><br><span class="line">        int ch;</span><br><span class="line">        while ((ch &#x3D; is.read(buffer)) !&#x3D; -1) &#123;</span><br><span class="line">            byteStream.write(buffer, 0, ch);</span><br><span class="line">        &#125;</span><br><span class="line">        byte[] data &#x3D; byteStream.toByteArray();</span><br><span class="line">        byteStream.close();</span><br><span class="line">        return data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public BufferedReader getReader() &#123;</span><br><span class="line">        return new BufferedReader(new InputStreamReader(getInputStream()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 重写方法用于多次获取流，防止读取用于校验过后，后面服务无法获取参数的情况</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @Override</span><br><span class="line">    public ServletInputStream getInputStream() &#123;</span><br><span class="line">        final ByteArrayInputStream bais &#x3D; new ByteArrayInputStream(body);</span><br><span class="line">        return new ServletInputStream() &#123;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public boolean isFinished() &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public boolean isReady() &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void setReadListener(ReadListener readListener) &#123;</span><br><span class="line">                LOGGER.info(&quot;setReadListener&quot;);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public int read() &#123;</span><br><span class="line">                return bais.read();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>OK，到这儿输入流总算搞定了，nice，然后开始Filter上场了。</p>
-<h3 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author Gamehu</span><br><span class="line"> * @date 2018&#x2F;12&#x2F;20 15:18</span><br><span class="line"> * @description  XSS、SQL注入校验</span><br><span class="line"> *&#x2F;</span><br><span class="line">@WebFilter(urlPatterns &#x3D; &quot;&#x2F;*&quot;, filterName &#x3D; &quot;xxFilter&quot;)</span><br><span class="line">public class xxFilter implements Filter &#123;</span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException &#123;</span><br><span class="line">        ...</span><br><span class="line">        &#x2F;&#x2F;安全扫描问题（sql注入、xss）处理，对参数进行校验</span><br><span class="line">        securityScanParamsValidate(filterChain, response, request);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 安全扫描问题（sql注入、xss）处理，对参数进行校验</span><br><span class="line">     *</span><br><span class="line">     * @param filterChain</span><br><span class="line">     * @param response</span><br><span class="line">     * @param request</span><br><span class="line">     * @throws IOException</span><br><span class="line">     * @throws ServletException</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private void securityScanParamsValidate(final FilterChain filterChain, final HttpServletResponse response, final HttpServletRequest request) throws IOException, ServletException &#123;</span><br><span class="line">        final  String paramsAndValues &#x3D; SecurityScanUtil.extractPostRequestBody(request);</span><br><span class="line">        if (StringUtils.isEmpty(paramsAndValues)) &#123;</span><br><span class="line">            filterChain.doFilter(request, response);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            &#x2F;&#x2F;根据参数是否能转换为json，执行不同的校验</span><br><span class="line">            parseParamAndValidate(filterChain, response, request, paramsAndValues);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void parseParamAndValidate(final FilterChain filterChain, final HttpServletResponse response, final HttpServletRequest request, final String paramsAndValues) throws IOException, ServletException &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            final JSONObject paramsObj &#x3D; JSONObject.parseObject(paramsAndValues);</span><br><span class="line">            if (paramsObj.size() &#x3D;&#x3D; 0) &#123;</span><br><span class="line">                filterChain.doFilter(request, response);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                &#x2F;&#x2F;对参数进行拆分校验，只校验每个参数值</span><br><span class="line">                jsonParamValidate(filterChain, response, request, paramsAndValues);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125; catch (JSONException ex) &#123;</span><br><span class="line">            LOGGER.error(&quot;isJSONValid，不是有效的JSON字符串,&#123;&#125;&quot;, ex.getMessage());</span><br><span class="line">            &#x2F;&#x2F;参数不是合法地json格式则进行整句校验（不进行任何拆分）</span><br><span class="line">            notJsonParamValidate(filterChain, response, request, paramsAndValues);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 非json格式参数安全问题校验</span><br><span class="line">     *</span><br><span class="line">     * @param filterChain</span><br><span class="line">     * @param response</span><br><span class="line">     * @param request</span><br><span class="line">     * @param paramsAndValues</span><br><span class="line">     * @throws IOException</span><br><span class="line">     * @throws ServletException</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private void notJsonParamValidate(final FilterChain filterChain, final HttpServletResponse response, final HttpServletRequest request, final String paramsAndValues) throws IOException, ServletException &#123;</span><br><span class="line">        final String uri &#x3D; request.getRequestURI();</span><br><span class="line">        &#x2F;&#x2F; sql注入校验</span><br><span class="line">        if (SecurityScanUtil.execSqlInjectValidate(uri, NO_KEY, paramsAndValues)) &#123;</span><br><span class="line">            response.sendRedirect(SQL_INJECT_ERROR);</span><br><span class="line">        &#125; else if (XssUtil.xssMatcher(uri, NO_KEY, paramsAndValues)) &#123;</span><br><span class="line">            &#x2F;&#x2F;xss校验</span><br><span class="line">            response.sendRedirect(XSS_ERROR);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            filterChain.doFilter(request, response);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * json格式参数安全问题校验（sql注入、xss）</span><br><span class="line">     *</span><br><span class="line">     * @param filterChain</span><br><span class="line">     * @param response</span><br><span class="line">     * @param request</span><br><span class="line">     * @param paramsAndValues</span><br><span class="line">     * @throws IOException</span><br><span class="line">     * @throws ServletException</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private void jsonParamValidate(final FilterChain filterChain, final HttpServletResponse response, final HttpServletRequest request, final String paramsAndValues) throws IOException, ServletException &#123;</span><br><span class="line">        &#x2F;&#x2F;防sql注入校验</span><br><span class="line">        if (SecurityScanUtil.sqlInjectValidate(request.getRequestURI(), paramsAndValues)) &#123;</span><br><span class="line">            response.sendRedirect(SQL_INJECT_ERROR);</span><br><span class="line">        &#125; else if (SecurityScanUtil.xssValidate(request.getRequestURI(), paramsAndValues)) &#123;</span><br><span class="line">            &#x2F;&#x2F;xss校验</span><br><span class="line">            response.sendRedirect(XSS_ERROR);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            filterChain.doFilter(request, response);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void destroy() &#123;</span><br><span class="line">        LOGGER.info(&quot;destroy&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * </span><br><span class="line"> * @author Gamehu</span><br><span class="line"> * @description  Xss和Sql注入检查 工具类 </span><br><span class="line"> * @date 2019&#x2F;5&#x2F;10 9:54</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class SecurityScanUtil &#123;</span><br><span class="line">    private static final Logger LOGGER &#x3D; LoggerFactory.getLogger(SecurityScanUtil.class);</span><br><span class="line">    private static final String GRAPHQL &#x3D; &quot;graphql&quot;;</span><br><span class="line"></span><br><span class="line">    private SecurityScanUtil() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 单个参数的sql注入校验</span><br><span class="line">     *</span><br><span class="line">     * @param paramName</span><br><span class="line">     * @param value</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static String sqlInjectionValidate(final HttpServletRequest request, final String paramName, final String value) &#123;</span><br><span class="line">        if (StringUtils.isEmpty(value)) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;*</span><br><span class="line">         * 防sql注入，如果存在抛出校验异常</span><br><span class="line">         *&#x2F;</span><br><span class="line">        if (SqlInjectUtil.haveSqlInject(request.getRequestURI(), paramName, value)) &#123;</span><br><span class="line">            return &quot;sqlError&quot;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 读取输入流中参数</span><br><span class="line">     *</span><br><span class="line">     * @param request</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line"></span><br><span class="line">    public static String extractPostRequestBody(final HttpServletRequest request) &#123;</span><br><span class="line"></span><br><span class="line">        final Scanner s;</span><br><span class="line">        try &#123;</span><br><span class="line">            s &#x3D; new Scanner(request.getInputStream(), &quot;UTF-8&quot;).useDelimiter(&quot;\\A&quot;);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            throw RiilExceptionUtils.bizException(e, BaseWebErrorCode.SecurityConstant.INPUTSTREAM_ERROR, BaseWebErrorMsg.SecurityConstant.INPUTSTREAM_ERROR_MSG);</span><br><span class="line">        &#125;</span><br><span class="line">        return s.hasNext() ? s.next() : &quot;&quot;;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 效验sql注入问题</span><br><span class="line">     * &lt;h3&gt;SQL注入的几种方式：&lt;&#x2F;h3&gt;</span><br><span class="line">     * &lt;pre&gt;</span><br><span class="line">     * 1) 使用 &#39; or 语句，将查询条件扩大，实现破坏性查询（操作）</span><br><span class="line">     * 2) 使用 ; 将SQL分成两部分，在后面一部分实现破坏性操作</span><br><span class="line">     * 3) 使用注释，将后面的条件取消掉，将查询条件扩大，注意MySQL有三种注释的方法，都需要处理</span><br><span class="line">     *</span><br><span class="line">     * 为了简化处理，这里只考虑字符串类型参数注入情况（整型等其它类型在应用内部类型转换会失败，所以基本可以忽略）</span><br><span class="line">     * &lt;&#x2F;pre&gt;</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     * @throws IOException</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static boolean sqlInjectValidate(final String uri, final String paramsAndValues) &#123;</span><br><span class="line">        &#x2F;&#x2F;获取参数列表以及参数值</span><br><span class="line">        final JSONObject paramsObj &#x3D; JSONObject.parseObject(paramsAndValues);</span><br><span class="line">        final Set&lt;String&gt; keys &#x3D; paramsObj.keySet();</span><br><span class="line">        return keys.stream().anyMatch(key -&gt; haveSqlInjectCondition(uri, paramsObj, key));</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 判断是否存在sql注入的表达式</span><br><span class="line">     *</span><br><span class="line">     * @param uri</span><br><span class="line">     * @param paramsObj</span><br><span class="line">     * @param key</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private static Boolean haveSqlInjectCondition(final String uri, final JSONObject paramsObj, final String key) &#123;</span><br><span class="line">        &#x2F;&#x2F;graphql 不进行校验</span><br><span class="line">        if (key.equalsIgnoreCase(GRAPHQL)) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        final String value &#x3D; convertParamToString(paramsObj, key);</span><br><span class="line">        return SqlInjectUtil.haveSqlInject(uri, key, value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 效验XSS问题</span><br><span class="line">     *</span><br><span class="line">     * @param uri</span><br><span class="line">     * @param paramsAndValues</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static boolean xssValidate(final String uri, final String paramsAndValues) &#123;</span><br><span class="line">        &#x2F;&#x2F;获取参数列表以及参数值</span><br><span class="line">        final JSONObject paramsObj &#x3D; JSONObject.parseObject(paramsAndValues);</span><br><span class="line">        final Set&lt;String&gt; keys &#x3D; paramsObj.keySet();</span><br><span class="line">        return keys.stream().anyMatch(key -&gt; haveXssCondition(uri, paramsObj, key));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 判断是否存在xss的表达式</span><br><span class="line">     *</span><br><span class="line">     * @param uri</span><br><span class="line">     * @param paramsObj</span><br><span class="line">     * @param key</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private static boolean haveXssCondition(final String uri, final JSONObject paramsObj, final String key) &#123;</span><br><span class="line">        final String value &#x3D; convertParamToString(paramsObj, key);</span><br><span class="line">        &#x2F;&#x2F;判断是否存在xss攻击问题</span><br><span class="line">        return XssUtil.haveXss(value, key, uri);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 处理参数为字符串</span><br><span class="line">     *</span><br><span class="line">     * @param paramsObj</span><br><span class="line">     * @param key</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private static String convertParamToString(final JSONObject paramsObj, final String key) &#123;</span><br><span class="line">        final Object obj &#x3D; paramsObj.get(key);</span><br><span class="line"></span><br><span class="line">        String value &#x3D; null;</span><br><span class="line"></span><br><span class="line">        if (obj instanceof JSONObject) &#123;</span><br><span class="line">            value &#x3D; ((JSONObject) obj).toJSONString();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (obj instanceof JSONArray) &#123;</span><br><span class="line">            value &#x3D; ((JSONArray) obj).toJSONString();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (obj instanceof String) &#123;</span><br><span class="line">            value &#x3D; (String) obj;</span><br><span class="line">        &#125;</span><br><span class="line">        return value;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author Gamehu</span><br><span class="line"> * @date 2019&#x2F;9&#x2F;26 12:12</span><br><span class="line"> * @description XSS校验的工具类</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class XssUtil &#123;</span><br><span class="line">    private static final Logger LOGGER &#x3D; LoggerFactory.getLogger(XssUtil.class);</span><br><span class="line">    private static final String GRAPHQL &#x3D; &quot;graphql&quot;;</span><br><span class="line">    private static Pattern[] patterns &#x3D; new Pattern[]&#123;</span><br><span class="line">            &#x2F;&#x2F; Script fragments</span><br><span class="line">            Pattern.compile(&quot;&lt;script&gt;(.*?)&lt;&#x2F;script&gt;&quot;, Pattern.CASE_INSENSITIVE),</span><br><span class="line">            &#x2F;&#x2F; src&#x3D;&#39;...&#39;</span><br><span class="line">            Pattern.compile(&quot;src[\r\n]*&#x3D;[\r\n]*\\\&#39;(.*?)\\\&#39;&quot;, Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL),</span><br><span class="line">            Pattern.compile(&quot;src[\r\n]*&#x3D;[\r\n]*\\\&quot;(.*?)\\\&quot;&quot;, Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL),</span><br><span class="line">            &#x2F;&#x2F; lonely script tags</span><br><span class="line">            Pattern.compile(&quot;&lt;&#x2F;script&gt;&quot;, Pattern.CASE_INSENSITIVE),</span><br><span class="line">            Pattern.compile(&quot;&lt;script(.*?)&gt;&quot;, Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL),</span><br><span class="line">            &#x2F;&#x2F; eval(...)</span><br><span class="line">            Pattern.compile(&quot;eval\\((.*?)\\)&quot;, Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL),</span><br><span class="line">            &#x2F;&#x2F; expression(...)</span><br><span class="line">            Pattern.compile(&quot;expression\\((.*?)\\)&quot;, Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL),</span><br><span class="line">            &#x2F;&#x2F; javascript:...</span><br><span class="line">            Pattern.compile(&quot;javascript:&quot;, Pattern.CASE_INSENSITIVE),</span><br><span class="line">            &#x2F;&#x2F; vbscript:...</span><br><span class="line">            Pattern.compile(&quot;vbscript:&quot;, Pattern.CASE_INSENSITIVE),</span><br><span class="line">            &#x2F;&#x2F; onload(...)&#x3D;...</span><br><span class="line">            Pattern.compile(&quot;onload(.*?)&#x3D;&quot;, Pattern.CASE_INSENSITIVE | Pattern.MULTILINE | Pattern.DOTALL)</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 判断是否存在xss攻击</span><br><span class="line">     *</span><br><span class="line">     * @param value</span><br><span class="line">     * @param key</span><br><span class="line">     * @param uri</span><br><span class="line">     * @return true表示存在，false表示不存在</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static Boolean haveXss(final String value, final String key, final String uri) &#123;</span><br><span class="line">        if (key.equalsIgnoreCase(GRAPHQL)) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return xssMatcher(value, key, uri);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static boolean xssMatcher(final String value, final String key, final String uri) &#123;</span><br><span class="line">        if (StringUtils.isNotBlank(value)) &#123;</span><br><span class="line">            Matcher matcher;</span><br><span class="line">            for (Pattern pattern : patterns) &#123;</span><br><span class="line">                matcher &#x3D; pattern.matcher(value);</span><br><span class="line">                &#x2F;&#x2F; 匹配</span><br><span class="line">                if (matcher.find()) &#123;</span><br><span class="line">                    LOGGER.error(&quot;存在xss风险,URI：&#123;&#125;，参数：&#123;&#125;,参数值：&#123;&#125;&quot;, uri, key, value);</span><br><span class="line">                    return true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;**</span><br><span class="line"> * @author Gamehu</span><br><span class="line"> * @date 2019&#x2F;9&#x2F;26 12:12</span><br><span class="line"> * @description SQL注入校验的工具类</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class SqlInjectUtil &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * SQL语法检查正则：只检查一个关键字可能存在误判情况，这里要求必须符合两个关键字（有先后顺序）才算匹配</span><br><span class="line">     * 第一组关键字</span><br><span class="line">     *&#x2F;</span><br><span class="line">    final static String sqlInjectGroup &#x3D; &quot;select|update|and|or|delete|insert|trancate|char|into|substr|ascii|declare|exec|count|master|drop|execute&quot;;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 构造SQL语法检查正则</span><br><span class="line">     * (?i)忽略字母的大小写，\s.*空白+字符</span><br><span class="line">     *&#x2F;</span><br><span class="line">    final static Pattern sqlSyntaxPattern &#x3D; Pattern.compile(&quot;(?i)(.*)\\b(&quot; + sqlInjectGroup + &quot; )\\b\\s.*&quot;, Pattern.CASE_INSENSITIVE);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 读取输入流中参数</span><br><span class="line">     *</span><br><span class="line">     * @param request</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line"></span><br><span class="line">    public static String extractPostRequestBody(final HttpServletRequest request) &#123;</span><br><span class="line"></span><br><span class="line">        final Scanner s;</span><br><span class="line">        try &#123;</span><br><span class="line">            s &#x3D; new Scanner(request.getInputStream(), &quot;UTF-8&quot;).useDelimiter(&quot;\\A&quot;);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            throw RiilExceptionUtils.bizException(e, BaseWebErrorCode.SecurityConstant.INPUTSTREAM_ERROR, BaseWebErrorMsg.SecurityConstant.INPUTSTREAM_ERROR_MSG);</span><br><span class="line">        &#125;</span><br><span class="line">        return s.hasNext() ? s.next() : &quot;&quot;;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 执行SQL注入校验</span><br><span class="line">     *</span><br><span class="line">     * @param uri</span><br><span class="line">     * @param key</span><br><span class="line">     * @param oldValue</span><br><span class="line">     * @return</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static boolean haveSqlInject(final String uri, final String key, final String oldValue) &#123;</span><br><span class="line">        if (StringUtils.isNotBlank(oldValue)) &#123;</span><br><span class="line">            &#x2F;&#x2F;统一转为小写</span><br><span class="line">            final String newValue &#x3D; oldValue.toLowerCase();</span><br><span class="line">            final String logStr &#x3D; &quot;存在sql注入风险,URL：&#123;&#125;，参数：&#123;&#125;,参数值：&#123;&#125;&quot;;</span><br><span class="line">            &#x2F;&#x2F; 检查是否包含SQL注入敏感字符</span><br><span class="line">            if (sqlSyntaxPattern.matcher(newValue).find()) &#123;</span><br><span class="line">                LOGGER.error(logStr, uri, key, newValue);</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p> 因为我们用了graphql，有些地方还用了dsl，所以正则是魔鬼，我写崩溃了差点，当然如果有更好的方法请告诉我，万分感谢。</p>
-<p>长出一口气…..</p>
-<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/09/23/%E9%9A%BE%E5%BA%A6%E6%B2%9F%E9%80%9A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/23/%E9%9A%BE%E5%BA%A6%E6%B2%9F%E9%80%9A/" itemprop="url">高难度沟通</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-23T15:44:00+08:00">
-                2019-09-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index">
-                    <span itemprop="name">成长</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>高难度沟通发生的三个场景</p>
-<p>矛盾、争取、推进</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2304,7 +2204,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">121</span>
+                  <span class="site-state-item-count">126</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2326,7 +2226,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-count">87</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2978,7 +2878,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("Docker 一点点");titles.push("理解一个新事物的方法");titles.push("前端工程化");titles.push("斜杠");titles.push("延宕");titles.push("组织化人才管理的四大领域");titles.push("个人发展战略");titles.push("抉择");titles.push("XSS、SQL注入");titles.push("高难度沟通");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("Modules");titles.push("Root User in Ubuntu");titles.push("领导寄语");titles.push("SSO实践");titles.push("PostgreSQL(1)");titles.push("Docker 一点点");titles.push("理解一个新事物的方法");titles.push("前端工程化");titles.push("斜杠");titles.push("延宕");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {
