@@ -309,6 +309,197 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/03/22/React%20%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/22/React%20%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93/" itemprop="url">React 条件渲染</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-22T18:14:00+08:00">
+                2019-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>产品1.1时，有较大需求的调整，映射到代码则意味着很多功能需要改造或者新增，此时才发现前期由于只求快，代码的可维护性太差，导致要改造模块功能太麻烦，所以就想着边改造边对代码进行重构，一步步提升性能和可维护性。</p>
+<p>这个过程我顺便用Lighthouse跑了一下我们的页面，结果挺崩溃的。</p>
+<p>我相当不能接受这个结果，遂列出了优化行动项</p>
+<ol>
+<li>深入学习React<ol>
+<li>官网再详细看一遍</li>
+<li>极客时间上React学完</li>
+<li>medium.com上找对应的React、Redux文章</li>
+</ol>
+</li>
+<li>尽可能少的渲染<ol>
+<li>掌握react的条件渲染规则</li>
+<li>辨识什么情况下用Redux</li>
+<li>父子组件、公共组件的定义和搭配</li>
+</ol>
+</li>
+<li>code review<ol>
+<li>代码逻辑</li>
+<li>代码可维护性</li>
+<li>渲染次数</li>
+<li>第三方组件风险</li>
+</ol>
+</li>
+</ol>
+<h2 id="React的条件渲染"><a href="#React的条件渲染" class="headerlink" title="React的条件渲染"></a>React的条件渲染</h2><p><em>官方的文章说的很详细，我很舒服。</em></p>
+<p><a href="https://reactjs.org/docs/reconciliation.html" target="_blank" rel="noopener" title="Reconciliation">https://reactjs.org/docs/reconciliation.html</a></p>
+<p><em>这篇文章虽然老了点但是讲的通俗易懂，编于更深入的理解React的Reconciliation</em></p>
+<p><a href="https://tylermcginnis.com/react-elements-vs-react-components/" target="_blank" rel="noopener" title="React Elements vs React Components">https://tylermcginnis.com/react-elements-vs-react-components/</a></p>
+<p><strong>然后我们再谈怎么阻止多余的渲染</strong></p>
+<p>官方是这么说的：</p>
+<blockquote>
+<p>Preventing Component from Rendering<br>In rare cases you might want a component to hide itself even though it was rendered by another component. To do this return null instead of its render output.</p>
+</blockquote>
+<p>所以最简单的方式就是当不需要某个模块输出是那就return null，从而避免渲染;</p>
+<p>因为我们是React+Redux，梳理代码后得出如下有效技巧：</p>
+<ol>
+<li>子组件添加state判断</li>
+<li>合理记录state用于条件判断是否需要渲染</li>
+<li>为元素设置key，选择不会动态变化得作为key，比如id之类的，杜绝使用index</li>
+<li>必要的时候设置shouldComponentUpdate</li>
+<li>卸载组件后记住重置状态</li>
+<li>利用devtool调试并提升代码性能</li>
+</ol>
+<p>参考：</p>
+<blockquote><footer><strong>robinwieruch</strong><cite><a href="https://www.robinwieruch.de/conditional-rendering-react/" target="_blank" rel="noopener">All React Conditional Rendering Techniques</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>React</strong><cite><a href="https://reactjs.org/docs/faq-internals.html" target="_blank" rel="noopener">Virtual DOM and Internals</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>React</strong><cite><a href="https://reactjs.org/docs/conditional-rendering.html" target="_blank" rel="noopener">Conditional Rendering</a></cite></footer></blockquote>
+
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/03/18/%E5%89%8D%E7%AB%AF-%E9%80%9A%E7%94%A8%E5%B7%A5%E5%85%B7%E7%B1%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2042,152 +2233,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/10/13/%E7%BD%B2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/13/%E7%BD%B2/" itemprop="url">部署</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-13T12:11:00+08:00">
-                2018-10-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%83%A8%E7%BD%B2/" itemprop="url" rel="index">
-                    <span itemprop="name">部署</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>部署方案推敲以及评审，最好有PlanB。</p>
-<p>确认部署方案，相关人员和部门配合，进行演练</p>
-<p>记录部署问题，优化部署方案。</p>
-<p>现场部署，做好问题记录，拿回公司做分析和优化。</p>
-<p><strong>一定要考虑客户的生产环境，公司做好随时支援现场的准备。</strong></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2241,7 +2286,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">126</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2252,7 +2297,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2915,7 +2960,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("通用工具类");titles.push("git 分支规范");titles.push("中间件到底该不该用");titles.push("系统之美");titles.push("几个版本之后");titles.push("合代码de内心独白");titles.push("前端小总结一下");titles.push("2019年开始");titles.push("怎么让工作更加高效");titles.push("部署");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("React 条件渲染");titles.push("通用工具类");titles.push("git 分支规范");titles.push("中间件到底该不该用");titles.push("系统之美");titles.push("几个版本之后");titles.push("合代码de内心独白");titles.push("前端小总结一下");titles.push("2019年开始");titles.push("怎么让工作更加高效");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {

@@ -309,6 +309,171 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/11/21/nginx-docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Gamehu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/iron_man.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/11/21/nginx-docker/" itemprop="url">nginx-docker</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-11-21T11:12:00+08:00">
+                2020-11-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>由于事业部专门成立团队做部署平台，由于各种因素迟迟没有上线，以前的Jenkins也不能用了，但是前后端需要有环境进行联调，后端还好说每个模块本地起个服务就行，前端就尴尬了本地起服务限制太多，所以需要想办法搞个环境，遂想着悄悄咪咪（深藏功与名…）搞了个环境让大家能先跑起来不至于耽误工期。</p>
+<p>满足以下要求：</p>
+<ol>
+<li>前端更新简单</li>
+<li>无脑一条命令搞定start\stop\restart</li>
+<li>于生成环境尽量贴合</li>
+</ol>
+<h3 id="实操"><a href="#实操" class="headerlink" title="实操"></a>实操</h3><p>因为生成环境是基于docker做部署，所以先弄个nginx的镜像。nginx的镜像茫茫多，不过大体都很全面，我觉得太重，所以就弄了个最简单的。</p>
+<h4 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h4><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3.1'</span></span><br><span class="line"><span class="attr">web:</span></span><br><span class="line">  <span class="attr">my-nginx:</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">new-monitor-nginx</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">logging:</span></span><br><span class="line">      <span class="attr">driver:</span> <span class="string">"journald"</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/home/xxx/mount/nginx.conf:/etc/nginx/nginx.conf</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/home/xxx/mount/html:/etc/nginx/html</span></span><br><span class="line"> </span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="string">"443:443"</span></span><br><span class="line">    <span class="attr">network_mode:</span> <span class="string">"bridge"</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">TZ=Asia/Shanghai</span></span><br><span class="line">    <span class="attr">ulimits:</span></span><br><span class="line">      <span class="attr">core:</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 用官方的nginx镜像</span></span><br><span class="line">FROM nginx</span><br><span class="line"><span class="meta">#</span><span class="bash"> ENTRYPOINT 类似于 CMD 指令，但其不会被 docker run 的命令行参数指定的指令所覆盖，用于传参。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> eg:docker run  nginx:one -c /etc/nginx/new.conf,容器内会运行nginx -c /etc/nginx/new.conf</span></span><br><span class="line">ENTRYPOINT ["nginx", "-c"] </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">COPY 复制，从上下文目录中复制文件或者目录到容器里指定路径。</span></span><br><span class="line">COPY nginx.conf /etc/nginx/nginx.conf</span><br><span class="line">COPY html /etc/nginx/html</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> RUN，在 docker build时作用</span></span><br><span class="line">RUN rm /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> EXPOSE 声明端口，镜像服务的守护端口，以方便配置映射。</span></span><br><span class="line">EXPOSE 8088</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> VOLUME 用于挂载数据卷</span></span><br><span class="line">VOLUME /var/log/nginx/log</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">CMD 类似于 RUN 指令，在docker run 时运行。</span></span><br><span class="line">CMD ["nginx", "-g", "daemon off;"]</span><br></pre></td></tr></table></figure>
+
+<h4 id="构建、启动容器"><a href="#构建、启动容器" class="headerlink" title="构建、启动容器"></a>构建、启动容器</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker build -t xxx</span><br><span class="line">docker-compose down</span><br><span class="line">sleep 10</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>后续直接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart 容器名</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h3><p>其实最终我又把docker干掉了….因为有同事悄悄咪咪手动装了nginx，优化了一下把nginx挂到了系统服务上，同样的也是直接systemctl xxx就行了。</p>
+<p>反正结果是好的，结合alibaba toolkit也是玩的飞快了。</p>
+<p>干研发的不就得折腾吗，对吧。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/10/29/nodeJs-%E9%83%A8%E7%BD%B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2169,246 +2334,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/07/08/fusion%20design/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Gamehu">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/iron_man.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/07/08/fusion%20design/" itemprop="url">Fusion Design</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-07-08T15:45:00+08:00">
-                2020-07-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>因为团队要用fusion design，所以按我的习惯我得先知道他是什么、为什么、能做什么，我才好下手。</p>
-<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><p>先不负责任的下一个结论，fusion design是个撒子？</p>
-<p><strong>答案：</strong></p>
-<blockquote>
-<p><strong>一个平台：</strong> fusion.design</p>
-<p><strong>两个工具：</strong></p>
-<ol>
-<li>开发者工具 Iceworks </li>
-<li>设计师工具 FusionCool</li>
-</ol>
-</blockquote>
-<p>可以看作是下图这样纠缠：</p>
-<img src="/2020/07/08/fusion%20design/6.png" class>
-
-<h3 id="Fusion-Design"><a href="#Fusion-Design" class="headerlink" title="Fusion Design"></a>Fusion Design</h3><p>fusion design = 一套基础组件库 @alifd/next + 主题定制平台 <a href="https://fusion.design" target="_blank" rel="noopener">https://fusion.design</a> +  设计师工具 FusionCool+ 物料中心 。</p>
-<p>所以更确切的说 Fusion Design算是一套体系，是一种旨在提升设计与开发之间 UI 构建效率的工作方式 ，<code>我认为理解这点很重要</code>，不然可能咱们用半天还以为他就是另一个库就像我们之前用的antd一样，其实完全不是一回事。</p>
-<p><strong>Fusion Design能解决哪些痛点：</strong></p>
-<ol>
-<li><p>【协作成本】内部（UCD和研发）协作问题，不再需要因为对概念、规范、复用性等问题UCD和研发不断沟通。</p>
-</li>
-<li><p>用户体验一致性问题 ，不同业务功能或者不同迭代功能，同样功能的交互和组件用户体验不一致。</p>
-</li>
-<li><p>【时间成本】重复工作问题，比如不断的review还原度不断的修正、UCD每次都需要对高保真进行规范说明以及关键内容的标注。</p>
-</li>
-</ol>
-<p>   <em>旧模式如下图：</em>红框部分是我们经常重复的内容。</p>
-   <img src="/2020/07/08/fusion%20design/1.png" class title="https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;53117538">
-
-<p><strong>Fusion Design提供了哪些能力来解决上诉的痛点：</strong></p>
-<ul>
-<li><p>物料中心：各种组件、区块、模板（包含官方（Next等）+其它第三方+咱们自研的）</p>
-</li>
-<li><p>UI的可定制能力，设计师根据物料中心的内容定制UI，还可沉淀设计模板。</p>
-</li>
-<li><p>研发都能配合前端工具（iceworks等），开发模块模板更高效，沉淀业务模板，后续可直接套用模板不用再开发。</p>
-</li>
-<li><p>快速定制、切换主题。</p>
-</li>
-</ul>
-<p>  应用fusion design之后，产出过程应该就会像下图：</p>
-  <img src="/2020/07/08/fusion%20design/2.png" class title="fusion design应用">
-
-<p><strong>@alifd/next</strong> </p>
-<ul>
-<li><strong>Next</strong> 是基于 Alibaba Fusion Design 的设计理念实现的一套骨架DPL(Design Pattern Library)类似于咱们之前使用的antd。配合 fusion.design 使用可以实现换肤的能力。</li>
-<li>基于React的组件库。 可以理解<strong><a href="https://github.com/alibaba-fusion/next" target="_blank" rel="noopener">Next</a></strong>是fusion design的技术实现。</li>
-</ul>
-<h4 id="小结一下"><a href="#小结一下" class="headerlink" title="小结一下"></a>小结一下</h4><p>所以综上所述，引人fusion design后，理想状态下设计师和研发产出页面（功能）的过程应该会如下面两张图所示：</p>
-<img src="/2020/07/08/fusion%20design/5.png" class title="前期产出">
-
-<img src="/2020/07/08/fusion%20design/4.png" class title="后期沉淀">
-
-
-
-<h3 id="物料中心"><a href="#物料中心" class="headerlink" title="物料中心"></a>物料中心</h3><p>可以理解成一个仓库，类似maven仓库或者npm仓库，里面可包含用开发好的<strong>物料</strong>(区块、模板、组件)，该物料中心与sketch、iceworks是互通的，相互间可上传可下载。</p>
-<h3 id="FusionCool"><a href="#FusionCool" class="headerlink" title="FusionCool"></a>FusionCool</h3><p>FusionCool：组件分发工具，主要面向所有设计师。当组件构建者完成组件设计发布组件后，每位设计师手上的Fusion Cool都会“自动”接收到构建者的发布的组件样式，确保无缝衔接组件更新。</p>
-<p>FusionCool也可以简单理解为是设计端使用的<strong>sketch</strong> 插件，达到<strong>sketch</strong> 既能设计页面，又能沉淀已经设计完成的模板。即设计师使用的同一套规范的组件，产出的设计稿都是同一套规范。</p>
-<img src="/2020/07/08/fusion%20design/3.png" class>
-
-<h3 id="IceWorks"><a href="#IceWorks" class="headerlink" title="IceWorks"></a>IceWorks</h3><p>飞冰(ICE) 是一套基于 React 的中后台应用解决方案，ICE 包含了一条从设计端到开发端的完整链路，帮助用户快速搭建属于自己的中后台应用，开发者无须关注环境的问题，并且有海量物料可用。目前已经和 Fusion 的物料体系打通，可以轻松使用 Fusion 站点的物料。</p>
-<p>Iceworks 是淘宝飞冰团队开发的面向前端开发者的 GUI 工具，开发者无须关注环境的问题，并且有海量物料可用。目前已经和 Fusion 的物料体系打通，可以轻松使用 Fusion 站点的物料。</p>
-<p>fusion design的御用开发者工具，基于其开发各种组件丰富fusion design站点的<strong>物料中心</strong>，当然iceworks也能轻松使用 Fusion 站点的物料，两者互通。</p>
-<h3 id="总之"><a href="#总之" class="headerlink" title="总之"></a>总之</h3><p>我个人认为fusion design的价值在于提升工作效率，因为它改造了前端（设计师和研发）的工作方式，减少了重复工作的内容，减少了沟通以及甩锅的成本，通过fusion design这个平台，让设计师和研发都能深度参与产品中来且这种参与是互补共赢的，它让设计师和研发之间的一些壁垒或者冲突点慢慢的消失了。</p>
-<p><strong>另外</strong></p>
-<p>对于角色（设计、研发）来说：可能最大变化就是对于通用性的、沉淀下来的物料，<strong>UCD才是老板</strong>，这块的样式布局等需要UCD统一把关收口，研发只需要<strong>更新包</strong>就行。总体上就是UCD的工作内容会增加但是研发时间会减少，协作时间也会减少，同时体验一致性也能达到要求。我估计能达到这种状态应该就可以要自行车了吧？</p>
-<p>但是这玩意都是<strong>线上</strong>的，不知道能不能支持本地搭一套（如果不能搭是不是又不能要自行车了）？</p>
-<h4 id="题外篇：iceworks-server"><a href="#题外篇：iceworks-server" class="headerlink" title="题外篇：iceworks server"></a>题外篇：iceworks server</h4><p>如需使用iceworks提供的一些快捷能力，比如新建项目（基于fusion design、react、typescript）、项目管理等。</p>
-<p>用于练手刚好。</p>
-<h5 id="1-安装iceworks"><a href="#1-安装iceworks" class="headerlink" title="1.安装iceworks"></a>1.安装iceworks</h5><p>npm install iceworks -g –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="noopener">https://registry.npm.taobao.org</a></p>
-<p>每个命令大家都可以玩一玩，我下面只介绍<code>start</code>的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">D:\baymax_projects\fusion-design-one&gt;iceworks -h</span><br><span class="line">Usage: iceworks &lt;command&gt; [options]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -V, --version                           output the version number</span><br><span class="line">  -h, --help                              output usage information</span><br><span class="line"></span><br><span class="line">Commands:</span><br><span class="line">  start                                   start and open the iceworks</span><br><span class="line">  init [type] [npmName]                   init project&#x2F;material&#x2F;component by template</span><br><span class="line">  add [options] [materialType] [npmName]  add block to current directory</span><br><span class="line">  generate                                generate material collection data(material.json)</span><br><span class="line">  sync [options]                          sync materials data to Fusion Material Center</span><br><span class="line">  use &lt;version&gt;                           specify the iceworks-core version</span><br><span class="line">  config [type] [key] [value]             operate iceworks global config</span><br><span class="line"></span><br><span class="line">  Run iceworks &lt;command&gt; --help for detailed usage of given command.</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="2-启动-安装iceworks-server"><a href="#2-启动-安装iceworks-server" class="headerlink" title="2.启动 安装iceworks-server"></a>2.启动 安装iceworks-server</h5><p><strong>windows:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iceworks  start</span><br></pre></td></tr></table></figure>
-
-<p><strong>linux：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;sh</span><br><span class="line"># iceworks start</span><br><span class="line">iceworks # open http:&#x2F;&#x2F;localhost:8000&#x2F;</span><br></pre></td></tr></table></figure>
-
-<p>3.若提示是否安装iceworks-server 直接Enter 默认是 稍等几分钟 自动启动浏览器</p>
-<h4 id="iceworks-server使用方法"><a href="#iceworks-server使用方法" class="headerlink" title="iceworks server使用方法"></a>iceworks server使用方法</h4><p>1.打开项目,(首先你要有项目包)</p>
-<img src="/2020/07/08/fusion%20design/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_15942030658073.png" class>
-
-<p>2.安装依赖</p>
-<p>如果要切换cnpm源，设置包管理工具cnpm（前提是现状了cnpm），如不需要则跳过此步。</p>
-<p><img src="http://p.qlogo.cn/qqmail_head/Q3auHgzwzM71G0g4z5ytHZ3RnWFG6CQBymPLrJfcn3414aSmCt9kxE3rFpGUyE4mkZAq7swa9ddRWBBE9reucepYTnCFraPo/0" alt="img"></p>
-<p><img src="http://p.qlogo.cn/qqmail_head/Q3auHgzwzM6v4zGcvurETEGvaibCoKpJiaLYIXnT6IQWUwzHpr64y93qJYK3iapia65fAOSFz92XwKagfibU85Ru1xnrFib2YttvcT/0" alt="img"></p>
-<p>3.启动服务</p>
-<p>当然你也可以本地运行</p>
-<img src="/2020/07/08/fusion%20design/image-20200708181243032.png" class>
-
-<p>4.当页面变成这样说明已经启动成功:(会自动跳转到项目页面)</p>
-<img src="/2020/07/08/fusion%20design/image-20200708181842813.png" class>
-
-<p>5.打开编辑器</p>
-<p><img src="http://p.qlogo.cn/qqmail_head/PiajxSqBRaEJVGxo28SB3YVYmnPVIWRrzicm3k0lSgoDfAdpDEwwfic7xdf2CSLwkN5DhaickyISN8y7dXqyHflWnhxz8HiaR8EvG/0" alt="img"></p>
-<img src="/2020/07/08/fusion%20design/image-20200708181919865.png" class>
-
-<h4 id="感谢："><a href="#感谢：" class="headerlink" title="感谢："></a>感谢：</h4><blockquote><footer><strong>阿里中后台UI解决方案 - Fusion</strong><cite><a href="https://zhuanlan.zhihu.com/p/53117538" target="_blank" rel="noopener">zhuanlan.zhihu.com/p/53117538</a></cite></footer></blockquote>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2462,7 +2387,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">126</span>
+                  <span class="site-state-item-count">127</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2473,7 +2398,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -3136,7 +3061,7 @@
       else if (!isArchive && !isCategory && !isTag) { //is index page
         var titles = [] //array to titles
 
-        var postsstr = 'titles.push("nodeJs 部署");titles.push("DDD(1)");titles.push("拖延");titles.push("CMDB");titles.push("Ice.js单元测试");titles.push("前端安全");titles.push("前端测试");titles.push("Jest");titles.push("js工具库");titles.push("Fusion Design");' //if you have a better way to get titles of posts, please change it
+        var postsstr = 'titles.push("nginx-docker");titles.push("nodeJs 部署");titles.push("DDD(1)");titles.push("拖延");titles.push("CMDB");titles.push("Ice.js单元测试");titles.push("前端安全");titles.push("前端测试");titles.push("Jest");titles.push("js工具库");' //if you have a better way to get titles of posts, please change it
         eval(postsstr)
 
         var promises = titles.map(function (title) {

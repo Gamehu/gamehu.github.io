@@ -7225,4 +7225,28 @@ redux可以减少数据的传递，不用依次往下传，随用随取，特别
         <tag>监控</tag>
       </tags>
   </entry>
+  <entry>
+    <title>开源软件的版本</title>
+    <url>/2021/06/21/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%E7%9A%84%E7%89%88%E6%9C%AC/</url>
+    <content><![CDATA[<img src="/2021/06/21/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%E7%9A%84%E7%89%88%E6%9C%AC/a.jpg" class title="Photo by athree23 on Pixabay">
+
+<p><img src="/2021/06/21/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6%E7%9A%84%E7%89%88%E6%9C%AC/a.jpg" alt="你想输入的替代文字"></p>
+<p>这两天不是React 18[1] duang的一下炸了吗？刚好在了解的过程中看到了React工作组的发布计划[2]</p>
+<p>个人觉得是写的很清晰，把不同阶级的版本都进行了说明，在这儿简单说一下每种版本代号的含义。</p>
+<h3 id="Apha"><a href="#Apha" class="headerlink" title="Apha"></a>Apha</h3><p>内部测试版，主要是针对社区内部人员发布的。α是希腊字母的第一个，表示最早的版本，一般不建议下载这个版本，这个版本包含很多BUG，功能也不全，因为主要是给开发人员和测试人员测试和找BUG用的。</p>
+<h3 id="Beta"><a href="#Beta" class="headerlink" title="Beta"></a>Beta</h3><p>公开测试版。β是希腊字母的第二个，顾名思义，这个版本在alpha版之后，主要是给一些相关的社区以及忠实的用户测试用的，该版将包含最终版本的所有重大更改和新功能，但是仍然存在一些未发现的BUG，但是相对alpha版要稳定一些。所以还是为了收到反馈并发现任何遗留问题。</p>
+<p>如果是负责基础能力的代码大哥们，实在着急的可以开始使用这个版本，主要是测试一下新功能以及升级方面的问题，提前入场准备。</p>
+<h3 id="RC"><a href="#RC" class="headerlink" title="RC"></a>RC</h3><p>Release Candidate（候选版本），该版本不会再有新增的功能，所以是最接近最终版的版本。该版本的功能已经比较完整和稳定，rc的发布标志着最终版即将到来，rc主要是收集一下版本的稳定性以及用户满意度方面的数据。</p>
+<p>这个版本其实一般用户可以下场练手了。</p>
+<h3 id="Stable"><a href="#Stable" class="headerlink" title="Stable"></a>Stable</h3><p>稳定版。这个就是最终发行版，你可以在里面遨游了。</p>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><code>[1]</code> React 18 介绍: <em><a href="https://github.com/reactwg/react-18/discussions/4" target="_blank" rel="noopener">https://github.com/reactwg/react-18/discussions/4</a></em><br><code>[2]</code> react 18发布计划: <em><a href="https://github.com/reactwg/react-18/discussions/9" target="_blank" rel="noopener">https://github.com/reactwg/react-18/discussions/9</a></em></p>
+]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>前端</tag>
+        <tag>React</tag>
+      </tags>
+  </entry>
 </search>
