@@ -103,7 +103,7 @@
 <meta property="og:image" content="https://i2.wp.com/css-tricks.com/wp-content/uploads/2021/03/s_4B1C4D78EB4B7F4A9199BBB917690297400901EB2ABA2FEBF7F40167C51F9C2A_1615280252636_wallace-frame.png?resize=671%252C709&ssl=1">
 <meta property="og:image" content="https://i2.wp.com/css-tricks.com/wp-content/uploads/2021/03/s_4B1C4D78EB4B7F4A9199BBB917690297400901EB2ABA2FEBF7F40167C51F9C2A_1615280250407_csscss-frame.png?resize=671%252C709&ssl=1">
 <meta property="article:published_time" content="2021-04-26T02:58:00.000Z">
-<meta property="article:modified_time" content="2021-06-29T09:31:24.193Z">
+<meta property="article:modified_time" content="2021-06-30T03:09:33.828Z">
 <meta property="article:author" content="Gamehu">
 <meta property="article:tag" content="css">
 <meta property="article:tag" content="检查工具">
@@ -444,7 +444,7 @@
 <h5 id="CSS-Stats"><a href="#CSS-Stats" class="headerlink" title="CSS Stats"></a>CSS Stats</h5><p><a href="https://github.com/cssstats/cssstats" target="_blank" rel="noopener">CSS Stats</a> 是另一个为你的样式表提供分析和可视化的工具。事实上，Robin 在不久前写过关于它的<a href="https://css-tricks.com/a-quick-css-audit-and-general-notes-about-design-systems/" target="_blank" rel="noopener">文章</a>，并展示了他如何使用它来审核他工作中的样式表。<br>你需要做的就是输入网站的 URL，然后点击 Enter。这些信息被分割成有意义的部分，包括了样式的声明数、颜色、排版、z-index 和特定样式等等。同样，你可能要把截图存储起来，以备日后参考。<br><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2021/03/s_4B1C4D78EB4B7F4A9199BBB917690297400901EB2ABA2FEBF7F40167C51F9C2A_1615280657659_cssstats-frame.png?resize=1342%2C918&ssl=1" alt="img"></p>
 <h5 id="Project-Wallace"><a href="#Project-Wallace" class="headerlink" title="Project Wallace"></a>Project Wallace</h5><p><a href="https://www.projectwallace.com/analyze-css" target="_blank" rel="noopener">Project Wallace</a> 是由 Bart Veneman 开发的，而他已经在 CSS Tricks 上介绍了这个<a href="https://css-tricks.com/in-search-of-a-stack-that-monitors-the-quality-and-complexity-of-css/" target="_blank" rel="noopener">项目</a>。Project Wallace 的强大之处在于，它可以比较和可视化基于导入的变化。这意味着你可以看到你的 CSS 代码库以前的状态，并看到你的代码在不同状态之间的变化。我觉得这个功能相当有用，特别是当你想说服别人代码是改进过的。该工具对单个项目是免费的，并为更多项目提供付费计划。<br><img src="https://i1.wp.com/css-tricks.com/wp-content/uploads/2021/03/s_4B1C4D78EB4B7F4A9199BBB917690297400901EB2ABA2FEBF7F40167C51F9C2A_1615280724437_projectwallace-frame.png?resize=1342%2C918&ssl=1" alt="img"></p>
 <h4 id="CLI-工具"><a href="#CLI-工具" class="headerlink" title="CLI 工具"></a>CLI 工具</h4><p>除了 DevTools 和在线工具，还有命令行界面（CLI）工具可以帮助我们检查 CSS：</p>
-<h5 id="Wallace"><a href="#Wallace" class="headerlink" title="Wallace"></a>Wallace</h5><p>我最喜欢的 CLI 工具之一是<a href="https://github.com/bartveneman/wallace-cli" target="_blank" rel="noopener">Wallace</a>。安装后，输入wallace，然后输入网站名称，它就会自动输出显示了你需要知道的关于网站的 CSS 代码的一切。我最喜欢看的是 !important 的使用次数，以及代码中有多少个 ID。另一个整洁的信息是顶级特定样式的数量以及有多少选择器使用它。这些可能是 “坏” 代码的危险信号。<br>我最喜欢这个工具的地方是，它可以从网站中提取所有的 CSS 代码 —— 不仅是外部文件，还能够包括内联代码。这就是为什么 CSS Stats 和 Wallace 的报告不匹配的原因。<br><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2021/03/s_4B1C4D78EB4B7F4A9199BBB917690297400901EB2ABA2FEBF7F40167C51F9C2A_1615280252636_wallace-frame.png?resize=671%2C709&ssl=1" alt="img"></p>
+<h5 id="Wallace"><a href="#Wallace" class="headerlink" title="Wallace"></a>Wallace</h5><p>我最喜欢的 CLI 工具之一是<a href="https://github.com/bartveneman/wallace-cli" target="_blank" rel="noopener">Wallace</a>。安装后，输入wallace，然后输入网站名称，它就会自动输出显示了你需要知道的关于网站的 CSS 代码的一切。我最喜欢看的是 !important 的使用次数，以及代码中有多少个 ID。另一个信息是顶级特定样式的数量以及有多少选择器使用它。这些可能是 “坏” 代码的危险信号。<br>我最喜欢这个工具的地方是，它可以从网站中提取所有的 CSS 代码 —— 不仅是外部文件，还能够包括内联代码。这就是为什么 CSS Stats 和 Wallace 的报告不匹配的原因。<br><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2021/03/s_4B1C4D78EB4B7F4A9199BBB917690297400901EB2ABA2FEBF7F40167C51F9C2A_1615280252636_wallace-frame.png?resize=671%2C709&ssl=1" alt="img"></p>
 <h5 id="csscss"><a href="#csscss" class="headerlink" title="csscss"></a>csscss</h5><p>csscss CLI 工具可以显示哪些规则共享相同的声明，而这对于识别重复的代码和减少编写的代码量是很有用的。在这样做之前，我会三思而后行，因为这可能是不值得的，尤其是在今天的缓存机制下。值得一提的是，csscss 需要 Ruby 运行环境。<br><img src="https://i2.wp.com/css-tricks.com/wp-content/uploads/2021/03/s_4B1C4D78EB4B7F4A9199BBB917690297400901EB2ABA2FEBF7F40167C51F9C2A_1615280250407_csscss-frame.png?resize=671%2C709&ssl=1" alt="img"></p>
 <h4 id="其他有用的工具"><a href="#其他有用的工具" class="headerlink" title="其他有用的工具"></a>其他有用的工具</h4><ul>
 <li><a href="https://github.com/bartveneman/color-sorter" target="_blank" rel="noopener">Color Sorter</a> —  先按色调，再按饱和度对 CSS 颜色进行排序。</li>
@@ -457,7 +457,7 @@
 <h4 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h4><p>CSS在我们周围无处不在，我们需要将其视为每个项目的头等公民。 如果您的CSS井井有条且编写精良，那么您将花费更少的时间调试它，而将更多的时间用于开发新功能。 在理想的世界中，我们会训练每个人都编写出色的CSS，但这需要时间。</p>
 <p>今天是开始关心CSS代码的日子。</p>
 <p>我知道审核CSS对每个人都不会很有趣。 但是，如果您针对这些工具中的任何一个运行代码，并尝试甚至改善CSS代码库的一部分，那么这篇文章就完成了它的工作。</p>
-<p>最近，我越来越多地考虑CSS代码，并且试图使更多的开发人员更加尊重CSS代码。 我甚至开始了一个新项目<a href="http://css-auditors.com/" target="_blank" rel="noopener">css-auditors.com</a>（是连字符域名！），该项目专门用于审核CSS。</p>
+<p>最近，我越来越多地考虑CSS代码，并且试图使更多的开发人员更加尊重CSS代码。 我甚至开始了一个新项目<a href="http://css-auditors.com/" target="_blank" rel="noopener">css-auditors.com</a>，该项目专门用于审核CSS。</p>
 
       
     </div>
