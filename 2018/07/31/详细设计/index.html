@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/IMG_4038-32.jpeg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/IMG_4038.jpeg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"gamehu.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="首先为什么需要详设？   肯定有人会喷，现在都谈敏捷了，你那是瀑布那一套了，现在谁还弄详设，然后就被鄙视了。如果是这样我就想问下，什么是敏捷？什么时候应该敏捷？先回答好了这两个问题再BB，哥也是经历过敏捷的人，13年在一家做数字工厂的创业公司，被公司副总忽悠做项目经理，当时作为一个码农的我来说，本身比较迷茫感觉天天敲代码不是我要的，觉得白富美离我太远。所以就想做产品经理，憧憬做一个响当当的产品出来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="详细设计">
+<meta property="og:url" content="https://gamehu.github.io/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="正儿八经">
+<meta property="og:description" content="首先为什么需要详设？   肯定有人会喷，现在都谈敏捷了，你那是瀑布那一套了，现在谁还弄详设，然后就被鄙视了。如果是这样我就想问下，什么是敏捷？什么时候应该敏捷？先回答好了这两个问题再BB，哥也是经历过敏捷的人，13年在一家做数字工厂的创业公司，被公司副总忽悠做项目经理，当时作为一个码农的我来说，本身比较迷茫感觉天天敲代码不是我要的，觉得白富美离我太远。所以就想做产品经理，憧憬做一个响当当的产品出来">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gamehu.github.io/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/001.png">
+<meta property="og:image" content="https://gamehu.github.io/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/scrum_framework.png">
+<meta property="og:image" content="https://gamehu.github.io/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/002.png">
+<meta property="og:image" content="https://gamehu.github.io/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E8%AF%A6%E8%AE%BE%E6%A8%A1%E6%9D%BF.png">
+<meta property="og:image" content="https://gamehu.github.io/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/004.png">
+<meta property="og:image" content="https://gamehu.github.io/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/scrum.jpg">
+<meta property="article:published_time" content="2018-07-31T13:29:00.000Z">
+<meta property="article:modified_time" content="2019-03-14T11:47:10.000Z">
+<meta property="article:author" content="Gamehu">
+<meta property="article:tag" content="详设">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gamehu.github.io/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/001.png">
+
+
+<link rel="canonical" href="https://gamehu.github.io/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://gamehu.github.io/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/","path":"2018/07/31/详细设计/","title":"详细设计"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>详细设计 | 正儿八经</title>
+  
+
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">正儿八经</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">浪起来？</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-1%E7%89%88%E8%AF%A6%E8%AE%BE"><span class="nav-number">1.</span> <span class="nav-text">0.1版详设</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-2%E7%89%88%E8%AF%A6%E8%AE%BE"><span class="nav-number">2.</span> <span class="nav-text">0.2版详设</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A"><span class="nav-number">3.</span> <span class="nav-text">名词解释</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Gamehu"
+      src="/images/IMG_4038.jpeg">
+  <p class="site-author-name" itemprop="name">Gamehu</p>
+  <div class="site-description" itemprop="description">我还是我，看到自己都老火...</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">159</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">99</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/gamehu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gamehu" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:gamehu520@gmail.com" title="E-Mail → mailto:gamehu520@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/gamehu/gamehu.github.io" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="详细设计 | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          详细设计
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-07-31 21:29:00" itemprop="dateCreated datePublished" datetime="2018-07-31T21:29:00+08:00">2018-07-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2019-03-14 19:47:10" itemprop="dateModified" datetime="2019-03-14T19:47:10+08:00">2019-03-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">工程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>首先为什么需要详设？</p>
+<img src="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/001.png" class="" title="来源于我">
+
+<p>肯定有人会喷，现在都谈敏捷了，你那是瀑布那一套了，现在谁还弄详设，然后就被鄙视了。如果是这样我就想问下，什么是敏捷？什么时候应该敏捷？先回答好了这两个问题再BB，哥也是经历过敏捷的人，13年在一家做数字工厂的创业公司，被公司副总忽悠做项目经理，当时作为一个码农的我来说，本身比较迷茫感觉天天敲代码不是我要的，觉得白富美离我太远。所以就想做产品经理，憧憬做一个响当当的产品出来，享誉中国，当然我得解释一下，此产品经理不是被玩坏的那种UE产品经理，而是正儿八经的产品经理。刚好遇到此副总，跟我聊了后就看上我了，美其名曰看上我的才，觉得我有当产品经理的潜力，然后我就飘飘然的去了。去了之后就让我先从项目经理干起，这儿的项目经理只管项目（需求调研、文档编写、项目资源协调…）不管技术。副总当时推得就是敏捷，因为本身干的是传统行业，一开始都是瀑布过来的，副总觉得瀑布有很多问题，所以准备推敏捷，我当时也是第一次接触敏捷，所以老大丢给了我一堆书，其中一本我记得是叫《敏捷项目管理》的书，然后就让我抱着啃，也恬不知耻的跟着其它项目组体验了敏捷的落地…。那段时间是我悠闲、迷茫的时光，一开始用latex跟公司弄宣传册，然后跟项目，去鸟不拉屎的地方，夏天跟客户喝着“枝江”聊着需求，其实挺怀恋的…。</p>
+<img src="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/scrum_framework.png" class="" title="来源于scrum.org">
+
+<p> 扯远了，后来在现在的公司，公司又请人做了一次敏捷培训，内容其实跟我之前看的书差不多，只是里面有一个概念是我比较深刻的就是讲师说了一个词语叫“小瀑布”，大概意思就是取敏捷和瀑布的各一部分。为什么呢？就是因为传统的瀑布确实是太重周期太长了，而且对客户的要求高，因为瀑布都是白纸黑字写好合同定功能需求的。你想想客户如果没想好，那是不是就麻烦了。但是事实是往往客户是不可能百分百知道自己要什么的或者说不可能百分百描述清楚自己要什么的。这个时候敏捷就有优势了，敏捷在我看来其实就是工作理念的转变，讲求的是快速迭代，讲求用户参与，讲求跨职能，这样就能很大限度的避免走偏。</p>
+<img src="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/002.png" class="" title="来源于网络">
+
+<p> 小瀑布在我们团队是咋用的呢，主要包括：</p>
+<ol>
+<li>首先团队是跨职能的，需求、产品、测试、研发都同属于一个团队，且团队的目标是一致的。</li>
+<li>前期除了User Story，还会进行需求评审，会出UCD文档，研发会出详设。</li>
+<li>Daily Scrum不强制要求。</li>
+<li>没有Sprint Review</li>
+</ol>
+<p>为什么我们会这样是因为我们本身不是一家互联网企业，对快速响应要求没那么高，我们是一家传统的toB企业，有自己的产品，很少接项目做，有稳定的渠道，不过也存在瓶颈，在这样的情况下，做新产品，我们则采取了现在的小瀑布的形式。至少目前来讲是很适合的。</p>
+<p>ok，扯得有点多了，我们还是来说说详设。</p>
+<h2 id="0-1版详设"><a href="#0-1版详设" class="headerlink" title="0.1版详设"></a>0.1版详设</h2><p>因为之前的详设没有一个特别正式的模板，接着0.2功能迭代需要写详设，领导让我和另外一个同事整一个详设的样板出来，跟领导过了几次，搜集了一下意见，最终中心思想只有一个，让新旧研发、测试、技术大佬都能看明白。</p>
+<p>所以最终出的模板是这样滴：</p>
+<img src="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E8%AF%A6%E8%AE%BE%E6%A8%A1%E6%9D%BF.png" class="" title="0.1详设模板">
+
+<p>这个模板稍微复杂了一些，但是他的好处在于说明了上下文，说明了依赖项，说明了核心逻辑，所以基本上出来的东西大家都能看懂，也能而且能评估难度和工作量等。</p>
+<h2 id="0-2版详设"><a href="#0-2版详设" class="headerlink" title="0.2版详设"></a>0.2版详设</h2><p>这版详设是在产品0.3.3迭代后出现的修改，是在0.1基础上的一些精进，精进了依赖项和核心逻辑说明。</p>
+<ul>
+<li>0.2把外部依赖项单独拎出来，这样能更加清晰表述自己所需要的支持，并且让对方知道。</li>
+<li>0.2把核心逻辑也着重提出来，0.1核心逻辑更多在于文字描述和UML图，0.2的要求是用伪代码+UML的形式进行核心逻辑的说明，核心思想就是贴近代码让详设更加实用。</li>
+</ul>
+<img src="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/004.png" class="" title="0.2详设模块">
+
+
+<p><strong>详设最实用的地方</strong>：是为了让你思考更加缜密，并且获得反馈。</p>
+<p><strong>未来的期望：</strong></p>
+<p>当然这版详设也不是最终版，以后会持续精进，最终的目标是直接不要文档。</p>
+<p>甚至我们刚进的一个架构师提出的愿景是：全部用类似单元测试的代码+注释的形式写详设，详设是否存在问题，看单元测试是否通过，我觉得是很美好的…..路很长。</p>
+<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><p><strong>Sprint</strong></p>
+<blockquote>
+<p>可理解为一个迭代</p>
+</blockquote>
+<p><strong>Scrum</strong></p>
+<blockquote>
+<p>Scrum 可以理解成是一个框架，此框架让产品管理和工作技术的相对成效更加清晰地显现出来，以便您可以持续改进产品、团队和工作环境。</p>
+</blockquote>
+<img src="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/scrum.jpg" class="" title="来源于twitter">
+
+<p><strong>Daily Scrum</strong></p>
+<blockquote>
+<p>每日站会</p>
+</blockquote>
+<p><strong>User Story</strong></p>
+<blockquote>
+<p>用户故事，可以理解为一个场景或者一条需求。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div class="post-widgets">
+    <div class="likely">
+        <div class="twitter">Tweet</div>
+        <div class="facebook">Share</div>
+        <div class="linkedin">Link</div>
+        <div class="gplus">Plus</div>
+        <div class="vkontakte">Share</div>
+        <div class="odnoklassniki">Class</div>
+        <div class="telegram">Send</div>
+        <div class="whatsapp">Send</div>
+        <div class="pinterest">Pin</div>
+    </div>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.js"></script><div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+          <div class="post-tags">
+              <a href="/tags/%E8%AF%A6%E8%AE%BE/" rel="tag"># 详设</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/07/24/%E4%BD%A0%E5%A6%B9/" rel="prev" title="疫苗你妹">
+                  <i class="fa fa-chevron-left"></i> 疫苗你妹
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/08/01/Code%20Review/" rel="next" title="Code Review">
+                  Code Review <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gamehu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+</body>
+</html>
