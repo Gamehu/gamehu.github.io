@@ -169,7 +169,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">159</span>
+          <span class="site-state-item-count">164</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -180,7 +180,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">99</span>
+        <span class="site-state-item-count">102</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,6 +220,601 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">详细设计</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-07-31 21:29:00" itemprop="dateCreated datePublished" datetime="2018-07-31T21:29:00+08:00">2018-07-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2019-03-14 19:47:10" itemprop="dateModified" datetime="2019-03-14T19:47:10+08:00">2019-03-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">工程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>首先为什么需要详设？</p>
+<img src="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/001.png" class="" title="来源于我">
+
+<p>肯定有人会喷，现在都谈敏捷了，你那是瀑布那一套了，现在谁还弄详设，然后就被鄙视了。如果是这样我就想问下，什么是敏捷？什么时候应该敏捷？先回答好了这两个问题再BB，哥也是经历过敏捷的人，13年在一家做数字工厂的创业公司，被公司副总忽悠做项目经理，当时作为一个码农的我来说，本身比较迷茫感觉天天敲代码不是我要的，觉得白富美离我太远。所以就想做产品经理，憧憬做一个响当当的产品出来，享誉中国，当然我得解释一下，此产品经理不是被玩坏的那种UE产品经理，而是正儿八经的产品经理。刚好遇到此副总，跟我聊了后就看上我了，美其名曰看上我的才，觉得我有当产品经理的潜力，然后我就飘飘然的去了。去了之后就让我先从项目经理干起，这儿的项目经理只管项目（需求调研、文档编写、项目资源协调…）不管技术。副总当时推得就是敏捷，因为本身干的是传统行业，一开始都是瀑布过来的，副总觉得瀑布有很多问题，所以准备推敏捷，我当时也是第一次接触敏捷，所以老大丢给了我一堆书，其中一本我记得是叫《敏捷项目管理》的书，然后就让我抱着啃，也恬不知耻的跟着其它项目组体验了敏捷的落地…。那段时间是我悠闲、迷茫的时光，一开始用latex跟公司弄宣传册，然后跟项目，去鸟不拉屎的地方，夏天跟客户喝着“枝江”聊着需求，其实挺怀恋的…。</p>
+<img src="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/scrum_framework.png" class="" title="来源于scrum.org">
+
+<p> 扯远了，后来在现在的公司，公司又请人做了一次敏捷培训，内容其实跟我之前看的书差不多，只是里面有一个概念是我比较深刻的就是讲师说了一个词语叫“小瀑布”，大概意思就是取敏捷和瀑布的各一部分。为什么呢？就是因为传统的瀑布确实是太重周期太长了，而且对客户的要求高，因为瀑布都是白纸黑字写好合同定功能需求的。你想想客户如果没想好，那是不是就麻烦了。但是事实是往往客户是不可能百分百知道自己要什么的或者说不可能百分百描述清楚自己要什么的。这个时候敏捷就有优势了，敏捷在我看来其实就是工作理念的转变，讲求的是快速迭代，讲求用户参与，讲求跨职能，这样就能很大限度的避免走偏。</p>
+<img src="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/002.png" class="" title="来源于网络">
+
+<p> 小瀑布在我们团队是咋用的呢，主要包括：</p>
+<ol>
+<li>首先团队是跨职能的，需求、产品、测试、研发都同属于一个团队，且团队的目标是一致的。</li>
+<li>前期除了User Story，还会进行需求评审，会出UCD文档，研发会出详设。</li>
+<li>Daily Scrum不强制要求。</li>
+<li>没有Sprint Review</li>
+</ol>
+<p>为什么我们会这样是因为我们本身不是一家互联网企业，对快速响应要求没那么高，我们是一家传统的toB企业，有自己的产品，很少接项目做，有稳定的渠道，不过也存在瓶颈，在这样的情况下，做新产品，我们则采取了现在的小瀑布的形式。至少目前来讲是很适合的。</p>
+<p>ok，扯得有点多了，我们还是来说说详设。</p>
+<h2 id="0-1版详设"><a href="#0-1版详设" class="headerlink" title="0.1版详设"></a>0.1版详设</h2><p>因为之前的详设没有一个特别正式的模板，接着0.2功能迭代需要写详设，领导让我和另外一个同事整一个详设的样板出来，跟领导过了几次，搜集了一下意见，最终中心思想只有一个，让新旧研发、测试、技术大佬都能看明白。</p>
+<p>所以最终出的模板是这样滴：</p>
+<img src="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E8%AF%A6%E8%AE%BE%E6%A8%A1%E6%9D%BF.png" class="" title="0.1详设模板">
+
+<p>这个模板稍微复杂了一些，但是他的好处在于说明了上下文，说明了依赖项，说明了核心逻辑，所以基本上出来的东西大家都能看懂，也能而且能评估难度和工作量等。</p>
+<h2 id="0-2版详设"><a href="#0-2版详设" class="headerlink" title="0.2版详设"></a>0.2版详设</h2><p>这版详设是在产品0.3.3迭代后出现的修改，是在0.1基础上的一些精进，精进了依赖项和核心逻辑说明。</p>
+<ul>
+<li>0.2把外部依赖项单独拎出来，这样能更加清晰表述自己所需要的支持，并且让对方知道。</li>
+<li>0.2把核心逻辑也着重提出来，0.1核心逻辑更多在于文字描述和UML图，0.2的要求是用伪代码+UML的形式进行核心逻辑的说明，核心思想就是贴近代码让详设更加实用。</li>
+</ul>
+<img src="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/004.png" class="" title="0.2详设模块">
+
+
+<p><strong>详设最实用的地方</strong>：是为了让你思考更加缜密，并且获得反馈。</p>
+<p><strong>未来的期望：</strong></p>
+<p>当然这版详设也不是最终版，以后会持续精进，最终的目标是直接不要文档。</p>
+<p>甚至我们刚进的一个架构师提出的愿景是：全部用类似单元测试的代码+注释的形式写详设，详设是否存在问题，看单元测试是否通过，我觉得是很美好的…..路很长。</p>
+<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><p><strong>Sprint</strong></p>
+<blockquote>
+<p>可理解为一个迭代</p>
+</blockquote>
+<p><strong>Scrum</strong></p>
+<blockquote>
+<p>Scrum 可以理解成是一个框架，此框架让产品管理和工作技术的相对成效更加清晰地显现出来，以便您可以持续改进产品、团队和工作环境。</p>
+</blockquote>
+<img src="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/scrum.jpg" class="" title="来源于twitter">
+
+<p><strong>Daily Scrum</strong></p>
+<blockquote>
+<p>每日站会</p>
+</blockquote>
+<p><strong>User Story</strong></p>
+<blockquote>
+<p>用户故事，可以理解为一个场景或者一条需求。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/07/24/%E4%BD%A0%E5%A6%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/07/24/%E4%BD%A0%E5%A6%B9/" class="post-title-link" itemprop="url">疫苗你妹</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2018-07-24 09:46:00 / 修改时间：10:12:24" itemprop="dateCreated datePublished" datetime="2018-07-24T09:46:00+08:00">2018-07-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%BB%9A%E7%B2%97/" itemprop="url" rel="index"><span itemprop="name">滚粗</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>兽爷的《疫苗之王》原篇。做个保留，作为一名小女孩的爸爸，仅以此文诅咒他么的长生生物之类的不良商家以及背后的各种势力各种任务，滚你妈的祖宗十八代。诅咒他们得癌症了发现能治，然后吃药发现吃的是假药，然后就只有等死。气死老子了，一想到自己女儿就气不打一处来。</p>
+<img src="/2018/07/24/%E4%BD%A0%E5%A6%B9/yimiao01.jpg" class="" title="兽爷">
+
+<img src="/2018/07/24/%E4%BD%A0%E5%A6%B9/yimiao02.jpg" class="" title="兽爷">
+
+<img src="/2018/07/24/%E4%BD%A0%E5%A6%B9/yimiao03.jpg" class="" title="兽爷">
+
+<img src="/2018/07/24/%E4%BD%A0%E5%A6%B9/yimiao.jpg" class="" title="兽爷">
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/07/17/%E9%A1%B9%E7%9B%AE%E8%84%9A%E6%89%8B%E6%9E%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/07/17/%E9%A1%B9%E7%9B%AE%E8%84%9A%E6%89%8B%E6%9E%B6/" class="post-title-link" itemprop="url">项目脚手架</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-07-17 10:12:00" itemprop="dateCreated datePublished" datetime="2018-07-17T10:12:00+08:00">2018-07-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2019-03-02 22:45:00" itemprop="dateModified" datetime="2019-03-02T22:45:00+08:00">2019-03-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>之前在12-Factors时提过我们在搭一个脚手架，这篇简单介绍一下，老话说得好再丑也要出来吓人嘛。</p>
+<h2 id="项目模块"><a href="#项目模块" class="headerlink" title="项目模块"></a>项目模块</h2><p>项目模块是基于maven做的项目生成脚手架，基于此脚手架生成 maven 项目模块， 开发人员能快速的基于模版进行开发，减少前期熟悉开发框架时间。同时 也通过此模版来统一平台开发规范，实现工程能力提升，沉淀工程规范。</p>
+<img src="/2018/07/17/%E9%A1%B9%E7%9B%AE%E8%84%9A%E6%89%8B%E6%9E%B6/01.png" class="" title="脚手架生成的项目">
+
+<p><strong>结构说明</strong></p>
+<ul>
+<li><p>app-bom 工程依赖管理.</p>
+</li>
+<li><p>app-manager 工程胶合层，service 层通用能力下沉，复杂 dao 组合.</p>
+</li>
+<li><p>app-repository 数据操作层，与数据库进行交互.</p>
+</li>
+<li><p>app-rpc-api 服务向外暴露的 rpc api 接口.</p>
+</li>
+<li><p>app-service 服务业务逻辑实现.</p>
+</li>
+<li><p>app-web 服务 restful 接口.</p>
+</li>
+</ul>
+<h2 id="maven脚手架"><a href="#maven脚手架" class="headerlink" title="maven脚手架"></a>maven脚手架</h2><img src="/2018/07/17/%E9%A1%B9%E7%9B%AE%E8%84%9A%E6%89%8B%E6%9E%B6/01.png" class="" title="脚手架">
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/07/12/%E6%9D%83%E9%99%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/07/12/%E6%9D%83%E9%99%90/" class="post-title-link" itemprop="url">权限</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-07-12 15:08:00" itemprop="dateCreated datePublished" datetime="2018-07-12T15:08:00+08:00">2018-07-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2019-03-03 11:39:16" itemprop="dateModified" datetime="2019-03-03T11:39:16+08:00">2019-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>最近项目的0.2阶段需要加上权限功能，产品方给了一个需求文档，让我们参与共创。所以借此梳理梳理权限的东西。其实万变不离其宗，我觉得基本上权限设计都是基于RBAC模型来设计的。</p>
+<p>我认为的权限应该是分为两种：</p>
+<ul>
+<li>应用权限。也就是我们通常说的系统权限，比如用户、角色、权限等等。</li>
+<li>认证。通常说的是验证某个用户是否具有访问系统的权限，实现方案比如OAuth、OAuth2、Open API等等。</li>
+</ul>
+<p>权限复杂度的设计依业务场景而定，我是基本上做的都是toB，所以权限这块会相对复杂些。不同的toB系统权限设计肯定也不同。不过我觉得大体可以分为三种toB权限设计场景。私有云、私有云（对客户定制开发并部署在客户现场 的我也归为私有云）、混合云。当然我比较熟的是公有云和私有云的，混合云的我还没涉及到过，不过我觉得是混合云应该和公有云的权限设计比较接近。</p>
+<p>下图我参与过的某toB平台，我理解的权限设计。</p>
+<img src="/2018/07/12/%E6%9D%83%E9%99%90/01.png" class="" title="来源于我">
+
+<p>租户那块为什么单独标注呢，租户是一个比较大的概念，通常表名一个公司或者个人。</p>
+<img src="/2018/07/12/%E6%9D%83%E9%99%90/02.png" class="" title="来源于我">
+
+
+<p>下面是我另外参与的私有云项目的权限设计。</p>
+<img src="/2018/07/12/%E6%9D%83%E9%99%90/03.png" class="" title="来源于我">
+
+<p>这个权限你会发现有一个<strong>域</strong>的概念，是因为我们的客户是集团性质的客户，会有总公司、分公司、事业部等概念，因为每个分公司或者事业部大体上都是独立运营的，但是他们又是属于一个集团，所以我们出现了域的概念。一个域可以理解为一个公司或者事业部但是我们不强关联，域是扁平的增加了灵活性。还有一点需要注意在这儿部门（组织）是不纳入权限的，我们使用角色来控制，为什么还需要部门，是为了让角色更丰满，部门可为角色打上标签，客户也好理解。同时也减少了复杂性。</p>
+<h2 id="名称解释"><a href="#名称解释" class="headerlink" title="名称解释"></a>名称解释</h2><p><strong>资源</strong></p>
+<p>因为要打造的是一个APM系统，所以里面会涉及到CMDB，资源这个名称就是CMDB来的当然一般我们叫CI（具体一个配置项，也叫CI实例），要详细讲就要讲到CMDB了，要讲CMDB那就复杂了，不是一两篇能说清楚的，后面有机会我会试着讲讲我理解的CMDB和CMDB在我们系统是怎么定义以及怎么用的。</p>
+<p><strong>RBAC</strong></p>
+<p>基于<strong>角色</strong>的访问控制，所以你会发现这个模型能满足大多数的权限设计。至少我没见过没有角色这个概念的权限设计。</p>
+<p>google和博客说的更清楚</p>
+<blockquote><footer><strong>唐乐 | 支付这点事</strong><cite><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MjM5MTE1MDMxMg==&mid=2649242055&idx=1&sn=b930e768094212ff7b1739deb500424f&chksm=bea5604089d2e9564895eba2029967a1384c2cec3df6d2a34fbd8b1735a3aa6ca7dfcdf7bf99&mpshare=1&scene=23&srcid=0712Y6e8P4UOiFSrCwrNGcyC#rd">用户权限设计(RBAC)您熟悉吗?原理和思路全在本文</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>转</strong><cite><a target="_blank" rel="noopener" href="https://blog.csdn.net/yangwenxue_admin/article/details/73936803">权限系统与RBAC模型概述</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>Java高级架构师</strong><cite><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI2MjQyNTYyNA==&mid=2247483877&idx=1&sn=226bb46a563d1cc82416d8ae832ba2eb&chksm=ea4a1c92dd3d95845f1e4900c5be287a356f2d5c49f87a3d109dc811389a3def0e6a2c77029f&mpshare=1&scene=23&srcid=0712JgrTeiqegeVB2UTuAz63#rd">RBAC新解 - 基于资源的权限管理</a></cite></footer></blockquote>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/07/10/how-brower-work/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/07/10/how-brower-work/" class="post-title-link" itemprop="url">浏览器是怎样工作的</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-07-10 18:42:00" itemprop="dateCreated datePublished" datetime="2018-07-10T18:42:00+08:00">2018-07-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2020-02-24 11:09:56" itemprop="dateModified" datetime="2020-02-24T11:09:56+08:00">2020-02-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>干了一段时间前端，老想着什么时候能搞明白点什么。要搞明白点前端的东西，前端的技术五花八门的，顾不过来，既然顾不过来那就别顾了，找到他们的基石就对了。不管技术怎么变，最终都得在浏览器解析。所以我想着先搞清楚浏览器是咋工作的，可能会让我对前端没那么惊慌。</p>
+<p>一google找到了这个姐妹-<strong>Tali Garsiel</strong>，看到有好几篇文章都是基于她的文章来的。这姐姐人干了N多年的前端开发，看了各个开源浏览器的源码，用尽洪荒之力总结出了这篇文档<a target="_blank" rel="noopener" href="http://www.taligarsiel.com/Projects/howbrowserswork1.htm" title="how brower work">http://www.taligarsiel.com/Projects/howbrowserswork1.htm</a>。那我也厚颜无耻的用她写的文章作为了解浏览器的入门。虽然文章的年代比较老，但是浏览器的核心概念是不变的，这点从近年来大家的解读可以看出来。</p>
+<p>文章主要是针对开源或者部分开源的Chrome、Firefox、Safari。文章有很多章节，我就挑我喜欢的来说了。</p>
+<p><strong>The browser’s main functionality</strong></p>
+<p>这个章节我了解到一个很有意思的事情就是浏览器的界面，其实是没有任何规范或者说标准的，几大浏览器厂商你抄我我抄你最后大家就基本上长得一样了。比如都有地址栏，都有工具栏等等。</p>
+<p>所以浏览器基本上都有以下几大功能：</p>
+<ul>
+<li>用来输入 URI 的地址栏</li>
+<li>前进和后退按钮</li>
+<li>书签设置选项</li>
+<li>用于刷新和停止加载当前文档的刷新和停止按钮</li>
+<li>用于返回主页的主页按钮</li>
+</ul>
+<p><strong>The browser’s high level structure</strong></p>
+<p>这章节讲的是浏览器的主要结构。</p>
+<ul>
+<li><p>用户界面 包括地址栏、前进&#x2F;后退按钮、书签菜单等。除了浏览器主窗口显示的您请求的页面外，其他显示的各个部分都属于用户界面。</p>
+</li>
+<li><p>浏览器引擎 在用户界面和呈现引擎之间传送指令。</p>
+</li>
+<li><p>呈现引擎 负责显示请求的内容。如果请求的内容是 HTML，它就负责解析 HTML 和 CSS 内容，并将解析后的内容显示在屏幕上。</p>
+</li>
+<li><p>网络 用于网络调用，比如 HTTP 请求。其接口与平台无关，并为所有平台提供底层实现。</p>
+</li>
+<li><p>用户界面后端 用于绘制基本的窗口小部件，比如组合框和窗口。其公开了与平台无关的通用接口，而在底层使用操作系统的用户界面方法。</p>
+</li>
+<li><p>JavaScript 解释器。用于解析和执行 JavaScript 代码。</p>
+</li>
+<li><p>数据存储。这是持久层。浏览器需要在硬盘上保存各种数据，例如 Cookie。新的 HTML 规范 (HTML5) 定义了“网络数据库”，这是一个完整（但是轻便）的浏览器内数据库。</p>
+</li>
+</ul>
+<img src="/2018/07/10/how-brower-work/structure.png" class="" title="来源于https:&#x2F;&#x2F;codeburst.io&#x2F;how-browsers-work-6350a4234634">
+
+<p>这几个组件中，最主要的或者说前端开发最应该关注的就是呈现引擎了，你想嘛，你做的everything最终不就是为了让浏览器把你想要的效果呈现给用户么，呈现引擎就是干这个事的。</p>
+<p>这个地方可能需要注意一下，可能会有疑惑为什么javascript单独拎出来了，请注意啊，javascript它最初的作用就是操作dom，从而实现一些动态效果而发明的。所以它本身是不能直接作为呈现给用户的，需要一个编译执行的过程，所以不属于呈现引擎的组成部分。当前现在javascript不仅用于前端开发了，后端也常常作为某种函数脚本的存在，比如java8以后的MapReduce可运行对应格式的js脚本、java的mango客户端也能用js脚本…</p>
+<p>呈现引擎先主要有两种一种是Firefox 的<strong>Gecko</strong>，这是 Mozilla 公司“自制”的呈现引擎。而 Safari 和 Chrome 浏览器使用的都是 <strong>WebKit</strong>。不管是哪一种引擎都是为了让浏览器能更好更多的支持内容的呈现。虽然现在浏览器能呈现的内容远远不止HTML+CSS，但是主要的还是对html和css进行解析呈现。</p>
+<p>如图所示，呈现引擎一开始通过网络组件请求需要呈现的文档内容，拿到内容后开始解析，首先解析html，把html分割成大量的标记（标签），进而把每个标记转化为一颗dom tree上的节点，同时解析css样式，并和dom tree转换为另一种树：Render Tree（该树包含有多个视觉属性的矩形，并存在排列顺序）。</p>
+<p>接着根据<strong>Render Tree</strong>进行布局，因为呈现树上包含有视觉属性以及顺序，所以可以为呈现树里各个节点（矩形）分配坐标。</p>
+<p>分配好坐标以后由另一个组件<strong>用户界面后端</strong>进行树的绘制。最终呈现给用户。Gecko，WebKit略有不同但是总体的流程是一样的。</p>
+<img src="/2018/07/10/how-brower-work/parser.png" class="" title="来源于我">
+
+<p>整个过程是渐进的过程，浏览器不会等着所有html文档都解析完再呈现，而是解析过程中就开始构建呈现树和设置布局。在不断接收和处理来自网络的其余内容的同时，呈现引擎会将部分内容解析并显示出来。</p>
+<blockquote>
+<p>专业解释：HTML 经过解析生成 DOM Tree；而在 CSS 解析完毕后，需要将解析的结果与 DOM Tree 的内容一起进行分析建立一棵 Render Tree（呈现树），最终用来进行绘图。Render Tree 中的元素与 DOM 元素相对应，但非一一对应：一个 DOM 元素可能会对应多个 renderer，如文本折行后，不同的「行」会成为 render tree 种不同的 renderer。也有的 DOM 元素被 Render Tree 完全无视，比如 display:none 的元素。</p>
+</blockquote>
+<img src="/2018/07/10/how-brower-work/attachment.png" class="" title="Attachment(对上眼) | 来源于我和网络">
+
+
+<p>这儿需要注意的是，html的解析是正向的从上到下（从左到右）的（从根节点开始），而css是逆向的从下到上（从右到左）的。为什么html是从上到下的，这个很好理解，你想想html解析后是一棵树，你想想树的构成肯定是先有个主干然后再有分叉，这样才是一个整体，不然不就是一盘散货么。那css为什么就一定要从下到上呢，通过下面的叙述你会知道如果css也采取从上到下的顺序，那dom tree和style rules两个需要对上眼的消耗是很大的（因为通常dom节点多，css样式也多）,从概率上来讲逆向匹配的概率是远远高于正向匹配的概率的。</p>
+<blockquote>
+<p>专业解释：在建立 Render Tree 时， DOM Tree 中的元素需要根据 CSS 的解析结果（Style Rules）来确定生成怎样的 renderer。对于每个 DOM 元素，必须在所有 Style Rules 中找到符合的 selector 并将对应的规则进行合并。选择器的「解析」实际是在这里执行的，在遍历 DOM Tree 时，从 Style Rules 中去寻找对应的 selector。</p>
+</blockquote>
+<blockquote>
+<p>如果<strong>正向解析</strong>，例如「div div p em」，我们首先就要检查当前元素到 html 的整条路径，找到最上层的 div，再往下找，如果遇到不匹配就必须回到最上层那个 div，往下再去匹配选择器中的第一个 div，回溯若干次才能确定匹配与否，效率很低。</p>
+<p><strong>逆向匹配</strong>则不同，如果当前的 DOM 元素是 div，而不是 selector 最后的 em，那只要一步就能排除。只有在匹配时，才会不断向上找父节点进行验证。其实更深入的理解需要深入了解Html Parser和css Parser的工作过程。</p>
+</blockquote>
+<img src="/2018/07/10/how-brower-work/render-engine.png" class="" title="来源于https:&#x2F;&#x2F;codeburst.io&#x2F;how-browsers-work-6350a4234634">
+
+
+
+<p>关键字解释：</p>
+<p><strong>style rules</strong></p>
+<img src="/2018/07/10/how-brower-work/style-rule.png" class="" title="来源于https:&#x2F;&#x2F;blog.csdn.net&#x2F;li_jiayu&#x2F;article&#x2F;details&#x2F;5123727">
+
+
+
+<p>源引：</p>
+<blockquote><footer><strong>By Tali Garsiel and Paul Irish</strong><cite><a target="_blank" rel="noopener" href="https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/#The_browsers_we_will_talk_about">浏览器的工作原理：新式网络浏览器幕后揭秘</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>Yongsheng</strong><cite><a target="_blank" rel="noopener" href="https://blog.csdn.net/milado_nju/article/details/7685517">理解WebKit和Chromium: WebKit的CSS实现</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>liumf2005</strong><cite><a target="_blank" rel="noopener" href="https://blog.csdn.net/liumf2005/article/details/8663887">Webkit CSS引擎分析</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>奇舞周刊mp</strong><cite><a target="_blank" rel="noopener" href="https://blog.csdn.net/liumf2005/article/details/8663887">几张图带你揭秘一个超快的 CSS 引擎</a></cite></footer></blockquote>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -877,451 +1472,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/06/28/%E8%81%94%E7%B3%BB%E5%92%8C%E5%BC%B1%E8%81%94%E7%B3%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-      <meta itemprop="description" content="我还是我，看到自己都老火...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/06/28/%E8%81%94%E7%B3%BB%E5%92%8C%E5%BC%B1%E8%81%94%E7%B3%BB/" class="post-title-link" itemprop="url">强联系和弱联系</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2018-06-28 10:57:00 / 修改时间：14:24:16" itemprop="dateCreated datePublished" datetime="2018-06-28T10:57:00+08:00">2018-06-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%BB%E4%B9%A6/" itemprop="url" rel="index"><span itemprop="name">读书</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>早上地铁上啃kindle里的<strong>万万没想到</strong>，里面有个小结讲的是<strong>穷人</strong>和富人的人脉结构。为什么穷人加粗，因为我就是穷人。</p>
-<p>里面有两个词语我比较深刻，<strong>强联系</strong> <strong>弱联系</strong>。</p>
-<p>所谓强联系其实就是讲的是平时跟你比较近的人，当然反之平时不怎么联系甚至没见过面的则为弱联系。通常我们都愿意跟强联系的人一起做事，因为熟。但是文章里面讲到外国友人做了几个相关的实验，恰恰证明其实真正能帮到你的很多时候是弱联系的人。<em><strong>因为他们有个共同的特点就是不在你当前的社交圈内</strong></em>。这一点很重要，因为强联系的人经常混在一起，你们的想法或者做的事都差不多，所以发现不了什么新的东西。然而弱联系的意义就是把不同的社交圈子连接在一起，从圈外跟你提供有用的信息。所以人脉的关键不在于你融入了哪个圈子，而在于你能接触多少圈外的人。后面还讲了其它几个实验，得出的结论就是，虽然咱们都重视强联系，但是人们的大部分知识还是来源于弱联系。其实很好理解，因为强联系的人愿意跟我们交流我们也经常交流，话多了当然就没什么新意了。</p>
-<p>还有个观点，文章是单独拿出来说的，就是别跟熟人合伙。这个其实对中国人来说尤其困难，包括我，里面说到的一点我是很认同的就是创新能力，跟熟人搭伙，创新能力肯定是没有跟弱联系搭伙强的。熟了很多东西反而有限制。</p>
-<p>文章实验指出，富人越容易跟不同阶层和不同地区的人联络，而且阶层多样性比地区多样性更重要。虽然富人爱跟各种人联系，但是真正说话的时间比穷人的短。所以知道了吧，要致富先得学会别强依赖，强联系的亲朋好友，得学会接触新的圈子。其实就是信息的传递，通过弱联系，有用的有启发的肯定会比强联系的多，你想想，强联系的才几个人，弱联系的又有多少，就算按比例弱联系也是完胜嘛。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/06/27/%E4%B8%89%E5%A4%A7%E4%B8%BB%E4%B9%89%E8%A6%81%E4%B8%8D%E5%BE%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-      <meta itemprop="description" content="我还是我，看到自己都老火...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/06/27/%E4%B8%89%E5%A4%A7%E4%B8%BB%E4%B9%89%E8%A6%81%E4%B8%8D%E5%BE%97/" class="post-title-link" itemprop="url">三大主义要不得</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2018-06-27 16:11:00 / 修改时间：16:46:48" itemprop="dateCreated datePublished" datetime="2018-06-27T16:11:00+08:00">2018-06-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%81%8C%E5%9C%BA/" itemprop="url" rel="index"><span itemprop="name">职场</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>一天看冯大的文章，里面有个词语叫 <strong>本位主义</strong>，知识渊博的我，不得不去百度一下，看看到底啥意思。然后竟然有意外收获，还找到了其它两个主义，感觉挺有用的，做个记录，告诫自己！</p>
-<p>三大主义分别为：</p>
-<ul>
-<li>本位主义</li>
-<li>老大主义</li>
-<li>怨职主义</li>
-</ul>
-<h2 id="本位主义"><a href="#本位主义" class="headerlink" title="本位主义"></a>本位主义</h2><p>指在处理单位与部门、整体与部分之间的关系时只顾自己，而不顾整体利益，对别部、别地、别人漠不关心的思想作风或行为态度和心理状态。</p>
-<p>这种主义是我见过最多的，基本上呆过的公司都存在这种人才，营销尤盛。这种人其实我是很不喜欢的，因为我太无私了，哈哈！没有其实我也顾自己，但是我不只顾自己，我是正儿八经的为大家放弃小家的那种革命人士，只要公司或者领导没有对我不仁我绝对是把公司、领导的利益放在我前面的。好了夸了自己半天，说回正题。本位主义的人他们有个优势，就是通常他们的kpi都是比较不错的，至于原因你想想kpi的重点不就是考核个人么，只为个人，能不kpi好么。幸好我做的是技术岗，通常这类人很少在身边。</p>
-<h2 id="老大主义"><a href="#老大主义" class="headerlink" title="老大主义"></a>老大主义</h2><p>老大主义为特权主义、目中无人、不知天高地厚，总感觉自己现在已经是天下第一，殊不知天外有天人外有人。</p>
-<p>这类人 是我敬仰的一批人，对他们来说没有所谓的雨天，能装逼天天是晴天。这种人也遇到过，国企尤盛，之前在国企待过一段时间，天天看他们装逼，是在看不下去然后就走了。有两把刷子你在装逼呗。千万不能成为这种人，幸好我看了看镜子中的自己，没有这份潜力，我就安心了。主要是太低调。</p>
-<h2 id="怨职主义"><a href="#怨职主义" class="headerlink" title="怨职主义"></a>怨职主义</h2><p>怨职主义就是公司某些员工天天抱怨公司不好、产品不好、待遇不好，整天怨天尤人，总认为自己的这份工作干不干无所谓，从不考虑自己是否对这份工作做专、做精、做透、做熟的一种现象。</p>
-<p>这类人应该是比较普遍，我也偶有这样的情绪，因为总避免不了遇见傻逼，当然也可能是我看你是傻逼，你看我也是傻逼。我一度自己思考过为什么会抱怨，后来总结了一下主要是两点，一点是不公，另一点是遇见了傻逼队友。现在的我很少抱怨了，因为我发现首先不公是到处存在的，要想天平往你这边倾一点那你就创造更大的价值，说起来俗，但最后其实就是看这个。另一个你不能避免遇到傻逼队友，你知道吧，生活就是这样，哪来一帆风顺，你想想西游记没了猪八戒，你能想象么。而且一个人负能量不能太多，多了容易长皱纹。</p>
-<p><em><strong>要以此为戒，做一个三无主义的好青年。</strong></em></p>
-<p>定义参考：</p>
-<blockquote><footer><strong>阿里|以商会友</strong><cite><a target="_blank" rel="noopener" href="https://club.1688.com/threadview/48868412.html">企业中的三个“陷阱”</a></cite></footer></blockquote>
-<blockquote><footer><strong>百度百科</strong><cite><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%9C%AC%E4%BD%8D%E4%B8%BB%E4%B9%89/757058?fr=aladdin">本位主义</a></cite></footer></blockquote>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/06/27/OKR/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-      <meta itemprop="description" content="我还是我，看到自己都老火...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/06/27/OKR/" class="post-title-link" itemprop="url">OKR</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-06-27 15:23:00" itemprop="dateCreated datePublished" datetime="2018-06-27T15:23:00+08:00">2018-06-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2019-03-04 18:16:26" itemprop="dateModified" datetime="2019-03-04T18:16:26+08:00">2019-03-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%81%8C%E5%9C%BA/" itemprop="url" rel="index"><span itemprop="name">职场</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>事业部老大从17年开始就在推OKR，以前都是说KPI，所以我想知道OKR又是个啥，以此文章做个记录。</p>
-<h1 id="什么是OKR体系？"><a href="#什么是OKR体系？" class="headerlink" title="什么是OKR体系？"></a>什么是OKR体系？</h1><p>OKR体系的全称是Objectives &amp; Key Results，即目标与关键成果。所谓OKR，O &#x3D; Objective 可以理解为企业目标，KR ＝Key Results 可以理解为关键成果。浓缩在一起就是“为确保达成企业目标的关键成果分解与实施”。</p>
-<img src="/2018/06/27/OKR/kpi1.png" class="">
-
-
-<h2 id="二、OKR与KPI的区别"><a href="#二、OKR与KPI的区别" class="headerlink" title="二、OKR与KPI的区别"></a>二、OKR与KPI的区别</h2><p>如果要说 OKR 和 KPI 的区别，区别就在于 KPI 只能让驴使劲走，而 OKR 用于保证驴头朝正确的方向，有些驴拼命想往前走，不希望落后于别人，这时候 OKR 用于帮助驴少走曲线。</p>
-<p>OKR考核：“我要做的事”，KPI考核：“要我做的事”，理解不同，但二者都强调有目标,同时也需要有执行力。OKR的思路是先制定目标，然后明确目标的结果，再对结果进行量化，最后考核完成情况。KPI 的思路也是先确定组织目标，然后对组织目标进行分解直到个人目标，然后对个人目标进行量化</p>
-<img src="/2018/06/27/OKR/ORK-KPI2.jpg" class="">
-
-<img src="/2018/06/27/OKR/kpi3.jpg" class="">
-
-<p>解释来源于：<blockquote><footer><strong>真人才</strong><cite><a target="_blank" rel="noopener" href="http://www.zhenrencai.cn/OKRCase3">OKR管理体系的基本框架</a></cite></footer></blockquote></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-      <meta itemprop="description" content="我还是我，看到自己都老火...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/" class="post-title-link" itemprop="url">Dubbo讲究(一)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-06-26 11:37:10" itemprop="dateCreated datePublished" datetime="2018-06-26T11:37:10+08:00">2018-06-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2020-01-12 18:54:28" itemprop="dateModified" datetime="2020-01-12T18:54:28+08:00">2020-01-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">中间件</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>第一次接触dubbo好像是在14年吧，13年参加工作时，在一家半国企，当时他们用的是axis2，当时那一堆代码+XML，让我怀疑是否应该继续干IT，觉得太难用了。后来接触了dubbo，觉得这玩意好，省了很多事，感概开源的力量和大公司的体量。用起来真实很通畅。</p>
-<p>当然我们公司也没有作妖，非要选个与众不同所以还是选了dubbo作为服务之间的通信框架。</p>
-<p>我这儿也不做什么源码解析了，比我专业的细致的网上很多，我主要解析一下我在用dubbo过程中遇到的问题相关的源码。比如今天讲的就是dubbo的异常机制、序列化协议hession相关的源码。</p>
-<p>问题起因在于我们系统中定义了自己的一套异常处理机制，有个自定义异常</p>
-<img src="/2018/06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error.png" class="" title="异常堆栈信息">
-
-<p>图中的ApiException是我们定义的针对接口异常的异常类，长成下图这样。</p>
-<img src="/2018/06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error01.png" class="" title="ApiException">
-
-<p>红框的部分是这次发生问题之后加的一个构造参数，加完之后就搞定了。那为什么呢？我们跟着异常信息我们知道是dubbo用的hession那块反序列化报了异常，跟下源码看下。</p>
-<ul>
-<li>我们找到JavaDeserializer的instantiate方法，找到_constructor，发现是个Constructor，找到赋值地方，在JavaDeserializer实例化时赋值，进入JavaDeserializer构造方法，根据赋值代码，并且因为我们的ApiException是不知一个构造函数的所以_constructor肯定不会为null,所以</li>
-</ul>
-<img src="/2018/06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error02.png" class="" title="xxx could not be instantiated">
-
-<pre><code>    public JavaDeserializer(Class cl) &#123;
-    	this._type = cl;
-        this._fieldMap = this.getFieldMap(cl);
-        this._readResolve = this.getReadResolve(cl);
-        if (this._readResolve != null) &#123;
-            this._readResolve.setAccessible(true);
-        &#125;
-
-        Constructor[] constructors = cl.getDeclaredConstructors();
-        long bestCost = 9223372036854775807L;
-
-        for(int i = 0; i &lt; constructors.length; ++i) &#123;
-            Class[] param = constructors[i].getParameterTypes();
-            long cost = 0L;
-
-            for(int j = 0; j &lt; param.length; ++j) &#123;
-                cost = 4L * cost;
-                if (Object.class.equals(param[j])) &#123;
-                    ++cost;
-                &#125; else if (String.class.equals(param[j])) &#123;
-                    cost += 2L;
-                &#125; else if (Integer.TYPE.equals(param[j])) &#123;
-                    cost += 3L;
-                &#125; else if (Long.TYPE.equals(param[j])) &#123;
-                    cost += 4L;
-                &#125; else if (param[j].isPrimitive()) &#123;
-                    cost += 5L;
-                &#125; else &#123;
-                    cost += 6L;
-                &#125;
-            &#125;
-
-            if (cost &lt; 0L || cost &gt; 65536L) &#123;
-                cost = 65536L;
-            &#125;
-
-            cost += (long)param.length &lt;&lt; 48;
-            if (cost &lt; bestCost) &#123;
-                this._constructor = constructors[i];
-                bestCost = cost;
-            &#125;
-        &#125;
-
-        if (this._constructor != null) &#123;
-            this._constructor.setAccessible(true);
-            Class[] params = this._constructor.getParameterTypes();
-            this._constructorArgs = new Object[params.length];
-
-            for(int i = 0; i &lt; params.length; ++i) &#123;
-                this._constructorArgs[i] = getParamArg(params[i]);
-            &#125;
-        &#125;
-
-    &#125;
-</code></pre>
-<p>根据下面这段代码，从JavaDeserializer的构造方法中可以看出，这里_constructor会被赋予参数最少的那个构造器，即找到ApiException一个参数的构造方法 public ApiException(Throwable cause)，</p>
-<img src="/2018/06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error04.png" class="" title="xxx">
-
-<p>有根据下面这段代码，我们知道Throwable不是primitive（原始数据类型），所以_constructorArgs值为null。</p>
-<img src="/2018/06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error03.png" class="" title="_constructorArgs">
-
-<p>**this._constructor.newInstance(this._constructorArgs)**使用反射调用构造方法时，要求给的参数必须是原始类型或者其包装器</p>
-<img src="/2018/06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error05.png" class="" title="反射调用构造函数">
-
-<p>但是我们给的参数值都为null，，传入的参数不合法，造成了上面的异常。</p>
-<p><strong>解决办法</strong></p>
-<p>所以绕了这么大一圈知道了原因，那怎么办呢，最简单的方式ApiException提供一个无参的构造方法。就会这样调用：ca.newInstance(new Object[])，即无参构造则不会再抛异常了。</p>
-<img src="/2018/06/26/dubbo%E8%AE%B2%E7%A9%B6(%E4%B8%80)/error06.png" class="" title="反射调用构造函数">
-
-<p><strong>小结</strong></p>
-<p>其实这块还会牵扯处很多东西，比如为什么ApiException要那么设计？为什么Java本身的反序列化机制能过而Hession不能过？再比如Constructor.newInstance()和我们经常看到的Class.newInstance()有什么区别？…哎 学海无涯苦作舟</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span>
+    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>

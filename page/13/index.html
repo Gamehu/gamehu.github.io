@@ -169,7 +169,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">159</span>
+          <span class="site-state-item-count">164</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -180,7 +180,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">99</span>
+        <span class="site-state-item-count">102</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,6 +220,523 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/03/14/%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%88%B0%E5%BA%95%E8%AF%A5%E4%B8%8D%E8%AF%A5%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/03/14/%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%88%B0%E5%BA%95%E8%AF%A5%E4%B8%8D%E8%AF%A5%E7%94%A8/" class="post-title-link" itemprop="url">中间件到底该不该用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-14 19:17:00" itemprop="dateCreated datePublished" datetime="2019-03-14T19:17:00+08:00">2019-03-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2020-09-21 21:35:26" itemprop="dateModified" datetime="2020-09-21T21:35:26+08:00">2020-09-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>前几天，组织上让我参加了一下咱们产品系统架构评估方面的一个会议，虽然内容较少但是我受益颇多。主持人是刚进入没多久的架构师，议题是现系统架构中一个很大的问题：现有架构（没做集群，因为大多数情况下客户现场只会给到2台服务器）吃不下每秒15000条syslog（网络交易日志），问题在于我们加的中间件kafka。</p>
+<p>所以最终议题为：什么时候需要中间件—即为什么我们要拿掉kafka。</p>
+<p>架构师抛了这几个问题：</p>
+<ol>
+<li><p>解耦 怎么解？</p>
+<blockquote>
+<p>比如 redis 用于做数据的交换，这个数据是不能丢的。</p>
+<p>比如kafka，不保证时间，不保证顺序性。。。</p>
+</blockquote>
+</li>
+<li><p>如果去掉这个中间层（件）会怎样？</p>
+</li>
+</ol>
+<p>特别是第二个问题，要随时问自己，如果去掉了会怎样？别盲目解读<strong>在我们领域，不是什么是加一层不能解决的</strong>这句话。</p>
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/03/04/%E7%B3%BB%E7%BB%9F%E4%B9%8B%E7%BE%8E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/03/04/%E7%B3%BB%E7%BB%9F%E4%B9%8B%E7%BE%8E/" class="post-title-link" itemprop="url">系统之美</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-03-04 18:03:00" itemprop="dateCreated datePublished" datetime="2019-03-04T18:03:00+08:00">2019-03-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2020-02-08 22:40:32" itemprop="dateModified" datetime="2020-02-08T22:40:32+08:00">2020-02-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AF%BB%E4%B9%A6/" itemprop="url" rel="index"><span itemprop="name">读书</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/02/28/%E5%87%A0%E4%B8%AA%E7%89%88%E6%9C%AC%E4%B9%8B%E5%90%8E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/02/28/%E5%87%A0%E4%B8%AA%E7%89%88%E6%9C%AC%E4%B9%8B%E5%90%8E/" class="post-title-link" itemprop="url">几个版本之后</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-02-28 14:19:00" itemprop="dateCreated datePublished" datetime="2019-02-28T14:19:00+08:00">2019-02-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2019-03-01 11:04:08" itemprop="dateModified" datetime="2019-03-01T11:04:08+08:00">2019-03-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>发篇文章感慨一下，从去年4、5月份开始，产品线正式成立（刨去mvp时间），到现在10个多月，从0到1，经历了太多。两地跑，累计飞了8万多公里，150多个小时。经济舱你懂的，真的是坐飞机都坐吐那种…..</p>
+<p>从0开始建立产品线团队，现在产品线大大小小五个团队：产线组、平台组、测试组、产品组、架构组以及管理团队。团队已经相对完善。</p>
+<p>从0开始确立产品目标、产品受众、产品价值，产品版本从0.1&#x3D;&gt;0.2&#x3D;&gt;0.3&#x3D;&gt;0.3.3&#x3D;&gt;1.0&#x3D;&gt;1.1。产品的roadmap已经清晰。</p>
+<p>当然这段过程走过来，发现了一些需要提升的地方，为了让产线更加阳光灿烂。</p>
+<p><strong>年前大家做了下总结，确定了一下2019年的节奏。</strong></p>
+<ol>
+<li>严格按照产品roadmap进行产品的迭代。力保核心功能。</li>
+<li>产品需求定义需更加清晰和严谨，必须有功能优先级，如果遇到无法自圆其说或者技术投入和产出存在较大差距的，应根据评估情况，决定做不做（由于产品上线的客户不是很多，对于某些需求不是很确定其价值，所以确立了这条规则）。功能不是越多越好。</li>
+<li>技术选型的出口人只能是平台组负责人，平台负责人对技术选型负全责。</li>
+<li>现有技术架构的优化、技术团队的工作流程优化、文档管理等由架构组负责，负责人为业务架构师。</li>
+<li>产线组、平台组、测试组三个组合并进行重新（虚拟）划分，划分为虚拟团队的形式（业务功能小组，非功能需求小组、现场支持和研发目标承接小组）。每个组暂由Scrum Master负责日常工作管理。</li>
+</ol>
+<p>领导说了团队一直在用敏捷的方式再跑，但是还不够特别敏捷，今年会邀请Scrum中文网的创建人来继续对团队进行敏捷训练。找到适合团队的小步快跑方式。</p>
+<p><em>一个团队是否有活力或者是否有能力，我觉得就是看团队目标是否对齐、管理团队是否足够开放、看团队是不是能自省、是否能自驱动、是否有立规矩。</em></p>
+<p><strong>2019 会怎样谁知道呢？</strong></p>
+<h2 id="特别说明"><a href="#特别说明" class="headerlink" title="特别说明"></a>特别说明</h2><p><strong>虚拟团队为了解决什么问题？</strong></p>
+<ol>
+<li><pre><code>运转效率提升。围绕不同的目标，把相关的各职能的人员放到一个团队，解决大家之前反馈的沟通决策链过长效率低，团队优化跨组织推动麻烦等问题。
+</code></pre>
+</li>
+<li><pre><code>保障非功能需求等长期目标。按照目标拆分团队，保障纳入产线规划的技术规划，持续有人去做。
+</code></pre>
+</li>
+</ol>
+<p><strong>虚拟团队的拆分原则是什么？</strong></p>
+<p>根据产线规划目标，按照目标的耦合程度，把目标做拆分，由不同的小组去承接这些目标。根据各组的目标和个人发展诉求相结合，把不同的同事放在不同的小组。不同的周期，小组的组成会有适度调整</p>
+<p><strong>都说了虚拟团队的设立是为了提升运转效率和更加敏捷的自优化，那么哪些事情我们可以自己做决定？</strong></p>
+<p>一句话：不涉及约定目标定义调整、目标优先级调整、周目标是否能达成的事项，团队都可以先决定，再做向上和左右的同步。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/02/25/%E5%90%88%E4%BB%A3%E7%A0%81de%E5%86%85%E5%BF%83%E7%8B%AC%E7%99%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/02/25/%E5%90%88%E4%BB%A3%E7%A0%81de%E5%86%85%E5%BF%83%E7%8B%AC%E7%99%BD/" class="post-title-link" itemprop="url">合代码de内心独白</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-02-25 10:39:00" itemprop="dateCreated datePublished" datetime="2019-02-25T10:39:00+08:00">2019-02-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2020-09-21 21:34:32" itemprop="dateModified" datetime="2020-09-21T21:34:32+08:00">2020-09-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>上周五产线领导派了一个活，合并前端和后端rest服务的代码，release合到develop。其实是一个很简单很日常的工作，但是因为种种原因，现在的版本周期过长，导致新增和修改的代码很多（特别是前端一堆的css、less、jsx、js….）。所以你知道我心中有多少只草泥马了。</p>
+<img src="/2019/02/25/%E5%90%88%E4%BB%A3%E7%A0%81de%E5%86%85%E5%BF%83%E7%8B%AC%E7%99%BD/frontend.png" class="" title="前端">
+
+<img src="/2019/02/25/%E5%90%88%E4%BB%A3%E7%A0%81de%E5%86%85%E5%BF%83%E7%8B%AC%E7%99%BD/backend.png" class="" title="rest后端">
+
+<p>这个时候需要的是冷静，蛋定。找个本子合一支笔，列清楚怎么做这件事情，一定要花时间考虑清楚再下手。</p>
+<h2 id="行动清单"><a href="#行动清单" class="headerlink" title="行动清单"></a>行动清单</h2><ol>
+<li><p>摸清楚分支情况，看看改动到底有多大，根据摸排的情况，判断是否需要上升到领导，因为如果动作太大势必会对团队的一些代码方面的操作有影响，需要领导提供协助，让团队配合合理解。</p>
+</li>
+<li><p>把涉及到修改人都和其确认一下，代码改动的分支以及模块，看是否与自己的理解存在误差，及时修正误差。 </p>
+</li>
+<li><p>借助命令（git log、git diff、git show…）以及工具（meld）对代码进行比对合并，设计面广最好不要直接往develop上合，先拉一个本地分支往上合，合完之后，验证通过再往develop合并。</p>
+</li>
+<li><p>合并之前，明确通知合并开始的时间点，并告知团队此时间段内不要再往分支上提交代码。</p>
+</li>
+<li><p>合并代码的时候手别抖，心别慌，扎稳马步，看清楚再合并，其实也不怕，因为你是单独拉的分支，哪怕整坏了也无所谓。所以就跟开车一样，胆大心细。 </p>
+</li>
+<li><p>合并完之后，本地测试是否功能有问题，一定要测。</p>
+</li>
+</ol>
+<hr>
+<p>合并代码有个坑，在于自动合并，它往往会给人错觉表示这块代码或者这几个文件时没问题的，但是很多时候往往是有问题，因为git并不知道这几个文件是否存在因果联系，这样就往往容易漏掉。我就遇到了这个问题，合并代码之后哪儿都ok就是一直提示license有问题，几个人轮番查了几波，排除了可能的原因，最终就落到了代码合并上，猜测是代码合并造成的，所以就查代码，最后发现确实是权限过滤的url那儿没有添加上license相关的url，导致license的url每次都被拦截了。</p>
+<p><strong>小结</strong></p>
+<p>干越复杂越麻烦的事，越不能心慌，理清思路，列出行动项，一个个啃掉。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/02/24/%E5%89%8D%E7%AB%AF%E5%B0%8F%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/02/24/%E5%89%8D%E7%AB%AF%E5%B0%8F%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B/" class="post-title-link" itemprop="url">前端小总结一下</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-02-24 11:59:00" itemprop="dateCreated datePublished" datetime="2019-02-24T11:59:00+08:00">2019-02-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2019-03-11 14:30:16" itemprop="dateModified" datetime="2019-03-11T14:30:16+08:00">2019-03-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>最近前后端都在写，而且相对来说前端写的多一些，因为领导说了，咱们这条产线实行前后端分离策略，但是团队里不再招专业前端，那xxx你先上，你不是常说你是一块砖吗，哪里需要哪里搬。是的，xxx就是我，所以朋友们在公司切记谨言慎行。当然主要还是我觉得了解下前端还是可以的（但是打死不写css）。</p>
+<p>所以我就从一个后端干到了前端，当然团队里肯定是有专业得前端的，不过因为咱们事业部有几条产线，所以资源稍有紧张，给到咱们产线就两个前端，有一个只会css，css肯定得有得，不然你想想啊，就算领导放心让你写css，你也肝颤啊。so，我就从产品mvp开始到正式产品立项，就主要精力在前端。</p>
+<h2 id="一入前端深似海啊"><a href="#一入前端深似海啊" class="headerlink" title="一入前端深似海啊"></a>一入前端深似海啊</h2><img src="/2019/02/24/%E5%89%8D%E7%AB%AF%E5%B0%8F%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B/gratisography-sad-bunny-thumbnail.jpg" class="" title="from gratisography">
+
+<p>前段的东西太多，而且层出不穷。抵御诱惑的最好办法是什么？我觉得是先仔细想想需不需它，当不确定时，先放着不着急做决定，只要坚定自己所要的东西，什么诱惑对你都是过眼云烟。</p>
+<p>脚手架的选择就出现了两派，一派以我为首，崇尚拿来即用避免重复造轮子，一派以专业前端同学为首，崇尚自己搭一套脚手架。具体就不细说，反正双方谁也说服不了谁。最终领导说了，谁是主要负责人谁说了算，当然专业前端是主要负责人，所以最终就决定自己搭建脚手架。当然这个过程是很痛苦的，时间也很长…曾今一度放弃这个方案，但是想着已经花了那么多精力了，就咬咬牙继续整了。最终大概前前后后花了3-4个月时间才算稳定了，当然这个过程编码还是断断继续在进行的。</p>
+<p>所以这块主要说下webpack，现在的前端打包工具我估计没谁说不用webpack吧，webpack教程我就不恬不知耻的讲了，网上一堆。不过我还是觉得大家尽量系统的看教程，别东一块西一块凑。</p>
+<h2 id="脚手架"><a href="#脚手架" class="headerlink" title="脚手架"></a>脚手架</h2><p>对于<strong>webpack</strong>打包工具，涉及到性能，我认为的三个关注点：</p>
+<ol>
+<li><p>包大小</p>
+<p> <em>主要是从压缩、去重（注意依赖公共部分单独打包）方面考虑，能从现有的配置解决的就不要引入新的插件，用了插件需要在官方了解每个数的意义。</em></p>
+<p> <em>项目中：js压缩用的UglifyJsPlugin，第三方库处理我们用的是CommonsChunkPlugin（有人说DllPlugin更好用），后面会抽时间试下。</em></p>
+</li>
+<li><p>包拆分</p>
+<p> <em>打包时，注意包的拆分，按模块按页面，可以分得细一些，让页面按需加载…，别都打到一个包里，一开始我们就遇到这个问题，打开一个页面光渲染所需的内容就要下载半天。</em></p>
+</li>
+<li><p>打包速度</p>
+<p> <em>能用缓存的用缓存，不需要转译的就别转译，Happypack能多进程执行打包，会快点</em></p>
+<p> <em>有两个很漂亮的可视化插件，*<em>JARVIS、webpack-bundle-analyzer</em></em> ，对于优化打包很有用。*</p>
+</li>
+</ol>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ul>
+<li><p>前端选型一定要适合团队和自己业务发展的。其它人觉得好用，你得看看其它人的场景和公司的体量。</p>
+</li>
+<li><p>没有特别与众不同的要求或者很多的个性化，避免重复造轮子。</p>
+</li>
+<li><p>当资源有限的时候，先保证功能性，再保证性能，但是性能优化一定是一个长期的非功能需求。</p>
+</li>
+</ul>
+<h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><p>没什么好说的……，都是主流的</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -807,450 +1324,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/09/20/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1-%E4%BC%98%E7%A7%80%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%91%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-      <meta itemprop="description" content="我还是我，看到自己都老火...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/09/20/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1-%E4%BC%98%E7%A7%80%E7%9A%84%E7%A8%8B%E5%BA%8F%E5%91%98/" class="post-title-link" itemprop="url">梦想金山-优秀的程序员</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2018-09-20 17:42:00 / 修改时间：18:00:36" itemprop="dateCreated datePublished" datetime="2018-09-20T17:42:00+08:00">2018-09-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%BB%E4%B9%A6/" itemprop="url" rel="index"><span itemprop="name">读书</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>优秀程序员四大修为</p>
-<p>1.坚韧不拔<br>2.知识全面<br>3.完美主义<br>4.团结协作</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/09/11/CSS%20Triggers/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-      <meta itemprop="description" content="我还是我，看到自己都老火...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/09/11/CSS%20Triggers/" class="post-title-link" itemprop="url">CSS Triggers</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-09-11 14:46:00" itemprop="dateCreated datePublished" datetime="2018-09-11T14:46:00+08:00">2018-09-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2020-02-24 11:07:18" itemprop="dateModified" datetime="2020-02-24T11:07:18+08:00">2020-02-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在学习浏览器那块，有一块时关于渲染的。</p>
-<img src="/2018/09/11/CSS%20Triggers/render.png" class="">
-
-<p>在此过程中发现了一个<a target="_blank" rel="noopener" href="https://csstriggers.com/">网站 CSS Triggers</a>，说明哪些css可以触发浏览器的重新渲染（<code>layout</code>、<code>Paint</code>、<code>Composite</code>），所以这个网站是用来告诉开发者不同内核浏览器对css属性修改的重绘&#x2F;回流情况，开发者知道了这些细节可以提高页面性能。</p>
-<p>小而美的网站，感谢这两位大佬 <a target="_blank" rel="noopener" href="https://twitter.com/aerotwist">Paul</a> and <a target="_blank" rel="noopener" href="https://twitter.com/DasSurma">Surma</a>。</p>
-<p>我在此简单做个记录，方便后续的使用。</p>
-<h3 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h3><ul>
-<li>紫色代表如果layout，中文一般翻译成布局。</li>
-<li>浅绿色代表Paint，一般翻译成重绘。</li>
-<li>深墨绿色代表Composite，翻译成混合或者合成，重绘和回流任意发生一个就会引起Composite。</li>
-</ul>
-<h4 id="触发时间："><a href="#触发时间：" class="headerlink" title="触发时间："></a>触发时间：</h4><ul>
-<li>Change from default：设置属性(从默认值修改，相当于一开始没设置css)</li>
-<li>Subsequernt updates：修改属性(对现有的属性值进行修改)。</li>
-</ul>
-<p>如图所示，点击每个属性会有详细的说明。</p>
-<img src="/2018/09/11/CSS%20Triggers/css.png" class="">
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/09/11/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1-%E8%BF%90%E8%90%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-      <meta itemprop="description" content="我还是我，看到自己都老火...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/09/11/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1-%E8%BF%90%E8%90%A5/" class="post-title-link" itemprop="url">梦想金山-运营</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-09-11 14:44:00" itemprop="dateCreated datePublished" datetime="2018-09-11T14:44:00+08:00">2018-09-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2018-09-12 16:42:52" itemprop="dateModified" datetime="2018-09-12T16:42:52+08:00">2018-09-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%BB%E4%B9%A6/" itemprop="url" rel="index"><span itemprop="name">读书</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>google的十大真理</p>
-<p>金山-梦想与野心。</p>
-<p>金山区别于其它中关村企业最核心的地方，金山是一家有野心的公司。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/09/10/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1-%E4%BA%BA%E7%89%A9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-      <meta itemprop="description" content="我还是我，看到自己都老火...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/09/10/%E6%A2%A6%E6%83%B3%E9%87%91%E5%B1%B1-%E4%BA%BA%E7%89%A9/" class="post-title-link" itemprop="url">梦想金山-人物</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-09-10 15:16:00" itemprop="dateCreated datePublished" datetime="2018-09-10T15:16:00+08:00">2018-09-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2018-09-12 16:39:04" itemprop="dateModified" datetime="2018-09-12T16:39:04+08:00">2018-09-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%BB%E4%B9%A6/" itemprop="url" rel="index"><span itemprop="name">读书</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>求伯君自己成功的经验三点：</p>
-<ol>
-<li>天赋</li>
-<li>个人的不懈努力</li>
-<li>机遇，遇到了一个时代和一些人</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/09/07/JavaScript%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-      <meta itemprop="description" content="我还是我，看到自己都老火...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/09/07/JavaScript%E6%98%AF%E6%80%8E%E4%B9%88%E5%B7%A5%E4%BD%9C%E7%9A%84/" class="post-title-link" itemprop="url">How Does JavaScript Really Work</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-09-07 14:29:00" itemprop="dateCreated datePublished" datetime="2018-09-07T14:29:00+08:00">2018-09-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2021-07-23 15:12:50" itemprop="dateModified" datetime="2021-07-23T15:12:50+08:00">2021-07-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%97%B2%E6%89%AF/" itemprop="url" rel="index"><span itemprop="name">闲扯</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="https://blog.bitsrc.io/how-does-javascript-really-work-part-1-7681dd54a36d">https://blog.bitsrc.io/how-does-javascript-really-work-part-1-7681dd54a36d</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>
