@@ -8713,6 +8713,7 @@ git checkout -b remote分支名 本地分支名
     <content><![CDATA[<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>最近遇到一个现场问题，客户反馈产品页面提示连接错误，一查是ws不能链接，借此复习下ws的内容。毕竟之前写ws功能是好几年前了。温故知新。</p>
 <p><a href="https://ably.com/topic/websockets">https://ably.com/topic/websockets</a></p>
 <p><a href="https://www.rfc-editor.org/rfc/rfc6455">https://www.rfc-editor.org/rfc/rfc6455</a></p>
+<p><a href="https://websockets.spec.whatwg.org/#websocket-opening-handshake">https://websockets.spec.whatwg.org/#websocket-opening-handshake</a></p>
 ]]></content>
       <categories>
         <category>工作</category>
