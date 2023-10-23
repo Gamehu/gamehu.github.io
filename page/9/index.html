@@ -169,7 +169,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">164</span>
+          <span class="site-state-item-count">165</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -220,6 +220,148 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/02/13/Root-User-in-Ubuntu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/02/13/Root-User-in-Ubuntu/" class="post-title-link" itemprop="url">Root User in Ubuntu</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-02-13 21:20:00 / 修改时间：21:56:44" itemprop="dateCreated datePublished" datetime="2020-02-13T21:20:00+08:00">2020-02-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>话说从接触Linux那一天起，就有一种独领风骚的傲气，命令走天下的这种霸气，那时候感觉精通Linux的连女朋友都带光环。</p>
+<p>我最开始接触Linux是从Ubuntu开始，当时笔记本装了双系统，我就鼓捣了一个Ubuntu，现在用的较多的CentOS，首先入门都是先从了解root开始，我其实一直对root很好奇，刚好今天看到twitter上ruanyf大佬推了一篇文章<a target="_blank" rel="noopener" href="https://itsfoss.com/root-user-ubuntu/">Root User in Ubuntu: Important Things You Should Know</a>讲基于Ubuntu的root的文章，基础好用，我们现在做的产品的安装包刚好也是基于Ubuntu做的，所以更有必要在此做个中文版记录。</p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>文章主要讲了以下四块：</p>
+<ol>
+<li>为什么在Ubuntu中禁用root用户</li>
+<li>以root身份使用命令</li>
+<li>切换到root用户</li>
+<li>解锁root用户</li>
+</ol>
+<h3 id="什么是root用户？为什么将其锁定在Ubuntu中？"><a href="#什么是root用户？为什么将其锁定在Ubuntu中？" class="headerlink" title="什么是root用户？为什么将其锁定在Ubuntu中？"></a>什么是root用户？为什么将其锁定在Ubuntu中？</h3><p><img src="https://i0.wp.com/itsfoss.com/wp-content/uploads/2020/01/root_user_ubuntu.png?ssl=1" alt="根用户Ubuntu"></p>
+<p>稍微了解Linux的都知道，在Linux中，有一个称为<a target="_blank" rel="noopener" href="http://www.linfo.org/root.html">root</a>的超级用户。这是超级管理员帐户，可以使用系统执行任何操作。它可以访问任何文件并在Linux系统上运行任何命令。</p>
+<p>拥有权利的同时也被赋予了重大的责任。超级用户可以为您提供对系统的完全控制权，因此也格外谨慎。超级用户可以访问系统文件并运行命令来更改系统配置。因此，错误的命令可能会造成无法挽回的损失，比如网上老说的一个梗：当rm -rf 之后我跑路了。所以一般情况下都不会给root权限，管理员会分配部分权限建对应的用户供对应的人使用。</p>
+<p>这也说明了为什么<a target="_blank" rel="noopener" href="https://ubuntu.com/">Ubuntu</a>默认情况下锁定了root用户，就是为了避免意外灾难。</p>
+<p>您无需具有root特权即可执行日常任务，例如将文件移动到主目录中，从Internet下载文件，创建文档等。</p>
+<p>*<strong>以此类比更好地理解它。如果必须切水果，可以使用菜刀。如果必须砍伐树木，则必须使用锯。现在，您可以使用锯切水果，但这不明智，是吗？*</strong></p>
+<p>这是否意味着您不能成为Ubuntu的root用户或无法使用具有root用户特权的系统？不，您仍然可以在“ sudo”的帮助下获得root用户访问权限（在下一节中说明）。</p>
+<blockquote>
+<p>重点：</p>
+<p>用户功能强大，无法用于常规任务。这就是为什么不建议始终使用root的原因。您仍然可以使用root运行特定命令。</p>
+</blockquote>
+<h3 id="如何在Ubuntu中以root用户身份运行命令？"><a href="#如何在Ubuntu中以root用户身份运行命令？" class="headerlink" title="如何在Ubuntu中以root用户身份运行命令？"></a>如何在Ubuntu中以root用户身份运行命令？</h3><p><img src="https://i2.wp.com/itsfoss.com/wp-content/uploads/2020/01/sudo_sandwich.png?ssl=1" alt="须藤三明治xkcd">图片来源：<a target="_blank" rel="noopener" href="https://xkcd.com/149/">xkcd</a></p>
+<p>当你需要某些系统特定任务的root特权。例如，如果要<a target="_blank" rel="noopener" href="https://itsfoss.com/update-ubuntu/">通过命令行更新Ubuntu</a>，则不能以常规用户身份运行该命令。会有以下类似的错误。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">Reading package lists... Done</span><br><span class="line">E: Could not open lock file /var/lib/apt/lists/lock - open (13: Permission denied)</span><br><span class="line">E: Unable to lock directory /var/lib/apt/lists/</span><br><span class="line">W: Problem unlinking the file /var/cache/apt/pkgcache.bin - RemoveCaches (13: Permission denied)</span><br><span class="line">W: Problem unlinking the file /var/cache/apt/srcpkgcache.bin - RemoveCaches (13: Permission denied)</span><br></pre></td></tr></table></figure>
+
+<p>那么，这个时候怎么做呢？简单的答案是在需要以root身份运行的命令之前添加sudo。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
+
+<p>Ubuntu和许多其他Linux发行版使用一种称为sudo的特殊机制。Sudo是一个程序，用于以root（或其他用户）身份控制对运行命令的访问。</p>
+<p>Sudo实际上是一个多功能的工具。可以将其配置为允许用户以root用户身份运行所有命令。您可以配置它仅以root身份运行选定的几个命令。您也可以配置为<a target="_blank" rel="noopener" href="https://linuxhandbook.com/sudo-without-password/">不带密码运行sudo</a>。</p>
+<p><a target="_blank" rel="noopener" href="https://itsfoss.com/install-ubuntu/">在安装Ubuntu时</a>，必须创建一个用户帐户。该用户帐户在您的系统上以管理员身份运行，并且按照Ubuntu中的默认sudo策略，它可以使用root特权在系统上运行任何命令。</p>
+<p>运行<strong>sudo不需要root密码，但需要用户自己的password</strong>。</p>
+<p>这就是为什么当使用sudo运行命令时，总会一开始就询问密码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gamehu@nuc:~$ sudo apt update</span><br><span class="line">[sudo] password for gamehu: </span><br></pre></td></tr></table></figure>
+
+<p>如您在上面的示例中看到的，用户gamehu试图使用<em>sudo</em>运行’apt update’命令，系统要求输入gamehu的密码。</p>
+<p><strong>要注意当您开始在终端中输入密码时，屏幕上什么都没有发生不会有任何显示，也没有所谓的删除键、退格键…这里会记录你按下的所有键。因为作为默认安全功能，屏幕上不显示任何内容。甚至没有星号（*）。您输入密码，然后按Enter。*</strong></p>
+<blockquote>
+<p>划重点：</p>
+<p>要在Ubuntu中以root身份运行命令，请在命令前添加sudo。<br>当要求输入密码时，输入您的帐户密码。<br>在屏幕上键入密码时，看不到任何内容。只需继续正确的输入密码，然后按Enter。</p>
+</blockquote>
+<h3 id="如何在Ubuntu中成为root用户？"><a href="#如何在Ubuntu中成为root用户？" class="headerlink" title="如何在Ubuntu中成为root用户？"></a>如何在Ubuntu中成为root用户？</h3><p>你可以使用sudo以root身份运行命令。但是，在某些情况下，您必须以root用户身份运行多个命令，则可以临时切换为root用户。</p>
+<p>sudo命令允许您使用以下命令模拟root登录shell：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo -i</span><br><span class="line">gamehu@nuc:~$ sudo -i</span><br><span class="line">[sudo] password for gamehu: </span><br><span class="line">root@nuc:~# whoami</span><br><span class="line">root</span><br><span class="line">root@nuc:~# </span><br></pre></td></tr></table></figure>
+
+<p>您会注意到，切换到root用户时，shell命令提示符将从$（美元键符号）更改为＃（磅键符号）。</p>
+<p>*<strong>尽管已向您展示了如何成为root用户，但我必须警告你，应避免将系统用作root用户。毕竟出于某种原因，我们不建议这样做。*</strong></p>
+<p>临时切换到root用户的另一种方法是使用su命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br></pre></td></tr></table></figure>
+
+<p>如果您尝试在不使用sudo的情况下使用su命令，则会遇到“ su身份验证失败”错误。</p>
+<p>您可以使用exit命令恢复为普通用户。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="如何在Ubuntu中启用root用户？"><a href="#如何在Ubuntu中启用root用户？" class="headerlink" title="如何在Ubuntu中启用root用户？"></a>如何在Ubuntu中启用root用户？</h3><p>到目前为止，您已经知道默认情况下，root用户在基于Ubuntu的发行版中被锁定。</p>
+<p>Linux使您可以自由地对系统进行任何操作。解锁root用户是这些自由之一。</p>
+<p>如果出于某种原因决定启用root用户，则可以通过为它设置密码来启用它：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure>
+
+<p>同样，不建议这样做，我也不鼓励您在桌面上执行此操作。如果忘记了密码，将无法再次<a target="_blank" rel="noopener" href="https://itsfoss.com/how-to-hack-ubuntu-password/">在Ubuntu中更改root密码</a>。</p>
+<p>您可以通过删除密码来再次锁定root用户：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd -dl root</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1305,326 +1447,6 @@
 
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>从这个课我知道了人才管理不是我之前那么单纯的理解，很容易被这个词午到，人才管理其实不仅仅说的是人才管理，还包括业务布局、组织变阵、人才赋能、机制建立等因素。</p>
 <p>所以我理解一下下，人才的定义是不是：专业技能过硬，有战略眼光且能适应业务未来的变局，且有组织向心力？</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/10/08/%E4%B8%AA%E4%BA%BA%E5%8F%91%E5%B1%95%E6%88%98%E7%95%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-      <meta itemprop="description" content="我还是我，看到自己都老火...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/10/08/%E4%B8%AA%E4%BA%BA%E5%8F%91%E5%B1%95%E6%88%98%E7%95%A5/" class="post-title-link" itemprop="url">个人发展战略</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-10-08 21:46:00" itemprop="dateCreated datePublished" datetime="2019-10-08T21:46:00+08:00">2019-10-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2020-09-21 21:34:14" itemprop="dateModified" datetime="2020-09-21T21:34:14+08:00">2020-09-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <img src="/2019/10/08/%E4%B8%AA%E4%BA%BA%E5%8F%91%E5%B1%95%E6%88%98%E7%95%A5/0.jpg" class="" title="下班路上">
-
-<h3 id="为什么要谈个人发展"><a href="#为什么要谈个人发展" class="headerlink" title="为什么要谈个人发展?"></a>为什么要谈个人发展?</h3><p>这个话题其实我很怕的….，因为我发育迟读书少，所以一直都懵懵懂懂+凄凄惨惨戚戚，自认为放荡不羁其实就是无知逗逼。我是从17年开始才意识到有个概念叫“以后的路咋走”，文气点就是<strong>个人发展</strong>。因为17年开始面临买房、小孩儿上学等一系列问题，深深感到自己的无力，表象就是缺钱，内里就是焦虑。那段时间常常展开双臂抬头望问天“咋整？我该咋整？”，夜深人静常常哭湿了我的小黄人枕巾。就想着不能这样，得变，得抗。</p>
-<p>这两年其实我一直在摸索适合自己地发展路径，包括之前地一篇也在写<span style=color:blue;><a href="#">Post not found: 个人定位</a></span>，从个人定位&#x3D;&gt;个人发展，我认为应该是这样地顺序，虽然现在个人发展长远地战略还不是非常明确，但是至少我认识到了个人发展地重要性，并且找到了最近3-5年自己地发展路径。</p>
-<p>当然这篇不是来说我的，是结合之前老大的分享以及平时自己的学习来试着说明一下，个人发展的必要性。</p>
-<p>**我们先聊聊几个点，看是否能达成共识。达不成共识可能这篇文章对你来说就没什么意义 **</p>
-<h2 id="工作压力大，没时间"><a href="#工作压力大，没时间" class="headerlink" title="工作压力大，没时间"></a><span style=color:red;>工作压力大，没时间</span></h2><p>不用我说大家都知道，个人发展是需要时间来铺垫的，同时个人发展肯定跟工作会有联系，这种联系根据个人的处境可强可弱。另外一个共识点是，工作肯定会压缩我们的可自由支配的时间。所以很多时候我们会得出一个结论，<strong>工作压力大，没时间</strong>。作为程序员我承认确实会存在这样的情况，究其原因：公司的业务压力大，需要堆人堆时间来跟上时代的节奏。另外一点则是个人的精力有限，就像电池一样，在工作上就把电耗尽了，就算会有一些休息时间，也已经没电了。但是我们可以这么想想：现在的工作强度是否有利于个人发展？得到报酬能否多到让我暂时放弃个人发展的程度？工作压力是否真的有我们想象得那么大，时间是否真的就没了？</p>
-<p>所以核心的问题是，我们对个人发展这件事情有多重视？愿意投资多少时间和精力？</p>
-<p>我的观点是：如果光感受到工作压力大让你没有时间，但又无法获得一些正反馈，那这不是你有没有时间得问题，而是先考虑这份工作是不是应该继续做下去的问题。如果有正反馈，我们再想想是否现在处境就算我想要的的”个人发展”。</p>
-<p>怎么来判断，我通常是这样做的：</p>
-<ol start="2">
-<li>列出来公司的晋升制度，薪酬制度。</li>
-<li>尽可能的根据各种反馈，试着评估一下公司的发展前景或者产品线的发展前景。</li>
-<li>列出来所在职位的工作内容（在不晋升的情况下），以及如果晋升了的工作内容（从与领导交流，加上观察基本上能预估出80%左右）。</li>
-<li>列出来如果因为某些因素，导致被动的离开公司，自己会怎样？</li>
-</ol>
-<p>不出意外你列完之后，会说一句“卧槽xxxx”，这样就对了，好好考虑一下个人发展的重要性吧。</p>
-<p><strong>有点扯远了，其实我是想说，自己愿意的话，不会没有时间。</strong></p>
-<h2 id="工作生活要平衡"><a href="#工作生活要平衡" class="headerlink" title="工作生活要平衡"></a><span style=color:red;>工作生活要平衡</span></h2><p><strong>我不想这么辛苦，我期望生活和工作平衡</strong></p>
-<blockquote>
-<p>很多人都期望活少钱多还开心，朋友圈那些天天晒美食，旅行，老婆孩子热炕头的生活就是理想人生。每个行业都有其辛苦的部分，这才是现实。有的要付出体力之苦，有的要付出健康的代价，有的要付出脑力之苦。既然选择了薪酬相对高一些的IT行业，持续学习新技术，新知识就是你必须面对的。你是想要今天的生活和工作平衡，还是中年油腻后的生计艰难？</p>
-<p>假如你不是富二代，官二代，还是更现实，更长期地看待工作和生活平衡的事情。如果你从事的工作是你热爱的工作，不存在平衡问题，从中获得的成就感就是你生活的一部分。如果你从事的工作是你谋生的手段，想持续获得这个收入，就遵循这个工作的本质规律。</p>
-</blockquote>
-<p>以上是老大的原话我觉得已经说的很透彻了，我认为要想追求工作生活的平衡是不可能的，当然我不是说工作和生活就必须得纠缠在一起才好，我是觉得<strong>平衡</strong>这词应该是心理上的划分而不是物理上的划分。</p>
-<h3 id="个人发展战略"><a href="#个人发展战略" class="headerlink" title="个人发展战略"></a>个人发展战略</h3><p>然后我们再来说怎么找到属于自己的个人发展战略，内容总结来自<strong>圈外商学院</strong>的个人发展战略主体纲要，因为平台不让看了，我就直接不要脸的引用有识之士的了。大家如果觉得有用请去链接点赞，就当我对其微薄的回报了。</p>
-<p><strong>一、一个模型，帮你找到真正热爱的工作</strong></p>
-<ul>
-<li><p>冰山模型；美国著名心理学家麦克利兰</p>
-</li>
-<li><ul>
-<li><p>显性30%；</p>
-</li>
-<li><ul>
-<li>知识（专业，书籍），慌乱</li>
-<li>技能（编程，技术），焦虑</li>
-<li>能力（思考能力，学习能力），挫败低效</li>
-</ul>
-</li>
-<li><p>隐性70%；</p>
-</li>
-<li><ul>
-<li>价值观（判断事物标准），矛盾纠结</li>
-<li>性格特质（行为偏好），心累</li>
-<li>动机（成就动机，权力动机），没热情</li>
-</ul>
-</li>
-<li><p>四个步骤找到适合的工作</p>
-</li>
-<li><ul>
-<li>找专业；找自己喜欢的专业和爱好的相关岗位</li>
-<li>搜索岗位；在招聘网上，搜索岗位的要求</li>
-<li>分析需求；用冰山模型，分析这份岗位需要的知识，技能和能力</li>
-<li>对比自己；用冰山模型匹配自己的价值观，性格特质和动机，确定适不适合。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>二、四大要素，决定你的市场价值</strong></p>
-<ul>
-<li><p>用冰山模型说明该投入到哪里，才能提升自己的市场价值</p>
-</li>
-<li><ul>
-<li>投入知识；容易获取，但如果不能运用来解决问题，几乎没有竞争力。</li>
-<li>投入技能；有门槛，但市场价值取决于稀缺程度，所有技能都会走向供需平衡，高收入不可持续，需要不断持续学习新技能。</li>
-<li>投入能力；能力可迁移，积累到一定高度，行业不对称，也能发挥作用。</li>
-<li>投入自我发现；难以改变和发现，但如有清晰的认识，找到相匹配的工作也能提升价值。</li>
-</ul>
-</li>
-<li><p>为什么大多数人都选择投入到知识和技能，不断碎片化学习，练习并不稀缺的技能。</p>
-</li>
-<li><ul>
-<li>因为知识和技能容易习得</li>
-<li>惰性让自身受限于岗位</li>
-<li>没明白工作本质是解决问题</li>
-</ul>
-</li>
-<li><p>汇总；我们的时间，永远应该花在正确的事情上，而不是容易的事情上。</p>
-</li>
-</ul>
-<p><strong>三、四类迹象，发现你的隐藏能力</strong></p>
-<ul>
-<li><ul>
-<li>虽然成功的道路有千万条，但成功人士基本都在遵循了一个原则，就是将自己的自身天赋发挥到了极致。</li>
-<li>天赋就是隐藏的能力，让一个人可以在同样起点的情况下，更加加速成长。</li>
-</ul>
-</li>
-<li><p><strong>天赋探索方法；“SIGN”</strong></p>
-</li>
-<li><ul>
-<li>自我效能（Self-efficacy）；对某类事情非常有信心，觉得自己肯定能做好。</li>
-<li>本能（Instinct）；迫不及待想要尝试的事情</li>
-<li>成长（Growth）；发现自己明显比别人进步的快一些</li>
-<li>满足（Needs）；做完后及时很累，也会觉得满足</li>
-</ul>
-</li>
-<li><p>如何在日常中发现自己的SIGN特质</p>
-</li>
-<li><ul>
-<li><p>围绕SIGN特质问自己</p>
-</li>
-<li><ul>
-<li>自我效能；认为自己能教别人什么？别人向你请教什么？跟别人聊天倾向聊什么？聊什么话题会让你感到自信？做什么事情不会感到焦虑和担心？</li>
-<li>本能；做什么事的时候很少拖延？长时间休息后，你最想念工作的哪个方面？你宁愿放弃休息时间也要做的事情是什么？</li>
-<li>成长；什么事情会让你沉浸其中忘记时间？不容易感到疲累和厌烦？</li>
-<li>满足；过去工作和生活中，有什么让你获得巨大的成就感和满足感？</li>
-</ul>
-</li>
-<li><p>围绕SIGN特质问他人</p>
-</li>
-<li><ul>
-<li><p>你觉得我身上有什么不同于别人的特质？</p>
-</li>
-<li><p>你最欣赏或者佩服我的方面是什么？</p>
-</li>
-<li><p>在你看来，我做什么的时候最兴奋？</p>
-</li>
-<li><p>我做过什么让你印象深刻的事情么？</p>
-</li>
-<li><p>在以下方面，你觉得我那些更加擅长？</p>
-</li>
-<li><ul>
-<li>思维方式；条理清晰，逻辑严密，脑洞很大，专注专业</li>
-<li>沟通协调；化解冲突，争取资源，知人善用</li>
-<li>计划执行；执行力强，强求完美，目标导向</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>四、三种方法，将知识内化成能力</strong></p>
-<ul>
-<li><p>惰性知识；不能及时有效调用，占用大脑内存的知识</p>
-</li>
-<li><p>如何把知识内化成能力，让自己的能力快速提升的三个方法</p>
-</li>
-<li><ul>
-<li><p>1.掌握20%的核心；二八原则，一个领域的20%的核心内容，能够解决80%的问题</p>
-</li>
-<li><ul>
-<li>如结构化思维20%的三个特征；主题鲜明，归类分明，逻辑递进。</li>
-<li>擅长找师傅，找领域内专业人士，了解领域的核心20%</li>
-</ul>
-</li>
-<li><p>2.知识和问题相互靠</p>
-</li>
-<li><ul>
-<li><p>让知识和问题链接起来，知识向问题靠，问题向知识靠。</p>
-</li>
-<li><p>知识（想应用）问题；看到一个知识就去思考这个知识可以用来解决什么问题？</p>
-</li>
-<li><ul>
-<li>如；马斯洛的五层次需求，可以用来分析奢侈品为什么这么贵？</li>
-</ul>
-</li>
-<li><p>问题（找解释）知识，遇到问题，抛弃第一反应，去想想有什么方法论模型可以用</p>
-</li>
-<li><ul>
-<li>看书遇到有趣的理论，先记下思考3个可以用该模型解决的问题。下次不要下意识反应，学会去翻一下以前的笔记，把问题补充到笔记里。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>3.做系统化训练</p>
-</li>
-<li><ul>
-<li>刻意练习；一个月中，显示每天练习三段式，再提炼主题，然后积累结构</li>
-<li>我们的习惯，是高估几天的变化，而低估几个月的变化。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>汇总；如何具体到行动中；</p>
-</li>
-<li><p>1.找专业人士了解领域的核心20%，先去学习20%</p>
-</li>
-<li><p>2.在学习的过程中，思考各个知识点的应用场景，并记录下来，遇到问题再回去找</p>
-</li>
-<li><p>3.能力提升是一个系统性过程，所以需要坚持至少1个月。</p>
-</li>
-</ul>
-<p><strong>五、三大系统，让学习不靠意志力</strong></p>
-<ul>
-<li><p>为什么我们如此难坚持</p>
-</li>
-<li><ul>
-<li>意志力是有限的，并不是学习这件事情类到你，而是“坚持”</li>
-<li>移动互联网时代，诱惑越来越多</li>
-<li>威尔海姆。霍夫曼主持的一项研究表明；人们醒着的时候，把大约1&#x2F;4的时间用来抵制欲望。</li>
-</ul>
-</li>
-<li><p>意志力不够用，就用行为改变来学习。</p>
-</li>
-<li><ul>
-<li>决定事情时起作用的大脑内部的两个系统；理性和感性。</li>
-</ul>
-</li>
-<li><p>如何让我们坚持做一件事的三个关键因素；</p>
-</li>
-<li><ul>
-<li><p>理性上；知道要学习（树立明确的目标）</p>
-</li>
-<li><ul>
-<li>明确的目标是坚持学习的第一步</li>
-</ul>
-</li>
-<li><p>感性上；愿意去学习（利用情绪冲动）</p>
-</li>
-<li><ul>
-<li>截止日期的紧迫感</li>
-<li>比较产生的焦虑感</li>
-<li>鼓励带来的成就感</li>
-</ul>
-</li>
-<li><p>情景上；制造适合学习的场景（创造学习环境）</p>
-</li>
-<li><ul>
-<li>人是社会动物，我们会观察周围人的行为来调整自己的行为。</li>
-<li>如果可以利用环境，就不要用你的意志力来抵制欲望</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>六、三个建议，让你不做“定制化人才”</strong></p>
-<ul>
-<li>1.调整主体，给自己定好发展方向</li>
-<li>2.提升能力，让自己成为横向可迁移的人才</li>
-<li>3.提升认知高度，让自己成为纵向可拓展的人才</li>
-</ul>
-<p>源引感谢：</p>
-<blockquote><footer><strong>圈外同学——个人发展战略</strong><cite><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/68267559">zhuanlan.zhihu.com/p/68267559</a></cite></footer></blockquote>
-
-<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
 
       
     </div>

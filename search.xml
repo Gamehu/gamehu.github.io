@@ -8722,4 +8722,25 @@ git checkout -b remote分支名 本地分支名
         <tag>websocket</tag>
       </tags>
   </entry>
+  <entry>
+    <title>docker网络问题</title>
+    <url>/2023/10/23/k8s%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>处理了一个现场问题，现场部署了多个agent但是就一个agent离线。</p>
+<p>查了下agent所在的服务器与主业务是能telnet通的，但是进入agent容器内部则不行，不管是ping还是curl都不行。</p>
+<p>首先怀疑容器的网络配置可能存在问题。检查容器的网络设置，先后检查了iptables、DNS、检查默认路由都没有异常。又因为容器外能访问，且该agent与其它2、3个agent属于同一个子网下，所以也侧面证明了，服务器的网络配置确实没问题。</p>
+<p>那接下来基本确定是docker网络配置的问题了。</p>
+<p>基于nsenter，验证网络问题，发现确实存在网络问题，ping docker默认网关不通。</p>
+<p>现场反馈更新过agent的网络地址，随即检查daemon.json 、docker-compose.yml文件</p>
+<p>发现docker-compose.yml内定义的subnet为16为子网掩码，而daemon.json为24位子网掩码，</p>
+<p>因为16比24的IP范围大，这种情况下,容器获得的IP地址可能不在docker-compose网络的子网范围内,从而无法连接到该网络,造成网络通信失败。</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案:"></a>解决方案:</h3><p>将docker-compose.yml和docker daemon中的子网掩码设置为相同。例如都使用24位子网掩码。
+ </p>
+]]></content>
+      <categories>
+        <category>工作</category>
+      </categories>
+      <tags>
+        <tag>k8s</tag>
+      </tags>
+  </entry>
 </search>

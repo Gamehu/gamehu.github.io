@@ -169,7 +169,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">164</span>
+          <span class="site-state-item-count">165</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -220,6 +220,108 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2022/06/11/JVM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/06/11/JVM/" class="post-title-link" itemprop="url">JVM</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-06-11 10:22:00" itemprop="dateCreated datePublished" datetime="2022-06-11T10:22:00+08:00">2022-06-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-10-18 11:26:20" itemprop="dateModified" datetime="2022-10-18T11:26:20+08:00">2022-10-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>由于最近在查一个OOM问题，所以借机读起了《深入理解Java虚拟机》第三版。简单做个记录。</p>
+<h3 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h3><h4 id="分代收集理论"><a href="#分代收集理论" class="headerlink" title="分代收集理论"></a>分代收集理论</h4><p>大多数垃圾收集器的都应用的理论。</p>
+<blockquote>
+<p>弱分代假说（年轻代）：绝大多数朝生夕灭的对象。<br>强分代假说（老年代）：熬过越多次垃圾收集就越难消亡。<br>跨代引用假说</p>
+</blockquote>
+<p> Partial GC（部分收集）:</p>
+<ul>
+<li>Minor GC&#x2F;Young GC(年轻代收集)</li>
+<li>Major GC&#x2F;Old GC（老年代收集）</li>
+<li>Mixed GC(混合收集)：JDK 11 ，只有G1有，针对年轻代和部分老年代。<br> Full GC（整堆收集）：整个堆和方法区</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/06/11/JVM/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1115,87 +1217,6 @@
 <p>cd submodule目录<br>git checkout origin&#x2F;develop<br>git pull origin develop</p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/87053283">https://zhuanlan.zhihu.com/p/87053283</a></p>
 <p><a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">https://git-scm.com/book/en/v2/Git-Tools-Submodules</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2021/07/26/%E6%9E%B6%E5%B1%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-      <meta itemprop="description" content="我还是我，看到自己都老火...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/07/26/%E6%9E%B6%E5%B1%8F/" class="post-title-link" itemprop="url">骨架屏</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2021-07-26 17:56:00 / 修改时间：18:11:48" itemprop="dateCreated datePublished" datetime="2021-07-26T17:56:00+08:00">2021-07-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="https://github.com/dvtng/react-loading-skeleton#readme">https://github.com/dvtng/react-loading-skeleton#readme</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/kaola-fed/awesome-skeleton">https://github.com/kaola-fed/awesome-skeleton</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/famanoder/dps">https://github.com/famanoder/dps</a></p>
 
       
     </div>

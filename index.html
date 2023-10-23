@@ -169,7 +169,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">164</span>
+          <span class="site-state-item-count">165</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -220,6 +220,94 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2023/10/23/k8s%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/10/23/k8s%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">docker网络问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-10-23 15:39:00 / 修改时间：17:28:22" itemprop="dateCreated datePublished" datetime="2023-10-23T15:39:00+08:00">2023-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>处理了一个现场问题，现场部署了多个agent但是就一个agent离线。</p>
+<p>查了下agent所在的服务器与主业务是能telnet通的，但是进入agent容器内部则不行，不管是ping还是curl都不行。</p>
+<p>首先怀疑容器的网络配置可能存在问题。检查容器的网络设置，先后检查了iptables、DNS、检查默认路由都没有异常。又因为容器外能访问，且该agent与其它2、3个agent属于同一个子网下，所以也侧面证明了，服务器的网络配置确实没问题。</p>
+<p>那接下来基本确定是docker网络配置的问题了。</p>
+<p>基于nsenter，验证网络问题，发现确实存在网络问题，ping docker默认网关不通。</p>
+<p>现场反馈更新过agent的网络地址，随即检查daemon.json 、docker-compose.yml文件</p>
+<p>发现docker-compose.yml内定义的subnet为16为子网掩码，而daemon.json为24位子网掩码，</p>
+<p>因为16比24的IP范围大，这种情况下,容器获得的IP地址可能不在docker-compose网络的子网范围内,从而无法连接到该网络,造成网络通信失败。</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案:"></a>解决方案:</h3><p>将docker-compose.yml和docker daemon中的子网掩码设置为相同。例如都使用24位子网掩码。
+ </p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1191,125 +1279,6 @@
 <p>T-Shirt Size Estimation</p>
 <h3 id="个人"><a href="#个人" class="headerlink" title="个人"></a>个人</h3><p>很多时候说是产品其实还是按照项目在做，就会有个人认为特别大的问题，一定要追求大而全，蛮力堆功能，宁可错杀一千不能放过一百。不然就拿不下某块领域的客户，但是真的只能这么做吗？肯定不是的，因为这么做肯定是活不长的，咱们干技术的就知道，啥都要就是一种幻想，现实往往是啥都不精，然后自己把自己给捆紧了，啥也不敢做也不能做了。</p>
 <p>最后只有两条路：<br> 1.就这么一直不停的缝缝补补、纠纠缠缠根本没时间和精力与时俱进。<br> 2.挣脱出来重新来一遍。但是又有多少资源和时间能重来呢？</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2022/08/19/%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%96%87%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-      <meta itemprop="description" content="我还是我，看到自己都老火...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/19/%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%96%87%E5%8C%96/" class="post-title-link" itemprop="url">工程师文化</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-08-19 16:51:57" itemprop="dateCreated datePublished" datetime="2022-08-19T16:51:57+08:00">2022-08-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-08-24 18:14:43" itemprop="dateModified" datetime="2022-08-24T18:14:43+08:00">2022-08-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>读陈皓老师的<a target="_blank" rel="noopener" href="https://coolshell.cn/articles/17497.html%E6%9C%89%E6%84%9F%E3%80%82">https://coolshell.cn/articles/17497.html有感。</a></p>
-<p><a target="_blank" rel="noopener" href="https://brendansterne.com/2013/07/11/do-the-right-thing-wait-to-get-fired/">https://brendansterne.com/2013/07/11/do-the-right-thing-wait-to-get-fired/</a></p>
-<p><a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=6029823">https://news.ycombinator.com/item?id=6029823</a></p>
-<h3 id="有段话印象很深刻："><a href="#有段话印象很深刻：" class="headerlink" title="有段话印象很深刻："></a>有段话印象很深刻：</h3><h4 id="计划就是瞎猜"><a href="#计划就是瞎猜" class="headerlink" title="计划就是瞎猜"></a>计划就是瞎猜</h4><blockquote>
-<p>除非你是算命先生，长期的商业计划是种幻想。有太多的事实证明那是超出你的掌控的：市场环境、对手、顾客、经济等等。做计划让你觉得一切尽在掌握但实际上你没有。<br>当你把计划变成猜测时，就等于进入一个危险的境地。做计划就是在用过去推导未来，等于给你戴上了眼罩。</p>
-</blockquote>
-<blockquote>
-<p>感想：你有职业规划吗？如果你有的话，那么你就一定就错了。职业规划是一件很扯淡的事情。我和一些高手都交流过，其实这些人在当初都并不有什么职业规划的，要说有的话，也就是想把技术搞透搞精。这些人在一开始从来没有想过要当个什么经理或是什么架构师之类的东西，这些人就是对技术有非常大的热情，把身边的那些看得见够得着的事情做到好好地，并且保持不持续强大的好奇心努力地学习自己不懂的东西。一个坚定不移的决定和意志力会比任何的计划和职业规划都重要。你问问自己，想不想当程序员，能不能一辈子都当一个程序员，能不能写程序写一辈子？（关于做一辈子程序员这个事，大家可以看看我的新浪微博 ——没哪个行业能像计算机行业这么活跃、刺激和有趣了。不仅是新兴工业革命的主力，又渗入到所有的行业中，干一辈子值了。&#x2F;&#x2F;@_你亲爱的偏执狂: 程序员首先是工程师，Professional，就跟律师，医生一样，给大家解决问题；但是另一面呢，又是艺术家，创造新奇好玩的东西。这样的职业做一辈子有什么问题？）</p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="http://www.effectiveengineer.com/blog/what-makes-a-good-engineering-culture">http://www.effectiveengineer.com/blog/what-makes-a-good-engineering-culture</a><br><a target="_blank" rel="noopener" href="https://www.quora.com/Software-Engineering/What-makes-a-good-engineering-culture/answer/Edmond-Lau?share=1">https://www.quora.com/Software-Engineering/What-makes-a-good-engineering-culture/answer/Edmond-Lau?share=1</a></p>
-<h3 id="1-优化迭代速度。"><a href="#1-优化迭代速度。" class="headerlink" title="1.优化迭代速度。"></a>1.优化迭代速度。</h3><ol>
-<li>快速的迭代速度增加了工作动力和兴奋度</li>
-<li>在基础设施方面，优化迭代速度意味着构建持续部署以支持快速验证、高测试覆盖率以减少构建和站点损坏、快速单元测试以鼓励人们运行它们，以及快速增量编译和重新加载以减少开发时间。</li>
-<li>团队方面，快速的迭代速度意味着拥有一组强大的领导者来帮助协调和推动团队工作。</li>
-</ol>
-<h3 id="2-不懈地推动自动化。"><a href="#2-不懈地推动自动化。" class="headerlink" title="2. 不懈地推动自动化。"></a>2. 不懈地推动自动化。</h3><ol>
-<li>自动化解决方案和编写重复性任务脚本很重要，因为它们可以让工程团队腾出时间来处理实际产品。自动化必须由数据和监控驱动。</li>
-</ol>
-<h3 id="3-构建正确的软件抽象。"><a href="#3-构建正确的软件抽象。" class="headerlink" title="3. 构建正确的软件抽象。"></a>3. 构建正确的软件抽象。</h3><ol>
-<li>保持核心抽象的简单和通用可以减少对自定义解决方案的需求，并提高团队对通用抽象的熟悉度和专业知识。将团队的注意力集中在少数核心抽象上，这意味着通用库变得更加健壮，监控变得更加智能，性能特征得到更好的理解，测试变得更加全面。所有这些都有助于简化系统并减少操作负担。</li>
-</ol>
-<h3 id="4-通过代码审查来关注高代码质量。"><a href="#4-通过代码审查来关注高代码质量。" class="headerlink" title="4. 通过代码审查来关注高代码质量。"></a>4. 通过代码审查来关注高代码质量。</h3><pre><code>维护高质量的代码库可以提高整个工程团队的生产力。更简洁的代码更容易推理、更快地开发、更易于更改并且更不容易受到错误的影响。一个健康的代码审查过程使这成为可能。
-
-建立一个及时的代码审查流程，无论是提交前还是提交后，都可以在几个方面提高代码质量。首先，知道有人会审查你的代码并且提交写得不好的代码可能会让你的队友失望的同行压力是对骇客、不可维护或未经测试的代码的强大威慑。其次，代码审查为代码审查者和作者提供了相互学习以编写更好的代码的机会。
-
-如果工程团队的其他成员可以轻松访问代码审查，那么审查还带来以下好处：a）增加及时审查代码的责任，b）允许团队成员 - 特别是新成员 - 进行建模其他人的良好代码审查，以及 c) 加速传播最佳编码实践。
-
-敏捷团队没有时间花在代码审查上的反驳忽略了很容易从编写不佳的代码中积累的技术债务。Ooyala 在其早期的启动阶段，用于优化以尽可能多地推出功能，而无需进行代码审查；结果是，虽然最初的产品可能更快地推向市场，但最终的代码修改起来很痛苦，我们花了一年多的时间重写脆弱的代码以消除技术债务。
-
-就其规模而言，Google 会对所有代码进行预先提交的代码审查，但较小的团队不需要如此全面或严格，并且并非所有代码都需要以同样严格的方式审查。Ooyala 后来在我在那里时通过电子邮件对核心或有风险的更改进行了提交后审查。在 Quora，我们在Phabricator中进行了所有代码审查，主要是提交后，并对模型或控制器代码和视图代码应用不同的标准；对于敏感代码或新工程师的代码，我们要么进行预提交审查，要么尝试在提交代码后的几个小时内对其进行审查。
-</code></pre>
-<h3 id="5-保持互相尊重的工作环境。"><a href="#5-保持互相尊重的工作环境。" class="headerlink" title="5. 保持互相尊重的工作环境。"></a>5. 保持互相尊重的工作环境。</h3><p>   同行之间的尊重构成了任何类型的开放式沟通的基础。一个人们乐于挑战彼此想法的地方是一个通过辩论形成合理想法的地方。人们容易被冒犯的地方是关键反馈被隐瞒的地方。</p>
-<h3 id="6-建立代码的共享所有权。"><a href="#6-建立代码的共享所有权。" class="headerlink" title="6. 建立代码的共享所有权。"></a>6. 建立代码的共享所有权。</h3><pre><code>    虽然个人精通代码库或基础设施的各个部分是很自然的，但没有人应该觉得他们拥有或是任何一个部分的唯一维护者。 
-
-    在组织上，共享代码所有权提供了三个好处。首先，保持总线因子大于 1 可以减轻维护者的压力，并降低团队在维护者离开时的风险。这也使那个人很难无忧无虑地休假。
-
-    其次，共享所有权使在特定领域不深入的工程师能够提供新的见解。它使工程师摆脱了他们被困在某些项目上的感觉，并鼓励他们从事各种项目，这有助于保持工作的趣味性并促进员工的学习和积极性。从长远来看，它降低了一些工程师感到停滞不前并决定离开的组织风险。
-
-    第三，共享所有权还为在需要更快地完成战略目标时让多个团队成员蜂拥而至（来自敏捷开发的一种技术）共同解决高优先级问题奠定了基础。对于孤立的所有权，负担通常落在一两个人身上。
-</code></pre>
-<h3 id="7-投资自动化测试。"><a href="#7-投资自动化测试。" class="headerlink" title="7. 投资自动化测试。"></a>7. 投资自动化测试。</h3><p>  单元测试覆盖率和某种程度的集成测试覆盖率是管理一大群人的大型代码库而不不断破坏构建或产品的唯一可扩展方式。自动化测试为提高代码质量所需的大规模重构提供了信心和有意义的保护。在缺乏严格的自动化测试的情况下，工程团队或外包测试团队进行手动测试所需的时间很容易变得令人望而却步，并且很容易陷入一种害怕改进一段代码的文化，因为它可能会破坏。</p>
-<p>  强大自动化测试将验证责任转移到原作者身上，减少不熟悉的人的投入。</p>
-<h3 id="8-分配-20-的时间。"><a href="#8-分配-20-的时间。" class="headerlink" title="8. 分配 20% 的时间。"></a>8. 分配 20% 的时间。</h3><h3 id="9-建立学习和持续改进的文化。"><a href="#9-建立学习和持续改进的文化。" class="headerlink" title="9. 建立学习和持续改进的文化。"></a>9. 建立学习和持续改进的文化。</h3><h3 id="10-雇佣最好的。"><a href="#10-雇佣最好的。" class="headerlink" title="10. 雇佣最好的。"></a>10. 雇佣最好的。</h3><p>如果没有足够的工程经验，很难识别出要构建的正确抽象。如果没有其他聪明人来挑战你的想法并推动你走向简单，很容易陷入构建复杂事物的陷阱。</p>
-<p>硅谷有句谚语，由史蒂夫·乔布斯（Steve Jobs）创造，“A 球员雇佣 A 球员。B 玩家雇佣 C 玩家。” 专注于招聘和聘用合适的人是困难的，但对于有效发展工程组织至关重要<br>因为低质量代码和团队中较弱的工程师带来的技术债务最终会伤害团队和产品。</p>
 
       
     </div>

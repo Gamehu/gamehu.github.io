@@ -169,7 +169,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">164</span>
+          <span class="site-state-item-count">165</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -220,6 +220,135 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/06/02/Linux%20ls%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/06/02/Linux%20ls%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">Linux ls命令</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-06-02 17:44:00" itemprop="dateCreated datePublished" datetime="2020-06-02T17:44:00+08:00">2020-06-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2020-09-01 14:24:50" itemprop="dateModified" datetime="2020-09-01T14:24:50+08:00">2020-09-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>前面的文章已经说过很多了，因为经常会到服务器上操作，所以记录几个常用的Linux命令。</p>
+<h3 id="ls命令"><a href="#ls命令" class="headerlink" title="ls命令"></a>ls命令</h3><p>ls命令应该说是我接触的linux的第一批命令之一，属于没事就敲个ls装逼的程度，但是用下来发现也是一个宝藏命令，实用性很强。</p>
+<h5 id="ls"><a href="#ls" class="headerlink" title="ls"></a><code>ls</code></h5><p>直接输入ls，不带任何其它选项，该<code>ls</code>命令提供有关由命令行上给定路径指向的每个文件对象的信息：</p>
+<ul>
+<li>只显示路径指向的文件对象的名称；</li>
+<li>如果该路径指向目录（或指向目录的符号链接），则该<code>ls</code>命令还会列出该目录的内容；</li>
+<li>如果显示多个条目，则将按文件名的字母顺序对其进行排序。</li>
+</ul>
+<p>最后，当在命令行上未给出路径时，这些<code>ls</code>命令将采用<code>./</code>–即当前目录。</p>
+<img src="/2020/06/02/Linux%20ls%E5%91%BD%E4%BB%A4/1.png" class="" title="ls">
+
+<h5 id="ls-l-长格式显示"><a href="#ls-l-长格式显示" class="headerlink" title="ls -l: 长格式显示"></a><code>ls -l: 长格式显示</code></h5><p>除文件名称外，亦将日期和时间、权限、拥有者、文件大小等资讯详细列出，我们经常使用的<code>ll</code>其实就是它的别名。</p>
+<img src="/2020/06/02/Linux%20ls%E5%91%BD%E4%BB%A4/2.png" class="" title="ls -l">
+
+<h5 id="ls-a-显示所有文件"><a href="#ls-a-显示所有文件" class="headerlink" title="ls -a: 显示所有文件"></a><code>ls -a: 显示所有文件</code></h5><p>使用该<code>-a</code>选项时，在显示目录内容时<code>ls</code>包括<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Hidden_file_and_hidden_directory">隐藏文件</a>。但是什么是隐藏文件？</p>
+<p>隐藏文件：名称以点开头的文件被视为隐藏文件。此外，每个目录还包含两个特殊的，通常为隐藏的条目：<code>.</code>和<code>..</code></p>
+<p>在每个目录中：</p>
+<ul>
+<li>该<code>.</code>条目指向目录本身。这种自我指称似乎很奇怪。但这有时很有用，有点像将自己的电话号码存储到智能手机库中。</li>
+<li>该<code>..</code>条目指向父目录。由于类Unix系统上的文件层次结构严格地组织为一<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Tree_(data_structure)">棵树</a>，因此每个目录只有一个父目录。</li>
+</ul>
+<img src="/2020/06/02/Linux%20ls%E5%91%BD%E4%BB%A4/3.png" class="">
+
+<h5 id="ls-s-显示文件分配的大小"><a href="#ls-s-显示文件分配的大小" class="headerlink" title="ls -s: 显示文件分配的大小"></a><code>ls -s: 显示文件分配的大小</code></h5><p>这里大小的单位是<strong>块</strong>，在linux中一块可以看作是1024字节，该大小指的不是逻辑大小而是实际大小。如下所示，a、b都是2097152，但是通过块的方式查看b只有1028，因为b目录下由 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Sparse_file">sparse files</a>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sh:~/ls$ ls -ls a b</span><br><span class="line">2052 -rw-r--r-- 1 sylvain sylvain 2097152 Sep 19 22:18 a</span><br><span class="line">1028 -rw-r--r-- 1 sylvain sylvain 2097152 Sep 19 22:18 b</span><br></pre></td></tr></table></figure>
+
+<h5 id="ls-h-可读性强的方式显示文件大小"><a href="#ls-h-可读性强的方式显示文件大小" class="headerlink" title="ls -h: 可读性强的方式显示文件大小"></a><code>ls -h: 可读性强的方式显示文件大小</code></h5><p>使用-h选项，ls将使用单位后缀显示文件大小，以使其更加用户友好。如图直接使用-h是没用的，结合l和s使用。</p>
+<img src="/2020/06/02/Linux%20ls%E5%91%BD%E4%BB%A4/4.png" class="">
+
+<h5 id="ls-d-只显示目录（文件夹）"><a href="#ls-d-只显示目录（文件夹）" class="headerlink" title="ls -d */: 只显示目录（文件夹）"></a><code>ls -d */: 只显示目录（文件夹）</code></h5><img src="/2020/06/02/Linux%20ls%E5%91%BD%E4%BB%A4/5.png" class="">
+
+<h5 id="ls-i-显示文件的索引号"><a href="#ls-i-显示文件的索引号" class="headerlink" title="ls -i: 显示文件的索引号"></a><code>ls -i: 显示文件的索引号</code></h5><p>有点我们说的引用地址的意思，该选项在查看文件的硬、软链接时比较有用。比如查看某几个文件是否引用同一基础文件系统对象。</p>
+<p>比如下图，切换到根目录，然后<code>ls -ia</code>你会发现<code>.</code>和<code>..</code> 的索引号都是2，证明指向的是同一个目录，这刚好可以解释根目录的父目录就是根目录自身。</p>
+<img src="/2020/06/02/Linux%20ls%E5%91%BD%E4%BB%A4/6.png" class="">
+
+<h5 id="ls-1"><a href="#ls-1" class="headerlink" title="ls ../"></a><code>ls ../</code></h5><p>查看父目录文件。</p>
+<h5 id="ls-2"><a href="#ls-2" class="headerlink" title="ls ~"></a><code>ls ~</code></h5><p>查看主目录的文件。</p>
+<h5 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h5><p><code>ls -t </code>：按修改时间倒序，最近修改的在前。</p>
+<p><code>ls -S</code>： 按文件大小正序，最小在前。</p>
+<p><code>ls -r</code>：反转排序。比如<code>ls -rS</code>，则会变成最大的在前。</p>
+<p><code>ls -R</code>：递归列出子目录，跟<code>find .</code>效果类似。</p>
+<p><strong>时间完整显示</strong></p>
+<p><code>ls --full-time</code>：显示完整日期及时间。</p>
+<h3 id="OK"><a href="#OK" class="headerlink" title="OK"></a>OK</h3><p>结束了，以上列举的80%都是我日常经常用的，希望对大家有帮助。</p>
+<p><strong>感谢</strong></p>
+<blockquote><footer><strong>ls Command in Linux: 17 Useful Examples Explained</strong><cite><a target="_blank" rel="noopener" href="https://linuxhandbook.com/ls-command/#_a_sample_file_hierarchy">Sylvain Leroux</a></cite></footer></blockquote>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -2183,148 +2312,6 @@
 
 
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/02/13/Root-User-in-Ubuntu/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-      <meta itemprop="description" content="我还是我，看到自己都老火...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/02/13/Root-User-in-Ubuntu/" class="post-title-link" itemprop="url">Root User in Ubuntu</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2020-02-13 21:20:00 / 修改时间：21:56:44" itemprop="dateCreated datePublished" datetime="2020-02-13T21:20:00+08:00">2020-02-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>话说从接触Linux那一天起，就有一种独领风骚的傲气，命令走天下的这种霸气，那时候感觉精通Linux的连女朋友都带光环。</p>
-<p>我最开始接触Linux是从Ubuntu开始，当时笔记本装了双系统，我就鼓捣了一个Ubuntu，现在用的较多的CentOS，首先入门都是先从了解root开始，我其实一直对root很好奇，刚好今天看到twitter上ruanyf大佬推了一篇文章<a target="_blank" rel="noopener" href="https://itsfoss.com/root-user-ubuntu/">Root User in Ubuntu: Important Things You Should Know</a>讲基于Ubuntu的root的文章，基础好用，我们现在做的产品的安装包刚好也是基于Ubuntu做的，所以更有必要在此做个中文版记录。</p>
-<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>文章主要讲了以下四块：</p>
-<ol>
-<li>为什么在Ubuntu中禁用root用户</li>
-<li>以root身份使用命令</li>
-<li>切换到root用户</li>
-<li>解锁root用户</li>
-</ol>
-<h3 id="什么是root用户？为什么将其锁定在Ubuntu中？"><a href="#什么是root用户？为什么将其锁定在Ubuntu中？" class="headerlink" title="什么是root用户？为什么将其锁定在Ubuntu中？"></a>什么是root用户？为什么将其锁定在Ubuntu中？</h3><p><img src="https://i0.wp.com/itsfoss.com/wp-content/uploads/2020/01/root_user_ubuntu.png?ssl=1" alt="根用户Ubuntu"></p>
-<p>稍微了解Linux的都知道，在Linux中，有一个称为<a target="_blank" rel="noopener" href="http://www.linfo.org/root.html">root</a>的超级用户。这是超级管理员帐户，可以使用系统执行任何操作。它可以访问任何文件并在Linux系统上运行任何命令。</p>
-<p>拥有权利的同时也被赋予了重大的责任。超级用户可以为您提供对系统的完全控制权，因此也格外谨慎。超级用户可以访问系统文件并运行命令来更改系统配置。因此，错误的命令可能会造成无法挽回的损失，比如网上老说的一个梗：当rm -rf 之后我跑路了。所以一般情况下都不会给root权限，管理员会分配部分权限建对应的用户供对应的人使用。</p>
-<p>这也说明了为什么<a target="_blank" rel="noopener" href="https://ubuntu.com/">Ubuntu</a>默认情况下锁定了root用户，就是为了避免意外灾难。</p>
-<p>您无需具有root特权即可执行日常任务，例如将文件移动到主目录中，从Internet下载文件，创建文档等。</p>
-<p>*<strong>以此类比更好地理解它。如果必须切水果，可以使用菜刀。如果必须砍伐树木，则必须使用锯。现在，您可以使用锯切水果，但这不明智，是吗？*</strong></p>
-<p>这是否意味着您不能成为Ubuntu的root用户或无法使用具有root用户特权的系统？不，您仍然可以在“ sudo”的帮助下获得root用户访问权限（在下一节中说明）。</p>
-<blockquote>
-<p>重点：</p>
-<p>用户功能强大，无法用于常规任务。这就是为什么不建议始终使用root的原因。您仍然可以使用root运行特定命令。</p>
-</blockquote>
-<h3 id="如何在Ubuntu中以root用户身份运行命令？"><a href="#如何在Ubuntu中以root用户身份运行命令？" class="headerlink" title="如何在Ubuntu中以root用户身份运行命令？"></a>如何在Ubuntu中以root用户身份运行命令？</h3><p><img src="https://i2.wp.com/itsfoss.com/wp-content/uploads/2020/01/sudo_sandwich.png?ssl=1" alt="须藤三明治xkcd">图片来源：<a target="_blank" rel="noopener" href="https://xkcd.com/149/">xkcd</a></p>
-<p>当你需要某些系统特定任务的root特权。例如，如果要<a target="_blank" rel="noopener" href="https://itsfoss.com/update-ubuntu/">通过命令行更新Ubuntu</a>，则不能以常规用户身份运行该命令。会有以下类似的错误。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">Reading package lists... Done</span><br><span class="line">E: Could not open lock file /var/lib/apt/lists/lock - open (13: Permission denied)</span><br><span class="line">E: Unable to lock directory /var/lib/apt/lists/</span><br><span class="line">W: Problem unlinking the file /var/cache/apt/pkgcache.bin - RemoveCaches (13: Permission denied)</span><br><span class="line">W: Problem unlinking the file /var/cache/apt/srcpkgcache.bin - RemoveCaches (13: Permission denied)</span><br></pre></td></tr></table></figure>
-
-<p>那么，这个时候怎么做呢？简单的答案是在需要以root身份运行的命令之前添加sudo。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
-
-<p>Ubuntu和许多其他Linux发行版使用一种称为sudo的特殊机制。Sudo是一个程序，用于以root（或其他用户）身份控制对运行命令的访问。</p>
-<p>Sudo实际上是一个多功能的工具。可以将其配置为允许用户以root用户身份运行所有命令。您可以配置它仅以root身份运行选定的几个命令。您也可以配置为<a target="_blank" rel="noopener" href="https://linuxhandbook.com/sudo-without-password/">不带密码运行sudo</a>。</p>
-<p><a target="_blank" rel="noopener" href="https://itsfoss.com/install-ubuntu/">在安装Ubuntu时</a>，必须创建一个用户帐户。该用户帐户在您的系统上以管理员身份运行，并且按照Ubuntu中的默认sudo策略，它可以使用root特权在系统上运行任何命令。</p>
-<p>运行<strong>sudo不需要root密码，但需要用户自己的password</strong>。</p>
-<p>这就是为什么当使用sudo运行命令时，总会一开始就询问密码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gamehu@nuc:~$ sudo apt update</span><br><span class="line">[sudo] password for gamehu: </span><br></pre></td></tr></table></figure>
-
-<p>如您在上面的示例中看到的，用户gamehu试图使用<em>sudo</em>运行’apt update’命令，系统要求输入gamehu的密码。</p>
-<p><strong>要注意当您开始在终端中输入密码时，屏幕上什么都没有发生不会有任何显示，也没有所谓的删除键、退格键…这里会记录你按下的所有键。因为作为默认安全功能，屏幕上不显示任何内容。甚至没有星号（*）。您输入密码，然后按Enter。*</strong></p>
-<blockquote>
-<p>划重点：</p>
-<p>要在Ubuntu中以root身份运行命令，请在命令前添加sudo。<br>当要求输入密码时，输入您的帐户密码。<br>在屏幕上键入密码时，看不到任何内容。只需继续正确的输入密码，然后按Enter。</p>
-</blockquote>
-<h3 id="如何在Ubuntu中成为root用户？"><a href="#如何在Ubuntu中成为root用户？" class="headerlink" title="如何在Ubuntu中成为root用户？"></a>如何在Ubuntu中成为root用户？</h3><p>你可以使用sudo以root身份运行命令。但是，在某些情况下，您必须以root用户身份运行多个命令，则可以临时切换为root用户。</p>
-<p>sudo命令允许您使用以下命令模拟root登录shell：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo -i</span><br><span class="line">gamehu@nuc:~$ sudo -i</span><br><span class="line">[sudo] password for gamehu: </span><br><span class="line">root@nuc:~# whoami</span><br><span class="line">root</span><br><span class="line">root@nuc:~# </span><br></pre></td></tr></table></figure>
-
-<p>您会注意到，切换到root用户时，shell命令提示符将从$（美元键符号）更改为＃（磅键符号）。</p>
-<p>*<strong>尽管已向您展示了如何成为root用户，但我必须警告你，应避免将系统用作root用户。毕竟出于某种原因，我们不建议这样做。*</strong></p>
-<p>临时切换到root用户的另一种方法是使用su命令：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br></pre></td></tr></table></figure>
-
-<p>如果您尝试在不使用sudo的情况下使用su命令，则会遇到“ su身份验证失败”错误。</p>
-<p>您可以使用exit命令恢复为普通用户。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="如何在Ubuntu中启用root用户？"><a href="#如何在Ubuntu中启用root用户？" class="headerlink" title="如何在Ubuntu中启用root用户？"></a>如何在Ubuntu中启用root用户？</h3><p>到目前为止，您已经知道默认情况下，root用户在基于Ubuntu的发行版中被锁定。</p>
-<p>Linux使您可以自由地对系统进行任何操作。解锁root用户是这些自由之一。</p>
-<p>如果出于某种原因决定启用root用户，则可以通过为它设置密码来启用它：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root</span><br></pre></td></tr></table></figure>
-
-<p>同样，不建议这样做，我也不鼓励您在桌面上执行此操作。如果忘记了密码，将无法再次<a target="_blank" rel="noopener" href="https://itsfoss.com/how-to-hack-ubuntu-password/">在Ubuntu中更改root密码</a>。</p>
-<p>您可以通过删除密码来再次锁定root用户：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd -dl root</span><br></pre></td></tr></table></figure>
       
     </div>
 
