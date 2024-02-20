@@ -13,7 +13,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
@@ -169,18 +169,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">102</span>
+        <span class="site-state-item-count">104</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,6 +220,220 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/08/06/GraphQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/08/06/GraphQL/" class="post-title-link" itemprop="url">GraphQL</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-08-06 15:24:00" itemprop="dateCreated datePublished" datetime="2018-08-06T15:24:00+08:00">2018-08-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2021-07-23 15:38:30" itemprop="dateModified" datetime="2021-07-23T15:38:30+08:00">2021-07-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>前后端关于CMDB的交互决定选用GraphQL，因为第一次听说就抓紧时间了解了以下是个什么东西。</p>
+<h2 id="GraphQL干嘛的？"><a href="#GraphQL干嘛的？" class="headerlink" title="GraphQL干嘛的？"></a>GraphQL干嘛的？</h2><blockquote><footer><strong>Overview</strong><cite><a target="_blank" rel="noopener" href="http://spec.graphql.cn/#sec-Overview-">spec.graphql.cn/#sec-Overview-</a></cite></footer></blockquote>
+
+<p><em>GraphQL语言致力于提供一种直观的弹性语法系统，用以描述客户端程序设计时的数据需求以及数据交互行为。</em></p>
+<p>说的直白点就是能让API设计变得更加的灵活，你想要什么数据就给你什么数据，不多不少。</p>
+<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><p>目前只有CMDB那一块使用的GraphQL，其它的前后端交互还是用的传统的方式。</p>
+<p>不过这并不影响我对它的兴趣，新东西总是喜欢琢磨琢磨，更何况GraphQL有大厂的背书，那证明它的潜力是巨大地。</p>
+<ul>
+<li>传统的api设计，如果想要多种场景公用一个接口，比如都是获取用户信息，A场景需要name，B场景需要name+sex，C场景需要name+introduction，很显然都是获取用户信息，但是每个场景要求的数据不一样，如果简单粗暴的直接返回整个用户信息，很显然不太科学，极端一点假设用户有20个字段，调用方只需要一个字段，你给20个字段完全是浪费，另一种方案是写三个接口，但是三个接口很显然太冗余了，所以通常是公用一个接口，但是共有一个接口就肯定免不了一堆逻辑判断,此外，这样还会造成不同业务之间的耦合，每次发布都需要各个业务场景一起测试和回归。</li>
+</ul>
+<p><strong>这种时候痛点就出现了，不重用接口则没法提高开发效率，重用接口则会有这些问题。</strong></p>
+<p>这个时候GraphQL就体现它的优势了，我认为它的出现就是为了解决上面的痛点。出现上面的问题的根本原因我认为在于，前端不能直白的告诉后端我要什么数据，必须通过后端经过对应的翻译转换，因为前端没有合适的方式来告诉我们A只需要name，B只需要name+sex，它可能就给我们一个userId然后给个businessCase然后我们根据businessCase来进行逻辑判断，进行数据查询，进行数据筛选以及过滤。</p>
+<h2 id="GraphQL"><a href="#GraphQL" class="headerlink" title="GraphQL"></a>GraphQL</h2><p>花点时间写这个，是因为觉得GraphQL算是开阔了我的技术视野，我们其实还用的很浅，他的<strong>一切皆是图</strong>、<strong>API无版本（某些场景）</strong>的思想，以及schema、别名、片段、指令、mutation、元字段等概念让GraphQL灵活的像猴哥，至少目前我们没有遇到有什么场景是满足不了的，至少对于技术浅薄的我来说是有开到脑洞。</p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI4Njc5NjM1NQ==&mid=2247501981&idx=1&sn=4cefea59913ac291f7fafcf4a3a007a0&chksm=ebd5f7b1dca27ea779ea35b8521d91b85239d9b5d64489e394be76347c72a0968ce616b1597d&mpshare=1&scene=1&srcid=0108kwmT37WixQYNhMCOnZQ4&sharer_sharetime=1610066466233&sharer_shareid=77df2eafd0a472623696abf038541666&version=3.1.1.3001&platform=win#rd">我为什么要放弃RESTful，选择拥抱GraphQL</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/chentsulin/awesome-graphql">graphql工具社区</a></p>
+<p>学习地址：</p>
+<blockquote><footer><strong>learn</strong><cite><a target="_blank" rel="noopener" href="http://graphql.cn/learn/">graphql.cn/learn</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>learn</strong><cite><a target="_blank" rel="noopener" href="https://www.howtographql.com">www.howtographql.com</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>graphql-up</strong><cite><a target="_blank" rel="noopener" href="https://github.com/prisma/graphql-up">github.com/prisma/graphql-up</a></cite></footer></blockquote>
+
+
+
+<p>这是我用nodejs实现的很简单的demo：</p>
+<blockquote><footer><strong>demo</strong><cite><a target="_blank" rel="noopener" href="https://github.com/WebHu/graph_demo.git">github.com/WebHu/graph_demo.git</a></cite></footer></blockquote>
+
+<p>这是通过howtographql搭建的demo</p>
+<blockquote><footer><strong>demo</strong><cite><a target="_blank" rel="noopener" href="https://github.com/WebHu/graph_apollo_demo.git">github.com/WebHu/graph_apollo_demo.git</a></cite></footer></blockquote>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://flaviocopes.com/graphql-vs-rest/">https://flaviocopes.com/graphql-vs-rest/</a></p>
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/08/01/%E8%A7%82%E7%9C%8B%E4%B9%8B%E9%81%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/08/01/%E8%A7%82%E7%9C%8B%E4%B9%8B%E9%81%93/" class="post-title-link" itemprop="url">观看之道</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-08-01 09:48:00" itemprop="dateCreated datePublished" datetime="2018-08-01T09:48:00+08:00">2018-08-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2020-09-21 21:34:24" itemprop="dateModified" datetime="2020-09-21T21:34:24+08:00">2020-09-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index"><span itemprop="name">成长</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>这两天看了有人推荐的约翰·伯格在BBC的纪录片《观看之感》，这部纪录片开始通过讲艺术中的绘画（油画），然后讲解油画的内容，最后过渡到当今（70年代）社会的海报（广告）。</p>
+<img src="/2018/08/01/%E8%A7%82%E7%9C%8B%E4%B9%8B%E9%81%93/001.png" class="" title="Ways of Seeing">
+
+
+
+<p>我这人是个粗人反应也比较慢，看到最后瞬间才如醍醐灌顶般了解这个纪录片讲述的东西，想在这儿写下感想….</p>
+<p>但是资历太浅写不出来，后面想通了再回来补，现在就记录下现下我的思考。</p>
+<p><strong>感触</strong></p>
+<p>一听到艺术都觉得那是个高层次的是在生活之上的，其实可能不是我们传颂的那样，它的内容最终都是反馈到世俗生活中的，所以这样传统的认知是值得商榷的（约翰·伯格甚至是批判这种认知），整个纪录片我得到的信息是，告诉我一个词叫“欲望”，其实不管是油画还是其复制品还是现在的海报背后都隐藏着人们对某一方面的欲望。</p>
+<p>所以其实你会发现现实中很多东西其实是被设计的，在比较深层次的地方他们可能会很可怕的引导你的思维方式、你的诉求、你的认知…，表面上可能会影响你穿什么、吃什么、喜欢什么…，这让我想到了一本书《娱乐至死》，大家有兴趣可以看下我觉得很有意义的一本书。</p>
+<p>节目最后伯格大叔也说了，纪录片仅代表他的观点，具体怎么看还是取决与我们自己。所以我们活着一定要多些思考，多换角度思考，多想想为什么，不要轻易听信别人，也不要懒得思考…</p>
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1211,222 +1425,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/07/03/Service%20Mesh/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-      <meta itemprop="description" content="我还是我，看到自己都老火...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/07/03/Service%20Mesh/" class="post-title-link" itemprop="url">Service Mesh</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-07-03 10:56:00" itemprop="dateCreated datePublished" datetime="2018-07-03T10:56:00+08:00">2018-07-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2020-09-21 21:36:06" itemprop="dateModified" datetime="2020-09-21T21:36:06+08:00">2020-09-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>之前从国外的一篇博客上了解到了ServiceMesh，觉得很感兴趣，感觉它是完全就是为分布式量身定做的以后肯定会大火，不管以后能不能进入运用ServiceMesh思想的公司，先了解是不错的，果不其然，阿里系首先就来了个dubbo mesh和sofa mesh，我参加阿里的dubbo meeting up时，宣布发布了dubbo mesh。以下内容做个这段时间的学习记录。</p>
-
-
-<p>Service mesh  我理解其实不是新技术是一个新技术理念。</p>
-<p>看了很多相关的文章也看了某些案例，准备动手实践一下。很多service mesh的文章和案例通常都会提到两个单词，data-plane和control-plane，即<strong>数据面板</strong>和<strong>控制面板</strong>。</p>
-<p>顾名思义，我理解数据面主要是负责服务间通信传递信息的相关操作，比如负载均衡、服务发现、心跳检测、路由、监控等等，但是你会发现，如果只有数据面板其实是没用的，因为数据面板功能再多但是它是死的，他就像一台计算机，软硬件都配好了就算你跟他通上电，插好网线他也不能工作，因为它不知道他要做什么和怎么做。</p>
-<p>而控制面板恰好就是做这个事的，它告诉控制面板应该做什么怎么做，比如服务间通信的规范、路由的地址以及路由的规则、监控的指标、限流、熔断的机制是什么配置是什么？控制面板才能真正让数据面板变成一套可运行的系统。</p>
-<p>其实通过很多案例知道，很多大中型的公司特别是互联网公司，他们很早以前就有了自己的数据面板可能叫代理更合适，因为那时候还没流行service mesh的概念，他们也有控制面板（可能那时候更明确的叫法是库或者配置中心）。所以service mesh只是概念新，但应用应该很早就有了，只是现在的提出的service mesh应该更激进一些，直接把数据面板和控制面板剥离出来作为基础设施，脱离业务。</p>
-<p>由于近年云原生、容器、微服务等概念的火热，微服务的落地案例越来越多，带来技术革新的同时也带来了烦恼。即微服务的运维（服务治理、路由策略、性能监控等）复杂度，不管是云原生还是容器都旨在让微服务能更快速更高效的部署，但是服务部署后是需要运行的，这么多服务之间的运行的有效性谁来保证，当然在云原生等概念火热之前，很多公司都有自己的微服务架构，服务之间运维也都有自己的一套。但是很多方案基本上都是把对服务运维的管理的代码或者说库耦合在业务代码里的，比如zk的使用，就是耦合在业务代码中的，而且很多时候是每种编程语言都需要开发一套代码来支持。这就让运维变得越来越繁琐，Dev和Ops耦合程度会越来越高。</p>
-<p>现在的Istio、linkerd、sofa mesh等其实就为了解决上面说到的痛点。那怎么解决呢，就是把属于基础设施的组件，属于ops的工作从业务中剥离出来。在业务服务的身边跟他派一个书童，这个书童就是service mesh的应用。书童存在的价值是什么？就是让他的少爷能专心的读书，除了读书其它事情一概不用管。我理解这就是service mesh真正的价值。</p>
-<h2 id="关键词解释"><a href="#关键词解释" class="headerlink" title="关键词解释"></a>关键词解释</h2><p>云原生（cloud native）<br>我理解的是什么都在云上做，存储、交付、部署、测试等等，最大的特点就是快。</p>
-<blockquote><footer><strong>佚名</strong><cite><a target="_blank" rel="noopener" href="http://cloud.51cto.com/art/201712/562038.htm">云原生架构概述 不了解你就OUT了</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>Matt Stine</strong><cite><a target="_blank" rel="noopener" href="https://pivotal.io/cloud-native">What are Cloud-Native Applications?</a></cite></footer></blockquote>
-
-
-<hr>
-<p>源引：</p>
-<blockquote><footer><strong>敖小剑</strong><cite><a target="_blank" rel="noopener" href="https://skyao.io/publication/istio-introduction/">服务网格新生代-Istio</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>小数</strong><cite><a target="_blank" rel="noopener" href="http://www.servicemesh.cn/?/article/24">深度解析Service Mesh中数据面板与控制面板</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>勇往直前的专栏</strong><cite><a target="_blank" rel="noopener" href="https://blog.csdn.net/zl1zl2zl3/article/details/78678460?locationNum=2&fps=1">聊聊Service Mesh：linkerd</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>并发编程网</strong><cite><a target="_blank" rel="noopener" href="http://ifeve.com/linkerd-introduction/">《Linkerd官方文档》Linkerd介绍?</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>William Morgan</strong><cite><a target="_blank" rel="noopener" href="https://blog.buoyant.io/2017/04/25/whats-a-service-mesh-and-why-do-i-need-one/">What’s a service mesh? And why do I need one?</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>goodrain</strong><cite><a target="_blank" rel="noopener" href="http://www.servicemesh.cn/?/article/75">Service mesh的历史-The History of the Service Mesh</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>William Morgan</strong><cite><a target="_blank" rel="noopener" href="https://thenewstack.io/history-service-mesh/">The History of the Service Mesh</a></cite></footer></blockquote>
-
-<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2018/06/30/Serverless/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-      <meta itemprop="description" content="我还是我，看到自己都老火...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/06/30/Serverless/" class="post-title-link" itemprop="url">Serverless</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-06-30 16:24:00" itemprop="dateCreated datePublished" datetime="2018-06-30T16:24:00+08:00">2018-06-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2020-02-23 13:18:46" itemprop="dateModified" datetime="2020-02-23T13:18:46+08:00">2020-02-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>最近关注ServerMesh时，又听到一个Serverless，所以又了解了解，做个笔记吧。</p>
-<p>最近google开源了Knative，感觉Serverless可能又要起飞了。</p>
-<p>Serverless也是一种架构模式，中文意思是“无服务器”架构。目前，业界并没有给出明确的定义，把其分成两种类型，分别为“Backend as a Service” 和 “Functions as a Service”。</p>
-<blockquote>
-<p>个人理解就是开发是不需要维护基础设施以及基础组件，直接填业务代码。</p>
-</blockquote>
-<h2 id="Serverless与传统架构比较"><a href="#Serverless与传统架构比较" class="headerlink" title="Serverless与传统架构比较"></a>Serverless与传统架构比较</h2><p>传统的互联网APP主要采用C&#x2F;S架构，服务器端需长期维持业务进程来处理客户端请求，并调用代码逻辑完成请求响应流程。而在Serverless架构中，应用业务逻辑将基于FAAS架构形成独立为多个相互独立功能组件，并以API服务的形式向外提供服务；同时，不同功能组件间的逻辑组织代码将存储在Amazon Lambda，Azure Function，Google Cloud Functions等产品上，业务代码仅在调用时才激活运行，当响应结束占用资源便会释放。</p>
-<blockquote>
-<p>个人理解类似事件驱动的感觉，来了请求就触发业务代码。我理解这种形式是不是很有可能比传统的长期维持的方式要慢一些，因为传统是等着你时刻准备着，serverless是你来了我再启用。</p>
-</blockquote>
-<p>Serverless 如果是在高并发而且要求数据安全性、独立性的场景应该是不适用。和云厂商真的是强耦合了。后续有时间继续学习吧。</p>
-<p>如果想试一试，可以去Cloudflare](<a target="_blank" rel="noopener" href="https://workers.cloudflare.com/docs)%E8%AF%95%E8%AF%95%E8%B7%91%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84js%E8%84%9A%E6%9C%AC%E6%84%9F%E5%8F%97%E4%B8%80%E4%B8%8B%E3%80%82">https://workers.cloudflare.com/docs)试试跑一个简单的js脚本感受一下。</a></p>
-<p>参考：</p>
-<blockquote><footer><strong>Leo_wlCnBlogs</strong><cite><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Leo_wl/p/6055252.html">Serverless 架构：用服务代替服务器</a></cite></footer></blockquote>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
@@ -1440,7 +1438,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

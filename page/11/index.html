@@ -13,7 +13,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
@@ -169,18 +169,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">102</span>
+        <span class="site-state-item-count">104</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,6 +220,299 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/09/03/Lint%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/09/03/Lint%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Lint笔记-ESLint</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-09-03 15:23:00" itemprop="dateCreated datePublished" datetime="2019-09-03T15:23:00+08:00">2019-09-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2020-09-21 21:34:04" itemprop="dateModified" datetime="2020-09-21T21:34:04+08:00">2020-09-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>由于尽量不想让自己在编码路上留下的足迹会让后人觉得像屎一样…年初到现在断断续续的都在想办法提升个人的工程能力</p>
+<p>关于Lint最早是前两年写了一段时间的nodejs，然后知道了一个叫ESLint的玩意…这东西好用啊，让代码可以不太像屎一样了所以最近就捡起来了，当然工具是辅助最重要的还是基础。</p>
+<p>伴随着格言 do not BB，show me code。刚好同事让我帮忙跟他弄一下ESLint，那我想着干脆整个文档，那不就简单了，大家都能用。</p>
+<p>以下就是跟我们项目贴合度比较高的ESLint简单的配置教程出来（为博客凑个数，话说确实太懒了文章写的少），然后有时间再分析其原理的东西。</p>
+<h2 id="ESLint-配置"><a href="#ESLint-配置" class="headerlink" title="ESLint 配置"></a>ESLint 配置</h2><h3 id="安装ESLint相关库"><a href="#安装ESLint相关库" class="headerlink" title="安装ESLint相关库"></a>安装ESLint相关库</h3><pre><code>npm install -g eslint 
+// 用了 React 需要再安一个babel-eslint  
+npm install -D eslint babel-eslint
+//如果要用大厂的需安装对应的库，比如用airbnb的
+npm install -D eslint-config-airbnb
+// 因为要校验 Reac 语法，所以这里需要下载一个 React 语法规则的包  
+npm install -D eslint-plugin-react
+</code></pre>
+<p>可能不全，但是总之一句话，别想太多提示差什么包就装什么包就对了。</p>
+<h3 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h3><pre><code>node_modules/.bin/eslint --init
+//如果全局安装了 可以直接
+eslint --init  
+</code></pre>
+<p>会出现一个界面，根据模板创建ESLint的配置文件，最终填完之后大概就是下面这样</p>
+<img src="/2019/09/03/Lint%E7%AC%94%E8%AE%B0/eslint.png" class="">
+
+<p><strong>演示一把：</strong></p>
+<p>选一种方式生成配置文件，可根据需求选择，建议第一个问题选第二种Use a popular style guide（使用大厂的），然后选一个，通常用airbnb的. 跟着界面依次填写下面的内容，最终会在你根目录下生成一个文件名为.eslintrc.js的配置文件 。</p>
+<p>根据模板创建配置文件，可以选个模板，也可以自己回答问题</p>
+<pre><code>PS E:\eslint&gt; eslint --init
+? How would you like to configure ESLint? Use a popular style guide
+? Which style guide do you want to follow? (Use arrow keys)
+&gt; Airbnb (https://github.com/airbnb/javascript)
+  Standard (https://github.com/standard/standard)
+  Google (https://github.com/google/eslint-config-google)
+</code></pre>
+<p>比如选airbnb</p>
+<pre><code>module.exports = &#123;
+&quot;extends&quot;: &quot;airbnb&quot;
+&#125;;
+</code></pre>
+<p>也可以自己回答问题来创建</p>
+<pre><code>&gt; eslint --init
+
+? How would you like to configure ESLint? Answer questions about your style
+// 是否校验 Es6 语法
+? Are you using ECMAScript 6 features? Yes  
+// 是否校验 Es6 模块语法
+? Are you using ES6 modules? Yes   
+// 代码运行环境，Browser 指浏览器 
+? Where will your code run? Browser   
+// 是否校验 CommonJs 语法  
+? Do you use CommonJS? Yes  
+// 是否校验 JSX 语法
+? Do you use JSX? Yes   
+// 是否校验 React 语法
+? Do you use React? Yes 
+// 首行空白选择 Tab 键还是 Space
+? What style of indentation do you use? Tabs
+// 字符串使用单引号 &#39;string&#39; 还是双引号 &quot;string&quot;
+? What quotes do you use for strings? Double
+// 操作系统
+? What line endings do you use? Windows 
+// 每行代码结尾是否校验加分号 ;
+? Do you require semicolons? Yes
+// 以 .js 格式生成配置文件
+? What format do you want your config file to be in? JavaScript   
+</code></pre>
+<p><em>PS</em>：也可以直接在根目录下手动建一个文件.eslintrc.js（后缀也可以是JSON、YAML等），然后手动写配置</p>
+<p><em><strong>贴一个我的（手动写的）</strong></em></p>
+<p>如果只用于JS语法类扫描，可参考但不建议直接使用，因为配置的东西有点多</p>
+<pre><code>module.exports = &#123;
+&quot;extends&quot;: [&quot;airbnb&quot;, &quot;prettier&quot;,&quot;prettier/react&quot;],
+&quot;parser&quot;: &quot;babel-eslint&quot;,
+//如果我们想对一些非标准 JS 语法添加 Lint 怎么办呢？有办法，ESLint 还支持我们自定义 parser。 parser是为了非标准语法能生的，plugin是针对符合js语法的规则集合的扩展。
+&quot;plugins&quot;: [
+    &quot;prettier&quot;,
+    &quot;react&quot;,
+    &quot;jsx-a11y&quot;,
+    &quot;import&quot;],
+//自定义规则，可以覆盖掉extends的配置。
+&quot;rules&quot;: &#123;
+    &quot;jsx-a11y/click-events-have-key-events&quot;:0,
+    &quot;jsx-a11y/interactive-supports-focus&quot;:0,
+    &quot;jsx-a11y/no-static-element-interactions &quot;:0,
+    // &#39;one-var&#39;:2,//&quot;error&quot; 或 2 开启规则，使用错误级别的错误
+    // 强制驼峰命名规则
+    &quot;camelcase&quot;: [0, &#123;
+        &quot;properties&quot;: &quot;never&quot;
+    &#125;],
+    &quot;prettier/prettier&quot;: [&quot;error&quot;],
+    &quot;react/prop-types&quot;: [&quot;warn&quot;],
+    &quot;react/jsx-uses-react&quot;: &quot;error&quot;,
+    &quot;react/jsx-uses-vars&quot;: &quot;error&quot;,
+    &quot;no-unused-vars&quot;: 1,//&quot;warn&quot; 或 1 - 开启规则，使用警告级别的错误
+    &quot;global-require&quot;: 0,//&quot;off&quot; 或 0 - 关闭规则
+    &quot;prefer-destructuring&quot;: 0,
+    &quot;class-methods-use-this&quot;: 0,
+    &quot;react/no-unused-state&quot;: 1,
+    &quot;jsx-a11y/no-static-element-interactions&quot;:0,
+    &quot;import/extensions&quot;:0
+&#125;,
+&quot;env&quot;:&#123;
+    //定义env会带进来一些全局变量，browser会添加所有的浏览器变量比如Windows
+    &quot;browser&quot;: true,
+    &quot;es6&quot;: true
+&#125;,
+//当我们将默认的解析器从Espree改为babel-eslint的时候，我们需要指定parseOptions，这个是必须的。parserOptions ESLint 允许你指定你想要支持的 JavaScript 语言选项。默认情况下，ESLint 支持 ECMAScript 5 语法。你可以覆盖该设置，以启用对 ECMAScript 其它版本和 JSX 的支持。
+&quot;parserOptions&quot;: &#123;
+    &quot;sourceType&quot;: &quot;module&quot;,
+    &quot;ecmaFeatures&quot;: &#123;
+        &quot;jsx&quot;: true// 启用 JSX
+    &#125;,
+    &quot;ecmaVersion&quot;: 6
+&#125;,
+
+&#125;;`
+</code></pre>
+<h3 id="配置IDE"><a href="#配置IDE" class="headerlink" title="配置IDE"></a>配置IDE</h3><p><em>VSCode配置需自行上网搜索</em></p>
+<p>启用ESLint插件</p>
+<img src="/2019/09/03/Lint%E7%AC%94%E8%AE%B0/idea_eslint.png" class="">
+
+<p>配置触发ESLint自动修复的快捷键</p>
+<img src="/2019/09/03/Lint%E7%AC%94%E8%AE%B0/idea_eslint01.png" class="">
+
+<p>ESLint的使用方法</p>
+<img src="/2019/09/03/Lint%E7%AC%94%E8%AE%B0/idea_eslint02.png" class="">
+<img src="/2019/09/03/Lint%E7%AC%94%E8%AE%B0/idea_eslint03.png" class="">
+
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/08/27/%E4%BD%9C%E7%94%A8%E5%9F%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/08/27/%E4%BD%9C%E7%94%A8%E5%9F%9F/" class="post-title-link" itemprop="url">作用域</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-08-27 15:16:00" itemprop="dateCreated datePublished" datetime="2019-08-27T15:16:00+08:00">2019-08-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2020-03-01 13:34:26" itemprop="dateModified" datetime="2020-03-01T13:34:26+08:00">2020-03-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="https://scotch.io/tutorials/understanding-scope-in-javascript#toc-lexical-scope">https://scotch.io/tutorials/understanding-scope-in-javascript#toc-lexical-scope</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1266,235 +1559,6 @@ git checkout -b remote分支名 本地分支名
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/08/02/%E5%86%99%E7%9A%84%E5%A5%BD%E7%9C%8B%E4%B8%80%E7%82%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-      <meta itemprop="description" content="我还是我，看到自己都老火...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/08/02/%E5%86%99%E7%9A%84%E5%A5%BD%E7%9C%8B%E4%B8%80%E7%82%B9/" class="post-title-link" itemprop="url">代码写的好看一点</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-08-02 16:54:00" itemprop="dateCreated datePublished" datetime="2019-08-02T16:54:00+08:00">2019-08-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2019-08-13 11:24:44" itemprop="dateModified" datetime="2019-08-13T11:24:44+08:00">2019-08-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index"><span itemprop="name">成长</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>当自己都觉得代码看起来不爽，或者不好读懂时 ，这块代码一定写的有问题。</p>
-<p>在《Clean Code》一书中Bob大叔认为在代码阅读过程中人们说脏话的频率是衡量代码质量的唯一标准。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/07/24/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-      <meta itemprop="description" content="我还是我，看到自己都老火...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/07/24/%E6%B5%8F%E8%A7%88%E5%99%A8%E6%B8%B2%E6%9F%93/" class="post-title-link" itemprop="url">浏览器渲染</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-07-24 14:29:00" itemprop="dateCreated datePublished" datetime="2019-07-24T14:29:00+08:00">2019-07-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2020-07-18 16:34:54" itemprop="dateModified" datetime="2020-07-18T16:34:54+08:00">2020-07-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">浏览器</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>最近再看浏览器方面的内容，对于渲染这块收集到的知识做个小结，我是大自然的搬运工。</p>
-<p><strong>By</strong> <a target="_blank" rel="noopener" href="https://developers.google.com/web/resources/contributors/ilyagrigorik?hl=zh-cn">Ilya Grigorik</a></p>
-<p>CSSOM 树和 DOM 树合并成渲染树，然后用于计算每个可见元素的布局，并输出给绘制流程，将像素渲染到屏幕上。优化上述每一个步骤对实现最佳渲染性能至关重要。</p>
-<p>在前面介绍构建对象模型的章节中，我们根据 HTML 和 CSS 输入构建了 DOM 树和 CSSOM 树。 不过，它们都是独立的对象，分别网罗文档不同方面的信息：一个描述内容，另一个则是描述需要对文档应用的样式规则。我们该如何将两者合并，让浏览器在屏幕上渲染像素呢？</p>
-<p>TL;DR</p>
-<ul>
-<li>DOM 树与 CSSOM 树合并后形成渲染树。</li>
-<li>渲染树只包含渲染网页所需的节点。</li>
-<li>布局计算每个对象的精确位置和大小。</li>
-<li>最后一步是绘制，使用最终渲染树将像素渲染到屏幕上。</li>
-</ul>
-<p>第一步是让浏览器将 DOM 和 CSSOM 合并成一个“渲染树”，网罗网页上所有可见的 DOM 内容，以及每个节点的所有 CSSOM 样式信息。</p>
-<p><img src="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/images/render-tree-construction.png?hl=zh-cn" alt="将 DOM 与 CSSOM 合并以形成渲染树"></p>
-<p>为构建渲染树，浏览器大体上完成了下列工作：</p>
-<ol>
-<li>从 DOM 树的根节点开始遍历每个可见节点。<ul>
-<li>某些节点不可见（例如脚本标记、元标记等），因为它们不会体现在渲染输出中，所以会被忽略。</li>
-<li>某些节点通过 CSS 隐藏，因此在渲染树中也会被忽略，例如，上例中的 span 节点—不会出现在渲染树中，—因为有一个显式规则在该节点上设置了“display: none”属性。</li>
-</ul>
-</li>
-<li>对于每个可见节点，为其找到适配的 CSSOM 规则并应用它们。</li>
-<li>发射可见节点，连同其内容和计算的样式。</li>
-</ol>
-<p><strong>Note:</strong> 简单提一句，请注意 <code>visibility: hidden</code> 与 <code>display: none</code> 是不一样的。前者隐藏元素，但元素仍占据着布局空间（即将其渲染成一个空框），而后者 (<code>display: none</code>) 将元素从渲染树中完全移除，元素既不可见，也不是布局的组成部分。</p>
-<p>最终输出的渲染同时包含了屏幕上的所有可见内容及其样式信息。<strong>有了渲染树，我们就可以进入“布局”阶段。</strong></p>
-<p>到目前为止，我们计算了哪些节点应该是可见的以及它们的计算样式，但我们尚未计算它们在设备<a target="_blank" rel="noopener" href="https://developers.google.com/web/fundamentals/design-and-ux/responsive?hl=zh-cn#set-the-viewport">视口</a>内的确切位置和大小—这就是“布局”阶段，也称为“自动重排”。</p>
-<p>为弄清每个对象在网页上的确切大小和位置，浏览器从渲染树的根节点开始进行遍历。让我们考虑下面这样一个简单的实例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;</span><br><span class="line">    &lt;title&gt;Critial Path: Hello world!&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;div style=&quot;width: 50%&quot;&gt;</span><br><span class="line">      &lt;div style=&quot;width: 50%&quot;&gt;Hello world!&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://googlesamples.github.io/web-fundamentals/fundamentals/performance/critical-rendering-path/nested.html">试一下</a></p>
-<p>以上网页的正文包含两个嵌套 div：第一个（父）div 将节点的显示尺寸设置为视口宽度的 50%，—父 div 包含的第二个 div—将其宽度设置为其父项的 50%；即视口宽度的 25%。</p>
-<p><img src="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/images/layout-viewport.png?hl=zh-cn" alt="计算布局信息"></p>
-<p>布局流程的输出是一个“盒模型”，它会精确地捕获每个元素在视口内的确切位置和尺寸：所有相对测量值都转换为屏幕上的绝对像素。</p>
-<p>最后，既然我们知道了哪些节点可见、它们的计算样式以及几何信息，我们终于可以将这些信息传递给最后一个阶段：将渲染树中的每个节点转换成屏幕上的实际像素。这一步通常称为“绘制”或“栅格化”。</p>
-<p>上述步骤都需要浏览器完成大量工作，所以相当耗时。不过，Chrome DevTools 可以帮助我们对上述所有三个阶段进行深入的了解。让我们看一下最初“hello world”示例的布局阶段：</p>
-<p><img src="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/images/layout-timeline.png?hl=zh-cn" alt="在 DevTools 中评估布局"></p>
-<ul>
-<li>“Layout”事件在时间线中捕获渲染树构建以及位置和尺寸计算。</li>
-<li>布局完成后，浏览器会立即发出“Paint Setup”和“Paint”事件，将渲染树转换成屏幕上的像素。</li>
-</ul>
-<p>执行渲染树构建、布局和绘制所需的时间将取决于文档大小、应用的样式，以及运行文档的设备：文档越大，浏览器需要完成的工作就越多；样式越复杂，绘制需要的时间就越长（例如，单色的绘制开销“较小”，而阴影的计算和渲染开销则要“大得多”）。</p>
-<p>最后将在视口中看到下面的网页：</p>
-<p><img src="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/images/device-dom-small.png?hl=zh-cn" alt="完成渲染的 Hello World 网页"></p>
-<p>下面简要概述了浏览器完成的步骤：</p>
-<ol>
-<li>处理 HTML 标记并构建 DOM 树。</li>
-<li>处理 CSS 标记并构建 CSSOM 树。</li>
-<li>将 DOM 与 CSSOM 合并成一个渲染树。</li>
-<li>根据渲染树来布局，以计算每个节点的几何信息。</li>
-<li>将各个节点绘制到屏幕上。</li>
-</ol>
-<p>我们的演示网页看起来可能很简单，实际上却需要完成相当多的工作。如果 DOM 或 CSSOM 被修改，您只能再执行一遍以上所有步骤，以确定哪些像素需要在屏幕上进行重新渲染。</p>
-<p>*<strong>优化关键渲染路径*就是指最大限度缩短执行上述第 1 步至第 5 步耗费的总时间。</strong> 这样一来，就能尽快将内容渲染到屏幕上，此外还能缩短首次渲染后屏幕刷新的时间，即为交互式内容实现更高的刷新率。</p>
-<h5 id="来源："><a href="#来源：" class="headerlink" title="来源："></a>来源：</h5><blockquote><footer><strong>渲染树构建、布局及绘制</strong><cite><a target="_blank" rel="noopener" href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction?hl=zh-cn">developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction?hl=zh-cn</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>rendering-repaint-reflowrelayout-restyle</strong><cite><a target="_blank" rel="noopener" href="https://www.phpied.com/rendering-repaint-reflowrelayout-restyle/">www.phpied.com/rendering-repaint-reflowrelayout-restyle</a></cite></footer></blockquote>
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
@@ -1508,7 +1572,7 @@ git checkout -b remote分支名 本地分支名
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

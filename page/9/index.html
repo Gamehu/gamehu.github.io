@@ -13,7 +13,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
@@ -169,18 +169,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">28</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">102</span>
+        <span class="site-state-item-count">104</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,6 +220,413 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/02/23/ES%20Module/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/02/23/ES%20Module/" class="post-title-link" itemprop="url">ES Module</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-02-23 22:33:00" itemprop="dateCreated datePublished" datetime="2020-02-23T22:33:00+08:00">2020-02-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2020-02-24 22:01:02" itemprop="dateModified" datetime="2020-02-24T22:01:02+08:00">2020-02-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>单独记录一下ES Module，听得太多用的也多，但是一直没深刻的认识一下它。</p>
+<p>同样的节奏先Google找是否有大佬写这方面的文章。</p>
+<p>幸运的是被我找到了<a target="_blank" rel="noopener" href="https://twitter.com/linclark">Lin Clark</a>（之前我学习浏览器方面的知识就是读的她的文章）写的，很喜欢她的文章，讲的很生动和具体。</p>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><p>来来来，搬运一下这一篇<a target="_blank" rel="noopener" href="https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/">ES modules: A cartoon deep-dive</a>。</p>
+<h4 id="模块如何提供帮助？"><a href="#模块如何提供帮助？" class="headerlink" title="模块如何提供帮助？"></a>模块如何提供帮助？</h4><p>模块为您提供了更好的方式来组织这些变量和函数。使用模块，您可以将有意义的变量和函数组合在一起。</p>
+<p>这会将这些函数和变量放入模块范围。模块作用域可用于在模块中的功能之间共享变量。</p>
+<p>但是与函数作用域不同，模块作用域具有一种使其变量也可用于其他模块的方式。他们可以明确地说出模块中的哪些变量，类或函数应该可用。</p>
+<p>当其他模块可以使用某些东西时，这称为导出。导出后，其他模块可以明确地说它们依赖于该变量，类或函数。</p>
+<img src="/2020/02/23/ES%20Module/1.png" class="">
+
+<p>因为这是一种明确的关系，所以您可以知道如果删除另一个模块，哪个模块将中断。</p>
+<p>一旦能够在模块之间导出和导入变量，就可以更轻松地将代码分解为可以相互独立工作的小块。然后，您可以组合并重组这些块（类似于积木），以从同一组模块创建所有不同种类的应用程序。</p>
+<h4 id="ES模块如何工作"><a href="#ES模块如何工作" class="headerlink" title="ES模块如何工作"></a>ES模块如何工作</h4><p>在使用模块进行开发时，您将建立一个依赖关系图。不同依赖项之间的连接来自您使用的任何导入语句。</p>
+<p>这些导入语句是浏览器或Node如何确切知道其需要加载哪些代码的方式。您给它一个文件，以用作图形的入口点。从那里开始，它紧随任何import语句以查找其余代码。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/04_import_graph.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/04_import_graph-500x291.png" alt="具有两个依赖关系的模块。 顶部模块是条目。 另外两个使用import语句关联"></a></p>
+<p>但是文件本身不是浏览器可以使用的东西。它需要解析所有这些文件，以将它们转换为称为模块记录的数据结构。这样，它实际上知道文件中正在发生什么。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/05_module_record.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/05_module_record-500x287.png" alt="具有各种字段的模块记录，包括RequestedModules和ImportEntries"></a></p>
+<p>之后，需要将模块记录转换为模块实例。实例结合了两件事：代码和状态。</p>
+<p>该代码基本上是一组指令。这就像如何做某食物的食谱。但是就其本身而言，您不能使用该代码执行任何操作。您需要原材料才能与这些代码一起使用。</p>
+<p>什么是状态？就像做食物的原材料。状态是变量在任何时间点的实际值。当然，这些变量只是内存中保存值的空间的昵称。</p>
+<p>因此，模块实例将代码（指令列表）与状态（所有变量的值）组合在一起。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/06_module_instance.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/06_module_instance-500x372.png" alt="结合了代码和状态的模块实例"></a></p>
+<p>我们需要的是每个模块的模块实例。模块加载的过程将从此入口点文件变为具有模块实例的完整图。</p>
+<p>对于ES模块，这分为三个步骤。</p>
+<ol>
+<li>构造—查找，下载所有文件并将其解析为模块记录。</li>
+<li>实例化—查找内存中的空间以放置所有导出的值（但尚未用值填充它们）。然后使导出和导入都指向内存中的那些空间的位置（地址）。这称为链接（引用）。</li>
+<li>求值—运行代码以将变量的实际值填写在对应的内存空间。</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/07_3_phases.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/07_3_phases-500x184.png" alt="三个阶段。 构建从单个JS文件到多个模块记录。 实例化链接那些记录。 评估执行代码。"></a></p>
+<p>人们谈论ES模块是异步的。您可以将其视为异步的，因为工作分为三个不同的阶段（加载，实例化和评估），并且这些阶段可以分别完成。</p>
+<p>这意味着规范确实引入了CommonJS中不存在的一种异步。我将在后面解释，但是在CommonJS中，模块及其下面的依赖项一次全部被加载，实例化和求值，而中间没有任何中断。</p>
+<p>但是，步骤本身不一定是异步的。它们可以以同步方式完成。这取决于正在执行的加载。这是因为并非所有内容都由ES模块规范控制。实际上有两部分工作，分别由不同的规范涵盖。</p>
+<p>在<a target="_blank" rel="noopener" href="https://tc39.github.io/ecma262/#sec-modules">ES模块规范</a>说，你应该如何解析文件到模块的记录，你应该如何实例化和评估模块。但是，它并没有说明如何首先获取文件。</p>
+<p>加载程序将获取文件。加载程序在其他规范中指定。对于浏览器，该规范是<a target="_blank" rel="noopener" href="https://html.spec.whatwg.org/#fetch-a-module-script-tree">HTML规范</a>。但是您可以根据所使用的平台使用不同的装载程序。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/07_loader_vs_es.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/07_loader_vs_es-500x286.png" alt="两个卡通人物。 一个代表说明如何加载模块的规范（即HTML规范）。 另一个代表ES模块规范。"></a></p>
+<p>加载程序还精确控制模块的加载方式。它调用ES模块的方法- <code>ParseModule</code>，<code>Module.Instantiate</code>和<code>Module.Evaluate</code>。有点像操纵JS引擎的字符串的p。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_loader_as_puppeteer.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_loader_as_puppeteer-500x330.png" alt="加载程序图形充当ES模块规范图形的伪造者。"></a></p>
+<p>现在，让我们详细介绍每个步骤。</p>
+<h4 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h4><p>在构建阶段，每个模块发生三件事。</p>
+<ol>
+<li>找出从哪里下载包含模块的文件</li>
+<li>提取文件（通过从URL下载文件或从文件系统加载文件）</li>
+<li>将文件解析为模块记录</li>
+</ol>
+<h4 id="查找并获取文件"><a href="#查找并获取文件" class="headerlink" title="查找并获取文件"></a>查找并获取文件</h4><p>加载程序将负责查找文件并下载。首先，它需要找到入口点文件。在HTML中，您可以通过脚本标记告诉加载程序在哪里找到它。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_script_entry.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_script_entry-500x188.png" alt="具有type = module属性和src URL的脚本标记。 src URL有一个文件，它是条目"></a></p>
+<p>但是，如何找到下一组模块- <code>main.js</code>直接依赖的模块呢？</p>
+<p>这就是导入语句的来源。导入语句的一部分称为模块说明符。它告诉加载程序可以在哪里找到每个下一个模块。</p>
+<img src="/2020/02/23/ES%20Module/2.png" class="">
+
+<p>有关模块说明符的一件事：在浏览器和Node之间有时需要对它们进行不同的处理。每个主机都有自己的解释模块说明符字符串的方式。为此，它使用一种称为模块解析算法的模块，该算法在平台之间有所不同。当前，某些可在Node中工作的模块说明符在浏览器中将无法工作，但<a target="_blank" rel="noopener" href="https://github.com/domenic/package-name-maps">仍在进行修复</a>。</p>
+<p>在此问题修复之前，浏览器仅接受URL作为模块说明符。他们将从该URL加载模块文件。但这不会同时出现在整个图表上。在解析文件之前，您不知道模块需要获取哪些依赖项，并且在获取文件之前无法解析文件。</p>
+<p>这意味着我们必须逐层遍历该树，解析一个文件，然后找出其依赖项，然后查找并加载这些依赖项。</p>
+<img src="/2020/02/23/ES%20Module/3.png" class="">
+
+<p>如果主线程要等待这些文件中的每一个下载，则许多其他任务将堆积在其队列中。</p>
+<img src="/2020/02/23/ES%20Module/4.png" class="">
+
+<p>这样阻塞主线程会使使用模块的应用程序使用起来太慢。这是ES模块规范将算法分为多个阶段的原因之一。将构造分为自己的阶段，使浏览器可以在开始实例化的同步工作之前获取文件并增强对模块图的理解。</p>
+<p>这种方法（算法分为多个阶段）是ES模块和CommonJS模块之间的主要区别之一。</p>
+<p>CommonJS可以做不同的事情，因为从文件系统加载文件比通过Internet下载花费的时间少得多。这意味着Node可以在加载文件时阻止主线程。并且由于文件已经加载，因此仅实例化和求值（在CommonJS中不是单独的阶段）是有意义的。这也意味着在返回模块实例之前，您要遍历整棵树，加载，实例化和评估任何依赖项。</p>
+<img src="/2020/02/23/ES%20Module/5.png" class="">
+
+<p>CommonJS方法有一些含义，我将在后面详细解释。但是，这意味着一件事，就是在带有CommonJS模块的Node中，可以在模块说明符中使用变量。<code>require</code>在寻找下一个模块之前，您正在执行该模块中的所有代码（直到语句）。这意味着当您进行模块解析时，变量将具有一个值。</p>
+<p>但是，使用ES模块，您可以在进行任何计算（求值）之前预先建立整个模块图。这意味着您不能在模块说明符中包含变量，因为这些变量尚无值。</p>
+<img src="/2020/02/23/ES%20Module/6.png" class="">
+
+<p>但是有时将变量用于模块路径确实很有用。例如，您可能想根据代码在做什么或在什么环境中运行来切换加载的模块。</p>
+<p>为了使ES模块成为可能，有一个建议叫做<a target="_blank" rel="noopener" href="https://github.com/tc39/proposal-dynamic-import">动态导入</a>。有了它，您可以使用类似的导入语句<code>import(</code>${path}&#x2F;foo.js<code>)</code>。</p>
+<p>动态导入的工作原理是，任何使用<code>import()</code>来导入的文件，都会作为一个入口文件从而创建一棵单独的依赖树，被单独处理。</p>
+<img src="/2020/02/23/ES%20Module/7.png" class="">
+
+<p>但是要注意一件事–这两棵树中的任何模块都将共享一个模块实例。这是因为加载程序会缓存模块实例。对于特定全局范围内的每个模块，将只有一个模块实例。</p>
+<p>这意味着浏览器的工作量更少。例如，这意味着即使多个模块依赖该模块文件，该模块文件也只会被提取一次。（这是缓存模块的一个原因。我们将在评估部分中看到另一个原因。）</p>
+<p>加载程序使用称为<a target="_blank" rel="noopener" href="https://html.spec.whatwg.org/multipage/webappapis.html#module-map">模块映射的内容</a>来管理此缓存。每个全局变量在单独的模块图中跟踪其模块。</p>
+<p>当加载程序获取一个URL时，它将把该URL放入模块映射中，并记下它当前正在获取文件。然后它将发出请求并继续以开始获取下一个文件。</p>
+<img src="/2020/02/23/ES%20Module/8.png" class="">
+
+<p>如果另一个模块依赖于同一文件会怎样？加载程序将在模块映射中查找每个URL。如果在其中看到<code>fetching</code>，它将继续前进到下一个URL。</p>
+<p>但是模块图不仅跟踪正在获取的文件。模块映射还充当模块的缓存，如下所示。</p>
+<h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><p>现在我们已经获取了该文件，我们需要将其解析为模块记录。这有助于浏览器了解模块的不同部分。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/25_file_to_module_record.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/25_file_to_module_record-500x199.png" alt="该图显示了被解析成模块记录的main.js文件"></a></p>
+<p>创建模块记录后，将其放置在模块映射中。这意味着无论何时从此处请求，加载程序都可以将其从该映射中拉出。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/25_module_map.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/25_module_map-500x239.png" alt="模块映射图中的“获取”占位符被模块记录填充"></a></p>
+<p>解析有一个细节看似微不足道，但实际上有很大的含义。所有模块都像<strong>严格模式</strong>来解析的。也还有其他的小细节，比如，关键字 <code>await</code> 在模块的最顶层是保留字， <code>this</code> 的值为 <code>undefinded</code>。</p>
+<p>这种不同的解析方式称为“解析目标”。如果您解析相同的文件但使用不同的目标，那么最终将得到不同的结果。因此，在开始解析之前就需要知道要解析的文件类型，不管是否是模块。</p>
+<p>在浏览器中，这非常简单。您只需放入<code>type=&quot;module&quot;</code>script标签。这告诉浏览器应将此文件解析为模块。并且由于只能导入模块，因此浏览器知道任何导入也是模块。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/26_parse_goal.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/26_parse_goal-500x311.png" alt="加载程序确定main.js是一个模块，因为script标签上的type属性表明是这样，而counter.js必须是一个模块，因为它已导入"></a></p>
+<p>但是在Node中，您不使用HTML标记，因此无法选择使用<code>type</code>属性。社区尝试解决此问题的一种方法是使用 <code>.mjs</code>扩展。使用该扩展名告诉Node，“此文件是一个模块”。您会看到人们将其视为解析目标的信号。目前讨论仍在进行中，因此尚不清楚Node社区最终决定使用什么信号。</p>
+<p>无论哪种方式，加载程序都将确定是否将文件解析为模块。如果它是一个模块并且有imports，它将重新开始该过程，直到提取并解析了所有文件。</p>
+<p>在加载过程的最后，您已经从只有一个入口点文件变成了拥有许多模块记录。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/27_construction.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/27_construction-500x406.png" alt="建设阶段的结果，左侧为JS文件，右侧为3个已解析的模块记录"></a></p>
+<p>下一步是实例化此模块并将所有实例连接在一起。</p>
+<h4 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h4><p>就像我之前提到的，实例化是将代码与状态结合在一起。该状态存在于内存中，因此实例化步骤就是将所有状态链接到内存。</p>
+<p>首先，JS引擎创建一个<strong>模块环境记录</strong>（Module Environment Record）。它是管理所有模块记录的变量。然后，它会在内存中找到所有export对应的的地址。模块环境记录将跟踪内存中与每个export相关联的地址。</p>
+<p>内存中的这些地址对应的空间尚无法获取其值。只有在运行之后，它们的实际值才会被填写。需要注意的一点是：在此阶段中将初始化所有导出的函数声明。这将使后面的执行阶段变得更加容易。</p>
+<p>为了实例化<strong>模块关系图</strong>，引擎会采用<strong>深度优先的后序遍历方式</strong>。这意味着它将到达关系图的最底部（底部不依赖于其他任何东西），并设置其导出。</p>
+<img src="/2020/02/23/ES%20Module/9.png" class="">
+
+<p>最终，引擎会把模块下的所有依赖导出连接到当前模块。接着回到上一层把模块的导入连接起来。</p>
+<p>请注意，导出和导入均指向内存中的同一位置。</p>
+<img src="/2020/02/23/ES%20Module/10.png" class="">
+
+<p>这不同于CommonJS模块。在CommonJS中，整个导出对象在导出时被复制。这意味着导出的任何值（如数字）都是副本，所以在CommonJS如果导出模块以后更改了该值，则导入模块将看不到该更改。</p>
+<p>这意味着，如果导出模块以后更改了该值，则导入模块将看不到该更改。</p>
+<img src="/2020/02/23/ES%20Module/11.png" class="">
+
+<p>相反，ES模块使用<strong>实时绑定</strong>（Live Binding）。两个模块都指向内存中的相同位置（引用）。这意味着，当导出模块更改值时，该更改将显示在导入模块中。</p>
+<p>导出值的模块可以随时更改这些值，但是导入模块不能更改其导入的值，因为是导入的是<strong>只读引用</strong>。不过如果模块导入了一个对象，则它可以更改该对象上的属性值。</p>
+<img src="/2020/02/23/ES%20Module/12.png" class="">
+
+<p>之所以ESM采用实时绑定，是因为可以在不运行任何代码的情况下链接到所有模块。这有助于解决循环依赖的问题，在后面的运行(evaluation)阶段会细说。</p>
+<p>OK，当实例化结束时，我们得到了所有模块实例，并知道了已完成链接的导出&#x2F;导入变量的内存地址。</p>
+<p>现在我们可以开始评估代码，并使用它们的值填充这些内存位置。</p>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><p>最后一步是往解析阶段获取的内存地址所在的空间里填充值。JS 引擎通过运行顶层代码（函数外的代码）来完成填充。</p>
+<p>除了填充值以外，运行代码还可能引发副作用。例如，一个模块可能会请求服务器。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/40_top_level_code.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/40_top_level_code-500x146.png" alt="模块将在功能之外进行编码，标记为顶级代码"></a></p>
+<p>因为这些潜在副作用的存在，所以<strong>模块代码只能运行一次</strong>。<br>前面我们看到，实例化阶段中发生的链接过程可以多次进行，并且每次的结果都一样。但是，如果运行阶段进行多次的话，则可能会每次都得到不一样的结果。</p>
+<p>这正是为什么需要有模块映射的原因之一。模块映射通过规范URL，缓存模块，因此每个模块只有一个模块记录。这样可以确保每个模块仅执行一次。与实例化一样，这是深度优先的后遍历。</p>
+<p>那我们之前谈到的循环依赖怎么处理呢？</p>
+<p>在循环依赖关系中，您最终会在模块关系图中出现循环。你依赖我我依赖你，通常，这会变成很大的循环。</p>
+<p>为了解释这个问题，我举个例子。</p>
+ <img src="/2020/02/23/ES%20Module/13.png" class="">
+
+<p>首先让我们看一下如果时CommonJS模块会时什么样的。首先，main模块将执行到require语句。然后它将去加载counter模块。</p>
+ <img src="/2020/02/23/ES%20Module/14.png" class="">
+
+<p>然后，counter模块将尝试从访问导出的对象<code>message</code>。但是由于尚未在main模块中执行，因此它将返回undefined。JS引擎将在内存中为局部变量分配空间，并将该值设置为undefined。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/42_cjs_variable_2.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/42_cjs_variable_2-500x113.png" alt="中间的内存，main.js和内存之间没有连接，但是从counter.js到未定义的内存位置的导入链接"></a></p>
+<p>此时会一直运行持续到counter模块顶级代码的末尾。我们想看看是否最终将获得正确的message（在执行main.js之后），因此我们设置了超时时间。然后继续运行到<code>main.js</code>。</p>
+ <img src="/2020/02/23/ES%20Module/15.png" class="">
+
+<p>message变量将被初始化并添加到内存中。但是由于两者之间没有连接，因此message在counter模块中仍然是时undefined。</p>
+ <img src="/2020/02/23/ES%20Module/16.png" class="">
+
+<p>如果使用实时绑定处理导出，则counter模块最终将看到正确的值。到超时运行时，<code>main.js</code>的执行就已经完成并填充了值。</p>
+<p>支持循环依赖是 ESM 设计之初就考虑到的一大因素。也正是这种分（三）阶段设计使其成为可能。</p>
+<h4 id="原文地址："><a href="#原文地址：" class="headerlink" title="原文地址："></a>原文地址：</h4><blockquote><footer><strong>Lin Clark</strong><cite><a target="_blank" rel="noopener" href="https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/">ES modules: A cartoon deep-dive</a></cite></footer></blockquote>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2020/02/22/Modules/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经">
+      <meta itemprop="description" content="我还是我，看到自己都老火...">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/02/22/Modules/" class="post-title-link" itemprop="url">Modules</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-02-22 20:11:00" itemprop="dateCreated datePublished" datetime="2020-02-22T20:11:00+08:00">2020-02-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2020-07-01 16:07:16" itemprop="dateModified" datetime="2020-07-01T16:07:16+08:00">2020-07-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <img src="/2020/02/22/Modules/a.png" class="" title="Photo by Sharon McCutcheon from Pexels">
+
+<p>模块话，模块化说了那么多次，以为了解个大概就行了，然而在一次面试经历中被问到AMD和ES Module，所以特此来一篇，汇总一下吸收的模块方面的内容。</p>
+<p>又是一篇搬运文章，谁让我放荡不羁爱打野呢。作者博客地址<a target="_blank" rel="noopener" href="https://www.preethikasireddy.com/">Preethi Kasireddy</a></p>
+<h3 id="为什么模块很重要？"><a href="#为什么模块很重要？" class="headerlink" title="为什么模块很重要？"></a>为什么模块很重要？</h3><p>如果没有模块，你能想象在复杂场景下你得js代码是个什么鬼模样吗？模块解决了名称空间和可维护性等变得越来越难以处理的问题。</p>
+<p>好的模块是高度独立的，具有独特的功能，可以根据需要对它们进行改组，删除或添加，而不会破坏整个系统。</p>
+<h4 id="优势："><a href="#优势：" class="headerlink" title="优势："></a>优势：</h4><p><strong>1）可维护性：</strong>根据定义，模块是独立的。精心设计的模块旨在尽可能减少对代码库各部分的依赖，从而使其能够独立增长和改进。当模块与其他代码解耦时，更新单个模块要容易得多。</p>
+<p><strong>2）命名空间：</strong>在JavaScript中，顶级函数范围之外的变量是全局变量（意味着每个人都可以访问它们）。因此，普遍存在“命名空间污染”，其中完全不相关的代码共享全局变量。</p>
+<p>在不相关的代码之间共享全局变量<a target="_blank" rel="noopener" href="http://c2.com/cgi/wiki?GlobalVariablesAreBad">在开发中</a>是一个很大的<a target="_blank" rel="noopener" href="http://c2.com/cgi/wiki?GlobalVariablesAreBad">禁忌</a>。模块允许我们通过为变量创建私有空间来避免名称空间污染。</p>
+<p><strong>3）可重用性：</strong>抽取通用部分，哪里需要就拿去，不用重复写，当然也对应的第一点，当有修改时只需要该一份。</p>
+<p>早期的时候为了达到“模块模式”，也有很多方式，不过我看了下基本上都是基于匿名闭包的基础上而来的。</p>
+<p>这些方式有一个共同点：<strong>使用单个全局变量将其代码包装在函数中，从而使用闭包作用域为其自身创建私有名称空间，同时自定义公开哪些方法、变量</strong>。</p>
+<p>大家可以看下jQuery的源码，就是这样的实现方式，如下面的代码。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myGradesCalculate = (<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    </span><br><span class="line">  <span class="comment">// Keep this variable private inside this closure scope</span></span><br><span class="line">  <span class="keyword">var</span> myGrades = [<span class="number">93</span>, <span class="number">95</span>, <span class="number">88</span>, <span class="number">0</span>, <span class="number">55</span>, <span class="number">91</span>];</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">var</span> average = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> total = myGrades.<span class="title function_">reduce</span>(<span class="keyword">function</span>(<span class="params">accumulator, item</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> accumulator + item;</span><br><span class="line">      &#125;, <span class="number">0</span>);</span><br><span class="line">      </span><br><span class="line">    <span class="keyword">return</span><span class="string">&#x27;Your average grade is &#x27;</span> + total / myGrades.<span class="property">length</span> + <span class="string">&#x27;.&#x27;</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> failing = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> failingGrades = myGrades.<span class="title function_">filter</span>(<span class="keyword">function</span>(<span class="params">item</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> item &lt; <span class="number">70</span>;</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;You failed &#x27;</span> + failingGrades.<span class="property">length</span> + <span class="string">&#x27; times.&#x27;</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Explicitly reveal public pointers to the private functions </span></span><br><span class="line">  <span class="comment">// that we want to reveal publicly</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">average</span>: average,</span><br><span class="line">    <span class="attr">failing</span>: failing</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line">myGradesCalculate.<span class="title function_">failing</span>(); <span class="comment">// &#x27;You failed 2 times.&#x27; </span></span><br><span class="line">myGradesCalculate.<span class="title function_">average</span>(); <span class="comment">// &#x27;Your average grade is 70.33333333333333.&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>如您所见，这种方法使我们可以决定将哪些变量&#x2F;方法设为私有（例如*<strong>myGrades*<strong>），以及通过将它们放在return语句中（例如</strong>*average**<em>和</em></strong>failing***）来公开哪些变量&#x2F;方法。</p>
+<ul>
+<li>Addy Osmani的“ <a target="_blank" rel="noopener" href="https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript">学习JavaScript设计模式”</a>：精妙读物中的细节宝库</li>
+<li><a target="_blank" rel="noopener" href="http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html">Ben Cherry的“足够好”</a>：一个有用的概述，其中包含模块模式的高级用法示例</li>
+<li><a target="_blank" rel="noopener" href="https://carldanley.com/js-module-pattern/">Carl Danley的博客</a>：模块模式概述和其他JavaScript模式的资源。</li>
+</ul>
+<p>所以大家可以看出，早期关于模块的写法，尽管每种方法都以其自己的方式有效，但它们也有缺点：</p>
+<ol>
+<li>大家各自发挥的，这样有个最大的问题就是到最后就是乱的，就像为什么需要TC39一样，让大家有一套标准，才能从而写出更友好通用的模块。 </li>
+<li>依赖管理是个问题，需要我们开发人员自己管理依赖，记得刚开始用jQuery这种第三方库的时候，如果没注意到顺序就会报错，所以想象一下如果引用较多时，管理依赖关系并正确解决这些问题会让人头疼。</li>
+<li>全局作用域被污染，上述的方式创建的变量（比如<strong>myGradesCalculate</strong>）都在全局范围内，所以该全局范围内的代码的每个部分都可以更改该变量。恶意代码可以有意更改该变量，以使您的代码执行您不希望这样做的事情，或者非恶意代码可能会无意间破坏了您的变量。</li>
+</ol>
+<p>所以基于上述原因，这个时候我们就需要一套规范了来解决这些个问题：<strong>我们能否设计一种无需遍历全局范围即可请求模块接口的方法</strong></p>
+<h3 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h3><p>现在比较通行得规范有两种：<a target="_blank" rel="noopener" href="http://wiki.commonjs.org/wiki/Modules/1.1">CommonJS</a>和<a target="_blank" rel="noopener" href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD</a>。</p>
+<h4 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a><strong><a target="_blank" rel="noopener" href="http://wiki.commonjs.org/wiki/Modules/1.1">CommonJS</a></strong></h4><p>CommonJS是一个旨在定义一系列规范以帮助开发服务器端JavaScript应用程序的项目。CommonJS团队尝试解决的领域之一就是模块，负责设计和实现用于声明模块的JavaScript API。我听说CommonJS，最早是在15年写Node应用的时候接触的，Node.js最开始就是遵循这套规范弄得模块化，但是据说后来不用该规范了。</p>
+<p>一个CommonJS的模块本质上是一种可重复使用的一段JavaScript代码其中出口特定对象，使它们可用于其他模块需要在他们的计划。</p>
+<p>使用CommonJS，每个JavaScript文件都将模块存储在其自己的唯一模块上下文中（就像将其包装在闭包中一样）。在此范围内，我们使用<em>module.exports</em>对象公开模块，并要求将其导入。</p>
+<p>当您定义CommonJS模块时，它可能看起来像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">myModule</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">hello</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;hello!&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">goodbye</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;goodbye!&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = myModule;</span><br></pre></td></tr></table></figure>
+
+<p>我们使用特殊对象模块，并将我们函数的引用放入<em>module.exports中</em>。这使CommonJS模块系统知道我们要公开的内容，以便其他文件可以使用它。</p>
+<p>然后，当某人想要使用<em>myModule时</em>，他们可以在其文件中要求它，如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myModule = <span class="built_in">require</span>(<span class="string">&#x27;myModule&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myModuleInstance = <span class="keyword">new</span> <span class="title function_">myModule</span>();</span><br><span class="line">myModuleInstance.<span class="title function_">hello</span>(); <span class="comment">// &#x27;hello!&#x27;</span></span><br><span class="line">myModuleInstance.<span class="title function_">goodbye</span>(); <span class="comment">// &#x27;goodbye!&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>与我们之前讨论的模块模式相比，这种方法有两个明显的好处：</p>
+<ol>
+<li>避免全局命名空间污染</li>
+<li>明确我们的依赖关系</li>
+</ol>
+<p>要注意的另一件事是，CommonJS采用服务器优先的方法并<strong>同步加载</strong>模块。这很重要，因为如果我们有我们需要的其他三个模块<em>需要</em>，它就会加载它们一个接一个。</p>
+<p>现在，它可以在服务器上很好地工作，但是不幸的是，这使得为浏览器编写JavaScript时更难使用，因为服务器端通常是从磁盘读取，而浏览器需要网络请求，所以只要加载模块的脚本一直在运行（JavaScript线程将停止直到代码被加载），它就会阻止浏览器运行其他任何东西，直到加载完成。</p>
+<h4 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a><a target="_blank" rel="noopener" href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD</a></h4><p>从上面我们知道CommonJS是同步的，所以很显然不适用浏览器端，那我们就需要<strong>异步模块定义</strong>的规范，即<strong>AMD</strong>。</p>
+<p>使用AMD加载模块如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">define</span>([<span class="string">&#x27;myModule&#x27;</span>, <span class="string">&#x27;myOtherModule&#x27;</span>], <span class="keyword">function</span>(<span class="params">myModule, myOtherModule</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(myModule.<span class="title function_">hello</span>());</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这里发生的是，<em><strong>define</strong></em>函数将每个模块依赖项的数组作为第一个参数。这些依赖项在后台加载（以非阻塞方式），并且一旦加载了<em><strong>define</strong></em>，便调用回调函数。</p>
+<p>接下来，回调函数将加载的依赖项作为参数（在本例中为<strong><em>myModule*<strong>和</strong></em>myOtherModule</strong><em>），以允许函数使用这些依赖项。最后，还必须使用</em>**define***关键字定义依赖项本身。</p>
+<p>例如，***myModule***可能看起来像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">define</span>([], <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">hello</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;hello&#x27;</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">goodbye</span>: <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;goodbye&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>与CommonJS不同，AMD采用了浏览器优先的方法以及<strong>异步</strong>行为来完成工作。</p>
+<p>除了异步之外，AMD的另一个好处是您的模块可以是<strong>对象，函数，构造函数，字符串，JSON和许多其他类型</strong>，而CommonJS仅支持将<strong>对象</strong>作为模块。</p>
+<p>AMD与CommonJS相比，其提供的io，文件系统和其他面向服务器的功能不兼容。</p>
+<h4 id="UMD"><a href="#UMD" class="headerlink" title="UMD"></a><a target="_blank" rel="noopener" href="https://github.com/umdjs/umd">UMD</a></h4><p>对于需要同时支持AMD和CommonJS功能的项目，还有另一种格式：通用模块定义（UMD）。</p>
+<p>UMD本质上创建了一种使用这两种方法之一的方式，同时还支持全局变量定义。结果，UMD模块能够在客户端和服务器上工作。</p>
+<p>以下是UMD如何开展业务的快速体验：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> (<span class="params">root, factory</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">&#x27;function&#x27;</span> &amp;&amp; define.<span class="property">amd</span>) &#123;</span><br><span class="line">      <span class="comment">// AMD</span></span><br><span class="line">    <span class="title function_">define</span>([<span class="string">&#x27;myModule&#x27;</span>, <span class="string">&#x27;myOtherModule&#x27;</span>], factory);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">exports</span> === <span class="string">&#x27;object&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">// CommonJS</span></span><br><span class="line">    <span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title function_">factory</span>(<span class="built_in">require</span>(<span class="string">&#x27;myModule&#x27;</span>), <span class="built_in">require</span>(<span class="string">&#x27;myOtherModule&#x27;</span>));</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// Browser globals (Note: root is window)</span></span><br><span class="line">    root.<span class="property">returnExports</span> = <span class="title function_">factory</span>(root.<span class="property">myModule</span>, root.<span class="property">myOtherModule</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;(<span class="variable language_">this</span>, <span class="keyword">function</span> (<span class="params">myModule, myOtherModule</span>) &#123;</span><br><span class="line">  <span class="comment">// Methods</span></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">notHelloOrGoodbye</span>(<span class="params"></span>)&#123;&#125;; <span class="comment">// A private method</span></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">hello</span>(<span class="params"></span>)&#123;&#125;; <span class="comment">// A public method because it&#x27;s returned (see below)</span></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">goodbye</span>(<span class="params"></span>)&#123;&#125;; <span class="comment">// A public method because it&#x27;s returned (see below)</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Exposed public methods</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">hello</span>: hello,</span><br><span class="line">      <span class="attr">goodbye</span>: goodbye</span><br><span class="line">  &#125;</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+
+
+
+<p><a target="_blank" rel="noopener" href="https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/">ES Module</a></p>
+<p>是我做前端开始听的最多的了，当然也因为无时无刻都在用它。</p>
+<p>上面咱们所说的，都不是JavaScript固有的。不过幸运的是，<a target="_blank" rel="noopener" href="https://github.com/tc39">TC39</a>（定义ECMAScript语法和语义的标准机构）引入了ECMAScript 6（ES6）内置模块。</p>
+<p>ES6提供了多种导入和导出模块的可能性，其他人则做了很好的解释-以下是其中的一些资源：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://jsmodules.io/cjs.html">jsmodules.io</a></li>
+<li><a target="_blank" rel="noopener" href="http://exploringjs.com/es6/ch_modules.html">Explorationjs.com</a></li>
+</ul>
+<p>与CommonJS或AMD相比，ES6模块最大的优点是它能够提供两全其美的优势：紧凑和声明性语法以及异步加载，以及诸如更好地支持依赖项等附加优点。</p>
+<p>ES6模块最让人兴奋的应该是导入是导出的<em>实时</em>只读视图，即是只读引用，不过却可以改写属性。所以你猜到了当你模块里的值属性发生变化时，导入的地方获取的值是一样的。ES Module具体的后面还有一篇文档单讲，不然这文章就太长了。</p>
+<h3 id="最后我们对比一下两种方式吧"><a href="#最后我们对比一下两种方式吧" class="headerlink" title="最后我们对比一下两种方式吧"></a>最后我们对比一下两种方式吧</h3><h4 id="ES-Module与CommonJS"><a href="#ES-Module与CommonJS" class="headerlink" title="ES Module与CommonJS:"></a>ES Module与CommonJS:</h4><ul>
+<li>CommonJS规范通常适用于Node这类服务器端的</li>
+<li>CommonJS模块是对象，是运行时加载，运行时才把模块挂载在exports之上（加载整个模块的所有），加载模块其实就是查找对象属性。</li>
+<li>ES Module不是对象，是使用export显示指定输出（函数、对象、变量等），再通过import导入。为编译时加载，编译时遇到import就会生成一个只读引用。等到运行时就会根据此引用去被加载的模块取值。所以不会加载模块所有方法，仅取所需。</li>
+<li>CommonJS 模块输出的是一个值的拷贝，ES6 模块输出的是值的引用。</li>
+<li>CommonJS 模块是运行时加载，ES6 模块是编译时输出接口</li>
+</ul>
+<h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4><p><a target="_blank" rel="noopener" href="https://scotch.io/tutorials/understanding-scope-in-javascript">全局范围（作用域）</a> 	 	</p>
+<blockquote>
+<ol>
+<li>写在script标签中的JS代码，都在全局作用域 。</li>
+<li>全局作用域在页面打开时创建，在页面关闭时销毁。 </li>
+<li>在全局作用域中有一个全局对象window，它代表的是一个浏览器的窗口，它由浏览器创建我们可以直接使用 。</li>
+<li>全局作用域中，创建变量都会作为window对象的属性保存</li>
+<li>创建的函数都会作为window对象的方法保存</li>
+<li>全局作用域中的变量都是全局变量，在页面的任何部分都可以访问的到并可以修改它</li>
+</ol>
+</blockquote>
+<h4 id="来源："><a href="#来源：" class="headerlink" title="来源："></a>来源：</h4><blockquote><footer><strong>darlyn</strong><cite><a target="_blank" rel="noopener" href="https://juejin.im/post/5b7d2f45e51d4538826f4c28">AMD , CMD, CommonJS，ES Module，UMD</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>Sebastian Peyrott</strong><cite><a target="_blank" rel="noopener" href="https://auth0.com/blog/javascript-module-systems-showdown/">JavaScript Module Systems Showdown: CommonJS vs AMD vs ES2015</a></cite></footer></blockquote>
+
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1121,350 +1528,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/10/31/%E5%BB%B6%E5%AE%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-      <meta itemprop="description" content="我还是我，看到自己都老火...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/10/31/%E5%BB%B6%E5%AE%95/" class="post-title-link" itemprop="url">延宕</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-10-31 16:16:00" itemprop="dateCreated datePublished" datetime="2019-10-31T16:16:00+08:00">2019-10-31</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2019-11-19 12:07:58" itemprop="dateModified" datetime="2019-11-19T12:07:58+08:00">2019-11-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index"><span itemprop="name">成长</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>延宕</strong>其实直白的说就是拖延的意思，有人就感觉了，装逼非要搞个不常见的，就是因为不常见所以你才会好奇啊，才会去查一下这个词时代表什么意思。良苦用心在于为了加深印象撒。</p>
-<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><p>此篇内容源起最近要准备进行一次分享，筛选分享主题时，想到了<strong>拖延</strong>，首先我自身就有这个问题，然后我敞开怀抱感受了一下，身边很多人都或多或少存在<strong>拖延</strong>的问题。</p>
-<p><strong>目录</strong></p>
-<ul>
-<li>拖延原因分析</li>
-<li>拖延的特征</li>
-<li>造成的危害</li>
-<li>怎么破</li>
-</ul>
-<p>首先这篇不是一个从心理学角度写的东西，当然咱也没这个段位。这是一个不严谨但具有严重个人色彩的分享，只在于刨析自己从而能给朋友们提供一些思考和建议。</p>
-<h4 id="拖延原因分析"><a href="#拖延原因分析" class="headerlink" title="拖延原因分析"></a>拖延原因分析</h4><p>白话点说可能有下面四个原因：</p>
-<ol>
-<li>对成功所需的能力缺乏自信</li>
-<li>对要去完成某个任务有反感心理：认定做事的过程中会遭遇很多困难，结局也会很惨</li>
-<li><strong>目标和回报太遥远，感受不到对我有什么意义</strong></li>
-<li><strong>无法自我约束，例如容易冲动和分心</strong></li>
-</ol>
-<p>加粗部分是我认为对我影响最突出的部分。</p>
-<p>首先咱们得说导致拖延的因素有很多，具体你是哪一类，你可以买本《拖延心理学》对号入座。我暂时认为自己时拖延早期患者，所以列出的主要是自己审视有的。</p>
-<h5 id="目标和回报太遥远，感受不到对我有什么意义"><a href="#目标和回报太遥远，感受不到对我有什么意义" class="headerlink" title="目标和回报太遥远，感受不到对我有什么意义"></a>目标和回报太遥远，感受不到对我有什么意义</h5><p>先分析一下，<strong>目标和回报太遥远，感受不到对我有什么意义</strong>，这个点其实很有意思，你回过头看一下自己列的目标也好还是flag之类的…，大多数都会有一个比较共通的点，那就是列的太大太虚，然后也没有反馈的环节。</p>
-<img src="/2019/10/31/%E5%BB%B6%E5%AE%95/a.png" class="" title="我的目标">
-
-<p>上图所示就是以前我列的目标，注意看打勾的标识完成的，红圈的表示未达成的。我来自我检讨一下啊，首先打圈的一看就不符合smart原则，当然也没法用PDCA那套。第二个原因是这几个都没有进行反馈设定，这就让你总感觉这个目标好像老离我挺远，慢慢的就觉得没意思了，也没用积极性了。</p>
-<p>但是相反打勾的我都完成了，主要有两方面的原因。</p>
-<ol>
-<li>这几个都是有明显的反馈环节的，比如团队分享，首先意义对我和对同事而言都是正向的。分享完之后也能收到同事给与的一些讨论和评价，这也是一个反馈的环节。这就让这件事变得有结束有结果有意义了，当然就有积极性。</li>
-<li>这件事很具体，也比较小，跨越的周期不长，比较符合smart原则，事情就变得可达。</li>
-</ol>
-<h5 id="无法自我约束，例如容易冲动和分心"><a href="#无法自我约束，例如容易冲动和分心" class="headerlink" title="无法自我约束，例如容易冲动和分心"></a>无法自我约束，例如容易冲动和分心</h5><p>先根据 Tim Urban在TED的演讲，刨析一下拖延时的大脑活动情况，我觉得真是讲到我心里去了，具体大家可以搜一下演讲的名字叫&lt;<a target="_blank" rel="noopener" href="http://open.163.com/newview/movie/free?pid=MBHQSM52F&mid=MBI15O7QE">你有拖延症吗</a>&gt;。</p>
-<img src="/2019/10/31/%E5%BB%B6%E5%AE%95/procrastination_brain.png" class="" title="wait but way">
-
-<p>如上图在有拖延症的大脑里会有一只Monkey（分心&#x2F;诱惑），它经常会跳出来，告诉你其实你的时间还有很多，要不我们逛逛YouTobe、BiliBIli…，它会不断的骚扰你，最终你会沦陷让其掌握大脑。其实就是抵御不了诱惑，容易分心。那什么时候我们会突然警醒呢，就是有一个东西出现的时候，如下图，这个东西叫<strong>恐慌</strong>。它一来Monkey就被吓跑了，但是往往这个时候，已经来不及了，被动了。</p>
-
-
-<h4 id="拖延特征"><a href="#拖延特征" class="headerlink" title="拖延特征"></a>拖延特征</h4><p>我们说说怎么辨别，你是否存在拖延这个问题。</p>
-<ol>
-<li><p><strong>看它是不是让你烦恼不已</strong></p>
-<p>内在结果：必须承受某些内在情绪的折磨，从恼怒、后悔到强烈的自我谴责和绝望  </p>
-<p>外在结果：影响家庭、工作、社交….</p>
-</li>
-<li><p><strong>在一开始，你往往信心满满</strong> </p>
-<p>在完成目标的一开始，往往信心满满  ，但是最后其实都不能很好的的完成或者说完成不了，往往整个过程如下图。</p>
-<img src="/2019/10/31/%E5%BB%B6%E5%AE%95/b.png" class="" title="拖延心理学">
-</li>
-<li><p><strong>自我</strong></p>
-<p>自我价值感 &#x3D;能力（具有独立性，反对受控制） &#x3D;表现（通过拖延，“我”说了算）,不愿意遵守那些不是我们自己所制定的规则并顺应别人的需要 。</p>
-</li>
-<li><p><strong>追求完美</strong></p>
-<p>咋一看还挺牛x，原来拖延还有这么美丽的特征，但是注意我们这儿说的是<strong>适应不良型的完美主义</strong>，“完美主义”者往往对自己期待过高，不够现实，当无法实现这样的要求是，就不知所措。失望之余，通过拖延让自己从中退却。适应不良型的完美主义，对自己的要求跟对自己的表现的期待之间存在一种矛盾。</p>
-</li>
-</ol>
-<h4 id="拖延的伤害"><a href="#拖延的伤害" class="headerlink" title="拖延的伤害"></a>拖延的伤害</h4><img src="/2019/10/31/%E5%BB%B6%E5%AE%95/huaiyi.jpg" class="" title="怀疑自己">
-
-<img src="/2019/10/31/%E5%BB%B6%E5%AE%95/wushen.jpg" class="" title="精神萎靡">
-
-<img src="/2019/10/31/%E5%BB%B6%E5%AE%95/ziwo.png" class="" title="变得自我">
-
-<img src="/2019/10/31/%E5%BB%B6%E5%AE%95/sikao.jpg" class="" title="无法实现自己的想法">
-
-<img src="/2019/10/31/%E5%BB%B6%E5%AE%95/xinli.jpg" class="" title="心理疾病">
-
-
-
-<h4 id="怎么破"><a href="#怎么破" class="headerlink" title="怎么破"></a>怎么破</h4><p>说了那么多，最终咱们得找到解法，当然前提是你有拖延困扰并且你愿意付诸行动改变这个毛病。</p>
-<p>以下是我亲身实践且认为效果良好的方子，现在我也还在这么做，这是个持久战别想着10天半个月就有多大的改变，也别相信什么21天就能养成xx习惯，普通人就踏踏实实干就行了。</p>
-<h5 id="破法1：你得接受"><a href="#破法1：你得接受" class="headerlink" title="破法1：你得接受"></a><strong>破法1：你得接受</strong></h5><ul>
-<li>​    接受自己能力有限这个事实得人不太会为此过于烦恼 。</li>
-<li>​    接受遵守那些不是我们自己所制定的规则并顺应别人的需要。</li>
-</ul>
-<h5 id="破法2：和原因对上号"><a href="#破法2：和原因对上号" class="headerlink" title="破法2：和原因对上号"></a><strong>破法2：和原因对上号</strong></h5><ul>
-<li>看看这方面的书以及专业的一些心理视频或者找心理方面的人士咨询，找到自身造成的拖延的原因，才能对症下药，人是个体，个体就有差异千万别总去套别人那套方法论，要找到适合自己的。</li>
-</ul>
-<h5 id="破法3：明确的目标与可行性的计划"><a href="#破法3：明确的目标与可行性的计划" class="headerlink" title="破法3：明确的目标与可行性的计划"></a><strong>破法3：明确的目标与可行性的计划</strong></h5><p>找到一个目标，然后将它分解成几个小的步骤，跨出小小的第一步，学习怎样记录时间，以及如何优化周围环境使之向有利于成功的方向推进。</p>
-<img src="/2019/10/31/%E5%BB%B6%E5%AE%95/target.png" class="">
-
-<ul>
-<li><p>目标smart且够小，可达。既非常小，又可以给你带来进步感和成就感。</p>
-</li>
-<li><p>执行过程中引入监督、奖惩机制  </p>
-</li>
-<li><p>整个执行目标的过程按照PDCA不断循环</p>
-</li>
-<li><p><strong>训练强大的执行力</strong>  </p>
-<blockquote>
-<p>执行能力的基本要素：注意力控制、 认知弹性、 目标设定、 信息处理  </p>
-<p>1.启动任务（起始，产生行动的想法）。</p>
-<p>2.维持注意力（持续跟进，专注于一个事项）。 </p>
-<p>3.抑制冲动（在行动前有所思考，而不是马上反应）。 </p>
-<p>4.转换注意力（从一个事项到另一个事项，转变关注的焦点，有弹性地加以回应）。 </p>
-<p>5.流程记忆（记得计划、指令和以前学到的知识，在学习新知识和应对新环境的时候可以记起和运用到旧的知识）。</p>
-<p>6.情绪控制（调整和管理情绪）。 </p>
-<p>7.组织材料（获取所需的材料，并依序编排）。</p>
-<p>8.自我监测（具备自我评价的相应语言能力，在必要的时候能够通过自我交谈闯过难关）。 </p>
-<p>9.时间管理（时间意识，以及对待时间的务实态度）。 </p>
-<p>10.计划（按优先次序考虑问题，找出达成目标的各个步骤，提前为以后的需要和相关进程做好准备）</p>
-</blockquote>
-</li>
-</ul>
-<h5 id="破法4：学会怎样判断时间"><a href="#破法4：学会怎样判断时间" class="headerlink" title="破法4：学会怎样判断时间**"></a><strong>破法</strong>4：学会怎样判断时间**</h5><blockquote>
-<p>时间四象限</p>
-<p>学会利用零碎时间</p>
-<p><strong>预防意外干扰，抵制诱惑</strong></p>
-<p>不要太分散精力</p>
-<p>找出你的最佳时间</p>
-<p>享受你的“自由”时间</p>
-</blockquote>
-<ul>
-<li>主观时间和客观时间，做到平滑过渡。很多人就是忽略客观时间所以才老是导致拖延，时间不是跟着你的意志走的。</li>
-<li>列出“非计划”时间，除开必须做的事情，剩下多少时间可以用于实现你的目标，给他排出来。</li>
-<li>积极的时间约束（番茄工作法…），主要是提高专注力，人不可能24小时都是专注的，就算你说你可以那请你看看猝死的例子…</li>
-</ul>
-<h5 id="破法5：积极一点"><a href="#破法5：积极一点" class="headerlink" title="破法5：积极一点"></a><strong>破法5：积极一点</strong></h5><p>记住一点：不断地否定自己或者消极对待是要消耗很多能量地。</p>
-<p>领导告诉了我一句话：<strong>如果你今年没觉得去年的自己是个SB那你就没有在成长</strong>，所以别动不动就沮丧、消极。</p>
-<p>所以又对应上前面说的，要从一个个小成就不断地激励自己。</p>
-<p> <strong>破法6：利用你的身体减轻拖延</strong> </p>
-<p>锻炼，很多人一提到锻炼就会马上接一个词“身体”，其实锻炼不仅仅是锻炼身体其实还是一种脑力的、心理的活动，锻炼是一种释放，通常锻炼你是不会受其他东西影响的，比如你不能玩手机不能看电视等等…这就迫使你专注起来，并且大脑会开始想事情，有点类似冥想的意思。</p>
-<p>你的大脑是比较放空的，你可以进行整理、归纳、思考等一系列活动，同时锻炼完事之后又特别爽，释放了身体和心理上的一些无用的东西。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://gamehu.github.io/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经">
-      <meta itemprop="description" content="我还是我，看到自己都老火...">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/" class="post-title-link" itemprop="url">组织化人才管理的四大领域</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-10-21 10:11:00" itemprop="dateCreated datePublished" datetime="2019-10-21T10:11:00+08:00">2019-10-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2020-01-02 17:36:06" itemprop="dateModified" datetime="2020-01-02T17:36:06+08:00">2020-01-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>今天内心膨胀的以为自己是个人才，所以随心所欲的看了门课。以下记录了我觉得对我有意义的点。</p>
-<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/mohamed.jpg" class="" title="Photo by Mohamed Nohassi on Unsplash">
-
-
-
-<p>根据业务布局和业务的洞察来理解和分析业务的变局时什么，再次基础上呢再来看搭建什么样的阵型，组织阵型来匹配业务，为了这样的一个人才搭建，需要准备怎样对人才进行赋能，这个赋能是系统性的赋能，不是对单个个体，甚至不是对团队，而是一个系统性的赋能。最后沉淀褚一套人才管理的机制，用这样的一套人才管理机制不断推动人才。</p>
-<h3 id="人才"><a href="#人才" class="headerlink" title="人才"></a>人才</h3><p><strong>业务布局&#x3D;人才体积</strong></p>
-<p>人才体积：人才在多大的业务空间中去发挥作用，所以业务布局决定了人才体积</p>
-<p><strong>组织阵型&#x3D;密度</strong></p>
-<p>人才分布的密度和人才分布的层次</p>
-<p><strong>人才赋能&#x3D;人才质量</strong></p>
-<p>对组织化导向的人才赋能，我组织想对我整个的人才产生怎样的一个牵引力。核心是我是要提高我得人才适应未来业务成长需求，适应未来变局的整体的能力的拉伸。</p>
-<p><strong>密度&#x3D;质量&#x2F;体积</strong></p>
-<p>所以单独对人才进行培训和赋能是不够的，而是要对人才的密度进行一个拉升，即提升人才质量的同时，要让业务体积处于合适的范围内。</p>
-<p>人才称重：人才在组织中的重量，发挥的作用。</p>
-<p>人才称重的三种方式：</p>
-<ol>
-<li>通过人才赋能提升人才质量</li>
-<li>通过业务布局减少人才体积（冗余）</li>
-<li>通过组织机构的调整来优化人才在不同组织单元中的密度，激活组织的有效性。</li>
-</ol>
-<h3 id="四大模型"><a href="#四大模型" class="headerlink" title="四大模型"></a>四大模型</h3><img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/1.jpg" class="">
-
-
-
-<p>主要说说人才管理机制模型：</p>
-<p>汰换、激励、约束、牵引</p>
-<p>汰换：这是一个必然的过程，当你想懈怠的时候觉得无趣的时候，问问自己你对于公司的价值是什么</p>
-<p>牵引：企业文化价值的输入、企业向心力的培养等</p>
-<h3 id="业务变局"><a href="#业务变局" class="headerlink" title="业务变局"></a>业务变局</h3><p><strong>业务结构与人才结构</strong></p>
-<p>解释，在什么情况下先发展业务还是先发展人才。</p>
-<p>依赖的手段则是进行<strong>业务摸底</strong>和<strong>人才摸底（核心团队）</strong></p>
-<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/2.jpg" class="">
-
-
-
-<h3 id="组织变阵"><a href="#组织变阵" class="headerlink" title="组织变阵"></a>组织变阵</h3><p>说明什么地方配置更加优秀的人才，合理的调整人才结构和组织结构</p>
-<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/3.jpg" class="">
-
-
-
-<h3 id="人才赋能"><a href="#人才赋能" class="headerlink" title="人才赋能"></a>人才赋能</h3><p>迎接未来面对变局的能力</p>
-<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/4.jpg" class="">
-
-<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/5.jpg" class="">
-
-
-
-
-
-<h3 id="人才管理机制"><a href="#人才管理机制" class="headerlink" title="人才管理机制"></a>人才管理机制</h3><p>通过上述内容，沉淀出一套符合自己公司的人才管理机制</p>
-<img src="/2019/10/21/%E7%BB%84%E7%BB%87%E5%8C%96%E4%BA%BA%E5%87%BA%E7%AE%A1%E7%90%86%E7%9A%84%E5%9B%9B%E5%A4%A7%E9%A2%86%E5%9F%9F/6.jpg" class="">
-
-
-
-
-
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>从这个课我知道了人才管理不是我之前那么单纯的理解，很容易被这个词午到，人才管理其实不仅仅说的是人才管理，还包括业务布局、组织变阵、人才赋能、机制建立等因素。</p>
-<p>所以我理解一下下，人才的定义是不是：专业技能过硬，有战略眼光且能适应业务未来的变局，且有组织向心力？</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
@@ -1478,7 +1541,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

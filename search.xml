@@ -8725,8 +8725,28 @@ git checkout -b remote分支名 本地分支名
   <entry>
     <title>docker网络问题</title>
     <url>/2023/10/23/docker%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>处理了一个现场问题，现场部署了多个agent但是就一个agent离线。</p>
-<p>查了下agent所在的服务器与主业务是能telnet通的，但是进入agent容器内部则不行，不管是ping还是curl都不行。</p>
+    <content><![CDATA[<h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>处理了一个现场问题，现场部署了多个agent但是就一个agent离线。</p>
+<p>agent是部署在单独的服务器A上，且使用docker部署，该agent需要与另外一台服务器B通信，当前的状态即是无法通信。</p>
+<p>agent-&gt;docker-&gt;服务器A-&gt;….-&gt;服务器B</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>先搞清楚请求要从agent到服务器B是个什么过程，找出其中的关键环节，逐个排查。</p>
+<p>容器B中的某个服务程序(比如web服务器)需要向服务器C发送数据。它会调用socket接口,传入目标地址等信息来生成数据包。<br>数据包被传递给容器B的网络堆栈。该堆栈会为数据包添加上以太网头(包含源MAC、目标MAC等),然后发送到容器的虚拟接口veth pair。<br>veth pair会将数据包传递给Docker主机的网络命名空间。这里包含一个Bridge接口docker0。<br>docker0收到数据包后,查找路由表,确定应该通过主机的物理接口eth0发送。<br>数据包被传递至主机的网络协议栈,这里会为数据包添加物理层头信息(比如Ethernet II头)。<br>添加完头信息的数据包通过主机的物理接口eth0发送出去。<br>数据包到达主机所在物理网络的交换机,交换机根据MAC地址转发到路由器。<br>路由器剥离二层头信息,查找三层信息,确定应向ISP上的默认网关发送。<br>在各个ISP路由器之间,重复着提取IP头,查询路由表,转发的过程。<br>最终数据包到达服务器C,服务器C的网络栈处理数据包,将其传递给目标服务。</p>
+<p>在Docker容器的网络中,还存在一个默认网关,它是容器访问外部网络的桥梁。</p>
+<p>当容器B的网络栈处理数据包时,会查看目标IP是否在容器内网段:</p>
+<p>如果目标IP在容器内网段,则直接通过veth pair发送给docker0。<br>如果目标IP不在容器内网段,则需要先发送给容器的默认网关。<br>容器的默认网关其实是一个在主机网络命名空间内的虚拟接口,IP地址属于docker0子网,比如172.17.0.1。</p>
+<p>所以数据包的流程可以补充为:</p>
+<p>容器B网络栈 -&gt; 容器默认网关(172.17.0.1) -&gt; docker0 -&gt; eth0</p>
+<p>默认网关负责帮助容器正确地将数据包发送到外部网络,从而实现网络访问。</p>
+<h4 id="可能的问题点"><a href="#可能的问题点" class="headerlink" title="可能的问题点"></a>可能的问题点</h4><ol>
+<li><p>容器内默认路由未正确设置<br>容器需要有默认网关来路由外部网络的访问。如果默认路由未设置或设置错误,可能导致容器内无法访问外部网络。</p>
+</li>
+<li><p>docker0桥接问题<br>docker0是连接容器和主机网络的桥梁。如果docker0配置错误,无法正确转发容器的数据包,会造成网络访问故障。</p>
+</li>
+<li><p>容器访问外部网络规则问题<br>可能由于iptables等防火墙规则错误配置,导致容器无法访问外部特定网络或端口。</p>
+</li>
+<li><p>容器网络命名空间隔离问题</p>
+</li>
+</ol>
+<h3 id="排查"><a href="#排查" class="headerlink" title="排查"></a>排查</h3><p>查了下agent所在的服务器与主业务是能telnet通的，但是进入agent容器内部则不行，不管是ping还是curl都不行。</p>
 <p>首先怀疑容器的网络配置可能存在问题。检查容器的网络设置，先后检查了iptables、DNS、检查默认路由都没有异常。又因为容器外能访问，且该agent与其它2、3个agent属于同一个子网下，所以也侧面证明了，服务器的网络配置确实没问题。</p>
 <p>那接下来基本确定是docker网络配置的问题了。</p>
 <p>基于nsenter，验证网络问题，发现确实存在网络问题，ping docker默认网关不通。</p>
@@ -8741,6 +8761,269 @@ git checkout -b remote分支名 本地分支名
       </categories>
       <tags>
         <tag>k8s</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>冯唐的成事方法</title>
+    <url>/2024/01/06/%E5%86%AF%E5%94%90%E7%9A%84%E6%88%90%E4%BA%8B%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h3 id="如何管理自我"><a href="#如何管理自我" class="headerlink" title="如何管理自我"></a>如何管理自我</h3><h3 id="成大事无捷径"><a href="#成大事无捷径" class="headerlink" title="成大事无捷径"></a>成大事无捷径</h3><p>笨功夫才是真功夫，没有快乐学习这一说法</p>
+<h3 id="如何平衡工作和生活"><a href="#如何平衡工作和生活" class="headerlink" title="如何平衡工作和生活"></a>如何平衡工作和生活</h3><p>有所逼<br>有所专</p>
+<ul>
+<li>临事静对猛虎，事了闲看落花。<br>有所规</li>
+<li>要立规矩，既要规范自己也要规范别人。</li>
+<li>你要让周围的人知道并遵守，久而久之，会享受到它带给你的福利。</li>
+<li>有所规划，多做计划。</li>
+</ul>
+<p>有所贪</p>
+<ul>
+<li>早做夜思，以求有济。</li>
+<li>用平常心处世，用进取心做事。</li>
+</ul>
+<h3 id="真正的猛人"><a href="#真正的猛人" class="headerlink" title="真正的猛人"></a>真正的猛人</h3><h4 id="怎么区分是不是真正的猛人"><a href="#怎么区分是不是真正的猛人" class="headerlink" title="怎么区分是不是真正的猛人"></a>怎么区分是不是真正的猛人</h4><ul>
+<li><p>看他的凶猛是对自己还是对他人</p>
+<ul>
+<li>真正的猛人，对他人的要求自己肯定能做到甚至做得更好。</li>
+</ul>
+</li>
+<li><p>从事情来判断。真正的猛人，他的凶猛和决绝是对事的。</p>
+<ul>
+<li>真正的猛人把事放在人之前，而不是看对自己爽不爽。</li>
+</ul>
+</li>
+<li><p>真的猛人追求不一样</p>
+<ul>
+<li>经常说起的自律、怎么如履薄冰等而不是吹牛，自己怎么怎么厉害</li>
+</ul>
+</li>
+</ul>
+<h4 id="猛人修炼方法：敬、恒"><a href="#猛人修炼方法：敬、恒" class="headerlink" title="猛人修炼方法：敬、恒"></a>猛人修炼方法：敬、恒</h4><p>三不朽：立言、立功、立德</p>
+<ul>
+<li>敬：是敬天悯人，尊重常识和积累，尊重事，不走捷径。</li>
+<li>恒：在对事上坚持投入时间和精力，长期主义。</li>
+</ul>
+<h4 id="做自己熟悉的行业"><a href="#做自己熟悉的行业" class="headerlink" title="做自己熟悉的行业"></a>做自己熟悉的行业</h4><ol>
+<li>做擅长的事容易成</li>
+<li>在主业做到顶尖<ol>
+<li>先知道100个关键词</li>
+<li>找到三五个专家，跟他们谈上半天到一天。</li>
+<li>找到三五本专著，仔细的看完。</li>
+<li>价值最大化</li>
+</ol>
+</li>
+</ol>
+<h4 id="掌控情绪"><a href="#掌控情绪" class="headerlink" title="掌控情绪"></a>掌控情绪</h4><h4 id="如何对待妒忌和贪婪"><a href="#如何对待妒忌和贪婪" class="headerlink" title="如何对待妒忌和贪婪"></a>如何对待妒忌和贪婪</h4><ol>
+<li>不害人</li>
+<li>要宽容</li>
+</ol>
+<h4 id="如何战胜自己，战胜逆境"><a href="#如何战胜自己，战胜逆境" class="headerlink" title="如何战胜自己，战胜逆境"></a>如何战胜自己，战胜逆境</h4><ol>
+<li>看脚下<ol>
+<li>现金流</li>
+<li>核心“上下游”</li>
+</ol>
+</li>
+<li>不断行<ol>
+<li>把自己稳定之后，不要停止努力，无论是在生活上还是在工作上。</li>
+<li>多做推功揽过。</li>
+<li>做一分算一分，在一日撑一日。</li>
+</ol>
+</li>
+<li>莫存顺逆<ol>
+<li>不要两分的看所谓的逆境。无论顺逆都是生活的一部分，都是正常的日子。</li>
+</ol>
+</li>
+</ol>
+<h4 id="如何战胜自己，战胜逆境-1"><a href="#如何战胜自己，战胜逆境-1" class="headerlink" title="如何战胜自己，战胜逆境"></a>如何战胜自己，战胜逆境</h4><ol>
+<li>真正的高手都有破局思维<ol>
+<li>在逆境中要考虑事在人为。</li>
+</ol>
+</li>
+</ol>
+<h4 id="有时候“不努力”是种正确的战略"><a href="#有时候“不努力”是种正确的战略" class="headerlink" title="有时候“不努力”是种正确的战略"></a>有时候“不努力”是种正确的战略</h4><ol>
+<li><p>战略方面，重要的是要认命</p>
+</li>
+<li><p>从战术的角度，有时候需要你收敛</p>
+<ol>
+<li>如果你有太强的目的性，很有可能遭到别人的反感。</li>
+<li>你有可能跑的太快，遭到别人的妒忌。</li>
+<li>长期过分努力做事，会遭到非常严重的抵抗。</li>
+</ol>
+</li>
+<li><p>不着急缓称王，是一种正确的态度。</p>
+</li>
+</ol>
+<p>可以不屠龙，但不能不磨剑。<br>能打仗、能力站、能快跑的时候，请力战快跑成事。<br>获得某个细分领域最多的知识和最高的智慧。</p>
+<h4 id="选择不仅仅是断舍离"><a href="#选择不仅仅是断舍离" class="headerlink" title="选择不仅仅是断舍离"></a>选择不仅仅是断舍离</h4><h4 id="养成好习惯"><a href="#养成好习惯" class="headerlink" title="养成好习惯"></a>养成好习惯</h4><h4 id="摒弃”身心灵“，在现实中修行"><a href="#摒弃”身心灵“，在现实中修行" class="headerlink" title="摒弃”身心灵“，在现实中修行"></a>摒弃”身心灵“，在现实中修行</h4><ol>
+<li>如何在现实中修行，珍惜每一个不舒服和难受。</li>
+<li>真正的修行是忍耐、自强。</li>
+</ol>
+<h4 id="以笨拙为本分，求仁得仁"><a href="#以笨拙为本分，求仁得仁" class="headerlink" title="以笨拙为本分，求仁得仁"></a>以笨拙为本分，求仁得仁</h4><h4 id="怎么通过拯救睡眠实现人生逆袭"><a href="#怎么通过拯救睡眠实现人生逆袭" class="headerlink" title="怎么通过拯救睡眠实现人生逆袭"></a>怎么通过拯救睡眠实现人生逆袭</h4><h4 id="分清欲望和志向"><a href="#分清欲望和志向" class="headerlink" title="分清欲望和志向"></a>分清欲望和志向</h4><ol>
+<li><p>如何管理欲望</p>
+<ol>
+<li>尊重欲望，尊重自己的好胜心</li>
+<li>中庸</li>
+</ol>
+</li>
+<li><p>构建自己的乐园</p>
+</li>
+</ol>
+<h4 id="如何应对年龄危机"><a href="#如何应对年龄危机" class="headerlink" title="如何应对年龄危机"></a>如何应对年龄危机</h4><ol>
+<li>锻炼好身体</li>
+<li>在一个好身体的基础上，持续修炼。</li>
+<li>衰年变法</li>
+<li>做减法，减少无效社交。</li>
+<li>减少日常花销</li>
+<li>认怂，退居二线</li>
+<li>回归生活</li>
+</ol>
+<h4 id="人人都该懂战略"><a href="#人人都该懂战略" class="headerlink" title="人人都该懂战略"></a>人人都该懂战略</h4><p>什么事战略：战略是一套完整的行动方案。这套完整的行动方案包括：何处竞争、如何竞争、何时竞争</p>
+<ol>
+<li>小公司通常不用做</li>
+<li>为什么要做战略：上下同欲，少走弯路。</li>
+<li>大处着眼，小处着手。</li>
+</ol>
+<h4 id="领导力"><a href="#领导力" class="headerlink" title="领导力"></a>领导力</h4><ol>
+<li><p>是否能成事，能够持续多成事。</p>
+</li>
+<li><p>抓大放小，容人，定方向，这是种小公司的领导力构成。</p>
+</li>
+<li><p>终极领导力，最终还是看个人的能力，危机时，只有自己靠得住，靠不了其他人。</p>
+<ol>
+<li>团队在强只是辅助</li>
+</ol>
+</li>
+<li><p>不着急、不害怕、不要脸</p>
+<ol>
+<li>不着急：对时间</li>
+<li>不害怕：对结果</li>
+<li>不要脸：对评价</li>
+</ol>
+</li>
+</ol>
+<h4 id="职场沟通规范"><a href="#职场沟通规范" class="headerlink" title="职场沟通规范"></a>职场沟通规范</h4><p>多条理，少大言</p>
+<ol>
+<li><p>倾听</p>
+<ol>
+<li>在表达自己之前，先问三个问题：<ol>
+<li>你对于这个问题是怎么想的？</li>
+<li>为什么这么想？</li>
+<li>有没有其它解决办法？</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>在倾听的基础上，理解别人的诉求</p>
+<ol>
+<li>了解清楚背景，站在对方的角度</li>
+</ol>
+</li>
+<li><p>开放</p>
+<ol>
+<li>不要预设答案，不要预设解决方案。</li>
+</ol>
+</li>
+<li><p>平等</p>
+</li>
+<li><p>多条理</p>
+<ol>
+<li>金字塔原则</li>
+</ol>
+</li>
+<li><p>少大言</p>
+<ol>
+<li>越具体越好。<ol>
+<li>情况是怎么样的？原因是什么？结论是什么？希望解决的具体的措施是什么？</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>创造一个良好的职场沟通环境</p>
+</li>
+<li><p>就事论事</p>
+<ol>
+<li>避免情绪化</li>
+</ol>
+</li>
+<li><p>可长可短</p>
+<ol>
+<li>沟通时间</li>
+</ol>
+</li>
+<li><p>职场沟通多讲事实，少讲个人喜好。</p>
+</li>
+<li><p>交流时不要庞杂。</p>
+<ol>
+<li>交流就交流，别看手机之类的</li>
+<li>也不要在比较累的时候</li>
+<li>找对方最好交流的状态</li>
+</ol>
+</li>
+<li><p>在职场交流中减少使用口头禅</p>
+</li>
+<li><p>在职场中交流少情绪化。</p>
+<ol>
+<li>记住如果这股火撒出去，一定是对这件事情有害的。把火压下去，用更低更缓慢的声调来讲。</li>
+</ol>
+</li>
+</ol>
+<h4 id="带团队的四条铁律"><a href="#带团队的四条铁律" class="headerlink" title="带团队的四条铁律"></a>带团队的四条铁律</h4><ol>
+<li><p>勤</p>
+<ol>
+<li>平时做不到的，战时一定也做不到。</li>
+</ol>
+</li>
+<li><p>放</p>
+<ol>
+<li>从团队成员出发，知道他们在想什么，放手让团队去做。</li>
+</ol>
+</li>
+<li><p>势力</p>
+<ol>
+<li>大局、实战</li>
+</ol>
+</li>
+<li><p>理想</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>看书</category>
+      </categories>
+      <tags>
+        <tag>成长</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LevelUpEnglish</title>
+    <url>/2024/02/20/LevelUpEnglish/</url>
+    <content><![CDATA[<p>经历了一轮裁员后，焦虑了，想着提升提升自己。</p>
+<p>英语虽然说一直在学，但是没有很严格的要求自己。刚好借着这波伤害把英语严格要求起来。</p>
+<h4 id="知识星球"><a href="#知识星球" class="headerlink" title="知识星球"></a>知识星球</h4><p>专门开了个知识星球，就弄给英语相关的，同时也在公众号上把英语记录起来。</p>
+<div style="width:20%;margin:auto"><img src="/2024/02/20/LevelUpEnglish/2.jpg" class="" title="知识星球"></div>
+
+<p>旨在学习英语，只包含英语学习相关的内容。</p>
+<p>我日常学习英语的方式：</p>
+<ol>
+<li>早晨7点半起床，送完孩子后开始听力20～30分钟</li>
+<li>晚上下班写一篇英文学习的公众号20～30分钟</li>
+<li>跟chatgpt用英文交流10～20分钟，可以选择一个小场景也可以根据白天学习的内容自由发挥</li>
+</ol>
+<p>学习工具：</p>
+<ol>
+<li>参考资料：<ol>
+<li><a href="https://vvyst0z7tes.feishu.cn/wiki/HQuawZepyiwNiNkImw6c00IXnmc?from=from_copylink">https://vvyst0z7tes.feishu.cn/wiki/HQuawZepyiwNiNkImw6c00IXnmc?from=from_copylink</a></li>
+<li><a href="https://1000h.org/">https://1000h.org/</a></li>
+</ol>
+</li>
+<li>播客（纯英文的），youtobe  music，apple 播客</li>
+<li>chatgpt</li>
+<li>LongMan Dictionary</li>
+</ol>
+<h4 id="公众号"><a href="#公众号" class="headerlink" title="公众号"></a>公众号</h4><div style="width:20%;margin:auto"><img src="/2024/02/20/LevelUpEnglish/1.jpg" class="" title="知识星球"></div>]]></content>
+      <categories>
+        <category>成长</category>
+      </categories>
+      <tags>
+        <tag>英语</tag>
       </tags>
   </entry>
 </search>
