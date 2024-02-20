@@ -185,7 +185,7 @@ body {
   box-sizing: border-box;
   color: var(--text-color);
   font-family: Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  font-size: 1.3em;
+  font-size: 1em;
   line-height: 2;
   min-height: 100%;
   position: relative;
@@ -2826,7 +2826,7 @@ hr {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #ff65ff;
+  background: #ffc7f7;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2859,4 +2859,172 @@ hr {
   margin-top: 60px;
   padding: 25px;
   box-shadow: 0 0 5px #d2d2d2;
+}
+.post {
+  margin-bottom: 60px;
+  margin-top: 0;
+  padding: 25px;
+  -moz-box-shadow: 0 0 5px rgba(202,203,204,0.5);
+  -webkit-box-shadow: 0 0 5px rgba(202,203,203,0.5);
+}
+code {
+  background: #fbf7f8;
+  color: #ff7600;
+  margin: 2px;
+}
+.highlight,
+pre {
+  border-radius: 3px;
+  margin: 5px 0;
+  padding: 5px;
+}
+.highlight,
+code,
+pre {
+  border: 1px solid #d6d6d6;
+}
+body {
+  font-family: 'Noto Serif SC', "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+code,
+pre {
+  font-family: 'Roboto Mono', consolas, Menlo, monospace, "PingFang SC", "Microsoft YaHei";
+}
+.post-body[itemprop="articleBody"] p {
+  color: #3f3f3f;
+  font-family: Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, "PingFang SC", Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-size: 14px;
+  letter-spacing: normal;
+}
+.header {
+  background: #fff !important;
+}
+.menu-item .fa {
+  display: none;
+}
+.menu-item a,
+.menu-item span.exturl {
+  font-size: 1.025em;
+}
+.menu-item-active a,
+.menu .menu-item a:hover,
+.menu .menu-item span.exturl:hover {
+  background: #fff;
+  color: #000;
+  font-size: 1.125em;
+}
+.logo-line-before i,
+.logo-line-after i {
+  display: none;
+}
+.site-title {
+  font-size: 2em;
+}
+.sidebar {
+  background: rgba(187,187,187,0.102);
+  bottom: 0;
+  position: fixed;
+  box-shadow: inset 0 0px 0px rgba(0,0,0,0);
+  top: 0;
+  z-index: 200;
+}
+.sidebar-nav li {
+  color: #555;
+  font-size: 1em;
+}
+.sidebar-nav li:hover {
+  color: #222;
+}
+.sidebar-nav li.sidebar-nav-overview {
+  margin-left: 10px;
+}
+.sidebar-nav .sidebar-nav-active {
+  border-bottom-color: #222;
+  color: #222;
+}
+.sidebar-nav .sidebar-nav-active:hover {
+  border-bottom-color: #222;
+  color: #222;
+}
+.post-toc ol a {
+  border-bottom-color: rgba(85,85,85,0);
+}
+.post-toc .nav .active-current > a {
+  color: #222;
+}
+.post-toc .nav .active > a {
+  border-bottom-color: #222;
+  color: #222;
+}
+.post-toc .nav .active-current > a:hover {
+  color: #222;
+}
+.site-author-image {
+  border: 0px solid #333;
+}
+.site-author-name {
+  color: #222;
+}
+.site-description {
+  color: #222;
+}
+.sidebar a,
+.sidebar span.exturl {
+  border-bottom-color: rgba(34,34,34,0);
+  color: #222;
+}
+.sidebar a:hover,
+.sidebar span.exturl:hover {
+  border-bottom-color: rgba(34,34,34,0);
+  color: rgba(34,34,34,0.51);
+}
+.feed-link a,
+.chat a {
+  border: 0px solid #fc6423;
+}
+.feed-link a:hover,
+.chat a:hover {
+  background: rgba(187,187,187,0.102);
+  border: 0px solid #fc6423;
+  color: #222;
+}
+.fa-feed:before,
+.fa-rss:before {
+  color: #222;
+}
+.links-of-author a::before,
+.links-of-author span.exturl::before {
+  display: none;
+}
+.toggle .toggle-line {
+  background: #222;
+  height: 3px;
+}
+.sidebar-toggle {
+  background: rgba(187,187,187,0);
+  height: 20px;
+  width: 25px;
+}
+.back-to-top {
+  background: rgba(34,34,34,0);
+  color: #222;
+}
+.post-block {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  border-radius: 20px;
+  padding: 30px 60px 30px 60px;
+  background: rgba(255,255,255,0.5) none repeat scroll !important;
+}
+.main-inner {
+  width: 50%;
+}
+.site-subtitle {
+  font-size: 1em;
+}
+.post-eof {
+  margin: 20px auto 20px;
+}
+.btn {
+  background: rgba(255,255,255,0);
 }
