@@ -1,1 +1,460 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/IMG_4038-32.jpeg"><link rel="icon" type="image/png" sizes="16x16" href="/images/IMG_4038.jpeg"><link rel="mask-icon" href="/images/logo.svg" color="#222"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous"><script class="next-config" data-name="main" type="application/json">{"hostname":"www.gamehu.run","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script><meta name="description" content="离职系列   第三篇   离职系列，想想这几年在公司的成长，在这做个记录。此篇主要谈谈LMT时，整理的现场故障处理流程。   LMT团队对外最大的价值就是及时响应现场故障，有点Google SRE On-Call Engineer的感觉，但是现场问题往往较复杂或处理链条很长，所以必须要有一个相对标准且高效的流程，让各角色团队达成一致，从而能快速推进。 LMT主要职责 快速响应告警，处理生产环"><meta property="og:type" content="article"><meta property="og:title" content="现场故障处理流程"><meta property="og:url" content="https://www.gamehu.run/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/index.html"><meta property="og:site_name" content="正儿八经 - 资深Java&#x2F;React工程师"><meta property="og:description" content="离职系列   第三篇   离职系列，想想这几年在公司的成长，在这做个记录。此篇主要谈谈LMT时，整理的现场故障处理流程。   LMT团队对外最大的价值就是及时响应现场故障，有点Google SRE On-Call Engineer的感觉，但是现场问题往往较复杂或处理链条很长，所以必须要有一个相对标准且高效的流程，让各角色团队达成一致，从而能快速推进。 LMT主要职责 快速响应告警，处理生产环"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://www.gamehu.run/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/xc02.jpg"><meta property="og:image" content="https://www.gamehu.run/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/xc.jpg"><meta property="og:image" content="https://www.gamehu.run/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/dz.png"><meta property="article:published_time" content="2024-03-29T13:12:00.000Z"><meta property="article:modified_time" content="2025-02-16T13:08:19.419Z"><meta property="article:author" content="Gamehu"><meta property="article:tag" content="LMT"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://www.gamehu.run/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/xc02.jpg"><link rel="canonical" href="https://www.gamehu.run/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/"><script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.gamehu.run/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/","path":"2024/03/29/故障排查流程/","title":"现场故障处理流程"}</script><script class="next-config" data-name="calendar" type="application/json">""</script><title>现场故障处理流程 | 正儿八经 - 资深Java/React工程师</title><noscript><link rel="stylesheet" href="/css/noscript.css"></noscript></head><body itemscope itemtype="http://schema.org/WebPage" class="use-motion"><div class="headband"></div><main class="main"><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-container"><div class="site-nav-toggle"><div class="toggle" aria-label="切换导航栏" role="button"><span class="toggle-line"></span> <span class="toggle-line"></span> <span class="toggle-line"></span></div></div><div class="site-meta"><a href="/" class="brand" rel="start"><i class="logo-line"></i><p class="site-title">正儿八经 - 资深Java/React工程师</p><i class="logo-line"></i></a><p class="site-subtitle" itemprop="description">浪起来？技术博客与求职信息</p></div><div class="site-nav-right"><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class="site-nav"><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-search"><a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索</a></li></ul></nav><div class="search-pop-overlay"><div class="popup search-popup"><div class="search-header"><span class="search-icon"><i class="fa fa-search"></i></span><div class="search-input-container"><input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="搜索..." spellcheck="false" type="search" class="search-input"></div><span class="popup-btn-close" role="button"><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class="search-result-icon"><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle" role="button"><span class="toggle-line"></span> <span class="toggle-line"></span> <span class="toggle-line"></span></div><aside class="sidebar"><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class="sidebar-nav"><li class="sidebar-nav-toc">文章目录</li><li class="sidebar-nav-overview">站点概览</li></ul><div class="sidebar-panel-container"><div class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#LMT%E4%B8%BB%E8%A6%81%E8%81%8C%E8%B4%A3"><span class="nav-number">1.</span> <span class="nav-text">LMT主要职责</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%B0%E5%9C%BA%E6%95%85%E9%9A%9C%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">现场故障处理流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#0-5%E7%89%88%E6%9C%AC"><span class="nav-number">2.1.</span> <span class="nav-text">0.5版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-0%E7%89%88%E6%9C%AC"><span class="nav-number">2.2.</span> <span class="nav-text">1.0版本</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">3.</span> <span class="nav-text">最后</span></a></li></ol></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" alt="Gamehu" src="/images/IMG_4038.jpeg"><p class="site-author-name" itemprop="name">Gamehu</p><div class="site-description" itemprop="description">10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go</div></div><div class="site-state-wrap site-overview-item animated"><nav class="site-state"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">183</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/"><span class="site-state-item-count">30</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/"><span class="site-state-item-count">110</span> <span class="site-state-item-name">标签</span></a></div></nav></div><div class="links-of-author site-overview-item animated"><span class="links-of-author-item"><a href="https://github.com/gamehu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gamehu" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a> </span><span class="links-of-author-item"><a href="mailto:gamehu520@gmail.com" title="E-Mail → mailto:gamehu520@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a></span></div></div></div></div></aside><div class="sidebar-dimmer"></div></header><div class="back-to-top" role="button" aria-label="返回顶部"><i class="fa fa-arrow-up"></i> <span>0%</span></div><div class="reading-progress-bar"></div><a href="https://github.com/gamehu/gamehu.github.io" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><noscript><div class="noscript-warning">Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class="post-block"><article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/IMG_4038.jpeg"><meta itemprop="name" content="Gamehu"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="正儿八经 - 资深Java/React工程师"><meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go"></span><span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork"><meta itemprop="name" content="现场故障处理流程 | 正儿八经 - 资深Java/React工程师"><meta itemprop="description" content=""></span><header class="post-header"><h1 class="post-title" itemprop="name headline">现场故障处理流程</h1><div class="post-meta-container"><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建时间：2024-03-29 21:12:00" itemprop="dateCreated datePublished" datetime="2024-03-29T21:12:00+08:00">2024-03-29</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-folder"></i> </span><span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a></span></span></div></div></header><div class="post-body" itemprop="articleBody"><div class="tag-container"><span class="main-tag">离职系列</span> <span class="sub-tag">第三篇</span></div><div class="article-quote">离职系列，想想这几年在公司的成长，在这做个记录。此篇主要谈谈LMT时，整理的现场故障处理流程。</div><p>LMT团队对外最大的价值就是及时响应现场故障，有点Google SRE On-Call Engineer的感觉，但是现场问题往往较复杂或处理链条很长，所以必须要有一个相对标准且高效的流程，让各角色团队达成一致，从而能快速推进。</p><h3 id="LMT主要职责"><a href="#LMT主要职责" class="headerlink" title="LMT主要职责"></a>LMT主要职责</h3><ol><li><p>快速响应告警，处理生产环境中的故障，对故障分级，同时保证SLA时效。</p></li><li><p>故障排查</p><ol><li>使用日志、指标和工具（如 fping、netdata、arthas 等）定位问题的根本原因。</li><li>执行临时修复措施（如回滚、重启服务）以恢复服务。</li><li>问题升级</li></ol></li><li><p>事后故障复盘</p><ol><li>在故障解决后，组织处理人撰写事后分析报告，记录问题的根本原因、影响和改进措施。</li><li>预防，推动改进措施的实施，防止类似问题再次发生。</li></ol></li><li><p>协作与沟通</p><ol><li>跟进每一个现场故障，与开发团队、产品团队和其他相关方协作，确保问题得到彻底解决。</li><li>在故障期间向利益相关者提供状态更新和预计故障关闭时间。</li></ol></li><li><p>知识库</p><ol><li>和研发团队一起沉淀文档建立知识库，提升效率的同时培养人员。</li></ol></li></ol><h3 id="现场故障处理流程"><a href="#现场故障处理流程" class="headerlink" title="现场故障处理流程"></a>现场故障处理流程</h3><p>基于上面的职责，我梳理两个版本，0.5和1.0版本现场故障处理流程，主要在于先分清每个团队的职责，然后把现场故障能快速的流转起来，不管是否为疑难杂症，都做到万事有回响。</p><h4 id="0-5版本"><a href="#0-5版本" class="headerlink" title="0.5版本"></a>0.5版本</h4><p>0.5版本用于建队初期，时间紧任务重，人员还未完全到位的情况。彼时LMT更多的是解决简单的问题以及跟进问题，大多问题的处理还是需要寻求原研发团队的支持故称<strong>接口人模式</strong>。<br>(故障组就是LMT)</p><img src="/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/xc02.jpg"><h4 id="1-0版本"><a href="#1-0版本" class="headerlink" title="1.0版本"></a>1.0版本</h4><p>1.0版本是各核心模块人员配置到位，且各团队磨合期过了后，整理的，1.0版本流程重点主要在两方面：</p><ol><li>LMT能独立解决大部分现场故障</li><li>LMT没法及时解决的需要有故障的升级路径，升级后LMT转为跟进故障处理情况并反馈一线。</li></ol><img src="/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/xc.jpg"><p>后续还有2.0版本，但是因为我已经不在LMT，且职责已经跟当初我建立时大相径庭所以我就不做梳理了。</p><h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>一定不要忘了还有 <strong>复盘与改进</strong></p><ol><li><p>复盘</p><ul><li>使用标准的文档模板，由实际故障处理人记录问题的完整过程，总结根因</li><li>复盘时共创改进措施，并每项都建立跟进人和时间</li></ul></li><li><p>预防措施</p><ul><li>举一反三，自查类似问题</li><li>更新知识库</li><li>加强相关人员培训</li></ul></li><li><p>填单<br>整个流程，为了各团队统一语言，所有过程记录我们要求都基于JIRA单，每个团队对应其流程节点，对JIRA单进行扭转和补充。</p><img src="/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/dz.png"></li></ol></div><footer class="post-footer"><div class="post-tags"><a href="/tags/LMT/" rel="tag"># LMT</a></div><div class="post-nav"><div class="post-nav-item"><a href="/2024/03/19/LMT/" rel="prev" title="LMT"><i class="fa fa-chevron-left"></i> LMT</a></div><div class="post-nav-item"><a href="/2024/06/14/%E7%8E%B0%E5%9C%BA%E6%95%85%E9%9A%9C%E5%AE%9A%E4%BD%8D/" rel="next" title="现场故障定位指南">现场故障定位指南 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2025</span> <span class="with-love"><i class="fa fa-heart"></i> </span><span class="author" itemprop="copyrightHolder">Gamehu</span></div><div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动</div></div></footer><script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script><script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script><script src="/js/third-party/search/local-search.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/IMG_4038-32.jpeg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/IMG_4038.jpeg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.gamehu.run","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="离职系列   第三篇   离职系列，想想这几年在公司的成长，在这做个记录。此篇主要谈谈LMT时，整理的现场故障处理流程。   LMT团队对外最大的价值就是及时响应现场故障，有点Google SRE On-Call Engineer的感觉，但是现场问题往往较复杂或处理链条很长，所以必须要有一个相对标准且高效的流程，让各角色团队达成一致，从而能快速推进。 LMT主要职责 快速响应告警，处理生产环">
+<meta property="og:type" content="article">
+<meta property="og:title" content="现场故障处理流程">
+<meta property="og:url" content="https://www.gamehu.run/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/index.html">
+<meta property="og:site_name" content="正儿八经 - 资深Java&#x2F;React工程师">
+<meta property="og:description" content="离职系列   第三篇   离职系列，想想这几年在公司的成长，在这做个记录。此篇主要谈谈LMT时，整理的现场故障处理流程。   LMT团队对外最大的价值就是及时响应现场故障，有点Google SRE On-Call Engineer的感觉，但是现场问题往往较复杂或处理链条很长，所以必须要有一个相对标准且高效的流程，让各角色团队达成一致，从而能快速推进。 LMT主要职责 快速响应告警，处理生产环">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.gamehu.run/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/xc02.jpg">
+<meta property="og:image" content="https://www.gamehu.run/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/xc.jpg">
+<meta property="og:image" content="https://www.gamehu.run/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/dz.png">
+<meta property="article:published_time" content="2024-03-29T13:12:00.000Z">
+<meta property="article:modified_time" content="2025-02-16T13:08:19.419Z">
+<meta property="article:author" content="Gamehu">
+<meta property="article:tag" content="LMT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.gamehu.run/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/xc02.jpg">
+
+
+<link rel="canonical" href="https://www.gamehu.run/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.gamehu.run/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/","path":"2024/03/29/故障排查流程/","title":"现场故障处理流程"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>现场故障处理流程 | 正儿八经 - 资深Java/React工程师</title>
+  
+
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">正儿八经 - 资深Java/React工程师</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">浪起来？技术博客与求职信息</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#LMT%E4%B8%BB%E8%A6%81%E8%81%8C%E8%B4%A3"><span class="nav-number">1.</span> <span class="nav-text">LMT主要职责</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%B0%E5%9C%BA%E6%95%85%E9%9A%9C%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">现场故障处理流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#0-5%E7%89%88%E6%9C%AC"><span class="nav-number">2.1.</span> <span class="nav-text">0.5版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-0%E7%89%88%E6%9C%AC"><span class="nav-number">2.2.</span> <span class="nav-text">1.0版本</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">3.</span> <span class="nav-text">最后</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Gamehu"
+      src="/images/IMG_4038.jpeg">
+  <p class="site-author-name" itemprop="name">Gamehu</p>
+  <div class="site-description" itemprop="description">10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">185</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">111</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/gamehu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gamehu" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:gamehu520@gmail.com" title="E-Mail → mailto:gamehu520@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/gamehu/gamehu.github.io" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="现场故障处理流程 | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          现场故障处理流程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-29 21:12:00" itemprop="dateCreated datePublished" datetime="2024-03-29T21:12:00+08:00">2024-03-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <div class="tag-container">
+  <span class="main-tag">离职系列</span>
+  <span class="sub-tag">第三篇</span>
+</div>
+<div class="article-quote">
+离职系列，想想这几年在公司的成长，在这做个记录。此篇主要谈谈LMT时，整理的现场故障处理流程。
+</div>
+
+<p>LMT团队对外最大的价值就是及时响应现场故障，有点Google SRE On-Call Engineer的感觉，但是现场问题往往较复杂或处理链条很长，所以必须要有一个相对标准且高效的流程，让各角色团队达成一致，从而能快速推进。</p>
+<h3 id="LMT主要职责"><a href="#LMT主要职责" class="headerlink" title="LMT主要职责"></a>LMT主要职责</h3><ol>
+<li><p>快速响应告警，处理生产环境中的故障，对故障分级，同时保证SLA时效。</p>
+</li>
+<li><p>故障排查</p>
+<ol>
+<li>使用日志、指标和工具（如 fping、netdata、arthas 等）定位问题的根本原因。</li>
+<li>执行临时修复措施（如回滚、重启服务）以恢复服务。</li>
+<li>问题升级</li>
+</ol>
+</li>
+<li><p>事后故障复盘</p>
+<ol>
+<li>在故障解决后，组织处理人撰写事后分析报告，记录问题的根本原因、影响和改进措施。</li>
+<li>预防，推动改进措施的实施，防止类似问题再次发生。</li>
+</ol>
+</li>
+<li><p>协作与沟通</p>
+<ol>
+<li>跟进每一个现场故障，与开发团队、产品团队和其他相关方协作，确保问题得到彻底解决。</li>
+<li>在故障期间向利益相关者提供状态更新和预计故障关闭时间。</li>
+</ol>
+</li>
+<li><p>知识库</p>
+<ol>
+<li>和研发团队一起沉淀文档建立知识库，提升效率的同时培养人员。</li>
+</ol>
+</li>
+</ol>
+<h3 id="现场故障处理流程"><a href="#现场故障处理流程" class="headerlink" title="现场故障处理流程"></a>现场故障处理流程</h3><p>基于上面的职责，我梳理两个版本，0.5和1.0版本现场故障处理流程，主要在于先分清每个团队的职责，然后把现场故障能快速的流转起来，不管是否为疑难杂症，都做到万事有回响。</p>
+<h4 id="0-5版本"><a href="#0-5版本" class="headerlink" title="0.5版本"></a>0.5版本</h4><p>0.5版本用于建队初期，时间紧任务重，人员还未完全到位的情况。彼时LMT更多的是解决简单的问题以及跟进问题，大多问题的处理还是需要寻求原研发团队的支持故称<strong>接口人模式</strong>。<br>(故障组就是LMT)</p>
+<img src="/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/xc02.jpg" class="">
+<h4 id="1-0版本"><a href="#1-0版本" class="headerlink" title="1.0版本"></a>1.0版本</h4><p>1.0版本是各核心模块人员配置到位，且各团队磨合期过了后，整理的，1.0版本流程重点主要在两方面：</p>
+<ol>
+<li>LMT能独立解决大部分现场故障</li>
+<li>LMT没法及时解决的需要有故障的升级路径，升级后LMT转为跟进故障处理情况并反馈一线。</li>
+</ol>
+<img src="/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/xc.jpg" class="">
+
+<p>后续还有2.0版本，但是因为我已经不在LMT，且职责已经跟当初我建立时大相径庭所以我就不做梳理了。</p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>一定不要忘了还有 <strong>复盘与改进</strong></p>
+<ol>
+<li><p>复盘</p>
+<ul>
+<li>使用标准的文档模板，由实际故障处理人记录问题的完整过程，总结根因</li>
+<li>复盘时共创改进措施，并每项都建立跟进人和时间</li>
+</ul>
+</li>
+<li><p>预防措施</p>
+<ul>
+<li>举一反三，自查类似问题</li>
+<li>更新知识库</li>
+<li>加强相关人员培训</li>
+</ul>
+</li>
+<li><p>填单<br>整个流程，为了各团队统一语言，所有过程记录我们要求都基于JIRA单，每个团队对应其流程节点，对JIRA单进行扭转和补充。</p>
+<img src="/2024/03/29/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E6%B5%81%E7%A8%8B/dz.png" class=""></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div class="post-widgets">
+    <div class="likely">
+        <div class="twitter">Tweet</div>
+        <div class="facebook">Share</div>
+        <div class="linkedin">Link</div>
+        <div class="gplus">Plus</div>
+        <div class="vkontakte">Share</div>
+        <div class="odnoklassniki">Class</div>
+        <div class="telegram">Send</div>
+        <div class="whatsapp">Send</div>
+        <div class="pinterest">Pin</div>
+    </div>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.js"></script><div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+          <div class="post-tags">
+              <a href="/tags/LMT/" rel="tag"># LMT</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/03/19/LMT/" rel="prev" title="LMT">
+                  <i class="fa fa-chevron-left"></i> LMT
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/06/14/%E7%8E%B0%E5%9C%BA%E6%95%85%E9%9A%9C%E5%AE%9A%E4%BD%8D/" rel="next" title="现场故障定位指南">
+                  现场故障定位指南 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gamehu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+</body>
+</html>

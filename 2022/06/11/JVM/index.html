@@ -1,1 +1,498 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png"><link rel="icon" type="image/png" sizes="32x32" href="/images/IMG_4038-32.jpeg"><link rel="icon" type="image/png" sizes="16x16" href="/images/IMG_4038.jpeg"><link rel="mask-icon" href="/images/logo.svg" color="#222"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous"><script class="next-config" data-name="main" type="application/json">{"hostname":"www.gamehu.run","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script><meta name="description" content="背景由于最近在查一个OOM问题，所以借机读起了《深入理解Java虚拟机》第三版。简单做个记录。 垃圾收集算法分代收集理论大多数垃圾收集器的都应用的理论。  弱分代假说（年轻代）：绝大多数朝生夕灭的对象。强分代假说（老年代）：熬过越多次垃圾收集就越难消亡。跨代引用假说   Partial GC（部分收集）:  Minor GC&#x2F;Young GC(年轻代收集) Major GC&#x2F;O"><meta property="og:type" content="article"><meta property="og:title" content="JVM"><meta property="og:url" content="https://www.gamehu.run/2022/06/11/JVM/index.html"><meta property="og:site_name" content="正儿八经 - 资深Java&#x2F;React工程师"><meta property="og:description" content="背景由于最近在查一个OOM问题，所以借机读起了《深入理解Java虚拟机》第三版。简单做个记录。 垃圾收集算法分代收集理论大多数垃圾收集器的都应用的理论。  弱分代假说（年轻代）：绝大多数朝生夕灭的对象。强分代假说（老年代）：熬过越多次垃圾收集就越难消亡。跨代引用假说   Partial GC（部分收集）:  Minor GC&#x2F;Young GC(年轻代收集) Major GC&#x2F;O"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://www.gamehu.run/2022/06/11/JVM/1.jpeg"><meta property="og:image" content="https://www.gamehu.run/2022/06/11/JVM/2.png"><meta property="og:image" content="https://www.gamehu.run/2022/06/11/JVM/gc_compact.png"><meta property="og:image" content="https://www.gamehu.run/2022/06/11/JVM/g1-011.png"><meta property="og:image" content="https://www.freecodecamp.org/news/content/images/size/w600/2021/01/image-39.png"><meta property="og:image" content="https://www.freecodecamp.org/news/content/images/size/w600/2021/01/image-32.png"><meta property="og:image" content="https://i.stack.imgur.com/XHfx0.jpg"><meta property="og:image" content="https://static001.infoq.cn/resource/image/75/a4/754f1ab05e6527107cfd8578d98a80a4.png"><meta property="article:published_time" content="2022-06-11T02:22:00.000Z"><meta property="article:modified_time" content="2025-02-19T03:45:00.303Z"><meta property="article:author" content="Gamehu"><meta property="article:tag" content="java"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://www.gamehu.run/2022/06/11/JVM/1.jpeg"><link rel="canonical" href="https://www.gamehu.run/2022/06/11/JVM/"><script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.gamehu.run/2022/06/11/JVM/","path":"2022/06/11/JVM/","title":"JVM"}</script><script class="next-config" data-name="calendar" type="application/json">""</script><title>JVM | 正儿八经 - 资深Java/React工程师</title><noscript><link rel="stylesheet" href="/css/noscript.css"></noscript></head><body itemscope itemtype="http://schema.org/WebPage" class="use-motion"><div class="headband"></div><main class="main"><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-container"><div class="site-nav-toggle"><div class="toggle" aria-label="切换导航栏" role="button"><span class="toggle-line"></span> <span class="toggle-line"></span> <span class="toggle-line"></span></div></div><div class="site-meta"><a href="/" class="brand" rel="start"><i class="logo-line"></i><p class="site-title">正儿八经 - 资深Java/React工程师</p><i class="logo-line"></i></a><p class="site-subtitle" itemprop="description">浪起来？技术博客与求职信息</p></div><div class="site-nav-right"><div class="toggle popup-trigger"><i class="fa fa-search fa-fw fa-lg"></i></div></div></div><nav class="site-nav"><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-search"><a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索</a></li></ul></nav><div class="search-pop-overlay"><div class="popup search-popup"><div class="search-header"><span class="search-icon"><i class="fa fa-search"></i></span><div class="search-input-container"><input autocomplete="off" autocapitalize="off" maxlength="80" placeholder="搜索..." spellcheck="false" type="search" class="search-input"></div><span class="popup-btn-close" role="button"><i class="fa fa-times-circle"></i></span></div><div class="search-result-container no-result"><div class="search-result-icon"><i class="fa fa-spinner fa-pulse fa-5x"></i></div></div></div></div></div><div class="toggle sidebar-toggle" role="button"><span class="toggle-line"></span> <span class="toggle-line"></span> <span class="toggle-line"></span></div><aside class="sidebar"><div class="sidebar-inner sidebar-nav-active sidebar-toc-active"><ul class="sidebar-nav"><li class="sidebar-nav-toc">文章目录</li><li class="sidebar-nav-overview">站点概览</li></ul><div class="sidebar-panel-container"><div class="post-toc-wrap sidebar-panel"><div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">垃圾收集算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86%E7%90%86%E8%AE%BA"><span class="nav-number">2.1.</span> <span class="nav-text">分代收集理论</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.1.</span> <span class="nav-text">标记-清除算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0-%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.2.</span> <span class="nav-text">标记-复制算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%86%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.3.</span> <span class="nav-text">标记-整理算法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E7%BB%86%E8%8A%82"><span class="nav-number">2.2.</span> <span class="nav-text">算法细节</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B9%E7%BB%93%E7%82%B9%E6%9E%9A%E4%B8%BE"><span class="nav-number">2.2.1.</span> <span class="nav-text">根结点枚举</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E7%82%B9"><span class="nav-number">2.2.2.</span> <span class="nav-text">安全点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E5%8C%BA%E5%9F%9F"><span class="nav-number">2.2.3.</span> <span class="nav-text">安全区域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%B0%E5%BF%86%E9%9B%86%E4%B8%8E%E5%8D%A1%E8%A1%A8"><span class="nav-number">2.2.4.</span> <span class="nav-text">记忆集与卡表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%99%E5%B1%8F%E9%9A%9C"><span class="nav-number">2.2.5.</span> <span class="nav-text">写屏障</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90"><span class="nav-number">2.2.6.</span> <span class="nav-text">并发可达性分析</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">垃圾收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#G1"><span class="nav-number">2.3.1.</span> <span class="nav-text">G1</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM-Architecture"><span class="nav-number">3.</span> <span class="nav-text">JVM Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Types-of-Java-Garbage-Collectors"><span class="nav-number">3.1.</span> <span class="nav-text">Types of Java Garbage Collectors</span></a></li></ol></li></ol></div></div><div class="site-overview-wrap sidebar-panel"><div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person"><img class="site-author-image" itemprop="image" alt="Gamehu" src="/images/IMG_4038.jpeg"><p class="site-author-name" itemprop="name">Gamehu</p><div class="site-description" itemprop="description">10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go</div></div><div class="site-state-wrap site-overview-item animated"><nav class="site-state"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">183</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/"><span class="site-state-item-count">30</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/"><span class="site-state-item-count">110</span> <span class="site-state-item-name">标签</span></a></div></nav></div><div class="links-of-author site-overview-item animated"><span class="links-of-author-item"><a href="https://github.com/gamehu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gamehu" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a> </span><span class="links-of-author-item"><a href="mailto:gamehu520@gmail.com" title="E-Mail → mailto:gamehu520@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a></span></div></div></div></div></aside><div class="sidebar-dimmer"></div></header><div class="back-to-top" role="button" aria-label="返回顶部"><i class="fa fa-arrow-up"></i> <span>0%</span></div><div class="reading-progress-bar"></div><a href="https://github.com/gamehu/gamehu.github.io" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><noscript><div class="noscript-warning">Theme NexT works best with JavaScript enabled</div></noscript><div class="main-inner post posts-expand"><div class="post-block"><article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2022/06/11/JVM/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/IMG_4038.jpeg"><meta itemprop="name" content="Gamehu"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="正儿八经 - 资深Java/React工程师"><meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go"></span><span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork"><meta itemprop="name" content="JVM | 正儿八经 - 资深Java/React工程师"><meta itemprop="description" content=""></span><header class="post-header"><h1 class="post-title" itemprop="name headline">JVM</h1><div class="post-meta-container"><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建时间：2022-06-11 10:22:00" itemprop="dateCreated datePublished" datetime="2022-06-11T10:22:00+08:00">2022-06-11</time> </span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-folder"></i> </span><span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a></span></span></div></div></header><div class="post-body" itemprop="articleBody"><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>由于最近在查一个OOM问题，所以借机读起了《深入理解Java虚拟机》第三版。简单做个记录。</p><h3 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h3><h4 id="分代收集理论"><a href="#分代收集理论" class="headerlink" title="分代收集理论"></a>分代收集理论</h4><p>大多数垃圾收集器的都应用的理论。</p><blockquote><p>弱分代假说（年轻代）：绝大多数朝生夕灭的对象。<br>强分代假说（老年代）：熬过越多次垃圾收集就越难消亡。<br>跨代引用假说</p></blockquote><p>Partial GC（部分收集）:</p><ul><li>Minor GC&#x2F;Young GC(年轻代收集)</li><li>Major GC&#x2F;Old GC（老年代收集）</li><li>Mixed GC(混合收集)：JDK 11 ，只有G1有，针对年轻代和部分老年代。<br>Full GC（整堆收集）：整个堆和方法区</li></ul><span id="more"></span><h5 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h5><p>标记需要回收的对象，然后清除。这是最基础算法，后续的其它算法都是针对其缺点的改进而来的。所以其实放在这个目录纬度可能有点不太合适，不过不纠结了。</p><img src="/2022/06/11/JVM/1.jpeg" title="stackoverflow"><p>缺点：</p><ol><li>随着对象增加而效率降低。</li><li>内存碎片</li></ol><h5 id="标记-复制算法"><a href="#标记-复制算法" class="headerlink" title="标记-复制算法"></a>标记-复制算法</h5><p>年轻代内存均分两个区域，一个使用完了，就将还存活的对象复制到另一个。避免内存碎片。</p><img src="/2022/06/11/JVM/2.png" title="opengenus"><p>缺点：</p><ol><li>内存缩小了一半 。</li><li>存活对象越多，复制的开销越大，效率降低。</li><li>需要担保机制，保证剩下的区域也不够时，也能正常运行，即需要依赖其它内存区域（年老代）。</li></ol><p>Appel式回收：优化了标记-复制算法，使内存的分配更加合理，比如分成了1个Eden、2个Survivor，Eden、Survivor默认比例为8:1，一开始使用1个Eden、1个Survivor，即剩下未使用的内存只占10%。</p><h5 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h5><p>主要针对年老代。标记后，让存活对象往内存的一端移动，然后再清理除此以外的内存。</p><img src="/2022/06/11/JVM/gc_compact.png" title="opengenus"><p>缺点：</p><ol><li>移动就意味着需要更新引用地址，增加了回收的复杂度。</li></ol><p>所以需要权衡（如果移动则回收更复杂，如果不移动则内存分配更复杂）。比如如果更关注吞吐量则选择“移动”，如果更关注延迟则“不移动”。</p><h4 id="算法细节"><a href="#算法细节" class="headerlink" title="算法细节"></a>算法细节</h4><p>上面说的是一些理论，现在说一些细节，垃圾收集的前置知识。</p><p>可达性分析：追踪通过“根”对象的一系列参考链可以到达哪些对象。算法中定义了几个GC Root对象。这些根对象在GC时不会被JVM回收，然后通过这些对象像分支一样向外扩展。引用的对象表示它们仍在使用中，不会被使用。</p><h5 id="根结点枚举"><a href="#根结点枚举" class="headerlink" title="根结点枚举"></a>根结点枚举</h5><p>即找出所有的GC Roots，且该过程是STW。所谓GC根是垃圾收集器专用的对象。垃圾收集器收集那些不是GC根并且不能通过GC根的引用访问的对象。</p><p>固定的可做为GC Roots的节点主要在全局性的引用（常量，类静态属性）与执行上下文（栈桢的本地变量表），</p><p><strong>OopMap</strong><br>快速完成根结点枚举的实现方式：OopMap。</p><p>一旦类加载动作完成的时候，HotSpot就会把对象内什么偏移量上是什么类型的数据计算出来，</p><p>在即时编译过程中，也会在特定的位置记录下栈里和寄存器里哪些位置是引用。</p><p>这样收集器在扫描时就可以直接得知这些信息了，并不需要真正一个不漏地从方法区等GC Roots开始查找</p><p>所以OopMap的作用就是存储内存中哪些位置存储了对象引用。</p><h5 id="安全点"><a href="#安全点" class="headerlink" title="安全点"></a>安全点</h5><blockquote><p>OopMap记录的位置（不是随时随地都记录，不然空间占用又是个大问题）<br>控制用户执行程序不能任意位置停顿下来执行垃圾收集。而是强制要求在安全点才能停顿。</p></blockquote><p>这些特定安全点的主要位置如下：</p><ul><li>在方法返回之前</li><li>调用方法后</li><li>抛出异常的位置</li><li>循环结束</li><li>…</li></ul><p>咋个保证到了位置就能停呢，HotSpot采用主动式中断方式，即不直接操作线程而是设置一个标志位，线程轮询这个标志位，当为真时，则线程主动中断挂起。<br>为了使轮询高效，HotSpot使用内存保护陷阱的方式，把轮询操作精简为一条指令，当应该听顿时，设置对应的内存页为只读，则该指令会产生一个自陷异常信号，使线程能挂起。</p><h5 id="安全区域"><a href="#安全区域" class="headerlink" title="安全区域"></a>安全区域</h5><p>扩展拉伸了的安全点。用于程序不执行的时候，即没法触发安全点的情况，该区域里引用关系不会发生变化，因此只要在区域内就能进行垃圾收集。</p><h5 id="记忆集与卡表"><a href="#记忆集与卡表" class="headerlink" title="记忆集与卡表"></a>记忆集与卡表</h5><blockquote><p>跨代引用的记录方案，避免为了找跨代引用关系时扫描整个老年代。<br>记忆集:用于记录从非收集区域指向收集区域的指针集合的抽象数据结构。<br>卡表：记忆集的具体的实现。</p></blockquote><h5 id="写屏障"><a href="#写屏障" class="headerlink" title="写屏障"></a>写屏障</h5><p>为的是维护卡表的元素，比如其它代的对象引用了本区域的对象，即赋值操作，这个时候需要更新卡表，但是怎么保证卡表的更新呢，特别是在已经编译为机器码时。<br>写屏障就是机器码层面的一个手段，在每个赋值操作形成一个AOP切面，赋值前后都属于写屏障，这个时候就能把更新卡表放在赋值之后了，从而保证卡表的更新。</p><h5 id="并发可达性分析"><a href="#并发可达性分析" class="headerlink" title="并发可达性分析"></a>并发可达性分析</h5><p><strong>三色标记</strong></p><blockquote><p>标记对象的状态。用于后续是否被回收的输入条件。<br>白色: 未被GC访问过的对象。<br>灰色: 被GC访问过，但是至少还存在一个引用没有被扫描。<br>黑色: 被GC访问过，且所有引用都被扫描过。<br><strong>并发扫描对象消失问题</strong><br>即把原本存活的对象标记为已消亡。</p></blockquote><p>解决办法：</p><ol><li>增量更新（插入引用）</li><li>原始快照（删除引用）</li></ol><h4 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h4><h5 id="G1"><a href="#G1" class="headerlink" title="G1"></a>G1</h5><p>里程碑式的收集器，源于开创了基于Region的堆内存布局，可对任何区域进行回收即不区分老年代、新生代。</p><p>虽然还是遵循分代理论，但是目标范围不再像以前的收集器，分隔新生代、老年代或者整个堆，而是可以对任何区域进行回收，因为Region布局里的每个区域都可作为新生代或者老年代的空间。</p><p>即新生代、老年代不再是固定的。而是一系列Region的动态集合（不需要连续）。</p><p>G1追求的不是一次扫描整个新生代或者老年代甚至整个堆，G1通过计算只会扫某些Region，理论上来讲只要收集的速度跟上分配的速度那就能完美一直运行。</p><img src="/2022/06/11/JVM/g1-011.png" title="g1"><h3 id="JVM-Architecture"><a href="#JVM-Architecture" class="headerlink" title="JVM Architecture"></a>JVM Architecture</h3><p><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/specs/jvms/se11/jvms11.pdf">https://docs.oracle.com/javase/specs/jvms/se11/jvms11.pdf</a></p><p><img src="https://www.freecodecamp.org/news/content/images/size/w600/2021/01/image-39.png" alt="img"></p><p><img src="https://www.freecodecamp.org/news/content/images/size/w600/2021/01/image-32.png" alt="img"></p><p>JVM中的类的加载器主要有三种:<em><strong>*启动类加载器*<em><strong>，</strong></em>*拓展类加载器*<em><strong>，</strong></em>*应用类加载器。*</strong></em></p><p>**启动类加载器(Bootstrap classLoader):**又称为引导类加载器，由C++编写，无法通过程序得到。主要负责加载JAVA中的一些核心类库，主要是位于<java_home>&#x2F;lib&#x2F;rt.jar中。</java_home></p><p>**拓展类加载器(Extension classLoader):**主要加载JAVA中的一些拓展类，位于<java_home>&#x2F;lib&#x2F;ext中,是启动类加载器的子类。</java_home></p><p><strong>应用类加载器(System classLoader):</strong> 又称为系统类加载器,主要用于加载CLASSPATH路径下我们自己写的类，是拓展类加载器的子类。</p><p><a target="_blank" rel="noopener" href="https://www.freecodecamp.org/news/jvm-tutorial-java-virtual-machine-architecture-explained-for-beginners/">https://www.freecodecamp.org/news/jvm-tutorial-java-virtual-machine-architecture-explained-for-beginners/</a></p><h4 id="Types-of-Java-Garbage-Collectors"><a href="#Types-of-Java-Garbage-Collectors" class="headerlink" title="Types of Java Garbage Collectors"></a>Types of Java Garbage Collectors</h4><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/woshimrf/p/jvm-garbage.html">https://www.cnblogs.com/woshimrf/p/jvm-garbage.html</a></p><p><a target="_blank" rel="noopener" href="https://javapapers.com/java/types-of-java-garbage-collectors/">https://javapapers.com/java/types-of-java-garbage-collectors/</a></p><p><img src="https://i.stack.imgur.com/XHfx0.jpg" alt="img"></p><p><img src="https://static001.infoq.cn/resource/image/75/a4/754f1ab05e6527107cfd8578d98a80a4.png" alt="img"></p><p><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/3wyretkqrhivtw4frmr3">https://www.infoq.cn/article/3wyretkqrhivtw4frmr3</a></p><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/dolphin0520/p/3784171.html">Java 如何有效地避免OOM：善于利用软引用和弱引用</a></p><p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p><p>Java Platform, Standard Edition HotSpot Virtual Machine Garbage Collection Tuning Guide：<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/9/gctuning/garbage-first-garbage-collector.htm#JSGCT-GUID-ED3AB6D3-FD9B-4447-9EDF-983ED2F7A573">https://docs.oracle.com/javase/9/gctuning/garbage-first-garbage-collector.htm#JSGCT-GUID-ED3AB6D3-FD9B-4447-9EDF-983ED2F7A573</a></p><p>Java Garbage Collection handbook ：<a target="_blank" rel="noopener" href="https://plumbr.io/handbook/garbage-collection-algorithms-implementations/g1">https://plumbr.io/handbook/garbage-collection-algorithms-implementations/g1</a></p><p>Shenandoah GC：<a target="_blank" rel="noopener" href="https://shipilev.net/talks/javazone-Sep2018-shenandoah.pdf">https://shipilev.net/talks/javazone-Sep2018-shenandoah.pdf</a></p><p><a target="_blank" rel="noopener" href="https://stuefe.de/posts/metaspace/what-is-compressed-class-space/">https://stuefe.de/posts/metaspace/what-is-compressed-class-space/</a><br><a target="_blank" rel="noopener" href="https://shipilev.net/jvm/anatomy-quarks/23-compressed-references/">https://shipilev.net/jvm/anatomy-quarks/23-compressed-references/</a><br><a target="_blank" rel="noopener" href="https://stuefe.de/posts/metaspace/analyze-metaspace-with-jcmd/">https://stuefe.de/posts/metaspace/analyze-metaspace-with-jcmd/</a></p><p><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/java-jvm-memory-model-memory-management-in-java">Understanding the Java Memory Model and Garbage Collection</a></p><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=QHIWkwxs0AI&t=212s">JVM Architecture</a></p></div><footer class="post-footer"><div class="post-tags"><a href="/tags/java/" rel="tag"># java</a></div><div class="post-nav"><div class="post-nav-item"><a href="/2022/06/09/GC/" rel="prev" title="GC"><i class="fa fa-chevron-left"></i> GC</a></div><div class="post-nav-item"><a href="/2022/06/14/OOM%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/" rel="next" title="OOM排查工具">OOM排查工具 <i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2025</span> <span class="with-love"><i class="fa fa-heart"></i> </span><span class="author" itemprop="copyrightHolder">Gamehu</span></div><div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动</div></div></footer><script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script><script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script><script src="/js/third-party/search/local-search.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/IMG_4038-32.jpeg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/IMG_4038.jpeg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.gamehu.run","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="背景由于最近在查一个OOM问题，所以借机读起了《深入理解Java虚拟机》第三版。简单做个记录。 垃圾收集算法分代收集理论大多数垃圾收集器的都应用的理论。  弱分代假说（年轻代）：绝大多数朝生夕灭的对象。强分代假说（老年代）：熬过越多次垃圾收集就越难消亡。跨代引用假说   Partial GC（部分收集）:  Minor GC&#x2F;Young GC(年轻代收集) Major GC&#x2F;O">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM">
+<meta property="og:url" content="https://www.gamehu.run/2022/06/11/JVM/index.html">
+<meta property="og:site_name" content="正儿八经 - 资深Java&#x2F;React工程师">
+<meta property="og:description" content="背景由于最近在查一个OOM问题，所以借机读起了《深入理解Java虚拟机》第三版。简单做个记录。 垃圾收集算法分代收集理论大多数垃圾收集器的都应用的理论。  弱分代假说（年轻代）：绝大多数朝生夕灭的对象。强分代假说（老年代）：熬过越多次垃圾收集就越难消亡。跨代引用假说   Partial GC（部分收集）:  Minor GC&#x2F;Young GC(年轻代收集) Major GC&#x2F;O">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.gamehu.run/2022/06/11/JVM/1.jpeg">
+<meta property="og:image" content="https://www.gamehu.run/2022/06/11/JVM/2.png">
+<meta property="og:image" content="https://www.gamehu.run/2022/06/11/JVM/gc_compact.png">
+<meta property="og:image" content="https://www.gamehu.run/2022/06/11/JVM/g1-011.png">
+<meta property="og:image" content="https://www.freecodecamp.org/news/content/images/size/w600/2021/01/image-39.png">
+<meta property="og:image" content="https://www.freecodecamp.org/news/content/images/size/w600/2021/01/image-32.png">
+<meta property="og:image" content="https://i.stack.imgur.com/XHfx0.jpg">
+<meta property="og:image" content="https://static001.infoq.cn/resource/image/75/a4/754f1ab05e6527107cfd8578d98a80a4.png">
+<meta property="article:published_time" content="2022-06-11T02:22:00.000Z">
+<meta property="article:modified_time" content="2025-02-19T03:45:00.303Z">
+<meta property="article:author" content="Gamehu">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.gamehu.run/2022/06/11/JVM/1.jpeg">
+
+
+<link rel="canonical" href="https://www.gamehu.run/2022/06/11/JVM/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.gamehu.run/2022/06/11/JVM/","path":"2022/06/11/JVM/","title":"JVM"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JVM | 正儿八经 - 资深Java/React工程师</title>
+  
+
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">正儿八经 - 资深Java/React工程师</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">浪起来？技术博客与求职信息</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">垃圾收集算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86%E7%90%86%E8%AE%BA"><span class="nav-number">2.1.</span> <span class="nav-text">分代收集理论</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.1.</span> <span class="nav-text">标记-清除算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0-%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.2.</span> <span class="nav-text">标记-复制算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%86%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.3.</span> <span class="nav-text">标记-整理算法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E7%BB%86%E8%8A%82"><span class="nav-number">2.2.</span> <span class="nav-text">算法细节</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B9%E7%BB%93%E7%82%B9%E6%9E%9A%E4%B8%BE"><span class="nav-number">2.2.1.</span> <span class="nav-text">根结点枚举</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E7%82%B9"><span class="nav-number">2.2.2.</span> <span class="nav-text">安全点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E5%8C%BA%E5%9F%9F"><span class="nav-number">2.2.3.</span> <span class="nav-text">安全区域</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%B0%E5%BF%86%E9%9B%86%E4%B8%8E%E5%8D%A1%E8%A1%A8"><span class="nav-number">2.2.4.</span> <span class="nav-text">记忆集与卡表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%99%E5%B1%8F%E9%9A%9C"><span class="nav-number">2.2.5.</span> <span class="nav-text">写屏障</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90"><span class="nav-number">2.2.6.</span> <span class="nav-text">并发可达性分析</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="nav-number">2.3.</span> <span class="nav-text">垃圾收集器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#G1"><span class="nav-number">2.3.1.</span> <span class="nav-text">G1</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JVM-Architecture"><span class="nav-number">3.</span> <span class="nav-text">JVM Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Types-of-Java-Garbage-Collectors"><span class="nav-number">3.1.</span> <span class="nav-text">Types of Java Garbage Collectors</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Gamehu"
+      src="/images/IMG_4038.jpeg">
+  <p class="site-author-name" itemprop="name">Gamehu</p>
+  <div class="site-description" itemprop="description">10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">185</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">111</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/gamehu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gamehu" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:gamehu520@gmail.com" title="E-Mail → mailto:gamehu520@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/gamehu/gamehu.github.io" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2022/06/11/JVM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JVM | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JVM
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-06-11 10:22:00" itemprop="dateCreated datePublished" datetime="2022-06-11T10:22:00+08:00">2022-06-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>由于最近在查一个OOM问题，所以借机读起了《深入理解Java虚拟机》第三版。简单做个记录。</p>
+<h3 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h3><h4 id="分代收集理论"><a href="#分代收集理论" class="headerlink" title="分代收集理论"></a>分代收集理论</h4><p>大多数垃圾收集器的都应用的理论。</p>
+<blockquote>
+<p>弱分代假说（年轻代）：绝大多数朝生夕灭的对象。<br>强分代假说（老年代）：熬过越多次垃圾收集就越难消亡。<br>跨代引用假说</p>
+</blockquote>
+<p> Partial GC（部分收集）:</p>
+<ul>
+<li>Minor GC&#x2F;Young GC(年轻代收集)</li>
+<li>Major GC&#x2F;Old GC（老年代收集）</li>
+<li>Mixed GC(混合收集)：JDK 11 ，只有G1有，针对年轻代和部分老年代。<br> Full GC（整堆收集）：整个堆和方法区</li>
+</ul>
+<span id="more"></span>
+<h5 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h5><p>标记需要回收的对象，然后清除。这是最基础算法，后续的其它算法都是针对其缺点的改进而来的。所以其实放在这个目录纬度可能有点不太合适，不过不纠结了。</p>
+<img src="/2022/06/11/JVM/1.jpeg" class="" title="stackoverflow">
+
+<p>缺点：</p>
+<ol>
+<li>随着对象增加而效率降低。</li>
+<li>内存碎片</li>
+</ol>
+<h5 id="标记-复制算法"><a href="#标记-复制算法" class="headerlink" title="标记-复制算法"></a>标记-复制算法</h5><p>年轻代内存均分两个区域，一个使用完了，就将还存活的对象复制到另一个。避免内存碎片。</p>
+<img src="/2022/06/11/JVM/2.png" class="" title="opengenus">
+
+<p>缺点：</p>
+<ol>
+<li>内存缩小了一半 。</li>
+<li>存活对象越多，复制的开销越大，效率降低。</li>
+<li>需要担保机制，保证剩下的区域也不够时，也能正常运行，即需要依赖其它内存区域（年老代）。</li>
+</ol>
+<p>Appel式回收：优化了标记-复制算法，使内存的分配更加合理，比如分成了1个Eden、2个Survivor，Eden、Survivor默认比例为8:1，一开始使用1个Eden、1个Survivor，即剩下未使用的内存只占10%。</p>
+<h5 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h5><p>主要针对年老代。标记后，让存活对象往内存的一端移动，然后再清理除此以外的内存。</p>
+<img src="/2022/06/11/JVM/gc_compact.png" class="" title="opengenus">
+
+<p>缺点：</p>
+<ol>
+<li>移动就意味着需要更新引用地址，增加了回收的复杂度。</li>
+</ol>
+<p>所以需要权衡（如果移动则回收更复杂，如果不移动则内存分配更复杂）。比如如果更关注吞吐量则选择“移动”，如果更关注延迟则“不移动”。</p>
+<h4 id="算法细节"><a href="#算法细节" class="headerlink" title="算法细节"></a>算法细节</h4><p>上面说的是一些理论，现在说一些细节，垃圾收集的前置知识。</p>
+<p>可达性分析：追踪通过“根”对象的一系列参考链可以到达哪些对象。算法中定义了几个GC Root对象。这些根对象在GC时不会被JVM回收，然后通过这些对象像分支一样向外扩展。引用的对象表示它们仍在使用中，不会被使用。</p>
+<h5 id="根结点枚举"><a href="#根结点枚举" class="headerlink" title="根结点枚举"></a>根结点枚举</h5><p>即找出所有的GC Roots，且该过程是STW。所谓GC根是垃圾收集器专用的对象。垃圾收集器收集那些不是GC根并且不能通过GC根的引用访问的对象。</p>
+<p>固定的可做为GC Roots的节点主要在全局性的引用（常量，类静态属性）与执行上下文（栈桢的本地变量表），</p>
+<p><strong>OopMap</strong><br>快速完成根结点枚举的实现方式：OopMap。</p>
+<p>一旦类加载动作完成的时候，HotSpot就会把对象内什么偏移量上是什么类型的数据计算出来，</p>
+<p>在即时编译过程中，也会在特定的位置记录下栈里和寄存器里哪些位置是引用。</p>
+<p>这样收集器在扫描时就可以直接得知这些信息了，并不需要真正一个不漏地从方法区等GC Roots开始查找</p>
+<p>所以OopMap的作用就是存储内存中哪些位置存储了对象引用。</p>
+<h5 id="安全点"><a href="#安全点" class="headerlink" title="安全点"></a>安全点</h5><blockquote>
+<p>OopMap记录的位置（不是随时随地都记录，不然空间占用又是个大问题）<br>控制用户执行程序不能任意位置停顿下来执行垃圾收集。而是强制要求在安全点才能停顿。</p>
+</blockquote>
+<p>这些特定安全点的主要位置如下：</p>
+<ul>
+<li>在方法返回之前</li>
+<li>调用方法后</li>
+<li>抛出异常的位置</li>
+<li>循环结束</li>
+<li>…</li>
+</ul>
+<p>咋个保证到了位置就能停呢，HotSpot采用主动式中断方式，即不直接操作线程而是设置一个标志位，线程轮询这个标志位，当为真时，则线程主动中断挂起。<br>为了使轮询高效，HotSpot使用内存保护陷阱的方式，把轮询操作精简为一条指令，当应该听顿时，设置对应的内存页为只读，则该指令会产生一个自陷异常信号，使线程能挂起。</p>
+<h5 id="安全区域"><a href="#安全区域" class="headerlink" title="安全区域"></a>安全区域</h5><p>扩展拉伸了的安全点。用于程序不执行的时候，即没法触发安全点的情况，该区域里引用关系不会发生变化，因此只要在区域内就能进行垃圾收集。</p>
+<h5 id="记忆集与卡表"><a href="#记忆集与卡表" class="headerlink" title="记忆集与卡表"></a>记忆集与卡表</h5><blockquote>
+<p>跨代引用的记录方案，避免为了找跨代引用关系时扫描整个老年代。<br>记忆集:用于记录从非收集区域指向收集区域的指针集合的抽象数据结构。<br>卡表：记忆集的具体的实现。</p>
+</blockquote>
+<h5 id="写屏障"><a href="#写屏障" class="headerlink" title="写屏障"></a>写屏障</h5><p>为的是维护卡表的元素，比如其它代的对象引用了本区域的对象，即赋值操作，这个时候需要更新卡表，但是怎么保证卡表的更新呢，特别是在已经编译为机器码时。<br>写屏障就是机器码层面的一个手段，在每个赋值操作形成一个AOP切面，赋值前后都属于写屏障，这个时候就能把更新卡表放在赋值之后了，从而保证卡表的更新。</p>
+<h5 id="并发可达性分析"><a href="#并发可达性分析" class="headerlink" title="并发可达性分析"></a>并发可达性分析</h5><p><strong>三色标记</strong></p>
+<blockquote>
+<p>标记对象的状态。用于后续是否被回收的输入条件。<br>白色: 未被GC访问过的对象。<br>灰色: 被GC访问过，但是至少还存在一个引用没有被扫描。<br>黑色: 被GC访问过，且所有引用都被扫描过。<br><strong>并发扫描对象消失问题</strong><br>即把原本存活的对象标记为已消亡。</p>
+</blockquote>
+<p>解决办法：</p>
+<ol>
+<li>增量更新（插入引用）</li>
+<li>原始快照（删除引用）</li>
+</ol>
+<h4 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h4><h5 id="G1"><a href="#G1" class="headerlink" title="G1"></a>G1</h5><p>里程碑式的收集器，源于开创了基于Region的堆内存布局，可对任何区域进行回收即不区分老年代、新生代。</p>
+<p>虽然还是遵循分代理论，但是目标范围不再像以前的收集器，分隔新生代、老年代或者整个堆，而是可以对任何区域进行回收，因为Region布局里的每个区域都可作为新生代或者老年代的空间。</p>
+<p>即新生代、老年代不再是固定的。而是一系列Region的动态集合（不需要连续）。</p>
+<p>G1追求的不是一次扫描整个新生代或者老年代甚至整个堆，G1通过计算只会扫某些Region，理论上来讲只要收集的速度跟上分配的速度那就能完美一直运行。</p>
+<img src="/2022/06/11/JVM/g1-011.png" class="" title="g1">
+<h3 id="JVM-Architecture"><a href="#JVM-Architecture" class="headerlink" title="JVM Architecture"></a>JVM Architecture</h3><p><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/specs/jvms/se11/jvms11.pdf">https://docs.oracle.com/javase/specs/jvms/se11/jvms11.pdf</a></p>
+<p><img src="https://www.freecodecamp.org/news/content/images/size/w600/2021/01/image-39.png" alt="img"></p>
+<p><img src="https://www.freecodecamp.org/news/content/images/size/w600/2021/01/image-32.png" alt="img"></p>
+<p>   JVM中的类的加载器主要有三种:<em><strong>*启动类加载器*<em><strong>，</strong></em>*拓展类加载器*<em><strong>，</strong></em>*应用类加载器。*</strong></em></p>
+<p>   **启动类加载器(Bootstrap classLoader):**又称为引导类加载器，由C++编写，无法通过程序得到。主要负责加载JAVA中的一些核心类库，主要是位于<JAVA_HOME>&#x2F;lib&#x2F;rt.jar中。</p>
+<p>   **拓展类加载器(Extension classLoader):**主要加载JAVA中的一些拓展类，位于<JAVA_HOME>&#x2F;lib&#x2F;ext中,是启动类加载器的子类。</p>
+<p>   <strong>应用类加载器(System classLoader):</strong>  又称为系统类加载器,主要用于加载CLASSPATH路径下我们自己写的类，是拓展类加载器的子类。</p>
+<p><a target="_blank" rel="noopener" href="https://www.freecodecamp.org/news/jvm-tutorial-java-virtual-machine-architecture-explained-for-beginners/">https://www.freecodecamp.org/news/jvm-tutorial-java-virtual-machine-architecture-explained-for-beginners/</a></p>
+<h4 id="Types-of-Java-Garbage-Collectors"><a href="#Types-of-Java-Garbage-Collectors" class="headerlink" title="Types of Java Garbage Collectors"></a>Types of Java Garbage Collectors</h4><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/woshimrf/p/jvm-garbage.html">https://www.cnblogs.com/woshimrf/p/jvm-garbage.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://javapapers.com/java/types-of-java-garbage-collectors/">https://javapapers.com/java/types-of-java-garbage-collectors/</a></p>
+<p><img src="https://i.stack.imgur.com/XHfx0.jpg" alt="img"></p>
+<p><img src="https://static001.infoq.cn/resource/image/75/a4/754f1ab05e6527107cfd8578d98a80a4.png" alt="img"></p>
+<p><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/3wyretkqrhivtw4frmr3">https://www.infoq.cn/article/3wyretkqrhivtw4frmr3</a></p>
+<p> <a target="_blank" rel="noopener" href="https://www.cnblogs.com/dolphin0520/p/3784171.html">Java 如何有效地避免OOM：善于利用软引用和弱引用</a></p>
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
+<p>Java Platform, Standard Edition HotSpot Virtual Machine Garbage Collection Tuning Guide：<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/9/gctuning/garbage-first-garbage-collector.htm#JSGCT-GUID-ED3AB6D3-FD9B-4447-9EDF-983ED2F7A573">https://docs.oracle.com/javase/9/gctuning/garbage-first-garbage-collector.htm#JSGCT-GUID-ED3AB6D3-FD9B-4447-9EDF-983ED2F7A573</a></p>
+<p>Java Garbage Collection handbook  ：<a target="_blank" rel="noopener" href="https://plumbr.io/handbook/garbage-collection-algorithms-implementations/g1">https://plumbr.io/handbook/garbage-collection-algorithms-implementations/g1</a></p>
+<p>Shenandoah GC：<a target="_blank" rel="noopener" href="https://shipilev.net/talks/javazone-Sep2018-shenandoah.pdf">https://shipilev.net/talks/javazone-Sep2018-shenandoah.pdf</a></p>
+<p><a target="_blank" rel="noopener" href="https://stuefe.de/posts/metaspace/what-is-compressed-class-space/">https://stuefe.de/posts/metaspace/what-is-compressed-class-space/</a><br><a target="_blank" rel="noopener" href="https://shipilev.net/jvm/anatomy-quarks/23-compressed-references/">https://shipilev.net/jvm/anatomy-quarks/23-compressed-references/</a><br><a target="_blank" rel="noopener" href="https://stuefe.de/posts/metaspace/analyze-metaspace-with-jcmd/">https://stuefe.de/posts/metaspace/analyze-metaspace-with-jcmd/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/java-jvm-memory-model-memory-management-in-java">Understanding the Java Memory Model and Garbage Collection</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=QHIWkwxs0AI&t=212s">JVM Architecture</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div class="post-widgets">
+    <div class="likely">
+        <div class="twitter">Tweet</div>
+        <div class="facebook">Share</div>
+        <div class="linkedin">Link</div>
+        <div class="gplus">Plus</div>
+        <div class="vkontakte">Share</div>
+        <div class="odnoklassniki">Class</div>
+        <div class="telegram">Send</div>
+        <div class="whatsapp">Send</div>
+        <div class="pinterest">Pin</div>
+    </div>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.js"></script><div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+          <div class="post-tags">
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/06/09/GC/" rel="prev" title="GC">
+                  <i class="fa fa-chevron-left"></i> GC
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/06/14/OOM%E6%8E%92%E6%9F%A5%E5%B7%A5%E5%85%B7/" rel="next" title="OOM排查工具">
+                  OOM排查工具 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gamehu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+</body>
+</html>
