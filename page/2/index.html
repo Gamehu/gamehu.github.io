@@ -169,7 +169,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">185</span>
+          <span class="site-state-item-count">186</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -220,6 +220,109 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/06/15/%E5%AE%9A%E4%BD%8D%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/06/15/%E5%AE%9A%E4%BD%8D%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">服务可用性定位问题常用命令</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-06-15 20:07:00" itemprop="dateCreated datePublished" datetime="2024-06-15T20:07:00+08:00">2024-06-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div class="tag-container">
+  <span class="main-tag">离职系列</span>
+  <span class="sub-tag">第五篇</span>
+</div>
+<div class="article-quote">
+离职系列，想想这几年在公司的成长，在这做个记录。上一篇<a href="/2024/06/14/%E7%8E%B0%E5%9C%BA%E6%95%85%E9%9A%9C%E5%AE%9A%E4%BD%8D/" title="现场故障定位指南">现场故障定位指南</a>，主要讲的方法论，这篇主要对服务可用性的几个场景总结下相应的命令。
+</div>
+
+<p>以下命令主要针对现场经常出现的安装失败、升级失败、补丁失败、服务不断重启、服务不可用几个场景：</p>
+<ol>
+<li>安装失败，通常就是现场环境问题，比如服务器的磁盘性能不达标、网络通信问题、服务器DNS配置错误、集群IP段不可用</li>
+<li>升级失败，通常和服务器的资源紧张有关（内存、磁盘、CPU等）</li>
+<li>服务不断重启，通常是基础组件问题如redis异常、应用pod自身程序的bug如OOM、k8s组件问题如etcd重启</li>
+<li>服务不可用，通常就是集群出了问题，比如磁盘满了导致镜像丢失</li>
+</ol>
+<h4 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h4><ol>
+<li>确认环境信息<ul>
+<li>环境信息<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># 操作系统版本</span><br><span class="line">cat /etc/redhat-release  # CentOS版本</span><br><span class="line">cat /etc/openEuler-release  # 欧拉版本</span><br><span class="line">uname -r  # 内核版本</span><br><span class="line">cat /proc/version  # 内核编译信息</span><br><span class="line">hostnamectl  # 查看完整的系统信息</span><br><span class="line"></span><br><span class="line"># 系统基础信息</span><br><span class="line">df -h               # 磁盘空间</span><br><span class="line">free -h             # 内存使用</span><br><span class="line">top                 # CPU和进程状态</span><br><span class="line">netstat -ant        # 网络连接</span><br><span class="line">uptime              # 系统负载</span><br><span class="line">iostat -x 1 10      # 磁盘状态</span><br><span class="line"></span><br><span class="line"># 进程分析</span><br><span class="line">ps -ef | grep 进程名</span><br><span class="line">pstree -p 进程ID</span><br><span class="line">lsof -p 进程ID</span><br><span class="line"></span><br><span class="line"># 分区及挂载</span><br><span class="line">lsblk  # 查看块设备</span><br><span class="line">df -Th  # 查看文件系统类型和空间</span><br><span class="line">mount | grep -E &quot;^/dev&quot;  # 查看挂载参数</span><br><span class="line"></span><br><span class="line"># 磁盘空间</span><br><span class="line">du -sh /* | sort -hr  # 大文件目录排序</span><br><span class="line"># 时间同步状态</span><br><span class="line">chronyc sources -v</span><br></pre></td></tr></table></figure></li>
+<li>K8s集群状态  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># K8s集群状态</span><br><span class="line">systemctl status kubelet  # kubelet是否正常</span><br><span class="line">systemctl status docker # docker是否正常</span><br><span class="line">systemctl status NetworkManager # 网络连接工具是否正常</span><br><span class="line">kubectl cluster-info #查看集群信息</span><br><span class="line">kubectl get nodes   # kubelet集群节点</span><br><span class="line">kubectl get po -A   # 查看所以pod状态</span><br><span class="line">kubectl get po -A -owide   # 查看所以pod的ip和所在的node</span><br><span class="line">kubectl describe node &lt;node-name&gt;</span><br><span class="line">kubectl get events -n &lt;namespace&gt;  #Kubernetes 事件日志</span><br><span class="line">journalctl -u kubelet -f  # 日志查看</span><br><span class="line">cat /var/log/messages | grep xx  # 日志查看 </span><br><span class="line"></span><br><span class="line"># 应用Pod状态</span><br><span class="line">kubectl get pods -n &lt;namespace&gt; -o wide</span><br><span class="line">ping pod_ip # 判断容器之间的联通性</span><br><span class="line">kubectl describe &lt;pod-name&gt; -n &lt;namespace&gt;</span><br><span class="line">kubectl exec -it &lt;pod-name&gt; -n &lt;namespace&gt; /bin/sh  # 进入容器内部</span><br><span class="line">kubectl logs &lt;pod-name&gt; -n &lt;namespace&gt; </span><br><span class="line"></span><br><span class="line"># 集群资源状态</span><br><span class="line">kubectl top nodes</span><br><span class="line">kubectl top pods -n &lt;namespace&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>客户网络环境限制（可用端口、防火墙策略）   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 网络组件</span><br><span class="line">ip link show</span><br><span class="line">iptables -L</span><br><span class="line"></span><br><span class="line"># DNS配置</span><br><span class="line">cat /etc/resolv.conf</span><br><span class="line"># 网络分析 </span><br><span class="line">curl url  # 应用连通性</span><br><span class="line">fping -c xx -p xx 目标IP或域名  # 基础连通性</span><br><span class="line">ping &lt;目标IP&gt;    # 基础连通性</span><br><span class="line">telnet &lt;IP&gt; &lt;端口&gt;    # 端口连通性</span><br><span class="line">traceroute    # 路由跟踪</span><br><span class="line">tcpdump -i any port &lt;端口&gt; -w dump.pcap    # 抓包分析</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a target="_blank" rel="noopener" href="https://jimmysong.io/kubernetes-hndbaook/guide/using-kubectl.html">https://jimmysong.io/kubernetes-hndbaook/guide/using-kubectl.html</a><br><a target="_blank" rel="noopener" href="https://kubernetes.io/zh-cn/docs/tasks/debug/_print/">https://kubernetes.io/zh-cn/docs/tasks/debug/_print/</a><br><a target="_blank" rel="noopener" href="https://cheat.sh/">https://cheat.sh/</a><br><a target="_blank" rel="noopener" href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">https://kubernetes.io/docs/reference/kubectl/cheatsheet/</a><br><a target="_blank" rel="noopener" href="https://kubernetes.io/zh/docs/reference/kubectl/">https://kubernetes.io/zh/docs/reference/kubectl/</a><br><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/run/">https://docs.docker.com/engine/reference/run/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1578,108 +1681,6 @@
 <p>Big-O Notation - For Coding Interviews</p>
 <p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=BgLTDT03QtU">https://www.youtube.com/watch?v=BgLTDT03QtU</a></p>
 <p><a target="_blank" rel="noopener" href="https://neetcode.io/courses/lessons/big-o-notation">https://neetcode.io/courses/lessons/big-o-notation</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2023/12/10/%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/12/10/%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0/" class="post-title-link" itemprop="url">数学知识复习</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-12-10 10:52:00" itemprop="dateCreated datePublished" datetime="2023-12-10T10:52:00+08:00">2023-12-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法与数据结构</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <div class="tag-container">
-  <span class="main-tag">算法与数据结构</span>
-  <span class="sub-tag">第一篇</span>
-</div>
-<div class="article-quote">
-最近在看《数据结构与算法分析-第三版》，记录下解惑时刻。
-</div>
-
-
-<ol>
-<li>指数</li>
-<li>对数</li>
-<li>取模</li>
-<li>阶乘</li>
-<li>归纳法<ol>
-<li>基准值</li>
-<li>归纳假设</li>
-</ol>
-</li>
-<li>反证法<ol>
-<li>假设定理不成立，然后证明该假设导致已知的性质不成立。</li>
-</ol>
-</li>
-<li>递归</li>
-</ol>
 
       
     </div>

@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://www.gamehu.run/2024/09/17/%E9%81%87%E8%A7%81%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6/error.jpg">
 <meta property="og:image" content="https://www.gamehu.run/2024/09/17/%E9%81%87%E8%A7%81%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6/sql.png">
 <meta property="article:published_time" content="2024-09-17T11:51:00.000Z">
-<meta property="article:modified_time" content="2025-02-26T14:08:57.675Z">
+<meta property="article:modified_time" content="2025-03-07T02:11:57.053Z">
 <meta property="article:author" content="Gamehu">
 <meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
@@ -175,7 +175,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">185</span>
+          <span class="site-state-item-count">186</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -405,13 +405,17 @@
 </li>
 </ol>
 <h4 id="第五步：监控效果"><a href="#第五步：监控效果" class="headerlink" title="第五步：监控效果"></a>第五步：监控效果</h4><ol>
-<li>上线后，连续一周到点蹲守数据库负载看板以及pg的pg_stat_activity。<ol>
+<li>上线后，连续一周到点蹲守<ol>
+<li>SELECT pg_stat_reset();  – 重置所有统计信息</li>
+<li>数据库负载看板以及pg的pg_stat_activity。<ol>
 <li>之前的sql执行时间没有再超过2s</li>
 <li>看板上慢sql也没有在发现</li>
 <li>数据库日志也没有再出现异常</li>
 </ol>
 </li>
-<li>EXPLAIN ANALYZE 对应sql，发现为Index Scan，索引生效。</li>
+<li>pg_stat_user_indexes+EXPLAIN ANALYZE 对应sql，查看索引使用情况。</li>
+</ol>
+</li>
 <li>业务功能正常。</li>
 </ol>
 <p>看上去目前超时的问题暂时解决，但是要想更彻底的解，还需要后续对遗留项逐个解决。</p>
@@ -419,6 +423,7 @@
 <li>连接池的参数调优，虽然默认的看上去没啥问题，但是迟早肯定会出问题，记一个DFX。</li>
 <li>多了一个HikariCP连接池，而且通过jconsole看了下，两个连接池都会初始化，这块是否有必要有两个连接池，这儿存在隐患，对ShardingSphere需要深入了解下，记一个DFX。</li>
 <li>历史数据的清理，跟PO提出，需要加一个需求不仅仅是告警，可能还有其他数据。</li>
+<li>对于核心且经常更新的表是否需要定时REINDEX</li>
 </ol>
 
     </div>
