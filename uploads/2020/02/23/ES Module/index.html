@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/IMG_4038-32.jpeg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/IMG_4038.jpeg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.gamehu.run","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="单独记录一下ES Module，听得太多用的也多，但是一直没深刻的认识一下它。 同样的节奏先Google找是否有大佬写这方面的文章。 幸运的是被我找到了Lin Clark（之前我学习浏览器方面的知识就是读的她的文章）写的，很喜欢她的文章，讲的很生动和具体。 开始来来来，搬运一下这一篇ES modules: A cartoon deep-dive。 模块如何提供帮助？模块为您提供了更好的方式来组织这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES Module">
+<meta property="og:url" content="https://www.gamehu.run/2020/02/23/ES%20Module/index.html">
+<meta property="og:site_name" content="正儿八经 - 资深Java&#x2F;React工程师">
+<meta property="og:description" content="单独记录一下ES Module，听得太多用的也多，但是一直没深刻的认识一下它。 同样的节奏先Google找是否有大佬写这方面的文章。 幸运的是被我找到了Lin Clark（之前我学习浏览器方面的知识就是读的她的文章）写的，很喜欢她的文章，讲的很生动和具体。 开始来来来，搬运一下这一篇ES modules: A cartoon deep-dive。 模块如何提供帮助？模块为您提供了更好的方式来组织这">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.gamehu.run/2020/02/23/ES%20Module/1.png">
+<meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/04_import_graph-500x291.png">
+<meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/05_module_record-500x287.png">
+<meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/06_module_instance-500x372.png">
+<meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/07_3_phases-500x184.png">
+<meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/07_loader_vs_es-500x286.png">
+<meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_loader_as_puppeteer-500x330.png">
+<meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_script_entry-500x188.png">
+<meta property="og:image" content="https://www.gamehu.run/2020/02/23/ES%20Module/2.png">
+<meta property="og:image" content="https://www.gamehu.run/2020/02/23/ES%20Module/3.png">
+<meta property="og:image" content="https://www.gamehu.run/2020/02/23/ES%20Module/4.png">
+<meta property="og:image" content="https://www.gamehu.run/2020/02/23/ES%20Module/5.png">
+<meta property="og:image" content="https://www.gamehu.run/2020/02/23/ES%20Module/6.png">
+<meta property="og:image" content="https://www.gamehu.run/2020/02/23/ES%20Module/7.png">
+<meta property="og:image" content="https://www.gamehu.run/2020/02/23/ES%20Module/8.png">
+<meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/25_file_to_module_record-500x199.png">
+<meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/25_module_map-500x239.png">
+<meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/26_parse_goal-500x311.png">
+<meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/27_construction-500x406.png">
+<meta property="og:image" content="https://www.gamehu.run/2020/02/23/ES%20Module/9.png">
+<meta property="og:image" content="https://www.gamehu.run/2020/02/23/ES%20Module/10.png">
+<meta property="og:image" content="https://www.gamehu.run/2020/02/23/ES%20Module/11.png">
+<meta property="og:image" content="https://www.gamehu.run/2020/02/23/ES%20Module/12.png">
+<meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/40_top_level_code-500x146.png">
+<meta property="og:image" content="https://www.gamehu.run/2020/02/23/ES%20Module/13.png">
+<meta property="og:image" content="https://www.gamehu.run/2020/02/23/ES%20Module/14.png">
+<meta property="og:image" content="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/42_cjs_variable_2-500x113.png">
+<meta property="og:image" content="https://www.gamehu.run/2020/02/23/ES%20Module/15.png">
+<meta property="og:image" content="https://www.gamehu.run/2020/02/23/ES%20Module/16.png">
+<meta property="article:published_time" content="2020-02-23T14:33:00.000Z">
+<meta property="article:modified_time" content="2020-02-24T14:01:02.000Z">
+<meta property="article:author" content="Gamehu">
+<meta property="article:tag" content="ES Module">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.gamehu.run/2020/02/23/ES%20Module/1.png">
+
+
+<link rel="canonical" href="https://www.gamehu.run/2020/02/23/ES%20Module/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.gamehu.run/2020/02/23/ES%20Module/","path":"2020/02/23/ES Module/","title":"ES Module"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ES Module | 正儿八经 - 资深Java/React工程师</title>
+  
+
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">正儿八经 - 资深Java/React工程师</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">浪起来？技术博客与求职信息</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B"><span class="nav-number">1.</span> <span class="nav-text">开始</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%A6%82%E4%BD%95%E6%8F%90%E4%BE%9B%E5%B8%AE%E5%8A%A9%EF%BC%9F"><span class="nav-number">1.1.</span> <span class="nav-text">模块如何提供帮助？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES%E6%A8%A1%E5%9D%97%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.2.</span> <span class="nav-text">ES模块如何工作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA"><span class="nav-number">1.3.</span> <span class="nav-text">构建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E5%B9%B6%E8%8E%B7%E5%8F%96%E6%96%87%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">查找并获取文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90"><span class="nav-number">1.5.</span> <span class="nav-text">解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E5%8C%96"><span class="nav-number">1.6.</span> <span class="nav-text">实例化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C"><span class="nav-number">1.7.</span> <span class="nav-text">运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E6%96%87%E5%9C%B0%E5%9D%80%EF%BC%9A"><span class="nav-number">1.8.</span> <span class="nav-text">原文地址：</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Gamehu"
+      src="/images/IMG_4038.jpeg">
+  <p class="site-author-name" itemprop="name">Gamehu</p>
+  <div class="site-description" itemprop="description">10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">189</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">112</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/gamehu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gamehu" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:gamehu520@gmail.com" title="E-Mail → mailto:gamehu520@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/gamehu/gamehu.github.io" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2020/02/23/ES%20Module/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ES Module | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ES Module
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-02-23 22:33:00" itemprop="dateCreated datePublished" datetime="2020-02-23T22:33:00+08:00">2020-02-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>单独记录一下ES Module，听得太多用的也多，但是一直没深刻的认识一下它。</p>
+<p>同样的节奏先Google找是否有大佬写这方面的文章。</p>
+<p>幸运的是被我找到了<a target="_blank" rel="noopener" href="https://twitter.com/linclark">Lin Clark</a>（之前我学习浏览器方面的知识就是读的她的文章）写的，很喜欢她的文章，讲的很生动和具体。</p>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><p>来来来，搬运一下这一篇<a target="_blank" rel="noopener" href="https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/">ES modules: A cartoon deep-dive</a>。</p>
+<h4 id="模块如何提供帮助？"><a href="#模块如何提供帮助？" class="headerlink" title="模块如何提供帮助？"></a>模块如何提供帮助？</h4><p>模块为您提供了更好的方式来组织这些变量和函数。使用模块，您可以将有意义的变量和函数组合在一起。</p>
+<p>这会将这些函数和变量放入模块范围。模块作用域可用于在模块中的功能之间共享变量。</p>
+<p>但是与函数作用域不同，模块作用域具有一种使其变量也可用于其他模块的方式。他们可以明确地说出模块中的哪些变量，类或函数应该可用。</p>
+<p>当其他模块可以使用某些东西时，这称为导出。导出后，其他模块可以明确地说它们依赖于该变量，类或函数。</p>
+<img src="/2020/02/23/ES%20Module/1.png" class="">
+
+<p>因为这是一种明确的关系，所以您可以知道如果删除另一个模块，哪个模块将中断。</p>
+<p>一旦能够在模块之间导出和导入变量，就可以更轻松地将代码分解为可以相互独立工作的小块。然后，您可以组合并重组这些块（类似于积木），以从同一组模块创建所有不同种类的应用程序。</p>
+<h4 id="ES模块如何工作"><a href="#ES模块如何工作" class="headerlink" title="ES模块如何工作"></a>ES模块如何工作</h4><p>在使用模块进行开发时，您将建立一个依赖关系图。不同依赖项之间的连接来自您使用的任何导入语句。</p>
+<p>这些导入语句是浏览器或Node如何确切知道其需要加载哪些代码的方式。您给它一个文件，以用作图形的入口点。从那里开始，它紧随任何import语句以查找其余代码。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/04_import_graph.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/04_import_graph-500x291.png" alt="具有两个依赖关系的模块。 顶部模块是条目。 另外两个使用import语句关联"></a></p>
+<p>但是文件本身不是浏览器可以使用的东西。它需要解析所有这些文件，以将它们转换为称为模块记录的数据结构。这样，它实际上知道文件中正在发生什么。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/05_module_record.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/05_module_record-500x287.png" alt="具有各种字段的模块记录，包括RequestedModules和ImportEntries"></a></p>
+<p>之后，需要将模块记录转换为模块实例。实例结合了两件事：代码和状态。</p>
+<p>该代码基本上是一组指令。这就像如何做某食物的食谱。但是就其本身而言，您不能使用该代码执行任何操作。您需要原材料才能与这些代码一起使用。</p>
+<p>什么是状态？就像做食物的原材料。状态是变量在任何时间点的实际值。当然，这些变量只是内存中保存值的空间的昵称。</p>
+<p>因此，模块实例将代码（指令列表）与状态（所有变量的值）组合在一起。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/06_module_instance.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/06_module_instance-500x372.png" alt="结合了代码和状态的模块实例"></a></p>
+<p>我们需要的是每个模块的模块实例。模块加载的过程将从此入口点文件变为具有模块实例的完整图。</p>
+<p>对于ES模块，这分为三个步骤。</p>
+<ol>
+<li>构造—查找，下载所有文件并将其解析为模块记录。</li>
+<li>实例化—查找内存中的空间以放置所有导出的值（但尚未用值填充它们）。然后使导出和导入都指向内存中的那些空间的位置（地址）。这称为链接（引用）。</li>
+<li>求值—运行代码以将变量的实际值填写在对应的内存空间。</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/07_3_phases.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/07_3_phases-500x184.png" alt="三个阶段。 构建从单个JS文件到多个模块记录。 实例化链接那些记录。 评估执行代码。"></a></p>
+<p>人们谈论ES模块是异步的。您可以将其视为异步的，因为工作分为三个不同的阶段（加载，实例化和评估），并且这些阶段可以分别完成。</p>
+<p>这意味着规范确实引入了CommonJS中不存在的一种异步。我将在后面解释，但是在CommonJS中，模块及其下面的依赖项一次全部被加载，实例化和求值，而中间没有任何中断。</p>
+<p>但是，步骤本身不一定是异步的。它们可以以同步方式完成。这取决于正在执行的加载。这是因为并非所有内容都由ES模块规范控制。实际上有两部分工作，分别由不同的规范涵盖。</p>
+<p>在<a target="_blank" rel="noopener" href="https://tc39.github.io/ecma262/#sec-modules">ES模块规范</a>说，你应该如何解析文件到模块的记录，你应该如何实例化和评估模块。但是，它并没有说明如何首先获取文件。</p>
+<p>加载程序将获取文件。加载程序在其他规范中指定。对于浏览器，该规范是<a target="_blank" rel="noopener" href="https://html.spec.whatwg.org/#fetch-a-module-script-tree">HTML规范</a>。但是您可以根据所使用的平台使用不同的装载程序。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/07_loader_vs_es.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/07_loader_vs_es-500x286.png" alt="两个卡通人物。 一个代表说明如何加载模块的规范（即HTML规范）。 另一个代表ES模块规范。"></a></p>
+<p>加载程序还精确控制模块的加载方式。它调用ES模块的方法- <code>ParseModule</code>，<code>Module.Instantiate</code>和<code>Module.Evaluate</code>。有点像操纵JS引擎的字符串的p。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_loader_as_puppeteer.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_loader_as_puppeteer-500x330.png" alt="加载程序图形充当ES模块规范图形的伪造者。"></a></p>
+<p>现在，让我们详细介绍每个步骤。</p>
+<h4 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h4><p>在构建阶段，每个模块发生三件事。</p>
+<ol>
+<li>找出从哪里下载包含模块的文件</li>
+<li>提取文件（通过从URL下载文件或从文件系统加载文件）</li>
+<li>将文件解析为模块记录</li>
+</ol>
+<h4 id="查找并获取文件"><a href="#查找并获取文件" class="headerlink" title="查找并获取文件"></a>查找并获取文件</h4><p>加载程序将负责查找文件并下载。首先，它需要找到入口点文件。在HTML中，您可以通过脚本标记告诉加载程序在哪里找到它。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_script_entry.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/08_script_entry-500x188.png" alt="具有type = module属性和src URL的脚本标记。 src URL有一个文件，它是条目"></a></p>
+<p>但是，如何找到下一组模块- <code>main.js</code>直接依赖的模块呢？</p>
+<p>这就是导入语句的来源。导入语句的一部分称为模块说明符。它告诉加载程序可以在哪里找到每个下一个模块。</p>
+<img src="/2020/02/23/ES%20Module/2.png" class="">
+
+<p>有关模块说明符的一件事：在浏览器和Node之间有时需要对它们进行不同的处理。每个主机都有自己的解释模块说明符字符串的方式。为此，它使用一种称为模块解析算法的模块，该算法在平台之间有所不同。当前，某些可在Node中工作的模块说明符在浏览器中将无法工作，但<a target="_blank" rel="noopener" href="https://github.com/domenic/package-name-maps">仍在进行修复</a>。</p>
+<p>在此问题修复之前，浏览器仅接受URL作为模块说明符。他们将从该URL加载模块文件。但这不会同时出现在整个图表上。在解析文件之前，您不知道模块需要获取哪些依赖项，并且在获取文件之前无法解析文件。</p>
+<p>这意味着我们必须逐层遍历该树，解析一个文件，然后找出其依赖项，然后查找并加载这些依赖项。</p>
+<img src="/2020/02/23/ES%20Module/3.png" class="">
+
+<p>如果主线程要等待这些文件中的每一个下载，则许多其他任务将堆积在其队列中。</p>
+<img src="/2020/02/23/ES%20Module/4.png" class="">
+
+<p>这样阻塞主线程会使使用模块的应用程序使用起来太慢。这是ES模块规范将算法分为多个阶段的原因之一。将构造分为自己的阶段，使浏览器可以在开始实例化的同步工作之前获取文件并增强对模块图的理解。</p>
+<p>这种方法（算法分为多个阶段）是ES模块和CommonJS模块之间的主要区别之一。</p>
+<p>CommonJS可以做不同的事情，因为从文件系统加载文件比通过Internet下载花费的时间少得多。这意味着Node可以在加载文件时阻止主线程。并且由于文件已经加载，因此仅实例化和求值（在CommonJS中不是单独的阶段）是有意义的。这也意味着在返回模块实例之前，您要遍历整棵树，加载，实例化和评估任何依赖项。</p>
+<img src="/2020/02/23/ES%20Module/5.png" class="">
+
+<p>CommonJS方法有一些含义，我将在后面详细解释。但是，这意味着一件事，就是在带有CommonJS模块的Node中，可以在模块说明符中使用变量。<code>require</code>在寻找下一个模块之前，您正在执行该模块中的所有代码（直到语句）。这意味着当您进行模块解析时，变量将具有一个值。</p>
+<p>但是，使用ES模块，您可以在进行任何计算（求值）之前预先建立整个模块图。这意味着您不能在模块说明符中包含变量，因为这些变量尚无值。</p>
+<img src="/2020/02/23/ES%20Module/6.png" class="">
+
+<p>但是有时将变量用于模块路径确实很有用。例如，您可能想根据代码在做什么或在什么环境中运行来切换加载的模块。</p>
+<p>为了使ES模块成为可能，有一个建议叫做<a target="_blank" rel="noopener" href="https://github.com/tc39/proposal-dynamic-import">动态导入</a>。有了它，您可以使用类似的导入语句<code>import(</code>${path}&#x2F;foo.js<code>)</code>。</p>
+<p>动态导入的工作原理是，任何使用<code>import()</code>来导入的文件，都会作为一个入口文件从而创建一棵单独的依赖树，被单独处理。</p>
+<img src="/2020/02/23/ES%20Module/7.png" class="">
+
+<p>但是要注意一件事–这两棵树中的任何模块都将共享一个模块实例。这是因为加载程序会缓存模块实例。对于特定全局范围内的每个模块，将只有一个模块实例。</p>
+<p>这意味着浏览器的工作量更少。例如，这意味着即使多个模块依赖该模块文件，该模块文件也只会被提取一次。（这是缓存模块的一个原因。我们将在评估部分中看到另一个原因。）</p>
+<p>加载程序使用称为<a target="_blank" rel="noopener" href="https://html.spec.whatwg.org/multipage/webappapis.html#module-map">模块映射的内容</a>来管理此缓存。每个全局变量在单独的模块图中跟踪其模块。</p>
+<p>当加载程序获取一个URL时，它将把该URL放入模块映射中，并记下它当前正在获取文件。然后它将发出请求并继续以开始获取下一个文件。</p>
+<img src="/2020/02/23/ES%20Module/8.png" class="">
+
+<p>如果另一个模块依赖于同一文件会怎样？加载程序将在模块映射中查找每个URL。如果在其中看到<code>fetching</code>，它将继续前进到下一个URL。</p>
+<p>但是模块图不仅跟踪正在获取的文件。模块映射还充当模块的缓存，如下所示。</p>
+<h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><p>现在我们已经获取了该文件，我们需要将其解析为模块记录。这有助于浏览器了解模块的不同部分。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/25_file_to_module_record.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/25_file_to_module_record-500x199.png" alt="该图显示了被解析成模块记录的main.js文件"></a></p>
+<p>创建模块记录后，将其放置在模块映射中。这意味着无论何时从此处请求，加载程序都可以将其从该映射中拉出。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/25_module_map.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/25_module_map-500x239.png" alt="模块映射图中的“获取”占位符被模块记录填充"></a></p>
+<p>解析有一个细节看似微不足道，但实际上有很大的含义。所有模块都像<strong>严格模式</strong>来解析的。也还有其他的小细节，比如，关键字 <code>await</code> 在模块的最顶层是保留字， <code>this</code> 的值为 <code>undefinded</code>。</p>
+<p>这种不同的解析方式称为“解析目标”。如果您解析相同的文件但使用不同的目标，那么最终将得到不同的结果。因此，在开始解析之前就需要知道要解析的文件类型，不管是否是模块。</p>
+<p>在浏览器中，这非常简单。您只需放入<code>type=&quot;module&quot;</code>script标签。这告诉浏览器应将此文件解析为模块。并且由于只能导入模块，因此浏览器知道任何导入也是模块。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/26_parse_goal.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/26_parse_goal-500x311.png" alt="加载程序确定main.js是一个模块，因为script标签上的type属性表明是这样，而counter.js必须是一个模块，因为它已导入"></a></p>
+<p>但是在Node中，您不使用HTML标记，因此无法选择使用<code>type</code>属性。社区尝试解决此问题的一种方法是使用 <code>.mjs</code>扩展。使用该扩展名告诉Node，“此文件是一个模块”。您会看到人们将其视为解析目标的信号。目前讨论仍在进行中，因此尚不清楚Node社区最终决定使用什么信号。</p>
+<p>无论哪种方式，加载程序都将确定是否将文件解析为模块。如果它是一个模块并且有imports，它将重新开始该过程，直到提取并解析了所有文件。</p>
+<p>在加载过程的最后，您已经从只有一个入口点文件变成了拥有许多模块记录。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/27_construction.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/27_construction-500x406.png" alt="建设阶段的结果，左侧为JS文件，右侧为3个已解析的模块记录"></a></p>
+<p>下一步是实例化此模块并将所有实例连接在一起。</p>
+<h4 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a>实例化</h4><p>就像我之前提到的，实例化是将代码与状态结合在一起。该状态存在于内存中，因此实例化步骤就是将所有状态链接到内存。</p>
+<p>首先，JS引擎创建一个<strong>模块环境记录</strong>（Module Environment Record）。它是管理所有模块记录的变量。然后，它会在内存中找到所有export对应的的地址。模块环境记录将跟踪内存中与每个export相关联的地址。</p>
+<p>内存中的这些地址对应的空间尚无法获取其值。只有在运行之后，它们的实际值才会被填写。需要注意的一点是：在此阶段中将初始化所有导出的函数声明。这将使后面的执行阶段变得更加容易。</p>
+<p>为了实例化<strong>模块关系图</strong>，引擎会采用<strong>深度优先的后序遍历方式</strong>。这意味着它将到达关系图的最底部（底部不依赖于其他任何东西），并设置其导出。</p>
+<img src="/2020/02/23/ES%20Module/9.png" class="">
+
+<p>最终，引擎会把模块下的所有依赖导出连接到当前模块。接着回到上一层把模块的导入连接起来。</p>
+<p>请注意，导出和导入均指向内存中的同一位置。</p>
+<img src="/2020/02/23/ES%20Module/10.png" class="">
+
+<p>这不同于CommonJS模块。在CommonJS中，整个导出对象在导出时被复制。这意味着导出的任何值（如数字）都是副本，所以在CommonJS如果导出模块以后更改了该值，则导入模块将看不到该更改。</p>
+<p>这意味着，如果导出模块以后更改了该值，则导入模块将看不到该更改。</p>
+<img src="/2020/02/23/ES%20Module/11.png" class="">
+
+<p>相反，ES模块使用<strong>实时绑定</strong>（Live Binding）。两个模块都指向内存中的相同位置（引用）。这意味着，当导出模块更改值时，该更改将显示在导入模块中。</p>
+<p>导出值的模块可以随时更改这些值，但是导入模块不能更改其导入的值，因为是导入的是<strong>只读引用</strong>。不过如果模块导入了一个对象，则它可以更改该对象上的属性值。</p>
+<img src="/2020/02/23/ES%20Module/12.png" class="">
+
+<p>之所以ESM采用实时绑定，是因为可以在不运行任何代码的情况下链接到所有模块。这有助于解决循环依赖的问题，在后面的运行(evaluation)阶段会细说。</p>
+<p>OK，当实例化结束时，我们得到了所有模块实例，并知道了已完成链接的导出&#x2F;导入变量的内存地址。</p>
+<p>现在我们可以开始评估代码，并使用它们的值填充这些内存位置。</p>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><p>最后一步是往解析阶段获取的内存地址所在的空间里填充值。JS 引擎通过运行顶层代码（函数外的代码）来完成填充。</p>
+<p>除了填充值以外，运行代码还可能引发副作用。例如，一个模块可能会请求服务器。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/40_top_level_code.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/40_top_level_code-500x146.png" alt="模块将在功能之外进行编码，标记为顶级代码"></a></p>
+<p>因为这些潜在副作用的存在，所以<strong>模块代码只能运行一次</strong>。<br>前面我们看到，实例化阶段中发生的链接过程可以多次进行，并且每次的结果都一样。但是，如果运行阶段进行多次的话，则可能会每次都得到不一样的结果。</p>
+<p>这正是为什么需要有模块映射的原因之一。模块映射通过规范URL，缓存模块，因此每个模块只有一个模块记录。这样可以确保每个模块仅执行一次。与实例化一样，这是深度优先的后遍历。</p>
+<p>那我们之前谈到的循环依赖怎么处理呢？</p>
+<p>在循环依赖关系中，您最终会在模块关系图中出现循环。你依赖我我依赖你，通常，这会变成很大的循环。</p>
+<p>为了解释这个问题，我举个例子。</p>
+ <img src="/2020/02/23/ES%20Module/13.png" class="">
+
+<p>首先让我们看一下如果时CommonJS模块会时什么样的。首先，main模块将执行到require语句。然后它将去加载counter模块。</p>
+ <img src="/2020/02/23/ES%20Module/14.png" class="">
+
+<p>然后，counter模块将尝试从访问导出的对象<code>message</code>。但是由于尚未在main模块中执行，因此它将返回undefined。JS引擎将在内存中为局部变量分配空间，并将该值设置为undefined。</p>
+<p><a target="_blank" rel="noopener" href="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/42_cjs_variable_2.png"><img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2018/03/42_cjs_variable_2-500x113.png" alt="中间的内存，main.js和内存之间没有连接，但是从counter.js到未定义的内存位置的导入链接"></a></p>
+<p>此时会一直运行持续到counter模块顶级代码的末尾。我们想看看是否最终将获得正确的message（在执行main.js之后），因此我们设置了超时时间。然后继续运行到<code>main.js</code>。</p>
+ <img src="/2020/02/23/ES%20Module/15.png" class="">
+
+<p>message变量将被初始化并添加到内存中。但是由于两者之间没有连接，因此message在counter模块中仍然是时undefined。</p>
+ <img src="/2020/02/23/ES%20Module/16.png" class="">
+
+<p>如果使用实时绑定处理导出，则counter模块最终将看到正确的值。到超时运行时，<code>main.js</code>的执行就已经完成并填充了值。</p>
+<p>支持循环依赖是 ESM 设计之初就考虑到的一大因素。也正是这种分（三）阶段设计使其成为可能。</p>
+<h4 id="原文地址："><a href="#原文地址：" class="headerlink" title="原文地址："></a>原文地址：</h4><blockquote><footer><strong>Lin Clark</strong><cite><a target="_blank" rel="noopener" href="https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/">ES modules: A cartoon deep-dive</a></cite></footer></blockquote>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div class="post-widgets">
+    <div class="likely">
+        <div class="twitter">Tweet</div>
+        <div class="facebook">Share</div>
+        <div class="linkedin">Link</div>
+        <div class="gplus">Plus</div>
+        <div class="vkontakte">Share</div>
+        <div class="odnoklassniki">Class</div>
+        <div class="telegram">Send</div>
+        <div class="whatsapp">Send</div>
+        <div class="pinterest">Pin</div>
+    </div>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.js"></script><div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+          <div class="post-tags">
+              <a href="/tags/ES-Module/" rel="tag"># ES Module</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/02/22/Modules/" rel="prev" title="Modules">
+                  <i class="fa fa-chevron-left"></i> Modules
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/02/25/React%20Hooks(%E4%B8%80)/" rel="next" title="React Hooks(一)">
+                  React Hooks(一) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gamehu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+</body>
+</html>

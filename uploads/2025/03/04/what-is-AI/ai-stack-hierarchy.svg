@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- 背景 -->
+  <rect x="0" y="0" width="800" height="600" fill="#f9f9f9"/>
+  <text x="400" y="40" font-family="var(--font-styrene-b), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'" font-size="24" text-anchor="middle" font-weight="bold">AI技术栈层级关系</text>
+  
+  <!-- 金字塔结构 -->
+  <!-- 第一层：深度学习框架 -->
+  <path d="M100,500 L700,500 L600,400 L200,400 Z" fill="#3498db" opacity="0.8" stroke="#2980b9" stroke-width="2"/>
+  <text x="400" y="465" font-family="var(--font-styrene-b), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'" font-size="20" text-anchor="middle" fill="#000000" font-weight="bold">深度学习框架</text>
+  <text x="400" y="490" font-family="var(--font-styrene-b), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'" font-size="14" text-anchor="middle" fill="#000000">TensorFlow, PyTorch, JAX</text>
+  
+  <!-- 第二层：LLM基础模型 -->
+  <path d="M200,400 L600,400 L550,325 L250,325 Z" fill="#9b59b6" opacity="0.8" stroke="#8e44ad" stroke-width="2"/>
+  <text x="400" y="375" font-family="var(--font-styrene-b), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'" font-size="20" text-anchor="middle" fill="#000000" font-weight="bold">大语言模型(LLM)</text>
+  <text x="400" y="395" font-family="var(--font-styrene-b), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'" font-size="14" text-anchor="middle" fill="#000000">GPT, Claude, Llama</text>
+  
+  <!-- 第三层：LLM开发框架 -->
+  <path d="M250,325 L550,325 L500,250 L300,250 Z" fill="#2ecc71" opacity="0.8" stroke="#27ae60" stroke-width="2"/>
+  <text x="400" y="295" font-family="var(--font-styrene-b), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'" font-size="20" text-anchor="middle" fill="#000000" font-weight="bold">LLM开发框架</text>
+  <text x="400" y="315" font-family="var(--font-styrene-b), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'" font-size="14" text-anchor="middle" fill="#000000">LangChain, LlamaIndex</text>
+  
+  <!-- 第四层：Agent平台 -->
+  <path d="M300,250 L500,250 L450,175 L350,175 Z" fill="#e74c3c" opacity="0.8" stroke="#c0392b" stroke-width="2"/>
+  <text x="400" y="220" font-family="var(--font-styrene-b), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'" font-size="20" text-anchor="middle" fill="#000000" font-weight="bold">Agent开发平台</text>
+  <text x="400" y="240" font-family="var(--font-styrene-b), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'" font-size="14" text-anchor="middle" fill="#000000">Dify, Coze</text>
+  
+  <!-- 第五层：应用 -->
+  <path d="M350,175 L450,175 L400,100 Z" fill="#f1c40f" opacity="0.8" stroke="#f39c12" stroke-width="2"/>
+  <text x="400" y="145" font-family="var(--font-styrene-b), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'" font-size="20" text-anchor="middle" fill="#000000" font-weight="bold">AI应用</text>
+  
+  <!-- 解释箭头 -->
+  <line x1="720" y1="450" x2="770" y2="450" stroke="#2980b9" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="720" y1="370" x2="770" y2="370" stroke="#8e44ad" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="720" y1="290" x2="770" y2="290" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="720" y1="210" x2="770" y2="210" stroke="#c0392b" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="720" y1="130" x2="770" y2="130" stroke="#f39c12" stroke-width="2" marker-end="url(#arrow)"/>
+  
+  <!-- 箭头标记定义 -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+    </marker>
+  </defs>
+</svg>

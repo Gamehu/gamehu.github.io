@@ -1,0 +1,1 @@
+(function(){if(CONFIG.chatra.embed){window.ChatraSetup={mode:"frame",injectTo:CONFIG.chatra.embed}}window.ChatraID=CONFIG.chatra.id;const t=document.querySelector(".sidebar-button button");if(t){t.addEventListener("click",()=>{Chatra("openChat",true)})}})();

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/IMG_4038-32.jpeg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/IMG_4038.jpeg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.gamehu.run","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="背景前前后后经历了几个公司敏捷的做法，有些些感悟，在此表一表。 开始首先咱们说一下为啥需要敏捷，因为敏捷的业务目标是更早的交付价值以及更灵活的应对变化。我认为这是之所以那么多公司或者团队想要实践敏捷的最大原因之一。 让我知道敏捷的公司，那是在14年我进了一家主打3D数字建模的公司，我的直接领导是公司敏捷的推崇者，当时两个研发团队也是按照敏捷走的，但是敏捷到底是个啥？当时老大给了我一本书让我自己">
+<meta property="og:type" content="article">
+<meta property="og:title" content="敏捷">
+<meta property="og:url" content="https://www.gamehu.run/2020/12/17/%E6%95%8F%E6%8D%B7%E5%92%8B%E6%95%B4/index.html">
+<meta property="og:site_name" content="正儿八经 - 资深Java&#x2F;React工程师">
+<meta property="og:description" content="背景前前后后经历了几个公司敏捷的做法，有些些感悟，在此表一表。 开始首先咱们说一下为啥需要敏捷，因为敏捷的业务目标是更早的交付价值以及更灵活的应对变化。我认为这是之所以那么多公司或者团队想要实践敏捷的最大原因之一。 让我知道敏捷的公司，那是在14年我进了一家主打3D数字建模的公司，我的直接领导是公司敏捷的推崇者，当时两个研发团队也是按照敏捷走的，但是敏捷到底是个啥？当时老大给了我一本书让我自己">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.gamehu.run/2020/12/17/%E6%95%8F%E6%8D%B7%E5%92%8B%E6%95%B4/scrum.jpg">
+<meta property="article:published_time" content="2020-12-17T10:15:00.000Z">
+<meta property="article:modified_time" content="2022-08-17T03:58:20.661Z">
+<meta property="article:author" content="Gamehu">
+<meta property="article:tag" content="敏捷">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.gamehu.run/2020/12/17/%E6%95%8F%E6%8D%B7%E5%92%8B%E6%95%B4/scrum.jpg">
+
+
+<link rel="canonical" href="https://www.gamehu.run/2020/12/17/%E6%95%8F%E6%8D%B7%E5%92%8B%E6%95%B4/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.gamehu.run/2020/12/17/%E6%95%8F%E6%8D%B7%E5%92%8B%E6%95%B4/","path":"2020/12/17/敏捷咋整/","title":"敏捷"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>敏捷 | 正儿八经 - 资深Java/React工程师</title>
+  
+
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">正儿八经 - 资深Java/React工程师</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">浪起来？技术博客与求职信息</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B"><span class="nav-number">2.</span> <span class="nav-text">开始</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E6%96%87"><span class="nav-number">2.1.</span> <span class="nav-text">正文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">2.2.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E8%AF%B4%E4%B8%80%E5%8F%A5"><span class="nav-number">2.3.</span> <span class="nav-text">多说一句</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Gamehu"
+      src="/images/IMG_4038.jpeg">
+  <p class="site-author-name" itemprop="name">Gamehu</p>
+  <div class="site-description" itemprop="description">10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">189</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">112</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/gamehu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gamehu" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:gamehu520@gmail.com" title="E-Mail → mailto:gamehu520@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/gamehu/gamehu.github.io" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2020/12/17/%E6%95%8F%E6%8D%B7%E5%92%8B%E6%95%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="敏捷 | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          敏捷
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-12-17 18:15:00" itemprop="dateCreated datePublished" datetime="2020-12-17T18:15:00+08:00">2020-12-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <img src="/2020/12/17/%E6%95%8F%E6%8D%B7%E5%92%8B%E6%95%B4/scrum.jpg" class="" title="Photo by İrfan Simsar on Unsplash">
+
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>前前后后经历了几个公司敏捷的做法，有些些感悟，在此表一表。</p>
+<h3 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h3><p>首先咱们说一下为啥需要敏捷，因为敏捷的业务目标是<strong>更早的交付价值以及更灵活的应对变化</strong>。我认为这是之所以那么多公司或者团队想要实践敏捷的最大原因之一。</p>
+<p>让我知道<strong>敏捷</strong>的公司，那是在14年我进了一家主打3D数字建模的公司，我的直接领导是公司敏捷的推崇者，当时两个研发团队也是按照敏捷走的，但是敏捷到底是个啥？当时老大给了我一本书让我自己去悟。书名好像是《Scrum敏捷软件开发》。之后大体有了个了解，至少对<code>站会、用户故事、backlog、sprint、SM、PO</code>等词有个概念。</p>
+<p>那时候觉得挺新鲜因为在此之前我只知道瀑布模式。在这家公司时我对敏捷印象是最深的，因为我经历了新旧之间的碰撞，不仅是思想上的还有实操上的。因为公司还有个管评审的年长型主管A大，他刚好更偏向于瀑布模式。</p>
+<h4 id="正文"><a href="#正文" class="headerlink" title="正文"></a><strong>正文</strong></h4><p><strong>chapter 1 ：</strong></p>
+<p>先交代一些往事，当时的我，迷茫的一逼，感觉写代码不适合我，我想要转产品，当然我说的产品不是UE性质那种产品哈，我说的是正儿八经的那种产品经理，“那种”指的是：从0到1打造适合用户且用户要买单的那种产品的产品经理。</p>
+<p>刚好我的leader就有个类似经历的人，他曾经因为在上海的一个研究所交付的产品令客户不满意，他去呆了3个月，硬生生从0到1重新根据需求设计产品，最终成功交付，当时研究所的人对他的评价是，他比我更懂我得工作。不然为啥他被现在的公司拉去当了副总？你品一品他当时只是一个研发岗。</p>
+<p>我虽然面试的是开发岗，刚好当时负责面试的人有事出去了，他刚好遇到了就说先跟他聊一聊，当我告诉他有意向走产品的时候，由于聊的很好，他果断把我留下来当他的助手了。所以我入职是没有经过技术面试的…。</p>
+<p>入职的title是<em>产品助理</em>，前期主要干的事就是看书，用Latex写公司宣传文档和摸鱼，后期就让我跟项目，主要是做项目需求。</p>
+<p>由于我们的客户多是各种工厂所以通常位置都比较偏僻，想去泡个脚都要摩托转公交再转出租的节奏。</p>
+<p>犹记得当时把我一个人丢到工厂的时候，那种无助…工厂里的人通常都比较务实比较直接。被怼的体无完肤到和颜悦色，中间也就是几顿酒的事….故事太多以后写小说再用。</p>
+<p>说这些是怎么个意思呢？其实没啥意思，就是说说一些背景，任何事物都是有联系的，你再细品。</p>
+<p><strong>chapter 2：</strong></p>
+<p>接上，在工厂第一次差不多进一个月，工作内容就是梳理各个环节各个干系人的需求，并整理成文档。</p>
+<p>感觉终于告一段落之后，速度赶回北京。然后就是评审，这个时候问题就来了，我老大觉得现有的需求可以开始准备进入研发了，遇到需求问题再澄清就行，但是评审主管就不干了，说你这需求文档需要细化的地方还有挺多，不能进入研发，所以评审没过。会后两位大佬分别拉我谈了一次，一个觉得需求不够完整（瀑布），一个觉得需求已经够了（敏捷）。那为什么双方没有达成一致呢，在我看来当时我老大推崇的敏捷没有玩好，比如A提的一点，研发是敏捷了节奏都挺快，交付周期也缩短了，但是交付结果不太好，老有返工，导致一个项目迟迟不能最终验收，这就是A不赞同的根本原因，因为连客户想要什么都没有完全搞清楚。</p>
+<p>对应到<strong>敏捷</strong>里的内容就是，在<strong>检视和调整</strong>两块没有足够重视。也就是下面的几个会议没有开好：</p>
+<ol>
+<li>Sprint 计划会议 </li>
+<li>每日 Scrum 站会 </li>
+<li>Sprint 评审会议 </li>
+<li>Sprint 回顾会议</li>
+</ol>
+<p>我理解以上四个会议就是每个迭代里防止走偏的措施，但最后还是走偏了。</p>
+<p><strong>chapter 3：</strong></p>
+<p>现公司一进来就是敏捷，但是大多数时间也是走的不顺，有段时间还专门找了教练带着跑了几个月，效果也是一般般。</p>
+<p>当时我想了想可能原因有下面几方面：</p>
+<ol>
+<li><p>公司是家传统意义上的软件公司，前面都是瀑布模式，虽然是新产品线但是也有很多老员工，所以不管从公司还是从人来说，这个转变是需要时间且需要强有力的刺激，<strong>很明显是时间给够了但是刺激不够</strong>。我们都知道有刺激才会有反应。</p>
+</li>
+<li><p>大家对敏捷的理解参差不齐，很多朋友是随波逐流，且最致命的是这类朋友基本上都认为自己是懂敏捷的，但是真的懂吗，大概率不是的或者只停留在字面上的理解（我其实也是一知半解）。</p>
+<blockquote>
+<p>敏捷应用其实在我看来是一系列的动作的组合，该套组合需是不断优化且需要组织严格遵守的，组合好之后，把该组合套在软件的开发周期里，然后一遍一遍的重复重复再重复。</p>
+<p>另外很多人的误解是，敏捷就不用写任何文档了，在我看来不是的，必要的文档还是需要的比如设计文档。</p>
+</blockquote>
+</li>
+</ol>
+<p>前段时间公司大佬给够了刺激，比如重新梳理组织架构、丰富了工具、完善了开发&#x2F;评审流程（必要的设计文档等）、强制执行双周迭代、双周演示会等等，我的感受是团队的流转效率是有提高的。</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a><strong>小结</strong></h4><p>我理解的敏捷其实是门大学问，不是只有简单的一些关键词，比如还有“以赋能和信任个人为中心的文化”这类的理念内容，持续学习中。</p>
+<p>所以其实我没啥发言权，不过随便说说，也没谁管得着，反正是我自己的博客….。</p>
+<p>从我的经历来看，敏捷是个好东西，但是落地也确实不容易，除了敏捷本身就代表一种变革（动作大）以外，它本身也涉及到很多关于人的因素，比如人的思维、习惯、团队文化等，但是如果因为对敏捷应用的不成功，就觉得敏捷不好用，并怀疑它的价值，不可取哈。</p>
+<p>另外敏捷只是解决问题的一种方式，也不要把它捧得太高。</p>
+<p><strong>任何方法或者工具都有它所适用的上下文。</strong></p>
+<blockquote>
+<p>我认为敏捷是解决问题的一种方式，技术越来越多成为变现的一种手段。那当然你会问谁先行呢？思维观念要变，同时也需要给搭配上不同的手段，谁先谁后并不是主要矛盾。— DXcon</p>
+</blockquote>
+<p><strong>敏捷的价值观</strong></p>
+<blockquote>
+<p>摘自&lt;说透敏捷&gt;</p>
+</blockquote>
+<ol>
+<li>个体和交互胜过过程和工具。</li>
+<li>可以工作的软件胜过面面俱到的文档。</li>
+<li>客户合作胜过合同谈判。</li>
+<li>响应变化胜过遵循计划。</li>
+<li>虽然右项有价值，但我们更重视<strong>左项</strong>。</li>
+</ol>
+<p>一个公司或者团队要应用敏捷，不代表要全套接收，有可能只需要敏捷里的某块就可以，不信谣不传谣。</p>
+<p>真正的敏捷应该是Be Agile而不是Do Agile。在我们强调&#x2F;争执xx方法论，xx实践的时候，我们往往在做敏捷，而不是真正的敏捷了。</p>
+<h4 id="多说一句"><a href="#多说一句" class="headerlink" title="多说一句"></a>多说一句</h4><p>团队，除了学会传统”规划、组织、领导、控制 “的管理方式之外，还需要”激励、授权、支持、交流 “，这实际上意味着，领导者(特别是CEO)把资源分配采取分布式，而不是集中制(集中在自己手里)。这对团队&#x2F;组织&#x2F;公司，在应对复杂、即时、阶层式问题时的灵活度、适应度增加很多。</p>
+<blockquote><footer><strong>coolshell</strong><cite><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/4951.html">软件公司的两种管理方式</a></cite></footer></blockquote>
+
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div class="post-widgets">
+    <div class="likely">
+        <div class="twitter">Tweet</div>
+        <div class="facebook">Share</div>
+        <div class="linkedin">Link</div>
+        <div class="gplus">Plus</div>
+        <div class="vkontakte">Share</div>
+        <div class="odnoklassniki">Class</div>
+        <div class="telegram">Send</div>
+        <div class="whatsapp">Send</div>
+        <div class="pinterest">Pin</div>
+    </div>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.js"></script><div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+          <div class="post-tags">
+              <a href="/tags/%E6%95%8F%E6%8D%B7/" rel="tag"># 敏捷</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/12/01/AHA/" rel="prev" title="AHA">
+                  <i class="fa fa-chevron-left"></i> AHA
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2020/12/19/%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E6%B3%95/" rel="next" title="问题解法咋聊(1)">
+                  问题解法咋聊(1) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gamehu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+</body>
+</html>
