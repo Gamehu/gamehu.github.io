@@ -9,6 +9,62 @@
 
 
     <url>
+        <loc>https://www.gamehu.run/2024/03/09/what-is-AI/</loc>
+        <lastmod>2025-03-27T10:04:33.705Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://www.gamehu.run/2024/10/04/AI%E5%BA%94%E7%94%A8-%E7%9F%A5%E8%AF%86%E5%BA%93/</loc>
+        <lastmod>2025-03-27T09:28:39.808Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://www.gamehu.run/2025/01/01/MCP%E5%8D%8F%E8%AE%AE/</loc>
+        <lastmod>2025-03-26T03:27:37.008Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://www.gamehu.run/2024/12/23/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%9B%86%E6%88%90/</loc>
+        <lastmod>2025-03-26T03:24:50.637Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://www.gamehu.run/2025/03/04/Prompt-Engineering/</loc>
+        <lastmod>2025-03-26T03:13:56.316Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://www.gamehu.run/2025/03/07/ETL%E5%A4%8D%E4%B9%A0(1)/</loc>
+        <lastmod>2025-03-21T06:38:15.122Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://www.gamehu.run/2024/09/17/%E9%81%87%E8%A7%81%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6/</loc>
+        <lastmod>2025-03-07T02:11:57.053Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://www.gamehu.run/2024/02/27/%E8%81%94%E9%82%A6%E6%9F%A5%E8%AF%A2/</loc>
         <lastmod>2025-02-27T15:28:08.614Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -35,14 +91,6 @@
     <url>
         <loc>https://www.gamehu.run/2024/06/15/%E5%AE%9A%E4%BD%8D%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
         <lastmod>2025-02-26T16:19:15.353Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://www.gamehu.run/2024/09/17/%E9%81%87%E8%A7%81%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6/</loc>
-        <lastmod>2025-02-26T14:08:57.675Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

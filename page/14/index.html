@@ -169,7 +169,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">186</span>
+          <span class="site-state-item-count">191</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -180,7 +180,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">111</span>
+        <span class="site-state-item-count">113</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,6 +220,585 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2019/08/20/git%E5%AE%9E%E8%B7%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/08/20/git%E5%AE%9E%E8%B7%B5/" class="post-title-link" itemprop="url">git实践</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-08-20 16:57:00" itemprop="dateCreated datePublished" datetime="2019-08-20T16:57:00+08:00">2019-08-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>据说再2016年我就开始接触git，当时还用台式机、笔记本作为两个用户进行git的一些实践和原理的了解，但是正儿八经在项目中用git还是现在，经过一年多的实践呢，入了一些坑所以觉得是时候展现真正的技术了，简单积累一下我比较常用的。</p>
+<img src="/2019/08/20/git%E5%AE%9E%E8%B7%B5/boat-164989.jpg" class="" title="Image by Pixabay License from Pixabay">
+
+<p>** git提交规范 **</p>
+<p>这块是很重要很重要的，在代码评审、问题追溯、代码回滚、代码培训等的时候都需要用到这个东西，但是团队内暂时还没有对此做硬性要求。不过我个人是一直比较注重提交的内容，因为以前吃过亏，没有友好的commit内容某些场景下很难定位。虽然我比较注重但是还是比较游击队的打法，最近看到了个东西叫commitizen，它可以配置一套标准的提交规范，所以准备用起来。</p>
+<p><strong>配置commitizen</strong></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.im/post/5cbd1fdf5188250a546f565f" title="安装链接">https://juejin.im/post/5cbd1fdf5188250a546f565f</a></p>
+<ul>
+<li><p>可借助工具使提交更加规范：安装cz-conventional-changelog，即使用第三方的提交模板，这儿表示用的AngularJS的提交模板</p>
+</li>
+<li><p>用husky配合git hooks 进行预检查</p>
+</li>
+</ul>
+<p>package.json</p>
+<pre><code>&#123;
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&quot;husky&quot;: &#123;</span><br><span class="line">  &quot;hooks&quot;: &#123;</span><br><span class="line">   &quot;commit-msg&quot;: &quot;(echo HUSKY_GIT_PARAMS: %HUSKY_GIT_PARAMS%) &amp;&amp; commitlint -E HUSKY_GIT_PARAMS&quot;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;,</span><br><span class="line">&quot;config&quot;: &#123;</span><br><span class="line">  &quot;commitizen&quot;: &#123;</span><br><span class="line">   &quot;path&quot;: &quot;./node_modules/cz-conventional-changelog&quot;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>git 储藏</strong></p>
+<pre><code>常用git stash命令：
+
+（1）git stash save &quot;save message&quot;  : 执行存储时，添加备注，方便查找，只有git stash 也要可以的，但查找时不方便识别。
+
+（2）git stash list  ：查看stash了哪些存储
+
+（3）git stash show ：显示做了哪些改动，默认show第一个存储,如果要显示其他存贮，后面加stash@&#123;$num&#125;，比如第二个 git stash show stash@&#123;1&#125;
+
+（4）git stash show -p : 显示第一个存储的改动，如果想显示其他存存储，命令：git stash show  stash@&#123;$num&#125;  -p ，比如第二个：git stash show  stash@&#123;1&#125;  -p
+
+（5）git stash apply :应用某个存储,但不会把存储从存储列表中删除，默认使用第一个存储,即stash@&#123;0&#125;，如果要使用其他个，git stash apply stash@&#123;$num&#125; ， 比如第二个：git stash apply stash@&#123;1&#125; 
+
+（6）git stash pop ：命令恢复之前缓存的工作目录，将缓存堆栈中的对应stash删除，并将对应修改应用到当前的工作目录下,默认为第一个stash,即stash@&#123;0&#125;，如果要应用并删除其他stash，命令：git stash pop stash@&#123;$num&#125; ，比如应用并删除第二个：git stash pop stash@&#123;1&#125;
+
+（7）git stash drop stash@&#123;$num&#125; ：丢弃stash@&#123;$num&#125;存储，从列表中删除这个存储
+
+（8）git stash clear ：删除所有缓存的stash
+</code></pre>
+<p><strong>git 回滚</strong></p>
+<pre><code>//回滚上一次提交
+git reset HEAD~ 
+// 修改最近一次提交的备注
+git commit --amend
+// 修改某一次提交的备注，最后的数字2指的是显示到倒数第几次
+git rebase -i HEAD~2
+</code></pre>
+<p><strong>git 合并</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//是将远程主机的最新内容拉到本地，用户在检查了以后决定是否合并到工作本机分支中</span><br><span class="line">  git fetch</span><br><span class="line">  //是将远程主机的最新内容拉到本地并合并</span><br><span class="line">  git pull</span><br></pre></td></tr></table></figure>
+
+<p><strong>git 切换分支</strong></p>
+<pre><code>//对于已经拉取到本地的分支之间的切换
+git checkout 分支名
+//对于还没有拉取到本地的分支
+git checkout -b remote分支名 本地分支名
+</code></pre>
+<p> <strong>git 撤销merge</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//经常在切换分支时，一不小心就merge错了分支或者合并时遇到冲突想取消操作，这命令就好用了</span><br><span class="line">git merge --abort</span><br><span class="line"></span><br><span class="line">//撤销指定的merge</span><br><span class="line">1.找到最后一次提交到master分支的版本号，即【merge前的版本号】</span><br><span class="line">git log --pretty=oneline</span><br><span class="line">2.回退到某个版本号</span><br><span class="line">git reset --hard 【merge前的版本号】</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p> <strong>git 撤销</strong></p>
+<img src="/2019/08/20/git%E5%AE%9E%E8%B7%B5/reset.jpg" class="">
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft: 将分支回退到指定提交，工作区维持现状不变,暂存区会在现有基础上增加该commit之后的提交。</span><br><span class="line">git reset --mixed: （默认操作）将分支回退到指定提交，暂存区也被同步为该指定提交，工作区保持不变。</span><br><span class="line">git reset --hard: 将分支回退到指定分支，暂存区和工作区都会被同步为该指定的提交。</span><br><span class="line">git reset --hard 可以回退到某个提交</span><br><span class="line">git revert可以撤销某个提交，撤销会产生一个新的提交</span><br></pre></td></tr></table></figure>
+
+<p> <strong>回退到某个版本并应用指定的几次提交</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">切换到目标分支上， 假如当前状态为新合并进了一条commit，只需执行 git reset --hard HEAD~1即可回退到合并前。</span><br><span class="line">或者回退到任何你想要的状态中 git reset --hard commitId, 其中commitId为你想要处于的版本hash code。</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">git reset --hard 1d7444 #回退到某个版本</span><br><span class="line">git cherry-pick 626335 #将某次commit的更改应用到当前版本 </span><br><span class="line">git push origin HEAD --force  #强制提交</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>根据关键字搜索提交记录</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git log --all-match --grep=登录</span><br><span class="line"></span><br><span class="line">commit 9f3e61ad63626c3e2e7541430d4af9693e3357ccAuthor: caofu &lt;[caofu@ruijie.com.cn](mailto:caofu@ruijie.com.cn)&gt;Date:  Fri Dec 7 13:09:55 2018 +0800  完成单点登录xxxx</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#查看某次提交的内容</span><br><span class="line">git show 9f3e61ad63626c3e2e7541430d4af9693e3357cc</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2019/08/19/%E5%90%83%E5%8A%9B%E4%B8%8D%E8%AE%A8%E5%A5%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/08/19/%E5%90%83%E5%8A%9B%E4%B8%8D%E8%AE%A8%E5%A5%BD/" class="post-title-link" itemprop="url">吃力不讨好</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-08-19 11:08:00" itemprop="dateCreated datePublished" datetime="2019-08-19T11:08:00+08:00">2019-08-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>话说2018.07.31的x安公司的谢XX和李XX，在摄像头下两人进行了比较随心所欲的肢体接触，网传是因为产品经理要求程序员实现APP主题根据手机壳变颜色的需求，程序员忍无可忍从而释放自我的过程。当然这是网传版本，据说完全不是那么回事。</p>
+<p>但是为什么这个事件就那么红呢。我觉得有两方面的原因：</p>
+<ol>
+<li>程序员一向是被整个社会调侃最多的职业之一（之一比较谦虚），热点够大。</li>
+<li>网传的需求太他么奇葩，迎合了大多的吃瓜群众。</li>
+</ol>
+<p>作为程序员其实我们为什么也觉得有趣，是因为产品和程序员多多少少都会有不对付（矛盾）的情况发生。这件事刚好映射了此情况。我个人觉得该矛盾的核心点还是在于同理心这一点上，双方好像都很难理解对方。其实主要就是很少站在对方的角度和位置上，客观的理解对象所说的事情。</p>
+<img src="/2019/08/19/%E5%90%83%E5%8A%9B%E4%B8%8D%E8%AE%A8%E5%A5%BD/tom-gainor-ABjAtsf3XDA-unsplash.jpg" class="" title="来源于https:&#x2F;&#x2F;unsplash.com&#x2F;photos&#x2F;ABjAtsf3XDA">
+
+<p>讲的有点多了，为什么想说”吃力不讨好”，是因为本周周会复盘时，刚好遇到了一个同事出现了此情况，当事人肯定很难受也比较委屈,这位同事暂时起名小波，方便叙述。</p>
+<p>当然这篇文章主要是站在技术人员的角度写的，其它职位的待我深入了解后再有资格叨叨。</p>
+<p>为什么需要复盘一下呢，明面上的原因是小波任务delay了进而导致周目标delay了，在PO验收时结果有些不太理想。所以SM就拉着大家做了一下复盘，<br>流程是：</p>
+<ul>
+<li>首先小波先说明一下整个delay的原因</li>
+<li>分析根因</li>
+<li>大家发表一下看法和建议</li>
+<li>形成改进项或者规约之类的东西</li>
+<li>团队是否认同</li>
+<li>改进项的责任人进行跟进</li>
+</ul>
+<p>大体的原因是在于，小波在研发时，鉴于程序员的伟大使命感，总想着抽象进而方便后人，但是在研发前期准备时不管是<strong>关键路径</strong>还是<strong>详设</strong>，都没能体现这块内容，关键是这块内容占用的时间还比较长，所以最终导致整个计划delay。这本身不是个问题，因为想法时好的，问题在于这是个”吃力不讨好”的事，因为这是过程产物，PO等人是看不到的，更大的问题是小波没有和任何人进行同步，一个人吭哧吭哧干了半天，那就大家都不知情，所以导致他很被动。</p>
+<p>所以我给的建议是：</p>
+<ol>
+<li>吃力不讨好的事一定得让干系人知道，好事不留名大多数情况下是扯淡的说法。</li>
+<li>自己得有一定得心理准备或者做一定的心里建设，因为既然是吃力不讨好的事，那就不能指望所有人能念你的好。</li>
+</ol>
+<p><strong>当然最终团队形成了一些改进项</strong></p>
+<ol>
+<li>尽量提前在”关键路径“阶段列出所有研发内容，功能性的和非功能性的，使后面的工程计划能更加准确。</li>
+<li>定义承载过程产物的文档格式以及标准，目的是为了体现研发过程。</li>
+<li>周目标的check标准更加细化，能提升更早暴露风险的时间。</li>
+<li>当在研发中遇到此类问题时，一定要马上同步到相关的人，评估计划方案之后再动手。</li>
+</ol>
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2019/08/09/%E7%BC%96%E5%86%99%E5%8F%AF%E8%AF%BB%E4%BB%A3%E7%A0%81%E7%9A%84%E8%89%BA%E6%9C%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/08/09/%E7%BC%96%E5%86%99%E5%8F%AF%E8%AF%BB%E4%BB%A3%E7%A0%81%E7%9A%84%E8%89%BA%E6%9C%AF/" class="post-title-link" itemprop="url">编写可读代码的艺术</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-08-09 17:31:00" itemprop="dateCreated datePublished" datetime="2019-08-09T17:31:00+08:00">2019-08-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>最近有个前辈大哥看我写的代码之后，温柔的推荐了我一本小书《编写可读性代码的艺术》</p>
+<h2 id="表明层次的改进"><a href="#表明层次的改进" class="headerlink" title="表明层次的改进"></a>表明层次的改进</h2><p><strong>全局观注释</strong></p>
+<p>当某个类或者文件使用盖住是，比如是表示系统的入口点、数据如何在系统中流动等，具有全局意义的代码，写几句精心选择的话说明该代码的意义，不宜过大的篇幅。</p>
+<p><strong>总结性的注释</strong></p>
+<p>对函数做的事情进行总结，让读者在深入了解细节之前就能明白该函数的主旨。</p>
+<p><strong>写注释拆分成几件事：</strong></p>
+<ol>
+<li>不管你心里想什么，先把它写下来。</li>
+<li>读一下注释，看看有没有什么地方可以改进的。</li>
+<li>不断改进。</li>
+</ol>
+<p><strong>注释目的：</strong></p>
+<ol>
+<li>记录想法<ol>
+<li>为什么这样写（指导性）批注。</li>
+<li>代码中的缺陷，使用像TODO或者XXX等这样的标记。</li>
+</ol>
+</li>
+</ol>
+<p><strong>站在读者的立场上思考</strong></p>
+<ol>
+<li>预料哪些代码是读者会有疑问的，加上注释。</li>
+<li>为普通读者意料之外的行为加上注释</li>
+<li>用注释来总结代码块，使读者不至于迷失在细节中</li>
+</ol>
+<p> <strong>怎样写出言简意赅的注释？</strong></p>
+<ol>
+<li><p>注释保持紧凑。不超过三行</p>
+</li>
+<li><p>避免使用不明确的代词，比如这、那。用有意义的名词代替，比如data、userList…</p>
+</li>
+<li><p>精确的描述函数的行为，比如“返回有效字符的个数”，哪些使有效字符哪些使无效字符？</p>
+</li>
+<li><p>某些涉及到比较复杂或者不太好用文字描述的函数，用输入输出的例子进行说明。比如“格式化字符串为下拉框格式”<br> <code>Example: listToOptionTags([&#123;id:1,name:&#39;a&#39;&#125;,...]) returns [&#123;$$typeof: Symbol(react.element), type: ƒ Option(), key: &quot;daa7f2d8-bfd9-11e9-8...&#125;,...]</code></p>
+</li>
+<li><p>声明代码的意图，别描述字面上的意思。比如在一段for循环上写“遍历用户对象集合”，改成“以逗号分隔拼接所有用户的firstName属性”</p>
+</li>
+<li><p>具名函数参数，对难以理解的参数可以按照参数名对参数赋值，比如java中可以用嵌入注释的方式：</p>
+<p> <code>connect(10,false); 改成 connect(/*timeout_ms=*/30,/*use_encryption=*/false)</code></p>
+</li>
+</ol>
+<p><strong>什么地方不需要注释？</strong></p>
+<ol>
+<li>能从代码本身中迅速地推断的事实。</li>
+<li>用来说明烂代码（比如函数名取得不明所以…）,这时考虑的应该是吧代码改好。</li>
+</ol>
+<h2 id="简化循环和逻辑"><a href="#简化循环和逻辑" class="headerlink" title="简化循环和逻辑"></a>简化循环和逻辑</h2><p><strong>把控制流变得易读</strong></p>
+<ol>
+<li><p>条件判断，比较的左侧通常是经常变化的值，右侧通常为不变化的值，比如：</p>
+<p> <code>if(length&gt;10)和if(10&lt;=length)，很明显前者更易读</code></p>
+</li>
+<li><p>if&#x2F;else的顺序，因为if&#x2F;else的顺序可以自由变换，很多时候应该要考虑哪一种顺序更好，可以有以下准则：</p>
+<ol>
+<li>通常情况下先处理正逻辑而不是负逻辑，比如if(haveUser)而不是if(!haveUser)</li>
+<li>先处理简单的情况，这样的好处是可视范围内应该都能看到if&#x2F;else</li>
+<li>先处理有趣的或者更危险的情况，比如负逻辑 if not file…</li>
+</ol>
+</li>
+</ol>
+<p>所以有些规则是根据具体的情况而定的，需要我们自行判断该用哪一种形式，总之我们的目的是为了避免if&#x2F;else顺序变得很别扭的情况。</p>
+<ol start="3">
+<li><p>三目运算符</p>
+<p>该表达式的可读性是存在争议的，三目表达式是一行书写，当比较内容比较简单时，使用三目会让代码看上去很紧凑和易读，不过当比较的内容比较长或者比较复杂的时候，所有代码挤在一行，这样就变得冗长了。</p>
+</li>
+</ol>
+<p><em>关键思想：相较于追求最小化代码行数，一个更好的度量方法是最小化人们理解它的时间。</em>所以可以遵循以下原则：默认情况下都用if&#x2F;else，三目表达式只有在最简单的情况下使用。</p>
+<h2 id="用自然语言描述代码"><a href="#用自然语言描述代码" class="headerlink" title="用自然语言描述代码"></a>用自然语言描述代码</h2><p>用自然语言描述程序，然后用这个描述写出更自然的代码。</p>
+<p>比较适用于稍微复杂一些的场景，通过这种方式，能根据描述用的词语和过程，进而拆分出一些子问题，从而简化代码，使代码看起来更自然。</p>
+<p><code>本文引用的内容，如有侵权请联系我删除，给您带来的不便我很抱歉。</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2019/08/05/Personal-Growth/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/08/05/Personal-Growth/" class="post-title-link" itemprop="url">Personal Growth</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-08-05 17:37:00" itemprop="dateCreated datePublished" datetime="2019-08-05T17:37:00+08:00">2019-08-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index"><span itemprop="name">成长</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>来自Quora上的一个关于个人成长的问答，先摘录在这儿，成长计划可参考之。</p>
+<p>Travel<br>Wake up early<br>Wake up and go to bed at the same time as much as possible<br>Get rid of toxic people<br>Focus on networking and building your network<br>Exercise daily, even if it is 5–10 minutes of intense exercise<br>Eat a high protein&#x2F;high fat breakfast within 30 minutes of waking<br>Drink plenty of water throughout the day<br>Focus on the 80&#x2F;20 rule<br>Focus on compounding activities. Like giving up alcohol or dramatically reducing it leads to more money and energy, which could result in more money if you reinvest the surplus. Same thing with negotiation and spending habits - Why the wealthy spend less on luxury: the 70&#x2F;30 rule in finance<br>Read, read and read. Read about personal health, sales, management, marketing and personal finance - Best investment books for beginners</p>
+<blockquote>
+<ol>
+<li>旅行</li>
+<li>起得很早</li>
+<li>尽可能多地醒来上床睡觉</li>
+<li>摆脱有毒的人</li>
+<li>专注于网络和建立网络</li>
+<li>即使每天剧烈运动5-10分钟，也要每天运动</li>
+<li>醒来30分钟内吃高蛋白&#x2F;高脂早餐</li>
+<li>全天多喝水</li>
+<li>专注于80&#x2F;20规则</li>
+<li>专注于复合活动。 就像放弃酒精或大幅度减少酒精含量一样，它可以带来更多的金钱和精力，如果您将剩余资金再投资，可能会产生更多的钱。 具有谈判和消费习惯的东西-富人为何减少在奢侈品上的消费：70&#x2F;30的金融规则</li>
+<li>阅读，阅读和阅读。 了解有关个人健康，销售，管理，市场营销和个人理财的信息-适用于初学者的最佳投资书</li>
+</ol>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2019/08/02/%E5%86%99%E7%9A%84%E5%A5%BD%E7%9C%8B%E4%B8%80%E7%82%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2019/08/02/%E5%86%99%E7%9A%84%E5%A5%BD%E7%9C%8B%E4%B8%80%E7%82%B9/" class="post-title-link" itemprop="url">代码写的好看一点</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-08-02 16:54:00" itemprop="dateCreated datePublished" datetime="2019-08-02T16:54:00+08:00">2019-08-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index"><span itemprop="name">成长</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>当自己都觉得代码看起来不爽，或者不好读懂时 ，这块代码一定写的有问题。</p>
+<p>在《Clean Code》一书中Bob大叔认为在代码阅读过程中人们说脏话的频率是衡量代码质量的唯一标准。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -982,511 +1561,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2019/04/22/%E5%95%A5%E6%97%B6%E5%80%99%E7%94%A8Redux/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/04/22/%E5%95%A5%E6%97%B6%E5%80%99%E7%94%A8Redux/" class="post-title-link" itemprop="url">啥时候用Redux</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-04-22 10:23:00" itemprop="dateCreated datePublished" datetime="2019-04-22T10:23:00+08:00">2019-04-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <img src="/2019/04/22/%E5%95%A5%E6%97%B6%E5%80%99%E7%94%A8Redux/001.png" class="">
-
-<p>一个小迭代结束之后，我们前端做了一个几次code revew，其中有个问题就是什么时候应该redux，因为redux其实有些重，但是某些场景其实很简单当让组件也很简单，有观点觉得没有必要上redux。</p>
-<p>这个问题需要有个解法。</p>
-<p><strong>我觉得需要根据现有的环境来几个方面来考虑。</strong></p>
-<ol>
-<li>现在我们产品前端组件类别：基础组件、业务通用组件、定制化组件。</li>
-<li>产品的体量，我们产品是ToB产品，功能比较多，代码量比较大。</li>
-<li>业务场景的复杂度，因为是ToB，所以场景覆盖比较全，同时定制化需求稍微比较多，所以复杂度比较高。</li>
-</ol>
-<p><strong>好，接着我们再看看Redux，要讨论是否需要用它或者什么时候用它我们得搞清楚它的作用是什么。</strong></p>
-<p>首先咱们得确定一点React本身其实就是一个UI(View)层它不是一个前端框架， 如果是个复杂的产品，前端光负责View很显然是不够的，所以这几年出现了很多前端架构，比如MVVM架构下的Angular就是一套前端框架.</p>
-<p>正因为这样，所以FaceBook提出了Flux的架构，就是为了能推出以React为基础的一套前端框架，让React不再孤单.</p>
-<p>至于什么是Flux，阮老师说的很清楚： <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2016/01/flux.html" title="Flux 架构入门教程">http://www.ruanyifeng.com/blog/2016/01/flux.html</a></p>
-<p><strong>看完之后你会发现，redux其实就是Flux的一种实现，主要解决两个问题：</strong></p>
-<ol>
-<li>清晰的代码层次结构，让复杂的前端变得更加健壮和易维护（action、dispatch、reducer等）.</li>
-<li>让React组件之间通信变得更有效率和更方便（通过store能在任何组件访问想要的数据，不管是横向的还是纵向的层级，而不用依次传递经过根本不需要该数据的组件，真正做到按需使用）</li>
-</ol>
-<p><strong>所以说到这儿我们可以简单列一下使用Redux的好处</strong></p>
-<ul>
-<li>大多数情况下可以用reducer友好的把state从组件里分离出来，使组件更加的轻量化也增加了代码可读性.</li>
-<li>Redux的store可以当成缓存使用，并且是全局的，你可以在任何地方使用它，只要不更新state，无论何时何地获取的数据都是一样的，使数据共享变得容易.</li>
-<li>Redux友好的把state统一放到了store里，通过action、dispatch、reducer，让state的变化变得可预测，让数据流变得清晰明朗，易于维护.</li>
-<li>Redux的store让数据的传递变得更有效率，无需依次进行数据传递（哪怕该组件根本不需要这个数据），可以满足需要的时候再获取.</li>
-<li>Redux更有利于公共组件的开发，公共组件无论在哪儿使用，可以通过dispatch触发其行为.</li>
-</ul>
-<h3 id="试着回答一下"><a href="#试着回答一下" class="headerlink" title="试着回答一下"></a>试着回答一下</h3><p>我觉得除非已经明确的定义某个组件只是一个纯UI类组件，不会存在其它业务逻辑或者行为，那我觉得没有必要用Redux，比如我们产品中的一些展示组件，这些组件一个最大的特点就是，只需要给它数据，它渲染就完事了不会有额外的一些操作,那完全就一个jsx就搞定了.<strong>除此以外都建议用Redux，虽然它复杂了些，但是你会慢慢发现他的好.</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2019/04/17/%E6%90%9C%E7%B4%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/04/17/%E6%90%9C%E7%B4%A2/" class="post-title-link" itemprop="url">搜索</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-04-17 14:22:00" itemprop="dateCreated datePublished" datetime="2019-04-17T14:22:00+08:00">2019-04-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>简单记录一下我平时使用搜索套路。</p>
-<img src="/2019/04/17/%E6%90%9C%E7%B4%A2/001.png" class="">
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2019/04/14/%E6%80%8E%E6%A0%B7%E4%BF%9D%E6%8C%81%E5%8A%A8%E5%8A%9B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/04/14/%E6%80%8E%E6%A0%B7%E4%BF%9D%E6%8C%81%E5%8A%A8%E5%8A%9B/" class="post-title-link" itemprop="url">怎样保持动力</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-04-14 22:46:00" itemprop="dateCreated datePublished" datetime="2019-04-14T22:46:00+08:00">2019-04-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index"><span itemprop="name">成长</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>浏览medium的时候发现了一位大佬，继而发现了她的<a target="_blank" rel="noopener" href="https://www.preethikasireddy.com/post/how-do-you-stay-motivated">博客</a>，继而读到了一篇关于“动力”的文章。觉得说的很到位，很契合我现在正努力改变而采用的方式，那就是先动起来。</p>
-<p><strong>这儿做个搬运工也做个自我的审视。</strong></p>
-<p>每天，无数人都在为动力而苦苦挣扎，或者说，缺乏动力。他们渴望做得更多，做得更好，但他们根本没有这样做的动力。</p>
-<img src="/2019/04/14/%E6%80%8E%E6%A0%B7%E4%BF%9D%E6%8C%81%E5%8A%A8%E5%8A%9B/panda.jpg" class="" title="Photo by Elena Loshina on Unsplash">
-
-<p>结果，他们最终过着平庸的生活，因为他们<em>知道</em>自己有“潜力”，但他们从未选择追求这种潜力。他们安顿在相同的套路中，发现自己希望得到比他们所收到的更多的东西。</p>
-<p>必须有一个更好的解决方案，对不对？</p>
-<h2 id="我对动机问题的回答"><a href="#我对动机问题的回答" class="headerlink" title="我对动机问题的回答"></a>我对动机问题的回答</h2><p>我知道我知道。您现在可能会问我：“ <em>您如何保持动力？”</em> 。我的答案很简单：</p>
-<p>我不会试图简单地“保持积极性”。<strong>我采取行动，动机随之而来。</strong></p>
-<p>人们似乎认为这是相反的，我们必须等待动力来使我们采取行动。但这离事实还远！</p>
-<p>动机不是一种神奇的能量，它只是神奇地独自出现。这是<strong>必须</strong>通过行动创造的力量。因此，真正有动力的唯一方法就是行动。如果您所做的只是将时间浪费在如意算盘上，那么您寻找的动力就永远不会到来。</p>
-<p><strong>每个人（即使是最成功的人）在完成任务时也有同样的恐惧感。其实我们也知道有要做的事情，但是却因为自己不想做而挣扎。</strong></p>
-<h2 id="不要想太多"><a href="#不要想太多" class="headerlink" title="不要想太多"></a>不要想太多</h2><p>在很多时候不想动的时，你得遵从你的内心而不是你的大脑，你的大脑总是会让你不动，因为它就是你的潜意识，但是从内心你知道你是应该要动起来的。所以这个时候遵从自己的内心赶紧挪动屁股动起来。</p>
-<h4 id="要点：采取行动的人有动力。"><a href="#要点：采取行动的人有动力。" class="headerlink" title="要点：采取行动的人有动力。"></a>要点：<strong>采取行动的人有动力</strong>。</h4><p>动机是当我们渴望采取行动，而我们实际上遵循这一愿望时发生的事情。如果您想获得动力，则<strong>必须</strong>采取行动。我意识到这是一个自我实现的预言，但这正是我要提出的重点。</p>
-<p>当您采取行动时，就会积蓄动力。动量推动着你前进，你想采取更多的行动。该行动将产生更多动力，依此类推。这是一个良性循环：正反馈回路。</p>
-<p><img src="https://uploads-ssl.webflow.com/5ddd80927946cdaa0e71d607/5dde0768ea47032aa8fb6c21_screen-shot-2019-10-28-at-1.34.39-pm.png" alt="img"></p>
-<p>如果发现自己缺乏动力，请看一下自己的行为。如果您不采取行动，是时候开始努力了。不久之后，您会发现自己比想知道的要有更多的动力！</p>
-<p>另一方面，<strong>零作用意味着零动量</strong>。如果您拒绝采取行动，那么您正在创建一个充满负面事物的空间。通常，这个空间充满<strong>思想</strong>：关于您应该如何或为什么或何时采取行动的想法。您的大脑过度分析了您想要完成的工作。您会发现自己正在思考完成动作所需的所有方式以及可能会失败的所有方式。</p>
-<p>恐惧和焦虑开始发作。在这一点上，您实际上已经产生了消极的动力，并且您一开始就害怕要完成的一切。您开始下滑。</p>
-<h4 id="您坐下来等待动力的时间越长，就会发现的越少。"><a href="#您坐下来等待动力的时间越长，就会发现的越少。" class="headerlink" title="您坐下来等待动力的时间越长，就会发现的越少。"></a><strong>您坐下来等待动力的时间越长，就会发现的越少。</strong></h4><p>当然，并非每种情况都要求您立即投入工作而不考虑应该采取的行动。例如，假设您需要与一个浪漫的伴侣进行艰难的谈话，以结束您的恋爱关系。您害怕伤害他们，害怕伤害自己。这种恐惧削弱了您的动力，使您无意继续进行对话，即使这是100％必要的。</p>
-<p>你该怎么办？您是否应该让这种对话像暴风雨云一样继续笼罩着您，直到您对它感到厌倦为止，只是在没有真正思考的情况下跳入对话？</p>
-<p>没有！</p>
-<p>在这种情况下，思考如何最好地进行对话实际上是有帮助的。有远见的人会使您免于伤害任何人的感情。考虑如何完成一项动作与考虑实际完成所述动作之间存在巨大差异。您可能需要花费数周，数月甚至数年的时间思考实际做某事，却一无所获。您必须意识到自己的想法：如果您发现自己偏离批判性思维而进入可怕的领域，那么该是停止停顿并<strong>采取行动</strong>的时候了！</p>
-<p>让我们回到眼前的场景。设置日期和您计划与伴侣进行对话的时间。设定时间和地点会让您负责。不要让自己对这一承诺退缩-放弃只是意味着欺骗自己。</p>
-<p>在您履行了这一承诺之后，然后-仅那时！-您是否应该开始考虑动作本身。</p>
-<p>通过提前计划并做出承诺，您实质上改变了您的思考过程。您现在<em>不再</em>是<em>“呃，我不想进行对话”，</em>而是以<em>“好吧，我在对话中实际上会说些什么？”</em>的心态。。这是非生产性思维与生产性思维的问题。</p>
-<p>看到不同？😊</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>动机的“秘密”就是行动。如果您发现自己动力不足，则可能是因为无所作为。如果您想找到动力，就需要全身心投入并开始行动！</p>
-<p>大小无关紧要。实际上，我建议您<strong>将其缩小</strong>。我们经常想尽可能地“完成很多工作”，但这是一个不好的方法，因为它耗尽了我们的意志力。取而代之的是，您应该采取足够的措施来增强动力，但要在压力开始感到沉重之前就停止。这样，您便有意愿回来以后再做更多的事情。</p>
-<p>现在是您采取行动的时候了。</p>
-<blockquote><footer><strong>Preethi Kasireddy</strong><cite><a target="_blank" rel="noopener" href="https://www.preethikasireddy.com/post/how-do-you-stay-motivated">How do you stay motivated?</a></cite></footer></blockquote>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2019/04/09/React%20Lifecycle/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/04/09/React%20Lifecycle/" class="post-title-link" itemprop="url">React Lifecycle</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-04-09 11:10:00" itemprop="dateCreated datePublished" datetime="2019-04-09T11:10:00+08:00">2019-04-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>当看到这个error时，才知道自己对React的生命周期理解得还是太薄。</p>
-<img src="/2019/04/09/React%20Lifecycle/001.png" class="">
-
-
-<p><a target="_blank" rel="noopener" href="https://tylermcginnis.com/react-interview-questions/">https://tylermcginnis.com/react-interview-questions/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2019/03/22/React%20%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/03/22/React%20%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93/" class="post-title-link" itemprop="url">React 条件渲染</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-03-22 18:14:00" itemprop="dateCreated datePublished" datetime="2019-03-22T18:14:00+08:00">2019-03-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>产品1.1时，有较大需求的调整，映射到代码则意味着很多功能需要改造或者新增，此时才发现前期由于只求快，代码的可维护性太差，导致要改造模块功能太麻烦，所以就想着边改造边对代码进行重构，一步步提升性能和可维护性。</p>
-<p>这个过程我顺便用Lighthouse跑了一下我们的页面，结果挺崩溃的。</p>
-<p>我相当不能接受这个结果，遂列出了优化行动项</p>
-<ol>
-<li>深入学习React<ol>
-<li>官网再详细看一遍</li>
-<li>极客时间上React学完</li>
-<li>medium.com上找对应的React、Redux文章</li>
-</ol>
-</li>
-<li>尽可能少的渲染<ol>
-<li>掌握react的条件渲染规则</li>
-<li>辨识什么情况下用Redux</li>
-<li>父子组件、公共组件的定义和搭配</li>
-</ol>
-</li>
-<li>code review<ol>
-<li>代码逻辑</li>
-<li>代码可维护性</li>
-<li>渲染次数</li>
-<li>第三方组件风险</li>
-</ol>
-</li>
-</ol>
-<h2 id="React的条件渲染"><a href="#React的条件渲染" class="headerlink" title="React的条件渲染"></a>React的条件渲染</h2><p><em>官方的文章说的很详细，我很舒服。</em></p>
-<p><a target="_blank" rel="noopener" href="https://reactjs.org/docs/reconciliation.html" title="Reconciliation">https://reactjs.org/docs/reconciliation.html</a></p>
-<p><em>这篇文章虽然老了点但是讲的通俗易懂，编于更深入的理解React的Reconciliation</em></p>
-<p><a target="_blank" rel="noopener" href="https://tylermcginnis.com/react-elements-vs-react-components/" title="React Elements vs React Components">https://tylermcginnis.com/react-elements-vs-react-components/</a></p>
-<p><strong>然后我们再谈怎么阻止多余的渲染</strong></p>
-<p>官方是这么说的：</p>
-<blockquote>
-<p>Preventing Component from Rendering<br>In rare cases you might want a component to hide itself even though it was rendered by another component. To do this return null instead of its render output.</p>
-</blockquote>
-<p>所以最简单的方式就是当不需要某个模块输出是那就return null，从而避免渲染;</p>
-<p>因为我们是React+Redux，梳理代码后得出如下有效技巧：</p>
-<ol>
-<li>子组件添加state判断</li>
-<li>合理记录state用于条件判断是否需要渲染</li>
-<li>为元素设置key，选择不会动态变化得作为key，比如id之类的，杜绝使用index</li>
-<li>必要的时候设置shouldComponentUpdate</li>
-<li>卸载组件后记住重置状态</li>
-<li>利用devtool调试并提升代码性能</li>
-</ol>
-<p>参考：</p>
-<blockquote><footer><strong>robinwieruch</strong><cite><a target="_blank" rel="noopener" href="https://www.robinwieruch.de/conditional-rendering-react/">All React Conditional Rendering Techniques</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>React</strong><cite><a target="_blank" rel="noopener" href="https://reactjs.org/docs/faq-internals.html">Virtual DOM and Internals</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>React</strong><cite><a target="_blank" rel="noopener" href="https://reactjs.org/docs/conditional-rendering.html">Conditional Rendering</a></cite></footer></blockquote>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/13/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><span class="page-number current">14</span><a class="page-number" href="/page/15/">15</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/15/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>

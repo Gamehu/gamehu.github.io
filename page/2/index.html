@@ -169,7 +169,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">186</span>
+          <span class="site-state-item-count">191</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -180,7 +180,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">111</span>
+        <span class="site-state-item-count">113</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,6 +220,355 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/08/18/%E5%89%8D%E7%BD%AE%E6%A3%80%E6%9F%A5%E8%84%9A%E6%9C%AC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/08/18/%E5%89%8D%E7%BD%AE%E6%A3%80%E6%9F%A5%E8%84%9A%E6%9C%AC/" class="post-title-link" itemprop="url">前置检查脚本</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-08-18 22:19:13" itemprop="dateCreated datePublished" datetime="2024-08-18T22:19:13+08:00">2024-08-18</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div class="tag-container">
+  <span class="main-tag">离职系列</span>
+  <span class="sub-tag">第八篇</span>
+</div>
+<div class="article-quote">
+离职系列，想想这几年在公司的成长，在这做个记录。
+</div>
+
+<p>此篇是因为遇到了太多环境类问题，从LMT建立的数据统计，这类问题占比已经超过了我处理问题的60%左右，占所有现场问题的20%左右以上，所以抽了个时间把可以在前置检查中避免的问题都梳理出来，试着写了个脚本，并一次次到现场验证，最终有了以下版本。该脚本在产品没有出根解之前，直接交给了TAC，让其与一线一起前置处理，避免过多的流转到LMT。</p>
+<h2 id="检查脚本，"><a href="#检查脚本，" class="headerlink" title="检查脚本，"></a>检查脚本，</h2><pre><code>   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br><span class="line">545</span><br><span class="line">546</span><br><span class="line">547</span><br><span class="line">548</span><br><span class="line">549</span><br><span class="line">550</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 环境前置检查脚本（用于提前感知问题，减少安装失败、升级失败等问题出现）</span><br><span class="line"># by hht</span><br><span class="line"># 上传后，chmod +x 授予执行权限，然后./pre_check.sh 直接执行</span><br><span class="line"></span><br><span class="line"># 输出错误到文件</span><br><span class="line">exec 2&gt;/tmp/pre_test_error.log</span><br><span class="line"># ANSI颜色代码</span><br><span class="line">GREEN=&#x27;\033[0;32m&#x27;</span><br><span class="line">RED=&#x27;\033[0;31m&#x27;</span><br><span class="line">NC=&#x27;\033[0m&#x27; # 恢复默认颜色</span><br><span class="line">YELLOW=&#x27;\033[0;33m&#x27;</span><br><span class="line">YELLOW_BG=&#x27;\033[43m&#x27;</span><br><span class="line">BLACK=&#x27;\033[30m&#x27; # 黑色字体</span><br><span class="line">none=&#x27;\e[0m&#x27;</span><br><span class="line">BLUE=&quot;\e[0;94m&quot;</span><br><span class="line">_red_bg() &#123; echo -e &quot;\e[41m$@$&#123;none&#125;&quot;; &#125;</span><br><span class="line">is_err=$(_red_bg 异常!)</span><br><span class="line"></span><br><span class="line">warn() &#123;</span><br><span class="line">      echo -e &quot;\n$&#123;YELLOW_BG&#125;$&#123;BLACK&#125;警告!$&#123;NC&#125; $@\n&quot;</span><br><span class="line">&#125;</span><br><span class="line">err() &#123;</span><br><span class="line">    echo -e &quot;\n$@ $is_err\n&quot; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 函数来检验IP地址的有效性</span><br><span class="line">is_valid_ip() &#123;</span><br><span class="line">  local ip=&quot;$1&quot;</span><br><span class="line">  local ip_regex=&quot;^([0-9]&#123;1,3&#125;\.)&#123;3&#125;[0-9]&#123;1,3&#125;$&quot;</span><br><span class="line"></span><br><span class="line">  if [[ $ip =~ $ip_regex ]]; then</span><br><span class="line">    return 0</span><br><span class="line">  else</span><br><span class="line">    return 1</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 声明账号</span><br><span class="line">server1_user=&quot;root&quot;</span><br><span class="line">server2_user=&quot;root&quot;</span><br><span class="line"></span><br><span class="line">echo -e &quot;\n$&#123;GREEN&#125;------------------------------------前置检查------------------------------------$&#123;NC&#125;&quot;</span><br><span class="line">echo</span><br><span class="line"># 输入服务器IP地址，进行校验</span><br><span class="line">while true; do</span><br><span class="line">  echo &quot;请输入master服务器的IP地址：&quot;</span><br><span class="line">  read server1_ip</span><br><span class="line"></span><br><span class="line">  if is_valid_ip &quot;$server1_ip&quot;; then</span><br><span class="line">    break</span><br><span class="line">  else</span><br><span class="line">    warn &quot;无效的IP地址，请重新输入。&quot;</span><br><span class="line">  fi</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">while true; do</span><br><span class="line">  echo &quot;请输入worker服务器的IP地址：&quot;</span><br><span class="line">  read server2_ip</span><br><span class="line">  if is_valid_ip &quot;$server2_ip&quot;; then</span><br><span class="line">    break</span><br><span class="line">  else</span><br><span class="line">    warn &quot;无效的IP地址，请重新输入。&quot;</span><br><span class="line">  fi</span><br><span class="line">done</span><br><span class="line"># 测试Ping</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;ping测试:$&#123;NC&#125;\n&quot;</span><br><span class="line">ping_check()&#123;</span><br><span class="line">  local server1_ip=$1</span><br><span class="line">  local server2_ip=$2</span><br><span class="line">  ping -c 3 $server1_ip &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    echo -e &quot;$server1_ip 可以Ping通。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">  else</span><br><span class="line">    err &quot;$server1_ip 无法Ping通。&quot;</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  ping -c 3 $server2_ip &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    echo -e &quot;$server2_ip 可以Ping通。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">  else</span><br><span class="line">    err &quot;$server2_ip 无法Ping通。&quot; &amp;&amp; exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">ping_check $server1_ip $server2_ip</span><br><span class="line">echo -e &quot;\n------------------------------------------------------------------------------&quot;</span><br><span class="line"># SSH测试</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;SSH测试:$&#123;NC&#125;\n&quot;</span><br><span class="line">ssh_check()&#123;</span><br><span class="line">  local server1_ip=$1</span><br><span class="line">  local server2_ip=$2</span><br><span class="line">  if sshpass timeout 10s ssh -o StrictHostKeyChecking=no root@$server1_ip echo &quot;SSH test&quot;  2&gt;/dev/null; then</span><br><span class="line">    echo -e &quot;Success: SSH from $server1_ip to $server2_ip connected.$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">  else </span><br><span class="line">    err &quot;SSH from $server1_ip to $server2_ip failed&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ssh_check $server1_ip $server2_ip</span><br><span class="line">echo -e &quot;\n------------------------------------------------------------------------------&quot;</span><br><span class="line"># 时间一致性检查</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;时间一致性检查:$&#123;NC&#125;\n&quot;</span><br><span class="line">date_check()&#123;</span><br><span class="line">  local server1_ip=$1</span><br><span class="line">  local server2_ip=$2</span><br><span class="line">  # 时间一致性检查</span><br><span class="line">  server1_time=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@$server1_ip date +%s)</span><br><span class="line">  server2_time=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@$server2_ip date +%s)</span><br><span class="line"></span><br><span class="line">  if [ $server1_time -eq $server2_time ]; then</span><br><span class="line">    echo -e &quot;两台服务器的时间完全一致。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">  else</span><br><span class="line">  # 使用 date 命令将时间戳转换为日期和时间</span><br><span class="line">    formatted1_time=$(date -d &quot;@$server1_time&quot;)</span><br><span class="line">    formatted2_time=$(date -d &quot;@$server2_time&quot;)</span><br><span class="line">    err &quot;两台服务器的时间不一致。&quot;</span><br><span class="line">    echo -e &quot;$&#123;server1_ip&#125;时间为：$&#123;formatted1_time&#125;&quot;</span><br><span class="line">    echo -e &quot;$&#123;server2_ip&#125;时间为：$&#123;formatted2_time&#125;&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">date_check $server1_ip $server2_ip</span><br><span class="line">echo -e &quot;\n------------------------------------------------------------------------------&quot;</span><br><span class="line"></span><br><span class="line"># 添加检查防火墙是否开启</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;检查防火墙:$&#123;NC&#125;\n&quot;</span><br><span class="line">check_firewall_status() &#123;</span><br><span class="line">  local server_ip=$1</span><br><span class="line"></span><br><span class="line">  # 使用 ssh 连接到服务器并查看 firewalld 服务的状态</span><br><span class="line">  firewall_status=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null &quot;root@$server_ip&quot; &quot;systemctl is-active firewalld&quot;)</span><br><span class="line">  </span><br><span class="line">  if [ &quot;$firewall_status&quot; = &quot;active&quot; ]; then</span><br><span class="line">    warn &quot;$server_ip 防火墙已开启。请根据http://172.17.160.32:18090/x/cYA0CQ检查端口&quot;</span><br><span class="line">  else</span><br><span class="line">    echo &quot;$server_ip 防火墙未开启。&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 调用这个函数并传入服务器 IP 和用户名</span><br><span class="line">check_firewall_status $server1_ip</span><br><span class="line">check_firewall_status $server2_ip</span><br><span class="line">echo -e &quot;\n------------------------------------------------------------------------------&quot;</span><br><span class="line"></span><br><span class="line"># DNS配置检查</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;DNS检查:$&#123;NC&#125;\n&quot;</span><br><span class="line">dns_check()&#123;</span><br><span class="line">  local server1_user=$1</span><br><span class="line">  local server2_user=$1</span><br><span class="line">  local server1_ip=$2</span><br><span class="line">  local server2_ip=$3</span><br><span class="line">  # DNS配置检查 - 验证是否一致</span><br><span class="line">  server1_dns=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server1_user@$server1_ip cat /etc/resolv.conf)</span><br><span class="line">  server2_dns=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server2_user@$server2_ip cat /etc/resolv.conf)</span><br><span class="line"></span><br><span class="line">  if [ &quot;$server1_dns&quot; == &quot;$server2_dns&quot; ]; then</span><br><span class="line">    echo -e &quot;两台服务器的DNS配置一致。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">  else</span><br><span class="line">    warn  &quot;两台服务器的DNS配置不一致。请判断是否影响集群。&quot;</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  # DNS配置检查 - 验证是否存在多行nameserver记录</span><br><span class="line">  server1_nameserver_count=$(echo &quot;$server1_dns&quot; | grep -c &#x27;^nameserver&#x27;)</span><br><span class="line">  server2_nameserver_count=$(echo &quot;$server2_dns&quot; | grep -c &#x27;^nameserver&#x27;)</span><br><span class="line"></span><br><span class="line">  if [ $server1_nameserver_count -eq 1 ] &amp;&amp; [ $server2_nameserver_count -eq 1 ]; then</span><br><span class="line">    echo -e &quot;两台服务器的DNS配置中只存在一行nameserver记录。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">  else</span><br><span class="line">    if [ $server1_nameserver_count -ne 1 ]; then</span><br><span class="line">      warn  &quot;第一台服务器($server1_ip)的DNS配置存在多行nameserver记录。请判断是否影响集群。&quot;</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    if [ $server2_nameserver_count -ne 1 ]; then</span><br><span class="line">      warn  &quot;第二台服务器($server2_ip)的DNS配置存在多行nameserver记录。请判断是否影响集群。&quot;</span><br><span class="line">    fi</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dns_check $server1_user $server1_ip $server2_ip</span><br><span class="line">echo -e &quot;\n------------------------------------------------------------------------------&quot;</span><br><span class="line"># 挂载检查</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;数据盘挂载检查:$&#123;NC&#125;\n&quot;</span><br><span class="line">mount_check()&#123;</span><br><span class="line">  local server1_user=$1</span><br><span class="line">  local server2_user=$1</span><br><span class="line">  local server1_ip=$2</span><br><span class="line">  local server2_ip=$3</span><br><span class="line">  server1_mount=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server1_user@$server1_ip mount | grep /opt/local-path-provisioner)</span><br><span class="line">  server2_mount=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server2_user@$server2_ip mount | grep /opt/local-path-provisioner)</span><br><span class="line"></span><br><span class="line">  if [ -n &quot;$server1_mount&quot; ] &amp;&amp; [ -n &quot;$server2_mount&quot; ]; then</span><br><span class="line">    echo -e &quot;两台服务器都正确挂载了/opt/local-path-provisioner目录。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">  else</span><br><span class="line">  #   echo -e &quot;两台服务器中有一台或两台未正确挂载/opt/local-path-provisioner目录。$&#123;RED&#125;异常$&#123;NC&#125;&quot;</span><br><span class="line">    if [ -z &quot;$server1_mount&quot; ]; then</span><br><span class="line">      err &quot;第一台服务器($server1_ip)未正确挂载/opt/local-path-provisioner目录。&quot;</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    if [ -z &quot;$server2_mount&quot; ]; then</span><br><span class="line">      err &quot;第二台服务器($server2_ip)未正确挂载/opt/local-path-provisioner目录。&quot;</span><br><span class="line">    fi</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mount_check $server1_user $server1_ip $server2_ip</span><br><span class="line">echo -e &quot;\n------------------------------------------------------------------------------&quot;</span><br><span class="line"># 使用Telnet检查SFTP服务是否联通</span><br><span class="line"># check_sftp() &#123;</span><br><span class="line">#   local server_ip=$1</span><br><span class="line">#   echo -e &quot;\n-----------使用Telnet检查SFTP服务是否联通-------------&quot;</span><br><span class="line"># #   # 使用Telnet连接到SSH端口（默认是22）</span><br><span class="line"># #   # 尝试连接SFTP服务器</span><br><span class="line"># #   sftp -oPort=22 $server_ip &lt;&lt;EOF 2&gt;/dev/null</span><br><span class="line"># #   quit</span><br><span class="line"># # EOF</span><br><span class="line"></span><br><span class="line"># #   # Check the exit status of the SFTP command</span><br><span class="line"># #   if [ $? -eq 0 ]; then</span><br><span class="line"># #     echo &quot;SFTP on $IP is working normally&quot;</span><br><span class="line"># #   else</span><br><span class="line"># #     echo &quot;SFTP on $IP is not working!&quot;</span><br><span class="line"># #   fi</span><br><span class="line"></span><br><span class="line">#   # 使用SSH命令测试SFTP服务</span><br><span class="line">#   ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null sftpuser@$server_ip sftp exit &gt; /dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">#   # 检查SSH命令的退出状态码</span><br><span class="line">#   if [ $? -eq 0 ]; then</span><br><span class="line">#     echo &quot;SFTP服务正常，可以连接到主机 $server_ip 的SFTP服务。&quot;</span><br><span class="line">#   else</span><br><span class="line">#     err &quot;SFTP服务异常，无法连接到主机 $server_ip 的SFTP服务。&quot;</span><br><span class="line">#   fi</span><br><span class="line"># &#125;</span><br><span class="line"># # 调用函数来进行Telnet检查</span><br><span class="line"># check_sftp $server_ip</span><br><span class="line"></span><br><span class="line"># 检查master SSH服务状态和配置</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;master SSH服务状态和配置检查:$&#123;NC&#125;\n&quot;</span><br><span class="line">check_sshd_config() &#123;</span><br><span class="line"></span><br><span class="line">  local server_ip=$1</span><br><span class="line">  local server_user=$2</span><br><span class="line"></span><br><span class="line">  # 使用 ssh 连接到服务器并执行命令检查SSH服务状态</span><br><span class="line">  ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;systemctl is-active sshd&quot; &gt; /dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    # 获取SSH配置文件内容</span><br><span class="line">    sshd_config_content=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;cat /etc/ssh/sshd_config&quot;)</span><br><span class="line"></span><br><span class="line">    # 检查配置文件内容是否包含指定的三行数据</span><br><span class="line">    if echo &quot;$sshd_config_content&quot; | grep -q -E &quot;Subsystem\s+sftp\s+internal-sftp&quot; &amp;&amp; echo &quot;$sshd_config_content&quot; | grep -q &quot;Match User sftpuser&quot; &amp;&amp; echo &quot;$sshd_config_content&quot; | grep -q &quot;ChrootDirectory /opt/ftpfile/sftp/sftpuser/&quot;; then</span><br><span class="line">      echo -e &quot;SSH配置正常。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">    else</span><br><span class="line">      warn &quot;请检查sshd_config文件，是否正确配置sftp。&quot;</span><br><span class="line">    fi</span><br><span class="line">  else</span><br><span class="line">    warn &quot;无法连接服务器或检查SSH服务状态。&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 调用函数执行检查</span><br><span class="line">check_sshd_config $server1_ip $server1_user</span><br><span class="line">echo -e &quot;\n------------------------------------------------------------------------------&quot;</span><br><span class="line"># sftp_with_password() &#123;</span><br><span class="line">#   echo -e &quot;\n-----------检查master的sftp连通性-------------&quot;</span><br><span class="line">#   local server_ip=$1</span><br><span class="line">#   local server_password=$2</span><br><span class="line"></span><br><span class="line">#   # 使用 expect 来自动输入密码</span><br><span class="line">#   expect -c &quot;</span><br><span class="line">#     spawn sftp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null sftpuser@$server_ip</span><br><span class="line">#     expect &#123;</span><br><span class="line">#       \&quot;password:\&quot; &#123;</span><br><span class="line">#         send \&quot;$server_password\n\&quot;</span><br><span class="line">#         exp_continue</span><br><span class="line">#       &#125;</span><br><span class="line">#       eof</span><br><span class="line">#     &#125;</span><br><span class="line">#   &quot;</span><br><span class="line">  </span><br><span class="line">#   if [ $? -eq 0 ]; then</span><br><span class="line">#     echo -e &quot;$server_ip SFTP连接成功。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">#   else</span><br><span class="line">#     warn &quot;无法连接$server_ip 的SFTP服务。&quot;</span><br><span class="line">#   fi</span><br><span class="line"># &#125;</span><br><span class="line"></span><br><span class="line"># # 调用函数来进行SFTP连接检查</span><br><span class="line"># sftp_with_password $server1_ip &quot;FYktvR1w2upoOb&quot;</span><br><span class="line"></span><br><span class="line"># 检查目录权限是否为777</span><br><span class="line"># check_directory_permission() &#123;</span><br><span class="line">#   local server_ip=$1</span><br><span class="line">#   local directory_path=$2</span><br><span class="line">#   echo -e &quot;\n-----------检查master的目录$&#123;directory_path&#125;权限-------------&quot;</span><br><span class="line"></span><br><span class="line">#   # 使用 ssh 连接到服务器并执行 stat 命令获取目录权限信息</span><br><span class="line">#   ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null sftpuser@$server_ip &quot;stat -c %a $directory_path&quot; &gt; /dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">#   if [ $? -eq 0 ]; then</span><br><span class="line">#     # 获取目录权限</span><br><span class="line">#     directory_permission=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null sftpuser@$server_ip &quot;stat -c %a $directory_path&quot;)</span><br><span class="line">    </span><br><span class="line">#     if [ &quot;$directory_permission&quot; -eq 777 ]; then</span><br><span class="line">#       echo -e &quot;$directory_path 目录权限为777。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">#     else</span><br><span class="line">#       warn &quot;$directory_path 目录权限不是777。&quot;</span><br><span class="line">#     fi</span><br><span class="line">#   else</span><br><span class="line">#     warn &quot;无法连接$server_ip 服务器或获取目录权限。&quot;</span><br><span class="line">#   fi</span><br><span class="line"># &#125;</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;检查master的sftp目录权限:$&#123;NC&#125;\n&quot;</span><br><span class="line">check_user() &#123;</span><br><span class="line">  ssh $1 &quot;id $2 &gt;/dev/null 2&gt;&amp;1&quot; </span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    echo -e &quot;$2用户在$1上存在。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">  else  </span><br><span class="line">    err &quot;$2用户在$1上不存在&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">check_dir_perm() &#123;</span><br><span class="line">  ssh $1 &quot;if [ \`stat -c %a $2\` -eq $3 ]; then echo -e &#x27;$2目录为$3权限。$&#123;GREEN&#125;正常$&#123;NC&#125;&#x27;; else err &#x27;$2目录不为$3权限&#x27;; fi&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 调用函数来检查服务器的目录权限</span><br><span class="line">check_user $server1_ip &quot;sftpuser&quot;</span><br><span class="line"></span><br><span class="line">check_dir_perm $server1_ip &quot;/opt&quot; 755</span><br><span class="line"></span><br><span class="line">check_dir_perm $server1_ip &quot;/opt/ftpfile/sftp/sftpuser&quot; 755</span><br><span class="line"></span><br><span class="line">echo -e &quot;\n------------------------------------------------------------------------------&quot;</span><br><span class="line"># check_directory_permission $server1_ip &quot;/opt&quot;</span><br><span class="line"># check_directory_permission $server1_ip &quot;/opt/ftpfile/sftp/sftpuser&quot;</span><br><span class="line"></span><br><span class="line"># 检查主机名与/etc/hosts文件的一致性</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;检查主机名的一致性:$&#123;NC&#125;\n&quot;</span><br><span class="line">check_hostname_and_hosts() &#123;</span><br><span class="line"></span><br><span class="line">  local server_ip=$1</span><br><span class="line">  local server_user=$2</span><br><span class="line">  # 使用 ssh 连接到服务器并获取主机名</span><br><span class="line">  server_hostname=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;hostname&quot;)</span><br><span class="line"></span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    # 获取 /etc/hosts 文件内容</span><br><span class="line">    hosts_file_content=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;cat /etc/hosts&quot;)</span><br><span class="line"></span><br><span class="line">    # 检查主机名与 /etc/hosts 内是否一致</span><br><span class="line">    if echo &quot;$hosts_file_content&quot; | grep -q -E &quot;^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\s+$server_hostname\s*$&quot;; then</span><br><span class="line">      echo -e &quot;$server_ip 主机名与/etc/hosts文件一致。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">    else</span><br><span class="line">      warn &quot;$server_ip 主机名与/etc/hosts文件不一致。&quot;</span><br><span class="line">    fi</span><br><span class="line">  else</span><br><span class="line">    warn &quot;无法连接$server_ip 服务器或获取主机名。&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 检查主机名与Kubernetes节点名是否一致</span><br><span class="line">check_hostname_and_k8s_node() &#123;</span><br><span class="line"></span><br><span class="line">  local server_ip=$1</span><br><span class="line">  local server_user=$2</span><br><span class="line">  local num=$3</span><br><span class="line">  # 使用 ssh 连接到服务器并获取Kubernetes节点名</span><br><span class="line">  k8s_node_name=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;kubectl get node -o jsonpath=&#x27;&#123;.items[$num].metadata.name&#125;&#x27;&quot;)</span><br><span class="line"></span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    # 获取主机名</span><br><span class="line">    server_hostname=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;hostname&quot;)</span><br><span class="line"></span><br><span class="line">    # 检查主机名与Kubernetes节点名是否一致</span><br><span class="line">    if [ &quot;$server_hostname&quot; = &quot;$k8s_node_name&quot; ]; then</span><br><span class="line">      echo -e &quot;$server_ip 主机名与Kubernetes节点名一致。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">    else</span><br><span class="line">      warn &quot;$server_ip 主机名与Kubernetes节点名不一致。&quot;</span><br><span class="line">    fi</span><br><span class="line">  else</span><br><span class="line">    warn &quot;无法连接$server_ip 服务器或获取Kubernetes节点名。&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 调用函数来检查服务器的主机名与/etc/hosts文件一致性</span><br><span class="line">check_hostname_and_hosts $server1_ip $server1_user</span><br><span class="line">check_hostname_and_hosts $server2_ip $server2_user</span><br><span class="line"></span><br><span class="line"># 调用函数来检查服务器的主机名与Kubernetes节点名一致性</span><br><span class="line">check_hostname_and_k8s_node $server1_ip $server1_user 0</span><br><span class="line">check_hostname_and_k8s_node $server2_ip $server2_user 1</span><br><span class="line">echo -e &quot;\n------------------------------------------------------------------------------&quot;</span><br><span class="line"></span><br><span class="line"># 磁盘写入速度测试（带缓存）</span><br><span class="line"># disk_speed_test() &#123;</span><br><span class="line">#   # local server_ip=$1</span><br><span class="line">#   # local server_user=$2</span><br><span class="line">#   # local test_file=&quot;/tmp/disk_speed_test_file&quot;</span><br><span class="line">#   # # 进行写入测试</span><br><span class="line">#   # write_speed=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;dd if=/dev/zero of=$&#123;test_file&#125; bs=8k count=128 conv=fsync oflag=direct&quot; 2&gt;&amp;1 | tail -n 1)</span><br><span class="line">#   # echo -e &quot;$&#123;server_ip&#125; 写入速度: $write_speed&quot;</span><br><span class="line">#   # # 进行读取测试</span><br><span class="line">#   # read_speed=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;sudo dd if=$&#123;test_file&#125; of=/dev/null bs=8k count=128 conv=fsync iflag=direct&quot; 2&gt;&amp;1 | tail -n 1)</span><br><span class="line">#   # echo -e &quot;$&#123;server_ip&#125; 读取速度: $read_speed&quot;</span><br><span class="line"></span><br><span class="line">#   # # 删除测试文件</span><br><span class="line">#   # ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;rm $test_file&quot;</span><br><span class="line"># &#125;</span><br><span class="line"></span><br><span class="line"># 测试磁盘读速度的函数</span><br><span class="line">disk_speed_test() &#123;</span><br><span class="line">  local server_ip=$1</span><br><span class="line">  local test_duration=30  # 测试持续时间（秒）</span><br><span class="line"></span><br><span class="line">  echo &quot;开始测试 $server_ip 过程会持续30s...&quot;</span><br><span class="line"></span><br><span class="line">  local time0=$(date &quot;+%s&quot;)</span><br><span class="line">  cat /dev/null &gt; disk_res</span><br><span class="line"></span><br><span class="line">  while ((($(date &quot;+%s&quot;) - time0) &lt;= test_duration)); do</span><br><span class="line">    disk_info=$(ssh &quot;$server_ip&quot; &#x27;dd if=/dev/zero of=output.file bs=8k count=128 conv=fsync 2&gt;&amp;1 1&gt;/dev/null&#x27;)</span><br><span class="line">    io_res=$(echo &quot;$disk_info&quot; | grep --only-matching -E &#x27;[0-9.]+ ([MGk]?B|bytes)/[s(ec)?|秒]&#x27;)</span><br><span class="line">    echo &quot;$io_res&quot; &gt;&gt; disk_res</span><br><span class="line">  done</span><br><span class="line"></span><br><span class="line">  local count=$(cat disk_res | wc -l)</span><br><span class="line">  local sum=$(cat disk_res | xargs -n2 | awk &#x27;&#123; if ($2 == &quot;kB/秒&quot; || $2 == &quot;kB/s&quot;) a+=($1/1024); else a+=$1 &#125; END&#123;printf(&quot;%.2f&quot;, a)&#125;&#x27;)</span><br><span class="line">  local average_speed=$(awk &#x27;BEGIN&#123;printf &quot;%.2f\n&quot;, &#x27;$sum&#x27;/&#x27;$count&#x27;&#125;&#x27;)</span><br><span class="line"></span><br><span class="line">  echo -e &quot;平均速度 $server_ip: $&#123;RED&#125;$average_speed MB/s$&#123;NC&#125;。推荐值：$&#123;GREEN&#125;&gt;=200m/s$&#123;NC&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 磁盘写入速度测试（不带缓存）</span><br><span class="line"></span><br><span class="line"># disk_speed_test_no_cache() &#123;</span><br><span class="line">  # local server_ip=$1</span><br><span class="line">  # local server_user=$2</span><br><span class="line">  # local test_file=&quot;/tmp/disk_speed_test_file&quot;</span><br><span class="line">  # # 禁用磁盘缓存</span><br><span class="line">  # ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;hdparm -W0 /dev/mapper/centos-root&quot; 2&gt;/dev/null</span><br><span class="line">  # # 进行写入测试</span><br><span class="line">  # write_speed=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;dd if=/dev/zero of=$&#123;test_file&#125; bs=8k count=128 conv=fsync oflag=direct&quot; 2&gt;&amp;1 | tail -n 1)</span><br><span class="line">  # echo -e &quot;$&#123;server_ip&#125; 写入速度: $write_speed&quot;</span><br><span class="line">  # # 进行读取测试</span><br><span class="line">  # read_speed=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;sudo dd if=$&#123;test_file&#125; of=/dev/null bs=8k count=128 conv=fsync iflag=direct&quot; 2&gt;&amp;1 | tail -n 1)</span><br><span class="line">  # echo -e &quot;$&#123;server_ip&#125; 读取速度: $read_speed&quot;</span><br><span class="line"></span><br><span class="line">  # # 删除测试文件</span><br><span class="line">  # ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;rm $test_file&quot;</span><br><span class="line">  # # 启用磁盘缓存</span><br><span class="line">  # ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;hdparm -W1 /dev/mapper/centos-root&quot; 2&gt;/dev/null</span><br><span class="line"># &#125;</span><br><span class="line"></span><br><span class="line"># 测试磁盘写入速度的函数</span><br><span class="line">disk_speed_test_no_cache() &#123;</span><br><span class="line">  local server_ip=&quot;$1&quot;</span><br><span class="line">  local test_duration=30  # 测试持续时间（秒）</span><br><span class="line"></span><br><span class="line">  echo &quot;开始测试 $server_ip 过程会持续30s...&quot;</span><br><span class="line"></span><br><span class="line">  local time0=$(date &quot;+%s&quot;)</span><br><span class="line">  cat /dev/null &gt; disk_res</span><br><span class="line"></span><br><span class="line">  while ((($(date &quot;+%s&quot;) - time0) &lt;= test_duration)); do</span><br><span class="line">    disk_info=$(ssh &quot;$server_ip&quot; &#x27;dd if=/dev/zero of=output.file bs=8k count=128 oflag=direct,nonblock conv=fsync 2&gt;&amp;1 1&gt;/dev/null&#x27;)</span><br><span class="line">    io_res=$(echo &quot;$disk_info&quot; | grep --only-matching -E &#x27;[0-9.]+ ([MGk]?B|bytes)/[s(ec)?|秒]&#x27;)</span><br><span class="line">    echo &quot;$io_res&quot; &gt;&gt; disk_res</span><br><span class="line">  done</span><br><span class="line"></span><br><span class="line">  local count=$(cat disk_res | wc -l)</span><br><span class="line">  local sum=$(cat disk_res | xargs -n2 | awk &#x27;&#123; if ($2 == &quot;kB/秒&quot; || $2 == &quot;kB/s&quot;) a+=($1/1024); else a+=$1 &#125; END&#123;printf(&quot;%.2f&quot;, a)&#125;&#x27;)</span><br><span class="line">  local average_speed=$(awk &#x27;BEGIN&#123;printf &quot;%.2f\n&quot;, &#x27;$sum&#x27;/&#x27;$count&#x27;&#125;&#x27;)</span><br><span class="line"></span><br><span class="line">  echo -e &quot;平均速度 $server_ip: $&#123;RED&#125; $average_speed MB/s $&#123;NC&#125;。推荐值：$&#123;GREEN&#125;&gt;=50m/s$&#123;NC&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 检查 CPU 是否支持 AVX</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;检查 CPU 是否支持 AVX:$&#123;NC&#125;\n&quot;</span><br><span class="line">check_avx_support() &#123;</span><br><span class="line">  local server_ip=$1</span><br><span class="line">  local avx_check=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@$server_ip &quot;grep -o &#x27;avx&#x27; /proc/cpuinfo&quot;)</span><br><span class="line"></span><br><span class="line">  if [ -n &quot;$avx_check&quot; ]; then</span><br><span class="line">    echo -e &quot;$server_ip CPU 支持 AVX (Advanced Vector Extensions)。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">  else</span><br><span class="line">    warn &quot;$server_ip CPU 不支持 AVX (Advanced Vector Extensions)。&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 调用函数来检查 AVX 支持</span><br><span class="line">check_avx_support  $server1_ip</span><br><span class="line">check_avx_support  $server2_ip</span><br><span class="line"></span><br><span class="line"># 定义要加载镜像的目录列表</span><br><span class="line">load_images() &#123;</span><br><span class="line">  image_directories=(&quot;/opt/xx/images/product/insight&quot; &quot;/opt/xx/images/product/insight/patch&quot;)</span><br><span class="line"></span><br><span class="line">  # 遍历目录并加载镜像</span><br><span class="line">  for directory in &quot;$&#123;image_directories[@]&#125;&quot;; do</span><br><span class="line">    if [ -d &quot;$directory&quot; ]; then</span><br><span class="line">      cd &quot;$directory&quot;</span><br><span class="line">      echo &quot;进入目录: $directory&quot;</span><br><span class="line">      for file in $(ls . | grep .tgz); do</span><br><span class="line">        echo &quot;加载镜像: $file&quot;</span><br><span class="line">        docker load &lt; &quot;$file&quot;</span><br><span class="line">      done</span><br><span class="line">    else</span><br><span class="line">      echo &quot;目录 $directory 不存在。&quot;</span><br><span class="line">    fi</span><br><span class="line">  done</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 检查磁盘性能</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;磁盘测试:$&#123;NC&#125;\n&quot;</span><br><span class="line"># read -p &quot;是否要检查磁盘？ (y/n): &quot; confirm</span><br><span class="line">echo &quot;是否要检查磁盘？ (y/n)：&quot;</span><br><span class="line">read confirm</span><br><span class="line">if [ &quot;$confirm&quot; = &quot;y&quot; ]; then</span><br><span class="line">  echo -e &quot;\n$&#123;BLUE&#125;磁盘写入速度测试（不带缓存）:$&#123;NC&#125;\n&quot;</span><br><span class="line">  disk_speed_test_no_cache $server1_ip</span><br><span class="line">  disk_speed_test_no_cache $server2_ip</span><br><span class="line">  echo -e &quot;\n$&#123;BLUE&#125;磁盘写入速度测试（带缓存）:$&#123;NC&#125;\n&quot;</span><br><span class="line">  disk_speed_test $server1_ip </span><br><span class="line">  disk_speed_test $server2_ip</span><br><span class="line">else</span><br><span class="line">  echo &quot;取消磁盘检查。&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># 镜像丢的时候使用</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;镜像加载:$&#123;NC&#125;\n&quot;</span><br><span class="line">echo &quot;是否要加载 Docker 镜像？ (y/n)：&quot;</span><br><span class="line">read confirm</span><br><span class="line"># read -p &quot;是否要加载 Docker 镜像？ (y/n): &quot; confirm</span><br><span class="line">if [ &quot;$confirm&quot; = &quot;y&quot; ]; then</span><br><span class="line">  load_images</span><br><span class="line">else</span><br><span class="line">  echo &quot;取消加载 Docker 镜像。&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       </span><br></pre></td></tr></table></figure>
+</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/07/29/%E9%81%87%E8%A7%81OOM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/07/29/%E9%81%87%E8%A7%81OOM/" class="post-title-link" itemprop="url">遇见OOM</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-07-29 21:12:00" itemprop="dateCreated datePublished" datetime="2024-07-29T21:12:00+08:00">2024-07-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div class="tag-container">
+  <span class="main-tag">离职系列</span>
+  <span class="sub-tag">第七篇</span>
+</div>
+<div class="article-quote">
+离职系列，想想这几年在公司的成长，在这做个记录。此篇主要谈谈LMT时，处理的两次OOM问题。
+</div>
+
+<p>为啥是两次？因为都很有代表性，一次可以算是三方库使用不当，一次是程序自身的问题。</p>
+<h3 id="第一次"><a href="#第一次" class="headerlink" title="第一次"></a>第一次</h3><p>JPA使用不当,….待续</p>
+<h3 id="第二次"><a href="#第二次" class="headerlink" title="第二次"></a>第二次</h3><p>应用频繁重启,….待续</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/07/16/%E6%9C%8D%E5%8A%A1%E5%8F%AF%E7%94%A8%E6%80%A7-%E6%A1%88%E4%BE%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/07/16/%E6%9C%8D%E5%8A%A1%E5%8F%AF%E7%94%A8%E6%80%A7-%E6%A1%88%E4%BE%8B/" class="post-title-link" itemprop="url">服务可用性-案例</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-07-16 13:49:00" itemprop="dateCreated datePublished" datetime="2024-07-16T13:49:00+08:00">2024-07-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div class="tag-container">
+  <span class="main-tag">离职系列</span>
+  <span class="sub-tag">第七篇</span>
+</div>
+<div class="article-quote">
+离职系列，想想这几年在公司的成长，在这做个记录。上一篇<a href="/2024/06/15/%E5%AE%9A%E4%BD%8D%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="服务可用性定位问题常用命令">服务可用性定位问题常用命令</a>，针对服务可用性常用命令进行了说明，这一篇主要是讲实践案例。
+</div>
+
+<p>因为我在LMT除了日常管理工作外，额外向领导请求了承担部分现场问题处理，挑的比较陌生且有挑战性的“服务可用性的问题”，想着在实践中学习，并且这部分问题是最麻烦的没有什么标准，往往又是最紧急的，我担起来一是减少了组员上报成本，另一个我更方便直接找到对应的负责人进行沟通，提高效率。所以这块积累的经验更多。</p>
+<h2 id="案例分享"><a href="#案例分享" class="headerlink" title="案例分享"></a>案例分享</h2><p>简单分享几个案例，一个主要对外（TAC），一个对内（组内研发）。两个文档因为对象不同，使用场景不同，稍有差异。</p>
+<p>整理案例，一是为了组内共同学习，二是提供给TAC团队，让其能更多的拦截一些一线提出的较简单的现场问题。</p>
+<h3 id="案例1（TAC）"><a href="#案例1（TAC）" class="headerlink" title="案例1（TAC）"></a>案例1（TAC）</h3><img src="/2024/07/16/%E6%9C%8D%E5%8A%A1%E5%8F%AF%E7%94%A8%E6%80%A7-%E6%A1%88%E4%BE%8B/1.jpg" class="">
+
+<h3 id="案例2（TAC）"><a href="#案例2（TAC）" class="headerlink" title="案例2（TAC）"></a>案例2（TAC）</h3><img src="/2024/07/16/%E6%9C%8D%E5%8A%A1%E5%8F%AF%E7%94%A8%E6%80%A7-%E6%A1%88%E4%BE%8B/dns.jpg" class="">
+<h3 id="案例3（研发）"><a href="#案例3（研发）" class="headerlink" title="案例3（研发）"></a>案例3（研发）</h3><img src="/2024/07/16/%E6%9C%8D%E5%8A%A1%E5%8F%AF%E7%94%A8%E6%80%A7-%E6%A1%88%E4%BE%8B/date.jpeg" class="">
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/06/18/%E7%8E%B0%E5%9C%BA%E4%BA%8B%E6%95%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/06/18/%E7%8E%B0%E5%9C%BA%E4%BA%8B%E6%95%85/" class="post-title-link" itemprop="url">现场事故</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-06-18 00:22:00" itemprop="dateCreated datePublished" datetime="2024-06-18T00:22:00+08:00">2024-06-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div class="tag-container">
+  <span class="main-tag">离职系列</span>
+  <span class="sub-tag">第六篇</span>
+</div>
+<div class="article-quote">
+离职系列，想想这几年在公司的成长，在这做个记录。此篇主要谈谈LMT时期。
+</div>
+
+<p>因为现场故障直接影响客户口碑、人力成本等事业部的重要指标，所以事业部领导要求针对现场故障处理需要有单独的奖惩制度，让整个事业部重视起来，所以我整理了对应的内容用于事业部邮件同步。</p>
+<h2 id="事故的定义"><a href="#事故的定义" class="headerlink" title="事故的定义"></a>事故的定义</h2><p>故障处理或产品自身服务中断造成客户损失、恶劣影响。（一线、客户投诉且影响产品口碑的）。</p>
+<h2 id="事故处理"><a href="#事故处理" class="headerlink" title="事故处理"></a>事故处理</h2><img src="/2024/06/18/%E7%8E%B0%E5%9C%BA%E4%BA%8B%E6%95%85/sg.jpg" class="">
+
+
+<h2 id="奖惩制度"><a href="#奖惩制度" class="headerlink" title="奖惩制度"></a>奖惩制度</h2><p>这块就比较个性化了，主要看重视程度，需要根据公司规章制度和领导的要求做调整。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -790,6 +1139,471 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/03/09/what-is-AI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/09/what-is-AI/" class="post-title-link" itemprop="url">what is AI</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-09 21:31:00" itemprop="dateCreated datePublished" datetime="2024-03-09T21:31:00+08:00">2024-03-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div class="tag-container">
+  <span class="ai-tag">AI</span>
+  <span class="sub-tag">第二篇</span>
+</div>
+
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>整理此篇最开始源于做知识库时<a href="/2024/10/04/AI%E5%BA%94%E7%94%A8-%E7%9F%A5%E8%AF%86%E5%BA%93/" title="AI应用-知识库">AI应用-知识库</a>时，当时就想整理写一篇关于AI的一些基础概念，个人扫盲专用，但是老忘。</p>
+<p>刚好最近找工作看到了很多AI相关的JD，所以想借着找工作的空隙，补一补这块的知识。</p>
+<p>其实我应该是比较早用chatgpt的用户，我都付费了一段时间后，我的很多同事才刚开始想方设法使用chatgpt，但是对于我来说更多时候把它作为一个效率工具或者新奇的玩具在用，关于AI的概念比较散，没有系统的深入了解过，刚好有工作中的机会让我意识到AI离我那么近，我应该好好认知它了，所以有了这篇文章，先把各种概念搞清楚。</p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="1-人工智能的基础概念"><a href="#1-人工智能的基础概念" class="headerlink" title="1. 人工智能的基础概念"></a>1. 人工智能的基础概念</h2><h3 id="什么是人工智能？"><a href="#什么是人工智能？" class="headerlink" title="什么是人工智能？"></a>什么是人工智能？</h3><p>人工智能（Artificial Intelligence，简称AI）是指通过计算机系统模拟人类智能的技术。它让机器能够学习、推理、感知、交流，甚至模仿人类的认知能力。</p>
+<h3 id="AI的分类"><a href="#AI的分类" class="headerlink" title="AI的分类"></a>AI的分类</h3><p>从应用角度，AI可分为三种类型：</p>
+<ol>
+<li><p><strong>弱人工智能（Narrow AI）</strong>：专注于解决特定问题的AI，如语音助手、图像识别等。现阶段大多数AI应用都属于此类。</p>
+</li>
+<li><p><strong>通用人工智能（AGI）</strong>：具备与人类相当的认知能力，能够理解、学习并应用知识解决各种问题。目前仍处于理论和研究阶段。</p>
+</li>
+<li><p><strong>超级人工智能（ASI）</strong>：理论上超越人类智能的AI，能在几乎所有领域超越人类最优秀的表现。</p>
+</li>
+</ol>
+<h3 id="AI的核心技术基础"><a href="#AI的核心技术基础" class="headerlink" title="AI的核心技术基础"></a>AI的核心技术基础</h3><ol>
+<li><p><strong>机器学习（Machine Learning）</strong>：让计算机从数据中学习并改进的方法，而不需要被明确编程。</p>
+</li>
+<li><p><strong>深度学习（Deep Learning）</strong>：机器学习的一个子集，是神经网络的一种实现方法，使用多层神经网络模拟人脑结构进行学习。深度学习是一种让多层神经元可以进行有效计算的方法，大大提高了神经网络的性能。“深度学习”这个名字，就是比喻多层神经元的自主学习过程。</p>
+</li>
+<li><p><strong>自然语言处理（NLP）</strong>：使计算机能够理解、解释和生成人类语言。</p>
+</li>
+<li><p><strong>计算机视觉（Computer Vision）</strong>：让计算机能够”看到”并理解视觉信息。</p>
+</li>
+</ol>
+<h2 id="2-机器学习：AI的核心引擎"><a href="#2-机器学习：AI的核心引擎" class="headerlink" title="2. 机器学习：AI的核心引擎"></a>2. 机器学习：AI的核心引擎</h2><h3 id="机器学习的基本概念"><a href="#机器学习的基本概念" class="headerlink" title="机器学习的基本概念"></a>机器学习的基本概念</h3><p>机器学习使计算机能够通过经验自动改进，这种”经验”通常来自数据。简单来说，传统编程是人类编写规则让计算机执行，而机器学习是计算机从数据中找出规则。</p>
+<h3 id="机器学习的主要类型"><a href="#机器学习的主要类型" class="headerlink" title="机器学习的主要类型"></a>机器学习的主要类型</h3><ol>
+<li><p><strong>监督学习</strong>：使用已标记的数据训练模型，如分类和回归问题。</p>
+<ul>
+<li>例如：垃圾邮件分类、房价预测</li>
+</ul>
+</li>
+<li><p><strong>无监督学习</strong>：从未标记的数据中发现模式和结构。</p>
+<ul>
+<li>例如：客户分群、异常检测</li>
+</ul>
+</li>
+<li><p><strong>强化学习</strong>：通过尝试与环境互动并获得反馈来学习最佳策略。</p>
+<ul>
+<li>例如：游戏AI、自动驾驶决策系统</li>
+</ul>
+</li>
+</ol>
+<h3 id="神经网络与深度学习"><a href="#神经网络与深度学习" class="headerlink" title="神经网络与深度学习"></a>神经网络与深度学习</h3><p>神经网络是机器学习的一种主要形式。它模仿人脑神经元连接方式的数学模型，由多层人工神经元组成：</p>
+<ol>
+<li><strong>输入层</strong>：接收初始数据</li>
+<li><strong>隐藏层</strong>：处理信息（深度学习通常有多个隐藏层）</li>
+<li><strong>输出层</strong>：产生最终结果</li>
+</ol>
+<p>深度学习是神经网络的一种实现方法，使用的神经网络具有多个隐藏层，能够学习更复杂的特征和模式，特别适合处理非结构化数据如图像、声音和文本。</p>
+<h2 id="3-现代AI模型与架构"><a href="#3-现代AI模型与架构" class="headerlink" title="3. 现代AI模型与架构"></a>3. 现代AI模型与架构</h2><h3 id="深度学习的方法"><a href="#深度学习的方法" class="headerlink" title="深度学习的方法"></a>深度学习的方法</h3><h4 id="卷积神经网络（CNN）"><a href="#卷积神经网络（CNN）" class="headerlink" title="卷积神经网络（CNN）"></a>卷积神经网络（CNN）</h4><p>CNN专门设计用于处理图像数据，通过使用卷积层来检测特征（如边缘、形状等），然后通过池化层减少数据维度，最后通过全连接层进行分类。</p>
+<p>CNN广泛应用于：</p>
+<ul>
+<li>图像分类与识别</li>
+<li>物体检测</li>
+<li>医学图像分析</li>
+</ul>
+<h4 id="循环神经网络（RNN）与长短期记忆网络（LSTM）"><a href="#循环神经网络（RNN）与长短期记忆网络（LSTM）" class="headerlink" title="循环神经网络（RNN）与长短期记忆网络（LSTM）"></a>循环神经网络（RNN）与长短期记忆网络（LSTM）</h4><p>RNN能够处理序列数据，具有”记忆”功能，适合处理文本、语音等时序数据。LSTM是RNN的改进版，解决了长序列训练中的梯度消失问题。</p>
+<p>应用领域：</p>
+<ul>
+<li>语音识别</li>
+<li>机器翻译</li>
+<li>文本生成</li>
+</ul>
+<h4 id="Transformer架构"><a href="#Transformer架构" class="headerlink" title="Transformer架构"></a>Transformer架构</h4><p>Transformer通过自注意力机制处理序列数据，克服了RNN处理长序列的局限性，成为现代语言模型的基础架构。Transformer 不同于以前的方法，不再一个个处理输入的单词，而是一次性处理整个输入，对每个词分配不同的权重。这种方法直接导致了2022年ChatGPT和后来无数生成式AI模型的诞生，是神经网络和深度学习目前的主流方法。<br>由于基于 Transformer 的模型需要一次性处理整个输入，所以都有“上下文大小”这个指标，指的是一次可以处理的最大输入。比如，GPT-4 Turbo 的上下文是 128k 个 Token，相当于一次性读取超过300页的文本。上下文越大，模型能够考虑的信息就越多，生成的回答也就越相关和连贯，相应地，所需要的算力也就越多。</p>
+<p>著名的Transformer模型：</p>
+<ul>
+<li>BERT（谷歌）</li>
+<li>GPT系列（OpenAI）</li>
+<li>Claude系列（Anthropic）</li>
+</ul>
+<h3 id="大型语言模型（LLM）"><a href="#大型语言模型（LLM）" class="headerlink" title="大型语言模型（LLM）"></a>大型语言模型（LLM）</h3><p>大型语言模型（Large Language Models，简称LLM）如GPT-4、Claude和Llama是基于Transformer架构的巨型AI模型，通过大规模预训练和微调，能够理解和生成人类语言，执行各种复杂的语言任务。本质上是一种基于深度学习的人工智能系统，它能够理解、生成和处理人类语言。让我来简单解释一下：</p>
+<h4 id="大语言模型的本质"><a href="#大语言模型的本质" class="headerlink" title="大语言模型的本质"></a>大语言模型的本质</h4><p>大语言模型是一种超大规模的神经网络，通常基于Transformer架构，它通过分析海量文本数据来”学习”语言的模式、规则和知识。想象一下，它就像一个阅读了互联网上大部分内容的”超级读者”，通过理解文字之间的关系来预测和生成文本。</p>
+<h4 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h4><ol>
+<li><strong>预训练</strong>：模型首先在海量文本数据上进行训练，学习词汇、语法、事实知识和一些推理能力</li>
+<li><strong>模式识别</strong>：它学会识别词语间的关系和上下文意义</li>
+<li><strong>生成文本</strong>：当你给它一个提示或问题时，它会预测最可能的后续文本</li>
+</ol>
+<h4 id="特点和能力"><a href="#特点和能力" class="headerlink" title="特点和能力"></a>特点和能力</h4><ul>
+<li><strong>规模巨大</strong>：现代LLM通常有数十亿到数万亿个参数（如GPT-4、Claude等）</li>
+<li><strong>通用性强</strong>：不需要针对特定任务重新训练就能执行多种语言任务</li>
+<li><strong>上下文理解</strong>：能够理解长文本中的上下文关系</li>
+<li><strong>生成能力</strong>：可以创作文章、对话、代码、诗歌等多种内容</li>
+<li><strong>少样本学习</strong>：只需几个例子就能理解新任务</li>
+</ul>
+<h4 id="常见应用"><a href="#常见应用" class="headerlink" title="常见应用"></a>常见应用</h4><ul>
+<li>聊天机器人和虚拟助手</li>
+<li>内容创作和写作辅助</li>
+<li>代码生成和编程辅助</li>
+<li>文档总结和信息提取</li>
+<li>语言翻译和知识问答</li>
+</ul>
+<p>简单来说，大语言模型是一种能够”理解”并”生成”人类语言的AI系统，它通过分析海量文本数据学习语言模式，并能够处理各种语言相关的任务。正是由于它的规模和训练方式，使它具备了理解上下文、生成连贯文本、解决问题和模拟对话等能力。</p>
+<h2 id="4-AI模型评估与开发框架"><a href="#4-AI模型评估与开发框架" class="headerlink" title="4. AI模型评估与开发框架"></a>4. AI模型评估与开发框架</h2><h3 id="AI模型的评价指标"><a href="#AI模型的评价指标" class="headerlink" title="AI模型的评价指标"></a>AI模型的评价指标</h3><ol>
+<li><p><strong>准确率（Accuracy）</strong>：</p>
+<ul>
+<li>定义：正确预测的样本数除以总样本数</li>
+<li>适用：分类问题，特别是类别平衡的情况</li>
+<li>局限：在类别不平衡情况下可能产生误导</li>
+</ul>
+</li>
+<li><p><strong>精确率（Precision）与召回率（Recall）</strong>：</p>
+<ul>
+<li>精确率：真正例数除以所有预测为正例的数量</li>
+<li>召回率：真正例数除以所有实际正例的数量</li>
+<li>应用：搜索引擎结果、医疗诊断等需要平衡查全率和查准率的场景</li>
+</ul>
+</li>
+<li><p><strong>F1分数</strong>：</p>
+<ul>
+<li>定义：精确率和召回率的调和平均数</li>
+<li>特点：同时考虑精确率和召回率，对极端值敏感</li>
+<li>公式：F1 &#x3D; 2 × (精确率 × 召回率) &#x2F; (精确率 + 召回率)</li>
+</ul>
+</li>
+<li><p><strong>ROC曲线和AUC值</strong>：</p>
+<ul>
+<li>ROC曲线：以假正例率为横轴，真正例率为纵轴的曲线</li>
+<li>AUC：ROC曲线下的面积，表示模型区分正负样本的能力</li>
+<li>数值含义：AUC为0.5表示随机猜测，越接近1表示模型越好</li>
+</ul>
+</li>
+<li><p><strong>困惑度（Perplexity）</strong>：</p>
+<ul>
+<li>定义：评估语言模型预测下一个词能力的指标</li>
+<li>计算：基于交叉熵，越低表示模型预测越准确</li>
+<li>应用：评估GPT、BERT等语言模型的训练效果</li>
+</ul>
+</li>
+<li><p><strong>BLEU分数</strong>：</p>
+<ul>
+<li>用途：评估机器翻译或文本生成质量</li>
+<li>机制：比较生成文本与参考文本的n-gram重合度</li>
+<li>范围：0到1，越高表示越接近参考文本</li>
+</ul>
+</li>
+<li><p><strong>推理速度与延迟</strong>：</p>
+<ul>
+<li>测量：每秒处理的请求数或响应所需的时间</li>
+<li>影响因素：模型大小、硬件配置、批处理大小</li>
+<li>重要性：实时应用中的关键指标</li>
+</ul>
+</li>
+<li><p><strong>参数量与计算复杂度</strong>：</p>
+<ul>
+<li>参数量：模型包含的可训练参数数量，通常以亿(B)计</li>
+<li>FLOPs：浮点运算数，衡量计算复杂度</li>
+<li>应用：评估模型规模和资源需求</li>
+</ul>
+</li>
+<li><p><strong>MMLU（大规模多任务语言理解）</strong>：</p>
+<ul>
+<li>测试内容：涵盖57个科目的多选题</li>
+<li>价值：评估模型在不同领域的知识和推理能力</li>
+<li>应用：评估像GPT-4、Claude等大型语言模型</li>
+</ul>
+</li>
+<li><p><strong>毒性与公平性评估</strong>：</p>
+<ul>
+<li>毒性指标：评估模型产生有害内容的倾向</li>
+<li>公平性指标：评估模型对不同群体的偏见程度</li>
+<li>方法：使用特定的基准测试集和人类评估</li>
+</ul>
+</li>
+</ol>
+<h3 id="流行的深度学习框架"><a href="#流行的深度学习框架" class="headerlink" title="流行的深度学习框架"></a>流行的深度学习框架</h3><ol>
+<li><p><strong>TensorFlow</strong>：由Google开发的开源机器学习框架</p>
+<ul>
+<li>特点：完整的生态系统，支持生产环境部署，TensorBoard可视化</li>
+<li>应用：大规模产品化AI服务，如语音识别、图像分类等</li>
+<li>适合：企业级应用和研究团队</li>
+</ul>
+</li>
+<li><p><strong>PyTorch</strong>：由Facebook (Meta) AI研究团队开发</p>
+<ul>
+<li>特点：动态计算图，直观的Python接口，更易于调试</li>
+<li>应用：学术研究，原型开发，尤其在NLP和计算机视觉领域流行</li>
+<li>适合：研究人员和快速迭代开发</li>
+</ul>
+</li>
+<li><p><strong>其他重要框架</strong>：</p>
+<ul>
+<li><strong>Keras</strong>：高级API，可在TensorFlow之上运行，简化开发流程</li>
+<li><strong>JAX</strong>：Google开发的用于高性能数值计算的库</li>
+<li><strong>Hugging Face Transformers</strong>：专注于预训练模型的库，尤其是NLP模型</li>
+</ul>
+</li>
+</ol>
+<h3 id="数据与训练过程"><a href="#数据与训练过程" class="headerlink" title="数据与训练过程"></a>数据与训练过程</h3><p>AI模型的训练需要大量高质量数据和计算资源：</p>
+<ol>
+<li><strong>数据收集与处理</strong>：收集、清洗、标注和增强数据</li>
+<li><strong>模型设计</strong>：选择合适的架构和初始参数</li>
+<li><strong>训练过程</strong>：使用优化算法（如梯度下降）调整模型参数</li>
+<li><strong>验证与测试</strong>：使用独立数据集评估模型性能</li>
+<li><strong>部署与监控</strong>：将模型投入实际应用并持续监控性能</li>
+</ol>
+<h3 id="先进训练技术"><a href="#先进训练技术" class="headerlink" title="先进训练技术"></a>先进训练技术</h3><ol>
+<li><p><strong>迁移学习</strong>：利用在一个任务上训练的知识来改进另一个相关任务的性能。</p>
+</li>
+<li><p><strong>微调</strong>：在预训练模型的基础上，使用特定任务的数据进行进一步训练。</p>
+</li>
+<li><p><strong>对比学习</strong>：让模型学习区分相似和不同的数据样本。</p>
+</li>
+<li><p><strong>强化学习与人类反馈（RLHF）</strong>：使用人类反馈来指导模型行为，提高模型输出的质量和安全性。</p>
+</li>
+</ol>
+<h2 id="5-AI应用领域与开发工具"><a href="#5-AI应用领域与开发工具" class="headerlink" title="5. AI应用领域与开发工具"></a>5. AI应用领域与开发工具</h2><p><img src="/2024/03/09/what-is-AI/ai-components-relationship.svg" alt="alt text"></p>
+<h3 id="这里有个我有些混淆的点，就是AI应用和AI-Agent区别，单独拎出来说下"><a href="#这里有个我有些混淆的点，就是AI应用和AI-Agent区别，单独拎出来说下" class="headerlink" title="这里有个我有些混淆的点，就是AI应用和AI Agent区别，单独拎出来说下:"></a>这里有个我有些混淆的点，就是AI应用和AI Agent区别，单独拎出来说下:</h3><h4 id="AI应用"><a href="#AI应用" class="headerlink" title="AI应用"></a>AI应用</h4><p>AI应用是指集成了AI技术的软件程序，通常为了解决特定问题或完成特定任务而设计：</p>
+<ul>
+<li><strong>功能范围</strong>：通常专注于一个或几个特定功能（如图像识别应用、语音转文本工具）</li>
+<li><strong>交互方式</strong>：用户提出请求，应用直接响应</li>
+<li><strong>自主性</strong>：有限，主要按照预设的方式运行</li>
+<li><strong>例子</strong>：智能照片编辑器、语音助手、自动翻译工具</li>
+</ul>
+<h4 id="AI-Agent"><a href="#AI-Agent" class="headerlink" title="AI Agent"></a>AI Agent</h4><p>AI Agent是一种更高级的系统，能够感知环境、自主决策并采取行动实现目标的AI系统：</p>
+<ul>
+<li><strong>功能范围</strong>：能够执行多步骤任务，调用多种工具</li>
+<li><strong>交互方式</strong>：可以理解用户意图，规划执行步骤，使用多种工具完成任务</li>
+<li><strong>自主性</strong>：较高，能根据环境和反馈调整行动（反应能力、社交能力和主动性）</li>
+<li><strong>例子</strong>：研究助手、客服代理、任务自动化</li>
+</ul>
+<h4 id="关键区别"><a href="#关键区别" class="headerlink" title="关键区别"></a>关键区别</h4><ol>
+<li><p><strong>自主决策能力</strong>：</p>
+<ul>
+<li>AI应用：按预定路径执行</li>
+<li>AI Agent：可以自行规划和决策如何完成任务</li>
+</ul>
+</li>
+<li><p><strong>工具使用</strong>：</p>
+<ul>
+<li>AI应用：通常使用内置功能</li>
+<li>AI Agent：可以调用多种外部工具和API</li>
+</ul>
+</li>
+<li><p><strong>状态维护</strong>：</p>
+<ul>
+<li>AI应用：每次交互可能是独立的</li>
+<li>AI Agent：维护对话或任务的状态，记住上下文</li>
+</ul>
+</li>
+</ol>
+<h4 id="在技术栈中的位置"><a href="#在技术栈中的位置" class="headerlink" title="在技术栈中的位置"></a>在技术栈中的位置</h4><p><img src="/2024/03/09/what-is-AI/ai-stack-hierarchy.svg" alt="alt text"></p>
+<p>正如之前的图表所示，AI应用处于技术栈的顶层，可以包含AI Agent作为其组成部分，也可以是更简单的AI功能实现。而AI Agent通常建立在大语言模型之上，使用特定的Agent开发平台构建。</p>
+<p>本质上，所有的AI Agent都是AI应用，但不是所有的AI应用都是Agent。AI Agent代表了更高级、更自主的AI应用形式。</p>
+<h3 id="主流AI-Agent和应用开发平台"><a href="#主流AI-Agent和应用开发平台" class="headerlink" title="主流AI Agent和应用开发平台"></a>主流AI Agent和应用开发平台</h3><ul>
+<li><p><strong>Dify</strong>：开源的LLM应用开发平台，提供可视化界面和API接口</p>
+<ul>
+<li>功能：知识库管理、对话应用创建、数据标注</li>
+<li>适合：快速构建企业级AI助手和应用</li>
+</ul>
+</li>
+<li><p><strong>Coze</strong>：微信团队开发的对话式AI平台</p>
+<ul>
+<li>功能：多场景机器人开发、无代码开发、多平台集成</li>
+<li>适合：社交媒体和聊天平台的AI助手开发</li>
+</ul>
+</li>
+<li><p><strong>LangChain</strong>：开源的大型语言模型应用开发框架</p>
+<ul>
+<li>功能：链式处理、代理（Agent）、知识库集成、工具调用</li>
+<li>适合：开发者构建复杂的AI应用和工作流程</li>
+</ul>
+</li>
+<li><p><strong>LlamaIndex</strong>：专注于数据连接和检索的框架</p>
+<ul>
+<li>功能：数据摄取、结构化、检索增强生成(RAG)</li>
+<li>适合：构建与私有数据交互的应用</li>
+</ul>
+</li>
+</ul>
+<h3 id="自然语言处理应用"><a href="#自然语言处理应用" class="headerlink" title="自然语言处理应用"></a>自然语言处理应用</h3><ul>
+<li><strong>聊天机器人与虚拟助手</strong>：如ChatGPT、Claude、Siri和小爱同学</li>
+<li><strong>机器翻译</strong>：如谷歌翻译、DeepL</li>
+<li><strong>文本摘要与生成</strong>：自动生成报告、文章和创意内容</li>
+<li><strong>情感分析</strong>：分析社交媒体、评论的情感倾向</li>
+</ul>
+<h3 id="计算机视觉应用"><a href="#计算机视觉应用" class="headerlink" title="计算机视觉应用"></a>计算机视觉应用</h3><ul>
+<li><strong>人脸识别</strong>：安防系统、手机解锁</li>
+<li><strong>自动驾驶</strong>：感知环境、识别道路和障碍物</li>
+<li><strong>医学影像分析</strong>：辅助诊断疾病</li>
+<li><strong>增强现实（AR）</strong>：叠加虚拟信息到真实世界</li>
+</ul>
+<h3 id="其他重要应用"><a href="#其他重要应用" class="headerlink" title="其他重要应用"></a>其他重要应用</h3><ul>
+<li><strong>推荐系统</strong>：个性化电商、音乐、视频推荐</li>
+<li><strong>金融科技</strong>：风险评估、算法交易、欺诈检测</li>
+<li><strong>智能制造</strong>：预测性维护、质量控制</li>
+<li><strong>科学研究</strong>：药物发现、蛋白质折叠预测、气候模拟</li>
+</ul>
+<h2 id="6-生成式AI"><a href="#6-生成式AI" class="headerlink" title="6. 生成式AI"></a>6. 生成式AI</h2><h3 id="什么是生成式AI？"><a href="#什么是生成式AI？" class="headerlink" title="什么是生成式AI？"></a>什么是生成式AI？</h3><p>生成式AI是能够创建新内容的人工智能系统，包括文本、图像、音频、视频等。它不仅能回答问题，还能创作各种内容。</p>
+<h3 id="文本生成"><a href="#文本生成" class="headerlink" title="文本生成"></a>文本生成</h3><p>大型语言模型（如GPT-4、Claude等）可以：</p>
+<ul>
+<li>撰写文章、故事和诗歌</li>
+<li>创建对话和角色扮演</li>
+<li>编写代码和技术文档</li>
+<li>生成各种类型的商业内容</li>
+</ul>
+<h3 id="图像生成"><a href="#图像生成" class="headerlink" title="图像生成"></a>图像生成</h3><p>基于扩散模型的AI系统（如DALL-E、Midjourney、Stable Diffusion）能够：</p>
+<ul>
+<li>根据文本描述生成高质量图像</li>
+<li>修改现有图像</li>
+<li>创建艺术作品和商业设计</li>
+<li>将草图转换为详细图像</li>
+</ul>
+<h3 id="音频与视频生成"><a href="#音频与视频生成" class="headerlink" title="音频与视频生成"></a>音频与视频生成</h3><ul>
+<li><strong>AI语音合成</strong>：生成逼真的人工语音（如ElevenLabs）</li>
+<li><strong>音乐生成</strong>：创作原创音乐（如Suno、MusicLM）</li>
+<li><strong>视频生成</strong>：通过文本描述或图像创建视频（如Sora、Runway）</li>
+</ul>
+<h2 id="7-AI的伦理与挑战"><a href="#7-AI的伦理与挑战" class="headerlink" title="7. AI的伦理与挑战"></a>7. AI的伦理与挑战</h2><h3 id="伦理考量"><a href="#伦理考量" class="headerlink" title="伦理考量"></a>伦理考量</h3><ol>
+<li><strong>偏见与公平性</strong>：模型可能继承训练数据中的偏见，导致不公平结果</li>
+<li><strong>隐私问题</strong>：AI系统的训练和运行可能涉及敏感个人数据</li>
+<li><strong>透明度与可解释性</strong>：深度学习模型通常被视为”黑盒”，难以解释决策过程</li>
+<li><strong>自主性与责任</strong>：当AI系统做出决策时，谁应负责任？</li>
+</ol>
+<h3 id="技术挑战"><a href="#技术挑战" class="headerlink" title="技术挑战"></a>技术挑战</h3><ol>
+<li><strong>数据质量与规模</strong>：高质量训练数据的获取与处理</li>
+<li><strong>计算资源需求</strong>：大型模型训练需要大量计算资源</li>
+<li><strong>鲁棒性问题</strong>：模型在遇到分布外数据时可能表现不佳</li>
+<li><strong>安全与对抗性攻击</strong>：模型可能被精心设计的输入所欺骗</li>
+</ol>
+<h3 id="社会经济影响"><a href="#社会经济影响" class="headerlink" title="社会经济影响"></a>社会经济影响</h3><ol>
+<li><strong>就业变化</strong>：自动化可能改变就业结构</li>
+<li><strong>数字鸿沟</strong>：技术获取不平等可能加剧社会不平等</li>
+<li><strong>教育转型</strong>：教育系统需要适应AI时代的技能需求</li>
+<li><strong>信息真实性</strong>：生成式AI带来的深度伪造和虚假信息挑战</li>
+</ol>
+<h3 id="开源与AI民主化"><a href="#开源与AI民主化" class="headerlink" title="开源与AI民主化"></a>开源与AI民主化</h3><ol>
+<li><p><strong>开源模型的崛起</strong>：</p>
+<ul>
+<li><strong>Llama系列</strong>：Meta发布的开源大型语言模型</li>
+<li><strong>Mistral AI</strong>：欧洲初创公司开发的高性能开源模型</li>
+<li><strong>Stability AI</strong>：开源图像生成模型的领先开发者</li>
+</ul>
+</li>
+<li><p><strong>本地部署与私有化</strong>：</p>
+<ul>
+<li><strong>轻量级模型</strong>：适合在消费级硬件上运行的小型模型</li>
+<li><strong>边缘计算</strong>：将AI能力部署到终端设备</li>
+<li><strong>隐私优先</strong>：不依赖云服务的AI解决方案</li>
+</ul>
+</li>
+</ol>
+<h3 id="应用前景"><a href="#应用前景" class="headerlink" title="应用前景"></a>应用前景</h3><ol>
+<li><p><strong>医疗健康</strong>：个性化医疗、疾病预测、药物发现加速</p>
+</li>
+<li><p><strong>气候变化</strong>：优化能源使用、气候模型、环保解决方案</p>
+</li>
+<li><p><strong>教育革新</strong>：个性化学习体验、智能辅导系统</p>
+</li>
+<li><p><strong>太空探索</strong>：自主探测器、数据分析、任务规划</p>
+</li>
+</ol>
+<h3 id="AI与人类协作"><a href="#AI与人类协作" class="headerlink" title="AI与人类协作"></a>AI与人类协作</h3><p>未来，最成功的场景很可能是人类与AI协作，而非完全替代：</p>
+<ul>
+<li><strong>增强人类能力</strong>：AI作为工具，扩展人类的认知和创造能力</li>
+<li><strong>互补优势</strong>：AI处理数据密集型和重复性任务，人类提供创造力、情感和道德判断</li>
+<li><strong>共同演进</strong>：人类与AI技术相互适应，形成新的工作和生活方式</li>
+</ul>
+<h2 id="8-如何入门AI学习"><a href="#8-如何入门AI学习" class="headerlink" title="8. 如何入门AI学习"></a>8. 如何入门AI学习</h2><h3 id="基础知识准备"><a href="#基础知识准备" class="headerlink" title="基础知识准备"></a>基础知识准备</h3><ul>
+<li><strong>数学基础</strong>：线性代数、微积分、概率与统计</li>
+<li><strong>编程技能</strong>：Python是AI领域最流行的语言</li>
+<li><strong>计算机科学基础</strong>：算法、数据结构、计算复杂性</li>
+</ul>
+<h3 id="推荐资源"><a href="#推荐资源" class="headerlink" title="推荐资源"></a>推荐资源</h3><ul>
+<li><strong>在线课程</strong>：吴恩达的机器学习课程、Fast.ai、Coursera和Udacity的AI课程</li>
+<li><strong>书籍</strong>：《深度学习》(Ian Goodfellow)、《动手学深度学习》(李沐)</li>
+<li><strong>实践平台</strong>：Google Colab、Kaggle、Hugging Face</li>
+<li><strong>社区</strong>：GitHub、Stack Overflow、AI相关的学术会议和讲座</li>
+<li><strong>文章或视频</strong>：<ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/BEiha9L_FZ0hvUuAGzLCWw">科技爱好者周刊#330：李开复梳理人工智能</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=qYNweeDHiyU">AI, Machine Learning, Deep Learning and Generative AI Explained</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.ibm.com/think/topics/ai-agents?utm_medium=OSocial&utm_source=Youtube&utm_content=WAIWW&utm_id=YT-201-Build-a-MCP">what is AI Agents</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=F8NKVhkZZWI">what is AI Agents</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=T-D1OfcDW1M">what is RAG</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=aywZrzNaKjs">what is LangChain</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="9-结语"><a href="#9-结语" class="headerlink" title="9. 结语"></a>9. 结语</h2><p>人工智能正在以前所未有的速度发展，从改变我们日常使用的应用程序到推动科学研究的前沿。无论你是对AI好奇的初学者，还是寻求深入了解的专业人士，了解AI的基本概念、技术和趋势都至关重要。</p>
+<p>AI并非遥不可及的未来技术，而是已经深入我们生活的工具和伙伴。通过积极学习和理性看待，我们可以更好地利用AI的力量，同时规避潜在风险，共同创造一个技术与人文平衡发展的未来。</p>
+<h2 id="关键词说明"><a href="#关键词说明" class="headerlink" title="关键词说明"></a>关键词说明</h2><h3 id="token"><a href="#token" class="headerlink" title="token"></a>token</h3><p>在自然语言处理（NLP）和大模型中，​Token（标记&#x2F;词元）​ 是文本处理的基本单位，可以理解为模型“读懂”文本的最小片段。它的作用类似于人类语言中的“词语”，但具体定义更灵活，可能是一个单词、子词、标点符号，甚至单个字符。<br>可以看下chatgpt的Tokenizer：<br><img src="/2024/03/09/what-is-AI/token.png" alt="alt text"></p>
+<h3 id="B"><a href="#B" class="headerlink" title="B"></a>B</h3><p>在大模型（如GPT、LLaMA等）的命名中，”B”通常代表”Billion”（十亿），表示模型的参数量级。例如：</p>
+<p>​13B → 130亿参数<br>​70B → 700亿参数<br>​175B → 1750亿参数（如GPT-3）</p>
+<p>这个单位是衡量模型复杂度和规模的关键指标。参数越多，模型通常能力越强，但也需要更多计算资源和数据训练。这个参数直接影响模型的“知识容量”和学习能力，但并非绝对。模型性能还与数据质量、训练方法、架构设计等因素相关。比如咱们的DeepSeek跟chatgpt不就是一个典型的例子吗</p>
+<h3 id="大模型"><a href="#大模型" class="headerlink" title="大模型"></a>大模型</h3><p>大模型（Large Language Model, LLM）​是指参数量极大、训练数据量极广的深度学习模型，通常专指自然语言处理（NLP）领域的超大规模模型。它们的“大”不仅体现在参数规模（如千亿级），还体现在训练数据、计算资源和应用能力的突破性提升。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/03/04/team-construction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -990,717 +1804,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/02/27/%E8%81%94%E9%82%A6%E6%9F%A5%E8%AF%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/02/27/%E8%81%94%E9%82%A6%E6%9F%A5%E8%AF%A2/" class="post-title-link" itemprop="url">联邦查询</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-02-27 10:18:23" itemprop="dateCreated datePublished" datetime="2024-02-27T10:18:23+08:00">2024-02-27</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>实现跨数据库数据的联邦查询需求，我主要负责整合需要的数据和表，另一个同时负责Redis里扩展模块。</p>
-<h2 id="解法设计"><a href="#解法设计" class="headerlink" title="解法设计"></a>解法设计</h2><h3 id="技术架构图"><a href="#技术架构图" class="headerlink" title="技术架构图"></a>技术架构图</h3><p><img src="/2024/02/27/%E8%81%94%E9%82%A6%E6%9F%A5%E8%AF%A2/1.png" alt="alt text"></p>
-<h3 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h3><p><img src="/2024/02/27/%E8%81%94%E9%82%A6%E6%9F%A5%E8%AF%A2/2.png" alt="alt text"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/02/20/LevelUpEnglish/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/02/20/LevelUpEnglish/" class="post-title-link" itemprop="url">LevelUpEnglish</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-02-20 21:31:00" itemprop="dateCreated datePublished" datetime="2024-02-20T21:31:00+08:00">2024-02-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index"><span itemprop="name">成长</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>经历了一轮裁员后，焦虑了，想着提升提升自己。</p>
-<p>英语虽然说一直在学，但是没有很严格的要求自己。刚好借着这波伤害把英语严格要求起来。</p>
-<h4 id="知识星球"><a href="#知识星球" class="headerlink" title="知识星球"></a>知识星球</h4><p>专门开了个知识星球，就弄给英语相关的，同时也在公众号上把英语记录起来。</p>
-<div style="width:30%;margin:auto"><img src="/2024/02/20/LevelUpEnglish/2.jpg" class="" title="知识星球"></div>
-
-<p>旨在学习英语，只包含英语学习相关的内容。</p>
-<p>我日常学习英语的方式：</p>
-<ol>
-<li>早晨7点半起床，送完孩子后开始听力20～30分钟</li>
-<li>晚上下班写一篇英文学习的公众号20～30分钟</li>
-<li>跟chatgpt用英文交流10～20分钟，可以选择一个小场景也可以根据白天学习的内容自由发挥</li>
-</ol>
-<p>学习工具：</p>
-<ol>
-<li>参考资料：<ol>
-<li><a target="_blank" rel="noopener" href="https://vvyst0z7tes.feishu.cn/wiki/HQuawZepyiwNiNkImw6c00IXnmc?from=from_copylink">https://vvyst0z7tes.feishu.cn/wiki/HQuawZepyiwNiNkImw6c00IXnmc?from=from_copylink</a></li>
-<li><a target="_blank" rel="noopener" href="https://1000h.org/">https://1000h.org/</a></li>
-</ol>
-</li>
-<li>播客（纯英文的），youtobe  music，apple 播客</li>
-<li>chatgpt</li>
-<li>LongMan Dictionary</li>
-</ol>
-<h4 id="公众号"><a href="#公众号" class="headerlink" title="公众号"></a>公众号</h4><div style="width:30%;margin:auto"><img src="/2024/02/20/LevelUpEnglish/1.jpg" class="" title="知识星球"></div>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/02/18/%E9%81%87%E8%A7%81pod%E9%87%8D%E5%90%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/02/18/%E9%81%87%E8%A7%81pod%E9%87%8D%E5%90%AF/" class="post-title-link" itemprop="url">遇见pod重启</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-02-18 09:31:29" itemprop="dateCreated datePublished" datetime="2024-02-18T09:31:29+08:00">2024-02-18</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <div class="tag-container">
-  <span class="main-tag">遇见系列</span>
-  <span class="sub-tag">第五篇</span>
-</div>
-<div class="article-quote"></div>
-
-<p>现场的应用A pod一段时间就会重启，用k8s命令看pod是因为超出limits。</p>
-<p>查看了gc日志。因为使用的是G1回收器</p>
-<p>让我详细解释G1 GC的工作流程：</p>
-<p>内存分区：</p>
-<p>整个堆内存被划分为大小相等的Region（默认2048个）<br>Region大小是2的幂次方，范围从1MB到32MB<br>每个Region可以是Eden、Survivor、Old或Humongous区<br>Humongous区专门用于存储大于Region大小一半的对象</p>
-<p>GC周期的四个主要阶段：</p>
-<p>a) 初始标记（Initial Mark）- STW：</p>
-<p>标记所有直接从GC Roots可达的对象<br>这个阶段需要Stop-The-World（STW）<br>通常和年轻代收集同时进行<br>时间很短</p>
-<p>b) 并发标记（Concurrent Mark）：</p>
-<p>遍历整个堆的对象图<br>标记所有可达的对象<br>与应用程序并发执行<br>使用SATB（Snapshot-At-The-Beginning）算法<br>记录标记期间的引用变化</p>
-<p>c) 最终标记（Final Mark）- STW：</p>
-<p>处理并发标记阶段遗留的SATB缓冲区<br>完成最终的标记工作<br>需要STW，但时间较短</p>
-<p>d) 筛选回收（Live Data Counting and Evacuation）- STW：</p>
-<p>计算各个Region的垃圾比例<br>根据用户期望的停顿时间建立回收集合<br>优先回收价值最大的Region（垃圾最多）<br>将存活对象复制到新的Region<br>清空旧Region</p>
-<p>特殊处理：</p>
-<p>a) 年轻代收集：</p>
-<p>当Eden区满时触发<br>只关注年轻代Region<br>存活对象复制到Survivor区或老年代</p>
-<p>b) 混合收集：</p>
-<p>同时回收年轻代和部分老年代Region<br>根据全局并发标记的结果<br>老年代Region按垃圾收集价值排序</p>
-<p>优化机制：</p>
-<p>a) Remembered Sets（Rsets）：</p>
-<p>记录跨Region的引用关系<br>每个Region都有一个RSet<br>避免全堆扫描</p>
-<p>b) Collection Sets（CSets）：</p>
-<p>需要被回收的Region集合<br>基于垃圾占比和期望停顿时间选择</p>
-<p>正常GC流程：</p>
-<p>Young GC：回收年轻代Region<br>并发标记周期：标记整个堆的存活对象<br>混合回收：回收年轻代和部分老年代Region</p>
-<p>Full GC触发条件：</p>
-<p>并发标记完成之前就出现内存分配失败<br>回收后的空间仍不足以支持下一次Young GC（空间担保失败）<br>混合回收后仍无法满足内存需求<br>Humongous对象分配失败</p>
-<p>Full GC的特点：</p>
-<p>必须Stop-The-World（STW）<br>对整个堆进行压缩和整理<br>单线程执行，停顿时间长<br>会明显影响应用程序性能</p>
-<p>Full GC后的处理：</p>
-<p>如果Full GC后内存足够，应用继续运行<br>如果Full GC后内存仍然不足，抛出OutOfMemoryError</p>
-<p>避免Full GC的建议：</p>
-<p>合理设置堆内存大小<br>调整并发标记的触发阈值<br>适当调整Region大小<br>控制大对象的产生<br>及时进行并发标记，避免内存耗尽</p>
-<p>Full GC在G1中的具体执行步骤：</p>
-<ol>
-<li>标记阶段（Marking Phase）：</li>
-</ol>
-<ul>
-<li>进入STW阶段，停止所有用户线程</li>
-<li>从GC Roots开始进行全堆标记</li>
-<li>标记所有存活对象</li>
-<li>使用单线程进行标记，效率较低</li>
-</ul>
-<ol start="2">
-<li>清理阶段（Cleanup Phase）：</li>
-</ol>
-<ul>
-<li>清理所有未被标记的对象（垃圾对象）</li>
-<li>回收空的Region</li>
-<li>重置各种元数据信息（RSet等）</li>
-<li>计算所有Region的存活对象信息</li>
-</ul>
-<ol start="3">
-<li>压缩阶段（Compaction Phase）：</li>
-</ol>
-<ul>
-<li>对存活对象进行压缩整理</li>
-<li>将存活对象复制到新的Region</li>
-<li>按照新的分代布局重新整理对象</li>
-<li>更新对象引用关系</li>
-<li>释放旧的Region</li>
-<li>重建RSet等辅助数据结构</li>
-</ul>
-<p>特点：</p>
-<ul>
-<li>整个过程完全STW</li>
-<li>单线程执行，性能较差</li>
-<li>会对整个堆内存进行处理</li>
-<li>会导致较长时间的停顿</li>
-<li>会破坏原有的分代结构，需要重新构建</li>
-</ul>
-<p>触发Full GC通常意味着：</p>
-<ul>
-<li>内存分配压力过大</li>
-<li>并发收集来不及回收内存</li>
-<li>可能需要调整GC参数或应用程序代码</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/01/06/%E5%86%AF%E5%94%90%E7%9A%84%E6%88%90%E4%BA%8B%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/01/06/%E5%86%AF%E5%94%90%E7%9A%84%E6%88%90%E4%BA%8B%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">冯唐的成事方法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-01-06 16:57:00" itemprop="dateCreated datePublished" datetime="2024-01-06T16:57:00+08:00">2024-01-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%9C%8B%E4%B9%A6/" itemprop="url" rel="index"><span itemprop="name">看书</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="如何管理自我"><a href="#如何管理自我" class="headerlink" title="如何管理自我"></a>如何管理自我</h3><h3 id="成大事无捷径"><a href="#成大事无捷径" class="headerlink" title="成大事无捷径"></a>成大事无捷径</h3><p>笨功夫才是真功夫，没有快乐学习这一说法</p>
-<h3 id="如何平衡工作和生活"><a href="#如何平衡工作和生活" class="headerlink" title="如何平衡工作和生活"></a>如何平衡工作和生活</h3><p>有所逼<br>有所专</p>
-<ul>
-<li>临事静对猛虎，事了闲看落花。<br>有所规</li>
-<li>要立规矩，既要规范自己也要规范别人。</li>
-<li>你要让周围的人知道并遵守，久而久之，会享受到它带给你的福利。</li>
-<li>有所规划，多做计划。</li>
-</ul>
-<p>有所贪</p>
-<ul>
-<li>早做夜思，以求有济。</li>
-<li>用平常心处世，用进取心做事。</li>
-</ul>
-<h3 id="真正的猛人"><a href="#真正的猛人" class="headerlink" title="真正的猛人"></a>真正的猛人</h3><h4 id="怎么区分是不是真正的猛人"><a href="#怎么区分是不是真正的猛人" class="headerlink" title="怎么区分是不是真正的猛人"></a>怎么区分是不是真正的猛人</h4><ul>
-<li><p>看他的凶猛是对自己还是对他人</p>
-<ul>
-<li>真正的猛人，对他人的要求自己肯定能做到甚至做得更好。</li>
-</ul>
-</li>
-<li><p>从事情来判断。真正的猛人，他的凶猛和决绝是对事的。</p>
-<ul>
-<li>真正的猛人把事放在人之前，而不是看对自己爽不爽。</li>
-</ul>
-</li>
-<li><p>真的猛人追求不一样</p>
-<ul>
-<li>经常说起的自律、怎么如履薄冰等而不是吹牛，自己怎么怎么厉害</li>
-</ul>
-</li>
-</ul>
-<h4 id="猛人修炼方法：敬、恒"><a href="#猛人修炼方法：敬、恒" class="headerlink" title="猛人修炼方法：敬、恒"></a>猛人修炼方法：敬、恒</h4><p>三不朽：立言、立功、立德</p>
-<ul>
-<li>敬：是敬天悯人，尊重常识和积累，尊重事，不走捷径。</li>
-<li>恒：在对事上坚持投入时间和精力，长期主义。</li>
-</ul>
-<h4 id="做自己熟悉的行业"><a href="#做自己熟悉的行业" class="headerlink" title="做自己熟悉的行业"></a>做自己熟悉的行业</h4><ol>
-<li>做擅长的事容易成</li>
-<li>在主业做到顶尖<ol>
-<li>先知道100个关键词</li>
-<li>找到三五个专家，跟他们谈上半天到一天。</li>
-<li>找到三五本专著，仔细的看完。</li>
-<li>价值最大化</li>
-</ol>
-</li>
-</ol>
-<h4 id="掌控情绪"><a href="#掌控情绪" class="headerlink" title="掌控情绪"></a>掌控情绪</h4><h4 id="如何对待妒忌和贪婪"><a href="#如何对待妒忌和贪婪" class="headerlink" title="如何对待妒忌和贪婪"></a>如何对待妒忌和贪婪</h4><ol>
-<li>不害人</li>
-<li>要宽容</li>
-</ol>
-<h4 id="如何战胜自己，战胜逆境"><a href="#如何战胜自己，战胜逆境" class="headerlink" title="如何战胜自己，战胜逆境"></a>如何战胜自己，战胜逆境</h4><ol>
-<li>看脚下<ol>
-<li>现金流</li>
-<li>核心“上下游”</li>
-</ol>
-</li>
-<li>不断行<ol>
-<li>把自己稳定之后，不要停止努力，无论是在生活上还是在工作上。</li>
-<li>多做推功揽过。</li>
-<li>做一分算一分，在一日撑一日。</li>
-</ol>
-</li>
-<li>莫存顺逆<ol>
-<li>不要两分的看所谓的逆境。无论顺逆都是生活的一部分，都是正常的日子。</li>
-</ol>
-</li>
-</ol>
-<h4 id="如何战胜自己，战胜逆境-1"><a href="#如何战胜自己，战胜逆境-1" class="headerlink" title="如何战胜自己，战胜逆境"></a>如何战胜自己，战胜逆境</h4><ol>
-<li>真正的高手都有破局思维<ol>
-<li>在逆境中要考虑事在人为。</li>
-</ol>
-</li>
-</ol>
-<h4 id="有时候“不努力”是种正确的战略"><a href="#有时候“不努力”是种正确的战略" class="headerlink" title="有时候“不努力”是种正确的战略"></a>有时候“不努力”是种正确的战略</h4><ol>
-<li><p>战略方面，重要的是要认命</p>
-</li>
-<li><p>从战术的角度，有时候需要你收敛</p>
-<ol>
-<li>如果你有太强的目的性，很有可能遭到别人的反感。</li>
-<li>你有可能跑的太快，遭到别人的妒忌。</li>
-<li>长期过分努力做事，会遭到非常严重的抵抗。</li>
-</ol>
-</li>
-<li><p>不着急缓称王，是一种正确的态度。</p>
-</li>
-</ol>
-<p>可以不屠龙，但不能不磨剑。<br>能打仗、能力站、能快跑的时候，请力战快跑成事。<br>获得某个细分领域最多的知识和最高的智慧。</p>
-<h4 id="选择不仅仅是断舍离"><a href="#选择不仅仅是断舍离" class="headerlink" title="选择不仅仅是断舍离"></a>选择不仅仅是断舍离</h4><h4 id="养成好习惯"><a href="#养成好习惯" class="headerlink" title="养成好习惯"></a>养成好习惯</h4><h4 id="摒弃”身心灵“，在现实中修行"><a href="#摒弃”身心灵“，在现实中修行" class="headerlink" title="摒弃”身心灵“，在现实中修行"></a>摒弃”身心灵“，在现实中修行</h4><ol>
-<li>如何在现实中修行，珍惜每一个不舒服和难受。</li>
-<li>真正的修行是忍耐、自强。</li>
-</ol>
-<h4 id="以笨拙为本分，求仁得仁"><a href="#以笨拙为本分，求仁得仁" class="headerlink" title="以笨拙为本分，求仁得仁"></a>以笨拙为本分，求仁得仁</h4><h4 id="怎么通过拯救睡眠实现人生逆袭"><a href="#怎么通过拯救睡眠实现人生逆袭" class="headerlink" title="怎么通过拯救睡眠实现人生逆袭"></a>怎么通过拯救睡眠实现人生逆袭</h4><h4 id="分清欲望和志向"><a href="#分清欲望和志向" class="headerlink" title="分清欲望和志向"></a>分清欲望和志向</h4><ol>
-<li><p>如何管理欲望</p>
-<ol>
-<li>尊重欲望，尊重自己的好胜心</li>
-<li>中庸</li>
-</ol>
-</li>
-<li><p>构建自己的乐园</p>
-</li>
-</ol>
-<h4 id="如何应对年龄危机"><a href="#如何应对年龄危机" class="headerlink" title="如何应对年龄危机"></a>如何应对年龄危机</h4><ol>
-<li>锻炼好身体</li>
-<li>在一个好身体的基础上，持续修炼。</li>
-<li>衰年变法</li>
-<li>做减法，减少无效社交。</li>
-<li>减少日常花销</li>
-<li>认怂，退居二线</li>
-<li>回归生活</li>
-</ol>
-<h4 id="人人都该懂战略"><a href="#人人都该懂战略" class="headerlink" title="人人都该懂战略"></a>人人都该懂战略</h4><p>什么事战略：战略是一套完整的行动方案。这套完整的行动方案包括：何处竞争、如何竞争、何时竞争</p>
-<ol>
-<li>小公司通常不用做</li>
-<li>为什么要做战略：上下同欲，少走弯路。</li>
-<li>大处着眼，小处着手。</li>
-</ol>
-<h4 id="领导力"><a href="#领导力" class="headerlink" title="领导力"></a>领导力</h4><ol>
-<li><p>是否能成事，能够持续多成事。</p>
-</li>
-<li><p>抓大放小，容人，定方向，这是种小公司的领导力构成。</p>
-</li>
-<li><p>终极领导力，最终还是看个人的能力，危机时，只有自己靠得住，靠不了其他人。</p>
-<ol>
-<li>团队在强只是辅助</li>
-</ol>
-</li>
-<li><p>不着急、不害怕、不要脸</p>
-<ol>
-<li>不着急：对时间</li>
-<li>不害怕：对结果</li>
-<li>不要脸：对评价</li>
-</ol>
-</li>
-</ol>
-<h4 id="职场沟通规范"><a href="#职场沟通规范" class="headerlink" title="职场沟通规范"></a>职场沟通规范</h4><p>多条理，少大言</p>
-<ol>
-<li><p>倾听</p>
-<ol>
-<li>在表达自己之前，先问三个问题：<ol>
-<li>你对于这个问题是怎么想的？</li>
-<li>为什么这么想？</li>
-<li>有没有其它解决办法？</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>在倾听的基础上，理解别人的诉求</p>
-<ol>
-<li>了解清楚背景，站在对方的角度</li>
-</ol>
-</li>
-<li><p>开放</p>
-<ol>
-<li>不要预设答案，不要预设解决方案。</li>
-</ol>
-</li>
-<li><p>平等</p>
-</li>
-<li><p>多条理</p>
-<ol>
-<li>金字塔原则</li>
-</ol>
-</li>
-<li><p>少大言</p>
-<ol>
-<li>越具体越好。<ol>
-<li>情况是怎么样的？原因是什么？结论是什么？希望解决的具体的措施是什么？</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>创造一个良好的职场沟通环境</p>
-</li>
-<li><p>就事论事</p>
-<ol>
-<li>避免情绪化</li>
-</ol>
-</li>
-<li><p>可长可短</p>
-<ol>
-<li>沟通时间</li>
-</ol>
-</li>
-<li><p>职场沟通多讲事实，少讲个人喜好。</p>
-</li>
-<li><p>交流时不要庞杂。</p>
-<ol>
-<li>交流就交流，别看手机之类的</li>
-<li>也不要在比较累的时候</li>
-<li>找对方最好交流的状态</li>
-</ol>
-</li>
-<li><p>在职场交流中减少使用口头禅</p>
-</li>
-<li><p>在职场中交流少情绪化。</p>
-<ol>
-<li>记住如果这股火撒出去，一定是对这件事情有害的。把火压下去，用更低更缓慢的声调来讲。</li>
-</ol>
-</li>
-</ol>
-<h4 id="带团队的四条铁律"><a href="#带团队的四条铁律" class="headerlink" title="带团队的四条铁律"></a>带团队的四条铁律</h4><ol>
-<li><p>勤</p>
-<ol>
-<li>平时做不到的，战时一定也做不到。</li>
-</ol>
-</li>
-<li><p>放</p>
-<ol>
-<li>从团队成员出发，知道他们在想什么，放手让团队去做。</li>
-</ol>
-</li>
-<li><p>势力</p>
-<ol>
-<li>大局、实战</li>
-</ol>
-</li>
-<li><p>理想</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2023/12/15/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/12/15/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="post-title-link" itemprop="url">时间复杂度</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-12-15 10:52:00" itemprop="dateCreated datePublished" datetime="2023-12-15T10:52:00+08:00">2023-12-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%AE%97%E6%B3%95%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">算法与数据结构</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <div class="tag-container">
-  <span class="main-tag">算法与数据结构</span>
-  <span class="sub-tag">第二篇</span>
-</div>
-<div class="article-quote">
-最近在看《数据结构与算法分析-第三版》，记录下解惑时刻。
-</div>
-
-
-
-
-<p>Big-O Notation - For Coding Interviews</p>
-<p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=BgLTDT03QtU">https://www.youtube.com/watch?v=BgLTDT03QtU</a></p>
-<p><a target="_blank" rel="noopener" href="https://neetcode.io/courses/lessons/big-o-notation">https://neetcode.io/courses/lessons/big-o-notation</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>

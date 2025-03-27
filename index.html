@@ -169,7 +169,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">186</span>
+          <span class="site-state-item-count">191</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -180,7 +180,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">111</span>
+        <span class="site-state-item-count">113</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,6 +220,291 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2025/03/07/ETL%E5%A4%8D%E4%B9%A0(1)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/07/ETL%E5%A4%8D%E4%B9%A0(1)/" class="post-title-link" itemprop="url">ETL复习(1)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-03-07 22:36:00" itemprop="dateCreated datePublished" datetime="2025-03-07T22:36:00+08:00">2025-03-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div class="tag-container">
+  <span class="main-tag">ETL</span>
+  <span class="sub-tag">第一篇</span>
+</div>
+
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>最近找工作，有些大数据岗位我想投，但是奈何之前的工作内容大数据不是主业，大数据经验不够看，我最早要追溯到15年当时spark+hive，然后17年的storm+hbase，到最近的flink+ck，我觉得我努把力看能不能够一够大数据相关的岗位。</p>
+<h2 id="基础环境准备"><a href="#基础环境准备" class="headerlink" title="基础环境准备"></a>基础环境准备</h2><p>把我给媳妇儿配的打LOL的电脑，偷偷拿来用一用，当成小型服务器，反正性能对LOL来说，很过剩了，不影响。</p>
+<p>我之前鼓捣其它技术的时候就在电脑上装了虚拟机，所以也不折腾了，直接装个ubuntu，然后装个docker+docker compose，就差不多了。</p>
+<h3 id="docker镜像源"><a href="#docker镜像源" class="headerlink" title="docker镜像源"></a>docker镜像源</h3><p>单独说下，因为docker默认用的国外的镜像源所以安装后几乎是不可用的，这时候需要配置国内的镜像。<br>要注意验证镜像源，比如通过curl等命令，看是否能正常访问是否能免验证访问，我就是被阿里云的镜像加速器耽搁了小半小时，就是按照官方的配置始终403，最后才发现，原理阿里前几个月更新了协议，大概意思是，不再支持外部直接用加速镜像，而是支持阿里云本身的产品使用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 1. 验证镜像源</span><br><span class="line">curl 镜像源 </span><br><span class="line"># 2. 添加镜像源</span><br><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-&#x27;EOF&#x27;</span><br><span class="line">&#123;</span><br><span class="line">  &quot;registry-mirrors&quot;: [</span><br><span class="line">    &quot;https://xxxx&quot;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"># 3. 使其生效</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br><span class="line"></span><br><span class="line"># 4. 查看镜像是否修改成功</span><br><span class="line">docker info</span><br><span class="line"></span><br><span class="line"># 5. 拉取镜像验证</span><br><span class="line">docker pull xxx</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<h3 id="安装CK"><a href="#安装CK" class="headerlink" title="安装CK"></a>安装CK</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"># 1. 获取ck镜像</span><br><span class="line"> docker pull clickhouse/clickhouse-server</span><br><span class="line"># 2. 添加ck需要的目录</span><br><span class="line">mkdir -p /data/clickhouse/data /data/clickhouse/config /data/clickhouse/logs</span><br><span class="line"></span><br><span class="line"># 3. ck的配置</span><br><span class="line">cat &gt; /data/clickhouse/config/config.xml &lt;&lt; EOF</span><br><span class="line">  &lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">  &lt;yandex&gt;</span><br><span class="line">      &lt;logger&gt;</span><br><span class="line">          &lt;level&gt;information&lt;/level&gt;</span><br><span class="line">          &lt;log&gt;/var/log/clickhouse-server/clickhouse-server.log&lt;/log&gt;</span><br><span class="line">          &lt;errorlog&gt;/var/log/clickhouse-server/clickhouse-server.err.log&lt;/errorlog&gt;</span><br><span class="line">      &lt;/logger&gt;</span><br><span class="line"></span><br><span class="line">      &lt;http_port&gt;8123&lt;/http_port&gt;</span><br><span class="line">      &lt;tcp_port&gt;9000&lt;/tcp_port&gt;</span><br><span class="line">      &lt;interserver_http_port&gt;9009&lt;/interserver_http_port&gt;</span><br><span class="line">      </span><br><span class="line">      &lt;listen_host&gt;0.0.0.0&lt;/listen_host&gt;</span><br><span class="line">      </span><br><span class="line">      &lt;max_connections&gt;4096&lt;/max_connections&gt;</span><br><span class="line">      &lt;keep_alive_timeout&gt;10&lt;/keep_alive_timeout&gt;</span><br><span class="line">      &lt;max_concurrent_queries&gt;100&lt;/max_concurrent_queries&gt;</span><br><span class="line">      &lt;uncompressed_cache_size&gt;8589934592&lt;/uncompressed_cache_size&gt;</span><br><span class="line">      &lt;mark_cache_size&gt;5368709120&lt;/mark_cache_size&gt;</span><br><span class="line">      </span><br><span class="line">      &lt;path&gt;/var/lib/clickhouse/&lt;/path&gt;</span><br><span class="line">      &lt;tmp_path&gt;/var/lib/clickhouse/tmp/&lt;/tmp_path&gt;</span><br><span class="line">      </span><br><span class="line">      &lt;user_directories&gt;</span><br><span class="line">          &lt;users_xml&gt;</span><br><span class="line">              &lt;path&gt;/etc/clickhouse-server/users.xml&lt;/path&gt;</span><br><span class="line">          &lt;/users_xml&gt;</span><br><span class="line">      &lt;/user_directories&gt;</span><br><span class="line"></span><br><span class="line">      &lt;timezone&gt;UTC&lt;/timezone&gt;</span><br><span class="line">  &lt;/yandex&gt;</span><br><span class="line">  EOF</span><br><span class="line"></span><br><span class="line"># 4. ck用户管理</span><br><span class="line">    cat &gt; /data/clickhouse/config/users.xml &lt;&lt; EOF</span><br><span class="line">      &lt;?xml version=&quot;1.0&quot;?&gt;</span><br><span class="line">      &lt;yandex&gt;</span><br><span class="line">          &lt;users&gt;</span><br><span class="line">              &lt;default&gt;</span><br><span class="line">                  &lt;password&gt;yourpassword&lt;/password&gt;</span><br><span class="line">                  &lt;networks&gt;</span><br><span class="line">                      &lt;ip&gt;::/0&lt;/ip&gt;</span><br><span class="line">                  &lt;/networks&gt;</span><br><span class="line">                  &lt;profile&gt;default&lt;/profile&gt;</span><br><span class="line">                  &lt;quota&gt;default&lt;/quota&gt;</span><br><span class="line">              &lt;/default&gt;</span><br><span class="line">          &lt;/users&gt;</span><br><span class="line"></span><br><span class="line">          &lt;profiles&gt;</span><br><span class="line">              &lt;default&gt;</span><br><span class="line">                  &lt;max_memory_usage&gt;10000000000&lt;/max_memory_usage&gt;</span><br><span class="line">                  &lt;use_uncompressed_cache&gt;0&lt;/use_uncompressed_cache&gt;</span><br><span class="line">                  &lt;load_balancing&gt;random&lt;/load_balancing&gt;</span><br><span class="line">              &lt;/default&gt;</span><br><span class="line">          &lt;/profiles&gt;</span><br><span class="line"></span><br><span class="line">          &lt;quotas&gt;</span><br><span class="line">              &lt;default&gt;</span><br><span class="line">                  &lt;interval&gt;</span><br><span class="line">                      &lt;duration&gt;3600&lt;/duration&gt;</span><br><span class="line">                      &lt;queries&gt;0&lt;/queries&gt;</span><br><span class="line">                      &lt;errors&gt;0&lt;/errors&gt;</span><br><span class="line">                      &lt;result_rows&gt;0&lt;/result_rows&gt;</span><br><span class="line">                      &lt;read_rows&gt;0&lt;/read_rows&gt;</span><br><span class="line">                      &lt;execution_time&gt;0&lt;/execution_time&gt;</span><br><span class="line">                  &lt;/interval&gt;</span><br><span class="line">              &lt;/default&gt;</span><br><span class="line">          &lt;/quotas&gt;</span><br><span class="line">      &lt;/yandex&gt;</span><br><span class="line">      EOF</span><br><span class="line"></span><br><span class="line"># 5.运行容器</span><br><span class="line"></span><br><span class="line">docker run -d \</span><br><span class="line">  --name clickhouse-server \</span><br><span class="line">  --ulimit nofile=262144:262144 \</span><br><span class="line">  -p 8123:8123 \</span><br><span class="line">  -p 9000:9000 \</span><br><span class="line">  -p 9009:9009 \</span><br><span class="line">  -v /data/clickhouse/data:/var/lib/clickhouse \</span><br><span class="line">  -v /data/clickhouse/config/config.xml:/etc/clickhouse-server/config.xml \</span><br><span class="line">  -v /data/clickhouse/config/users.xml:/etc/clickhouse-server/users.xml \</span><br><span class="line">  -v /data/clickhouse/logs:/var/log/clickhouse-server \</span><br><span class="line">  --restart=always \</span><br><span class="line">  clickhouse/clickhouse-server:latest</span><br><span class="line"></span><br><span class="line"># 6. 测试是否可用（内部）</span><br><span class="line">  docker exec -it clickhouse-server clickhouse-client --password yourpassword</span><br><span class="line"></span><br><span class="line"># 7.暴露到外部可访问，由于不想每次run都写一长串，也为了后续方便管理其它容器，把docker compose装上</span><br><span class="line">  apt update</span><br><span class="line">  apt install -y docker-compose</span><br><span class="line"># 8.compose文件编写，别忘了暴露environment</span><br><span class="line">  nano /data/clickhouse/docker-compose.yml</span><br><span class="line">  </span><br><span class="line">  version: &#x27;3&#x27;</span><br><span class="line">    services:</span><br><span class="line">      clickhouse:</span><br><span class="line">        image: clickhouse/clickhouse-server:latest</span><br><span class="line">        container_name: clickhouse-server</span><br><span class="line">        restart: always</span><br><span class="line">        ports:</span><br><span class="line">          - &quot;8123:8123&quot;</span><br><span class="line">          - &quot;9000:9000&quot;</span><br><span class="line">          - &quot;9009:9009&quot;</span><br><span class="line">        volumes:</span><br><span class="line">          - /data/clickhouse/data:/var/lib/clickhouse</span><br><span class="line">          - /data/clickhouse/config/config.xml:/etc/clickhouse-server/config.xml</span><br><span class="line">          - /data/clickhouse/config/users.xml:/etc/clickhouse-server/users.xml</span><br><span class="line">          - /data/clickhouse/logs:/var/log/clickhouse-server</span><br><span class="line">        environment:</span><br><span class="line">          - CLICKHOUSE_USER=default</span><br><span class="line">          - CLICKHOUSE_PASSWORD=xxxx</span><br><span class="line">        ulimits:</span><br><span class="line">          nofile:</span><br><span class="line">            soft: 262144</span><br><span class="line">            hard: 262144</span><br><span class="line"># 删除ck容器后重启</span><br><span class="line">  cd /data/clickhouse</span><br><span class="line">  docker-compose up -d</span><br><span class="line"># 9. 看是否正常返回</span><br><span class="line">  curl &quot;http://xx:8123/?user=default&amp;password=xx&amp;query=SELECT%201&quot;</span><br><span class="line"></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<h2 id="还有待续…"><a href="#还有待续…" class="headerlink" title="还有待续…."></a>还有待续….</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.coderjia.cn/archives/dba3f94c-a021-468a-8ac6-e840f85867ea">https://www.coderjia.cn/archives/dba3f94c-a021-468a-8ac6-e840f85867ea</a><br><a target="_blank" rel="noopener" href="https://hub.docker.com/r/clickhouse/clickhouse-server/">https://hub.docker.com/r/clickhouse/clickhouse-server/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2025/03/04/Prompt-Engineering/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/04/Prompt-Engineering/" class="post-title-link" itemprop="url">Prompt Engineering</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-03-04 11:11:01" itemprop="dateCreated datePublished" datetime="2025-03-04T11:11:01+08:00">2025-03-04</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div class="tag-container">
+  <span class="ai-tag">AI</span>
+  <span class="sub-tag">第四篇</span>
+</div>
+
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>最近准备面试嘛，看到好些JD里，特别是关于大模型的JD，里面有个技能要求Prompt Engineering。刚好我也有兴趣，平时也是claude.ai和chatgpt、deepseek的重度用户，美元都花了好些，问题问的多了，慢慢的知道问题描述的准确性与预期的答案相关性确实很大。确实感觉Prompt Engineering（提示词工程）已经成为一项重要技能。无论你是开发者、内容创作者还是普通用户，掌握这项技能都能帮助你更有效地与AI交流，获得更满意的结果。刚好借此JD机会，更深入的学习下怎么才能写好Prompt。</p>
+<h2 id="什么是Prompt-Engineering？"><a href="#什么是Prompt-Engineering？" class="headerlink" title="什么是Prompt Engineering？"></a>什么是Prompt Engineering？</h2><h3 id="基本概念解释"><a href="#基本概念解释" class="headerlink" title="基本概念解释"></a>基本概念解释</h3><p>Prompt Engineering是指设计和优化输入到AI模型（如ChatGPT、Claude等）的提示词的过程，目的是引导AI生成更准确、更符合预期的输出内容。</p>
+<p>简单来说，就像我们与人交流时，清晰表达自己的需求会得到更好的回应一样，与AI的交流也需要”说人话”，而Prompt Engineering就是学习如何更好地”对AI说话”的艺术。</p>
+<h3 id="为什么Prompt-Engineering很重要？"><a href="#为什么Prompt-Engineering很重要？" class="headerlink" title="为什么Prompt Engineering很重要？"></a>为什么Prompt Engineering很重要？</h3><ul>
+<li><strong>节省时间</strong>：好的提示词能直接获得理想结果，减少反复尝试的时间</li>
+<li><strong>提高质量</strong>：精心设计的提示词能显著提升AI输出的质量和准确度</li>
+<li><strong>解锁潜能</strong>：掌握高级技巧后，你可以让AI完成更复杂的任务</li>
+</ul>
+<h2 id="Prompt-Engineering的基础知识"><a href="#Prompt-Engineering的基础知识" class="headerlink" title="Prompt Engineering的基础知识"></a>Prompt Engineering的基础知识</h2><h3 id="提示词的基本结构"><a href="#提示词的基本结构" class="headerlink" title="提示词的基本结构"></a>提示词的基本结构</h3><p>一个好的提示词通常包含以下几个要素：</p>
+<ol>
+<li><strong>明确的指令</strong>：清楚地告诉AI你想要它做什么</li>
+<li><strong>上下文信息</strong>：提供必要的背景知识</li>
+<li><strong>输入数据</strong>：需要AI处理的具体内容</li>
+<li><strong>输出格式</strong>：期望AI如何组织和呈现结果</li>
+</ol>
+<h3 id="简单例子对比"><a href="#简单例子对比" class="headerlink" title="简单例子对比"></a>简单例子对比</h3><p><strong>不好的提示词</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">写一篇关于AI的科普文章</span><br></pre></td></tr></table></figure>
+
+<p><strong>好的提示词</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">请写一篇800字左右的科普文章，主题是&quot;人工智能的发展历程&quot;，适合完全不动技术的人阅读，</span><br><span class="line">包含三个主要发展阶段，使用生动的比喻和案例解释专业概念，并在结尾提出对未来的展望。</span><br></pre></td></tr></table></figure>
+
+<h2 id="提升Prompt效果的核心技巧"><a href="#提升Prompt效果的核心技巧" class="headerlink" title="提升Prompt效果的核心技巧"></a>提升Prompt效果的核心技巧</h2><h3 id="1-清晰具体"><a href="#1-清晰具体" class="headerlink" title="1. 清晰具体"></a>1. 清晰具体</h3><p>越具体的提示词越能得到准确的回答。包括具体描述：</p>
+<ul>
+<li>所需输出的长度（字数&#x2F;段落数）</li>
+<li>目标受众（专业水平&#x2F;年龄段）</li>
+<li>风格（正式&#x2F;轻松&#x2F;创意）</li>
+<li>结构（要点&#x2F;段落&#x2F;表格）</li>
+</ul>
+<p><strong>例子</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">请用简单的语言向我10岁女儿解释光合作用，不超过200字，使用至少2个生活中的比喻，避免使用专业术语。</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-提供示例（少样本学习）"><a href="#2-提供示例（少样本学习）" class="headerlink" title="2. 提供示例（少样本学习）"></a>2. 提供示例（少样本学习）</h3><p>通过提供几个输入-输出的示例，可以更好地引导AI理解你的期望。</p>
+<p><strong>例子</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">请按照以下格式将这些句子翻译成英文：</span><br><span class="line"></span><br><span class="line">中文：我喜欢吃苹果。</span><br><span class="line">英文：I like to eat apples.</span><br><span class="line"></span><br><span class="line">中文：明天我要去北京旅游。</span><br><span class="line">英文：I will travel to Beijing tomorrow.</span><br><span class="line"></span><br><span class="line">中文：这本书很有趣，我想推荐给你。</span><br><span class="line">英文：</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-角色设定"><a href="#3-角色设定" class="headerlink" title="3. 角色设定"></a>3. 角色设定</h3><p>让AI扮演特定角色，能使回答更符合特定专业或风格需求。</p>
+<p><strong>例子</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">请你扮演一位经验丰富的营销专家，分析我的产品定位问题，并提供改进建议。我的产品是一款...</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-分步骤思考"><a href="#4-分步骤思考" class="headerlink" title="4. 分步骤思考"></a>4. 分步骤思考</h3><p>引导AI一步步思考问题，可以获得更准确的结果，特别是对于复杂问题。</p>
+<p><strong>例子</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">请帮我解决这个数学问题，在回答前，请先分析问题，列出已知条件，然后逐步推导求解过程，最后给出结论。</span><br><span class="line"></span><br><span class="line">问题：一个圆柱形水箱，底面积为3平方米，高为2米。现在水箱中有水，深度为1.5米。如果以每分钟0.1立方米的速度向水箱中注水，需要多少分钟才能将水箱装满？</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-指定输出格式"><a href="#5-指定输出格式" class="headerlink" title="5. 指定输出格式"></a>5. 指定输出格式</h3><p>明确要求特定的输出格式，使结果更易于使用。</p>
+<p><strong>例子</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">请分析这家公司的优势和劣势，并以下面的JSON格式输出结果：</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;公司名称&quot;: &quot;XX科技&quot;,</span><br><span class="line">  &quot;优势&quot;: [&quot;优势1&quot;, &quot;优势2&quot;, &quot;优势3&quot;],</span><br><span class="line">  &quot;劣势&quot;: [&quot;劣势1&quot;, &quot;劣势2&quot;, &quot;劣势3&quot;],</span><br><span class="line">  &quot;改进建议&quot;: [&quot;建议1&quot;, &quot;建议2&quot;, &quot;建议3&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="进阶技巧"><a href="#进阶技巧" class="headerlink" title="进阶技巧"></a>进阶技巧</h2><h3 id="链式思维（Chain-of-Thought）"><a href="#链式思维（Chain-of-Thought）" class="headerlink" title="链式思维（Chain-of-Thought）"></a>链式思维（Chain-of-Thought）</h3><p>引导AI展示其思考过程，对于复杂推理特别有效。</p>
+<p><strong>例子</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">问题：小明有12个苹果，他给了小红3个，又给了小李他手中苹果数量的一半，最后他还剩下多少个苹果？请一步一步地思考，解释每一步的计算过程和原因。</span><br></pre></td></tr></table></figure>
+
+<h3 id="思维树（Tree-of-Thoughts）"><a href="#思维树（Tree-of-Thoughts）" class="headerlink" title="思维树（Tree of Thoughts）"></a>思维树（Tree of Thoughts）</h3><p>引导AI探索多种可能性和解决方案路径。</p>
+<p><strong>例子</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">请用思维树的方式分析我创业的三个不同选择（开咖啡店、做在线教育、开发APP），每个选择探索三个可能的发展路径，考虑不同条件下的结果，然后总结最优选择。</span><br></pre></td></tr></table></figure>
+
+<h3 id="自我评估和修正"><a href="#自我评估和修正" class="headerlink" title="自我评估和修正"></a>自我评估和修正</h3><p>让AI评估自己的输出并进行改进。</p>
+<p><strong>例子</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">请写一篇关于气候变化的短文，然后评估这篇文章的优缺点，并基于评估给出一个改进版本。</span><br></pre></td></tr></table></figure>
+
+<h2 id="常见应用场景实战"><a href="#常见应用场景实战" class="headerlink" title="常见应用场景实战"></a>常见应用场景实战</h2><h3 id="内容创作"><a href="#内容创作" class="headerlink" title="内容创作"></a>内容创作</h3><h4 id="写作辅助"><a href="#写作辅助" class="headerlink" title="写作辅助"></a>写作辅助</h4><p><strong>例子</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">请为我的科技博客生成一篇文章大纲，主题是&quot;5G技术如何改变我们的生活&quot;。大纲应包含引言、3-5个主要部分、每部分2-3个小节，以及结论。每个小节都需要有简短描述。</span><br></pre></td></tr></table></figure>
+
+<h4 id="创意生成"><a href="#创意生成" class="headerlink" title="创意生成"></a>创意生成</h4><p><strong>例子</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我正在设计一个以&quot;海洋保护&quot;为主题的儿童故事书。请创作5个可能的故事情节，每个情节包含主角描述、基本冲突和教育意义。</span><br></pre></td></tr></table></figure>
+
+<h3 id="数据分析与处理"><a href="#数据分析与处理" class="headerlink" title="数据分析与处理"></a>数据分析与处理</h3><p><strong>例子</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">我有一组销售数据，包含产品名称、月份和销售额。请帮我分析这些数据，找出销售趋势，并提出改进建议。数据如下：</span><br><span class="line">[数据内容]</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码辅助"><a href="#代码辅助" class="headerlink" title="代码辅助"></a>代码辅助</h3><p><strong>例子</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">请编写一个Python函数，用于分析文本情感倾向。函数应接受一段文本作为输入，返回积极、消极或中性的评价以及置信度分数。请包含必要的注释和简单的使用示例。</span><br></pre></td></tr></table></figure>
+
+<h2 id="常见问题与解决方法"><a href="#常见问题与解决方法" class="headerlink" title="常见问题与解决方法"></a>常见问题与解决方法</h2><h3 id="如何处理AI回答过于笼统或离题？"><a href="#如何处理AI回答过于笼统或离题？" class="headerlink" title="如何处理AI回答过于笼统或离题？"></a>如何处理AI回答过于笼统或离题？</h3><ul>
+<li><strong>解决方法</strong>：增加具体细节，使用引导性问题，明确输出要求</li>
+<li><strong>例子</strong>：原提示”谈谈人工智能的未来”可改为”请从就业、教育和伦理三个方面，具体分析人工智能在未来10年可能带来的社会变革。每个方面请提供至少两个具体的预测和可能的应对策略。”</li>
+</ul>
+<h3 id="如何避免AI生成的内容过于冗长？"><a href="#如何避免AI生成的内容过于冗长？" class="headerlink" title="如何避免AI生成的内容过于冗长？"></a>如何避免AI生成的内容过于冗长？</h3><ul>
+<li><strong>解决方法</strong>：明确字数限制，要求简洁回答，指定重点内容</li>
+<li><strong>例子</strong>：”请用不超过300字，总结量子计算的核心原理，重点解释量子比特和量子纠缠这两个概念。”</li>
+</ul>
+<h3 id="如何使AI生成更创新性的内容？"><a href="#如何使AI生成更创新性的内容？" class="headerlink" title="如何使AI生成更创新性的内容？"></a>如何使AI生成更创新性的内容？</h3><ul>
+<li><strong>解决方法</strong>：明确要求原创思路，设置情景约束，激励思维发散</li>
+<li><strong>例子</strong>：”请提出5种从未出现过的智能家居产品创意，每种产品都需要融合至少两种现有技术，并解决一个特定的家庭难题。”</li>
+</ul>
+<h3 id="免费学习资源"><a href="#免费学习资源" class="headerlink" title="免费学习资源"></a>免费学习资源</h3><ol>
+<li><p><strong>免费课程与教程</strong></p>
+<ul>
+<li>OpenAI的Prompt Engineering指南 (官网免费提供)</li>
+<li>李宏毅教授的”Large Language Model”课程 (YouTube完整课程)</li>
+<li>Khan Academy的AI基础知识 (免费教育平台)</li>
+<li>Hugging Face的NLP教程 (官方文档免费)</li>
+<li>Coursera上的免费AI课程 (可以免费旁听)</li>
+</ul>
+</li>
+<li><p><strong>免费电子书与指南</strong></p>
+<ul>
+<li>《Prompt Engineering Guide》by Lilian Weng (在线免费阅读)</li>
+<li>Dair.ai的Prompt Engineering Guide (GitHub上免费)</li>
+<li>Github上的awesome-chatgpt-prompts开源仓库</li>
+<li>OpenAI官方的最佳实践指南</li>
+</ul>
+</li>
+<li><p><strong>免费在线社区与资源</strong></p>
+<ul>
+<li>GitHub上的Prompt Engineering资源库</li>
+<li>Reddit的r&#x2F;PromptEngineering社区</li>
+<li>Discord的公开AI社区讨论组</li>
+</ul>
+</li>
+<li><p><strong>免费网站</strong></p>
+<ul>
+<li>​免费课程：DeepLearning.AI 的《ChatGPT Prompt Engineering for Developers》</li>
+<li>​工具包：LangChain 的 Prompt 模板库、Promptify（开源 Prompt 工具）</li>
+<li>​论文库：Papers with Code 中搜索 “Prompt Engineering”</li>
+<li><a target="_blank" rel="noopener" href="https://promptperfect.jina.ai/">https://promptperfect.jina.ai/</a></li>
+<li><a target="_blank" rel="noopener" href="https://learn.deeplearning.ai/">https://learn.deeplearning.ai/</a></li>
+<li><a target="_blank" rel="noopener" href="https://paperswithcode.com/paper/chain-of-thought-prompting-elicits-reasoning">https://paperswithcode.com/paper/chain-of-thought-prompting-elicits-reasoning</a></li>
+<li><a target="_blank" rel="noopener" href="https://promptbase.com/">https://promptbase.com/</a></li>
+</ul>
+</li>
+</ol>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>Prompt Engineering不仅是一项技术技能，更是一门艺术。通过不断实践和调整，你会发现与AI交流的效率和质量都会显著提升。记住，最好的学习方式是实践——从今天开始尝试这些技巧，记录效果，持续改进。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -277,7 +562,7 @@
 <p>在我的12年职业生涯中，我从”这bug在本地没问题啊”进化到了”这需求有啥实际意义”再到”好的，我来搞定！”。带团队的经历让我明白，比起Debug代码，Debug人际关系才是真正的高难度挑战。所幸，我在这两方面都交出了不错的成绩单。</p>
 <p>相信我的技术能力、产品思维和团队协作经验能为您的团队带来实质性的贡献。代码之外，我能够搭建开发者与产品、业务之间的桥梁，确保我们不只是在开发功能，而是在创造价值。我们一定能擦出技术的火花——毕竟，一个能理解产品、带过团队、写了12年代码还没秃顶的工程师，不是每天都能遇到的。</p>
 <p>代码问候，<br>[软件开发特种兵]</p>
-<p>联系方式：<br>电话：[18515068121]<br>邮箱：[<a href="mailto:&#103;&#x61;&#109;&#x65;&#104;&#117;&#x40;&#121;&#101;&#x61;&#x68;&#46;&#110;&#101;&#x74;">&#103;&#x61;&#109;&#x65;&#104;&#117;&#x40;&#121;&#101;&#x61;&#x68;&#46;&#110;&#101;&#x74;</a>]<br>Wechat：[GamehuDB]</p>
+<p>联系方式：<br>电话：[18515068121]<br>邮箱：[<a href="mailto:&#x67;&#97;&#109;&#x65;&#x68;&#x75;&#64;&#121;&#101;&#97;&#x68;&#46;&#110;&#101;&#x74;">&#x67;&#97;&#109;&#x65;&#x68;&#x75;&#64;&#121;&#101;&#97;&#x68;&#46;&#110;&#101;&#x74;</a>]<br>Wechat：[GamehuDB]</p>
 <p>P.S. 我的GitHub贡献图可能不够绿，但我的生产环境代码从不让服务器变红。</p>
 <h3 id="Java-Development-Engineer-x2F-Full-Stack-Development-Engineer"><a href="#Java-Development-Engineer-x2F-Full-Stack-Development-Engineer" class="headerlink" title="Java Development Engineer&#x2F;Full Stack Development Engineer"></a>Java Development Engineer&#x2F;Full Stack Development Engineer</h3><p>Dear Hiring Team:</p>
 <p>If software engineers were dishes, I’d be that slow-simmered stock that’s been cooking for 12 years — looking unassuming, but one taste reveals the expertise within.</p>
@@ -285,8 +570,186 @@
 <p>During my 12-year career, I’ve evolved from “but the bug doesn’t appear on my local machine” to “what’s the actual purpose of this requirement” to “I’ll handle it!” My team leadership experience taught me that debugging human relationships is far more challenging than debugging code. Fortunately, I’ve managed to achieve good results in both areas.</p>
 <p>I believe my technical abilities, product mindset, and team collaboration experience will bring substantial value to your team. Beyond coding, I can build bridges between developers, product teams, and business units, ensuring we’re not just developing features but creating value. We’ll definitely create technical sparks together — after all, an engineer who understands products, has led teams, and has written code for 12 years without going bald isn’t someone you meet every day.</p>
 <p>Code regards,<br>[Software Development Special Forces]</p>
-<p>Contact Information:<br>twitter：[Gamehu520]<br>email：[<a href="mailto:&#x67;&#x61;&#109;&#x65;&#x68;&#x75;&#64;&#121;&#x65;&#x61;&#x68;&#46;&#x6e;&#x65;&#x74;">&#x67;&#x61;&#109;&#x65;&#x68;&#x75;&#64;&#121;&#x65;&#x61;&#x68;&#46;&#x6e;&#x65;&#x74;</a>]<br>Wechat：[GamehuDB]</p>
+<p>Contact Information:<br>twitter：[Gamehu520]<br>email：[<a href="mailto:&#103;&#x61;&#109;&#101;&#x68;&#117;&#64;&#x79;&#x65;&#x61;&#x68;&#x2e;&#x6e;&#101;&#116;">&#103;&#x61;&#109;&#101;&#x68;&#117;&#64;&#x79;&#x65;&#x61;&#x68;&#x2e;&#x6e;&#101;&#116;</a>]<br>Wechat：[GamehuDB]</p>
 <p>P.S. My GitHub contribution graph might not be very green, but my production code never turns servers red.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2025/01/01/MCP%E5%8D%8F%E8%AE%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/01/01/MCP%E5%8D%8F%E8%AE%AE/" class="post-title-link" itemprop="url">MCP协议</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-01-01 21:57:02" itemprop="dateCreated datePublished" datetime="2025-01-01T21:57:02+08:00">2025-01-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div class="tag-container">
+  <span class="ai-tag">AI</span>
+  <span class="sub-tag">第三篇</span>
+</div>
+
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>知道MCP还是源于因为之前验证<a href="/2024/12/23/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%9B%86%E6%88%90/" title="大模型集成">大模型集成</a>时了解到的。因为当时后续计划做AI应用，增加saas平台的噱头的同时成为一个亮点功能，提升用户体验。</p>
+<h1 id="基础概念与架构设计"><a href="#基础概念与架构设计" class="headerlink" title="基础概念与架构设计"></a>基础概念与架构设计</h1><p>MCP(Model Context Protocol）是一个开放协议，它标准化了应用程序如何向大语言模型（LLMs）提供上下文。可以将MCP比作AI应用的USB-C接口。正如USB-C提供了一种标准化的方式，将你的设备连接到各种外围设备和配件，MCP 也提供了一种标准化的方式，将AI模型连接到不同的数据源和工具。</p>
+<h2 id="一、协议本质解构"><a href="#一、协议本质解构" class="headerlink" title="一、协议本质解构"></a>一、协议本质解构</h2><p>MCP是一种<strong>客户端-服务器架构的数据访问协议</strong>，专为AI应用（如大语言模型）设计，其核心是为AI应用提供一种标准化方式来安全访问多种数据源。</p>
+<p><strong>关键组件</strong></p>
+<ol>
+<li>MCP 主机：运行AI应用并发起数据请求，如聊天应用或IDE</li>
+<li>MCP 客户端：处理与 MCP 服务器的通信</li>
+<li>MCP 服务器：连接到各种数据源的轻量级程序</li>
+<li>大型语言模型(LLM)：分析问题并选择回答的 AI 模型</li>
+<li>数据源：包括数据库、外部 API 等</li>
+</ol>
+<p>MCP采用简洁的JSON格式进行通信，主要支持两类基本操作：</p>
+<ul>
+<li><strong>发现操作</strong>：客户端识别服务器提供的能力</li>
+<li><strong>执行操作</strong>：请求服务器执行特定工具来访问数据</li>
+</ul>
+<h2 id="二、核心作用剖析"><a href="#二、核心作用剖析" class="headerlink" title="二、核心作用剖析"></a>二、核心作用剖析</h2><ol>
+<li><p><strong>访问标准化</strong></p>
+<ul>
+<li>为不同类型的数据源提供统一的访问接口</li>
+<li>客户端无需了解每个数据源的具体访问细节</li>
+</ul>
+</li>
+<li><p><strong>安全控制</strong></p>
+<ul>
+<li>服务器明确声明其访问能力和权限范围</li>
+<li>支持基本的认证和授权机制</li>
+<li>客户端可以限制服务器的访问范围</li>
+</ul>
+</li>
+<li><p><strong>工具扩展性</strong></p>
+<ul>
+<li>服务器可以动态注册和提供各种工具</li>
+<li>客户端可以发现并使用这些工具</li>
+<li>支持从简单的文件读取到复杂的API调用等多种操作</li>
+</ul>
+</li>
+</ol>
+<h2 id="三、基本工作流程"><a href="#三、基本工作流程" class="headerlink" title="三、基本工作流程"></a>三、基本工作流程</h2><h3 id="MCP的典型工作流程如下：内部实现可能会有多次循环"><a href="#MCP的典型工作流程如下：内部实现可能会有多次循环" class="headerlink" title="MCP的典型工作流程如下：内部实现可能会有多次循环"></a>MCP的典型工作流程如下：内部实现可能会有多次循环</h3><p><img src="/2025/01/01/MCP%E5%8D%8F%E8%AE%AE/2.png" alt="alt text"><br>大体流程如下：</p>
+<ol>
+<li>用户向 MCP 主机（如聊天应用或 IDE）提出问题</li>
+<li>主机将问题发送给大型语言模型(LLM)进行分析</li>
+<li>LLM 确定需要使用哪些工具来回答问题</li>
+<li>主机通过 MCP 客户端请求执行相应工具</li>
+<li>MCP 客户端向不同的 MCP 服务器发送工具执行请求</li>
+<li>MCP 服务器访问相应的数据源（数据库或外部 API）</li>
+<li>数据源返回结果给 MCP 服务器，再传回客户端</li>
+<li>MCP 客户端汇总工具执行结果并返回给主机</li>
+<li>主机将工具结果发送给 LLM 生成最终回答</li>
+<li>最终回答显示给用户</li>
+</ol>
+<h2 id="四、现实应用场景"><a href="#四、现实应用场景" class="headerlink" title="四、现实应用场景"></a>四、现实应用场景</h2><p>MCP适用于以下典型场景：</p>
+<ol>
+<li><p><strong>增强型AI聊天应用</strong></p>
+<ul>
+<li>让聊天机器人能够访问用户本地文件和数据库</li>
+<li>使AI可以获取并引用真实、最新的信息</li>
+</ul>
+</li>
+<li><p><strong>智能开发工具</strong></p>
+<ul>
+<li>IDE中的代码助手可以访问项目代码文件</li>
+<li>辅助工具可以查询API文档和相关资源</li>
+</ul>
+</li>
+<li><p><strong>企业AI集成</strong></p>
+<ul>
+<li>让AI应用安全地访问企业内部数据</li>
+<li>在保护敏感信息的同时提供个性化服务</li>
+</ul>
+</li>
+</ol>
+<h2 id="五、协议现状与局限"><a href="#五、协议现状与局限" class="headerlink" title="五、协议现状与局限"></a>五、协议现状与局限</h2><p>当前MCP协议的特点与局限：</p>
+<ol>
+<li><p><strong>简洁性优先</strong></p>
+<ul>
+<li>协议设计相对简单，专注于解决基本的数据访问问题</li>
+<li>尚未包含复杂的加密、动态路由等高级功能</li>
+</ul>
+</li>
+<li><p><strong>开发阶段</strong></p>
+<ul>
+<li>协议仍在发展中，标准可能会随时间演进</li>
+<li>生态系统正在逐步构建</li>
+</ul>
+</li>
+<li><p><strong>基础功能聚焦</strong></p>
+<ul>
+<li>当前主要聚焦于基础的数据访问能力</li>
+<li>缺乏高级的事务处理、分布式一致性等特性</li>
+</ul>
+</li>
+</ol>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>MCP代表了AI工具与数据源之间交互的一个重要标准化尝试。它为构建能够访问和利用各种数据的AI应用提供了基础架构，虽然相对简单，但解决了AI应用难以安全访问多样化数据的关键问题。随着协议的发展，MCP有潜力成为AI应用与数据源之间交互的重要标准，类似于HTTP对于web应用的意义。</p>
+<p>但是目前MCP仍处于相对早期阶段，其真正的潜力和影响力将随着更多实现和应用的出现而逐步显现。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://www.anthropic.com/news/model-context-protocol">https://www.anthropic.com/news/model-context-protocol</a><br><a target="_blank" rel="noopener" href="https://github.com/modelcontextprotocol">https://github.com/modelcontextprotocol</a><br><a target="_blank" rel="noopener" href="https://modelcontextprotocol.io/introduction">https://modelcontextprotocol.io/introduction</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=sahuZMMXNpI">https://www.youtube.com/watch?v=sahuZMMXNpI</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=eur8dUO9mvE">https://www.youtube.com/watch?v=eur8dUO9mvE</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=kQmXtrmQ5Zg&t=2s">https://www.youtube.com/watch?v=kQmXtrmQ5Zg&amp;t=2s</a></p>
 
       
     </div>
@@ -505,7 +968,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/12/23/AI%E6%A8%A1%E5%9E%8B%E5%B0%9D%E9%B2%9C/">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/12/23/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%9B%86%E6%88%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/IMG_4038.jpeg">
@@ -523,7 +986,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/12/23/AI%E6%A8%A1%E5%9E%8B%E5%B0%9D%E9%B2%9C/" class="post-title-link" itemprop="url">AI模型尝鲜</a>
+          <a href="/2024/12/23/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%9B%86%E6%88%90/" class="post-title-link" itemprop="url">大模型集成</a>
         </h2>
 
         <div class="post-meta-container">
@@ -555,11 +1018,11 @@
 离职系列，想想这几年在公司的成长，在这做个记录。这篇是关于AI功能方案验证。
 </div>
 
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>落地事业部上一年关于AI的创新奖的方案，更合适的叫法应该是交接，之前的团队几乎停留在理论上和一个demo上，因为久久没有效果，可能感受到了上级的压力，需要看到实际效果，最终找到了我们团队，希望能借助我们团队让其产生价值（官方说法），我理解实际就接这个摊子。</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>落地事业部上一年关于AI的创新奖的方案，更合适的叫法应该是交接，之前的团队几乎停留在理论上和一个demo上，因为久久没有效果，可能感受到了上级的压力，需要看到实际效果，最终找到了我们团队，希望能借助我们团队让其产生价值（官方说法），我理解实际就接这个摊子。好在年前我自己捣鼓过AI知识库<a href="/2024/10/04/AI%E5%BA%94%E7%94%A8-%E7%9F%A5%E8%AF%86%E5%BA%93/" title="AI应用-知识库">AI应用-知识库</a>，所以不怯场。</p>
 <h2 id="方案介绍"><a href="#方案介绍" class="headerlink" title="方案介绍"></a>方案介绍</h2><p>因为在这之前就是一个demo，具体前面的团队也说不出来个所以然，所以我们直接说说两边对话后的方案走向，希望做一个功能：容量预测，意思是根据服务器的多个指标历史数据，预估服务器未来的负载情况，从而给予客户参考或预案。</p>
 <p>我试着画下大体的方案：</p>
-<h3 id="架构图："><a href="#架构图：" class="headerlink" title="架构图："></a>架构图：</h3><p><img src="/2024/12/23/AI%E6%A8%A1%E5%9E%8B%E5%B0%9D%E9%B2%9C/ai01.png" alt="alt text"></p>
-<h3 id="时序图："><a href="#时序图：" class="headerlink" title="时序图："></a>时序图：</h3><p><img src="/2024/12/23/AI%E6%A8%A1%E5%9E%8B%E5%B0%9D%E9%B2%9C/ai02.png" alt="alt text"></p>
+<h3 id="架构图："><a href="#架构图：" class="headerlink" title="架构图："></a>架构图：</h3><p><img src="/2024/12/23/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%9B%86%E6%88%90/ai01.png" alt="alt text"></p>
+<h3 id="时序图："><a href="#时序图：" class="headerlink" title="时序图："></a>时序图：</h3><p><img src="/2024/12/23/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%9B%86%E6%88%90/ai02.png" alt="alt text"></p>
 <h3 id="大体流程"><a href="#大体流程" class="headerlink" title="大体流程"></a>大体流程</h3><ol>
 <li>调度器触发flink批任务从ClickHouse获取原始数据</li>
 <li>Flink进行基本的数据清洗和标准化</li>
@@ -835,6 +1298,114 @@
 <h5 id="时序图"><a href="#时序图" class="headerlink" title="时序图"></a>时序图</h5><p><img src="/2024/12/22/%E9%81%87%E8%A7%81%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/5.jpg" alt="alt text"></p>
 <h5 id="关键验证点"><a href="#关键验证点" class="headerlink" title="关键验证点"></a>关键验证点</h5><p>1、2验证点，由于前期已经做过验证，着重验证3、4就行，特别是更新和删除数据。</p>
 <h5 id="验证结果"><a href="#验证结果" class="headerlink" title="验证结果"></a>验证结果</h5><p>按500个租户，每个租户5000在活告警，没问题，因为主要是验证可行性，没有那么严格的压测，图啥的当时就没留了。这块详设的时候会更具体严格一些。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/10/04/AI%E5%BA%94%E7%94%A8-%E7%9F%A5%E8%AF%86%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/10/04/AI%E5%BA%94%E7%94%A8-%E7%9F%A5%E8%AF%86%E5%BA%93/" class="post-title-link" itemprop="url">AI应用-知识库</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-10-04 22:31:00" itemprop="dateCreated datePublished" datetime="2024-10-04T22:31:00+08:00">2024-10-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div class="tag-container">
+  <span class="ai-tag">AI</span>
+  <span class="sub-tag">第一篇</span>
+</div>
+
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>这篇文章脱了很久了。因为我之前带LMT团队，团队的主要工作内容就是处理客户现场问题，因为我要求过程留痕并且达到知识沉淀的效果，所以处理过程中产生了大量的文档，也就是很多经验都落到了文档上，比如linux系统（硬盘、系统版本、dns等）、docker、k8s、现场网络问题（防火墙、网闸等安全设备），也就是运维经常面临的问题，也有产品配置、bug等文档。</p>
+<p>文档越来越多，但是却越来越难利用起来，我就想着把这些经验积累起来弄一个知识库，就像gpt一样，只要我输入有关问题他就能根据这些内容生成回答的内容，当然里面不仅仅是经验问答还需要有linux系统（硬盘、系统版本、dns等）、docker、k8s、现场网络问题（防火墙、网闸等安全设备）这些原始（原理）知识，还得有我们的产品知识。</p>
+<p>这个知识库一是为了方便使用且能让我练手，二是当时公司推行创新活动，AI相关的案例也能为事业部加分。</p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>知识库的定位：小而美，因为是个人发起的前期申请到的服务器资源有限，而且功能非常单一明确，只需要满足知识库就行，不需要全能。</p>
+<h3 id="选型"><a href="#选型" class="headerlink" title="选型"></a>选型</h3><p>通过一通查找对比，综合考虑，选择了Anything LLM或者Dify.AI+Ollama+Llama2小模型。</p>
+<h4 id="Anything-LLM"><a href="#Anything-LLM" class="headerlink" title="Anything LLM"></a>Anything LLM</h4><p><img src="/2024/10/04/AI%E5%BA%94%E7%94%A8-%E7%9F%A5%E8%AF%86%E5%BA%93/llm.png" alt="alt text"></p>
+<h4 id="考虑的其中一点"><a href="#考虑的其中一点" class="headerlink" title="考虑的其中一点"></a>考虑的其中一点</h4><p><strong>是用Anything LLM这种开箱即用的还是用LangChain这种需要自己上手写代码的</strong><br>Anything LLM和Dify.AI在其架构中广泛使用了LangChain组件，尤其是:</p>
+<ul>
+<li>文档加载器(Document Loaders)</li>
+<li>文本分割器(Text Splitters)</li>
+<li>向量存储(Vector Stores)</li>
+<li>检索器(Retrievers)</li>
+</ul>
+<ol>
+<li>直接使用Anything LLM这种系统的好处<ol>
+<li>意味着即使不直接编写LangChain代码，您也在间接使用LangChain的强大功能。这有几个好处:<br>模块化设计 - 可以灵活替换组件(如切换向量数据库)<br>经过验证的架构 - 使用业界已验证的RAG实现方式<br>未来升级路径 - 如果您将来想更深入定制，可以直接使用LangChain API</li>
+</ol>
+</li>
+<li>坏处<ol>
+<li>没有深入的了解和实践经验</li>
+</ol>
+</li>
+</ol>
+<p>我当时其实想用LangChain的，环境都搭好了，但是因为没有系统的学习过，进度很慢，没法赶上评审节点，所以最终选择了使用Anything LLM这种简单的方式。</p>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>Anything LLM+Ollama+Llama2:7B</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://docs.useanything.com/setup/llm-configuration/overview">https://docs.useanything.com/setup/llm-configuration/overview</a><br><a target="_blank" rel="noopener" href="https://github.com/Mintplex-Labs/anything-llm/blob/master/docker/HOW_TO_USE_DOCKER.md">https://github.com/Mintplex-Labs/anything-llm/blob/master/docker/HOW_TO_USE_DOCKER.md</a><br><a target="_blank" rel="noopener" href="https://adasci.org/anythingllm-for-local-execution-and-inferencing-of-llms-a-deep-dive/">https://adasci.org/anythingllm-for-local-execution-and-inferencing-of-llms-a-deep-dive/</a><br><a target="_blank" rel="noopener" href="https://itnext.io/deploy-flexible-and-custom-setups-with-anything-llm-on-kubernetes-a2b5687f2bcc">https://itnext.io/deploy-flexible-and-custom-setups-with-anything-llm-on-kubernetes-a2b5687f2bcc</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=4UFrVvy7VlA">https://www.youtube.com/watch?v=4UFrVvy7VlA</a></p>
 
       
     </div>
@@ -1218,357 +1789,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/08/18/%E5%89%8D%E7%BD%AE%E6%A3%80%E6%9F%A5%E8%84%9A%E6%9C%AC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/08/18/%E5%89%8D%E7%BD%AE%E6%A3%80%E6%9F%A5%E8%84%9A%E6%9C%AC/" class="post-title-link" itemprop="url">前置检查脚本</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-08-18 22:19:13" itemprop="dateCreated datePublished" datetime="2024-08-18T22:19:13+08:00">2024-08-18</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <div class="tag-container">
-  <span class="main-tag">离职系列</span>
-  <span class="sub-tag">第八篇</span>
-</div>
-<div class="article-quote">
-离职系列，想想这几年在公司的成长，在这做个记录。
-</div>
-
-<p>此篇是因为遇到了太多环境类问题，从LMT建立的数据统计，这类问题占比已经超过了我处理问题的60%左右，占所有现场问题的20%左右以上，所以抽了个时间把可以在前置检查中避免的问题都梳理出来，试着写了个脚本，并一次次到现场验证，最终有了以下版本。该脚本在产品没有出根解之前，直接交给了TAC，让其与一线一起前置处理，避免过多的流转到LMT。</p>
-<h2 id="检查脚本，"><a href="#检查脚本，" class="headerlink" title="检查脚本，"></a>检查脚本，</h2><pre><code>   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br><span class="line">545</span><br><span class="line">546</span><br><span class="line">547</span><br><span class="line">548</span><br><span class="line">549</span><br><span class="line">550</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line"></span><br><span class="line"># 环境前置检查脚本（用于提前感知问题，减少安装失败、升级失败等问题出现）</span><br><span class="line"># by hht</span><br><span class="line"># 上传后，chmod +x 授予执行权限，然后./pre_check.sh 直接执行</span><br><span class="line"></span><br><span class="line"># 输出错误到文件</span><br><span class="line">exec 2&gt;/tmp/pre_test_error.log</span><br><span class="line"># ANSI颜色代码</span><br><span class="line">GREEN=&#x27;\033[0;32m&#x27;</span><br><span class="line">RED=&#x27;\033[0;31m&#x27;</span><br><span class="line">NC=&#x27;\033[0m&#x27; # 恢复默认颜色</span><br><span class="line">YELLOW=&#x27;\033[0;33m&#x27;</span><br><span class="line">YELLOW_BG=&#x27;\033[43m&#x27;</span><br><span class="line">BLACK=&#x27;\033[30m&#x27; # 黑色字体</span><br><span class="line">none=&#x27;\e[0m&#x27;</span><br><span class="line">BLUE=&quot;\e[0;94m&quot;</span><br><span class="line">_red_bg() &#123; echo -e &quot;\e[41m$@$&#123;none&#125;&quot;; &#125;</span><br><span class="line">is_err=$(_red_bg 异常!)</span><br><span class="line"></span><br><span class="line">warn() &#123;</span><br><span class="line">      echo -e &quot;\n$&#123;YELLOW_BG&#125;$&#123;BLACK&#125;警告!$&#123;NC&#125; $@\n&quot;</span><br><span class="line">&#125;</span><br><span class="line">err() &#123;</span><br><span class="line">    echo -e &quot;\n$@ $is_err\n&quot; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 函数来检验IP地址的有效性</span><br><span class="line">is_valid_ip() &#123;</span><br><span class="line">  local ip=&quot;$1&quot;</span><br><span class="line">  local ip_regex=&quot;^([0-9]&#123;1,3&#125;\.)&#123;3&#125;[0-9]&#123;1,3&#125;$&quot;</span><br><span class="line"></span><br><span class="line">  if [[ $ip =~ $ip_regex ]]; then</span><br><span class="line">    return 0</span><br><span class="line">  else</span><br><span class="line">    return 1</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 声明账号</span><br><span class="line">server1_user=&quot;root&quot;</span><br><span class="line">server2_user=&quot;root&quot;</span><br><span class="line"></span><br><span class="line">echo -e &quot;\n$&#123;GREEN&#125;------------------------------------前置检查------------------------------------$&#123;NC&#125;&quot;</span><br><span class="line">echo</span><br><span class="line"># 输入服务器IP地址，进行校验</span><br><span class="line">while true; do</span><br><span class="line">  echo &quot;请输入master服务器的IP地址：&quot;</span><br><span class="line">  read server1_ip</span><br><span class="line"></span><br><span class="line">  if is_valid_ip &quot;$server1_ip&quot;; then</span><br><span class="line">    break</span><br><span class="line">  else</span><br><span class="line">    warn &quot;无效的IP地址，请重新输入。&quot;</span><br><span class="line">  fi</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">while true; do</span><br><span class="line">  echo &quot;请输入worker服务器的IP地址：&quot;</span><br><span class="line">  read server2_ip</span><br><span class="line">  if is_valid_ip &quot;$server2_ip&quot;; then</span><br><span class="line">    break</span><br><span class="line">  else</span><br><span class="line">    warn &quot;无效的IP地址，请重新输入。&quot;</span><br><span class="line">  fi</span><br><span class="line">done</span><br><span class="line"># 测试Ping</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;ping测试:$&#123;NC&#125;\n&quot;</span><br><span class="line">ping_check()&#123;</span><br><span class="line">  local server1_ip=$1</span><br><span class="line">  local server2_ip=$2</span><br><span class="line">  ping -c 3 $server1_ip &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    echo -e &quot;$server1_ip 可以Ping通。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">  else</span><br><span class="line">    err &quot;$server1_ip 无法Ping通。&quot;</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">  ping -c 3 $server2_ip &gt; /dev/null 2&gt;&amp;1</span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    echo -e &quot;$server2_ip 可以Ping通。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">  else</span><br><span class="line">    err &quot;$server2_ip 无法Ping通。&quot; &amp;&amp; exit 1</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">ping_check $server1_ip $server2_ip</span><br><span class="line">echo -e &quot;\n------------------------------------------------------------------------------&quot;</span><br><span class="line"># SSH测试</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;SSH测试:$&#123;NC&#125;\n&quot;</span><br><span class="line">ssh_check()&#123;</span><br><span class="line">  local server1_ip=$1</span><br><span class="line">  local server2_ip=$2</span><br><span class="line">  if sshpass timeout 10s ssh -o StrictHostKeyChecking=no root@$server1_ip echo &quot;SSH test&quot;  2&gt;/dev/null; then</span><br><span class="line">    echo -e &quot;Success: SSH from $server1_ip to $server2_ip connected.$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">  else </span><br><span class="line">    err &quot;SSH from $server1_ip to $server2_ip failed&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ssh_check $server1_ip $server2_ip</span><br><span class="line">echo -e &quot;\n------------------------------------------------------------------------------&quot;</span><br><span class="line"># 时间一致性检查</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;时间一致性检查:$&#123;NC&#125;\n&quot;</span><br><span class="line">date_check()&#123;</span><br><span class="line">  local server1_ip=$1</span><br><span class="line">  local server2_ip=$2</span><br><span class="line">  # 时间一致性检查</span><br><span class="line">  server1_time=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@$server1_ip date +%s)</span><br><span class="line">  server2_time=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@$server2_ip date +%s)</span><br><span class="line"></span><br><span class="line">  if [ $server1_time -eq $server2_time ]; then</span><br><span class="line">    echo -e &quot;两台服务器的时间完全一致。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">  else</span><br><span class="line">  # 使用 date 命令将时间戳转换为日期和时间</span><br><span class="line">    formatted1_time=$(date -d &quot;@$server1_time&quot;)</span><br><span class="line">    formatted2_time=$(date -d &quot;@$server2_time&quot;)</span><br><span class="line">    err &quot;两台服务器的时间不一致。&quot;</span><br><span class="line">    echo -e &quot;$&#123;server1_ip&#125;时间为：$&#123;formatted1_time&#125;&quot;</span><br><span class="line">    echo -e &quot;$&#123;server2_ip&#125;时间为：$&#123;formatted2_time&#125;&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">date_check $server1_ip $server2_ip</span><br><span class="line">echo -e &quot;\n------------------------------------------------------------------------------&quot;</span><br><span class="line"></span><br><span class="line"># 添加检查防火墙是否开启</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;检查防火墙:$&#123;NC&#125;\n&quot;</span><br><span class="line">check_firewall_status() &#123;</span><br><span class="line">  local server_ip=$1</span><br><span class="line"></span><br><span class="line">  # 使用 ssh 连接到服务器并查看 firewalld 服务的状态</span><br><span class="line">  firewall_status=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null &quot;root@$server_ip&quot; &quot;systemctl is-active firewalld&quot;)</span><br><span class="line">  </span><br><span class="line">  if [ &quot;$firewall_status&quot; = &quot;active&quot; ]; then</span><br><span class="line">    warn &quot;$server_ip 防火墙已开启。请根据http://172.17.160.32:18090/x/cYA0CQ检查端口&quot;</span><br><span class="line">  else</span><br><span class="line">    echo &quot;$server_ip 防火墙未开启。&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 调用这个函数并传入服务器 IP 和用户名</span><br><span class="line">check_firewall_status $server1_ip</span><br><span class="line">check_firewall_status $server2_ip</span><br><span class="line">echo -e &quot;\n------------------------------------------------------------------------------&quot;</span><br><span class="line"></span><br><span class="line"># DNS配置检查</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;DNS检查:$&#123;NC&#125;\n&quot;</span><br><span class="line">dns_check()&#123;</span><br><span class="line">  local server1_user=$1</span><br><span class="line">  local server2_user=$1</span><br><span class="line">  local server1_ip=$2</span><br><span class="line">  local server2_ip=$3</span><br><span class="line">  # DNS配置检查 - 验证是否一致</span><br><span class="line">  server1_dns=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server1_user@$server1_ip cat /etc/resolv.conf)</span><br><span class="line">  server2_dns=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server2_user@$server2_ip cat /etc/resolv.conf)</span><br><span class="line"></span><br><span class="line">  if [ &quot;$server1_dns&quot; == &quot;$server2_dns&quot; ]; then</span><br><span class="line">    echo -e &quot;两台服务器的DNS配置一致。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">  else</span><br><span class="line">    warn  &quot;两台服务器的DNS配置不一致。请判断是否影响集群。&quot;</span><br><span class="line">  fi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  # DNS配置检查 - 验证是否存在多行nameserver记录</span><br><span class="line">  server1_nameserver_count=$(echo &quot;$server1_dns&quot; | grep -c &#x27;^nameserver&#x27;)</span><br><span class="line">  server2_nameserver_count=$(echo &quot;$server2_dns&quot; | grep -c &#x27;^nameserver&#x27;)</span><br><span class="line"></span><br><span class="line">  if [ $server1_nameserver_count -eq 1 ] &amp;&amp; [ $server2_nameserver_count -eq 1 ]; then</span><br><span class="line">    echo -e &quot;两台服务器的DNS配置中只存在一行nameserver记录。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">  else</span><br><span class="line">    if [ $server1_nameserver_count -ne 1 ]; then</span><br><span class="line">      warn  &quot;第一台服务器($server1_ip)的DNS配置存在多行nameserver记录。请判断是否影响集群。&quot;</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    if [ $server2_nameserver_count -ne 1 ]; then</span><br><span class="line">      warn  &quot;第二台服务器($server2_ip)的DNS配置存在多行nameserver记录。请判断是否影响集群。&quot;</span><br><span class="line">    fi</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">dns_check $server1_user $server1_ip $server2_ip</span><br><span class="line">echo -e &quot;\n------------------------------------------------------------------------------&quot;</span><br><span class="line"># 挂载检查</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;数据盘挂载检查:$&#123;NC&#125;\n&quot;</span><br><span class="line">mount_check()&#123;</span><br><span class="line">  local server1_user=$1</span><br><span class="line">  local server2_user=$1</span><br><span class="line">  local server1_ip=$2</span><br><span class="line">  local server2_ip=$3</span><br><span class="line">  server1_mount=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server1_user@$server1_ip mount | grep /opt/local-path-provisioner)</span><br><span class="line">  server2_mount=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server2_user@$server2_ip mount | grep /opt/local-path-provisioner)</span><br><span class="line"></span><br><span class="line">  if [ -n &quot;$server1_mount&quot; ] &amp;&amp; [ -n &quot;$server2_mount&quot; ]; then</span><br><span class="line">    echo -e &quot;两台服务器都正确挂载了/opt/local-path-provisioner目录。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">  else</span><br><span class="line">  #   echo -e &quot;两台服务器中有一台或两台未正确挂载/opt/local-path-provisioner目录。$&#123;RED&#125;异常$&#123;NC&#125;&quot;</span><br><span class="line">    if [ -z &quot;$server1_mount&quot; ]; then</span><br><span class="line">      err &quot;第一台服务器($server1_ip)未正确挂载/opt/local-path-provisioner目录。&quot;</span><br><span class="line">    fi</span><br><span class="line"></span><br><span class="line">    if [ -z &quot;$server2_mount&quot; ]; then</span><br><span class="line">      err &quot;第二台服务器($server2_ip)未正确挂载/opt/local-path-provisioner目录。&quot;</span><br><span class="line">    fi</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mount_check $server1_user $server1_ip $server2_ip</span><br><span class="line">echo -e &quot;\n------------------------------------------------------------------------------&quot;</span><br><span class="line"># 使用Telnet检查SFTP服务是否联通</span><br><span class="line"># check_sftp() &#123;</span><br><span class="line">#   local server_ip=$1</span><br><span class="line">#   echo -e &quot;\n-----------使用Telnet检查SFTP服务是否联通-------------&quot;</span><br><span class="line"># #   # 使用Telnet连接到SSH端口（默认是22）</span><br><span class="line"># #   # 尝试连接SFTP服务器</span><br><span class="line"># #   sftp -oPort=22 $server_ip &lt;&lt;EOF 2&gt;/dev/null</span><br><span class="line"># #   quit</span><br><span class="line"># # EOF</span><br><span class="line"></span><br><span class="line"># #   # Check the exit status of the SFTP command</span><br><span class="line"># #   if [ $? -eq 0 ]; then</span><br><span class="line"># #     echo &quot;SFTP on $IP is working normally&quot;</span><br><span class="line"># #   else</span><br><span class="line"># #     echo &quot;SFTP on $IP is not working!&quot;</span><br><span class="line"># #   fi</span><br><span class="line"></span><br><span class="line">#   # 使用SSH命令测试SFTP服务</span><br><span class="line">#   ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null sftpuser@$server_ip sftp exit &gt; /dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">#   # 检查SSH命令的退出状态码</span><br><span class="line">#   if [ $? -eq 0 ]; then</span><br><span class="line">#     echo &quot;SFTP服务正常，可以连接到主机 $server_ip 的SFTP服务。&quot;</span><br><span class="line">#   else</span><br><span class="line">#     err &quot;SFTP服务异常，无法连接到主机 $server_ip 的SFTP服务。&quot;</span><br><span class="line">#   fi</span><br><span class="line"># &#125;</span><br><span class="line"># # 调用函数来进行Telnet检查</span><br><span class="line"># check_sftp $server_ip</span><br><span class="line"></span><br><span class="line"># 检查master SSH服务状态和配置</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;master SSH服务状态和配置检查:$&#123;NC&#125;\n&quot;</span><br><span class="line">check_sshd_config() &#123;</span><br><span class="line"></span><br><span class="line">  local server_ip=$1</span><br><span class="line">  local server_user=$2</span><br><span class="line"></span><br><span class="line">  # 使用 ssh 连接到服务器并执行命令检查SSH服务状态</span><br><span class="line">  ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;systemctl is-active sshd&quot; &gt; /dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    # 获取SSH配置文件内容</span><br><span class="line">    sshd_config_content=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;cat /etc/ssh/sshd_config&quot;)</span><br><span class="line"></span><br><span class="line">    # 检查配置文件内容是否包含指定的三行数据</span><br><span class="line">    if echo &quot;$sshd_config_content&quot; | grep -q -E &quot;Subsystem\s+sftp\s+internal-sftp&quot; &amp;&amp; echo &quot;$sshd_config_content&quot; | grep -q &quot;Match User sftpuser&quot; &amp;&amp; echo &quot;$sshd_config_content&quot; | grep -q &quot;ChrootDirectory /opt/ftpfile/sftp/sftpuser/&quot;; then</span><br><span class="line">      echo -e &quot;SSH配置正常。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">    else</span><br><span class="line">      warn &quot;请检查sshd_config文件，是否正确配置sftp。&quot;</span><br><span class="line">    fi</span><br><span class="line">  else</span><br><span class="line">    warn &quot;无法连接服务器或检查SSH服务状态。&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 调用函数执行检查</span><br><span class="line">check_sshd_config $server1_ip $server1_user</span><br><span class="line">echo -e &quot;\n------------------------------------------------------------------------------&quot;</span><br><span class="line"># sftp_with_password() &#123;</span><br><span class="line">#   echo -e &quot;\n-----------检查master的sftp连通性-------------&quot;</span><br><span class="line">#   local server_ip=$1</span><br><span class="line">#   local server_password=$2</span><br><span class="line"></span><br><span class="line">#   # 使用 expect 来自动输入密码</span><br><span class="line">#   expect -c &quot;</span><br><span class="line">#     spawn sftp -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null sftpuser@$server_ip</span><br><span class="line">#     expect &#123;</span><br><span class="line">#       \&quot;password:\&quot; &#123;</span><br><span class="line">#         send \&quot;$server_password\n\&quot;</span><br><span class="line">#         exp_continue</span><br><span class="line">#       &#125;</span><br><span class="line">#       eof</span><br><span class="line">#     &#125;</span><br><span class="line">#   &quot;</span><br><span class="line">  </span><br><span class="line">#   if [ $? -eq 0 ]; then</span><br><span class="line">#     echo -e &quot;$server_ip SFTP连接成功。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">#   else</span><br><span class="line">#     warn &quot;无法连接$server_ip 的SFTP服务。&quot;</span><br><span class="line">#   fi</span><br><span class="line"># &#125;</span><br><span class="line"></span><br><span class="line"># # 调用函数来进行SFTP连接检查</span><br><span class="line"># sftp_with_password $server1_ip &quot;FYktvR1w2upoOb&quot;</span><br><span class="line"></span><br><span class="line"># 检查目录权限是否为777</span><br><span class="line"># check_directory_permission() &#123;</span><br><span class="line">#   local server_ip=$1</span><br><span class="line">#   local directory_path=$2</span><br><span class="line">#   echo -e &quot;\n-----------检查master的目录$&#123;directory_path&#125;权限-------------&quot;</span><br><span class="line"></span><br><span class="line">#   # 使用 ssh 连接到服务器并执行 stat 命令获取目录权限信息</span><br><span class="line">#   ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null sftpuser@$server_ip &quot;stat -c %a $directory_path&quot; &gt; /dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line">#   if [ $? -eq 0 ]; then</span><br><span class="line">#     # 获取目录权限</span><br><span class="line">#     directory_permission=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null sftpuser@$server_ip &quot;stat -c %a $directory_path&quot;)</span><br><span class="line">    </span><br><span class="line">#     if [ &quot;$directory_permission&quot; -eq 777 ]; then</span><br><span class="line">#       echo -e &quot;$directory_path 目录权限为777。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">#     else</span><br><span class="line">#       warn &quot;$directory_path 目录权限不是777。&quot;</span><br><span class="line">#     fi</span><br><span class="line">#   else</span><br><span class="line">#     warn &quot;无法连接$server_ip 服务器或获取目录权限。&quot;</span><br><span class="line">#   fi</span><br><span class="line"># &#125;</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;检查master的sftp目录权限:$&#123;NC&#125;\n&quot;</span><br><span class="line">check_user() &#123;</span><br><span class="line">  ssh $1 &quot;id $2 &gt;/dev/null 2&gt;&amp;1&quot; </span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    echo -e &quot;$2用户在$1上存在。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">  else  </span><br><span class="line">    err &quot;$2用户在$1上不存在&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">check_dir_perm() &#123;</span><br><span class="line">  ssh $1 &quot;if [ \`stat -c %a $2\` -eq $3 ]; then echo -e &#x27;$2目录为$3权限。$&#123;GREEN&#125;正常$&#123;NC&#125;&#x27;; else err &#x27;$2目录不为$3权限&#x27;; fi&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 调用函数来检查服务器的目录权限</span><br><span class="line">check_user $server1_ip &quot;sftpuser&quot;</span><br><span class="line"></span><br><span class="line">check_dir_perm $server1_ip &quot;/opt&quot; 755</span><br><span class="line"></span><br><span class="line">check_dir_perm $server1_ip &quot;/opt/ftpfile/sftp/sftpuser&quot; 755</span><br><span class="line"></span><br><span class="line">echo -e &quot;\n------------------------------------------------------------------------------&quot;</span><br><span class="line"># check_directory_permission $server1_ip &quot;/opt&quot;</span><br><span class="line"># check_directory_permission $server1_ip &quot;/opt/ftpfile/sftp/sftpuser&quot;</span><br><span class="line"></span><br><span class="line"># 检查主机名与/etc/hosts文件的一致性</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;检查主机名的一致性:$&#123;NC&#125;\n&quot;</span><br><span class="line">check_hostname_and_hosts() &#123;</span><br><span class="line"></span><br><span class="line">  local server_ip=$1</span><br><span class="line">  local server_user=$2</span><br><span class="line">  # 使用 ssh 连接到服务器并获取主机名</span><br><span class="line">  server_hostname=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;hostname&quot;)</span><br><span class="line"></span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    # 获取 /etc/hosts 文件内容</span><br><span class="line">    hosts_file_content=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;cat /etc/hosts&quot;)</span><br><span class="line"></span><br><span class="line">    # 检查主机名与 /etc/hosts 内是否一致</span><br><span class="line">    if echo &quot;$hosts_file_content&quot; | grep -q -E &quot;^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\s+$server_hostname\s*$&quot;; then</span><br><span class="line">      echo -e &quot;$server_ip 主机名与/etc/hosts文件一致。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">    else</span><br><span class="line">      warn &quot;$server_ip 主机名与/etc/hosts文件不一致。&quot;</span><br><span class="line">    fi</span><br><span class="line">  else</span><br><span class="line">    warn &quot;无法连接$server_ip 服务器或获取主机名。&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 检查主机名与Kubernetes节点名是否一致</span><br><span class="line">check_hostname_and_k8s_node() &#123;</span><br><span class="line"></span><br><span class="line">  local server_ip=$1</span><br><span class="line">  local server_user=$2</span><br><span class="line">  local num=$3</span><br><span class="line">  # 使用 ssh 连接到服务器并获取Kubernetes节点名</span><br><span class="line">  k8s_node_name=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;kubectl get node -o jsonpath=&#x27;&#123;.items[$num].metadata.name&#125;&#x27;&quot;)</span><br><span class="line"></span><br><span class="line">  if [ $? -eq 0 ]; then</span><br><span class="line">    # 获取主机名</span><br><span class="line">    server_hostname=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;hostname&quot;)</span><br><span class="line"></span><br><span class="line">    # 检查主机名与Kubernetes节点名是否一致</span><br><span class="line">    if [ &quot;$server_hostname&quot; = &quot;$k8s_node_name&quot; ]; then</span><br><span class="line">      echo -e &quot;$server_ip 主机名与Kubernetes节点名一致。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">    else</span><br><span class="line">      warn &quot;$server_ip 主机名与Kubernetes节点名不一致。&quot;</span><br><span class="line">    fi</span><br><span class="line">  else</span><br><span class="line">    warn &quot;无法连接$server_ip 服务器或获取Kubernetes节点名。&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 调用函数来检查服务器的主机名与/etc/hosts文件一致性</span><br><span class="line">check_hostname_and_hosts $server1_ip $server1_user</span><br><span class="line">check_hostname_and_hosts $server2_ip $server2_user</span><br><span class="line"></span><br><span class="line"># 调用函数来检查服务器的主机名与Kubernetes节点名一致性</span><br><span class="line">check_hostname_and_k8s_node $server1_ip $server1_user 0</span><br><span class="line">check_hostname_and_k8s_node $server2_ip $server2_user 1</span><br><span class="line">echo -e &quot;\n------------------------------------------------------------------------------&quot;</span><br><span class="line"></span><br><span class="line"># 磁盘写入速度测试（带缓存）</span><br><span class="line"># disk_speed_test() &#123;</span><br><span class="line">#   # local server_ip=$1</span><br><span class="line">#   # local server_user=$2</span><br><span class="line">#   # local test_file=&quot;/tmp/disk_speed_test_file&quot;</span><br><span class="line">#   # # 进行写入测试</span><br><span class="line">#   # write_speed=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;dd if=/dev/zero of=$&#123;test_file&#125; bs=8k count=128 conv=fsync oflag=direct&quot; 2&gt;&amp;1 | tail -n 1)</span><br><span class="line">#   # echo -e &quot;$&#123;server_ip&#125; 写入速度: $write_speed&quot;</span><br><span class="line">#   # # 进行读取测试</span><br><span class="line">#   # read_speed=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;sudo dd if=$&#123;test_file&#125; of=/dev/null bs=8k count=128 conv=fsync iflag=direct&quot; 2&gt;&amp;1 | tail -n 1)</span><br><span class="line">#   # echo -e &quot;$&#123;server_ip&#125; 读取速度: $read_speed&quot;</span><br><span class="line"></span><br><span class="line">#   # # 删除测试文件</span><br><span class="line">#   # ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;rm $test_file&quot;</span><br><span class="line"># &#125;</span><br><span class="line"></span><br><span class="line"># 测试磁盘读速度的函数</span><br><span class="line">disk_speed_test() &#123;</span><br><span class="line">  local server_ip=$1</span><br><span class="line">  local test_duration=30  # 测试持续时间（秒）</span><br><span class="line"></span><br><span class="line">  echo &quot;开始测试 $server_ip 过程会持续30s...&quot;</span><br><span class="line"></span><br><span class="line">  local time0=$(date &quot;+%s&quot;)</span><br><span class="line">  cat /dev/null &gt; disk_res</span><br><span class="line"></span><br><span class="line">  while ((($(date &quot;+%s&quot;) - time0) &lt;= test_duration)); do</span><br><span class="line">    disk_info=$(ssh &quot;$server_ip&quot; &#x27;dd if=/dev/zero of=output.file bs=8k count=128 conv=fsync 2&gt;&amp;1 1&gt;/dev/null&#x27;)</span><br><span class="line">    io_res=$(echo &quot;$disk_info&quot; | grep --only-matching -E &#x27;[0-9.]+ ([MGk]?B|bytes)/[s(ec)?|秒]&#x27;)</span><br><span class="line">    echo &quot;$io_res&quot; &gt;&gt; disk_res</span><br><span class="line">  done</span><br><span class="line"></span><br><span class="line">  local count=$(cat disk_res | wc -l)</span><br><span class="line">  local sum=$(cat disk_res | xargs -n2 | awk &#x27;&#123; if ($2 == &quot;kB/秒&quot; || $2 == &quot;kB/s&quot;) a+=($1/1024); else a+=$1 &#125; END&#123;printf(&quot;%.2f&quot;, a)&#125;&#x27;)</span><br><span class="line">  local average_speed=$(awk &#x27;BEGIN&#123;printf &quot;%.2f\n&quot;, &#x27;$sum&#x27;/&#x27;$count&#x27;&#125;&#x27;)</span><br><span class="line"></span><br><span class="line">  echo -e &quot;平均速度 $server_ip: $&#123;RED&#125;$average_speed MB/s$&#123;NC&#125;。推荐值：$&#123;GREEN&#125;&gt;=200m/s$&#123;NC&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 磁盘写入速度测试（不带缓存）</span><br><span class="line"></span><br><span class="line"># disk_speed_test_no_cache() &#123;</span><br><span class="line">  # local server_ip=$1</span><br><span class="line">  # local server_user=$2</span><br><span class="line">  # local test_file=&quot;/tmp/disk_speed_test_file&quot;</span><br><span class="line">  # # 禁用磁盘缓存</span><br><span class="line">  # ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;hdparm -W0 /dev/mapper/centos-root&quot; 2&gt;/dev/null</span><br><span class="line">  # # 进行写入测试</span><br><span class="line">  # write_speed=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;dd if=/dev/zero of=$&#123;test_file&#125; bs=8k count=128 conv=fsync oflag=direct&quot; 2&gt;&amp;1 | tail -n 1)</span><br><span class="line">  # echo -e &quot;$&#123;server_ip&#125; 写入速度: $write_speed&quot;</span><br><span class="line">  # # 进行读取测试</span><br><span class="line">  # read_speed=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;sudo dd if=$&#123;test_file&#125; of=/dev/null bs=8k count=128 conv=fsync iflag=direct&quot; 2&gt;&amp;1 | tail -n 1)</span><br><span class="line">  # echo -e &quot;$&#123;server_ip&#125; 读取速度: $read_speed&quot;</span><br><span class="line"></span><br><span class="line">  # # 删除测试文件</span><br><span class="line">  # ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;rm $test_file&quot;</span><br><span class="line">  # # 启用磁盘缓存</span><br><span class="line">  # ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $server_user@$server_ip &quot;hdparm -W1 /dev/mapper/centos-root&quot; 2&gt;/dev/null</span><br><span class="line"># &#125;</span><br><span class="line"></span><br><span class="line"># 测试磁盘写入速度的函数</span><br><span class="line">disk_speed_test_no_cache() &#123;</span><br><span class="line">  local server_ip=&quot;$1&quot;</span><br><span class="line">  local test_duration=30  # 测试持续时间（秒）</span><br><span class="line"></span><br><span class="line">  echo &quot;开始测试 $server_ip 过程会持续30s...&quot;</span><br><span class="line"></span><br><span class="line">  local time0=$(date &quot;+%s&quot;)</span><br><span class="line">  cat /dev/null &gt; disk_res</span><br><span class="line"></span><br><span class="line">  while ((($(date &quot;+%s&quot;) - time0) &lt;= test_duration)); do</span><br><span class="line">    disk_info=$(ssh &quot;$server_ip&quot; &#x27;dd if=/dev/zero of=output.file bs=8k count=128 oflag=direct,nonblock conv=fsync 2&gt;&amp;1 1&gt;/dev/null&#x27;)</span><br><span class="line">    io_res=$(echo &quot;$disk_info&quot; | grep --only-matching -E &#x27;[0-9.]+ ([MGk]?B|bytes)/[s(ec)?|秒]&#x27;)</span><br><span class="line">    echo &quot;$io_res&quot; &gt;&gt; disk_res</span><br><span class="line">  done</span><br><span class="line"></span><br><span class="line">  local count=$(cat disk_res | wc -l)</span><br><span class="line">  local sum=$(cat disk_res | xargs -n2 | awk &#x27;&#123; if ($2 == &quot;kB/秒&quot; || $2 == &quot;kB/s&quot;) a+=($1/1024); else a+=$1 &#125; END&#123;printf(&quot;%.2f&quot;, a)&#125;&#x27;)</span><br><span class="line">  local average_speed=$(awk &#x27;BEGIN&#123;printf &quot;%.2f\n&quot;, &#x27;$sum&#x27;/&#x27;$count&#x27;&#125;&#x27;)</span><br><span class="line"></span><br><span class="line">  echo -e &quot;平均速度 $server_ip: $&#123;RED&#125; $average_speed MB/s $&#123;NC&#125;。推荐值：$&#123;GREEN&#125;&gt;=50m/s$&#123;NC&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 检查 CPU 是否支持 AVX</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;检查 CPU 是否支持 AVX:$&#123;NC&#125;\n&quot;</span><br><span class="line">check_avx_support() &#123;</span><br><span class="line">  local server_ip=$1</span><br><span class="line">  local avx_check=$(ssh -q -o BatchMode=yes -o ConnectTimeout=5 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null root@$server_ip &quot;grep -o &#x27;avx&#x27; /proc/cpuinfo&quot;)</span><br><span class="line"></span><br><span class="line">  if [ -n &quot;$avx_check&quot; ]; then</span><br><span class="line">    echo -e &quot;$server_ip CPU 支持 AVX (Advanced Vector Extensions)。$&#123;GREEN&#125;正常$&#123;NC&#125;&quot;</span><br><span class="line">  else</span><br><span class="line">    warn &quot;$server_ip CPU 不支持 AVX (Advanced Vector Extensions)。&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 调用函数来检查 AVX 支持</span><br><span class="line">check_avx_support  $server1_ip</span><br><span class="line">check_avx_support  $server2_ip</span><br><span class="line"></span><br><span class="line"># 定义要加载镜像的目录列表</span><br><span class="line">load_images() &#123;</span><br><span class="line">  image_directories=(&quot;/opt/xx/images/product/insight&quot; &quot;/opt/xx/images/product/insight/patch&quot;)</span><br><span class="line"></span><br><span class="line">  # 遍历目录并加载镜像</span><br><span class="line">  for directory in &quot;$&#123;image_directories[@]&#125;&quot;; do</span><br><span class="line">    if [ -d &quot;$directory&quot; ]; then</span><br><span class="line">      cd &quot;$directory&quot;</span><br><span class="line">      echo &quot;进入目录: $directory&quot;</span><br><span class="line">      for file in $(ls . | grep .tgz); do</span><br><span class="line">        echo &quot;加载镜像: $file&quot;</span><br><span class="line">        docker load &lt; &quot;$file&quot;</span><br><span class="line">      done</span><br><span class="line">    else</span><br><span class="line">      echo &quot;目录 $directory 不存在。&quot;</span><br><span class="line">    fi</span><br><span class="line">  done</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 检查磁盘性能</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;磁盘测试:$&#123;NC&#125;\n&quot;</span><br><span class="line"># read -p &quot;是否要检查磁盘？ (y/n): &quot; confirm</span><br><span class="line">echo &quot;是否要检查磁盘？ (y/n)：&quot;</span><br><span class="line">read confirm</span><br><span class="line">if [ &quot;$confirm&quot; = &quot;y&quot; ]; then</span><br><span class="line">  echo -e &quot;\n$&#123;BLUE&#125;磁盘写入速度测试（不带缓存）:$&#123;NC&#125;\n&quot;</span><br><span class="line">  disk_speed_test_no_cache $server1_ip</span><br><span class="line">  disk_speed_test_no_cache $server2_ip</span><br><span class="line">  echo -e &quot;\n$&#123;BLUE&#125;磁盘写入速度测试（带缓存）:$&#123;NC&#125;\n&quot;</span><br><span class="line">  disk_speed_test $server1_ip </span><br><span class="line">  disk_speed_test $server2_ip</span><br><span class="line">else</span><br><span class="line">  echo &quot;取消磁盘检查。&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"># 镜像丢的时候使用</span><br><span class="line">echo -e &quot;\n$&#123;BLUE&#125;镜像加载:$&#123;NC&#125;\n&quot;</span><br><span class="line">echo &quot;是否要加载 Docker 镜像？ (y/n)：&quot;</span><br><span class="line">read confirm</span><br><span class="line"># read -p &quot;是否要加载 Docker 镜像？ (y/n): &quot; confirm</span><br><span class="line">if [ &quot;$confirm&quot; = &quot;y&quot; ]; then</span><br><span class="line">  load_images</span><br><span class="line">else</span><br><span class="line">  echo &quot;取消加载 Docker 镜像。&quot;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">       </span><br></pre></td></tr></table></figure>
-</code></pre>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/07/29/%E9%81%87%E8%A7%81OOM/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/07/29/%E9%81%87%E8%A7%81OOM/" class="post-title-link" itemprop="url">遇见OOM</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-07-29 21:12:00" itemprop="dateCreated datePublished" datetime="2024-07-29T21:12:00+08:00">2024-07-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <div class="tag-container">
-  <span class="main-tag">离职系列</span>
-  <span class="sub-tag">第七篇</span>
-</div>
-<div class="article-quote">
-离职系列，想想这几年在公司的成长，在这做个记录。此篇主要谈谈LMT时，处理的两次OOM问题。
-</div>
-
-<p>为啥是两次？因为都很有代表性，一次可以算是三方库使用不当，一次是程序自身的问题。</p>
-<h3 id="第一次"><a href="#第一次" class="headerlink" title="第一次"></a>第一次</h3><p>JPA使用不当,….待续</p>
-<h3 id="第二次"><a href="#第二次" class="headerlink" title="第二次"></a>第二次</h3><p>应用频繁重启,….待续</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/07/16/%E6%9C%8D%E5%8A%A1%E5%8F%AF%E7%94%A8%E6%80%A7-%E6%A1%88%E4%BE%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/07/16/%E6%9C%8D%E5%8A%A1%E5%8F%AF%E7%94%A8%E6%80%A7-%E6%A1%88%E4%BE%8B/" class="post-title-link" itemprop="url">服务可用性-案例</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-07-16 13:49:00" itemprop="dateCreated datePublished" datetime="2024-07-16T13:49:00+08:00">2024-07-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <div class="tag-container">
-  <span class="main-tag">离职系列</span>
-  <span class="sub-tag">第七篇</span>
-</div>
-<div class="article-quote">
-离职系列，想想这几年在公司的成长，在这做个记录。上一篇<a href="/2024/06/15/%E5%AE%9A%E4%BD%8D%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="服务可用性定位问题常用命令">服务可用性定位问题常用命令</a>，针对服务可用性常用命令进行了说明，这一篇主要是讲实践案例。
-</div>
-
-<p>因为我在LMT除了日常管理工作外，额外向领导请求了承担部分现场问题处理，挑的比较陌生且有挑战性的“服务可用性的问题”，想着在实践中学习，并且这部分问题是最麻烦的没有什么标准，往往又是最紧急的，我担起来一是减少了组员上报成本，另一个我更方便直接找到对应的负责人进行沟通，提高效率。所以这块积累的经验更多。</p>
-<h2 id="案例分享"><a href="#案例分享" class="headerlink" title="案例分享"></a>案例分享</h2><p>简单分享几个案例，一个主要对外（TAC），一个对内（组内研发）。两个文档因为对象不同，使用场景不同，稍有差异。</p>
-<p>整理案例，一是为了组内共同学习，二是提供给TAC团队，让其能更多的拦截一些一线提出的较简单的现场问题。</p>
-<h3 id="案例1（TAC）"><a href="#案例1（TAC）" class="headerlink" title="案例1（TAC）"></a>案例1（TAC）</h3><img src="/2024/07/16/%E6%9C%8D%E5%8A%A1%E5%8F%AF%E7%94%A8%E6%80%A7-%E6%A1%88%E4%BE%8B/1.jpg" class="">
-
-<h3 id="案例2（TAC）"><a href="#案例2（TAC）" class="headerlink" title="案例2（TAC）"></a>案例2（TAC）</h3><img src="/2024/07/16/%E6%9C%8D%E5%8A%A1%E5%8F%AF%E7%94%A8%E6%80%A7-%E6%A1%88%E4%BE%8B/dns.jpg" class="">
-<h3 id="案例3（研发）"><a href="#案例3（研发）" class="headerlink" title="案例3（研发）"></a>案例3（研发）</h3><img src="/2024/07/16/%E6%9C%8D%E5%8A%A1%E5%8F%AF%E7%94%A8%E6%80%A7-%E6%A1%88%E4%BE%8B/date.jpeg" class="">
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/06/18/%E7%8E%B0%E5%9C%BA%E4%BA%8B%E6%95%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/06/18/%E7%8E%B0%E5%9C%BA%E4%BA%8B%E6%95%85/" class="post-title-link" itemprop="url">现场事故</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-06-18 00:22:00" itemprop="dateCreated datePublished" datetime="2024-06-18T00:22:00+08:00">2024-06-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <div class="tag-container">
-  <span class="main-tag">离职系列</span>
-  <span class="sub-tag">第六篇</span>
-</div>
-<div class="article-quote">
-离职系列，想想这几年在公司的成长，在这做个记录。此篇主要谈谈LMT时期。
-</div>
-
-<p>因为现场故障直接影响客户口碑、人力成本等事业部的重要指标，所以事业部领导要求针对现场故障处理需要有单独的奖惩制度，让整个事业部重视起来，所以我整理了对应的内容用于事业部邮件同步。</p>
-<h2 id="事故的定义"><a href="#事故的定义" class="headerlink" title="事故的定义"></a>事故的定义</h2><p>故障处理或产品自身服务中断造成客户损失、恶劣影响。（一线、客户投诉且影响产品口碑的）。</p>
-<h2 id="事故处理"><a href="#事故处理" class="headerlink" title="事故处理"></a>事故处理</h2><img src="/2024/06/18/%E7%8E%B0%E5%9C%BA%E4%BA%8B%E6%95%85/sg.jpg" class="">
-
-
-<h2 id="奖惩制度"><a href="#奖惩制度" class="headerlink" title="奖惩制度"></a>奖惩制度</h2><p>这块就比较个性化了，主要看重视程度，需要根据公司规章制度和领导的要求做调整。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 </div>
