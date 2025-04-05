@@ -169,7 +169,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">191</span>
+          <span class="site-state-item-count">193</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -180,7 +180,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">113</span>
+        <span class="site-state-item-count">114</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,6 +220,640 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2020/04/21/ps-grep-top-free/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/04/21/ps-grep-top-free/" class="post-title-link" itemprop="url">Linux ps、top、free命令</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-04-21 10:54:00" itemprop="dateCreated datePublished" datetime="2020-04-21T10:54:00+08:00">2020-04-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>虽然我们系统有建设一些监控工具比如Grafana、Prometheus等，但是很多时候还是愿意直接先到服务器上去瞧一眼，特别是客户现场的问题，因为客户现场暂时不会装这些工具。因为我们是做NPMD的，流量大的时候资源消耗就比较大，加上前期先铺功能非功能需求的细节待完善，所以有时候会出现客户现场机器在一段时间后会变得比较慢的情况，这个时候那当然就说劈里啪啦一堆装逼的命令敲上去瞅瞅服务器咋了。</p>
+<p>用的比较高频的命令就是<strong>ps、grep、top</strong>。用的倒是还算一般，不过一直没有深深的了解，所以刚好借着这个机会，深入的学习一下。演示用的是安装centos系统的vps。</p>
+<h3 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h3><p>这命令应该是我使用的命令中的top one了，该命令用于获取正在运行的进程信息。 我们在看一些服务是否运行的时候通常都是用这个命令。我们可以获取任何用户在当前系统上运行的进程之类的信息，例如进程ID（PID）。</p>
+<p>ps命令本身是一个扩展工具，ps –help a一下，会发现有很多的命令选项，说是有80多个。</p>
+<img src="/2020/04/21/ps-grep-top-free/ps.png" class="" title="from 我">
+
+<p>当然我们只说说常用的。</p>
+<h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><p>如果在Linux中使用不带任何选项的ps命令，它将显示当前shell中正在运行的进程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps</span><br></pre></td></tr></table></figure>
+
+<p>只会看到ps和bash。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  PID TTY          TIME CMD</span><br><span class="line"> 2053 pts/0    00:00:00 ps</span><br><span class="line">31585 pts/0    00:00:00 bash</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>PID是进程的唯一ID</li>
+<li>TTY是已登录终端用户的类型。pts表示伪终端</li>
+<li>TIME给您进程运行了多长时间</li>
+<li>CMD是您运行以启动该过程的命令</li>
+</ul>
+<p>很明显，我们并没有得到任何真实，有用的信息。</p>
+<h5 id="1-查看所有运行过程"><a href="#1-查看所有运行过程" class="headerlink" title="1.查看所有运行过程"></a>1.查看所有运行过程</h5><p>如果要查看自己运行的所有进程，可以将ps命令与选项x一起使用，如下所示：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -x</span><br></pre></td></tr></table></figure>
+
+<p>x选项将显示所有进程，即使它们与当前tty（终端类型）不相关。</p>
+<p>“– ”是可选的，但一般的Linux约定是加上“–”选项。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">  PID TTY      STAT   TIME COMMAND</span><br><span class="line">  543 tty1     Ss+    0:00 /sbin/agetty --noclear tty1 linux</span><br><span class="line">  544 ?        Ssl    0:01 /usr/bin/python2 -Es /usr/sbin/firewalld --nofork --nopid</span><br><span class="line">  546 ?        S      0:00 [hwrng]</span><br><span class="line">  556 ?        I&lt;     0:00 [cryptd]</span><br><span class="line">  943 ?        Ss     0:00 /sbin/dhclient -1 -q -lf /var/lib/dhclient/dhclient--eth0.lease -pf /var/run/dhclient-eth0.pid -H vultr eth0</span><br><span class="line"> 1009 ?        Ssl    0:53 /usr/bin/python2 -Es /usr/sbin/tuned -l -P</span><br><span class="line"> 1012 ?        Ssl    0:59 /usr/sbin/rsyslogd -n</span><br><span class="line"> 1052 ?        Ss     0:00 nginx: master process /usr/sbin/nginx</span><br><span class="line"> 1265 ?        Ss     0:02 /usr/libexec/postfix/master -w</span><br><span class="line">12385 ?        R      0:00 [kworker/u2:0-ev]</span><br><span class="line">12684 ?        Ss     0:00 sshd: root@pts/0</span><br><span class="line">12688 ?        Ss     0:00 sshd: root@notty</span><br><span class="line">12690 pts/0    Ss     0:00 -bash</span><br></pre></td></tr></table></figure>
+
+<p>上面输出中的STAT表示过程状态代码。有兴趣可以查一下详细的说明。其实很少会看到仅使用选项x的ps命令。通常以这种方式伴随选项u：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ux</span><br></pre></td></tr></table></figure>
+
+<p>使用选项u，您将获得有关每个进程的详细信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND</span><br><span class="line">abhishek   503  0.0  0.4 681580 37516 pts/0    Sl   18:09   0:00 gedit</span><br><span class="line">abhishek  2245  0.0  0.0  11300  1496 ?        S    18:37   0:00 /usr/bin/ssh-agent -D -a /run/user/1000/keyring/.ssh</span><br><span class="line">abhishek  3039  0.0  0.0  77344  3508 ?        Ss   10:37   0:00 /lib/systemd/systemd --user</span><br><span class="line">abhishek  3040  0.0  0.0 114632   360 ?        S    10:37   0:00 (sd-pam)</span><br><span class="line">abhishek  3054  0.0  0.1 517104 11512 ?        SLl  10:37   0:01 /usr/bin/gnome-keyring-daemon --daemonize --login</span><br></pre></td></tr></table></figure>
+
+<p>如您所见，现在您获得了每个进程的用户名以及CPU <a target="_blank" rel="noopener" href="https://linuxhandbook.com/linux-memory-usage/">使用率</a>和<a target="_blank" rel="noopener" href="https://linuxhandbook.com/linux-memory-usage/">内存使用率</a>。RSS显示该进程当前在RAM中有多少内存，而VSZ显示该进程总共有多少虚拟内存。</p>
+<h5 id="2-使用ps-aux命令查看所有正在运行的进程"><a href="#2-使用ps-aux命令查看所有正在运行的进程" class="headerlink" title="2.使用ps aux命令查看所有正在运行的进程"></a>2.使用ps aux命令查看所有正在运行的进程</h5><p>您可能会一直在Linux教程和文档中看到<code>ps -aux</code>或看到<code>ps aux</code>它们。</p>
+<p>使用添加的-a选项，您可以查看<a target="_blank" rel="noopener" href="https://linuxhandbook.com/linux-list-users/">Linux系统上所有用户</a>的运行进程。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux</span><br></pre></td></tr></table></figure>
+
+<p>命令输出与ps -ux相同，但是现在您也具有其他用户的进程。由于使用-u选项，您可以识别哪个进程属于哪个用户。</p>
+<h5 id="3-在Linux中使用ps-ef命令查看所有正在运行的进程"><a href="#3-在Linux中使用ps-ef命令查看所有正在运行的进程" class="headerlink" title="3.在Linux中使用ps -ef命令查看所有正在运行的进程"></a>3.在Linux中使用ps -ef命令查看所有正在运行的进程</h5><p>除了ps -aux以外，您还可以使用-e命令列出所有正在运行的进程。通常的做法是将与“f”结合使用，以获得用于运行进程的命令的完整列表。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef</span><br></pre></td></tr></table></figure>
+
+<p>还可以加上“H”，显示所有的父进程以及其下的子进程一起：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -efH</span><br></pre></td></tr></table></figure>
+
+<h5 id="4-查看特定用户的所有正在运行的进程"><a href="#4-查看特定用户的所有正在运行的进程" class="headerlink" title="4.查看特定用户的所有正在运行的进程"></a>4.查看特定用户的所有正在运行的进程</h5><p>要获取有关特定用户运行的所有进程的信息，可以将“-U”选项与用户名一起使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -U user_name</span><br></pre></td></tr></table></figure>
+
+<p>例如，我可以看到root用户正在运行的所有进程是这样的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ps -U root</span><br><span class="line">  PID TTY          TIME CMD</span><br><span class="line">    1 ?        00:00:41 systemd</span><br><span class="line">    2 ?        00:00:00 kthreadd</span><br><span class="line">    3 ?        00:00:00 rcu_gp</span><br><span class="line">    4 ?        00:00:00 rcu_par_gp</span><br><span class="line">    8 ?        00:00:00 mm_percpu_wq</span><br><span class="line">    9 ?        00:00:03 ksoftirqd/0</span><br><span class="line">   10 ?        00:01:22 rcu_sched</span><br></pre></td></tr></table></figure>
+
+<h5 id="5-查看小组运行的所有进程"><a href="#5-查看小组运行的所有进程" class="headerlink" title="5.查看小组运行的所有进程"></a>5.查看小组运行的所有进程</h5><p>您还可以通过按组名或组ID来对正在运行的进程进行分类：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -G group_name_or_id</span><br></pre></td></tr></table></figure>
+
+<p>您可以与选项f结合使用以获取完整列表。</p>
+<h5 id="6-获取程序的所有出现次数和PID"><a href="#6-获取程序的所有出现次数和PID" class="headerlink" title="6.获取程序的所有出现次数和PID"></a>6.获取程序的所有出现次数和PID</h5><p>ps命令的基本用法之一是获取正在运行的程序的进程ID（PID）。通常，当要终止行为异常的程序时，将搜索该程序的所有实例，获取其PID并使用kill命令终止该过程。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -C program__name</span><br></pre></td></tr></table></figure>
+
+<p>例如，如果我必须找到apt软件包管理器的所有正在运行的实例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ps -C apt</span><br><span class="line">  PID TTY          TIME CMD</span><br><span class="line">11425 pts/1    00:00:00 apt</span><br></pre></td></tr></table></figure>
+
+<p>您也可以<a target="_blank" rel="noopener" href="https://linuxhandbook.com/grep-command-examples/">使用grep命令</a>获得类似的结果。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep program_name</span><br></pre></td></tr></table></figure>
+
+<h5 id="7-获取有关PID的过程信息"><a href="#7-获取有关PID的过程信息" class="headerlink" title="7.获取有关PID的过程信息"></a>7.获取有关PID的过程信息</h5><p>好的！您有一个PID，但您不知道它属于哪个进程。您可以通过以下方式使用ps命令从其PID查找过程信息，N即PID：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -pN</span><br></pre></td></tr></table></figure>
+
+<p>您可以通过使用逗号分隔多个PID，以使用多个PID：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -pN1,N2,N3</span><br></pre></td></tr></table></figure>
+
+<h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><p>其实上面提到了一点，结合ps命令搜索进程，所以可以看出grep命令就像一个过滤器一样的作用，grep在文件中搜索匹配条件的内容，并显示包含该条件的所有行。 </p>
+<h4 id="基本用法-1"><a href="#基本用法-1" class="headerlink" title="基本用法"></a>基本用法</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@vultr ~]# grep --help</span><br><span class="line">Usage: grep [OPTION]... PATTERN [FILE]...</span><br><span class="line">Search for PATTERN in each FILE or standard input.</span><br><span class="line">PATTERN is, by default, a basic regular expression (BRE).</span><br><span class="line">Example: grep -i &#x27;hello world&#x27; menu.h main.c</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$cat &gt; geekfile.txt</span><br><span class="line">unix is great os. unix is opensource. unix is free os.</span><br><span class="line">learn operating system.</span><br><span class="line">Unix linux which one you choose.</span><br><span class="line">uNix is easy to learn.unix is a multiuser os.Learn unix .unix is a powerful.</span><br></pre></td></tr></table></figure>
+
+<p><strong>1.不区分大小写的搜索：</strong> -i选项允许在给定文件中不区分大小写地搜索字符串。比如“ UNIX”，“ Unix”，“ unix”等词都可匹配。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$grep -i &quot;UNix&quot; geekfile.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>Output:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">unix is great os. unix is opensource. unix is free os.</span><br><span class="line">Unix linux which one you choose.</span><br><span class="line">uNix is easy to learn.unix is a multiuser os.Learn unix .unix is a powerful.</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 显示与条件匹配的文件名</strong> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$grep -l &quot;unix&quot; *</span><br><span class="line"></span><br><span class="line">or</span><br><span class="line"> </span><br><span class="line">$grep -l &quot;unix&quot; f1.txt f2.txt f3.xt f4.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>Output:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geekfile.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 检查文件中的整个单词 :</strong> 默认情况下，即使grep在文件中找到子字符串，它也只会匹配给定的字符串。 grep的-w选项使其仅匹配整个单词。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ grep -w &quot;unix&quot; geekfile.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>Output:</strong></p>
+<img src="/2020/04/21/ps-grep-top-free/image-20200422105439799.png" class="">
+
+
+<p><strong>4.使用grep -n在显示输出时显示行号：</strong>要显示匹配行的文件的行号。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ grep -n &quot;unix&quot; geekfile.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>Output:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1:unix is great os. unix is opensource. unix is free os.</span><br><span class="line">4:uNix is easy to learn.unix is a multiuser os.Learn unix .unix is a powerful.</span><br></pre></td></tr></table></figure>
+
+<p><strong>5.反转模式匹配：</strong>您可以使用-v选项显示与指定搜索字符串模式不匹配的行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ grep -v &quot;unix&quot; geekfile.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>Output:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">learn operating system.</span><br><span class="line">Unix linux which one you choose.</span><br></pre></td></tr></table></figure>
+
+<p><strong>6.匹配以字符串开头的行：</strong> ^正则表达式模式指定行的开头。可以在grep中使用它来匹配以给定的字符串开头的行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ grep &quot;^unix&quot; geekfile.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>Output:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unix is great os. unix is opensource. unix is free os.</span><br></pre></td></tr></table></figure>
+
+<p><strong>7.匹配以字符串结尾的行：</strong>“ $”正则表达式模式指定行的结尾。可以在grep中使用它来匹配以给定字符串结尾的行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ grep &quot;os$&quot; geekfile.txt</span><br></pre></td></tr></table></figure>
+
+<p><strong>Output:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@vultr home]# grep &quot;system.$&quot; geekfile.txt</span><br><span class="line">learn operating system.</span><br></pre></td></tr></table></figure>
+
+<p>grep正则有兴趣的可以看下<a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/regular-expression-grep/?ref=rp">regular-expression-grep</a>。通常我是ps和grep结合在一起用，比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@vultr home]# ps -ef |grep -i &quot;v2ray&quot;</span><br><span class="line">root      1008     1  0 Apr17 ?        00:01:57 /usr/bin/v2ray/v2ray -config /etc/v2ray/config.json</span><br><span class="line">root     29435 28377  0 11:09 pts/0    00:00:00 grep --color=auto -i v2ray</span><br></pre></td></tr></table></figure>
+
+<h4 id="小结一下"><a href="#小结一下" class="headerlink" title="小结一下"></a>小结一下</h4><table>
+<thead>
+<tr>
+<th align="left">Linux grep command options</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-i</td>
+<td align="left">忽略大小写</td>
+</tr>
+<tr>
+<td align="left">-w</td>
+<td align="left">强制PATTERN只匹配整个单词</td>
+</tr>
+<tr>
+<td align="left">-v</td>
+<td align="left">反向匹配</td>
+</tr>
+<tr>
+<td align="left">-n</td>
+<td align="left">输出匹配的行号</td>
+</tr>
+<tr>
+<td align="left">-h</td>
+<td align="left">在输出中禁止Unix文件名前缀</td>
+</tr>
+<tr>
+<td align="left">-r</td>
+<td align="left">在Linux上递归搜索目录</td>
+</tr>
+<tr>
+<td align="left">-R</td>
+<td align="left">就像-r一样，但是遵循所有符号链接</td>
+</tr>
+<tr>
+<td align="left">-l</td>
+<td align="left">仅打印具有选定行的文件名称称</td>
+</tr>
+<tr>
+<td align="left">-c</td>
+<td align="left">每个文件仅打印选定行的数量</td>
+</tr>
+<tr>
+<td align="left">–color</td>
+<td align="left">颜色显示匹配的内容</td>
+</tr>
+</tbody></table>
+<h3 id="top"><a href="#top" class="headerlink" title="top"></a>top</h3><p>top命令提供系统信息的快速概述，它提供了正在运行的系统的动态实时视图，每3秒刷新一次（默认情况下）。 视图内容分为两部分：</p>
+<ol>
+<li>系统的摘要信息</li>
+<li>当前由Linux内核管理的进程或线程的列表。</li>
+</ol>
+<p>一旦运行此命令，它将打开一个交互式命令模式，其中上半部分将包含进程和资源使用情况的统计信息。 下半部分包含当前正在运行的进程的列表。 按q会退出命令模式。</p>
+<img src="/2020/04/21/ps-grep-top-free/top.png" class="">
+
+<h5 id="上半部分"><a href="#上半部分" class="headerlink" title="上半部分"></a>上半部分</h5><p>如图，在终端的顶部，我们获得了概览数据，包括当前任务数、内存使用率和cpu负载。 </p>
+<p><strong>第一行：任务队列信息</strong>，同uptime命令的结果一样。</p>
+<blockquote>
+<p>4:06:23 — 当前系统时间</p>
+<p> up 4 days, 22:36 — 系统已经运行了4天22小时36分钟（在这期间系统没有重启过的吆！）</p>
+<p>2 users — 当前有2个用户登录系统</p>
+<p>load average: 0.00, 0.00, 0.00 — load average后面的三个数分别是1分钟、5分钟、15分钟的负载情况。例如，负载为1.0表示当前负荷为100％。</p>
+</blockquote>
+<p><strong>load average</strong>：平均负载部分表示一分钟，五分钟和十五分钟的平均“负载”，数据是每隔5秒钟检查一次活跃的进程数，然后按特定算法计算出的数值。。 “负载”是系统执行的计算工作量的度量。 在Linux上，负载是在任何给定时刻处于R和D状态的进程数。 “平均负载”值为您提供了一个等待时间，可以用来衡量您需要等待多长时间才能完成工作。</p>
+<p>在多核系统上，您应该首先将平均负载除以CPU核数以得到类似的度量。</p>
+<p><strong>第二行：Tasks — 任务（进程）</strong></p>
+<p>系统进程也称为任务。进程可以以许多不同的方式运行，并使用各种算法确定优先级。 这有助于优化计算机执行任务的方式和时间。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Tasks:  83 total,   1 running,  48 sleeping,   0 stopped,   0 zombie</span><br></pre></td></tr></table></figure>
+
+<p>对状态进行简单的说明:</p>
+<table>
+<thead>
+<tr>
+<th align="left">State</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Running</td>
+<td align="left">运行中&#x2F;待处理（Active &#x2F; in Queue to be Processed）</td>
+</tr>
+<tr>
+<td align="left">Sleeping</td>
+<td align="left">休眠（Waiting for a Process to Complete）</td>
+</tr>
+<tr>
+<td align="left">Stopped</td>
+<td align="left">停止（Interrupted by Job Control Signal ）</td>
+</tr>
+<tr>
+<td align="left">Zombie</td>
+<td align="left">僵尸进程（Made up of “Orphaned” Child Tasks &#x2F; No Longer Running）</td>
+</tr>
+</tbody></table>
+<p><strong>第三行：cpu状态信息</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%Cpu(s):  0.3 us,  0.0 sy,  0.0 ni, 99.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st</span><br></pre></td></tr></table></figure>
+
+<p>CPU使用率部分显示了在各种任务上花费的CPU时间的百分比。 </p>
+<table>
+<thead>
+<tr>
+<th align="left">Abbreviation</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">us</td>
+<td align="left">CPU在用户空间（各个进程使用）中花费在执行进程上的时间</td>
+</tr>
+<tr>
+<td align="left">sy</td>
+<td align="left">运行内核空间（内核使用）进程所花费的时间</td>
+</tr>
+<tr>
+<td align="left">ni</td>
+<td align="left">优先级</td>
+</tr>
+<tr>
+<td align="left">id</td>
+<td align="left">CPU保持空闲的时间</td>
+</tr>
+<tr>
+<td align="left">wa</td>
+<td align="left">CPU等待I &#x2F; O完成所花费的时间</td>
+</tr>
+<tr>
+<td align="left">hi</td>
+<td align="left">处理硬件中断花费的时间（中断是向处理器发出有关需要立即关注的事件的信号）</td>
+</tr>
+<tr>
+<td align="left">si</td>
+<td align="left">处理软件中断花费的时间（中断是向处理器发出有关需要立即关注的事件的信号）</td>
+</tr>
+<tr>
+<td align="left">st</td>
+<td align="left">CPU在虚拟机上花费的时间</td>
+</tr>
+</tbody></table>
+<p><strong>第四行：内存状态信息</strong></p>
+<p>“内存”部分显示有关系统内存使用情况的信息。 标记为“ Mem”和“ Swap”的行分别显示有关RAM和交换空间的信息。 简而言之，交换空间是硬盘的一部分，就像RAM一样使用。 当RAM使用率接近满时，RAM的不常用区域将写入交换空间，以备以后需要时检索。 但是，由于访问磁盘的速度很慢，因此过多地依赖交换会损害系统性能。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">KiB Mem :  1006744 total,   200872 free,   146212 used,   659660 buff/cache</span><br><span class="line">KiB Swap:        0 total,        0 free,        0 used.   660908 avail Mem</span><br></pre></td></tr></table></figure>
+
+<p>  “avail Mem”值是可以分配给进程而不会引起更多交换的内存量。</p>
+<p>Linux内核还尝试以各种方式减少磁盘访问时间。 它在RAM中维护“磁盘缓存”，在RAM中存储磁盘的常用区域。 另外，磁盘写操作存储在“磁盘缓冲区”中，内核最终将其写出到磁盘。 它们消耗的总内存为“ buff &#x2F; cache”值。缓存使用的内存将在需要时分配给进程。</p>
+<h5 id="下半部分"><a href="#下半部分" class="headerlink" title="下半部分"></a>下半部分</h5><p>在终端的下部，我们有一个任务信息的表格，其中包含许多详细信息，先简单解释一下表头。</p>
+<table>
+<thead>
+<tr>
+<th align="left">Abbreviation</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">PID</td>
+<td align="left">进程ID(唯一正整数)</td>
+</tr>
+<tr>
+<td align="left">USER</td>
+<td align="left">用户名</td>
+</tr>
+<tr>
+<td align="left">PR</td>
+<td align="left">代表任务的优先级</td>
+</tr>
+<tr>
+<td align="left">NI</td>
+<td align="left">代表任务的价值。 负值表示优先级较高，正值表示优先级较低</td>
+</tr>
+<tr>
+<td align="left">VIRT</td>
+<td align="left">任务使用的虚拟内存</td>
+</tr>
+<tr>
+<td align="left">RES</td>
+<td align="left">任务使用的物理内存</td>
+</tr>
+<tr>
+<td align="left">SHR</td>
+<td align="left">任务使用的共享内存</td>
+</tr>
+<tr>
+<td align="left">S</td>
+<td align="left">进程状态（正在运行，已停止等）</td>
+</tr>
+<tr>
+<td align="left">%CPU</td>
+<td align="left">CPU 负载</td>
+</tr>
+<tr>
+<td align="left">%MEM</td>
+<td align="left">物理内存&#x2F;总内存的百分比</td>
+</tr>
+<tr>
+<td align="left">TIME +</td>
+<td align="left">自启动以来该进程使用的总CPU时间，精确到百分之一秒</td>
+</tr>
+<tr>
+<td align="left">COMMAND</td>
+<td align="left">进程名称</td>
+</tr>
+</tbody></table>
+<h3 id="基本用法-2"><a href="#基本用法-2" class="headerlink" title="基本用法"></a>基本用法</h3><h4 id="杀进程"><a href="#杀进程" class="headerlink" title="杀进程"></a><strong>杀进程</strong></h4><p>如果您想终止进程，只需在top运行时按“ k”。 这将弹出提示，提示您输入进程的进程ID，然后按Enter。</p>
+<p>如下图中的：<span style=color:red>PID to signal&#x2F;kill [default pid &#x3D; 1]</span></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Tasks:  81 total,   2 running,  46 sleeping,   0 stopped,   0 zombie</span><br><span class="line">%Cpu(s):  0.0 us,  0.3 sy,  0.0 ni, 99.7 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st</span><br><span class="line">KiB Mem :  1006744 total,   202708 free,   144288 used,   659748 buff/cache</span><br><span class="line">KiB Swap:        0 total,        0 free,        0 used.   662828 avail Mem</span><br><span class="line">&lt;span style=color:red&gt;PID to signal/kill [default pid = 1]&lt;/span&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="进程列表排序"><a href="#进程列表排序" class="headerlink" title="进程列表排序"></a><strong>进程列表排序</strong></h4><p>使用诸如top之类的工具的最常见原因之一就是找出哪个进程消耗最多的资源。 您可以按以下键对列表进行排序（记住是<strong>大写</strong>哦）：</p>
+<ul>
+<li>“ M”按内存使用量排序</li>
+<li>“ P”按CPU使用率排序</li>
+<li>“ N”按进程ID排序</li>
+<li>“ T”按运行时间排序</li>
+</ul>
+<p>默认情况下，top按降序显示所有结果。 但是，您可以通过按’R’切换到升序。</p>
+<p>您也可以使用-o+表头的名称对列表进行排序。 例如，如果要按CPU使用率对进程进行排序，可以使用以下方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top -o %CPU</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看线程"><a href="#查看线程" class="headerlink" title="查看线程"></a>查看线程</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">top -H</span><br><span class="line">//出现的视图中的Tasks会变为Threads</span><br><span class="line">Threads: 103 total,   3 running,  68 sleeping,   0 stopped,   0 zombie</span><br></pre></td></tr></table></figure>
+
+<h4 id="显示完整路径（绝对路径）"><a href="#显示完整路径（绝对路径）" class="headerlink" title="显示完整路径（绝对路径）"></a>显示完整路径（绝对路径）</h4><p>默认情况下，top不显示程序的完整路径，也不区分内核空间进程和用户空间进程。 如果您需要此信息，请在top运行时按“ c”，再次按“ c”返回默认设置。内核空间进程周围带有方括号标记。 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">2036 root      20   0  158820   8852   7532 S  0.3  0.9   0:00.01 sshd: root [priv]</span><br><span class="line">   1 root      20   0   46124   8060   5616 S  0.0  0.8   0:15.58 /usr/lib/systemd/systemd --switched-root --system --deserialize 22</span><br><span class="line">   2 root      20   0       0      0      0 S  0.0  0.0   0:00.13 [kthreadd]</span><br><span class="line">   3 root       0 -20       0      0      0 I  0.0  0.0   0:00.00 [rcu_gp]</span><br><span class="line">   4 root       0 -20       0      0      0 I  0.0  0.0   0:00.00 [rcu_par_gp]</span><br></pre></td></tr></table></figure>
+
+<p>或者运行以下命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top -c</span><br></pre></td></tr></table></figure>
+
+<h4 id="树状显示"><a href="#树状显示" class="headerlink" title="树状显示"></a>树状显示</h4><p>如果希望查看进程的子级父级。 按“ V”。比如下图所示systemd为系统启动的第一个进程，该进程又创建了sshd等其它进程…。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">    1 root      20   0   46124   8060   5616 S  0.0  0.8   0:15.58 systemd</span><br><span class="line">  439 root      20   0   37204   3708   3396 S  0.0  0.4   2:00.59  `- systemd-journal</span><br><span class="line"> 1012 root      20   0  258612   9696   8084 S  0.0  1.0   1:14.57  `- rsyslogd</span><br><span class="line"> 1052 root      20   0  131160   2188     60 S  0.0  0.2   0:00.00  `- nginx</span><br><span class="line"> 1053 nginx     20   0  132160  10100   7252 S  0.0  1.0   0:46.42      `- nginx</span><br><span class="line"> 1265 root      20   0   89716   4836   3804 S  0.0  0.5   0:02.67  `- master</span><br><span class="line"> 1268 postfix   20   0   89888   6600   5596 S  0.0  0.7   0:00.65      `- qmgr</span><br><span class="line"> 1608 postfix   20   0   89820   6628   5624 S  0.0  0.7   0:00.01      `- pickup</span><br><span class="line">13138 root      20   0  112936   7732   6708 S  0.0  0.8   0:16.48  `- sshd</span><br><span class="line">28367 root      20   0  159228  10264   8572 S  0.0  1.0   0:03.73      `- sshd</span><br><span class="line">28377 root      20   0  115464   3624   3208 S  0.0  0.4   0:00.13          `- bash</span><br><span class="line"> 2053 root      20   0  161908   4444   3804 R  0.3  0.4   0:00.21              `- top</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="列出指定用户的进程"><a href="#列出指定用户的进程" class="headerlink" title="列出指定用户的进程"></a>列出指定用户的进程</h4><p>要列出某个用户的进程，请在top运行时按“ u”。 </p>
+<p>或者用以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top -u root</span><br></pre></td></tr></table></figure>
+
+<h4 id="过滤进程"><a href="#过滤进程" class="headerlink" title="过滤进程"></a>过滤进程</h4><p>如果只想查看某些进程，可以使用top的过滤。 要激活此模式，请按“ o” &#x2F;“ O”。 顶部会出现一个提示，您可以在此处键入过滤器表达式。如下图中的<span style=color:red>add filter #1 (ignoring case) as: [!]FLD?VAL</span></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">KiB Mem :  1006744 total,   198520 free,   147308 used,   660916 buff/cache</span><br><span class="line">KiB Swap:        0 total,        0 free,        0 used.   659616 avail Mem</span><br><span class="line">add filter #1 (ignoring case) as: [!]FLD?VAL</span><br><span class="line">  PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND</span><br><span class="line">    1 root      20   0   46124   8060   5616 S  0.0  0.8   0:15.74 systemd</span><br><span class="line">    2 root      20   0       0      0      0 S  0.0  0.0   0:00.13 kthreadd</span><br><span class="line">    3 root       0 -20       0      0      0 I  0.0  0.0   0:00.00 rcu_gp</span><br></pre></td></tr></table></figure>
+
+<p>过滤器表达式是指定属性和值之间关系的语句。 过滤器的一些示例是：</p>
+<ul>
+<li>COMMAND &#x3D; getty：过滤在COMMAND属性中包含“ getty”的进程。</li>
+<li>！COMMAND &#x3D; getty：过滤在COMMAND属性中没有“ getty”的进程。</li>
+<li>％CPU&gt; 3.0：筛选CPU利用率超过3％的进程。</li>
+</ul>
+<p>添加过滤器后，您可以通过添加更多过滤器来进一步简化操作。 要清除添加的所有过滤器，请按“ &#x3D;”。</p>
+<h4 id="更改CPU和内存统计信息的默认外观"><a href="#更改CPU和内存统计信息的默认外观" class="headerlink" title="更改CPU和内存统计信息的默认外观"></a>更改CPU和内存统计信息的默认外观</h4><p>如果觉得top显示CPU和内存统计信息的默认方式不喜欢。 可以按“ t”和“ m”来更改CPU和内存统计信息的样式。 </p>
+<img src="/2020/04/21/ps-grep-top-free/top1.png" class="">
+
+<h4 id="保存设置"><a href="#保存设置" class="headerlink" title="保存设置"></a>保存设置</h4><p>如果您对top的输出进行了任何更改，则可以按“ W”将其保存以备后用。 top将其配置写入主目录中的.toprc文件。</p>
+<h4 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h4><blockquote><footer><strong>top1</strong><cite><a target="_blank" rel="noopener" href="http://man7.org/linux/man-pages/man1/top.1.html">man7.org</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>grep-command-in-unixlinux</strong><cite><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/grep-command-in-unixlinux">geeksforgeeks</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>howto-use-grep-command-in-linux-unix</strong><cite><a target="_blank" rel="noopener" href="https://www.cyberciti.biz/faq/howto-use-grep-command-in-linux-unix/">Vivek Gite</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>guide-linux-top-command</strong><cite><a target="_blank" rel="noopener" href="https://www.booleanworld.com/guide-linux-top-command/">SUPRIYO BISWAS</a></cite></footer></blockquote>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2020/03/22/Java%208%20Stream/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/03/22/Java%208%20Stream/" class="post-title-link" itemprop="url">Java 8 Streams</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-03-22 12:20:00" itemprop="dateCreated datePublished" datetime="2020-03-22T12:20:00+08:00">2020-03-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <img src="/2020/03/22/Java%208%20Stream/computer-keyboard-34153.jpg" class="" title="Photo by Negative Space from Pexels">
+
+<p>最近两周被平台组指名道姓拉去当了两周的苦力，写业务层代码，因为逻辑比较复杂数据输入比较多样，所以导致使用集合的概率很高，且常常伴随着过滤、排序等操作，继而用到了很多Streams提供的方法，遂做个简单记录。</p>
+<h3 id="Streams"><a href="#Streams" class="headerlink" title="Streams"></a>Streams</h3><p>Stream是Java 8中引入的新的抽象层，它提供了一些类似SQL语句的声明性方式处理数据。</p>
+<p>流操作分为中间操作和最终操作，元素流在管道中经过中间操作（intermediate operation）的处理，最后由最终操作(terminal operation)得到前面处理的结果。 流管道由一个源（例如Collection，数组，生成器函数或I &#x2F; O通道）组成； 随后是零个或多个中间操作，例如Stream.filter或Stream.map； 以及诸如Stream.forEach或Stream.reduce之类的终端操作。</p>
+<img src="/2020/03/22/Java%208%20Stream/java-streams.png" class="">
+
+<p>即将要处理的元素集合看作一种流， 流在管道中传输， 并且可以在管道中插入节点上进行处理， 比如筛选， 排序，聚合等。</p>
+<p>当然为什么喜欢用它还是因为Stream API 借助于同样新出现的 Lambda 表达式，极大的提高编程效率和程序可读性。会让代码看起来更加简洁当然通常也会更加高效。</p>
+<h3 id="API"><a href="#API" class="headerlink" title="API"></a>API</h3><img src="/2020/03/22/Java%208%20Stream/apis.png" class="" title="api">
+
+<p>如上图api很多，其中又可以按照最开始说的分为中间操作、最终操作两类，中间（<strong>Intermediate</strong>）操作是可以零个或者多个但是最终（<strong>Terminal</strong>）操作只能有一个，能力有限我就列举一下我常用的。</p>
+<p><strong>可能我们需要注意的一个概念</strong>：因为一个 Stream 可以进行多次中间操作，那是不是就会对 Stream 的每个元素进行转换多次，即时间复杂度就是 N（转换次数）个 ？其实不是这样的，转换操作都是 lazy 的，多个转换操作只会在 Terminal 操作的时候融合起来，一次循环完成。</p>
+<h4 id="中间操作（intermediate-operation）"><a href="#中间操作（intermediate-operation）" class="headerlink" title="中间操作（intermediate operation）"></a>中间操作（intermediate operation）</h4><table>
+<thead>
+<tr>
+<th>API</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>filter</td>
+<td>用于按指定条件过滤元素</td>
+</tr>
+<tr>
+<td>map</td>
+<td>map方法将每个元素映射到其相应的结果，通常用于list转换为map</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>limit返回流中的前N个元素，同SQL的limit</td>
+</tr>
+<tr>
+<td>sorted</td>
+<td>对Stream中的元素进行排序</td>
+</tr>
+<tr>
+<td>distinct</td>
+<td>删除重复项</td>
+</tr>
+</tbody></table>
+<h4 id="最终操作（terminal-operation）"><a href="#最终操作（terminal-operation）" class="headerlink" title="最终操作（terminal operation）"></a>最终操作（terminal operation）</h4><table>
+<thead>
+<tr>
+<th>API</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>forEach</td>
+<td>迭代Stream中的元素</td>
+</tr>
+<tr>
+<td>sum</td>
+<td>对Stream中的元素求和</td>
+</tr>
+<tr>
+<td>collect</td>
+<td>可以接受各种参数并将流元素累加成集合</td>
+</tr>
+<tr>
+<td>reduce</td>
+<td>这个方法的主要作用是把 Stream 元素组合起来。它提供一个起始值（种子），然后依照运算规则（BinaryOperator），和前面 Stream 的第一个、第二个、第 n 个元素组合。其实sum等这类也可以说是reduce。</td>
+</tr>
+<tr>
+<td>max</td>
+<td>获取Stream中符合条件的最大值</td>
+</tr>
+<tr>
+<td>findAny</td>
+<td>这是一个 termimal 操作，它总是返回 Stream 的符合条件的元素，或者空。注意它的返回值类型是Optional（为了避免空指针）。</td>
+</tr>
+<tr>
+<td>anyMatch</td>
+<td>Stream 中只要有一个元素符合传入的 条件。</td>
+</tr>
+</tbody></table>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>列出几个工作中实践的例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 用于按指定条件过滤元素并且把符合条件的添加到指定的集合</span><br><span class="line">List&lt;CiStrategy&gt; sorted = new ArrayList&lt;&gt;(cis.size());</span><br><span class="line">cis.stream().filter(it -&gt; it.getType() == StrategyType.GLOBAL).forEach(sorted::add);</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// 拿输入的id到stream中比较是否存在，如果不存在则返回null</span><br><span class="line">final List&lt;String&gt; agentEnableIds = getEnableAgenIdsByApp(query.getAppId());</span><br><span class="line"></span><br><span class="line">String enableId = agentEnableIds.stream()</span><br><span class="line">        .filter(id -&gt; agentId.equals(id))</span><br><span class="line">        .findAny()</span><br><span class="line">        .orElse(null);</span><br><span class="line">//未开启xx</span><br><span class="line">if (isNullOrEmpty(enableId)) &#123;</span><br><span class="line">    return Collections.emptyList();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 两个集合中，集合B中找到符合集合A中的数据，最终得到符合条件的元素集合</span><br><span class="line">agentCmsList.stream().filter(ag -&gt; agentEnableIds.contains(ag.getId())).collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// checkList的元素作为IpV4Ranges中toRange方法的参数，最终把toRange返回值转换为集合</span><br><span class="line">List&lt;String&gt; checkList = splitter.splitToList(scopesToCheck);</span><br><span class="line">List&lt;IpRange&gt; rangesToCheck = checkList.stream().map(IpV4Ranges::toRange).collect(toList());</span><br><span class="line"></span><br><span class="line">// failed集合中，去重后的类型失败的有哪些</span><br><span class="line">List&lt;String&gt; types = failed.stream().map(Quality.Metric::getType).distinct().collect(toList());</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Alarm的list集合，转换为map，key为Alarm的appId，value为Alarm</span><br><span class="line">List&lt;Alarm&gt; dealingAlarms = dealingAlarmPage.getList();</span><br><span class="line">Map&lt;String, Alarm&gt; dealingAlarmMap = dealingAlarms.stream().collect(Collectors.</span><br><span class="line">toMap(Alarm::getAppId, Function.identity()));</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 根据状态排序，如果状态一样按照名称排序</span><br><span class="line">    public IBoardAppDataList sortByAppStatus(String[] statusOrder) &#123;</span><br><span class="line">        return new BoardAppDataList(this.stream().sorted(new Comparator&lt;BoardAppData&gt;() &#123;</span><br><span class="line"></span><br><span class="line">            private int findStatus(String[] a, BoardAppData target) &#123;</span><br><span class="line">                return IntStream.range(0, a.length)</span><br><span class="line">                        .filter(i -&gt; String.valueOf(target.getStatus()).equals(a[i]))</span><br><span class="line">                        .findFirst()</span><br><span class="line">                        .orElse(-1);    // return -1 if target is not found</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public int compare(BoardAppData o1, BoardAppData o2) &#123;</span><br><span class="line">                int c = findStatus(statusOrder, o1) - findStatus(statusOrder, o2);</span><br><span class="line">                if (c == 0) &#123;</span><br><span class="line">                    return o1.getAppName().compareTo(o2.getAppName());</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    return c;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).collect(Collectors.toList()));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// 判断输入参数里是否存在任意一个满足haveXssCondition</span><br><span class="line">Set&lt;String&gt; keys = paramsObj.keySet();</span><br><span class="line">return keys.stream().anyMatch(key -&gt; haveXssCondition(uri, paramsObj, key));</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><p>很显然我这篇仅仅是一个简单的记录文档，如果需要深入了解，还是系统的看相关的文档和源码。而且我主要用的是stream其实还有parallelStream，有兴趣的大家可以看看。</p>
+<h4 id="感谢："><a href="#感谢：" class="headerlink" title="感谢："></a>感谢：</h4><blockquote><footer><strong>陈 争云, 占 宇剑, 和 司 磊</strong><cite><a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/java/j-lo-java8streamapi/index.html">Java 8 中的 Streams API 详解</a></cite></footer></blockquote>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1462,231 +2096,6 @@
 <blockquote>
 <p>否定自己是很耗能量的一件事，积极一点。</p>
 </blockquote>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2019/12/27/SSO%E5%AE%9E%E8%B7%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/12/27/SSO%E5%AE%9E%E8%B7%B5/" class="post-title-link" itemprop="url">SSO实践</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-12-27 17:49:00" itemprop="dateCreated datePublished" datetime="2019-12-27T17:49:00+08:00">2019-12-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <img src="/2019/12/27/SSO%E5%AE%9E%E8%B7%B5/florian-olivo-4hbJ-eymZ1o-unsplash.jpg" class="" title="Photo by Florian Olivo on Unsplash">
-
-
-
-<h1 id="OK，正式说明了"><a href="#OK，正式说明了" class="headerlink" title="OK，正式说明了"></a>OK，正式说明了</h1><p>SSO的说明网上有很多我就不在这儿丢人了。找了张小图SSO的作用一目了然。</p>
-<img src="/2019/12/27/SSO%E5%AE%9E%E8%B7%B5/whatis-single_sign_on-h.png" class="" title="https:&#x2F;&#x2F;searchsecurity.techtarget.com&#x2F;definition&#x2F;single-sign-on">
-
-<p>以下主要记录一下我在产品中SSO的实践案例。</p>
-<h2 id="案例1"><a href="#案例1" class="headerlink" title="案例1"></a>案例1</h2><p><strong>案例1</strong> 是比较标准的基于OpenID方式的SSO，用Node.js写的。</p>
-<p>案例1没什么说的，网上样例很多，如果有兴趣可以看下我之前写的，不过比较老了，也是第一次写nodejs。</p>
-<blockquote><footer><strong>OpenID+MongoDB实现的数据交换中心</strong><cite><a target="_blank" rel="noopener" href="https://github.com/WebHu/async_data_exchange_center.git">github.com/WebHu/async_data_exchange_center.git</a></cite></footer></blockquote>
-
-
-
-<h3 id="案例2"><a href="#案例2" class="headerlink" title="案例2"></a><strong>案例2</strong></h3><p>则是非标的SSO，用Java+javascript写的。</p>
-<p>案例2虽然不是非标的，不过整体流程是具备的，比较适用特定编码场景（Spring Security+OpenID），可能有需要的同学，反正我是没在网上找到这类案例。</p>
-<img src="/2019/12/27/SSO%E5%AE%9E%E8%B7%B5/sso.png" class="" title="场景说明">
-
-<p>客户现场的系统A需要登入到我们提供的系统B，没有单独用户中心即也不存在用户同步，客户要求的是能无缝登入，所以解决办法有用户则直接登入无用户则创建后再登入，登录效果与从登录页面发起的登录一样，所以token解析后用Security的方式执行登录。</p>
-<h4 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * sso出现在路径末尾 react router方式 目前采用这种方式 http://.../frame/#/module/xxx?sso=xxx 避免sso一直保留</span><br><span class="line"> * @param key 需要获取url参数key</span><br><span class="line"> * @returns &#123;string|null&#125;</span><br><span class="line"> */</span><br><span class="line">export function getSsoString(key) &#123;</span><br><span class="line">  const str = location.hash;</span><br><span class="line">  if (str == null || str.length &lt; 2) &#123;</span><br><span class="line">    return null;</span><br><span class="line">  &#125;</span><br><span class="line">  const arr = str.split(&#x27;?&#x27;);</span><br><span class="line">  if (arr != null &amp;&amp; arr.length === 2) &#123;</span><br><span class="line">    const query = arr[1];</span><br><span class="line">    if (query != null &amp;&amp; query.length &gt; 0) &#123;</span><br><span class="line">      const words = query.split(&#x27;&amp;&#x27;);</span><br><span class="line">      // 将每一个数组元素以=分隔并赋给obj对象</span><br><span class="line">      for (let i = 0; i &lt; words.length; i++) &#123;</span><br><span class="line">        const tmp_arr = words[i].split(&#x27;=&#x27;);</span><br><span class="line">        const k = decodeURIComponent(tmp_arr[0]);</span><br><span class="line">        const v = decodeURIComponent(tmp_arr[1]);</span><br><span class="line">        if (k === key) &#123;</span><br><span class="line">          return v;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 单点登录逻辑 在页面token发送到后端进行验证</span><br><span class="line"> * @param callback</span><br><span class="line"> */</span><br><span class="line">export function sso(callback) &#123;</span><br><span class="line">  const token = getSsoString(&#x27;sso&#x27;);</span><br><span class="line">  if (token != null) &#123;</span><br><span class="line">    req(BASE_WEB_API.SSO, &#123; token &#125;, null, &#123; validateError: true &#125;)</span><br><span class="line">      .then(response =&gt; &#123;</span><br><span class="line">        // do something....</span><br><span class="line">        if (callback != null) &#123;</span><br><span class="line">          callback();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">      .catch(e =&gt; &#123;</span><br><span class="line">        console.error(&#x27;failed sso --&gt; &#x27;, e);</span><br><span class="line">        if (callback != null) &#123;</span><br><span class="line">          callback();</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125; else if (callback != null) &#123;</span><br><span class="line">    callback();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 跳转到猎豹系统</span><br><span class="line"> *</span><br><span class="line"> * @param response</span><br><span class="line"> * @throws Exception</span><br><span class="line"> */</span><br><span class="line">@PostMapping(value = &quot;/cheetah&quot;, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)</span><br><span class="line">public String cheetah(@RequestBody SSOVO ssovo,</span><br><span class="line">                      HttpServletRequest request,</span><br><span class="line">                      HttpServletResponse response) throws Exception &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        // 验证license</span><br><span class="line">        if (!licenseService.isValid()) &#123;</span><br><span class="line">            LOGGER.error(&quot;license is invalid&quot;);</span><br><span class="line">            return validateTokenError(request, LICENSE_ERROR_MSG);</span><br><span class="line">        &#125;</span><br><span class="line">        //解析token</span><br><span class="line">        Context.Token userToken = Context.getUserInfoFromToken(ssovo.getToken());</span><br><span class="line">        if (isNullOrEmpty(userToken.getUserName()) || isNullOrEmpty(userToken.getPassword())) &#123;</span><br><span class="line">            LOGGER.warn(&quot;token is invalid:&#123;&#125;&quot;, ssovo.getToken());</span><br><span class="line">            return validateTokenError(request);</span><br><span class="line">        &#125;</span><br><span class="line">        LOGGER.info(&quot;当前单点登录的用户信息为:&#123;&#125;&quot;, JSON.toJSONString(userToken));</span><br><span class="line">        //验证内置用户是否存在，不存在则创建</span><br><span class="line">        SSOUserVO user = ssoService.checkUser(userToken.getUserName(), Context.getCmsContext());</span><br><span class="line">        if (user != null) &#123;</span><br><span class="line">            // 执行登录</span><br><span class="line">            user.setPassword(userToken.getPassword());</span><br><span class="line">            return ssoLogin(request, response, user);</span><br><span class="line">        &#125;</span><br><span class="line">        //异常时跳转到登录页</span><br><span class="line">        return validateTokenError(request);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        LOGGER.error(&quot;sso登录失败:&#123;&#125;&quot;, e.getMessage());</span><br><span class="line">        return validateTokenError(request);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private String validateTokenError(HttpServletRequest request) &#123;</span><br><span class="line">    return validateError(request, SSO_VERIFICATION_ERROR_MSG);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private String validateTokenError(HttpServletRequest request, String msg) &#123;</span><br><span class="line">    return validateError(request, msg);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private String validateError(HttpServletRequest request, String msg) &#123;</span><br><span class="line">    HttpSession session = request.getSession();</span><br><span class="line">    if (session != null) &#123;</span><br><span class="line">        //使session失效</span><br><span class="line">        session.invalidate();</span><br><span class="line">    &#125;</span><br><span class="line">    SSOErrorVO errorVo = new SSOErrorVO(SSO_VERIFICATION_ERROR, msg);</span><br><span class="line">    return JSON.toJSONString(errorVo);</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> * 执行登录</span><br><span class="line"> *</span><br><span class="line"> * @param request</span><br><span class="line"> * @param response</span><br><span class="line"> * @param userToken</span><br><span class="line"> * @return</span><br><span class="line"> * @throws IOException</span><br><span class="line"> * @throws ServletException</span><br><span class="line"> */</span><br><span class="line">private String ssoLogin(HttpServletRequest request, HttpServletResponse response, SSOUserVO userToken) throws IOException, ServletException &#123;</span><br><span class="line">    try &#123;</span><br><span class="line">        //登录</span><br><span class="line">        UsernamePasswordAuthenticationToken authReq</span><br><span class="line">                = new UsernamePasswordAuthenticationToken(userToken.getUserName(), userToken.getPassword());</span><br><span class="line">        authReq.setDetails(new WebAuthenticationDetails(request));</span><br><span class="line">        Authentication auth = authenticationManagerBean.authenticate(authReq);</span><br><span class="line">        SecurityContextHolder.getContext().setAuthentication(auth);</span><br><span class="line">        HttpSession session = request.getSession(true);</span><br><span class="line">        // 永不超时</span><br><span class="line">        session.setMaxInactiveInterval(-1);</span><br><span class="line">        //TODO 静态导入</span><br><span class="line">        session.setAttribute(SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());</span><br><span class="line">        baymaxLoginSuccessHandler.onAuthenticationSuccess(request, response, auth);</span><br><span class="line">    &#125; catch (AuthenticationException failed) &#123;</span><br><span class="line">        LOGGER.warn(</span><br><span class="line">                &quot;sso: InternalAuthenticationServiceException occurred while trying to authenticate the user.&quot;,</span><br><span class="line">                failed);</span><br><span class="line">        SecurityContextHolder.clearContext();</span><br><span class="line">        baymaxAuthenticationFailureHandler.onAuthenticationFailure(request, response, failed);</span><br><span class="line">        validateTokenError(request);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 根据用户名，获取用户的token</span><br><span class="line"> *</span><br><span class="line"> * @param userName</span><br><span class="line"> * @param response</span><br><span class="line"> * @return</span><br><span class="line"> */</span><br><span class="line">@RequestMapping(value = &quot;/getToken/&#123;userName&#125;&quot;, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)</span><br><span class="line">public String getToken(@PathVariable(value = &quot;userName&quot;, required = false) String userName, HttpServletResponse response) &#123;</span><br><span class="line"></span><br><span class="line">    try &#123;</span><br><span class="line">        return Context.createToken(userName, PasswordUtil.getPlaintextPwd());</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">        LOGGER.error(&quot;获取token失败:&#123;&#125;&quot;, e.getMessage());</span><br><span class="line">        formatErrorResponse(response, HttpServletResponse.SC_BAD_REQUEST, e.getMessage());</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void formatErrorResponse(HttpServletResponse response, int httpCode, String errorMsg) &#123;</span><br><span class="line">    response.setStatus(httpCode);</span><br><span class="line">    response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);</span><br><span class="line">    try (PrintWriter out = response.getWriter();) &#123;</span><br><span class="line">        String errorMsgVo = JSON.toJSONString(ImmutableMap.of(&quot;code&quot;, SSO_GET_TOKEN_ERROR, &quot;message&quot;, errorMsg));</span><br><span class="line">        out.write(errorMsgVo);</span><br><span class="line">        out.flush();</span><br><span class="line">    &#125; catch (IOException ex) &#123;</span><br><span class="line">        LOGGER.warn(&quot;get token :&#123;&#125;&quot;, ex.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>处理400异常避免出现白页</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @author Gamehu</span><br><span class="line"> * @description 接管400异常，个性化错误提示</span><br><span class="line"> * @date 2019/12/19</span><br><span class="line"> */</span><br><span class="line">@RestControllerAdvice(assignableTypes = SSOController.class)</span><br><span class="line">@Order(Ordered.HIGHEST_PRECEDENCE)</span><br><span class="line">@Slf4j</span><br><span class="line">@Component</span><br><span class="line">public class SSO400ExceptionHandler &#123;</span><br><span class="line">    @ExceptionHandler(value = Exception.class)</span><br><span class="line">    @ResponseStatus(HttpStatus.BAD_REQUEST)</span><br><span class="line">    public Object defaultErrorHandler(Exception e) &#123;</span><br><span class="line">        log.warn(&quot;---SSO验证异常---  ERROR: &#123;&#125;&quot;, e.getMessage());</span><br><span class="line">        return ImmutableMap.of(&quot;code&quot;, SSO_VERIFICATION_ERROR, &quot;message&quot;, e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="引伸阅读："><a href="#引伸阅读：" class="headerlink" title="引伸阅读："></a>引伸阅读：</h3><blockquote><footer><strong>OpenID versus OAuth from the user’s perspective</strong><cite><a target="_blank" rel="noopener" href="http://cakebaker.42dh.com/2008/04/01/openid-versus-oauth-from-the-users-perspective/">cakebaker.42dh.com/2008/04/01/openid-versus-oauth-from-the-users-perspective</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>OAUTH-OPENID: YOU’RE BARKING UP THE WRONG TREE IF YOU THINK THEY’RE THE SAME THING</strong><cite><a target="_blank" rel="noopener" href="http://softwareas.com/oauth-openid-youre-barking-up-the-wrong-tree-if-you-think-theyre-the-same-thing/">softwareas.com/oauth-openid-youre-barking-up-the-wrong-tree-if-you-think-theyre-the-same-thing</a></cite></footer></blockquote>
-
-<blockquote><footer><strong>What's the difference between OpenID and OAuth?</strong><cite><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/1087031/whats-the-difference-between-openid-and-oauth">stackoverflow.com/questions/1087031/whats-the-difference-between-openid-and-oauth</a></cite></footer></blockquote>
-
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2019/11/29/postgresql(1)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/11/29/postgresql(1)/" class="post-title-link" itemprop="url">PostgreSQL(1)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-11-29 10:45:00" itemprop="dateCreated datePublished" datetime="2019-11-29T10:45:00+08:00">2019-11-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <img src="/2019/11/29/postgresql(1)/1.jpg" class="" title="Photo by fabio on Unsplash">
-
-<p>最近产品提了一个需求，要做菜单优化。</p>
-<p>菜单优化：</p>
-<ol>
-<li>重写菜单数据初始化sql脚本，数据结构两层变为三层</li>
-<li>权限数据调整</li>
-<li>兼容原有菜单权限数据</li>
-</ol>
-<p>这里面第三点是最麻烦的，兼容原有的菜单数据，我给需求说了两个方案。</p>
-<p>PlanA：从时间方面（因为是个小迭代，整个迭代的功能只有一周时间开发）考虑管理员菜单权限保留，其它普通角色菜单权限一律置空，需求也接受（因为客户现场大多数情况都是用管理员账号）。</p>
-<p>PlanB：保留原有数据，但是需要1-2天预研一下升级方案是否可行，我提出的方案是直接用sql脚本做，需求也认可，PlanA为兜底方案。</p>
-<p>我就提个解决方案，结果这事最后让我支援一下给做了…，所以在这简单记录一下过程产物。</p>
-<h3 id="PLV8"><a href="#PLV8" class="headerlink" title="PLV8"></a>PLV8</h3><p>简单地说就算PostgreSQL里加个扩展，这个扩展就是V8引擎，是的，你理解的没错，就是Google开源的JavaScript引擎，有了这个扩展那就能在sql里写js代码了，这对于在脚本里写逻辑那可是爽歪歪了。</p>
-<p>安装过程我就不多说了，网上有很多，大体流程就是</p>
-<ol>
-<li>从GitHub wget 下来</li>
-<li>make install</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#添加扩展</span><br><span class="line">CREATE EXTENSION plv8;</span><br><span class="line"></span><br><span class="line">#验证plv8的版本，出来版本号就证明装上了</span><br><span class="line">SELECT plv8_version();</span><br></pre></td></tr></table></figure>
-
-
-
-<p>然后你就可以写JS代码了，ES6、coffeeScript等都可以，只要最终是v8能解析的就成。</p>
-<h3 id="写"><a href="#写" class="headerlink" title="写"></a>写</h3><p>好现在开始写了，一开始不太了解，打算用存储过程做，但是后来老前辈提醒我，我这个是升级脚本，只需要执行一遍就成，所以没必要做存储过程，最后还得删掉，因为留着没意义。</p>
-<p>然后建议我用DO $$的写法,此方式执行完不会留下其它痕迹就跟执行一条长sql一样，贴个代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line">DO</span><br><span class="line">$$</span><br><span class="line">plv8.elog(INFO, &#x27;------------------------------------update user menus start------------------------------------&#x27;);</span><br><span class="line">buildTree = function(list) &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    let temp = &#123;&#125;;</span><br><span class="line">    let tree = &#123;&#125;;</span><br><span class="line">    for (let menu of list) &#123;</span><br><span class="line">      temp[menu.id] = menu;</span><br><span class="line">    &#125;</span><br><span class="line">    for (let i in temp) &#123;</span><br><span class="line">      if (temp[i].parent) &#123;</span><br><span class="line">        if (!temp[temp[i].parent].children) &#123;</span><br><span class="line">          temp[temp[i].parent].children = &#123;&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        temp[temp[i].parent].children[temp[i].id] = temp[i];</span><br><span class="line">      &#125; else &#123;</span><br><span class="line"></span><br><span class="line">        tree[temp[i].id] = temp[i];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return tree;</span><br><span class="line"></span><br><span class="line">  &#125; catch (error) &#123;</span><br><span class="line">    plv8.elog(ERROR, &#x27;buildTree &#x27; + error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">getTreeOfMenus = function() &#123;</span><br><span class="line">  let cmdb = require(&#x27;xxx&#x27;);</span><br><span class="line">  let result = cmdb.service.query(&#x27;default&#x27;, &#x27;&#123;xxx&#123;id name&#125;&#125;&#x27;, &#123;&#125;);</span><br><span class="line">  return buildTree(result);</span><br><span class="line">&#125;;</span><br><span class="line">let allMenus = getTreeOfMenus();</span><br><span class="line"></span><br><span class="line">delete allMenus[&#x27;xxx&#x27;];</span><br><span class="line"></span><br><span class="line">let ids = [];</span><br><span class="line">idsOfflatten = function(data) &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    for (let id in data) &#123;</span><br><span class="line">      ids.push(id);</span><br><span class="line">      if (data[id].children) &#123;</span><br><span class="line">        idsOfflatten(data[id].children);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return ids;</span><br><span class="line">  &#125; catch (error) &#123;</span><br><span class="line">    plv8.elog(ERROR, &#x27;idsOfflatten &#x27; + error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">let flatIds = idsOfflatten(allMenus);</span><br><span class="line">plv8.elog(INFO, &#x27;new menu ids:&#x27; + flatIds);</span><br><span class="line">getNormalMenus = function(menus) &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    plv8.elog(INFO, &#x27;old menus : &#x27; + JSON.stringify(menus));</span><br><span class="line">    let old_keys = Object.keys(menus);</span><br><span class="line">    old_keys.forEach(id =&gt; &#123;</span><br><span class="line">      if (!flatIds.includes(id)) &#123;</span><br><span class="line">        plv8.elog(INFO, &#x27;delete menu id: &#x27; + id);</span><br><span class="line">        delete menus[id];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    return menus;</span><br><span class="line">  &#125; catch (error) &#123;</span><br><span class="line">    plv8.elog(ERROR, &#x27;getNormalMenus &#x27; + error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">updateMenus = function() &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    let ROLE_ADMIN = &#x27;admin&#x27;,</span><br><span class="line">      ROLE_DOMAIN = &#x27;domain&#x27;;</span><br><span class="line">    let query = &#x27;SELECT name,  menus, role_type FROM xxx&#x27;;</span><br><span class="line">    let updateAdmin =</span><br><span class="line">      &#x27;UPDATE xxx SET  menus=NULL,  last_modified=CURRENT_TIMESTAMP where  name = $1&#x27;;</span><br><span class="line">    let updateNormal = &#x27;UPDATE xxx SET  menus=$1, last_modified=CURRENT_TIMESTAMP where name = $2&#x27;;</span><br><span class="line">    let execCount=0;</span><br><span class="line">    plv8.execute(query).forEach(row =&gt; &#123;</span><br><span class="line">      let roleType = row.role_type;</span><br><span class="line">      if (roleType === ROLE_DOMAIN || roleType === ROLE_ADMIN) &#123;  </span><br><span class="line">        let adminCount = plv8.execute(updateAdmin, [row.name]);</span><br><span class="line">        plv8.elog(INFO, &#x27;update admin user menus is null ,count: &#x27;+adminCount );</span><br><span class="line">        adminCount&gt;0 ? execCount+=1:null;</span><br><span class="line">        return;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      let newMenus = getNormalMenus(row.menus);</span><br><span class="line">      let normalCount = plv8.execute(updateNormal, [newMenus, row.name]);</span><br><span class="line">      plv8.elog(INFO, &#x27;update normal user menus , &#x27; + JSON.stringify(newMenus)+&#x27;,count:&#x27;+normalCount);</span><br><span class="line">      normalCount&gt;0 ? execCount+=1:null;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">   return execCount;</span><br><span class="line">  &#125; catch (error) &#123;</span><br><span class="line">    plv8.elog(ERROR, &#x27;updateMenus &#x27; + error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">let updateCount=updateMenus();</span><br><span class="line">plv8.elog(INFO,&#x27;total of successes :&#x27;+updateCount);</span><br><span class="line">plv8.elog(INFO,&#x27;------------------------------------update user menus end------------------------------------&#x27;);</span><br><span class="line">$$ LANGUAGE plv8;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h3><p>PostgreSQL很强大，这是我初试水，后续有机会会再写写工作中的一些PostgreSQL的实践例子。</p>
-<p>其实PostgreSQL几乎可扩展主流的所有编程语言比如C++、Java、nodejs等。</p>
-<p>参考文档：</p>
-<blockquote><footer><strong>plv8 documention</strong><cite><a target="_blank" rel="noopener" href="https://plv8.github.io/">plv8.github.io</a></cite></footer></blockquote>
-
 
       
     </div>

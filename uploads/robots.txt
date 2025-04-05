@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://gamehu.run/sitemap.xml
-Sitemap: https://gamehu.run/baidusitemap.xml

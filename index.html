@@ -169,7 +169,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">191</span>
+          <span class="site-state-item-count">193</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -180,7 +180,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">113</span>
+        <span class="site-state-item-count">114</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -281,7 +281,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <div class="tag-container">
-  <span class="main-tag">ETL</span>
+  <span class="main-tag">面试知识梳理</span>
   <span class="sub-tag">第一篇</span>
 </div>
 
@@ -514,6 +514,325 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2025/03/02/%E9%9D%A2%E8%AF%95%E9%A2%98-HTTPS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/02/%E9%9D%A2%E8%AF%95%E9%A2%98-HTTPS/" class="post-title-link" itemprop="url">面试题-HTTPS</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-03-02 09:31:07" itemprop="dateCreated datePublished" datetime="2025-03-02T09:31:07+08:00">2025-03-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div class="tag-container">
+  <span class="main-tag">面试</span>
+  <span class="sub-tag">第一篇</span>
+</div>
+
+<p><img src="/2025/03/02/%E9%9D%A2%E8%AF%95%E9%A2%98-HTTPS/1.jpeg" alt="源自ByteByteGo"></p>
+<h1 id="HTTPS工作原理：三个关键步骤解"><a href="#HTTPS工作原理：三个关键步骤解" class="headerlink" title="HTTPS工作原理：三个关键步骤解"></a>HTTPS工作原理：三个关键步骤解</h1><p>根据图中内容，HTTPS（Hypertext Transfer Protocol Secure）的工作原理可以分为三个关键步骤：</p>
+<h3 id="服务器证书检查（Server-Certificate-Check）"><a href="#服务器证书检查（Server-Certificate-Check）" class="headerlink" title="服务器证书检查（Server Certificate Check）"></a>服务器证书检查（Server Certificate Check）</h3><p>这是建立安全连接的第一步：</p>
+<ul>
+<li>客户端（浏览器）向服务器发送”HELLO”消息</li>
+<li>服务器回应”HELLO”</li>
+<li>服务器发送自己的证书给客户端</li>
+<li>客户端向证书颁发机构（CA）发送请求，确认此证书是否有效</li>
+<li>CA回应”YES”，表示证书合法</li>
+</ul>
+<p>这一步确保了用户正在与合法网站通信，而不是某个冒充者。证书颁发机构作为可信第三方，保证了服务器的身份。</p>
+<h3 id="密钥交换（Key-Exchange）"><a href="#密钥交换（Key-Exchange）" class="headerlink" title="密钥交换（Key Exchange）"></a>密钥交换（Key Exchange）</h3><p>验证服务器身份后，需要建立加密通信：</p>
+<ul>
+<li>客户端从服务器证书中提取服务器的公钥</li>
+<li>客户端创建一个会话密钥</li>
+<li>客户端告知服务器它支持的密码套件（”I know A,B,C,D cipher suites”）</li>
+<li>服务器选择一个密码套件（”OK, Let’s use C”）</li>
+<li>客户端使用服务器的公钥和选定的密码套件加密会话密钥</li>
+<li>服务器使用自己的私钥解密，获得会话密钥</li>
+</ul>
+<p>此时，服务器也拥有了会话密钥，为后续加密通信做好准备。</p>
+<h3 id="加密通信隧道（Encrypted-Tunnel）"><a href="#加密通信隧道（Encrypted-Tunnel）" class="headerlink" title="加密通信隧道（Encrypted Tunnel）"></a>加密通信隧道（Encrypted Tunnel）</h3><p>在完成前两步后：</p>
+<ul>
+<li>客户端和服务器双方都拥有相同的会话密钥</li>
+<li>客户端发送的数据使用会话密钥加密</li>
+<li>服务器接收数据后使用相同的会话密钥解密</li>
+<li>服务器发送给客户端的数据也使用相同的会话密钥加密</li>
+<li>客户端接收后使用会话密钥解密</li>
+</ul>
+<p>这形成了一个安全的加密通信隧道，即使数据在传输过程中被拦截，没有会话密钥的第三方也无法解密内容，保证了数据传输的安全性。</p>
+<h2 id="PS：从输入URL到页面显示的完整过程"><a href="#PS：从输入URL到页面显示的完整过程" class="headerlink" title="PS：从输入URL到页面显示的完整过程"></a>PS：从输入URL到页面显示的完整过程</h2><ol>
+<li>URL解析：浏览器解析URL，确定协议（HTTP&#x2F;HTTPS）、域名和路径</li>
+<li>DNS解析：浏览器查询DNS服务器，将域名转换为IP地址<ul>
+<li>首先检查浏览器缓存</li>
+<li>然后检查操作系统缓存</li>
+<li>接着查询本地DNS服务器</li>
+<li>必要时进行递归查询</li>
+</ul>
+</li>
+<li>建立TCP连接：浏览器与服务器建立TCP连接（三次握手）<ul>
+<li>客户端发送SYN包</li>
+<li>服务器回应SYN-ACK包</li>
+<li>客户端发送ACK包</li>
+</ul>
+</li>
+<li>TLS握手（HTTPS）：如果是HTTPS，还需进行TLS握手<ul>
+<li>服务器证书检查</li>
+<li>密钥交换</li>
+<li>建立加密通信隧道</li>
+</ul>
+</li>
+<li>发送HTTP请求：浏览器向服务器发送HTTP请求，包含请求方法、路径、头部信息等</li>
+<li>服务器处理请求：服务器接收请求，进行相应处理，生成HTTP响应</li>
+<li>接收HTTP响应：浏览器接收服务器返回的数据，包含状态码、响应头、响应体</li>
+<li>解析HTML：浏览器开始解析HTML，构建DOM树</li>
+<li>处理CSS：解析CSS，构建CSSOM树</li>
+<li>执行JavaScript：加载并执行JavaScript代码</li>
+<li>构建渲染树：将DOM树和CSSOM树结合，形成渲染树</li>
+<li>布局：计算每个元素在屏幕上的精确位置和大小</li>
+<li>绘制：将计算好的像素信息绘制到屏幕上</li>
+<li>合成：将多个图层合成为最终显示的页面</li>
+<li>TCP连接关闭：数据传输完成后，断开TCP连接（四次挥手）<ul>
+<li>客户端发送FIN包，表示客户端不再发送数据</li>
+<li>服务器发送ACK包，确认收到客户端的FIN</li>
+<li>服务器发送FIN包，表示服务器也不再发送数据</li>
+<li>客户端发送ACK包，确认收到服务器的FIN</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2025/03/01/SQL%E9%80%9F%E9%80%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/03/01/SQL%E9%80%9F%E9%80%9A/" class="post-title-link" itemprop="url">SQL速通</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-03-01 22:36:00" itemprop="dateCreated datePublished" datetime="2025-03-01T22:36:00+08:00">2025-03-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div class="tag-container">
+  <span class="main-tag">离职系列</span>
+  <span class="sub-tag">第十三篇</span>
+</div>
+
+<div class="article-quote">
+离职系列，回忆过去，在这做个记录。
+</div>
+
+<h1 id="SQL脚本管理规范：小团队高频发版实践指南"><a href="#SQL脚本管理规范：小团队高频发版实践指南" class="headerlink" title="SQL脚本管理规范：小团队高频发版实践指南"></a>SQL脚本管理规范：小团队高频发版实践指南</h1><h2 id="1-背景与目的"><a href="#1-背景与目的" class="headerlink" title="1. 背景与目的"></a>1. 背景与目的</h2><p>作为一个研发不到10人的团队，从0到1构建SAAS平台，且每周需要发布2-3个版本，所以总有些团队管理等问题会慢慢暴露，我们再慢慢修复，就跟修BUG一样，这一篇就是因为上线出过SQL脚本的问题（阿里云的SQL控制台对一些写的不太规范的sql执行存在兼容性问题会导致SQL执行不符合预期），所以有了这篇SQL规范，先说问题，当前SQL脚本管理存在以下问题：</p>
+<ul>
+<li>各开发人员风格不一，缺乏统一规范</li>
+<li>脚本分散、无统一管理，难以追踪变更历史</li>
+<li>发版频繁导致变更混乱，增加了维护成本</li>
+<li>部分脚本质量不高，存在安全隐患</li>
+</ul>
+<p>本规范旨在提供一套简单、实用且专业的SQL脚本管理方案，帮助团队高效管理数据库变更，可根据实践情况持续优化。</p>
+<h2 id="2-目录结构"><a href="#2-目录结构" class="headerlink" title="2. 目录结构"></a>2. 目录结构</h2><p>采用精简的目录结构，既能满足版本管理需求，又不过于复杂：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">/PG                      # 数据库名称</span><br><span class="line">├── YYYY/                # 年份目录</span><br><span class="line">│   └── MM-DD/           # 日期目录，如04-15表示4月15日</span><br><span class="line">│       ├── release_N/   # 发布版本号，如release_1</span><br><span class="line">│       │   ├── DDL/     # 数据结构变更脚本</span><br><span class="line">│       │   │   ├── 001_create_table_xxx.sql</span><br><span class="line">│       │   │   └── 002_create_index_xxx.sql</span><br><span class="line">│       │   ├── DML/     # 数据操作脚本</span><br><span class="line">│       │   │   └── 001_add_data_xxx.sql</span><br><span class="line">│       │   └── ROLLBACK/ # 回滚脚本（可选）</span><br><span class="line">│       │       └── 001_rollback_xxx.sql</span><br><span class="line">├── dictionary/          # 数据字典</span><br><span class="line">│   ├── base/            # 基础数据</span><br><span class="line">│   │   ├── init_v1.0.sql  # 2025年1月版本</span><br><span class="line">│   │   └── init_v2.0.sql  # 2025年7月版本（整合上半年变更）</span><br><span class="line">│   ├── incremental/       # 按数据字典type</span><br><span class="line">│   │   ├── dict_payment_type.sql  </span><br><span class="line">│   │   └── ...</span><br><span class="line">├── menu/                # 菜单</span><br><span class="line">│   ├── base/    # 基础数据</span><br><span class="line">│   │   ├── init_v1.0.sql  # 2025年1月版本</span><br><span class="line">│   │   └── init_v2.0.sql  # 2025年7月版本（整合上半年变更）</span><br><span class="line">│   ├── ...</span><br><span class="line">│   ├── module_xx/       # 按模块</span><br><span class="line">│   │   ├── crm.sql </span><br><span class="line">│   │   └── ...     </span><br></pre></td></tr></table></figure>
+
+<h2 id="3-文件命名规范"><a href="#3-文件命名规范" class="headerlink" title="3. 文件命名规范"></a>3. 文件命名规范</h2><h3 id="3-1-脚本文件命名"><a href="#3-1-脚本文件命名" class="headerlink" title="3.1 脚本文件命名"></a>3.1 脚本文件命名</h3><p>采用<code>序号_描述[_rollback].sql</code>格式：</p>
+<ul>
+<li><strong>序号</strong>：确保执行顺序，如<code>001</code>、<code>002</code></li>
+<li><strong>描述</strong>：简明表达脚本用途，如<code>create_user_table</code>、<code>add_email_column</code></li>
+<li><strong>rollback</strong>：回滚脚本添加<code>_rollback</code>后缀</li>
+</ul>
+<p>示例：</p>
+<ul>
+<li><code>001_create_user_table.sql</code></li>
+<li><code>001_create_user_table_rollback.sql</code></li>
+</ul>
+<h3 id="3-2-数据库对象命名"><a href="#3-2-数据库对象命名" class="headerlink" title="3.2 数据库对象命名"></a>3.2 数据库对象命名</h3><ol>
+<li><p><strong>表命名</strong>：</p>
+<ul>
+<li>使用小写和下划线</li>
+<li>采用前缀区分业务模块，如<code>sys_user</code>、<code>order_item</code></li>
+<li>名称应能清晰表达表的用途</li>
+</ul>
+</li>
+<li><p><strong>列命名</strong>：</p>
+<ul>
+<li>主键统一为<code>id</code></li>
+<li>外键使用<code>entity_id</code>格式，如<code>user_id</code></li>
+<li>创建和更新时间统一为<code>create_time</code>、<code>update_time</code></li>
+</ul>
+</li>
+<li><p><strong>索引命名</strong>：</p>
+<ul>
+<li>主键索引：<code>pk_表名</code></li>
+<li>唯一索引：<code>uk_表名_列名</code></li>
+<li>普通索引：<code>idx_表名_列名</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="4-脚本编写规范"><a href="#4-脚本编写规范" class="headerlink" title="4. 脚本编写规范"></a>4. 脚本编写规范</h2><h3 id="4-1-文件头注释"><a href="#4-1-文件头注释" class="headerlink" title="4.1 文件头注释"></a>4.1 文件头注释</h3><p>所有SQL脚本必须包含统一的文件头注释：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- ========================================</span></span><br><span class="line"><span class="comment">-- 描述: [功能简述]</span></span><br><span class="line"><span class="comment">-- 文件名: [文件名]</span></span><br><span class="line"><span class="comment">-- 作者: [作者]</span></span><br><span class="line"><span class="comment">-- 创建日期: [YYYY-MM-DD]</span></span><br><span class="line"><span class="comment">-- ========================================</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-SQL编写原则"><a href="#4-2-SQL编写原则" class="headerlink" title="4.2 SQL编写原则"></a>4.2 SQL编写原则</h3><ol>
+<li><p><strong>原子性</strong>：一个脚本只完成一个独立任务</p>
+</li>
+<li><p><strong>幂等性</strong>：脚本可以重复执行而不产生副作用</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 好的做法</span></span><br><span class="line"><span class="keyword">CREATE TABLE</span> IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> users (</span><br><span class="line">  id <span class="type">VARCHAR</span>(<span class="number">36</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">  username <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY KEY</span> (id)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 或者</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> users;</span><br><span class="line"><span class="keyword">CREATE TABLE</span> users (</span><br><span class="line">  id <span class="type">VARCHAR</span>(<span class="number">36</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">  username <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY KEY</span> (id)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>向后兼容</strong>：尽量避免破坏性变更</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 推荐</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> users <span class="keyword">ADD</span> <span class="keyword">COLUMN</span> email <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 不允许</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> users <span class="keyword">ADD</span> <span class="keyword">COLUMN</span> email <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>安全性</strong>：敏感信息不应明文存储</p>
+</li>
+</ol>
+<h3 id="4-3-代码风格"><a href="#4-3-代码风格" class="headerlink" title="4.3 代码风格"></a>4.3 代码风格</h3><ol>
+<li><p><strong>关键字大写</strong>：所有SQL关键字使用大写形式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> status <span class="operator">=</span> <span class="string">&#x27;active&#x27;</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>适当缩进</strong>：使用一致的缩进提高可读性</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">    u.id,</span><br><span class="line">    u.username,</span><br><span class="line">    r.name <span class="keyword">AS</span> role_name</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">    users u</span><br><span class="line"><span class="keyword">JOIN</span> </span><br><span class="line">    roles r <span class="keyword">ON</span> u.role_id <span class="operator">=</span> r.id</span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">    u.status <span class="operator">=</span> <span class="string">&#x27;active&#x27;</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>添加注释</strong>：为复杂SQL语句添加适当注释</p>
+</li>
+</ol>
+<h2 id="5-特殊脚本管理"><a href="#5-特殊脚本管理" class="headerlink" title="5. 特殊脚本管理"></a>5. 特殊脚本管理</h2>   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">数据字典和菜单：</span><br><span class="line"></span><br><span class="line">├── dictionary/          # 数据字典</span><br><span class="line">│   ├── base/            # 基础数据</span><br><span class="line">│   │   ├── init_v1.0.sql  # 2025年1月版本</span><br><span class="line">│   │   └── init_v2.0.sql  # 2025年7月版本（整合上半年变更）</span><br><span class="line">│   ├── incremental/       # 按数据字典type</span><br><span class="line">│   │   ├── dict_payment_type.sql  </span><br><span class="line">│   │   └── ...</span><br><span class="line">├── menu/                # 菜单</span><br><span class="line">│   ├── base/    # 基础数据</span><br><span class="line">│   │   ├── init_v1.0.sql  # 2025年1月版本</span><br><span class="line">│   │   └── init_v2.0.sql  # 2025年7月版本（整合上半年变更）</span><br><span class="line">│   ├── ...</span><br><span class="line">│   ├── module_xx/       # 按模块</span><br><span class="line">│   │   ├── crm.sql </span><br><span class="line">│   │   └── ...    </span><br></pre></td></tr></table></figure>
+
+<h2 id="6-实施流程"><a href="#6-实施流程" class="headerlink" title="6. 实施流程"></a>6. 实施流程</h2><p>针对高频发版小团队，简化流程但不降低质量要求：</p>
+<h3 id="6-1-开发变更流程"><a href="#6-1-开发变更流程" class="headerlink" title="6.1 开发变更流程"></a>6.1 开发变更流程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">    A[编写SQL脚本] --&gt; B[本地测试]</span><br><span class="line">    B --&gt; C&#123;通过?&#125;</span><br><span class="line">    C --&gt;|否| A</span><br><span class="line">    C --&gt;|是| D[通知焕涛]</span><br><span class="line">    D --&gt; E[代码评审]</span><br><span class="line">    E --&gt; F&#123;焕涛通过云平台工具测试执行通过?&#125;</span><br><span class="line">    F --&gt;|否| A</span><br><span class="line">    F --&gt;|是| G[测试环境部署]</span><br><span class="line">    G --&gt; H&#123;测试人员验证通过?&#125;</span><br><span class="line">    H --&gt;|否| A</span><br><span class="line">    H --&gt;|是| I[生产环境部署]</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2执行顺序"><a href="#6-2执行顺序" class="headerlink" title="6.2执行顺序"></a>6.2执行顺序</h3><p>为确保数据库变更的安全有序，按以下顺序执行：</p>
+<ol>
+<li>DDL脚本（按文件名序号顺序）</li>
+<li>DML脚本（按文件名序号顺序）</li>
+<li>特殊配置（数据字典、菜单）</li>
+</ol>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>团队应当将本规范视为基础标准，在实践中不断完善和优化，形成最适合团队的工作方式。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2025/02/22/%E5%B7%A5%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -562,7 +881,7 @@
 <p>在我的12年职业生涯中，我从”这bug在本地没问题啊”进化到了”这需求有啥实际意义”再到”好的，我来搞定！”。带团队的经历让我明白，比起Debug代码，Debug人际关系才是真正的高难度挑战。所幸，我在这两方面都交出了不错的成绩单。</p>
 <p>相信我的技术能力、产品思维和团队协作经验能为您的团队带来实质性的贡献。代码之外，我能够搭建开发者与产品、业务之间的桥梁，确保我们不只是在开发功能，而是在创造价值。我们一定能擦出技术的火花——毕竟，一个能理解产品、带过团队、写了12年代码还没秃顶的工程师，不是每天都能遇到的。</p>
 <p>代码问候，<br>[软件开发特种兵]</p>
-<p>联系方式：<br>电话：[18515068121]<br>邮箱：[<a href="mailto:&#x67;&#97;&#109;&#x65;&#x68;&#x75;&#64;&#121;&#101;&#97;&#x68;&#46;&#110;&#101;&#x74;">&#x67;&#97;&#109;&#x65;&#x68;&#x75;&#64;&#121;&#101;&#97;&#x68;&#46;&#110;&#101;&#x74;</a>]<br>Wechat：[GamehuDB]</p>
+<p>联系方式：<br>电话：[18515068121]<br>邮箱：[<a href="mailto:&#103;&#97;&#109;&#x65;&#x68;&#x75;&#x40;&#121;&#x65;&#97;&#104;&#x2e;&#x6e;&#x65;&#x74;">&#103;&#97;&#109;&#x65;&#x68;&#x75;&#x40;&#121;&#x65;&#97;&#104;&#x2e;&#x6e;&#x65;&#x74;</a>]<br>Wechat：[GamehuDB]</p>
 <p>P.S. 我的GitHub贡献图可能不够绿，但我的生产环境代码从不让服务器变红。</p>
 <h3 id="Java-Development-Engineer-x2F-Full-Stack-Development-Engineer"><a href="#Java-Development-Engineer-x2F-Full-Stack-Development-Engineer" class="headerlink" title="Java Development Engineer&#x2F;Full Stack Development Engineer"></a>Java Development Engineer&#x2F;Full Stack Development Engineer</h3><p>Dear Hiring Team:</p>
 <p>If software engineers were dishes, I’d be that slow-simmered stock that’s been cooking for 12 years — looking unassuming, but one taste reveals the expertise within.</p>
@@ -570,7 +889,7 @@
 <p>During my 12-year career, I’ve evolved from “but the bug doesn’t appear on my local machine” to “what’s the actual purpose of this requirement” to “I’ll handle it!” My team leadership experience taught me that debugging human relationships is far more challenging than debugging code. Fortunately, I’ve managed to achieve good results in both areas.</p>
 <p>I believe my technical abilities, product mindset, and team collaboration experience will bring substantial value to your team. Beyond coding, I can build bridges between developers, product teams, and business units, ensuring we’re not just developing features but creating value. We’ll definitely create technical sparks together — after all, an engineer who understands products, has led teams, and has written code for 12 years without going bald isn’t someone you meet every day.</p>
 <p>Code regards,<br>[Software Development Special Forces]</p>
-<p>Contact Information:<br>twitter：[Gamehu520]<br>email：[<a href="mailto:&#103;&#x61;&#109;&#101;&#x68;&#117;&#64;&#x79;&#x65;&#x61;&#x68;&#x2e;&#x6e;&#101;&#116;">&#103;&#x61;&#109;&#101;&#x68;&#117;&#64;&#x79;&#x65;&#x61;&#x68;&#x2e;&#x6e;&#101;&#116;</a>]<br>Wechat：[GamehuDB]</p>
+<p>Contact Information:<br>twitter：[Gamehu520]<br>email：[<a href="mailto:&#x67;&#97;&#x6d;&#x65;&#x68;&#x75;&#x40;&#x79;&#101;&#97;&#104;&#46;&#110;&#x65;&#x74;">&#x67;&#97;&#x6d;&#x65;&#x68;&#x75;&#x40;&#x79;&#101;&#97;&#104;&#46;&#110;&#x65;&#x74;</a>]<br>Wechat：[GamehuDB]</p>
 <p>P.S. My GitHub contribution graph might not be very green, but my production code never turns servers red.</p>
 
       
@@ -1018,7 +1337,7 @@
 离职系列，想想这几年在公司的成长，在这做个记录。这篇是关于AI功能方案验证。
 </div>
 
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>落地事业部上一年关于AI的创新奖的方案，更合适的叫法应该是交接，之前的团队几乎停留在理论上和一个demo上，因为久久没有效果，可能感受到了上级的压力，需要看到实际效果，最终找到了我们团队，希望能借助我们团队让其产生价值（官方说法），我理解实际就接这个摊子。好在年前我自己捣鼓过AI知识库<a href="/2024/10/04/AI%E5%BA%94%E7%94%A8-%E7%9F%A5%E8%AF%86%E5%BA%93/" title="AI应用-知识库">AI应用-知识库</a>，所以不怯场。</p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>落地事业部上一年关于AI的创新奖的方案，更合适的叫法应该是交接，之前的团队几乎停留在理论上和一个demo上，因为久久没有效果，可能感受到了上级的压力，需要看到实际效果，最终找到了我们团队，希望能借助我们团队让其产生价值（官方说法），我理解实际就接这个摊子。好在年前我自己捣鼓过AI知识库<a href="/2024/03/12/AI%E5%BA%94%E7%94%A8-%E7%9F%A5%E8%AF%86%E5%BA%93/" title="AI应用-知识库">AI应用-知识库</a>，所以不怯场。</p>
 <h2 id="方案介绍"><a href="#方案介绍" class="headerlink" title="方案介绍"></a>方案介绍</h2><p>因为在这之前就是一个demo，具体前面的团队也说不出来个所以然，所以我们直接说说两边对话后的方案走向，希望做一个功能：容量预测，意思是根据服务器的多个指标历史数据，预估服务器未来的负载情况，从而给予客户参考或预案。</p>
 <p>我试着画下大体的方案：</p>
 <h3 id="架构图："><a href="#架构图：" class="headerlink" title="架构图："></a>架构图：</h3><p><img src="/2024/12/23/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%9B%86%E6%88%90/ai01.png" alt="alt text"></p>
@@ -1324,114 +1643,6 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/10/04/AI%E5%BA%94%E7%94%A8-%E7%9F%A5%E8%AF%86%E5%BA%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/10/04/AI%E5%BA%94%E7%94%A8-%E7%9F%A5%E8%AF%86%E5%BA%93/" class="post-title-link" itemprop="url">AI应用-知识库</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-10-04 22:31:00" itemprop="dateCreated datePublished" datetime="2024-10-04T22:31:00+08:00">2024-10-04</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <div class="tag-container">
-  <span class="ai-tag">AI</span>
-  <span class="sub-tag">第一篇</span>
-</div>
-
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>这篇文章脱了很久了。因为我之前带LMT团队，团队的主要工作内容就是处理客户现场问题，因为我要求过程留痕并且达到知识沉淀的效果，所以处理过程中产生了大量的文档，也就是很多经验都落到了文档上，比如linux系统（硬盘、系统版本、dns等）、docker、k8s、现场网络问题（防火墙、网闸等安全设备），也就是运维经常面临的问题，也有产品配置、bug等文档。</p>
-<p>文档越来越多，但是却越来越难利用起来，我就想着把这些经验积累起来弄一个知识库，就像gpt一样，只要我输入有关问题他就能根据这些内容生成回答的内容，当然里面不仅仅是经验问答还需要有linux系统（硬盘、系统版本、dns等）、docker、k8s、现场网络问题（防火墙、网闸等安全设备）这些原始（原理）知识，还得有我们的产品知识。</p>
-<p>这个知识库一是为了方便使用且能让我练手，二是当时公司推行创新活动，AI相关的案例也能为事业部加分。</p>
-<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>知识库的定位：小而美，因为是个人发起的前期申请到的服务器资源有限，而且功能非常单一明确，只需要满足知识库就行，不需要全能。</p>
-<h3 id="选型"><a href="#选型" class="headerlink" title="选型"></a>选型</h3><p>通过一通查找对比，综合考虑，选择了Anything LLM或者Dify.AI+Ollama+Llama2小模型。</p>
-<h4 id="Anything-LLM"><a href="#Anything-LLM" class="headerlink" title="Anything LLM"></a>Anything LLM</h4><p><img src="/2024/10/04/AI%E5%BA%94%E7%94%A8-%E7%9F%A5%E8%AF%86%E5%BA%93/llm.png" alt="alt text"></p>
-<h4 id="考虑的其中一点"><a href="#考虑的其中一点" class="headerlink" title="考虑的其中一点"></a>考虑的其中一点</h4><p><strong>是用Anything LLM这种开箱即用的还是用LangChain这种需要自己上手写代码的</strong><br>Anything LLM和Dify.AI在其架构中广泛使用了LangChain组件，尤其是:</p>
-<ul>
-<li>文档加载器(Document Loaders)</li>
-<li>文本分割器(Text Splitters)</li>
-<li>向量存储(Vector Stores)</li>
-<li>检索器(Retrievers)</li>
-</ul>
-<ol>
-<li>直接使用Anything LLM这种系统的好处<ol>
-<li>意味着即使不直接编写LangChain代码，您也在间接使用LangChain的强大功能。这有几个好处:<br>模块化设计 - 可以灵活替换组件(如切换向量数据库)<br>经过验证的架构 - 使用业界已验证的RAG实现方式<br>未来升级路径 - 如果您将来想更深入定制，可以直接使用LangChain API</li>
-</ol>
-</li>
-<li>坏处<ol>
-<li>没有深入的了解和实践经验</li>
-</ol>
-</li>
-</ol>
-<p>我当时其实想用LangChain的，环境都搭好了，但是因为没有系统的学习过，进度很慢，没法赶上评审节点，所以最终选择了使用Anything LLM这种简单的方式。</p>
-<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>Anything LLM+Ollama+Llama2:7B</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://docs.useanything.com/setup/llm-configuration/overview">https://docs.useanything.com/setup/llm-configuration/overview</a><br><a target="_blank" rel="noopener" href="https://github.com/Mintplex-Labs/anything-llm/blob/master/docker/HOW_TO_USE_DOCKER.md">https://github.com/Mintplex-Labs/anything-llm/blob/master/docker/HOW_TO_USE_DOCKER.md</a><br><a target="_blank" rel="noopener" href="https://adasci.org/anythingllm-for-local-execution-and-inferencing-of-llms-a-deep-dive/">https://adasci.org/anythingllm-for-local-execution-and-inferencing-of-llms-a-deep-dive/</a><br><a target="_blank" rel="noopener" href="https://itnext.io/deploy-flexible-and-custom-setups-with-anything-llm-on-kubernetes-a2b5687f2bcc">https://itnext.io/deploy-flexible-and-custom-setups-with-anything-llm-on-kubernetes-a2b5687f2bcc</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=4UFrVvy7VlA">https://www.youtube.com/watch?v=4UFrVvy7VlA</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/09/26/%E9%81%87%E8%A7%81%E6%B4%AA%E5%B3%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1555,221 +1766,6 @@
 </ol>
 </li>
 <li>适当的动态调整信号量</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/09/17/%E9%81%87%E8%A7%81%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/09/17/%E9%81%87%E8%A7%81%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6/" class="post-title-link" itemprop="url">遇见连接超时</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-09-17 19:51:00" itemprop="dateCreated datePublished" datetime="2024-09-17T19:51:00+08:00">2024-09-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <div class="tag-container">
-  <span class="main-tag">离职系列</span>
-  <span class="sub-tag">第九篇</span>
-</div>
-<div class="article-quote">
-离职系列，想想这几年在公司的成长，在这做个记录。这篇是遇到的一个比较典型的线上问题。
-</div>
-
-<h3 id="问题现象"><a href="#问题现象" class="headerlink" title="问题现象"></a>问题现象</h3><p>写了一个每天执行两次的定时任务，该任务会分批对线上所有几百个租户生成《平安通告》，上线1个多月后突然手机收到告警，某几个用户生成失败。</p>
-<pre><code>  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">2024-10-17 17:00:10,125 [safetyNoticeGenerator8] ERROR [com.alibaba.druid.pool.DruidDataSource] DruidDataSource.java:1988 - &#123;conn-110021&#125; discard</span><br><span class="line"> org.postgresql.util.PSQLException: An I/O error occurred while sending to the backend.</span><br><span class="line">   at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:395)</span><br><span class="line">   at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:498)</span><br><span class="line">   at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:415)</span><br><span class="line">   at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:190)</span><br><span class="line">   at org.postgresql.jdbc.PgPreparedStatement.execute(PgPreparedStatement.java:177)</span><br><span class="line">   at com.alibaba.druid.pool.DruidPooledPreparedStatement.execute(DruidPooledPreparedStatement.java:483)</span><br><span class="line">   at org.apache.shardingsphere.driver.jdbc.core.statement.ShardingSpherePreparedStatement$2.executeSQL(ShardingSpherePreparedStatement.java:439)</span><br><span class="line">   at org.apache.shardingsphere.driver.jdbc.core.statement.ShardingSpherePreparedStatement$2.executeSQL(ShardingSpherePreparedStatement.java:435)</span><br><span class="line">   at org.apache.shardingsphere.infra.executor.sql.execute.engine.driver.jdbc.JDBCExecutorCallback.execute(JDBCExecutorCallback.java:95)</span><br><span class="line">   at org.apache.shardingsphere.infra.executor.sql.execute.engine.driver.jdbc.JDBCExecutorCallback.execute(JDBCExecutorCallback.java:75)</span><br><span class="line">   at org.apache.shardingsphere.infra.executor.kernel.ExecutorEngine.syncExecute(ExecutorEngine.java:135)</span><br><span class="line">   at org.apache.shardingsphere.infra.executor.kernel.ExecutorEngine.serialExecute(ExecutorEngine.java:121)</span><br><span class="line">   at org.apache.shardingsphere.infra.executor.kernel.ExecutorEngine.execute(ExecutorEngine.java:115)</span><br><span class="line">   at org.apache.shardingsphere.infra.executor.sql.execute.engine.driver.jdbc.JDBCExecutor.execute(JDBCExecutor.java:65)</span><br><span class="line">   at org.apache.shardingsphere.infra.executor.sql.execute.engine.driver.jdbc.JDBCExecutor.execute(JDBCExecutor.java:49)</span><br><span class="line">   at org.apache.shardingsphere.driver.executor.DriverJDBCExecutor.doExecute(DriverJDBCExecutor.java:156)</span><br><span class="line">   at org.apache.shardingsphere.driver.executor.DriverJDBCExecutor.execute(DriverJDBCExecutor.java:145)</span><br><span class="line">   at org.apache.shardingsphere.driver.jdbc.core.statement.ShardingSpherePreparedStatement.execute(ShardingSpherePreparedStatement.java:402)</span><br><span class="line">   at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44)</span><br><span class="line">   at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java)</span><br><span class="line">   at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:65)</span><br><span class="line">   at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:80)</span><br><span class="line">   at jdk.internal.reflect.GeneratedMethodAccessor49.invoke(Unknown Source)</span><br><span class="line">   at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">   at java.base/java.lang.reflect.Method.invoke(Method.java:568)</span><br><span class="line">   at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:61)</span><br><span class="line">   at jdk.proxy2/jdk.proxy2.$Proxy207.query(Unknown Source)</span><br><span class="line">   at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:65)</span><br><span class="line">   at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:333)</span><br><span class="line">   at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:158)</span><br><span class="line">   at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:110)</span><br><span class="line">   at com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor.intercept(MybatisPlusInterceptor.java:81)</span><br><span class="line">   at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:59)</span><br><span class="line">   at jdk.proxy2/jdk.proxy2.$Proxy206.query(Unknown Source)</span><br><span class="line">   at jdk.internal.reflect.GeneratedMethodAccessor44.invoke(Unknown Source)</span><br><span class="line">   at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">   at java.base/java.lang.reflect.Method.invoke(Method.java:568)</span><br><span class="line">   at org.apache.ibatis.plugin.Invocation.proceed(Invocation.java:49)</span><br><span class="line">   at com.github.yulichang.interceptor.MPJInterceptor.intercept(MPJInterceptor.java:76)</span><br><span class="line">   at org.apache.ibatis.plugin.Plugin.invoke(Plugin.java:59)</span><br><span class="line">   at jdk.proxy2/jdk.proxy2.$Proxy206.query(Unknown Source)</span><br><span class="line">   at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:154)</span><br><span class="line">   at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:147)</span><br><span class="line">   at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:142)</span><br><span class="line">   at jdk.internal.reflect.GeneratedMethodAccessor109.invoke(Unknown Source)</span><br><span class="line">   at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">   at java.base/java.lang.reflect.Method.invoke(Method.java:568)</span><br><span class="line">   at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:425)</span><br><span class="line">   at jdk.proxy2/jdk.proxy2.$Proxy189.selectList(Unknown Source)</span><br><span class="line">   at org.mybatis.spring.SqlSessionTemplate.selectList(SqlSessionTemplate.java:224)</span><br><span class="line">   at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.executeForMany(MybatisMapperMethod.java:166)</span><br><span class="line">   at com.baomidou.mybatisplus.core.override.MybatisMapperMethod.execute(MybatisMapperMethod.java:77)</span><br><span class="line">   at com.baomidou.mybatisplus.core.override.MybatisMapperProxy$PlainMethodInvoker.invoke(MybatisMapperProxy.java:152)</span><br><span class="line">   at com.baomidou.mybatisplus.core.override.MybatisMapperProxy.invoke(MybatisMapperProxy.java:89)</span><br><span class="line">   at jdk.proxy2/jdk.proxy2.$Proxy197.findDistinctCiIdsByIdentityId(Unknown Source)</span><br><span class="line">   at com.xxx.xxxcloud.manage.service.safety.notice.impl.xxServiceImpl.addAlertData(xxServiceImpl.java:612)</span><br><span class="line">   at com.xxx.xxxcloud.manage.service.safety.notice.impl.xxServiceImpl.lambda$setJsonField$5(xxServiceImpl.java:368)</span><br><span class="line">   at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)</span><br><span class="line">   at com.xxx.xxxcloud.manage.service.safety.notice.impl.xxServiceImpl.setJsonField(xxServiceImpl.java:346)</span><br><span class="line">   at com.xxx.xxxcloud.manage.service.safety.notice.impl.xxServiceImpl.batchCreate(xxServiceImpl.java:201)</span><br><span class="line">   at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</span><br><span class="line">   at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)</span><br><span class="line">   at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</span><br><span class="line">   at java.base/java.lang.reflect.Method.invoke(Method.java:568)</span><br><span class="line">   at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343)</span><br><span class="line">   at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)</span><br><span class="line">   at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)</span><br><span class="line">   at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:751)</span><br><span class="line">   at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:117)</span><br><span class="line">   at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:391)</span><br><span class="line">   at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)</span><br><span class="line">   at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)</span><br><span class="line">   at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:751)</span><br><span class="line">   at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:703)</span><br><span class="line">   at com.xxx.xxxcloud.manage.service.safety.notice.impl.xxServiceImpl$$SpringCGLIB$$0.batchCreate(&lt;generated&gt;)</span><br><span class="line">   at com.xxx.xxxcloud.manage.service.safety.notice.impl.SafetyNoticeScheduleServiceImpl.processBatch(SafetyNoticeScheduleServiceImpl.java:194)</span><br><span class="line">   at com.xxx.xxxcloud.manage.service.safety.notice.impl.SafetyNoticeScheduleServiceImpl.lambda$processBatchesInThreadPool$0(SafetyNoticeScheduleServiceImpl.java:112)</span><br><span class="line">   at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)</span><br><span class="line">   at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)</span><br><span class="line">   at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)</span><br><span class="line">   at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)</span><br><span class="line">   at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)</span><br><span class="line">   at java.base/java.lang.Thread.run(Thread.java:840)</span><br><span class="line"> Caused by: java.net.SocketTimeoutException: Read timed out</span><br><span class="line">   at java.base/sun.nio.ch.NioSocketImpl.timedRead(NioSocketImpl.java:288)</span><br><span class="line">   at java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:314)</span><br><span class="line">   at java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:355)</span><br><span class="line">   at java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:808)</span><br><span class="line">   at java.base/java.net.Socket$SocketInputStream.read(Socket.java:966)</span><br><span class="line">   at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:484)</span><br><span class="line">   at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:478)</span><br><span class="line">   at java.base/sun.security.ssl.SSLSocketInputRecord.bytesInCompletePacket(SSLSocketInputRecord.java:70)</span><br><span class="line">   at java.base/sun.security.ssl.SSLSocketImpl.readApplicationRecord(SSLSocketImpl.java:1465)</span><br><span class="line">   at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:1069)</span><br><span class="line">   at org.postgresql.core.VisibleBufferedInputStream.readMore(VisibleBufferedInputStream.java:161)</span><br><span class="line">   at org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:128)</span><br><span class="line">   at org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:113)</span><br><span class="line">   at org.postgresql.core.VisibleBufferedInputStream.read(VisibleBufferedInputStream.java:73)</span><br><span class="line">   at org.postgresql.core.PGStream.receiveChar(PGStream.java:465)</span><br><span class="line">   at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2155)</span><br><span class="line">   at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:368)</span><br><span class="line">   ... 82 common frames omitted</span><br><span class="line"> org.springframework.jdbc.UncategorizedSQLException: </span><br><span class="line"> ### Error querying database.  Cause: java.sql.SQLException: Connection is closed</span><br><span class="line"> ### The error may exist in class path resource [mapper/TbxxHealthCheckResultMapper.xml]</span><br><span class="line"> ### The error may involve com.xxx.xxxcloud.manage.mapper.xx.TbxxHealthCheckResultMapper.selectExecuteLatest</span><br><span class="line"> ### The error occurred while executing a query</span><br><span class="line"> ### Cause: java.sql.SQLException: Connection is closed</span><br><span class="line"> ; uncategorized SQLException; SQL state [null]; error code [0]; Connection is closed</span><br><span class="line">   at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:93)</span><br><span class="line">   at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:439)</span><br><span class="line">   at java.base/java.lang.Thread.run(Thread.java:840)</span><br><span class="line"> Caused by: java.sql.SQLException: Connection is closed</span><br><span class="line">   at com.zaxxer.hikari.pool.ProxyConnection$ClosedConnection.lambda$getClosedConnection$0(ProxyConnection.java:502)</span><br><span class="line">   at jdk.proxy3/jdk.proxy3.$Proxy173.prepareStatement(Unknown Source)</span><br><span class="line">   at com.zaxxer.hikari.pool.ProxyConnection.prepareStatement(ProxyConnection.java:327)</span><br><span class="line">   at com.zaxxer.hikari.pool.HikariProxyConnection.prepareStatement(HikariProxyConnection.java)</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>从上面有几个关键信息梳理下异常调用链：</p>
-<img src="/2024/09/17/%E9%81%87%E8%A7%81%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6/error.jpg" class="">
-
-<p>得出几个重要信息：</p>
-<ol>
-<li>异常发生的业务代码是在批量处理”xx报告”时，查询告警处</li>
-<li>ShardingSphere下的连接池hikari抛出了异常Connection is closed</li>
-<li>Druid连接池也抛出了异常{conn-xxx} discard</li>
-<li>底层SocketTimeoutException，表明是客户端等待数据库服务器的响应超时（初步判断为慢sql）</li>
-</ol>
-<p>所以我开始从以下几个方面排查：</p>
-<ol>
-<li>查业务代码的变更，为什么之前好好的跑了一个多月，突然出问题。</li>
-<li>检查数据库连接参数设置</li>
-<li>评估查询的数据量是否过大</li>
-<li>看下HikariCP和Druid是否有啥联系以及为啥会有两个连接池？</li>
-<li>查看数据库负载情况</li>
-</ol>
-<h3 id="处理过程"><a href="#处理过程" class="headerlink" title="处理过程"></a>处理过程</h3><h4 id="第一步：摸索"><a href="#第一步：摸索" class="headerlink" title="第一步：摸索"></a>第一步：摸索</h4><p>怀疑一切，切忌先入为主。</p>
-<ol>
-<li>想办法重现问题<ol>
-<li>提前发通知，下午7点以后会操作线上系统。通常6点半以后几乎就没人用系统了。</li>
-<li>因为设计该功能时，留了补偿手动，可手动重新触发报告生成。</li>
-<li>反复重试了几次，问题未复现。</li>
-</ol>
-</li>
-<li>查看业务代码变更。<ol>
-<li>报错处业务代码owner是我，没做任何更改，所以变成重点关注addAlertData方法，也就是与告警相关（重点在数据量）</li>
-<li>业务没变更但是加入了<strong>ShardingSphere</strong>（异常中也有这块的信息，先存疑）</li>
-</ol>
-</li>
-<li>检查系统连接池参数<ol>
-<li>druid，几乎都没有做定制，都是使用的默认值。<ol>
-<li>使用默认值其实存在风险，应该根据业务调整一些参数，因为买的阿里的pg所以咨询了他们拿到了一份他们暴露的参数调优参考，后续可针对性修改）</li>
-</ol>
-</li>
-<li>新增的ShardingSphere的HikariCP也是使用的默认值。（异常中也有这块的信息，先存疑）</li>
-</ol>
-</li>
-<li>观察显示的数据库负载情况（阿里云的监控看板、pg的pg_stat_activity等视图、数据库日志等）<ol>
-<li>从视图发现确实存在执行时间较长的几条sqlsql，虽然有些慢但是不足以触发异常。慢的原因初步判断为数据量过大（报错的租户行数都在50w左右）</li>
-<li>记录下这个sql，拿去控制台执行，EXPLAIN ANALYZE该sql，发现Seq Scan除了时间较长以外还存在索引问题，几乎每次查询都要用到的“告警状态”字段之前没加索引。（可能是原因之一）</li>
-<li>查看数据库日志如下，这表明数据库和客户端的连接中断确实是问题的根源，可能是因为网络问题、数据库负载过高、或者连接超时等因素导致的。<ol>
-<li><img src="/2024/09/17/%E9%81%87%E8%A7%81%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6/sql.png" class=""></li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h4 id="第二步：验证"><a href="#第二步：验证" class="headerlink" title="第二步：验证"></a>第二步：验证</h4><p>验证怀疑的所有点，通常控制变量法进行验证。</p>
-<p>因为暂时没有复现，不着急先按兵不动。</p>
-<ol>
-<li>前提是要有补偿方案，不能阻断线上使用，特别是这种核心业务。因为当时留了后门可以手动触发某个租户所以没问题。</li>
-<li>虽然是线上故障同时也算严重bug，但是也不要着急，胡乱改一通，可能按下葫芦又起瓢，尽可能的找到根因，哪怕不能一次性修复。</li>
-</ol>
-<p>等待了两天发现同样的问题又发生了。</p>
-<ol>
-<li>但是这次发现了上一次遗漏的一个信息，报错的租户从日志看时间，异常都是在10s以后抛出的。（初步判断是SocketTimeout的超时时间，可能是10s）</li>
-<li>拿到同样报错的sql去执行发现虽然跟之前没啥差别，问题还是那些问题，也没超过10s。（怀疑是因为报错时候执行了sql，触发了pg的缓存，所以再去查缓存生效，导致执行时间变短）</li>
-</ol>
-<p>验证第一个问题：</p>
-<p>因为当前看存在有两个连接池，查HikariCP与Druid的源码：<br>      <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">// HikariCP只有connectionTimeout为30s</span><br><span class="line">static &#123;</span><br><span class="line">    CONNECTION_TIMEOUT = TimeUnit.SECONDS.toMillis(30L);</span><br><span class="line">    VALIDATION_TIMEOUT = TimeUnit.SECONDS.toMillis(5L);</span><br><span class="line">    SOFT_TIMEOUT_FLOOR = Long.getLong(&quot;com.zaxxer.hikari.timeoutMs.floor&quot;, 250L);</span><br><span class="line">    IDLE_TIMEOUT = TimeUnit.MINUTES.toMillis(10L);</span><br><span class="line">    MAX_LIFETIME = TimeUnit.MINUTES.toMillis(30L);</span><br><span class="line">    unitTest = false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// DruidDataSource初始化，socketTimeout是10s</span><br><span class="line">public void init() throws SQLException &#123;</span><br><span class="line">    if (!this.inited) &#123;</span><br><span class="line">        DruidDriver.getInstance();</span><br><span class="line">        ReentrantLock lock = this.lock;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            lock.lockInterruptibly();</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            throw new SQLException(&quot;interrupt&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        boolean init = false;</span><br><span class="line">  </span><br><span class="line">      if (this.connectTimeout == 0) &#123;</span><br><span class="line">        this.connectTimeout = 10000;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      if (this.socketTimeout == 0) &#123;</span><br><span class="line">          this.socketTimeout = 10000;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></p>
-<p>先不管HikariCP，至少能确定Druid的10s超时确实存在，因为阿里云上我开起了pg的慢sql监控，根据时间刚好查到了确实存在一条告警sql查询执行时间为10s+。</p>
-<ol>
-<li>所以初步判断SocketTimeoutException是因为sql执行时间超过了连接池的默认超时。</li>
-<li>去查了下该租户下告警的数据总数已经超过了50W，在活5000左右。</li>
-</ol>
-<h4 id="第三步：修复方案"><a href="#第三步：修复方案" class="headerlink" title="第三步：修复方案"></a>第三步：修复方案</h4><p>方案如下：</p>
-<ol>
-<li>加索引，对常用的字段“告警状态”添加索引。</li>
-<li>对在活告警查询的地方分批</li>
-<li>对在活主告警限制查询的条数而不是查所有。</li>
-</ol>
-<h4 id="第四步：方案执行"><a href="#第四步：方案执行" class="headerlink" title="第四步：方案执行"></a>第四步：方案执行</h4><ol>
-<li><p>对所有配置分表的表，检查索引，添加必要的索引。</p>
-<ol>
-<li><pre><code>  -- ========================================
-  -- 描述: 创建告警表的“status”字段索引
-  -- 文件名: 001_create_alert_status_index.sql
-  -- 作者: hht
-  -- 创建日期: 2024-10-31
-  -- ========================================
-
-  DO $$
-  DECLARE
-      i INTEGER;
-  BEGIN
-      -- 遍历 tb_xx_alert_0 ~ tb_xx_alert_15
-      FOR i IN 0..15 LOOP
-          -- 动态生成 ALTER TABLE 语句，添加字段
-          EXECUTE FORMAT(&#39;
-              ALTER TABLE public.tb_xx_alert_%s 
-              CREATE INDEX tb_xx_alert_%s_status_index ON tb_xx_alert_%s  (status);
-          &#39;, i);
-      END LOOP;
-  END $$;
-</code></pre>
-</li>
-</ol>
-</li>
-<li><p>告警分批且限制条数</p>
-<ol>
-<li><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">private List&lt;AlertVO&gt; findSubscribedAlerts(AlertSubscribedParam param) &#123;</span><br><span class="line">  try &#123;</span><br><span class="line">    List&lt;List&lt;String&gt;&gt; parts = PartsListUtil.getParts(param.getSubscribedCiIds(), BATCH_SIZE);</span><br><span class="line">    List&lt;AlertVO&gt; all = new ArrayList&lt;&gt;();</span><br><span class="line">    for (List&lt;String&gt; part : parts) &#123;</span><br><span class="line">      // 分批查询</span><br><span class="line">      param.setSubscribedCiIds(part);</span><br><span class="line">      // 主告警不超过100条</span><br><span class="line">      Page&lt;AlertVO&gt; page = new Page&lt;&gt;(1, 100 - all.size());</span><br><span class="line">      IPage&lt;AlertVO&gt; result = tbXxAlertMapper.findSubscribedAlerts(page, param);</span><br><span class="line">      if (result.getTotal() == 0) &#123;</span><br><span class="line">        continue;</span><br><span class="line">      &#125;</span><br><span class="line">      // 聚合告警的子告警数据补充</span><br><span class="line">      getAlertAggChildren(param.getIdentityId(), result.getRecords());</span><br><span class="line">      all.addAll(result.getRecords());</span><br><span class="line">      // 如果已经达到100，退出循环</span><br><span class="line">      if (all.size() == 100) &#123;</span><br><span class="line">        break;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    // 最后统一按createTime降序排序</span><br><span class="line">    all.sort((a1, a2) -&gt; Long.compare(a2.getCreateTime(), a1.getCreateTime()));</span><br><span class="line">    return all;</span><br><span class="line">  &#125; catch (Exception e) &#123;</span><br><span class="line">    String errorMessage =</span><br><span class="line">        String.format(&quot;查询关注告警失败: identityId=%s, deal=%s&quot;, param.getIdentityId(), param.isDeal());</span><br><span class="line">    log.error(errorMessage, param.getIdentityId(), e);</span><br><span class="line">    throw new SafetyNoticeException(errorMessage, e);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">       </span><br></pre></td></tr></table></figure></li>
-</ol>
-</li>
-</ol>
-<h4 id="第五步：监控效果"><a href="#第五步：监控效果" class="headerlink" title="第五步：监控效果"></a>第五步：监控效果</h4><ol>
-<li>上线后，连续一周到点蹲守<ol>
-<li>SELECT pg_stat_reset();  – 重置所有统计信息</li>
-<li>数据库负载看板以及pg的pg_stat_activity。<ol>
-<li>之前的sql执行时间没有再超过2s</li>
-<li>看板上慢sql也没有在发现</li>
-<li>数据库日志也没有再出现异常</li>
-</ol>
-</li>
-<li>pg_stat_user_indexes+EXPLAIN ANALYZE 对应sql，查看索引使用情况。</li>
-</ol>
-</li>
-<li>业务功能正常。</li>
-</ol>
-<p>看上去目前超时的问题暂时解决，但是要想更彻底的解，还需要后续对遗留项逐个解决。</p>
-<h3 id="遗留项-x2F-改进项"><a href="#遗留项-x2F-改进项" class="headerlink" title="遗留项&#x2F;改进项"></a>遗留项&#x2F;改进项</h3><ol>
-<li>连接池的参数调优，虽然默认的看上去没啥问题，但是迟早肯定会出问题，记一个DFX。</li>
-<li>多了一个HikariCP连接池，而且通过jconsole看了下，两个连接池都会初始化，这块是否有必要有两个连接池，这儿存在隐患，对ShardingSphere需要深入了解下，记一个DFX。</li>
-<li>历史数据的清理，跟PO提出，需要加一个需求不仅仅是告警，可能还有其他数据。</li>
-<li>对于核心且经常更新的表是否需要定时REINDEX</li>
 </ol>
 
       

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/IMG_4038-32.jpeg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/IMG_4038.jpeg">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.gamehu.run","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.12.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="离职系列   第十三篇    离职系列，回忆过去，在这做个记录。   SQL脚本管理规范：小团队高频发版实践指南1. 背景与目的作为一个研发不到10人的团队，从0到1构建SAAS平台，且每周需要发布2-3个版本，所以总有些团队管理等问题会慢慢暴露，我们再慢慢修复，就跟修BUG一样，这一篇就是因为上线出过SQL脚本的问题（阿里云的SQL控制台对一些写的不太规范的sql执行存在兼容性问题会导致S">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL速通">
+<meta property="og:url" content="https://www.gamehu.run/2025/03/01/SQL%E9%80%9F%E9%80%9A/index.html">
+<meta property="og:site_name" content="正儿八经 - 资深Java&#x2F;React工程师">
+<meta property="og:description" content="离职系列   第十三篇    离职系列，回忆过去，在这做个记录。   SQL脚本管理规范：小团队高频发版实践指南1. 背景与目的作为一个研发不到10人的团队，从0到1构建SAAS平台，且每周需要发布2-3个版本，所以总有些团队管理等问题会慢慢暴露，我们再慢慢修复，就跟修BUG一样，这一篇就是因为上线出过SQL脚本的问题（阿里云的SQL控制台对一些写的不太规范的sql执行存在兼容性问题会导致S">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-03-01T14:36:00.000Z">
+<meta property="article:modified_time" content="2025-04-05T15:36:00.473Z">
+<meta property="article:author" content="Gamehu">
+<meta property="article:tag" content="SQL">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://www.gamehu.run/2025/03/01/SQL%E9%80%9F%E9%80%9A/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://www.gamehu.run/2025/03/01/SQL%E9%80%9F%E9%80%9A/","path":"2025/03/01/SQL速通/","title":"SQL速通"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SQL速通 | 正儿八经 - 资深Java/React工程师</title>
+  
+
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.css"><style>
+#needsharebutton-postbottom {
+  cursor: pointer;
+  height: 26px;
+  margin-top: 10px;
+  position: relative;
+}
+#needsharebutton-postbottom .btn {
+  border: 1px solid $btn-default-border-color;
+  border-radius: 3px;
+  display: initial;
+  padding: 1px 4px;
+}
+</style>
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">正儿八经 - 资深Java/React工程师</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">浪起来？技术博客与求职信息</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SQL%E8%84%9A%E6%9C%AC%E7%AE%A1%E7%90%86%E8%A7%84%E8%8C%83%EF%BC%9A%E5%B0%8F%E5%9B%A2%E9%98%9F%E9%AB%98%E9%A2%91%E5%8F%91%E7%89%88%E5%AE%9E%E8%B7%B5%E6%8C%87%E5%8D%97"><span class="nav-number">1.</span> <span class="nav-text">SQL脚本管理规范：小团队高频发版实践指南</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%83%8C%E6%99%AF%E4%B8%8E%E7%9B%AE%E7%9A%84"><span class="nav-number">1.1.</span> <span class="nav-text">1. 背景与目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">2. 目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%96%87%E4%BB%B6%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="nav-number">1.3.</span> <span class="nav-text">3. 文件命名规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E8%84%9A%E6%9C%AC%E6%96%87%E4%BB%B6%E5%91%BD%E5%90%8D"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 脚本文件命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AF%B9%E8%B1%A1%E5%91%BD%E5%90%8D"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 数据库对象命名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99%E8%A7%84%E8%8C%83"><span class="nav-number">1.4.</span> <span class="nav-text">4. 脚本编写规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E6%96%87%E4%BB%B6%E5%A4%B4%E6%B3%A8%E9%87%8A"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 文件头注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-SQL%E7%BC%96%E5%86%99%E5%8E%9F%E5%88%99"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 SQL编写原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.3 代码风格</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E7%89%B9%E6%AE%8A%E8%84%9A%E6%9C%AC%E7%AE%A1%E7%90%86"><span class="nav-number">1.5.</span> <span class="nav-text">5. 特殊脚本管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%AE%9E%E6%96%BD%E6%B5%81%E7%A8%8B"><span class="nav-number">1.6.</span> <span class="nav-text">6. 实施流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E5%BC%80%E5%8F%91%E5%8F%98%E6%9B%B4%E6%B5%81%E7%A8%8B"><span class="nav-number">1.6.1.</span> <span class="nav-text">6.1 开发变更流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-number">1.6.2.</span> <span class="nav-text">6.2执行顺序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">1.7.</span> <span class="nav-text">最后</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Gamehu"
+      src="/images/IMG_4038.jpeg">
+  <p class="site-author-name" itemprop="name">Gamehu</p>
+  <div class="site-description" itemprop="description">10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">193</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">114</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/gamehu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;gamehu" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:gamehu520@gmail.com" title="E-Mail → mailto:gamehu520@gmail.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/gamehu/gamehu.github.io" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2025/03/01/SQL%E9%80%9F%E9%80%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="SQL速通 | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SQL速通
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-03-01 22:36:00" itemprop="dateCreated datePublished" datetime="2025-03-01T22:36:00+08:00">2025-03-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <div class="tag-container">
+  <span class="main-tag">离职系列</span>
+  <span class="sub-tag">第十三篇</span>
+</div>
+
+<div class="article-quote">
+离职系列，回忆过去，在这做个记录。
+</div>
+
+<h1 id="SQL脚本管理规范：小团队高频发版实践指南"><a href="#SQL脚本管理规范：小团队高频发版实践指南" class="headerlink" title="SQL脚本管理规范：小团队高频发版实践指南"></a>SQL脚本管理规范：小团队高频发版实践指南</h1><h2 id="1-背景与目的"><a href="#1-背景与目的" class="headerlink" title="1. 背景与目的"></a>1. 背景与目的</h2><p>作为一个研发不到10人的团队，从0到1构建SAAS平台，且每周需要发布2-3个版本，所以总有些团队管理等问题会慢慢暴露，我们再慢慢修复，就跟修BUG一样，这一篇就是因为上线出过SQL脚本的问题（阿里云的SQL控制台对一些写的不太规范的sql执行存在兼容性问题会导致SQL执行不符合预期），所以有了这篇SQL规范，先说问题，当前SQL脚本管理存在以下问题：</p>
+<ul>
+<li>各开发人员风格不一，缺乏统一规范</li>
+<li>脚本分散、无统一管理，难以追踪变更历史</li>
+<li>发版频繁导致变更混乱，增加了维护成本</li>
+<li>部分脚本质量不高，存在安全隐患</li>
+</ul>
+<p>本规范旨在提供一套简单、实用且专业的SQL脚本管理方案，帮助团队高效管理数据库变更，可根据实践情况持续优化。</p>
+<h2 id="2-目录结构"><a href="#2-目录结构" class="headerlink" title="2. 目录结构"></a>2. 目录结构</h2><p>采用精简的目录结构，既能满足版本管理需求，又不过于复杂：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">/PG                      # 数据库名称</span><br><span class="line">├── YYYY/                # 年份目录</span><br><span class="line">│   └── MM-DD/           # 日期目录，如04-15表示4月15日</span><br><span class="line">│       ├── release_N/   # 发布版本号，如release_1</span><br><span class="line">│       │   ├── DDL/     # 数据结构变更脚本</span><br><span class="line">│       │   │   ├── 001_create_table_xxx.sql</span><br><span class="line">│       │   │   └── 002_create_index_xxx.sql</span><br><span class="line">│       │   ├── DML/     # 数据操作脚本</span><br><span class="line">│       │   │   └── 001_add_data_xxx.sql</span><br><span class="line">│       │   └── ROLLBACK/ # 回滚脚本（可选）</span><br><span class="line">│       │       └── 001_rollback_xxx.sql</span><br><span class="line">├── dictionary/          # 数据字典</span><br><span class="line">│   ├── base/            # 基础数据</span><br><span class="line">│   │   ├── init_v1.0.sql  # 2025年1月版本</span><br><span class="line">│   │   └── init_v2.0.sql  # 2025年7月版本（整合上半年变更）</span><br><span class="line">│   ├── incremental/       # 按数据字典type</span><br><span class="line">│   │   ├── dict_payment_type.sql  </span><br><span class="line">│   │   └── ...</span><br><span class="line">├── menu/                # 菜单</span><br><span class="line">│   ├── base/    # 基础数据</span><br><span class="line">│   │   ├── init_v1.0.sql  # 2025年1月版本</span><br><span class="line">│   │   └── init_v2.0.sql  # 2025年7月版本（整合上半年变更）</span><br><span class="line">│   ├── ...</span><br><span class="line">│   ├── module_xx/       # 按模块</span><br><span class="line">│   │   ├── crm.sql </span><br><span class="line">│   │   └── ...     </span><br></pre></td></tr></table></figure>
+
+<h2 id="3-文件命名规范"><a href="#3-文件命名规范" class="headerlink" title="3. 文件命名规范"></a>3. 文件命名规范</h2><h3 id="3-1-脚本文件命名"><a href="#3-1-脚本文件命名" class="headerlink" title="3.1 脚本文件命名"></a>3.1 脚本文件命名</h3><p>采用<code>序号_描述[_rollback].sql</code>格式：</p>
+<ul>
+<li><strong>序号</strong>：确保执行顺序，如<code>001</code>、<code>002</code></li>
+<li><strong>描述</strong>：简明表达脚本用途，如<code>create_user_table</code>、<code>add_email_column</code></li>
+<li><strong>rollback</strong>：回滚脚本添加<code>_rollback</code>后缀</li>
+</ul>
+<p>示例：</p>
+<ul>
+<li><code>001_create_user_table.sql</code></li>
+<li><code>001_create_user_table_rollback.sql</code></li>
+</ul>
+<h3 id="3-2-数据库对象命名"><a href="#3-2-数据库对象命名" class="headerlink" title="3.2 数据库对象命名"></a>3.2 数据库对象命名</h3><ol>
+<li><p><strong>表命名</strong>：</p>
+<ul>
+<li>使用小写和下划线</li>
+<li>采用前缀区分业务模块，如<code>sys_user</code>、<code>order_item</code></li>
+<li>名称应能清晰表达表的用途</li>
+</ul>
+</li>
+<li><p><strong>列命名</strong>：</p>
+<ul>
+<li>主键统一为<code>id</code></li>
+<li>外键使用<code>entity_id</code>格式，如<code>user_id</code></li>
+<li>创建和更新时间统一为<code>create_time</code>、<code>update_time</code></li>
+</ul>
+</li>
+<li><p><strong>索引命名</strong>：</p>
+<ul>
+<li>主键索引：<code>pk_表名</code></li>
+<li>唯一索引：<code>uk_表名_列名</code></li>
+<li>普通索引：<code>idx_表名_列名</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="4-脚本编写规范"><a href="#4-脚本编写规范" class="headerlink" title="4. 脚本编写规范"></a>4. 脚本编写规范</h2><h3 id="4-1-文件头注释"><a href="#4-1-文件头注释" class="headerlink" title="4.1 文件头注释"></a>4.1 文件头注释</h3><p>所有SQL脚本必须包含统一的文件头注释：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- ========================================</span></span><br><span class="line"><span class="comment">-- 描述: [功能简述]</span></span><br><span class="line"><span class="comment">-- 文件名: [文件名]</span></span><br><span class="line"><span class="comment">-- 作者: [作者]</span></span><br><span class="line"><span class="comment">-- 创建日期: [YYYY-MM-DD]</span></span><br><span class="line"><span class="comment">-- ========================================</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-SQL编写原则"><a href="#4-2-SQL编写原则" class="headerlink" title="4.2 SQL编写原则"></a>4.2 SQL编写原则</h3><ol>
+<li><p><strong>原子性</strong>：一个脚本只完成一个独立任务</p>
+</li>
+<li><p><strong>幂等性</strong>：脚本可以重复执行而不产生副作用</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 好的做法</span></span><br><span class="line"><span class="keyword">CREATE TABLE</span> IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> users (</span><br><span class="line">  id <span class="type">VARCHAR</span>(<span class="number">36</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">  username <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY KEY</span> (id)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 或者</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> users;</span><br><span class="line"><span class="keyword">CREATE TABLE</span> users (</span><br><span class="line">  id <span class="type">VARCHAR</span>(<span class="number">36</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">  username <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY KEY</span> (id)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>向后兼容</strong>：尽量避免破坏性变更</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 推荐</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> users <span class="keyword">ADD</span> <span class="keyword">COLUMN</span> email <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 不允许</span></span><br><span class="line"><span class="keyword">ALTER TABLE</span> users <span class="keyword">ADD</span> <span class="keyword">COLUMN</span> email <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">NOT NULL</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>安全性</strong>：敏感信息不应明文存储</p>
+</li>
+</ol>
+<h3 id="4-3-代码风格"><a href="#4-3-代码风格" class="headerlink" title="4.3 代码风格"></a>4.3 代码风格</h3><ol>
+<li><p><strong>关键字大写</strong>：所有SQL关键字使用大写形式</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> status <span class="operator">=</span> <span class="string">&#x27;active&#x27;</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>适当缩进</strong>：使用一致的缩进提高可读性</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">    u.id,</span><br><span class="line">    u.username,</span><br><span class="line">    r.name <span class="keyword">AS</span> role_name</span><br><span class="line"><span class="keyword">FROM</span> </span><br><span class="line">    users u</span><br><span class="line"><span class="keyword">JOIN</span> </span><br><span class="line">    roles r <span class="keyword">ON</span> u.role_id <span class="operator">=</span> r.id</span><br><span class="line"><span class="keyword">WHERE</span> </span><br><span class="line">    u.status <span class="operator">=</span> <span class="string">&#x27;active&#x27;</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>添加注释</strong>：为复杂SQL语句添加适当注释</p>
+</li>
+</ol>
+<h2 id="5-特殊脚本管理"><a href="#5-特殊脚本管理" class="headerlink" title="5. 特殊脚本管理"></a>5. 特殊脚本管理</h2>   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">数据字典和菜单：</span><br><span class="line"></span><br><span class="line">├── dictionary/          # 数据字典</span><br><span class="line">│   ├── base/            # 基础数据</span><br><span class="line">│   │   ├── init_v1.0.sql  # 2025年1月版本</span><br><span class="line">│   │   └── init_v2.0.sql  # 2025年7月版本（整合上半年变更）</span><br><span class="line">│   ├── incremental/       # 按数据字典type</span><br><span class="line">│   │   ├── dict_payment_type.sql  </span><br><span class="line">│   │   └── ...</span><br><span class="line">├── menu/                # 菜单</span><br><span class="line">│   ├── base/    # 基础数据</span><br><span class="line">│   │   ├── init_v1.0.sql  # 2025年1月版本</span><br><span class="line">│   │   └── init_v2.0.sql  # 2025年7月版本（整合上半年变更）</span><br><span class="line">│   ├── ...</span><br><span class="line">│   ├── module_xx/       # 按模块</span><br><span class="line">│   │   ├── crm.sql </span><br><span class="line">│   │   └── ...    </span><br></pre></td></tr></table></figure>
+
+<h2 id="6-实施流程"><a href="#6-实施流程" class="headerlink" title="6. 实施流程"></a>6. 实施流程</h2><p>针对高频发版小团队，简化流程但不降低质量要求：</p>
+<h3 id="6-1-开发变更流程"><a href="#6-1-开发变更流程" class="headerlink" title="6.1 开发变更流程"></a>6.1 开发变更流程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">    A[编写SQL脚本] --&gt; B[本地测试]</span><br><span class="line">    B --&gt; C&#123;通过?&#125;</span><br><span class="line">    C --&gt;|否| A</span><br><span class="line">    C --&gt;|是| D[通知焕涛]</span><br><span class="line">    D --&gt; E[代码评审]</span><br><span class="line">    E --&gt; F&#123;焕涛通过云平台工具测试执行通过?&#125;</span><br><span class="line">    F --&gt;|否| A</span><br><span class="line">    F --&gt;|是| G[测试环境部署]</span><br><span class="line">    G --&gt; H&#123;测试人员验证通过?&#125;</span><br><span class="line">    H --&gt;|否| A</span><br><span class="line">    H --&gt;|是| I[生产环境部署]</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2执行顺序"><a href="#6-2执行顺序" class="headerlink" title="6.2执行顺序"></a>6.2执行顺序</h3><p>为确保数据库变更的安全有序，按以下顺序执行：</p>
+<ol>
+<li>DDL脚本（按文件名序号顺序）</li>
+<li>DML脚本（按文件名序号顺序）</li>
+<li>特殊配置（数据字典、菜单）</li>
+</ol>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>团队应当将本规范视为基础标准，在实践中不断完善和优化，形成最适合团队的工作方式。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div class="post-widgets">
+    <div class="likely">
+        <div class="twitter">Tweet</div>
+        <div class="facebook">Share</div>
+        <div class="linkedin">Link</div>
+        <div class="gplus">Plus</div>
+        <div class="vkontakte">Share</div>
+        <div class="odnoklassniki">Class</div>
+        <div class="telegram">Send</div>
+        <div class="whatsapp">Send</div>
+        <div class="pinterest">Pin</div>
+    </div>
+  </div>
+  <script src="//cdn.jsdelivr.net/npm/ilyabirman-likely@2/release/likely.min.js"></script><div class="post-widgets">
+      <div id="needsharebutton-postbottom">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    </div>
+          <div class="post-tags">
+              <a href="/tags/SQL/" rel="tag"># SQL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/02/22/%E5%B7%A5%E4%BD%9C/" rel="prev" title="Java开发工程师、全栈开发工程师">
+                  <i class="fa fa-chevron-left"></i> Java开发工程师、全栈开发工程师
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/03/02/%E9%9D%A2%E8%AF%95%E9%A2%98-HTTPS/" rel="next" title="面试题-HTTPS">
+                  面试题-HTTPS <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gamehu</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.0/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-needmoreshare2@1/needsharebutton.min.js"></script>
+  <script>
+      pbOptions = {};
+        pbOptions.iconStyle = "box";
+        pbOptions.boxForm = "horizontal";
+        pbOptions.position = "bottomCenter";
+        pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+  </script>
+</body>
+</html>

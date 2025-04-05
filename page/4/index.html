@@ -169,7 +169,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">191</span>
+          <span class="site-state-item-count">193</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -180,7 +180,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">113</span>
+        <span class="site-state-item-count">114</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -220,6 +220,181 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2023/09/11/clickhouse-system-tables/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/09/11/clickhouse-system-tables/" class="post-title-link" itemprop="url">ClickHouse System Tables</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-09-11 08:46:09" itemprop="dateCreated datePublished" datetime="2023-09-11T08:46:09+08:00">2023-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>最近处理一个现场故障，现象是系统用一段时间就会变得很慢，clickhouse会重启，etcd发生长时间起不来，业务日志有代码报错。</p>
+<p>总结下来大体发现如下几个问题：</p>
+<ul>
+<li>clickhouse变慢、重启</li>
+<li>业务代码报空指针</li>
+<li>etcd长时间起不来</li>
+</ul>
+<p>业务代码问题先给到业务方进行排查，我们先看clickhouse和etcd问题</p>
+<h3>clickhouse变慢、重启</h3>
+
+<p>因为对于基础组件都没开系统日志，所以只能从观察系统的指标开始，通过netdata，发现clickhouse会不断的打到峰值</p>
+<p>所以先从clickhouse查起，因为没有开日志，所以就从clickhoue提供的系统表开始查起</p>
+<p>我们找了下官方资料，先锁定了如下几张表</p>
+<ul>
+<li>system.query_log</li>
+<li>system.query_thread_log</li>
+<li>system.metrics</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查看可疑的sql</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    address,</span><br><span class="line">    event_time,</span><br><span class="line">    client_hostname,</span><br><span class="line">    read_rows,</span><br><span class="line">    result_rows,</span><br><span class="line">    query_duration_ms</span><br><span class="line"><span class="keyword">FROM</span> system.query_log</span><br><span class="line"><span class="keyword">WHERE</span> event_date <span class="operator">=</span> <span class="string">&#x27;2023-09-09&#x27;</span> </span><br><span class="line"><span class="comment">-- 查看执行sql最多的来源</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    address,</span><br><span class="line">    <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">AS</span> query_count</span><br><span class="line"><span class="keyword">FROM</span> system.query_thread</span><br><span class="line"><span class="keyword">WHERE</span> event_date <span class="operator">=</span> <span class="string">&#x27;2023-09-09&#x27;</span> <span class="keyword">AND</span> peak_memory_usage <span class="operator">&gt;</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> address;</span><br><span class="line"><span class="comment">-- 查看消耗内存最大的来源</span></span><br><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">    address,</span><br><span class="line">    <span class="built_in">SUM</span>(peak_memory_usage) <span class="keyword">AS</span> total_peak_memory</span><br><span class="line"><span class="keyword">FROM</span> system.query_thread</span><br><span class="line"><span class="keyword">WHERE</span> event_date <span class="operator">=</span> <span class="string">&#x27;2023-09-09&#x27;</span> <span class="keyword">AND</span> peak_memory_usage <span class="operator">&gt;</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> address;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2023/09/07/K8S-IPTABLES/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/09/07/K8S-IPTABLES/" class="post-title-link" itemprop="url">K8S IPTABLES</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-09-07 11:16:00" itemprop="dateCreated datePublished" datetime="2023-09-07T11:16:00+08:00">2023-09-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>最近处理一个现场，80端口正常开放，但是从外部curl无法访问，pod内部是没问题的</p>
+<p>初步判断时k8s内部的转发出了问题</p>
+<p><a target="_blank" rel="noopener" href="https://www.tkng.io/services/clusterip/dataplane/iptables/">https://www.tkng.io/services/clusterip/dataplane/iptables/</a><br><a target="_blank" rel="noopener" href="https://kubernetes.io/blog/2022/09/07/iptables-chains-not-api/">https://kubernetes.io/blog/2022/09/07/iptables-chains-not-api/</a><br><a target="_blank" rel="noopener" href="https://dustinspecker.com/posts/iptables-how-kubernetes-services-direct-traffic-to-pods/">https://dustinspecker.com/posts/iptables-how-kubernetes-services-direct-traffic-to-pods/</a><br><a target="_blank" rel="noopener" href="https://medium.com/swlh/manage-iptables-firewall-for-docker-kubernetes-daa5870aca4d">https://medium.com/swlh/manage-iptables-firewall-for-docker-kubernetes-daa5870aca4d</a><br><a target="_blank" rel="noopener" href="https://livebook.manning.com/concept/kubernetes/iptable">https://livebook.manning.com/concept/kubernetes/iptable</a><br><a target="_blank" rel="noopener" href="https://serenafeng.github.io/2020/03/26/kube-proxy-in-iptables-mode/">https://serenafeng.github.io/2020/03/26/kube-proxy-in-iptables-mode/</a><br><a target="_blank" rel="noopener" href="https://jimmysong.io/en/blog/understanding-iptables/">https://jimmysong.io/en/blog/understanding-iptables/</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/cloudvtech/article/details/79728920">https://blog.csdn.net/cloudvtech/article/details/79728920</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1109,152 +1284,6 @@
 </blockquote>
 <p>我把考核那一条往后挪了，第一条换成了目标达成路径，额外还加上了奖励机制。</p>
 <p>考核在某些场景下还是需要的，但是也仅仅是作为一个信息的输入，而不是奉为圭臬。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2022/08/17/%E5%8A%AA%E5%8A%9B%E5%B0%B1%E8%83%BD%E6%88%90%E5%8A%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/17/%E5%8A%AA%E5%8A%9B%E5%B0%B1%E8%83%BD%E6%88%90%E5%8A%9F/" class="post-title-link" itemprop="url">努力就能成功？</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-08-17 12:17:38" itemprop="dateCreated datePublished" datetime="2022-08-17T12:17:38+08:00">2022-08-17</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>最近有疑惑，又在开始看陈皓老师的文章。看到了这篇努力就能成功[1]。做个转载。</p>
-<p>摘了其中一段文字，详细请点击原文。</p>
-<p>你喜欢这句话吗？<br>“努力就会成功”，“加班就会有成就”，“勤劳就会致富”……是这样吗？</p>
-<p>仔细思考一下，这些话存在严重的逻辑问题，我们在高中的时候学过“充分条件”，“必要条件”和“充要条件”！</p>
-<p>“努力就会成功”这句话，把“努力”说成了“成功”的充要条件，这不就是错的吗？努力只是成功的必要条件之一。你在错误的方向或是格局很小的方向上努力，能有用么？你努力地要饭，你努力地当搬运工，你努力地打骚扰电话销卖保险…… 在错误和小格局的方向上努力，你还觉得努力还有用吗？</p>
-<h3 id="个人感悟"><a href="#个人感悟" class="headerlink" title="个人感悟"></a>个人感悟</h3><p>虽然一直知道努力就能成功不过是一句鸡汤，但是看了这篇文章还是有醍醐灌顶的感觉，work smart和work hard有着本质的区别，一个是通过技能挣钱一个是通过劳动力挣钱。所以应该是通过不断的学习和迎接挑战来提升自己的技能，而不是找个简单的，然后想着用蛮力堆出成功，过程中还把自己感动的一塌糊涂。</p>
-<p>References<br>[1] 努力就能成功: <a target="_blank" rel="noopener" href="https://coolshell.cn/articles/19271.html">https://coolshell.cn/articles/19271.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2022/08/17/X%E3%80%81Y%E7%90%86%E8%AE%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/17/X%E3%80%81Y%E7%90%86%E8%AE%BA/" class="post-title-link" itemprop="url">X、Y理论</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-08-17 11:12:58" itemprop="dateCreated datePublished" datetime="2022-08-17T11:12:58+08:00">2022-08-17</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/4951.html">https://coolshell.cn/articles/4951.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://softwareengineering.stackexchange.com/questions/45776/why-do-business-analysts-and-project-managers-get-higher-salaries-than-programmer">https://softwareengineering.stackexchange.com/questions/45776/why-do-business-analysts-and-project-managers-get-higher-salaries-than-programmer</a></p>
-<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/X%E7%90%86%E8%AE%BA%E5%92%8CY%E7%90%86%E8%AE%BA">https://zh.wikipedia.org/wiki/X%E7%90%86%E8%AE%BA%E5%92%8CY%E7%90%86%E8%AE%BA</a></p>
 
       
     </div>
