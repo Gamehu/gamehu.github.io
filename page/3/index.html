@@ -169,7 +169,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">193</span>
+          <span class="site-state-item-count">194</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -220,6 +220,115 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/03/12/AI%E5%BA%94%E7%94%A8-%E7%9F%A5%E8%AF%86%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/12/AI%E5%BA%94%E7%94%A8-%E7%9F%A5%E8%AF%86%E5%BA%93/" class="post-title-link" itemprop="url">AI应用-知识库</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-12 22:31:00" itemprop="dateCreated datePublished" datetime="2024-03-12T22:31:00+08:00">2024-03-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div class="tag-container">
+  <span class="ai-tag">AI</span>
+  <span class="sub-tag">第一篇</span>
+</div>
+
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>这篇文章拖了很久了。因为我之前带LMT团队，团队的主要工作内容就是处理客户现场问题，因为我要求过程留痕并且达到知识沉淀的效果，所以处理过程中产生了大量的文档，也就是很多经验都落到了文档上，比如linux系统（硬盘、系统版本、dns等）、docker、k8s、现场网络问题（防火墙、网闸等安全设备），也就是运维经常面临的问题，也有产品配置、bug等文档。</p>
+<p>文档越来越多，但是却越来越难利用起来，我就想着把这些经验积累起来弄一个知识库，就像gpt一样，只要我输入有关问题他就能根据这些内容生成回答的内容，当然里面不仅仅是经验问答还需要有linux系统（硬盘、系统版本、dns等）、docker、k8s、现场网络问题（防火墙、网闸等安全设备）这些原始（原理）知识，还得有我们的产品知识。</p>
+<p>这个知识库一是为了方便使用且能让我练手，二是当时公司推行创新活动，AI相关的案例也能为事业部加分。</p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>知识库的定位：小而美，因为是个人发起的前期申请到的服务器资源有限，而且功能非常单一明确，只需要满足知识库就行，不需要全能。</p>
+<h3 id="选型"><a href="#选型" class="headerlink" title="选型"></a>选型</h3><p>通过一通查找对比，综合考虑，选择了Anything LLM或者Dify.AI+Ollama+Llama2小模型。</p>
+<h4 id="Anything-LLM"><a href="#Anything-LLM" class="headerlink" title="Anything LLM"></a>Anything LLM</h4><p><img src="/2024/03/12/AI%E5%BA%94%E7%94%A8-%E7%9F%A5%E8%AF%86%E5%BA%93/llm.png" alt="alt text"></p>
+<h4 id="考虑的其中一点"><a href="#考虑的其中一点" class="headerlink" title="考虑的其中一点"></a>考虑的其中一点</h4><p><strong>是用Anything LLM这种开箱即用的还是用LangChain这种需要自己上手写代码的</strong><br>Anything LLM和Dify.AI在其架构中广泛使用了LangChain组件，尤其是:</p>
+<ul>
+<li>文档加载器(Document Loaders)</li>
+<li>文本分割器(Text Splitters)</li>
+<li>向量存储(Vector Stores)</li>
+<li>检索器(Retrievers)</li>
+</ul>
+<ol>
+<li>直接使用Anything LLM这种系统的好处<ol>
+<li>意味着即使不直接编写LangChain代码，您也在间接使用LangChain的强大功能。这有几个好处:<br>模块化设计 - 可以灵活替换组件(如切换向量数据库)<br>经过验证的架构 - 使用业界已验证的RAG实现方式<br>未来升级路径 - 如果您将来想更深入定制，可以直接使用LangChain API</li>
+</ol>
+</li>
+<li>坏处<ol>
+<li>没有深入的了解和实践经验</li>
+</ol>
+</li>
+</ol>
+<p>我当时其实想用LangChain的，环境都搭好了，但是因为没有系统的学习过，进度很慢，没法赶上评审节点，所以最终选择了使用Anything LLM这种简单的方式。</p>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>Anything LLM+Ollama试了几种模型和Embedder，最终勉强得出一个组合Llama2:7B-chinese+bge-m3<br>还需要调整文档本身的内容，以及一些参数再多次尝试。</p>
+<p>待续…</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://docs.useanything.com/setup/llm-configuration/overview">https://docs.useanything.com/setup/llm-configuration/overview</a><br><a target="_blank" rel="noopener" href="https://github.com/Mintplex-Labs/anything-llm/blob/master/docker/HOW_TO_USE_DOCKER.md">https://github.com/Mintplex-Labs/anything-llm/blob/master/docker/HOW_TO_USE_DOCKER.md</a><br><a target="_blank" rel="noopener" href="https://adasci.org/anythingllm-for-local-execution-and-inferencing-of-llms-a-deep-dive/">https://adasci.org/anythingllm-for-local-execution-and-inferencing-of-llms-a-deep-dive/</a><br><a target="_blank" rel="noopener" href="https://itnext.io/deploy-flexible-and-custom-setups-with-anything-llm-on-kubernetes-a2b5687f2bcc">https://itnext.io/deploy-flexible-and-custom-setups-with-anything-llm-on-kubernetes-a2b5687f2bcc</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=4UFrVvy7VlA">https://www.youtube.com/watch?v=4UFrVvy7VlA</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -668,6 +777,9 @@
 <p>​13B → 130亿参数<br>​70B → 700亿参数<br>​175B → 1750亿参数（如GPT-3）</p>
 <p>这个单位是衡量模型复杂度和规模的关键指标。参数越多，模型通常能力越强，但也需要更多计算资源和数据训练。这个参数直接影响模型的“知识容量”和学习能力，但并非绝对。模型性能还与数据质量、训练方法、架构设计等因素相关。比如咱们的DeepSeek跟chatgpt不就是一个典型的例子吗</p>
 <h3 id="大模型"><a href="#大模型" class="headerlink" title="大模型"></a>大模型</h3><p>大模型（Large Language Model, LLM）​是指参数量极大、训练数据量极广的深度学习模型，通常专指自然语言处理（NLP）领域的超大规模模型。它们的“大”不仅体现在参数规模（如千亿级），还体现在训练数据、计算资源和应用能力的突破性提升。</p>
+<h3 id="AI-幻觉​"><a href="#AI-幻觉​" class="headerlink" title="AI 幻觉​"></a>AI 幻觉​</h3><p>AI 系统生成内容与现实事实或用户输入不符。原因包括数据缺陷（错误信息、偏见等）、训练过程局限（架构、推理、对齐问题）及推理随机性等。常见于大语言模型，影响输出可靠性。​​​幻觉​​是模型缺陷，需通过​​RAG检索增强​​或​​微调​​减少。</p>
+<h3 id="模型蒸馏​"><a href="#模型蒸馏​" class="headerlink" title="模型蒸馏​"></a>模型蒸馏​</h3><p>把复杂大模型（教师模型）知识迁移到简单小模型（学生模型），让小模型以低计算成本模仿大模型性能。用于在资源受限场景部署模型，如智能家居设备的AI应用。​</p>
+<h3 id="模型微调​"><a href="#模型微调​" class="headerlink" title="模型微调​"></a>模型微调​</h3><p>在已训练好模型基础上，针对特定任务或数据集调整，提升模型在该场景的性能。例如医疗领域。</p>
 
       
     </div>
@@ -1794,87 +1906,6 @@
 <p>因为16比24的IP范围大，这种情况下,容器获得的IP地址可能不在docker-compose网络的子网范围内,从而无法连接到该网络,造成网络通信失败。</p>
 <h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案:"></a>解决方案:</h3><p>将docker-compose.yml和docker daemon中的子网掩码设置为相同。例如都使用24位子网掩码。
  </p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2023/10/09/Websocket/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/10/09/Websocket/" class="post-title-link" itemprop="url">Websocket</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-10-09 15:11:00" itemprop="dateCreated datePublished" datetime="2023-10-09T15:11:00+08:00">2023-10-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%B7%A5%E4%BD%9C/" itemprop="url" rel="index"><span itemprop="name">工作</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>最近遇到一个现场问题，客户反馈产品页面提示连接错误，一查是ws不能链接，借此复习下ws的内容。毕竟之前写ws功能是好几年前了。温故知新。</p>
-<p><a target="_blank" rel="noopener" href="https://ably.com/topic/websockets">https://ably.com/topic/websockets</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.rfc-editor.org/rfc/rfc6455">https://www.rfc-editor.org/rfc/rfc6455</a></p>
-<p><a target="_blank" rel="noopener" href="https://websockets.spec.whatwg.org/#websocket-opening-handshake">https://websockets.spec.whatwg.org/#websocket-opening-handshake</a></p>
 
       
     </div>

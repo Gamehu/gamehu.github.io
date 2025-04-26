@@ -169,7 +169,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">193</span>
+          <span class="site-state-item-count">194</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -220,6 +220,136 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">详细设计</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-07-31 21:29:00" itemprop="dateCreated datePublished" datetime="2018-07-31T21:29:00+08:00">2018-07-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%B7%A5%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">工程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>首先为什么需要详设？</p>
+<img src="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/001.png" class="" title="来源于我">
+
+<p>肯定有人会喷，现在都谈敏捷了，你那是瀑布那一套了，现在谁还弄详设，然后就被鄙视了。如果是这样我就想问下，什么是敏捷？什么时候应该敏捷？先回答好了这两个问题再BB，哥也是经历过敏捷的人，13年在一家做数字工厂的创业公司，被公司副总忽悠做项目经理，当时作为一个码农的我来说，本身比较迷茫感觉天天敲代码不是我要的，觉得白富美离我太远。所以就想做产品经理，憧憬做一个响当当的产品出来，享誉中国，当然我得解释一下，此产品经理不是被玩坏的那种UE产品经理，而是正儿八经的产品经理。刚好遇到此副总，跟我聊了后就看上我了，美其名曰看上我的才，觉得我有当产品经理的潜力，然后我就飘飘然的去了。去了之后就让我先从项目经理干起，这儿的项目经理只管项目（需求调研、文档编写、项目资源协调…）不管技术。副总当时推得就是敏捷，因为本身干的是传统行业，一开始都是瀑布过来的，副总觉得瀑布有很多问题，所以准备推敏捷，我当时也是第一次接触敏捷，所以老大丢给了我一堆书，其中一本我记得是叫《敏捷项目管理》的书，然后就让我抱着啃，也恬不知耻的跟着其它项目组体验了敏捷的落地…。那段时间是我悠闲、迷茫的时光，一开始用latex跟公司弄宣传册，然后跟项目，去鸟不拉屎的地方，夏天跟客户喝着“枝江”聊着需求，其实挺怀恋的…。</p>
+<img src="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/scrum_framework.png" class="" title="来源于scrum.org">
+
+<p> 扯远了，后来在现在的公司，公司又请人做了一次敏捷培训，内容其实跟我之前看的书差不多，只是里面有一个概念是我比较深刻的就是讲师说了一个词语叫“小瀑布”，大概意思就是取敏捷和瀑布的各一部分。为什么呢？就是因为传统的瀑布确实是太重周期太长了，而且对客户的要求高，因为瀑布都是白纸黑字写好合同定功能需求的。你想想客户如果没想好，那是不是就麻烦了。但是事实是往往客户是不可能百分百知道自己要什么的或者说不可能百分百描述清楚自己要什么的。这个时候敏捷就有优势了，敏捷在我看来其实就是工作理念的转变，讲求的是快速迭代，讲求用户参与，讲求跨职能，这样就能很大限度的避免走偏。</p>
+<img src="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/002.png" class="" title="来源于网络">
+
+<p> 小瀑布在我们团队是咋用的呢，主要包括：</p>
+<ol>
+<li>首先团队是跨职能的，需求、产品、测试、研发都同属于一个团队，且团队的目标是一致的。</li>
+<li>前期除了User Story，还会进行需求评审，会出UCD文档，研发会出详设。</li>
+<li>Daily Scrum不强制要求。</li>
+<li>没有Sprint Review</li>
+</ol>
+<p>为什么我们会这样是因为我们本身不是一家互联网企业，对快速响应要求没那么高，我们是一家传统的toB企业，有自己的产品，很少接项目做，有稳定的渠道，不过也存在瓶颈，在这样的情况下，做新产品，我们则采取了现在的小瀑布的形式。至少目前来讲是很适合的。</p>
+<p>ok，扯得有点多了，我们还是来说说详设。</p>
+<h2 id="0-1版详设"><a href="#0-1版详设" class="headerlink" title="0.1版详设"></a>0.1版详设</h2><p>因为之前的详设没有一个特别正式的模板，接着0.2功能迭代需要写详设，领导让我和另外一个同事整一个详设的样板出来，跟领导过了几次，搜集了一下意见，最终中心思想只有一个，让新旧研发、测试、技术大佬都能看明白。</p>
+<p>所以最终出的模板是这样滴：</p>
+<img src="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/%E8%AF%A6%E8%AE%BE%E6%A8%A1%E6%9D%BF.png" class="" title="0.1详设模板">
+
+<p>这个模板稍微复杂了一些，但是他的好处在于说明了上下文，说明了依赖项，说明了核心逻辑，所以基本上出来的东西大家都能看懂，也能而且能评估难度和工作量等。</p>
+<h2 id="0-2版详设"><a href="#0-2版详设" class="headerlink" title="0.2版详设"></a>0.2版详设</h2><p>这版详设是在产品0.3.3迭代后出现的修改，是在0.1基础上的一些精进，精进了依赖项和核心逻辑说明。</p>
+<ul>
+<li>0.2把外部依赖项单独拎出来，这样能更加清晰表述自己所需要的支持，并且让对方知道。</li>
+<li>0.2把核心逻辑也着重提出来，0.1核心逻辑更多在于文字描述和UML图，0.2的要求是用伪代码+UML的形式进行核心逻辑的说明，核心思想就是贴近代码让详设更加实用。</li>
+</ul>
+<img src="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/004.png" class="" title="0.2详设模块">
+
+
+<p><strong>详设最实用的地方</strong>：是为了让你思考更加缜密，并且获得反馈。</p>
+<p><strong>未来的期望：</strong></p>
+<p>当然这版详设也不是最终版，以后会持续精进，最终的目标是直接不要文档。</p>
+<p>甚至我们刚进的一个架构师提出的愿景是：全部用类似单元测试的代码+注释的形式写详设，详设是否存在问题，看单元测试是否通过，我觉得是很美好的…..路很长。</p>
+<h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><p><strong>Sprint</strong></p>
+<blockquote>
+<p>可理解为一个迭代</p>
+</blockquote>
+<p><strong>Scrum</strong></p>
+<blockquote>
+<p>Scrum 可以理解成是一个框架，此框架让产品管理和工作技术的相对成效更加清晰地显现出来，以便您可以持续改进产品、团队和工作环境。</p>
+</blockquote>
+<img src="/2018/07/31/%E8%AF%A6%E7%BB%86%E8%AE%BE%E8%AE%A1/scrum.jpg" class="" title="来源于twitter">
+
+<p><strong>Daily Scrum</strong></p>
+<blockquote>
+<p>每日站会</p>
+</blockquote>
+<p><strong>User Story</strong></p>
+<blockquote>
+<p>用户故事，可以理解为一个场景或者一条需求。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1260,88 +1390,6 @@
 <p>区块链的商业生态，ICO是非常大的一块，目前也是势头最火的一块，但我个人认为目前问题很大，过于挑战人性，我是非常拒绝现在那些ICO行为的。此外硬分叉，虽然最开始我们说硬分叉有其技术争论的原因；但后来就变味了，借用硬分叉的名义薅韭菜，这里信息不对称因素太大，很多人入场的人根本不知道分叉币的流通盘有多低，不知道一旦大交易所或钱包系统派糖后价格会雪崩下跌。</p>
 <p>参考：<blockquote><footer><strong>MacTalk</strong><cite><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MjM5ODQ2MDIyMA==&mid=2650714344&idx=1&sn=e9ec572a0917ffca5fb15cf4c1fbd859&chksm=bec07ebb89b7f7adf31f088cfd67743300425e4853469c758fa3e0cf129c5c2081209ff4e931&mpshare=1&scene=23&srcid=0629FLXTeLgrc81S3xpifNMQ#rd">技术人为什么追逐区块链？</a></cite></footer></blockquote></p>
 <p>参考：<blockquote><footer><strong>曹政</strong><cite><a target="_blank" rel="noopener" href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxd767009104b89c74&redirect_uri=https%3A%2F%2Fyike.fm%2Fcallback%2Fweixin%2Fmp-login%3FcallbackURI%3D%252Fweixin-enrolled&response_type=code&scope=snsapi_userinfo&state=1#wechat_redirect">正本清源区块链</a></cite></footer></blockquote></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2018/06/28/%E8%81%94%E7%B3%BB%E5%92%8C%E5%BC%B1%E8%81%94%E7%B3%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/06/28/%E8%81%94%E7%B3%BB%E5%92%8C%E5%BC%B1%E8%81%94%E7%B3%BB/" class="post-title-link" itemprop="url">强联系和弱联系</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-06-28 10:57:00" itemprop="dateCreated datePublished" datetime="2018-06-28T10:57:00+08:00">2018-06-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AF%BB%E4%B9%A6/" itemprop="url" rel="index"><span itemprop="name">读书</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>早上地铁上啃kindle里的<strong>万万没想到</strong>，里面有个小结讲的是<strong>穷人</strong>和富人的人脉结构。为什么穷人加粗，因为我就是穷人。</p>
-<p>里面有两个词语我比较深刻，<strong>强联系</strong> <strong>弱联系</strong>。</p>
-<p>所谓强联系其实就是讲的是平时跟你比较近的人，当然反之平时不怎么联系甚至没见过面的则为弱联系。通常我们都愿意跟强联系的人一起做事，因为熟。但是文章里面讲到外国友人做了几个相关的实验，恰恰证明其实真正能帮到你的很多时候是弱联系的人。<em><strong>因为他们有个共同的特点就是不在你当前的社交圈内</strong></em>。这一点很重要，因为强联系的人经常混在一起，你们的想法或者做的事都差不多，所以发现不了什么新的东西。然而弱联系的意义就是把不同的社交圈子连接在一起，从圈外跟你提供有用的信息。所以人脉的关键不在于你融入了哪个圈子，而在于你能接触多少圈外的人。后面还讲了其它几个实验，得出的结论就是，虽然咱们都重视强联系，但是人们的大部分知识还是来源于弱联系。其实很好理解，因为强联系的人愿意跟我们交流我们也经常交流，话多了当然就没什么新意了。</p>
-<p>还有个观点，文章是单独拿出来说的，就是别跟熟人合伙。这个其实对中国人来说尤其困难，包括我，里面说到的一点我是很认同的就是创新能力，跟熟人搭伙，创新能力肯定是没有跟弱联系搭伙强的。熟了很多东西反而有限制。</p>
-<p>文章实验指出，富人越容易跟不同阶层和不同地区的人联络，而且阶层多样性比地区多样性更重要。虽然富人爱跟各种人联系，但是真正说话的时间比穷人的短。所以知道了吧，要致富先得学会别强依赖，强联系的亲朋好友，得学会接触新的圈子。其实就是信息的传递，通过弱联系，有用的有启发的肯定会比强联系的多，你想想，强联系的才几个人，弱联系的又有多少，就算按比例弱联系也是完胜嘛。</p>
 
       
     </div>

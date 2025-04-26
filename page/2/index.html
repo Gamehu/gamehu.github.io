@@ -169,7 +169,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">193</span>
+          <span class="site-state-item-count">194</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -220,6 +220,156 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/09/26/%E9%81%87%E8%A7%81%E6%B4%AA%E5%B3%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/09/26/%E9%81%87%E8%A7%81%E6%B4%AA%E5%B3%B0/" class="post-title-link" itemprop="url">遇见小洪峰</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-09-26 22:00:11" itemprop="dateCreated datePublished" datetime="2024-09-26T22:00:11+08:00">2024-09-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <div class="tag-container">
+  <span class="main-tag">离职系列</span>
+  <span class="sub-tag">第十篇</span>
+</div>
+<div class="article-quote">
+离职系列，想想这几年在公司的成长，在这做个记录。这篇是关于线上的bug。
+</div>
+
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>其实说来这个问题，跟之前的<a href="/2024/09/17/%E9%81%87%E8%A7%81%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6/" title="遇见连接超时">遇见连接超时</a>有个遗留项也有一些关系，因为报错的源头，也是是数据库连接关闭，与上一次仅仅是我那块出问题不同的是，这次是大批量的租户多种任务都失败，飞书告警消息都把我弹麻了。</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2024-10-23 17:00:10,177 [XxxGenerator8] ERROR [c.r.r.m.s.s.notice.impl.Xxx] Xxx.java:631 - 客户:2xx319,告警数据处理异常</span><br><span class="line">org.springframework.jdbc.UncategorizedSQLException: </span><br><span class="line">2024-10-23 17:00:10,176 [XxxGenerator8] ERROR [c.r.r.m.s.s.notice.impl.Xxx] Xxx.java:511 - 客户:2xx319,集成平台巡检数据处理异常</span><br><span class="line">024-10-23 17:00:10,175 [XxxGenerator8] ERROR [c.r.r.m.s.s.notice.impl.Xxx] Xxx.java:547 - 客户:2xx319,服务状态数据处理异常</span><br><span class="line">org.springframework.jdbc.UncategorizedSQLException: </span><br><span class="line">	... 35 common frames omitted</span><br><span class="line">2024-10-23 17:00:10,174 [XxxGenerator8] ERROR [c.r.r.m.s.s.notice.impl.Xxx] Xxx.java:582 - 客户:2xx319,心跳数据处理异常</span><br><span class="line">	... 82 common frames omitted</span><br><span class="line">org.springframework.jdbc.UncategorizedSQLException: </span><br><span class="line">     ### Cause: java.sql.SQLException: Connection is closed</span><br><span class="line">            ; uncategorized SQLException; SQL state [null]; error code [0]; Connection is closed</span><br><span class="line">              at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:93)</span><br><span class="line">              at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:439)</span><br><span class="line">              at java.base/java.lang.Thread.run(Thread.java:840)</span><br><span class="line">            Caused by: java.sql.SQLException: Connection is closed</span><br><span class="line"></span><br><span class="line">       </span><br></pre></td></tr></table></figure>
+
+<p>这次定位很快，具体定位的就不再赘述，出了问题后，我想了想有两个明确的因素：</p>
+<ol>
+<li>上次类似的错误就发现了，连接池设置存在问题。<ol>
+<li>再次检查，当前没有慢sql，所以初步判断是连接池问题。</li>
+</ol>
+</li>
+<li>新上线了策略功能，策略把之前定时默认执行的任务，可更改为每个租户下每种类型单独的执行时间和周期。<ol>
+<li>怀疑存在了N个客户N个任务都在同一时间点执行的问题，导致连接池耗尽。</li>
+</ol>
+</li>
+</ol>
+<h2 id="处理"><a href="#处理" class="headerlink" title="处理"></a>处理</h2><ol>
+<li>根据预留的后门，手动把核心任务给生成了，让线上能正常处理。</li>
+<li>因为之前已知了引入ShardingSphere后同时引入了HikariCP连接池，现在只留HikariCP连接池，并对参数进行调优。<ol>
+<li>以下是同事调优后的参数：超时时间以及连接池大小都对应阿里云购买的高性能PG做了对应的调整。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">master0:</span><br><span class="line">  dataSourceClassName: com.zaxxer.hikari.HikariDataSource</span><br><span class="line">  driverClassName: org.postgresql.Driver</span><br><span class="line">  jdbcUrl: jdbc:postgresql://xx.aliyuncs.com:xx/xx</span><br><span class="line">  username: xxx</span><br><span class="line">  password: xxx</span><br><span class="line">  connectionTimeout: 60000</span><br><span class="line">  idleTimeout: 600000</span><br><span class="line">  maxLifetime: 3600000</span><br><span class="line">  maximumPoolSize: 200</span><br><span class="line">  minimumIdle: 1</span><br><span class="line">  poolName: business-data-master0</span><br><span class="line">    </span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li>临时的先让cron表达式有一定的偏移量比如<ol>
+<li><pre><code>&#123;% codeblock %&#125;
+
+               return timeList.stream()
+                   .map(time -> &#123;
+                       String[] timeParts = parseTime(time);
+                       // TODO 临时解法：为每个cron添加随机偏移（ 0~3分钟）
+                       int minuteOffset = ThreadLocalRandom.current().nextInt(4); // 生成 0~3 的随机数
+                       int minute = (Integer.parseInt(timeParts[1]) + minuteOffset) % 60; // 防止超出 59 分钟
+                       return "0 " + minute + " " + timeParts[0] + " * * ? ";
+                   &#125;)
+                   .collect(Collectors.toList());
+                private static String[] parseTime(String time) &#123;
+                    return time.split(":"); // 格式为 "HH:mm"
+                &#125;
+            &#125;
+
+   &#123;% endcodeblock %&#125;
+</code></pre>
+</li>
+</ol>
+</li>
+</ol>
+<p>2、3做完之后，腾出缓冲时间着手长期解了，需要重新做下解法设计，以适配高并发的场景。</p>
+<h2 id="解法设计1-0"><a href="#解法设计1-0" class="headerlink" title="解法设计1.0"></a>解法设计1.0</h2><p>具体的解法设计咋做，可看下之前的<a href="/2024/12/22/%E9%81%87%E8%A7%81%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/" title="遇见多表查询">遇见多表查询</a>，这儿就直接给出一些结论：</p>
+<ol>
+<li>任务错峰（随机延迟）</li>
+<li>任务限流（线程池 + 队列）</li>
+<li>任务优先级机制（先执行核心任务）</li>
+</ol>
+<h3 id="UML："><a href="#UML：" class="headerlink" title="UML："></a>UML：</h3><p><img src="/2024/09/26/%E9%81%87%E8%A7%81%E6%B4%AA%E5%B3%B0/4.png" alt="alt text"></p>
+<h3 id="流程图："><a href="#流程图：" class="headerlink" title="流程图："></a>流程图：</h3><p><img src="/2024/09/26/%E9%81%87%E8%A7%81%E6%B4%AA%E5%B3%B0/2.png" alt="alt text"></p>
+<h3 id="时序图："><a href="#时序图：" class="headerlink" title="时序图："></a>时序图：</h3><p><img src="/2024/09/26/%E9%81%87%E8%A7%81%E6%B4%AA%E5%B3%B0/3.png" alt="alt text"></p>
+<h3 id="关键伪代码"><a href="#关键伪代码" class="headerlink" title="关键伪代码"></a>关键伪代码</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 任务优先级定义</span><br><span class="line">private enum TaskPriority &#123;</span><br><span class="line">    HIGH(0),</span><br><span class="line">    MEDIUM(5),</span><br><span class="line">    LOW(10);</span><br><span class="line"></span><br><span class="line">    private final int value;</span><br><span class="line"></span><br><span class="line">    TaskPriority(int value) &#123;</span><br><span class="line">        this.value = value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getValue() &#123;</span><br><span class="line">        return value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">* manage-biz Powerjob 调度类</span><br><span class="line">* 优化版本 - 任务削峰与队列管理</span><br><span class="line">*</span><br><span class="line">* @author hht</span><br><span class="line">* @since 2024-09-10</span><br><span class="line">*/</span><br><span class="line">@Component(value = &quot;manageBizPowerjobDispatcher&quot;)</span><br><span class="line">@Slf4j</span><br><span class="line">@RequiredArgsConstructor</span><br><span class="line">public class ManageBizPowerjobDispatcher &#123;</span><br><span class="line">    private final IXxxScheduleService XxxScheduleService;</span><br><span class="line">    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();</span><br><span class="line"></span><br><span class="line">    /** 平安通告powerjob任务id */</span><br><span class="line">    public static final String TASK_SAFETY_NOTICE_ID = &quot;generateXxx&quot;;</span><br><span class="line"></span><br><span class="line">    public static final String SUCCESS = &quot;success&quot;;</span><br><span class="line"></span><br><span class="line">    // 配置参数，可从配置文件注入</span><br><span class="line">    @Value(&quot;$&#123;powerjob.task.max-concurrent:10&#125;&quot;)</span><br><span class="line">    private int maxConcurrentTasks;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;powerjob.task.queue-capacity:500&#125;&quot;)</span><br><span class="line">    private int queueCapacity;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;powerjob.task.max-delay-minutes:5&#125;&quot;)</span><br><span class="line">    private int maxDelayMinutes;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;powerjob.task.worker-threads:20&#125;&quot;)</span><br><span class="line">    private int workerThreads;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    // 延迟任务定义</span><br><span class="line">    @Data</span><br><span class="line">    private static class DelayedTask implements Delayed &#123;</span><br><span class="line">        private final Runnable task;</span><br><span class="line">        private final long executeTime;</span><br><span class="line">        private final String taskId;</span><br><span class="line">        private final String jobParams;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public long getDelay(TimeUnit unit) &#123;</span><br><span class="line">            return unit.convert(executeTime - System.currentTimeMillis(), TimeUnit.MILLISECONDS);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 优先级任务定义</span><br><span class="line">    @Data</span><br><span class="line">    private static class PriorityTask implements Comparable&lt;PriorityTask&gt; &#123;</span><br><span class="line">        private final Runnable task;</span><br><span class="line">        private final TaskPriority priority;</span><br><span class="line">        private final String taskId;</span><br><span class="line">        private final String jobParams;</span><br><span class="line">        private final long createTime;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public int compareTo(PriorityTask other) &#123;</span><br><span class="line">            // 先按优先级排序，再按创建时间排序</span><br><span class="line">            int priorityCompare = Integer.compare(priority.getValue(), other.priority.getValue());</span><br><span class="line">            if (priorityCompare != 0) &#123;</span><br><span class="line">                return priorityCompare;</span><br><span class="line">            &#125;</span><br><span class="line">            return Long.compare(createTime, other.createTime);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">      * 1.单独的线程，负责从队列中获取任务并分发</span><br><span class="line">      * 2.协调延迟队列和优先级队列</span><br><span class="line">      * 3.控制任务的并发执行数量</span><br><span class="line">     */</span><br><span class="line">    private class TaskDispatcher implements Runnable &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            while (!Thread.currentThread().isInterrupted()) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    // 先检查延迟队列</span><br><span class="line">                    DelayedTask delayedTask = delayedTaskQueue.poll();</span><br><span class="line">                    if (delayedTask != null) &#123;</span><br><span class="line">                        // 将任务添加到优先级队列</span><br><span class="line">                        submitToPriorityQueue(delayedTask.getTask(), TaskPriority.HIGH, delayedTask.getTaskId(), delayedTask.getJobParams());</span><br><span class="line">                        continue;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    // 从优先级队列取任务执行</span><br><span class="line">                    PriorityTask priorityTask = priorityTaskQueue.take();</span><br><span class="line">                    if (priorityTask != null) &#123;</span><br><span class="line">                        try &#123;</span><br><span class="line">                            // 获取信号量，控制并发</span><br><span class="line">                            taskSemaphore.acquire();</span><br><span class="line">                            </span><br><span class="line">                            // 记录任务开始执行</span><br><span class="line">                            activeTaskCount.incrementAndGet();</span><br><span class="line">                            taskExecutionCount.computeIfAbsent(priorityTask.getTaskId(), k -&gt; new AtomicInteger(0)).incrementAndGet();</span><br><span class="line">                            </span><br><span class="line">                            // 提交到线程池执行</span><br><span class="line">                            executorService.submit(() -&gt; &#123;</span><br><span class="line">                                try &#123;</span><br><span class="line">                                    log.info(&quot;执行任务: &#123;&#125;, 参数: &#123;&#125;&quot;, priorityTask.getTaskId(), priorityTask.getJobParams());</span><br><span class="line">                                    priorityTask.getTask().run();</span><br><span class="line">                                &#125; catch (Exception e) &#123;</span><br><span class="line">                                    log.error(&quot;任务执行异常: &#123;&#125;&quot;, priorityTask.getTaskId(), e);</span><br><span class="line">                                &#125; finally &#123;</span><br><span class="line">                                    // 释放信号量</span><br><span class="line">                                    taskSemaphore.release();</span><br><span class="line">                                    // 更新计数器</span><br><span class="line">                                    activeTaskCount.decrementAndGet();</span><br><span class="line">                                    AtomicInteger counter = taskExecutionCount.get(priorityTask.getTaskId());</span><br><span class="line">                                    if (counter != null) &#123;</span><br><span class="line">                                        counter.decrementAndGet();</span><br><span class="line">                                    &#125;</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;);</span><br><span class="line">                        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                            Thread.currentThread().interrupt();</span><br><span class="line">                            break;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                    Thread.currentThread().interrupt();</span><br><span class="line">                    break;</span><br><span class="line">                &#125; catch (Exception e) &#123;</span><br><span class="line">                    log.error(&quot;任务分发器异常&quot;, e);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 任务队列和执行器</span><br><span class="line">    private DelayQueue&lt;DelayedTask&gt; delayedTaskQueue;</span><br><span class="line">    private PriorityBlockingQueue&lt;PriorityTask&gt; priorityTaskQueue;</span><br><span class="line">    private ExecutorService executorService;</span><br><span class="line">    private ExecutorService dispatcherService;</span><br><span class="line">    private Semaphore taskSemaphore;</span><br><span class="line">    private Random random;</span><br><span class="line"></span><br><span class="line">    // 任务执行状态监控</span><br><span class="line">    private AtomicLong totalTasksReceived = new AtomicLong(0);</span><br><span class="line">    private AtomicLong totalTasksExecuted = new AtomicLong(0);</span><br><span class="line">    private AtomicInteger activeTaskCount = new AtomicInteger(0);</span><br><span class="line">    private Map&lt;String, AtomicInteger&gt; taskExecutionCount = new ConcurrentHashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    @PostConstruct</span><br><span class="line">    public void init() &#123;</span><br><span class="line">        // 初始化任务队列</span><br><span class="line">        delayedTaskQueue = new DelayQueue&lt;&gt;();</span><br><span class="line">        priorityTaskQueue = new PriorityBlockingQueue&lt;&gt;(queueCapacity);</span><br><span class="line">        </span><br><span class="line">        // 初始化线程池</span><br><span class="line">        executorService = Executors.newFixedThreadPool(workerThreads, new ThreadFactory() &#123;</span><br><span class="line">            private final AtomicInteger counter = new AtomicInteger(1);</span><br><span class="line">            </span><br><span class="line">            @Override</span><br><span class="line">            public Thread newThread(Runnable r) &#123;</span><br><span class="line">                Thread thread = new Thread(r, &quot;task-worker-&quot; + counter.getAndIncrement());</span><br><span class="line">                thread.setDaemon(true);</span><br><span class="line">                return thread;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        </span><br><span class="line">        // 初始化分发器线程，</span><br><span class="line">        dispatcherService = Executors.newSingleThreadExecutor(r -&gt; &#123;</span><br><span class="line">            Thread thread = new Thread(r, &quot;task-dispatcher&quot;);</span><br><span class="line">            thread.setDaemon(true);</span><br><span class="line">            return thread;</span><br><span class="line">        &#125;);</span><br><span class="line">        </span><br><span class="line">        // 初始化信号量</span><br><span class="line">        taskSemaphore = new Semaphore(maxConcurrentTasks);</span><br><span class="line">        </span><br><span class="line">        // 初始化随机数生成器</span><br><span class="line">        random = new Random();</span><br><span class="line">        </span><br><span class="line">        // 启动任务分发线程</span><br><span class="line">        dispatcherService.submit(new TaskDispatcher());</span><br><span class="line">        </span><br><span class="line">        log.info(&quot;任务调度器初始化完成，最大并发任务数: &#123;&#125;, 队列容量: &#123;&#125;, 最大延迟分钟数: &#123;&#125;, 工作线程数: &#123;&#125;&quot;, </span><br><span class="line">                maxConcurrentTasks, queueCapacity, maxDelayMinutes, workerThreads);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @PreDestroy</span><br><span class="line">    public void shutdown() &#123;</span><br><span class="line">        // 关闭调度器</span><br><span class="line">        if (dispatcherService != null) &#123;</span><br><span class="line">            dispatcherService.shutdownNow();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        // 关闭执行器</span><br><span class="line">        if (executorService != null) &#123;</span><br><span class="line">            executorService.shutdown();</span><br><span class="line">            try &#123;</span><br><span class="line">                if (!executorService.awaitTermination(30, TimeUnit.SECONDS)) &#123;</span><br><span class="line">                    executorService.shutdownNow();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                executorService.shutdownNow();</span><br><span class="line">                Thread.currentThread().interrupt();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        log.info(&quot;任务调度器已关闭，总接收任务数: &#123;&#125;, 总执行任务数: &#123;&#125;&quot;, </span><br><span class="line">                totalTasksReceived.get(), totalTasksExecuted.get());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">    * 提交任务到延迟队列</span><br><span class="line">    */</span><br><span class="line">    private void submitToDelayQueue(Runnable task, String taskId, String jobParams) &#123;</span><br><span class="line">        // 随机延迟时间，在0到maxDelayMinutes分钟之间</span><br><span class="line">        long delayMs = random.nextInt((int) TimeUnit.MINUTES.toMillis(maxDelayMinutes));</span><br><span class="line">        DelayedTask delayedTask = new DelayedTask(task, delayMs, taskId, jobParams);</span><br><span class="line">        delayedTaskQueue.offer(delayedTask);</span><br><span class="line">        totalTasksReceived.incrementAndGet();</span><br><span class="line">        </span><br><span class="line">        log.info(&quot;任务已提交到延迟队列: &#123;&#125;, 延迟: &#123;&#125;ms&quot;, taskId, delayMs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">    * 提交任务到优先级队列</span><br><span class="line">    */</span><br><span class="line">    private void submitToPriorityQueue(Runnable task, TaskPriority priority, String taskId, String jobParams) &#123;</span><br><span class="line">        PriorityTask priorityTask = new PriorityTask(task, priority, taskId, jobParams);</span><br><span class="line">        priorityTaskQueue.offer(priorityTask);</span><br><span class="line">        </span><br><span class="line">        log.info(&quot;任务已提交到优先级队列: &#123;&#125;, 优先级: &#123;&#125;&quot;, taskId, priority);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">    * 获取任务类型对应的优先级</span><br><span class="line">    */</span><br><span class="line">    private TaskPriority getTaskPriority(String taskId) &#123;</span><br><span class="line">        switch (taskId) &#123;</span><br><span class="line">            case TASK_SAFETY_NOTICE_ID:</span><br><span class="line">            case TASK_PUSH_SERVICE_STATUS_ID:</span><br><span class="line">                return TaskPriority.HIGH;</span><br><span class="line">            case TASK_TENANT_SERVICE_PHASE_ID:</span><br><span class="line">            case TASK_WEEKLY_SUMMARY:</span><br><span class="line">                return TaskPriority.MEDIUM;</span><br><span class="line">            default:</span><br><span class="line">                return TaskPriority.LOW;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">    * 创建可执行的任务</span><br><span class="line">    */</span><br><span class="line">    private Runnable createExecutableTask(String taskId, String jobParams, TaskContext taskContext) &#123;</span><br><span class="line">        switch (taskId) &#123;</span><br><span class="line">            case TASK_SAFETY_NOTICE_ID:</span><br><span class="line">                return () -&gt; generateXxxTask(taskContext);</span><br><span class="line">            case TASK_OTHER:</span><br><span class="line">                return () -&gt; generateOtherTask(taskContext);</span><br><span class="line">            ...</span><br><span class="line">            default:</span><br><span class="line">                throw new IllegalArgumentException(&quot;未知的任务类型: &quot; + taskId);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">    * 通用任务提交方法</span><br><span class="line">    */</span><br><span class="line">    private ProcessResult submitTask(String taskId, TaskContext taskContext) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            totalTasksReceived.incrementAndGet();</span><br><span class="line">            </span><br><span class="line">            // 检查任务执行情况，如果已有大量相同类型任务，加入延迟队列</span><br><span class="line">            int activeCount = taskExecutionCount.computeIfAbsent(taskId, k -&gt; new AtomicInteger(0)).get();</span><br><span class="line">            if (activeCount &gt; maxConcurrentTasks / 2) &#123;</span><br><span class="line">                log.warn(&quot;当前任务类型 &#123;&#125; 正在执行的数量较多: &#123;&#125;, 将使用延迟队列分散负载&quot;, taskId, activeCount);</span><br><span class="line">                submitToDelayQueue(createExecutableTask(taskId, taskContext.getJobParams(), taskContext), taskId, taskContext.getJobParams());</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                // 根据任务类型分配优先级</span><br><span class="line">                TaskPriority priority = getTaskPriority(taskId);</span><br><span class="line">                submitToPriorityQueue(createExecutableTask(taskId, taskContext.getJobParams(), taskContext), priority, taskId, taskContext.getJobParams());</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            return new ProcessResult(true, formatResponse(SUCCESS, taskId));</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            log.error(&quot;提交任务异常: &#123;&#125;&quot;, taskId, e);</span><br><span class="line">            return new ProcessResult(false, formatResponse(e.getMessage(), taskId));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // ====== 以下是原始的PowerJob任务处理方法，改为使用队列系统 ======</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">    * 告警任务</span><br><span class="line">    */</span><br><span class="line">    @PowerJobHandler(name = TASK_OTHER)</span><br><span class="line">    public ProcessResult generateOtherTask(TaskContext taskContext) &#123;</span><br><span class="line">        log.info(&quot;==================== 调度触发(其它任务) ======================&quot;);</span><br><span class="line">        return submitTask(TASK_OTHER, taskContext);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private ProcessResult generateOtherTask(TaskContext taskContext) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            StrategyJobParams jobParams = new StrategyJobParams();</span><br><span class="line">            if (StringUtils.hasLength(taskContext.getJobParams())) &#123;</span><br><span class="line">                jobParams = OBJECT_MAPPER.readValue(taskContext.getJobParams(), StrategyJobParams.class);</span><br><span class="line">            &#125;</span><br><span class="line">            strategyScheduleService.generateTask(jobParams);</span><br><span class="line">            totalTasksExecuted.incrementAndGet();</span><br><span class="line">            return new ProcessResult(true, formatResponse(SUCCESS, TASK_OTHER));</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            log.error(&quot;调度执行【其它任务】异常&quot;, e);</span><br><span class="line">            return new ProcessResult(false, formatResponse(e.getMessage(), TASK_OTHER));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">    * 生成平安通告</span><br><span class="line">    */</span><br><span class="line">    @PowerJobHandler(name = TASK_SAFETY_NOTICE_ID)</span><br><span class="line">    public ProcessResult generateXxx(TaskContext taskContext) &#123;</span><br><span class="line">        log.info(&quot;==================== 调度触发(平安通告) ======================&quot;);</span><br><span class="line">        return submitTask(TASK_SAFETY_NOTICE_ID, taskContext);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private ProcessResult generateXxxTask(TaskContext taskContext) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            // 获取调度任务的参数</span><br><span class="line">            StrategyJobParams jobParams = null;</span><br><span class="line">            if (StringUtils.hasLength(taskContext.getJobParams())) &#123;</span><br><span class="line">                jobParams = OBJECT_MAPPER.readValue(taskContext.getJobParams(), StrategyJobParams.class);</span><br><span class="line">            &#125;</span><br><span class="line">            // 生成平安通告</span><br><span class="line">            XxxScheduleService.autoGenerateBatch(jobParams);</span><br><span class="line">            totalTasksExecuted.incrementAndGet();</span><br><span class="line">            return new ProcessResult(true, formatResponse(&quot;success&quot;, TASK_SAFETY_NOTICE_ID));</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            log.error(&quot;调度执行【平安通告】异常&quot;, e);</span><br><span class="line">            return new ProcessResult(false, formatResponse(e.getMessage(), TASK_SAFETY_NOTICE_ID));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    private String formatResponse(String info, String id) &#123;</span><br><span class="line">        return String.format(&quot;&#123;\&quot;taskId\&quot;: \&quot;%s\&quot;, \&quot;info\&quot;: \&quot;%s\&quot;&#125;&quot;, id, info);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="解法设计2-0"><a href="#解法设计2-0" class="headerlink" title="解法设计2.0"></a>解法设计2.0</h2><p>主要是解决一些异常场景，比如：</p>
+<ol>
+<li>服务异常重启，任务丢了？</li>
+<li>信号量获取阻塞，所有任务堆积？</li>
+<li>发生异常，及时感知等</li>
+</ol>
+<p>这一步还停留在设计阶段，也可能是我设计并落地，也先做个记录。</p>
+<p>解法：</p>
+<ol>
+<li>Redis代替内存队列，开启持久话，便于启动后恢复。</li>
+<li>核心业务单独维护信号量</li>
+<li>设置拒绝策略，当队列超过阈值直接异常返回给powerjob<ol>
+<li>同时发送告警</li>
+</ol>
+</li>
+<li>适当的动态调整信号量</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1328,115 +1478,6 @@
 <p>正因如此，LMT 的成立成为企业提升运维效率、保障业务稳定性的必然选择。</p>
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>给你们贴一张LMT成立初期拦截现场故障的占比，你就知道单独抽出几个研发成立LMT有没有必要了。</p>
 <img src="/2024/03/19/LMT/1.jpg" class="" title="效能看板">
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2024/03/12/AI%E5%BA%94%E7%94%A8-%E7%9F%A5%E8%AF%86%E5%BA%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/03/12/AI%E5%BA%94%E7%94%A8-%E7%9F%A5%E8%AF%86%E5%BA%93/" class="post-title-link" itemprop="url">AI应用-知识库</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-03-12 22:31:00" itemprop="dateCreated datePublished" datetime="2024-03-12T22:31:00+08:00">2024-03-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <div class="tag-container">
-  <span class="ai-tag">AI</span>
-  <span class="sub-tag">第一篇</span>
-</div>
-
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>这篇文章拖了很久了。因为我之前带LMT团队，团队的主要工作内容就是处理客户现场问题，因为我要求过程留痕并且达到知识沉淀的效果，所以处理过程中产生了大量的文档，也就是很多经验都落到了文档上，比如linux系统（硬盘、系统版本、dns等）、docker、k8s、现场网络问题（防火墙、网闸等安全设备），也就是运维经常面临的问题，也有产品配置、bug等文档。</p>
-<p>文档越来越多，但是却越来越难利用起来，我就想着把这些经验积累起来弄一个知识库，就像gpt一样，只要我输入有关问题他就能根据这些内容生成回答的内容，当然里面不仅仅是经验问答还需要有linux系统（硬盘、系统版本、dns等）、docker、k8s、现场网络问题（防火墙、网闸等安全设备）这些原始（原理）知识，还得有我们的产品知识。</p>
-<p>这个知识库一是为了方便使用且能让我练手，二是当时公司推行创新活动，AI相关的案例也能为事业部加分。</p>
-<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>知识库的定位：小而美，因为是个人发起的前期申请到的服务器资源有限，而且功能非常单一明确，只需要满足知识库就行，不需要全能。</p>
-<h3 id="选型"><a href="#选型" class="headerlink" title="选型"></a>选型</h3><p>通过一通查找对比，综合考虑，选择了Anything LLM或者Dify.AI+Ollama+Llama2小模型。</p>
-<h4 id="Anything-LLM"><a href="#Anything-LLM" class="headerlink" title="Anything LLM"></a>Anything LLM</h4><p><img src="/2024/03/12/AI%E5%BA%94%E7%94%A8-%E7%9F%A5%E8%AF%86%E5%BA%93/llm.png" alt="alt text"></p>
-<h4 id="考虑的其中一点"><a href="#考虑的其中一点" class="headerlink" title="考虑的其中一点"></a>考虑的其中一点</h4><p><strong>是用Anything LLM这种开箱即用的还是用LangChain这种需要自己上手写代码的</strong><br>Anything LLM和Dify.AI在其架构中广泛使用了LangChain组件，尤其是:</p>
-<ul>
-<li>文档加载器(Document Loaders)</li>
-<li>文本分割器(Text Splitters)</li>
-<li>向量存储(Vector Stores)</li>
-<li>检索器(Retrievers)</li>
-</ul>
-<ol>
-<li>直接使用Anything LLM这种系统的好处<ol>
-<li>意味着即使不直接编写LangChain代码，您也在间接使用LangChain的强大功能。这有几个好处:<br>模块化设计 - 可以灵活替换组件(如切换向量数据库)<br>经过验证的架构 - 使用业界已验证的RAG实现方式<br>未来升级路径 - 如果您将来想更深入定制，可以直接使用LangChain API</li>
-</ol>
-</li>
-<li>坏处<ol>
-<li>没有深入的了解和实践经验</li>
-</ol>
-</li>
-</ol>
-<p>我当时其实想用LangChain的，环境都搭好了，但是因为没有系统的学习过，进度很慢，没法赶上评审节点，所以最终选择了使用Anything LLM这种简单的方式。</p>
-<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><p>Anything LLM+Ollama试了几种模型和Embedder，最终勉强得出一个组合Llama2:7B-chinese+bge-m3<br>还需要调整文档本身的内容，以及一些参数再多次尝试。</p>
-<p>待续…</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="https://docs.useanything.com/setup/llm-configuration/overview">https://docs.useanything.com/setup/llm-configuration/overview</a><br><a target="_blank" rel="noopener" href="https://github.com/Mintplex-Labs/anything-llm/blob/master/docker/HOW_TO_USE_DOCKER.md">https://github.com/Mintplex-Labs/anything-llm/blob/master/docker/HOW_TO_USE_DOCKER.md</a><br><a target="_blank" rel="noopener" href="https://adasci.org/anythingllm-for-local-execution-and-inferencing-of-llms-a-deep-dive/">https://adasci.org/anythingllm-for-local-execution-and-inferencing-of-llms-a-deep-dive/</a><br><a target="_blank" rel="noopener" href="https://itnext.io/deploy-flexible-and-custom-setups-with-anything-llm-on-kubernetes-a2b5687f2bcc">https://itnext.io/deploy-flexible-and-custom-setups-with-anything-llm-on-kubernetes-a2b5687f2bcc</a><br><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=4UFrVvy7VlA">https://www.youtube.com/watch?v=4UFrVvy7VlA</a></p>
 
       
     </div>

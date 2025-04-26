@@ -169,7 +169,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">193</span>
+          <span class="site-state-item-count">194</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -220,6 +220,245 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2020/04/28/%E5%89%8D%E7%AB%AF%E5%9F%8B%E7%82%B9(%E4%B8%80)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/IMG_4038.jpeg">
+      <meta itemprop="name" content="Gamehu">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/04/28/%E5%89%8D%E7%AB%AF%E5%9F%8B%E7%82%B9(%E4%B8%80)/" class="post-title-link" itemprop="url">前端埋点(一)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-04-28 16:52:00" itemprop="dateCreated datePublished" datetime="2020-04-28T16:52:00+08:00">2020-04-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>我们是做NPMD工具的，但是对自身的产品本身确没有监控，说起来就很惆怅了，当然主要原因还是产品从0到1这个过程，前期放荡不羁的功能造作，导致对基础设施建设这块做的很少。</p>
+<p>这是一贯坚持基础建设重要性的我的又一篇分享。关于前端埋点。</p>
+<p>所以我当然承认基础建设是体系化的漫长的一个过程，但是因为各种不可抗因素，现没法体系化落地，所以只能先捡最能产生价值的且能引起更多不同之能的同事关注的事开始做，比如前端埋点。</p>
+<p><strong>先说痛点：</strong></p>
+<ol>
+<li><p>整个质量体系监控缺失，前端报错后端报错，全靠经验、人肉日志和用户主动反馈。</p>
+<blockquote>
+<p>特别是现场问题排查，通常都会先找到前端定位问题，现场又不能远程。</p>
+</blockquote>
+</li>
+<li><p>业务数据的效果无从跟踪。</p>
+<blockquote>
+<p>如使用某功能的频率无从得知，需要人肉从客户处拿此类数据，且还不准。</p>
+</blockquote>
+</li>
+<li><p>用户的访问行为&#x2F;设备特征&#x2F;应用性能信息完全无感知。</p>
+<blockquote>
+<p>如活跃时间点(避开做升级)，软硬件系统和设备比例(做兼容)，慢页面优化等无从做起。</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>前端埋点对我们产品的好处：</strong></p>
+<ol>
+<li><p>记录访问行为&#x2F;设备特征&#x2F;应用性能信息。</p>
+<blockquote>
+<p>为产品的设计，提供参考数据，对于我们这种从0到1的ToB产品，我个人觉得是特别需要这类用户反馈数据的，避免闭门造车。</p>
+<p>为产品的优化（性能、产品设计…）提供参考。</p>
+</blockquote>
+</li>
+<li><p>记录异常。</p>
+<blockquote>
+<p>便于问题的排查，我们处理的问题一般是客户现场问题，通常情况下又都是客户的内网，所以是无法远程的，这类异常记录手段刚好能丰富异常记录数据，便于问题的排查。</p>
+</blockquote>
+</li>
+</ol>
+<p>所以可以看出，前端埋点至少会影响的到产品、UCD、研发、测试，当利益方多的时候，事情才更有推下去的可能性。</p>
+<h3 id="埋点"><a href="#埋点" class="headerlink" title="埋点"></a>埋点</h3><p>决策源于数据，而数据源于采集，采集源于规则梳理，让这一切发生源于工程师的创造力和执行力。</p>
+<h4 id="埋点的方式"><a href="#埋点的方式" class="headerlink" title="埋点的方式"></a>埋点的方式</h4><ol>
+<li><p>手动埋点</p>
+<blockquote>
+<p>手动代码埋点比较常见，即需要在采集数据的地方调用埋点的方法。</p>
+<p>优点是流量可控，业务方可以根据需要在任意地点任意场景进行数据采集，采集信息也完全由业务方来控制。这样的有点也带来了一些弊端，需要业务方来写死方法，如果采集方案变了，业务方也需要重新修改代码，重新发布。</p>
+<p>百度统计等第三方数据统计服务商大都采用这种方案；</p>
+</blockquote>
+</li>
+<li><p>可视化埋点</p>
+<blockquote>
+<p>即通过可视化工具配置采集节点，在前端自动解析配置并上报埋点数据。</p>
+<p>优点业务方工作量少，缺点则是技术上推广和实现起来有点难（业务方前端代码规范是个大前提，比如唯一ID等）。</p>
+<p> 代表方案是已经开源的<a target="_blank" rel="noopener" href="https://github.com/mixpanel">Mixpanel</a>；</p>
+</blockquote>
+</li>
+<li><p>“无痕埋点”</p>
+<blockquote>
+<p>无痕埋点则是前端自动采集全部事件，上报埋点数据，由后端来过滤和计算出有用的数据，优点是前端只要加载埋点脚本。缺点是流量和采集的数据过于庞大，服务器性能压力山大，主流的 GrowingIO 就是这种实现方案。</p>
+</blockquote>
+</li>
+</ol>
+<p><strong>那我们产品现阶段比较适合的方式时什么呢？</strong></p>
+<blockquote>
+<p>手动代码埋点的方案，代码埋点虽然使用起来灵活，但是开发成本较高且对业务代码有强侵入性，并且一旦发布就很难修改，更何况我们这是部署在客户现场的。</p>
+</blockquote>
+<blockquote>
+<p>可视化埋点也是不太可行的，我们连工程化、规范化都没做到，而且是部署在客户现场的，先天不足，再一个可视化埋点通常基于xpath的方式，只能读取页面上标签元素展示出来的属性，不能够获取上下文（通常内存里）的一些属性。而且页面的结构发生变化时，需重新标记操作。</p>
+</blockquote>
+<p>所以几乎只有考虑无痕埋点，虽然无痕埋点流量消耗和数据计算成本很高，但是因为我们是ToB运维工具，企业内部用的，使用人数也不多，所以也还好，当然这是第一版如果确实在实验局发现压力挺大，我们可以再改进一下，比如采用手动埋点+无痕埋点的方式或者三种结合的方式。</p>
+<p>OK先把埋点方式定下来了，我们现在考虑剩下的东西。</p>
+<h4 id="埋点需求整理原则"><a href="#埋点需求整理原则" class="headerlink" title="埋点需求整理原则"></a>埋点需求整理原则</h4><p>埋点不能乱埋，埋点的原则是基于一系列问题展开，并基于这些问题确定埋点需求，怎么确定埋点需求，可以照下面的问题切入进行梳理</p>
+<p><strong>HOW：</strong></p>
+<ul>
+<li>怎样证明新功能效果？</li>
+<li>需要哪些埋点？我们要采集什么内容，进行哪些采集接口的约定？</li>
+<li>我该怎么埋这些点？</li>
+<li>部分埋点的计算逻辑是什么？</li>
+<li>数据结果怎么看？</li>
+<li>通过什么方式来调用我们的采集脚本？</li>
+<li>无埋点：考虑到数据量对于服务器的压力，我们需要对无埋点进行开关配置，可以配置进行哪些元素进行无埋点采集</li>
+</ul>
+<p><strong>WHO：</strong></p>
+<ul>
+<li>我的产品设计面对的用户群里是谁？</li>
+<li>用户特征是什么？</li>
+<li>这部分特征用户对功能预期的数据结果是什么？</li>
+<li>用户习惯是什么？</li>
+</ul>
+<p><strong>WHAT：</strong></p>
+<ul>
+<li>产品包含哪几个模块？</li>
+</ul>
+<p><strong>WHERE：</strong></p>
+<ul>
+<li>新功能展示在产品端的哪个位置？</li>
+<li>在哪些版本生效？</li>
+<li>哪些功能的展示或作用在哪里需要跟服务端等交互？</li>
+</ul>
+<p><strong>WHEN：</strong></p>
+<ul>
+<li>功能是在用户场景什么时候调用产生？</li>
+<li>调用过程中什么时候和服务端交互？</li>
+<li>功能调用正常情况下需要大概需要多长时间？</li>
+<li>什么情况会影响调用结果？</li>
+<li>调用有风险的时候，是否需要加监测？</li>
+</ul>
+<hr>
+<p>回答了上面的问题，基本上能知道埋点的意义在哪儿以及需要收集哪些数据等，接下来就得开始指定埋点规范了。</p>
+<h4 id="埋点规范"><a href="#埋点规范" class="headerlink" title="埋点规范"></a>埋点规范</h4><p>埋点规范就跟编码规范一样，不按照规范就会有很大的隐患比如以下问题：</p>
+<ol>
+<li><p>埋点混乱</p>
+</li>
+<li><p>常常埋错，漏埋</p>
+</li>
+<li><p>业务变化后，老埋点数据失去意义</p>
+</li>
+<li><p>埋点数据无人使用，浪费资源</p>
+</li>
+<li><p>数据团队、研发团队、产品团队协作配合难度大</p>
+</li>
+<li><p>很多时候不太重视数据，而是重视业务的快速上线</p>
+</li>
+<li><p>埋点语义不明确，同一个按钮存在多种描述，不易检索</p>
+</li>
+<li><p>无用&#x2F;重复埋点太多，干扰了正常埋点数据</p>
+</li>
+<li><p>大量存量埋点Owner离职或者转岗，导致大量僵尸埋点信息</p>
+<blockquote>
+<p><em>所以为了避免以上问题我们需要建立一个好的规范，比如命名规范和流程规范。</em></p>
+</blockquote>
+<p><strong>埋点命名规范</strong></p>
+<p>我们当前的做法是埋点名称只能是由字母、数字、下划线组成，并保证在应用内唯一，比如sw是展示，ck是点击。</p>
+<p>常用规则的举例如下：<br>比如行为埋点：<code>&#123;团队|业务|角色&#125;_&#123;组件|页面&#125;_&#123;具体元素&#125;_&#123;动作&#125;</code><br>示例：<br>front_alarm_sw ： front代表项目，alarm代表功能，sw是展示，ck是点击<br>front_alarm1_detail_table_point_ck ：front代表项目，alarm1_detail代表功能，table组件，point小圆点组件，ck点击</p>
+</li>
+</ol>
+<p><strong>埋点流程规范</strong></p>
+<p>如果你发现每天有大量埋点错误反馈，并导致很多错误的分析结论，一个错误的分析结果还不如没有数据分析结果。造成这个问题的原因包括：</p>
+<ol>
+<li>前端埋点涉及复杂的交互，难以找准埋点位置；<ol start="2">
+<li>埋点的验收流程不完善，没有经过测试和产品经理的测试和验收，验证不完备；</li>
+</ol>
+</li>
+</ol>
+<p>好的埋点需求应该和业务功能需求同等重要，也需要经历软件开发的整个生命周期，如果能严格按照一个规范的流程处理埋点，以上问题会得到更好的解决。</p>
+<h4 id="规范内容"><a href="#规范内容" class="headerlink" title="规范内容"></a>规范内容</h4><h2 id="需求阶段：确定埋点信息，核心包括五方面信息：事件ID、埋点名称、埋点描述、埋点属性以及截图。如何落地：如果不按照规则和流程埋点将不会上报相关数据，制定强制规定。开发什么功能：埋点全文检索能力、自动找到重复埋点（语义相近或者数据相近）功能。开发阶段：务必和开发沟通，并让开发在完全理解业务语义的情况下，在前端按照埋点代码规范进行埋点。如何落地：静态代码检查。开发什么功能：开发探测每个埋点对应到的代码文件和代码行，开发根据人均事件量级进行监控报警功能。测试阶段：务必和测试沟通，并让测试在完全理解业务语义的情况下，通过CodeReview和埋点测试两种方式对埋点正确性进行验证。如何落地：规定如果未经测试的埋点不允许上报埋点数据。开发什么功能：提供所见即所得的埋点测试平台。验收阶段：确保相关人员在完全理解业务语义的情况下，可以通过与自比较和他比较的方式来进行验证。举例：-他比较验证：前端某业务点数量和对应服务端数据应该基本相当。如何落地：规定如果未经验证的埋点不允许上报埋点数据。开发什么功能：提供埋点实时数据查询。清理阶段：确认完全理解语义的情况下，可对业务发生巨大变化或者不在维护的埋点进行废弃。如何落地：3个月以上未被使用的埋点、1个月以上数据为0的埋点自动废弃。3个月后使用次日会自动开启采集。开发什么功能：根据规则提供针对未使用埋点的计算、并自动废弃。可以看出，规范要落地，需要整个公司的共识，也需要从上而下的压力，还有强势的制度。比如针对全公司个部门做评分，评分规则基于埋点和数据分析抽象出来。"><a href="#需求阶段：确定埋点信息，核心包括五方面信息：事件ID、埋点名称、埋点描述、埋点属性以及截图。如何落地：如果不按照规则和流程埋点将不会上报相关数据，制定强制规定。开发什么功能：埋点全文检索能力、自动找到重复埋点（语义相近或者数据相近）功能。开发阶段：务必和开发沟通，并让开发在完全理解业务语义的情况下，在前端按照埋点代码规范进行埋点。如何落地：静态代码检查。开发什么功能：开发探测每个埋点对应到的代码文件和代码行，开发根据人均事件量级进行监控报警功能。测试阶段：务必和测试沟通，并让测试在完全理解业务语义的情况下，通过CodeReview和埋点测试两种方式对埋点正确性进行验证。如何落地：规定如果未经测试的埋点不允许上报埋点数据。开发什么功能：提供所见即所得的埋点测试平台。验收阶段：确保相关人员在完全理解业务语义的情况下，可以通过与自比较和他比较的方式来进行验证。举例：-他比较验证：前端某业务点数量和对应服务端数据应该基本相当。如何落地：规定如果未经验证的埋点不允许上报埋点数据。开发什么功能：提供埋点实时数据查询。清理阶段：确认完全理解语义的情况下，可对业务发生巨大变化或者不在维护的埋点进行废弃。如何落地：3个月以上未被使用的埋点、1个月以上数据为0的埋点自动废弃。3个月后使用次日会自动开启采集。开发什么功能：根据规则提供针对未使用埋点的计算、并自动废弃。可以看出，规范要落地，需要整个公司的共识，也需要从上而下的压力，还有强势的制度。比如针对全公司个部门做评分，评分规则基于埋点和数据分析抽象出来。" class="headerlink" title="需求阶段：确定埋点信息，核心包括五方面信息：事件ID、埋点名称、埋点描述、埋点属性以及截图。如何落地：如果不按照规则和流程埋点将不会上报相关数据，制定强制规定。开发什么功能：埋点全文检索能力、自动找到重复埋点（语义相近或者数据相近）功能。开发阶段：务必和开发沟通，并让开发在完全理解业务语义的情况下，在前端按照埋点代码规范进行埋点。如何落地：静态代码检查。开发什么功能：开发探测每个埋点对应到的代码文件和代码行，开发根据人均事件量级进行监控报警功能。测试阶段：务必和测试沟通，并让测试在完全理解业务语义的情况下，通过CodeReview和埋点测试两种方式对埋点正确性进行验证。如何落地：规定如果未经测试的埋点不允许上报埋点数据。开发什么功能：提供所见即所得的埋点测试平台。验收阶段：确保相关人员在完全理解业务语义的情况下，可以通过与自比较和他比较的方式来进行验证。举例：- 他比较验证：前端某业务点数量和对应服务端数据应该基本相当。如何落地：规定如果未经验证的埋点不允许上报埋点数据。开发什么功能：提供埋点实时数据查询。清理阶段：确认完全理解语义的情况下，可对业务发生巨大变化或者不在维护的埋点进行废弃。如何落地：3个月以上未被使用的埋点、1个月以上数据为0的埋点自动废弃。3个月后使用次日会自动开启采集。开发什么功能：根据规则提供针对未使用埋点的计算、并自动废弃。可以看出，规范要落地，需要整个公司的共识，也需要从上而下的压力，还有强势的制度。比如针对全公司个部门做评分，评分规则基于埋点和数据分析抽象出来。
+   "></a><strong>需求阶段：</strong><br><br>确定埋点信息，核心包括五方面信息：事件ID、埋点名称、埋点描述、埋点属性以及截图。<br><br><em>如何落地：</em><br><br>如果不按照规则和流程埋点将不会上报相关数据，制定强制规定。<br><br><em>开发什么功能：</em><br><br>埋点全文检索能力、自动找到重复埋点（语义相近或者数据相近）功能。<br><br><strong>开发阶段：</strong><br><br>务必和开发沟通，并让开发在完全理解业务语义的情况下，在前端按照埋点代码规范进行埋点。<br><br><em>如何落地：</em><br><br>静态代码检查。<br><br><em>开发什么功能：</em><br><br>开发探测每个埋点对应到的代码文件和代码行，开发根据人均事件量级进行监控报警功能。<br><br><strong>测试阶段：</strong><br><br>务必和测试沟通，并让测试在完全理解业务语义的情况下，通过CodeReview和埋点测试两种方式对埋点正确性进行验证。<br><br><em>如何落地：</em><br><br>规定如果未经测试的埋点不允许上报埋点数据。<br><br><em>开发什么功能：</em><br><br>提供所见即所得的埋点测试平台。<br><br><strong>验收阶段：</strong><br><br>确保相关人员在完全理解业务语义的情况下，可以通过与自比较和他比较的方式来进行验证。<br><br><em>举例：</em><br><br>- 他比较验证：前端某业务点数量和对应服务端数据应该基本相当。<br><br><em>如何落地：</em><br><br>规定如果未经验证的埋点不允许上报埋点数据。<br><br><em>开发什么功能：</em><br><br>提供埋点实时数据查询。<br><br><strong>清理阶段：</strong><br><br>确认完全理解语义的情况下，可对业务发生巨大变化或者不在维护的埋点进行废弃。<br><br><em>如何落地：</em><br><br>3个月以上未被使用的埋点、1个月以上数据为0的埋点自动废弃。3个月后使用次日会自动开启采集。<br><br><em>开发什么功能：</em><br><br>根据规则提供针对未使用埋点的计算、并自动废弃。<br><br>可以看出，规范要落地，需要整个公司的共识，也需要从上而下的压力，还有强势的制度。比如针对全公司个部门做评分，评分规则基于埋点和数据分析抽象出来。
+   </h2><p>另外我们在前端埋点中也遇到过一些注意事项，整理如下，希望对大家有所帮助。</p>
+<p><strong>注意事项：</strong></p>
+<p><em>一些埋点安全性问题：</em></p>
+<p>如果你使用普通的http 协议，在数据传输的过程存在被劫持(包括不限于：JS代码注入等)的可能性，造成H5页面中出现诸如：未知的广告或者原网页被重定向等问题。为了降低此类事件发生的可能性，建议最好使用https 协议（倡导全站https），以确保数据传输过程的完整性，安全性。</p>
+<p><em>版本迭代的时候埋点需要注意什么？</em></p>
+<ul>
+<li>如果是公用模块，可以非常放心安全的全量迁移埋点；<ul>
+<li>如果是新增模块，那就需要注意是否遵循了最新的埋点规范，有没有重复的埋点命名存在，埋点是否符合业务逻辑；</li>
+<li>如果是下线模块，那就需要评估下线后对数据的影响范围，而且要第一时间充分周知相关方，让各方参与评估；</li>
+<li>如果是更新模块，需要评估在原有埋点上需要修改的埋点内容，是否需要重新埋点，删除不需要的埋点，而且要修改功能的数据承接。</li>
+</ul>
+</li>
+</ul>
+<h3 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h3><blockquote><footer><strong>前端埋点的那些事</strong><cite><a target="_blank" rel="noopener" href="https://www.imooc.com/article/27151?block_id=tuijian_wz">www.imooc.com/article/27151?block_id=tuijian_wz</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>美团点评前端无痕埋点实践</strong><cite><a target="_blank" rel="noopener" href="https://juejin.im/entry/58e8aa25a22b9d00589bd297">juejin.im/entry/58e8aa25a22b9d00589bd297</a></cite></footer></blockquote>
+
+<blockquote><footer><strong>从零开始写一个前端数据埋点工具</strong><cite><a target="_blank" rel="noopener" href="https://juejin.im/post/5d2c188651882547b2361bdf">juejin.im/post/5d2c188651882547b2361bdf</a></cite></footer></blockquote>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1994,109 +2233,6 @@
 <p>同样，不建议这样做，我也不鼓励您在桌面上执行此操作。如果忘记了密码，将无法再次<a target="_blank" rel="noopener" href="https://itsfoss.com/how-to-hack-ubuntu-password/">在Ubuntu中更改root密码</a>。</p>
 <p>您可以通过删除密码来再次锁定root用户：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd -dl root</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://www.gamehu.run/2020/02/03/%E9%A2%86%E5%AF%BC%E5%AF%84%E8%AF%AD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/IMG_4038.jpeg">
-      <meta itemprop="name" content="Gamehu">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="10年经验Java开发者，精通React，熟悉Python、Docker、Vue及Go">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 正儿八经 - 资深Java/React工程师">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2020/02/03/%E9%A2%86%E5%AF%BC%E5%AF%84%E8%AF%AD/" class="post-title-link" itemprop="url">领导寄语</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2020-02-03 16:59:00" itemprop="dateCreated datePublished" datetime="2020-02-03T16:59:00+08:00">2020-02-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%88%90%E9%95%BF/" itemprop="url" rel="index"><span itemprop="name">成长</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <img src="/2020/02/03/%E9%A2%86%E5%AF%BC%E5%AF%84%E8%AF%AD/a.png" class="" title="Photo by DJ Johnson on Unsplash">
-
-<p>记录近两年各种机会下与事业部头部三剑客交流收获的一些真知灼见。</p>
-<p><strong>关于合作</strong></p>
-<blockquote>
-<p>目标一致</p>
-</blockquote>
-<p>看上去的完美搭档其实是一个很磨人的过程，一开始恨不得一见面就呼巴掌作为打招呼的方式，最终能达成默契或者说合作，目标一致最重要的前提。</p>
-<p>不管你怎么看不惯一个人，三观有多么不合，但是当你发现大家目标都是一致的时候，静下来的时候大家总会想一想，是不是我有问题，慢慢的就变得能够互相包容，所以要做成事首要条件不是考虑要找多要好的人多默契的人，关键在于你们的目标是否一致，只要目标一致你会发现你们很难分割彼此。</p>
-<p>所以有目标是一件重要紧急的事。</p>
-<p><strong>关于做事</strong></p>
-<blockquote>
-<p>干一行，爱一行，不然干不了大事。</p>
-</blockquote>
-<p>最深刻的一句话，我记得当时是我谈起对我现在做的事好像也没到喜欢的程度的时候，领导对我说了这句话，听后我记得当时醍醐灌顶，然后手脚冰凉，内心很奔溃，至此以后我逐渐爱上了我现在做的事，虽然还是有很厌烦的时候，不过总能爱回去。</p>
-<blockquote>
-<p>勇于释放自己，学会利用资源，学会影响上级。</p>
-</blockquote>
-<p>这句话是我最亲近的老大对我说的，当我在抱怨做事的一些困惑时。这是最有挑战的不过收获也是最大的，这句话不是教我怎么在领导面前表现，而是告诉我领导在意的是你的结果，当你结果好的时候，才会在意过程，从而改变对你的一些印象。当你做出结果时，他们会关注到的。</p>
-<p><strong>关于自信</strong></p>
-<blockquote>
-<p>当你进入了公司就不要再因为自己的出身、学历等感到自卑，因为能进来表示公司已经认可了你，接下来你要想的是，怎么做到比别人牛逼。</p>
-</blockquote>
-<blockquote>
-<p>否定自己是很耗能量的一件事，积极一点。</p>
-</blockquote>
-
       
     </div>
 
